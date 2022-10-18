@@ -1,0 +1,273 @@
+[  447.577841] INFO: task repro:446 blocked for more than 147 seconds.
+[  447.578515]       Not tainted 6.0.0-4fe89d07dcc2 #1
+[  447.579009] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  447.579784] task:repro           state:D stack:    0 pid:  446 ppid:   445 flags:0x00000000
+[  447.580611] Call Trace:
+[  447.580873]  <TASK>
+[  447.581106]  __schedule+0x2de/0x900
+[  447.581493]  schedule+0x5b/0xe0
+[  447.581873]  schedule_preempt_disabled+0x1c/0x30
+[  447.582351]  __mutex_lock.isra.17+0x480/0x710
+[  447.582809]  ? write_comp_data+0x2f/0x90
+[  447.583231]  __mutex_lock_slowpath+0x13/0x20
+[  447.583683]  mutex_lock+0x30/0x40
+[  447.584057]  fuse_lock_inode+0x59/0x70
+[  447.584442]  fuse_lookup.part.25+0x3b/0x1d0
+[  447.584879]  ? write_comp_data+0x2f/0x90
+[  447.585295]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[  447.585797]  ? d_alloc_parallel+0x44e/0x690
+[  447.586241]  ? write_comp_data+0x2f/0x90
+[  447.586656]  fuse_lookup+0x54/0x70
+[  447.587033]  __lookup_slow+0xdb/0x1f0
+[  447.587432]  walk_component+0x1b3/0x260
+[  447.587848]  link_path_walk.part.41+0x3bd/0x600
+[  447.588333]  ? write_comp_data+0x2f/0x90
+[  447.588753]  path_openat+0x114/0x1da0
+[  447.589155]  ? update_load_avg+0x82/0x760
+[  447.589591]  ? write_comp_data+0x2f/0x90
+[  447.590039]  ? write_comp_data+0x2f/0x90
+[  447.590454]  do_filp_open+0xd6/0x160
+[  447.590849]  ? write_comp_data+0x2f/0x90
+[  447.591264]  ? _raw_spin_unlock+0x1d/0x40
+[  447.591694]  ? alloc_fd+0x159/0x270
+[  447.592075]  ? write_comp_data+0x2f/0x90
+[  447.592494]  do_sys_openat2+0x55d/0x6f0
+[  447.592911]  do_sys_open+0x92/0xf0
+[  447.593280]  __x64_sys_openat+0x2d/0x40
+[  447.593687]  do_syscall_64+0x3b/0x90
+[  447.594094]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  447.594614] RIP: 0033:0x7f48e9fc31e5
+[  447.594995] RSP: 002b:00007ffde6dddbc0 EFLAGS: 00000287 ORIG_RAX: 0000000000000101
+[  447.595757] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f48e9fc31e5
+[  447.596471] RDX: 0000000000090800 RSI: 000000000040606f RDI: 00000000ffffff9c
+[  447.597188] RBP: 00007ffde6ddde50 R08: 00007ffde6de8080 R09: 0000000000000000
+[  447.597920] R10: 0000000000000000 R11: 0000000000000287 R12: 0000000000402360
+[  447.598625] R13: 00007ffde6dddfb0 R14: 0000000000000000 R15: 0000000000000000
+[  447.599321]  </TASK>
+[  447.599560] INFO: task repro:452 blocked for more than 147 seconds.
+[  447.600191]       Not tainted 6.0.0-4fe89d07dcc2 #1
+[  447.600685] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  447.601456] task:repro           state:D stack:    0 pid:  452 ppid:   446 flags:0x00004004
+[  447.602293] Call Trace:
+[  447.602550]  <TASK>
+[  447.602776]  __schedule+0x2de/0x900
+[  447.603153]  ? preempt_count_add+0x80/0xc0
+[  447.603587]  schedule+0x5b/0xe0
+[  447.603929]  request_wait_answer+0x24a/0x3c0
+[  447.604383]  ? prepare_to_wait_event+0x130/0x130
+[  447.604870]  fuse_simple_request+0x2de/0x530
+[  447.605324]  fuse_lookup_name+0x134/0x2d0
+[  447.605771]  fuse_lookup.part.25+0x62/0x1d0
+[  447.606221]  fuse_lookup+0x54/0x70
+[  447.606593]  __lookup_slow+0xdb/0x1f0
+[  447.606988]  walk_component+0x1b3/0x260
+[  447.607396]  link_path_walk.part.41+0x3bd/0x600
+[  447.607876]  ? write_comp_data+0x2f/0x90
+[  447.608289]  path_lookupat.isra.43+0x64/0x270
+[  447.608751]  filename_lookup.part.59+0xf2/0x220
+[  447.609235]  ? getname_kernel+0x41/0x190
+[  447.609653]  ? write_comp_data+0x2f/0x90
+[  447.610093]  ? write_comp_data+0x2f/0x90
+[  447.610509]  kern_path+0x81/0x90
+[  447.610858]  lookup_bdev+0x6d/0x130
+[  447.611236]  blkdev_get_by_path+0x41/0x150
+[  447.611668]  get_tree_bdev+0x73/0x330
+[  447.612060]  ? fuse_fill_super_common+0x580/0x580
+[  447.612555]  fuse_get_tree+0x1ec/0x260
+[  447.612956]  vfs_get_tree+0x38/0x110
+[  447.613343]  path_mount+0x769/0x1030
+[  447.613745]  ? write_comp_data+0x2f/0x90
+[  447.614164]  do_mount+0xaf/0xd0
+[  447.614511]  __x64_sys_mount+0x14b/0x160
+[  447.614932]  do_syscall_64+0x3b/0x90
+[  447.615320]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  447.615851] RIP: 0033:0x7f48e9fc859d
+[  447.616231] RSP: 002b:00007f48e9e80cc8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+[  447.616997] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f48e9fc859d
+[  447.617732] RDX: 0000000020000080 RSI: 0000000020000040 RDI: 0000000020000000
+[  447.618453] RBP: 00007f48e9e80e00 R08: 0000000020000280 R09: 0000000000000000
+[  447.619181] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffde6dddd3e
+[  447.619918] R13: 00007ffde6dddd3f R14: 00007ffde6ddddd0 R15: 00007f48e9e81700
+[  447.620660]  </TASK>
+[  595.033832] INFO: task repro:446 blocked for more than 294 seconds.
+[  595.034606]       Not tainted 6.0.0-4fe89d07dcc2 #1
+[  595.035136] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  595.035943] task:repro           state:D stack:    0 pid:  446 ppid:   445 flags:0x00000000
+[  595.036896] Call Trace:
+[  595.037242]  <TASK>
+[  595.037513]  __schedule+0x2de/0x900
+[  595.037960]  schedule+0x5b/0xe0
+[  595.038315]  schedule_preempt_disabled+0x1c/0x30
+[  595.038821]  __mutex_lock.isra.17+0x480/0x710
+[  595.039296]  ? write_comp_data+0x2f/0x90
+[  595.039753]  __mutex_lock_slowpath+0x13/0x20
+[  595.040276]  mutex_lock+0x30/0x40
+[  595.040659]  fuse_lock_inode+0x59/0x70
+[  595.041095]  fuse_lookup.part.25+0x3b/0x1d0
+[  595.041576]  ? write_comp_data+0x2f/0x90
+[  595.042081]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[  595.042596]  ? d_alloc_parallel+0x44e/0x690
+[  595.043192]  ? write_comp_data+0x2f/0x90
+[  595.043679]  fuse_lookup+0x54/0x70
+[  595.044070]  __lookup_slow+0xdb/0x1f0
+[  595.044493]  walk_component+0x1b3/0x260
+[  595.044938]  link_path_walk.part.41+0x3bd/0x600
+[  595.045449]  ? write_comp_data+0x2f/0x90
+[  595.045927]  path_openat+0x114/0x1da0
+[  595.046340]  ? update_load_avg+0x82/0x760
+[  595.046834]  ? write_comp_data+0x2f/0x90
+[  595.047281]  ? write_comp_data+0x2f/0x90
+[  595.047859]  do_filp_open+0xd6/0x160
+[  595.048390]  ? write_comp_data+0x2f/0x90
+[  595.048960]  ? _raw_spin_unlock+0x1d/0x40
+[  595.049603]  ? alloc_fd+0x159/0x270
+[  595.050086]  ? write_comp_data+0x2f/0x90
+[  595.050510]  do_sys_openat2+0x55d/0x6f0
+[  595.050963]  do_sys_open+0x92/0xf0
+[  595.051382]  __x64_sys_openat+0x2d/0x40
+[  595.051834]  do_syscall_64+0x3b/0x90
+[  595.052355]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  595.053023] RIP: 0033:0x7f48e9fc31e5
+[  595.053418] RSP: 002b:00007ffde6dddbc0 EFLAGS: 00000287 ORIG_RAX: 0000000000000101
+[  595.054493] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f48e9fc31e5
+[  595.055364] RDX: 0000000000090800 RSI: 000000000040606f RDI: 00000000ffffff9c
+[  595.056019] RBP: 00007ffde6ddde50 R08: 00007ffde6de8080 R09: 0000000000000000
+[  595.057009] R10: 0000000000000000 R11: 0000000000000287 R12: 0000000000402360
+[  595.058047] R13: 00007ffde6dddfb0 R14: 0000000000000000 R15: 0000000000000000
+[  595.058957]  </TASK>
+[  595.059253] INFO: task repro:452 blocked for more than 294 seconds.
+[  595.060125]       Not tainted 6.0.0-4fe89d07dcc2 #1
+[  595.060787] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  595.061938] task:repro           state:D stack:    0 pid:  452 ppid:   446 flags:0x00004004
+[  595.063072] Call Trace:
+[  595.063463]  <TASK>
+[  595.063777]  __schedule+0x2de/0x900
+[  595.064304]  ? preempt_count_add+0x80/0xc0
+[  595.064870]  schedule+0x5b/0xe0
+[  595.065331]  request_wait_answer+0x24a/0x3c0
+[  595.065967]  ? prepare_to_wait_event+0x130/0x130
+[  595.066610]  fuse_simple_request+0x2de/0x530
+[  595.067213]  fuse_lookup_name+0x134/0x2d0
+[  595.067682]  fuse_lookup.part.25+0x62/0x1d0
+[  595.068197]  fuse_lookup+0x54/0x70
+[  595.068625]  __lookup_slow+0xdb/0x1f0
+[  595.069080]  walk_component+0x1b3/0x260
+[  595.069531]  link_path_walk.part.41+0x3bd/0x600
+[  595.070077]  ? write_comp_data+0x2f/0x90
+[  595.070516]  path_lookupat.isra.43+0x64/0x270
+[  595.071025]  filename_lookup.part.59+0xf2/0x220
+[  595.071555]  ? getname_kernel+0x41/0x190
+[  595.072024]  ? write_comp_data+0x2f/0x90
+[  595.072483]  ? write_comp_data+0x2f/0x90
+[  595.072938]  kern_path+0x81/0x90
+[  595.073326]  lookup_bdev+0x6d/0x130
+[  595.073750]  blkdev_get_by_path+0x41/0x150
+[  595.074212]  get_tree_bdev+0x73/0x330
+[  595.074635]  ? fuse_fill_super_common+0x580/0x580
+[  595.075174]  fuse_get_tree+0x1ec/0x260
+[  595.075632]  vfs_get_tree+0x38/0x110
+[  595.076071]  path_mount+0x769/0x1030
+[  595.076514]  ? write_comp_data+0x2f/0x90
+[  595.076987]  do_mount+0xaf/0xd0
+[  595.077380]  __x64_sys_mount+0x14b/0x160
+[  595.077865]  do_syscall_64+0x3b/0x90
+[  595.078275]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  595.078841] RIP: 0033:0x7f48e9fc859d
+[  595.079253] RSP: 002b:00007f48e9e80cc8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+[  595.080099] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f48e9fc859d
+[  595.080893] RDX: 0000000020000080 RSI: 0000000020000040 RDI: 0000000020000000
+[  595.081679] RBP: 00007f48e9e80e00 R08: 0000000020000280 R09: 0000000000000000
+[  595.082478] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffde6dddd3e
+[  595.083263] R13: 00007ffde6dddd3f R14: 00007ffde6ddddd0 R15: 00007f48e9e81700
+[  595.084089]  </TASK>
+[  742.489837] INFO: task repro:446 blocked for more than 442 seconds.
+[  742.490578]       Not tainted 6.0.0-4fe89d07dcc2 #1
+[  742.491135] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  742.492006] task:repro           state:D stack:    0 pid:  446 ppid:   445 flags:0x00000000
+[  742.492962] Call Trace:
+[  742.493260]  <TASK>
+[  742.493521]  __schedule+0x2de/0x900
+[  742.493997]  schedule+0x5b/0xe0
+[  742.494395]  schedule_preempt_disabled+0x1c/0x30
+[  742.494950]  __mutex_lock.isra.17+0x480/0x710
+[  742.495481]  ? write_comp_data+0x2f/0x90
+[  742.495937]  __mutex_lock_slowpath+0x13/0x20
+[  742.496450]  mutex_lock+0x30/0x40
+[  742.496864]  fuse_lock_inode+0x59/0x70
+[  742.497322]  fuse_lookup.part.25+0x3b/0x1d0
+[  742.497859]  ? write_comp_data+0x2f/0x90
+[  742.498314]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[  742.498855]  ? d_alloc_parallel+0x44e/0x690
+[  742.499363]  ? write_comp_data+0x2f/0x90
+[  742.499839]  fuse_lookup+0x54/0x70
+[  742.500263]  __lookup_slow+0xdb/0x1f0
+[  742.500718]  walk_component+0x1b3/0x260
+[  742.501190]  link_path_walk.part.41+0x3bd/0x600
+[  742.501754]  ? write_comp_data+0x2f/0x90
+[  742.502238]  path_openat+0x114/0x1da0
+[  742.502691]  ? update_load_avg+0x82/0x760
+[  742.503180]  ? write_comp_data+0x2f/0x90
+[  742.503657]  ? write_comp_data+0x2f/0x90
+[  742.504134]  do_filp_open+0xd6/0x160
+[  742.504578]  ? write_comp_data+0x2f/0x90
+[  742.505052]  ? _raw_spin_unlock+0x1d/0x40
+[  742.505535]  ? alloc_fd+0x159/0x270
+[  742.505995]  ? write_comp_data+0x2f/0x90
+[  742.506480]  do_sys_openat2+0x55d/0x6f0
+[  742.506958]  do_sys_open+0x92/0xf0
+[  742.507377]  __x64_sys_openat+0x2d/0x40
+[  742.507842]  do_syscall_64+0x3b/0x90
+[  742.508285]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  742.508889] RIP: 0033:0x7f48e9fc31e5
+[  742.509315] RSP: 002b:00007ffde6dddbc0 EFLAGS: 00000287 ORIG_RAX: 0000000000000101
+[  742.510182] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f48e9fc31e5
+[  742.510973] RDX: 0000000000090800 RSI: 000000000040606f RDI: 00000000ffffff9c
+[  742.511792] RBP: 00007ffde6ddde50 R08: 00007ffde6de8080 R09: 0000000000000000
+[  742.512614] R10: 0000000000000000 R11: 0000000000000287 R12: 0000000000402360
+[  742.513429] R13: 00007ffde6dddfb0 R14: 0000000000000000 R15: 0000000000000000
+[  742.514277]  </TASK>
+[  742.514552] INFO: task repro:452 blocked for more than 442 seconds.
+[  742.515272]       Not tainted 6.0.0-4fe89d07dcc2 #1
+[  742.515835] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  742.516718] task:repro           state:D stack:    0 pid:  452 ppid:   446 flags:0x00004004
+[  742.517674] Call Trace:
+[  742.517991]  <TASK>
+[  742.518253]  __schedule+0x2de/0x900
+[  742.518682]  ? preempt_count_add+0x80/0xc0
+[  742.519174]  schedule+0x5b/0xe0
+[  742.519563]  request_wait_answer+0x24a/0x3c0
+[  742.520082]  ? prepare_to_wait_event+0x130/0x130
+[  742.520640]  fuse_simple_request+0x2de/0x530
+[  742.521156]  fuse_lookup_name+0x134/0x2d0
+[  742.521650]  fuse_lookup.part.25+0x62/0x1d0
+[  742.522189]  fuse_lookup+0x54/0x70
+[  742.522609]  __lookup_slow+0xdb/0x1f0
+[  742.523053]  walk_component+0x1b3/0x260
+[  742.523515]  link_path_walk.part.41+0x3bd/0x600
+[  742.524056]  ? write_comp_data+0x2f/0x90
+[  742.524523]  path_lookupat.isra.43+0x64/0x270
+[  742.525046]  filename_lookup.part.59+0xf2/0x220
+[  742.525591]  ? getname_kernel+0x41/0x190
+[  742.526082]  ? write_comp_data+0x2f/0x90
+[  742.526553]  ? write_comp_data+0x2f/0x90
+[  742.527027]  kern_path+0x81/0x90
+[  742.527427]  lookup_bdev+0x6d/0x130
+[  742.527855]  blkdev_get_by_path+0x41/0x150
+[  742.528347]  get_tree_bdev+0x73/0x330
+[  742.528792]  ? fuse_fill_super_common+0x580/0x580
+[  742.529355]  fuse_get_tree+0x1ec/0x260
+[  742.529828]  vfs_get_tree+0x38/0x110
+[  742.530271]  path_mount+0x769/0x1030
+[  742.530710]  ? write_comp_data+0x2f/0x90
+[  742.531181]  do_mount+0xaf/0xd0
+[  742.531572]  __x64_sys_mount+0x14b/0x160
+[  742.532046]  do_syscall_64+0x3b/0x90
+[  742.532482]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  742.533077] RIP: 0033:0x7f48e9fc859d
+[  742.533503] RSP: 002b:00007f48e9e80cc8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+[  742.534399] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f48e9fc859d
+[  742.535216] RDX: 0000000020000080 RSI: 0000000020000040 RDI: 0000000020000000
+[  742.536035] RBP: 00007f48e9e80e00 R08: 0000000020000280 R09: 0000000000000000
+[  742.536851] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffde6dddd3e
+[  742.537662] R13: 00007ffde6dddd3f R14: 00007ffde6ddddd0 R15: 00007f48e9e81700
+[  742.538505]  </TASK>
