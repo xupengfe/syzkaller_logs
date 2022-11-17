@@ -1,0 +1,51 @@
+git bisect start
+# bad: [f0c4d9fc9cc9462659728d168387191387e903cc] Linux 6.1-rc4
+git bisect bad f0c4d9fc9cc9462659728d168387191387e903cc
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [4817c37d71b554fe46ea494f6b2c8562b26640bf] Merge tag 'drm-intel-gt-next-2021-12-23' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+git bisect good 4817c37d71b554fe46ea494f6b2c8562b26640bf
+# good: [c011dd537ffe47462051930413fed07dbdc80313] Merge tag 'arm-soc-5.19' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good c011dd537ffe47462051930413fed07dbdc80313
+# good: [6614a3c3164a5df2b54abb0b3559f51041cf705b] Merge tag 'mm-stable-2022-08-03' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good 6614a3c3164a5df2b54abb0b3559f51041cf705b
+# good: [7e6739b9336e61fe23ca4e2c8d1fda8f19f979bf] Merge tag 'drm-next-2022-10-05' of git://anongit.freedesktop.org/drm/drm
+git bisect good 7e6739b9336e61fe23ca4e2c8d1fda8f19f979bf
+# good: [ef688f8b8cd3eb20547a6543f03e3d8952b87769] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect good ef688f8b8cd3eb20547a6543f03e3d8952b87769
+# good: [f311d498be8f1aa49d5cfca0b18d6db4f77845b7] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect good f311d498be8f1aa49d5cfca0b18d6db4f77845b7
+# good: [e97eace635a42da4644290179aea496178e64988] Merge tag 'iommu-fixes-v6.1-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect good e97eace635a42da4644290179aea496178e64988
+# good: [2eb824f68d8c33e05f2003773f44ae2eae5892d0] Merge tag 'mtd/fixes-for-6.1-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux
+git bisect good 2eb824f68d8c33e05f2003773f44ae2eae5892d0
+# good: [f4298cac2bfcced49ab308756dc8fef684f3da81] Merge tag 'kvmarm-fixes-6.1-3' of git://git.kernel.org/pub/scm/linux/kernel/git/kvmarm/kvmarm into HEAD
+git bisect good f4298cac2bfcced49ab308756dc8fef684f3da81
+# bad: [fde25beb382b7dd6f2eab8022ab017cbdfaa3ff6] Merge tag 'drm-fixes-2022-11-04-1' of git://anongit.freedesktop.org/drm/drm
+git bisect bad fde25beb382b7dd6f2eab8022ab017cbdfaa3ff6
+# good: [9521c9d6a53df9c44a5f5ddbc229ceaf3cf79ef6] Merge tag 'net-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 9521c9d6a53df9c44a5f5ddbc229ceaf3cf79ef6
+# good: [980a2ff2cb987e2177a1bd02633f4259a0d1daab] Merge tag 'amd-drm-fixes-6.1-2022-11-02' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+git bisect good 980a2ff2cb987e2177a1bd02633f4259a0d1daab
+# bad: [ee6050c8af96bba2f81e8b0793a1fc2f998fcd20] Merge tag 'ata-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/dlemoal/libata
+git bisect bad ee6050c8af96bba2f81e8b0793a1fc2f998fcd20
+# good: [eb81b682b131642405a05c627ab08cf0967b3dd8] btrfs: fix inode reserve space leak due to nowait buffered write
+git bisect good eb81b682b131642405a05c627ab08cf0967b3dd8
+# good: [f2f32f8af2b0ca9d619e5183eae3eed431793baf] Merge tag 'for-6.1-rc3-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux
+git bisect good f2f32f8af2b0ca9d619e5183eae3eed431793baf
+# bad: [7f7bac08d9e31cd6e2c0ea1685c86ec6f1e7e03c] Merge tag 'fuse-fixes-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/mszeredi/fuse
+git bisect bad 7f7bac08d9e31cd6e2c0ea1685c86ec6f1e7e03c
+# bad: [4a6f278d4827b59ba26ceae0ff4529ee826aa258] fuse: add file_modified() to fallocate
+git bisect bad 4a6f278d4827b59ba26ceae0ff4529ee826aa258
+# good: [9fa248c65bdbf5af0a2f74dd38575acfc8dfd2bf] fuse: fix readdir cache race
+git bisect good 9fa248c65bdbf5af0a2f74dd38575acfc8dfd2bf
+# first bad commit: [4a6f278d4827b59ba26ceae0ff4529ee826aa258] fuse: add file_modified() to fallocate
+|1117_144354|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m f0c4d9fc9cc9462659728d168387191387e903cc -b 4a6f278d4827b59ba26ceae0ff4529ee826aa258 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_4a6f278d4827b59ba26ceae0ff4529ee826aa258_revert|
+|1117_151825|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1117_151844|Run /home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_4a6f278d4827b59ba26ceae0ff4529ee826aa258_revert with image:/root/image/centos8_2.img in local port:10022|
+|1117_151909|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1117_151909|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1117_151910|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/b9740c7ed8efbb38631af7d0d93ca3c778b2f53b/repro.cprog root@localhost:/root/repro.c|
+|1117_151912|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1117_152140|/home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_4a6f278d4827b59ba26ceae0ff4529ee826aa258_revert didn't contain notify_change: in dmesg, pass|
+|1117_152140|Bisect successfully! f0c4d9fc9cc9462659728d168387191387e903cc_4a6f278d4827b59ba26ceae0ff4529ee826aa258_revert bzimage passed!|
