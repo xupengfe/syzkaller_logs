@@ -1,0 +1,44 @@
+git bisect start
+# bad: [f0c4d9fc9cc9462659728d168387191387e903cc] Linux 6.1-rc4
+git bisect bad f0c4d9fc9cc9462659728d168387191387e903cc
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [4817c37d71b554fe46ea494f6b2c8562b26640bf] Merge tag 'drm-intel-gt-next-2021-12-23' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+git bisect bad 4817c37d71b554fe46ea494f6b2c8562b26640bf
+# bad: [e058a84bfddc42ba356a2316f2cf1141974625c9] Merge tag 'drm-next-2021-07-01' of git://anongit.freedesktop.org/drm/drm
+git bisect bad e058a84bfddc42ba356a2316f2cf1141974625c9
+# good: [3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4] Merge tag 'media/v5.13-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4
+# bad: [e22e9832798df81393d09d40fa34b01aea53cf39] Merge tag '9p-for-5.13-rc1' of git://github.com/martinetd/linux
+git bisect bad e22e9832798df81393d09d40fa34b01aea53cf39
+# bad: [9d31d2338950293ec19d9b095fbaa9030899dcb4] Merge tag 'net-next-5.13' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect bad 9d31d2338950293ec19d9b095fbaa9030899dcb4
+# bad: [d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9] Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect bad d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9
+# good: [9a45da9270b64b14e154093c28f746d861ab8c61] Merge tag 'core-rcu-2021-04-28' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 9a45da9270b64b14e154093c28f746d861ab8c61
+# bad: [0080665fbd0e6a771aee366bb2aa208626e43def] Merge tag 'devicetree-for-5.13' of git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux
+git bisect bad 0080665fbd0e6a771aee366bb2aa208626e43def
+# bad: [fc0586062816559defb14c947319ef8c4c326fb3] Merge tag 'for-5.13/drivers-2021-04-27' of git://git.kernel.dk/linux-block
+git bisect bad fc0586062816559defb14c947319ef8c4c326fb3
+# bad: [16b3d0cf5bad844daaf436ad2e9061de0fe36e5c] Merge tag 'sched-core-2021-04-28' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 16b3d0cf5bad844daaf436ad2e9061de0fe36e5c
+# good: [03b2cd72aad1103127282f39c614e4722e5d9e8f] Merge tag 'objtool-core-2021-04-28' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 03b2cd72aad1103127282f39c614e4722e5d9e8f
+# good: [c006fac556e401a62054d065da168099ea5a5b10] sched: Warn on long periods of pending need_resched
+git bisect good c006fac556e401a62054d065da168099ea5a5b10
+# bad: [d0946a882e6220229a29f9031641e54379be5a1e] perf/x86/intel: Hybrid PMU support for perf capabilities
+git bisect bad d0946a882e6220229a29f9031641e54379be5a1e
+# good: [47f661eca0700928012e11c57ea0328f5ccfc3b9] perf: Apply PERF_EVENT_IOC_MODIFY_ATTRIBUTES to children
+git bisect good 47f661eca0700928012e11c57ea0328f5ccfc3b9
+# bad: [46ade4740bbf9bf4e804ddb2c85845cccd219f3c] perf/x86: Move cpuc->running into P4 specific code
+git bisect bad 46ade4740bbf9bf4e804ddb2c85845cccd219f3c
+# good: [fb6cc127e0b6e629252cdd0f77d5a1f49db95b92] signal: Introduce TRAP_PERF si_code and si_perf to siginfo
+git bisect good fb6cc127e0b6e629252cdd0f77d5a1f49db95b92
+# bad: [f2c3c32f45002de19c6dec33f32fd259e82f2557] selftests/perf_events: Add kselftest for process-wide sigtrap handling
+git bisect bad f2c3c32f45002de19c6dec33f32fd259e82f2557
+# bad: [97ba62b278674293762c3d91f724f1bb922f04e0] perf: Add support for SIGTRAP on perf events
+git bisect bad 97ba62b278674293762c3d91f724f1bb922f04e0
+# first bad commit: [97ba62b278674293762c3d91f724f1bb922f04e0] perf: Add support for SIGTRAP on perf events
+|1116_181832|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m f0c4d9fc9cc9462659728d168387191387e903cc -b 97ba62b278674293762c3d91f724f1bb922f04e0 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_97ba62b278674293762c3d91f724f1bb922f04e0_revert|
+|1116_181908|FAIL|bzImage:/home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_97ba62b278674293762c3d91f724f1bb922f04e0_revert does not exist:|

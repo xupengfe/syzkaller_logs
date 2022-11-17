@@ -1,0 +1,266 @@
+|1116_021029|CMD=cd /root/os.linux.intelnext.kernel|
+|1116_021029|git log f0c4d9fc9cc9462659728d168387191387e903cc check_result:commit f0c4d9fc9cc9462659728d168387191387e903cc|
+|1116_021029|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|1116_021029|CMD=git checkout -f f0c4d9fc9cc9462659728d168387191387e903cc|
+|1116_021029|CMD=cd /root/os.linux.intelnext.kernel|
+|1116_021029||/home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc| exist, no need make|
+|1116_021029|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_021044|Run /home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc with image:/root/image/centos8_2.img in local port:10022|
+|1116_021109|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_021109|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_021110|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_021112|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_021547|/home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc contained perf_event_release_kernel:[  300.168352]  perf_event_release_kernel+0x77/0x370
+[  300.168979]  ? perf_event_release_kernel+0x370/0x370
+[  300.189708]  perf_event_release_kernel+0x77/0x370
+[  300.190321]  ? perf_event_release_kernel+0x370/0x370
+[  300.203059]  perf_event_release_kernel+0x77/0x370
+[  300.203680]  ? perf_event_release_kernel+0x370/0x370
+[  300.224081]  perf_event_release_kernel+0x77/0x370
+[  300.224691]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_021547|Found time:300 in /home/bzimage/1116_021029_perf_event_release_kernel/f0c4d9fc9cc9462659728d168387191387e903cc_dmesg.log|
+|1116_021547|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:2100|
+|1116_021547|-END- commit f0c4d9fc9cc9462659728d168387191387e903cc FAIL bad|
+|1116_021547||/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|1116_021547|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_021559|Run /home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|1116_021624|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_021624|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_021625|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_021627|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_025127|/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_025127|Start commit f0c4d9fc9cc9462659728d168387191387e903cc PASS good|
+|1116_025127|CMD=git checkout -f f0c4d9fc9cc9462659728d168387191387e903cc|
+|1116_025127|CMD=git bisect start|
+|1116_025127|CMD=git bisect bad f0c4d9fc9cc9462659728d168387191387e903cc|
+|1116_025140||/home/bzimage/bzImage_4817c37d71b554fe46ea494f6b2c8562b26640bf| exist, no need make|
+|1116_025140|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_025154|Run /home/bzimage/bzImage_4817c37d71b554fe46ea494f6b2c8562b26640bf with image:/root/image/centos8_2.img in local port:10022|
+|1116_025219|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_025219|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_025220|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_025222|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_032722|/home/bzimage/bzImage_4817c37d71b554fe46ea494f6b2c8562b26640bf contained perf_event_release_kernel:[  300.183058]  perf_event_release_kernel+0x73/0x360
+[  300.183852]  ? perf_event_release_kernel+0x360/0x360
+[  300.212112]  perf_event_release_kernel+0x73/0x360
+[  300.212915]  ? perf_event_release_kernel+0x360/0x360, FAIL|
+|1116_032734||/home/bzimage/bzImage_e058a84bfddc42ba356a2316f2cf1141974625c9| exist, no need make|
+|1116_032734|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_032745|Run /home/bzimage/bzImage_e058a84bfddc42ba356a2316f2cf1141974625c9 with image:/root/image/centos8_2.img in local port:10022|
+|1116_032810|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_032810|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_032811|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_032813|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_040313|/home/bzimage/bzImage_e058a84bfddc42ba356a2316f2cf1141974625c9 contained perf_event_release_kernel:[  300.213241]  perf_event_release_kernel+0x6e/0x370
+[  300.214156]  ? perf_event_release_kernel+0x370/0x370
+[  300.259460]  perf_event_release_kernel+0x6e/0x370
+[  300.260424]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_040318||/home/bzimage/bzImage_3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4| exist, no need make|
+|1116_040318|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_040332|Run /home/bzimage/bzImage_3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4 with image:/root/image/centos8_2.img in local port:10022|
+|1116_040357|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_040358|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_040359|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_040400|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_043901|/home/bzimage/bzImage_3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4 didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_043902||/home/bzimage/bzImage_e22e9832798df81393d09d40fa34b01aea53cf39| exist, no need make|
+|1116_043902|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_043917|Run /home/bzimage/bzImage_e22e9832798df81393d09d40fa34b01aea53cf39 with image:/root/image/centos8_2.img in local port:10022|
+|1116_043942|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_043942|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_043943|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_043945|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_051445|/home/bzimage/bzImage_e22e9832798df81393d09d40fa34b01aea53cf39 contained perf_event_release_kernel:[  300.231604]  perf_event_release_kernel+0x6e/0x370
+[  300.232422]  ? perf_event_release_kernel+0x370/0x370
+[  300.249892]  perf_event_release_kernel+0x6e/0x370
+[  300.250685]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_051447||/home/bzimage/bzImage_9d31d2338950293ec19d9b095fbaa9030899dcb4| exist, no need make|
+|1116_051447|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_051500|Run /home/bzimage/bzImage_9d31d2338950293ec19d9b095fbaa9030899dcb4 with image:/root/image/centos8_2.img in local port:10022|
+|1116_051525|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_051525|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_051526|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_051528|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_055028|/home/bzimage/bzImage_9d31d2338950293ec19d9b095fbaa9030899dcb4 contained perf_event_release_kernel:[  300.231262]  perf_event_release_kernel+0x6e/0x370
+[  300.232621]  ? perf_event_release_kernel+0x370/0x370
+[  300.262396]  perf_event_release_kernel+0x6e/0x370
+[  300.263753]  ? perf_event_release_kernel+0x370/0x370
+[  300.300249]  perf_event_release_kernel+0x6e/0x370
+[  300.301179]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_055029||/home/bzimage/bzImage_d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9| exist, no need make|
+|1116_055029|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_055043|Run /home/bzimage/bzImage_d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9 with image:/root/image/centos8_2.img in local port:10022|
+|1116_055108|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_055108|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_055110|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_055111|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_062611|/home/bzimage/bzImage_d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9 contained perf_event_release_kernel:[  300.235796]  perf_event_release_kernel+0x6e/0x370
+[  300.237194]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_062612||/home/bzimage/bzImage_9a45da9270b64b14e154093c28f746d861ab8c61| exist, no need make|
+|1116_062612|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_062625|Run /home/bzimage/bzImage_9a45da9270b64b14e154093c28f746d861ab8c61 with image:/root/image/centos8_2.img in local port:10022|
+|1116_062650|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_062650|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_062651|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_062652|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_070152|/home/bzimage/bzImage_9a45da9270b64b14e154093c28f746d861ab8c61 didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_070153||/home/bzimage/bzImage_0080665fbd0e6a771aee366bb2aa208626e43def| exist, no need make|
+|1116_070153|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_070207|Run /home/bzimage/bzImage_0080665fbd0e6a771aee366bb2aa208626e43def with image:/root/image/centos8_2.img in local port:10022|
+|1116_070232|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_070233|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_070234|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_070235|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_073736|/home/bzimage/bzImage_0080665fbd0e6a771aee366bb2aa208626e43def contained perf_event_release_kernel:[  300.372827]  perf_event_release_kernel+0x6e/0x370
+[  300.374383]  ? perf_event_release_kernel+0x370/0x370
+[  300.406544]  perf_event_release_kernel+0x6e/0x370
+[  300.407637]  ? perf_event_release_kernel+0x370/0x370
+[  300.494582]  perf_event_release_kernel+0x6e/0x370
+[  300.495911]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_073736||/home/bzimage/bzImage_fc0586062816559defb14c947319ef8c4c326fb3| was not exist, will make it|
+|1116_080751|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_080810|Run /home/bzimage/bzImage_fc0586062816559defb14c947319ef8c4c326fb3 with image:/root/image/centos8_2.img in local port:10022|
+|1116_080835|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_080835|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_080837|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_080838|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_084338|/home/bzimage/bzImage_fc0586062816559defb14c947319ef8c4c326fb3 contained perf_event_release_kernel:[  300.261363]  perf_event_release_kernel+0x6e/0x370
+[  300.262781]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_084339||/home/bzimage/bzImage_16b3d0cf5bad844daaf436ad2e9061de0fe36e5c| was not exist, will make it|
+|1116_091210|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_091229|Run /home/bzimage/bzImage_16b3d0cf5bad844daaf436ad2e9061de0fe36e5c with image:/root/image/centos8_2.img in local port:10022|
+|1116_091254|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_091254|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_091256|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_091257|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_094757|/home/bzimage/bzImage_16b3d0cf5bad844daaf436ad2e9061de0fe36e5c contained perf_event_release_kernel:[  300.284789]  perf_event_release_kernel+0x6e/0x370
+[  300.285730]  ? perf_event_release_kernel+0x370/0x370
+[  300.317069]  perf_event_release_kernel+0x6e/0x370
+[  300.318049]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_094758||/home/bzimage/bzImage_03b2cd72aad1103127282f39c614e4722e5d9e8f| was not exist, will make it|
+|1116_101610|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_101626|Run /home/bzimage/bzImage_03b2cd72aad1103127282f39c614e4722e5d9e8f with image:/root/image/centos8_2.img in local port:10022|
+|1116_101651|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_101652|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_101653|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_101654|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_105154|/home/bzimage/bzImage_03b2cd72aad1103127282f39c614e4722e5d9e8f didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_105156||/home/bzimage/bzImage_c006fac556e401a62054d065da168099ea5a5b10| was not exist, will make it|
+|1116_111912|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_111930|Run /home/bzimage/bzImage_c006fac556e401a62054d065da168099ea5a5b10 with image:/root/image/centos8_2.img in local port:10022|
+|1116_111955|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_111956|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_111957|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_111958|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_115458|/home/bzimage/bzImage_c006fac556e401a62054d065da168099ea5a5b10 didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_115500||/home/bzimage/bzImage_d0946a882e6220229a29f9031641e54379be5a1e| was not exist, will make it|
+|1116_122041|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_122058|Run /home/bzimage/bzImage_d0946a882e6220229a29f9031641e54379be5a1e with image:/root/image/centos8_2.img in local port:10022|
+|1116_122123|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_122123|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_122124|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_122125|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_125626|/home/bzimage/bzImage_d0946a882e6220229a29f9031641e54379be5a1e contained perf_event_release_kernel:[  300.204823]  perf_event_release_kernel+0x6e/0x370
+[  300.205635]  ? perf_event_release_kernel+0x370/0x370
+[  300.257497]  perf_event_release_kernel+0x6e/0x370
+[  300.258329]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_125626||/home/bzimage/bzImage_47f661eca0700928012e11c57ea0328f5ccfc3b9| was not exist, will make it|
+|1116_132449|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_132506|Run /home/bzimage/bzImage_47f661eca0700928012e11c57ea0328f5ccfc3b9 with image:/root/image/centos8_2.img in local port:10022|
+|1116_132531|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_132531|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_132532|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_132534|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_140034|/home/bzimage/bzImage_47f661eca0700928012e11c57ea0328f5ccfc3b9 didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_140034||/home/bzimage/bzImage_46ade4740bbf9bf4e804ddb2c85845cccd219f3c| was not exist, will make it|
+|1116_143157|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_143216|Run /home/bzimage/bzImage_46ade4740bbf9bf4e804ddb2c85845cccd219f3c with image:/root/image/centos8_2.img in local port:10022|
+|1116_143241|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_143242|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_143243|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_143244|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_150744|/home/bzimage/bzImage_46ade4740bbf9bf4e804ddb2c85845cccd219f3c contained perf_event_release_kernel:[  300.279905]  perf_event_release_kernel+0x6e/0x370
+[  300.280744]  ? perf_event_release_kernel+0x370/0x370
+[  300.298509]  perf_event_release_kernel+0x6e/0x370
+[  300.299302]  ? perf_event_release_kernel+0x370/0x370
+[  300.316082]  perf_event_release_kernel+0x6e/0x370
+[  300.316867]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_150745||/home/bzimage/bzImage_fb6cc127e0b6e629252cdd0f77d5a1f49db95b92| was not exist, will make it|
+|1116_153529|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_153549|Run /home/bzimage/bzImage_fb6cc127e0b6e629252cdd0f77d5a1f49db95b92 with image:/root/image/centos8_2.img in local port:10022|
+|1116_153614|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_153614|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_153616|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_153617|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_161117|/home/bzimage/bzImage_fb6cc127e0b6e629252cdd0f77d5a1f49db95b92 didn't contain perf_event_release_kernel: in dmesg, pass|
+|1116_161117||/home/bzimage/bzImage_f2c3c32f45002de19c6dec33f32fd259e82f2557| was not exist, will make it|
+|1116_163838|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_163856|Run /home/bzimage/bzImage_f2c3c32f45002de19c6dec33f32fd259e82f2557 with image:/root/image/centos8_2.img in local port:10022|
+|1116_163921|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_163922|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_163923|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_163924|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_171424|/home/bzimage/bzImage_f2c3c32f45002de19c6dec33f32fd259e82f2557 contained perf_event_release_kernel:[  300.195035]  perf_event_release_kernel+0x6e/0x370
+[  300.195873]  ? perf_event_release_kernel+0x370/0x370
+[  300.213617]  perf_event_release_kernel+0x6e/0x370
+[  300.214461]  ? perf_event_release_kernel+0x370/0x370
+[  300.242718]  perf_event_release_kernel+0x6e/0x370
+[  300.243556]  ? perf_event_release_kernel+0x370/0x370
+[  300.261550]  perf_event_release_kernel+0x6e/0x370
+[  300.262411]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_171424||/home/bzimage/bzImage_97ba62b278674293762c3d91f724f1bb922f04e0| was not exist, will make it|
+|1116_174249|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1116_174303|Run /home/bzimage/bzImage_97ba62b278674293762c3d91f724f1bb922f04e0 with image:/root/image/centos8_2.img in local port:10022|
+|1116_174328|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1116_174329|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1116_174330|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/7f78467d9c426f5811637b40171795a664ec3d8e/repro.cprog root@localhost:/root/repro.c|
+|1116_174332|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1116_181832|/home/bzimage/bzImage_97ba62b278674293762c3d91f724f1bb922f04e0 contained perf_event_release_kernel:[  300.428474]  perf_event_release_kernel+0x6e/0x370
+[  300.429719]  ? perf_event_release_kernel+0x370/0x370, FAIL|
+|1116_181832|Bisect PASS: find 97ba62b278674293762c3d91f724f1bb922f04e0 is the first bad commit|
+|1116_181832|CMD=git bisect log >> /home/bzimage/bi.log|
+|1116_181832|CMD=git bisect log >> /home/bzimage/1116_021029_perf_event_release_kernel/bisect.log|
+git bisect start
+# bad: [f0c4d9fc9cc9462659728d168387191387e903cc] Linux 6.1-rc4
+git bisect bad f0c4d9fc9cc9462659728d168387191387e903cc
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [4817c37d71b554fe46ea494f6b2c8562b26640bf] Merge tag 'drm-intel-gt-next-2021-12-23' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+git bisect bad 4817c37d71b554fe46ea494f6b2c8562b26640bf
+# bad: [e058a84bfddc42ba356a2316f2cf1141974625c9] Merge tag 'drm-next-2021-07-01' of git://anongit.freedesktop.org/drm/drm
+git bisect bad e058a84bfddc42ba356a2316f2cf1141974625c9
+# good: [3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4] Merge tag 'media/v5.13-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 3aa139aa9fdc138a84243dc49dc18d9b40e1c6e4
+# bad: [e22e9832798df81393d09d40fa34b01aea53cf39] Merge tag '9p-for-5.13-rc1' of git://github.com/martinetd/linux
+git bisect bad e22e9832798df81393d09d40fa34b01aea53cf39
+# bad: [9d31d2338950293ec19d9b095fbaa9030899dcb4] Merge tag 'net-next-5.13' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect bad 9d31d2338950293ec19d9b095fbaa9030899dcb4
+# bad: [d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9] Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect bad d72cd4ad4174cfd2257c426ad51e4f53bcfde9c9
+# good: [9a45da9270b64b14e154093c28f746d861ab8c61] Merge tag 'core-rcu-2021-04-28' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 9a45da9270b64b14e154093c28f746d861ab8c61
+# bad: [0080665fbd0e6a771aee366bb2aa208626e43def] Merge tag 'devicetree-for-5.13' of git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux
+git bisect bad 0080665fbd0e6a771aee366bb2aa208626e43def
+# bad: [fc0586062816559defb14c947319ef8c4c326fb3] Merge tag 'for-5.13/drivers-2021-04-27' of git://git.kernel.dk/linux-block
+git bisect bad fc0586062816559defb14c947319ef8c4c326fb3
+# bad: [16b3d0cf5bad844daaf436ad2e9061de0fe36e5c] Merge tag 'sched-core-2021-04-28' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 16b3d0cf5bad844daaf436ad2e9061de0fe36e5c
+# good: [03b2cd72aad1103127282f39c614e4722e5d9e8f] Merge tag 'objtool-core-2021-04-28' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 03b2cd72aad1103127282f39c614e4722e5d9e8f
+# good: [c006fac556e401a62054d065da168099ea5a5b10] sched: Warn on long periods of pending need_resched
+git bisect good c006fac556e401a62054d065da168099ea5a5b10
+# bad: [d0946a882e6220229a29f9031641e54379be5a1e] perf/x86/intel: Hybrid PMU support for perf capabilities
+git bisect bad d0946a882e6220229a29f9031641e54379be5a1e
+# good: [47f661eca0700928012e11c57ea0328f5ccfc3b9] perf: Apply PERF_EVENT_IOC_MODIFY_ATTRIBUTES to children
+git bisect good 47f661eca0700928012e11c57ea0328f5ccfc3b9
+# bad: [46ade4740bbf9bf4e804ddb2c85845cccd219f3c] perf/x86: Move cpuc->running into P4 specific code
+git bisect bad 46ade4740bbf9bf4e804ddb2c85845cccd219f3c
+# good: [fb6cc127e0b6e629252cdd0f77d5a1f49db95b92] signal: Introduce TRAP_PERF si_code and si_perf to siginfo
+git bisect good fb6cc127e0b6e629252cdd0f77d5a1f49db95b92
+# bad: [f2c3c32f45002de19c6dec33f32fd259e82f2557] selftests/perf_events: Add kselftest for process-wide sigtrap handling
+git bisect bad f2c3c32f45002de19c6dec33f32fd259e82f2557
+# bad: [97ba62b278674293762c3d91f724f1bb922f04e0] perf: Add support for SIGTRAP on perf events
+git bisect bad 97ba62b278674293762c3d91f724f1bb922f04e0
+# first bad commit: [97ba62b278674293762c3d91f724f1bb922f04e0] perf: Add support for SIGTRAP on perf events
+|1116_181832|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m f0c4d9fc9cc9462659728d168387191387e903cc -b 97ba62b278674293762c3d91f724f1bb922f04e0 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_97ba62b278674293762c3d91f724f1bb922f04e0_revert|
+|1116_181908|FAIL|bzImage:/home/bzimage/bzImage_f0c4d9fc9cc9462659728d168387191387e903cc_97ba62b278674293762c3d91f724f1bb922f04e0_revert does not exist:|
