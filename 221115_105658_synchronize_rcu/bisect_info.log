@@ -1,0 +1,44 @@
+git bisect start
+# bad: [094226ad94f471a9f19e8f8e7140a09c2625abaa] Linux 6.1-rc5
+git bisect bad 094226ad94f471a9f19e8f8e7140a09c2625abaa
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [7cd2802d7496c1fc76f42dc045b48cc16d11df39] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad 7cd2802d7496c1fc76f42dc045b48cc16d11df39
+# good: [e058a84bfddc42ba356a2316f2cf1141974625c9] Merge tag 'drm-next-2021-07-01' of git://anongit.freedesktop.org/drm/drm
+git bisect good e058a84bfddc42ba356a2316f2cf1141974625c9
+# good: [cc09ee80c3b18ae1a897a30a17fe710b2b2f620a] Merge tag 'mm-slub-5.15-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/vbabka/linux
+git bisect good cc09ee80c3b18ae1a897a30a17fe710b2b2f620a
+# bad: [56d33754481fe0dc7436dc4ee4fbd44b3039361d] Merge tag 'drm-next-2021-11-03' of git://anongit.freedesktop.org/drm/drm
+git bisect bad 56d33754481fe0dc7436dc4ee4fbd44b3039361d
+# bad: [73d21a3579818aa0e39de207474a39ca35c7d8cb] Merge tag 'media/v5.16-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect bad 73d21a3579818aa0e39de207474a39ca35c7d8cb
+# good: [86a44e9067c95083d5dbf5a140e3f4560e5af1ca] Merge tag 'ntfs3_for_5.15' of git://github.com/Paragon-Software-Group/linux-ntfs3
+git bisect good 86a44e9067c95083d5dbf5a140e3f4560e5af1ca
+# good: [8d1f01775f8ead7ee313403158be95bffdbb3638] Merge tag 'for-5.16/io_uring-2021-10-29' of git://git.kernel.dk/linux-block
+git bisect good 8d1f01775f8ead7ee313403158be95bffdbb3638
+# bad: [8cb1ae19bfae92def42c985417cd6e894ddaa047] Merge tag 'x86-fpu-2021-11-01' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 8cb1ae19bfae92def42c985417cd6e894ddaa047
+# good: [91e1c99e175ae6bb6be765c6fcd40e869f8f6aee] Merge tag 'perf-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 91e1c99e175ae6bb6be765c6fcd40e869f8f6aee
+# bad: [9a7e0a90a454a7826ecbca055a6ec9271b70c686] Merge tag 'sched-core-2021-11-01' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 9a7e0a90a454a7826ecbca055a6ec9271b70c686
+# good: [43aa0a195f06101bcb5d8d711bba0dd24b33a1a0] Merge tag 'objtool-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 43aa0a195f06101bcb5d8d711bba0dd24b33a1a0
+# bad: [7d380f24fe662033fd21a65f678057abd293f76e] sched/numa: Fix a few comments
+git bisect bad 7d380f24fe662033fd21a65f678057abd293f76e
+# bad: [1a7243ca4074beed97b68d7235a6e34862fc2cd6] kthread: Move prio/affinite change into the newly created thread
+git bisect bad 1a7243ca4074beed97b68d7235a6e34862fc2cd6
+# good: [1c36432b278cecf1499f21fae19836e614954309] kselftests/sched: cleanup the child processes
+git bisect good 1c36432b278cecf1499f21fae19836e614954309
+# good: [ed7b564cfdd0668efbd739d0b4e2d67797293f32] sched/rt: Support sched_stat_runtime tracepoint for RT sched class
+git bisect good ed7b564cfdd0668efbd739d0b4e2d67797293f32
+# good: [b5eb4a5f6521d58d5564b8746701bd67a92a2b11] sched/dl: Support schedstats for deadline sched class
+git bisect good b5eb4a5f6521d58d5564b8746701bd67a92a2b11
+# bad: [c597bfddc9e9e8a63817252b67c3ca0e544ace26] sched: Provide Kconfig support for default dynamic preempt mode
+git bisect bad c597bfddc9e9e8a63817252b67c3ca0e544ace26
+# good: [32ed980c3020b7a19e26dc488c10817807ba2a41] sched: Remove unused inline function __rq_clock_broken()
+git bisect good 32ed980c3020b7a19e26dc488c10817807ba2a41
+# first bad commit: [c597bfddc9e9e8a63817252b67c3ca0e544ace26] sched: Provide Kconfig support for default dynamic preempt mode
+|1116_065131|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 094226ad94f471a9f19e8f8e7140a09c2625abaa -b c597bfddc9e9e8a63817252b67c3ca0e54|
+|1116_065212|FAIL|bzImage:/home/bzimage/bzImage_094226ad94f471a9f19e8f8e7140a09c2625abaa_c597bfddc9e9e8a63817252b67c3ca0e544ace26_revert does not exist:|
