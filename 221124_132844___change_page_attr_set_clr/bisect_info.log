@@ -1,0 +1,35 @@
+git bisect start
+# bad: [73d909b0233ab9bc055411c9c9e9f4a192a07c87] x86/cet/shstk: Add ARCH_SHSTK_UNLOCK
+git bisect bad 73d909b0233ab9bc055411c9c9e9f4a192a07c87
+# good: [094226ad94f471a9f19e8f8e7140a09c2625abaa] Linux 6.1-rc5
+git bisect good 094226ad94f471a9f19e8f8e7140a09c2625abaa
+# skip: [e237cb87ea3964f22ed12f69e66bacf9fe1c5e7b] Merge x86/sgx into tip/master
+git bisect skip e237cb87ea3964f22ed12f69e66bacf9fe1c5e7b
+# good: [e57ef2ed97c1d078973298658a8096644a1e9e09] x86: Put hot per CPU variables into a struct
+git bisect good e57ef2ed97c1d078973298658a8096644a1e9e09
+# good: [8461039ff55d97e810c13e473e4c771f307b8863] Merge x86/core into tip/master
+git bisect good 8461039ff55d97e810c13e473e4c771f307b8863
+# bad: [bf1269766228ef169145af26ae50ef9ef095b6fe] selftests/x86/lam: Add ARCH_FORCE_TAGGED_SVA test cases for linear-address masking
+git bisect bad bf1269766228ef169145af26ae50ef9ef095b6fe
+# bad: [19404aeebbc18cc15ef440b4c17f9cc9f3005329] x86_64: Remove pointless set_64bit() usage
+git bisect bad 19404aeebbc18cc15ef440b4c17f9cc9f3005329
+# bad: [88993b1627f2a2205b2f3112c4d22448cd863df3] mm: Update ptep_get_lockless()'s comment
+git bisect bad 88993b1627f2a2205b2f3112c4d22448cd863df3
+# good: [107b6828a7cde2de0bb293588a59892831cef78b] x86/mm: Use mm_alloc() in poking_init()
+git bisect good 107b6828a7cde2de0bb293588a59892831cef78b
+# good: [237c7e967566ca7048fd7e74951fccb026f92df0] x86/mm: Do verify W^X at boot up
+git bisect good 237c7e967566ca7048fd7e74951fccb026f92df0
+# good: [1f6eae43052889579dae56eae275003b9a876c21] mm: Introduce set_memory_rox()
+git bisect good 1f6eae43052889579dae56eae275003b9a876c21
+# bad: [b38994948567e6d6b62947401c57f4ab2efe070c] x86/mm: Implement native set_memory_rox()
+git bisect bad b38994948567e6d6b62947401c57f4ab2efe070c
+# first bad commit: [b38994948567e6d6b62947401c57f4ab2efe070c] x86/mm: Implement native set_memory_rox()
+|1124_180143|/root/bzimage_bisect/make_bz.sh -k /root/rpedgeco.linux -m 73d909b0233ab9bc055411c9c9e9f4a192a07c87 -b b38994948567e6d6b62947401c57f4ab2efe070c -d /|
+|1124_182414|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1124_182425|Run /home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87_b38994948567e6d6b62947401c57f4ab2efe070c_revert with image:/root/image/centos8_2.|
+|1124_182450|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1124_182451|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1124_182452|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f5f9ae77e751cbb320edf473193e3188ac930706/repro.cprog root@localhost:/|
+|1124_182453|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1124_182722|/home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87_b38994948567e6d6b62947401c57f4ab2efe070c_revert didn't contain __change_page_attr_set|
+|1124_182722|Bisect successfully! 73d909b0233ab9bc055411c9c9e9f4a192a07c87_b38994948567e6d6b62947401c57f4ab2efe070c_revert bzimage passed!|
