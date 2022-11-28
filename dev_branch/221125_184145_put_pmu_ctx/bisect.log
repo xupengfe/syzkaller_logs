@@ -1,0 +1,152 @@
+|1125_184145|CMD=cd /root/rpedgeco.linux|
+|1125_184145|git log 73d909b0233ab9bc055411c9c9e9f4a192a07c87 check_result:commit 73d909b0233ab9bc055411c9c9e9f4a192a07c87|
+|1125_184145|git log 094226ad94f471a9f19e8f8e7140a09c2625abaa check_result:commit 094226ad94f471a9f19e8f8e7140a09c2625abaa|
+|1125_184145|CMD=git checkout -f 73d909b0233ab9bc055411c9c9e9f4a192a07c87|
+|1125_184146|CMD=cd /root/rpedgeco.linux|
+|1125_184146||/home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87| exist, no need make|
+|1125_184146|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_184155|Run /home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87 with image:/root/image/centos8_2.img in local port:10022|
+|1125_184220|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_184221|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_184222|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_184223|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_184233|/home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87 contained put_pmu_ctx:[   36.542091] WARNING: CPU: 0 PID: 1142 at kernel/events/core.c:4907 put_pmu_ctx+0x107/0x120
+[   36.543828] RIP: 0010:put_pmu_ctx+0x107/0x120, FAIL|
+|1125_184233|Found time:36 in /home/bzimage/1125_184145_put_pmu_ctx/73d909b0233ab9bc055411c9c9e9f4a192a07c87_dmesg.log|
+|1125_184233|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:156|
+|1125_184233|-END- commit 73d909b0233ab9bc055411c9c9e9f4a192a07c87 FAIL bad|
+|1125_184233||/home/bzimage/bzImage_094226ad94f471a9f19e8f8e7140a09c2625abaa| exist, no need make|
+|1125_184233|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_184244|Run /home/bzimage/bzImage_094226ad94f471a9f19e8f8e7140a09c2625abaa with image:/root/image/centos8_2.img in local port:10022|
+|1125_184309|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_184309|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_184311|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_184312|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_184548|/home/bzimage/bzImage_094226ad94f471a9f19e8f8e7140a09c2625abaa didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_184548|Start commit 094226ad94f471a9f19e8f8e7140a09c2625abaa PASS good|
+|1125_184548|CMD=git checkout -f 73d909b0233ab9bc055411c9c9e9f4a192a07c87|
+|1125_184549|CMD=git bisect start|
+|1125_184549|CMD=git bisect bad 73d909b0233ab9bc055411c9c9e9f4a192a07c87|
+|1125_184549|Bisect first start commit:094226ad94f471a9f19e8f8e7140a09c2625abaa|
+|1125_184549|git bisect good 094226ad94f471a9f19e8f8e7140a09c2625abaa|
+|1125_184549||/home/bzimage/bzImage_e237cb87ea3964f22ed12f69e66bacf9fe1c5e7b| was not exist, will make it|
+|1125_184816|git bisect skip e237cb87ea3964f22ed12f69e66bacf9fe1c5e7b|
+|1125_184816||/home/bzimage/bzImage_e57ef2ed97c1d078973298658a8096644a1e9e09| exist, no need make|
+|1125_184816|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_184827|Run /home/bzimage/bzImage_e57ef2ed97c1d078973298658a8096644a1e9e09 with image:/root/image/centos8_2.img in local port:10022|
+|1125_184852|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_184852|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_184853|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_184855|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_185131|/home/bzimage/bzImage_e57ef2ed97c1d078973298658a8096644a1e9e09 didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_185131|git bisect good e57ef2ed97c1d078973298658a8096644a1e9e09|
+|1125_185132||/home/bzimage/bzImage_8461039ff55d97e810c13e473e4c771f307b8863| exist, no need make|
+|1125_185132|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_185140|Run /home/bzimage/bzImage_8461039ff55d97e810c13e473e4c771f307b8863 with image:/root/image/centos8_2.img in local port:10022|
+|1125_185205|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_185206|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_185207|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_185208|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_185444|/home/bzimage/bzImage_8461039ff55d97e810c13e473e4c771f307b8863 didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_185444|git bisect good 8461039ff55d97e810c13e473e4c771f307b8863|
+|1125_185445||/home/bzimage/bzImage_bf1269766228ef169145af26ae50ef9ef095b6fe| exist, no need make|
+|1125_185445|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_185451|Run /home/bzimage/bzImage_bf1269766228ef169145af26ae50ef9ef095b6fe with image:/root/image/centos8_2.img in local port:10022|
+|1125_185516|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_185517|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_185518|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_185519|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_185755|/home/bzimage/bzImage_bf1269766228ef169145af26ae50ef9ef095b6fe didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_185755|git bisect good bf1269766228ef169145af26ae50ef9ef095b6fe|
+|1125_185756||/home/bzimage/bzImage_6db34baf0d6a1ee3f74da1ab1935b08b4cf21f8b| was not exist, will make it|
+|1125_191927|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_191931|Run /home/bzimage/bzImage_6db34baf0d6a1ee3f74da1ab1935b08b4cf21f8b with image:/root/image/centos8_2.img in local port:10022|
+|1125_191956|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_191956|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_191958|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_191959|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_192235|/home/bzimage/bzImage_6db34baf0d6a1ee3f74da1ab1935b08b4cf21f8b didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_192235|git bisect good 6db34baf0d6a1ee3f74da1ab1935b08b4cf21f8b|
+|1125_192235||/home/bzimage/bzImage_d515ac04708729660e7707a0c90fec4dd26c6d7e| was not exist, will make it|
+|1125_194429|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_194435|Run /home/bzimage/bzImage_d515ac04708729660e7707a0c90fec4dd26c6d7e with image:/root/image/centos8_2.img in local port:10022|
+|1125_194500|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_194500|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_194501|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_194503|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_194739|/home/bzimage/bzImage_d515ac04708729660e7707a0c90fec4dd26c6d7e didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_194739|git bisect good d515ac04708729660e7707a0c90fec4dd26c6d7e|
+|1125_194739||/home/bzimage/bzImage_1166c4da90964cafa1f72ae530990de6dec38fec| was not exist, will make it|
+|1125_201033|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_201039|Run /home/bzimage/bzImage_1166c4da90964cafa1f72ae530990de6dec38fec with image:/root/image/centos8_2.img in local port:10022|
+|1125_201104|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_201104|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_201105|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_201107|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_201343|/home/bzimage/bzImage_1166c4da90964cafa1f72ae530990de6dec38fec didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_201343|git bisect good 1166c4da90964cafa1f72ae530990de6dec38fec|
+|1125_201343||/home/bzimage/bzImage_30654ae69eb4631ff6b89e66e883d089a7cc8e98| was not exist, will make it|
+|1125_203451|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_203456|Run /home/bzimage/bzImage_30654ae69eb4631ff6b89e66e883d089a7cc8e98 with image:/root/image/centos8_2.img in local port:10022|
+|1125_203521|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_203521|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_203523|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_203524|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_203800|/home/bzimage/bzImage_30654ae69eb4631ff6b89e66e883d089a7cc8e98 didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_203800|git bisect good 30654ae69eb4631ff6b89e66e883d089a7cc8e98|
+|1125_203800||/home/bzimage/bzImage_56c297b7288d69d8ba62eedb3c79b446272f3439| was not exist, will make it|
+|1125_205854|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_205859|Run /home/bzimage/bzImage_56c297b7288d69d8ba62eedb3c79b446272f3439 with image:/root/image/centos8_2.img in local port:10022|
+|1125_205924|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_205924|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_205925|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_205926|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_210202|/home/bzimage/bzImage_56c297b7288d69d8ba62eedb3c79b446272f3439 didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_210202|git bisect good 56c297b7288d69d8ba62eedb3c79b446272f3439|
+|1125_210203||/home/bzimage/bzImage_59923419d01c99521c6fc654d1098e3b116978b3| was not exist, will make it|
+|1125_212258|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_212303|Run /home/bzimage/bzImage_59923419d01c99521c6fc654d1098e3b116978b3 with image:/root/image/centos8_2.img in local port:10022|
+|1125_212328|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_212328|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_212329|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_212331|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_212607|/home/bzimage/bzImage_59923419d01c99521c6fc654d1098e3b116978b3 didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_212607|git bisect good 59923419d01c99521c6fc654d1098e3b116978b3|
+|1125_212607|Bisect PASS: find 73d909b0233ab9bc055411c9c9e9f4a192a07c87 is the first bad commit|
+|1125_212607|CMD=git bisect log >> /home/bzimage/bi.log|
+|1125_212607|CMD=git bisect log >> /home/bzimage/1125_184145_put_pmu_ctx/bisect.log|
+git bisect start
+# bad: [73d909b0233ab9bc055411c9c9e9f4a192a07c87] x86/cet/shstk: Add ARCH_SHSTK_UNLOCK
+git bisect bad 73d909b0233ab9bc055411c9c9e9f4a192a07c87
+# good: [094226ad94f471a9f19e8f8e7140a09c2625abaa] Linux 6.1-rc5
+git bisect good 094226ad94f471a9f19e8f8e7140a09c2625abaa
+# skip: [e237cb87ea3964f22ed12f69e66bacf9fe1c5e7b] Merge x86/sgx into tip/master
+git bisect skip e237cb87ea3964f22ed12f69e66bacf9fe1c5e7b
+# good: [e57ef2ed97c1d078973298658a8096644a1e9e09] x86: Put hot per CPU variables into a struct
+git bisect good e57ef2ed97c1d078973298658a8096644a1e9e09
+# good: [8461039ff55d97e810c13e473e4c771f307b8863] Merge x86/core into tip/master
+git bisect good 8461039ff55d97e810c13e473e4c771f307b8863
+# good: [bf1269766228ef169145af26ae50ef9ef095b6fe] selftests/x86/lam: Add ARCH_FORCE_TAGGED_SVA test cases for linear-address masking
+git bisect good bf1269766228ef169145af26ae50ef9ef095b6fe
+# good: [6db34baf0d6a1ee3f74da1ab1935b08b4cf21f8b] Merge sched/urgent into tip/master
+git bisect good 6db34baf0d6a1ee3f74da1ab1935b08b4cf21f8b
+# good: [d515ac04708729660e7707a0c90fec4dd26c6d7e] mm: Add guard pages around a shadow stack.
+git bisect good d515ac04708729660e7707a0c90fec4dd26c6d7e
+# good: [1166c4da90964cafa1f72ae530990de6dec38fec] x86/shstk: Introduce routines modifying shstk
+git bisect good 1166c4da90964cafa1f72ae530990de6dec38fec
+# good: [30654ae69eb4631ff6b89e66e883d089a7cc8e98] x86: Expose thread features in /proc/$PID/status
+git bisect good 30654ae69eb4631ff6b89e66e883d089a7cc8e98
+# good: [56c297b7288d69d8ba62eedb3c79b446272f3439] selftests/x86: Add shadow stack test
+git bisect good 56c297b7288d69d8ba62eedb3c79b446272f3439
+# good: [59923419d01c99521c6fc654d1098e3b116978b3] x86/cet: Add PTRACE interface for shadow stack
+git bisect good 59923419d01c99521c6fc654d1098e3b116978b3
+# first bad commit: [73d909b0233ab9bc055411c9c9e9f4a192a07c87] x86/cet/shstk: Add ARCH_SHSTK_UNLOCK
+|1125_212607|/root/bzimage_bisect/make_bz.sh -k /root/rpedgeco.linux -m 73d909b0233ab9bc055411c9c9e9f4a192a07c87 -b 73d909b0233ab9bc055411c9c9e9f4a192a07c87 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87_73d909b0233ab9bc055411c9c9e9f4a192a07c87_revert|
+|1125_214817|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1125_214822|Run /home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87_73d909b0233ab9bc055411c9c9e9f4a192a07c87_revert with image:/root/image/centos8_2.img in local port:10022|
+|1125_214847|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1125_214847|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1125_214848|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e07780a3ce3871129db248820fca96efc8b6b62/repro.cprog root@localhost:/root/repro.c|
+|1125_214849|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1125_215126|/home/bzimage/bzImage_73d909b0233ab9bc055411c9c9e9f4a192a07c87_73d909b0233ab9bc055411c9c9e9f4a192a07c87_revert didn't contain put_pmu_ctx: in dmesg, pass|
+|1125_215126|Bisect successfully! 73d909b0233ab9bc055411c9c9e9f4a192a07c87_73d909b0233ab9bc055411c9c9e9f4a192a07c87_revert bzimage passed!|
