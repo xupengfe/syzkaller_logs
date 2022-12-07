@@ -1,0 +1,42 @@
+git bisect start
+# bad: [76dcd734eca23168cb008912c0f69ff408905235] Linux 6.1-rc8
+git bisect bad 76dcd734eca23168cb008912c0f69ff408905235
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [f2b551fad8d8f2ac5e1f810ad595298381e0b0c5] Merge tag 'wireless-drivers-next-2021-12-23' of git://git.kernel.org/pub/scm/linux/kernel/git/kvalo/wireless-drivers-next
+git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5
+# bad: [9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34] Merge tag 'optee-warning-for-v5.19' of https://git.linaro.org/people/jens.wiklander/linux-tee into arm/late
+git bisect bad 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34
+# bad: [7403e6d8263937dea206dd201fed1ceed190ca18] Merge tag 'vfio-v5.18-rc1' of https://github.com/awilliam/linux-vfio
+git bisect bad 7403e6d8263937dea206dd201fed1ceed190ca18
+# bad: [88db8458086b1dcf20b56682504bdb34d2bca0e2] Merge tag 'exfat-for-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/linkinjeon/exfat
+git bisect bad 88db8458086b1dcf20b56682504bdb34d2bca0e2
+# good: [5c947d0dbae8038ec1c8b538891f6475350542ee] Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/kernel/git/herbert/crypto-2.6
+git bisect good 5c947d0dbae8038ec1c8b538891f6475350542ee
+# bad: [64ad9461521b1a357846ef6cedc4bccd48a046e0] Merge tag 'x86_core_for_v5.17_rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 64ad9461521b1a357846ef6cedc4bccd48a046e0
+# bad: [d3c810803576d867265277df8e94eee386351c9d] Merge tag 'for-5.17/block-2022-01-11' of git://git.kernel.dk/linux-block
+git bisect bad d3c810803576d867265277df8e94eee386351c9d
+# good: [a135ce4400bb87f229ab33a663987327d9e0b2a0] Merge tag 'selinux-pr-20220110' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/selinux
+git bisect good a135ce4400bb87f229ab33a663987327d9e0b2a0
+# bad: [5672cdfba4fefd6178b6c4078cb1bb7bf6ce0573] Merge tag 'for-linus-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rw/ubifs
+git bisect bad 5672cdfba4fefd6178b6c4078cb1bb7bf6ce0573
+# good: [36c86a9e1be3b29f9f075a946df55dfe1d818019] btrfs: output more debug messages for uncommitted transaction
+git bisect good 36c86a9e1be3b29f9f075a946df55dfe1d818019
+# good: [11fc88c2e49ba8e3ca827dc9bdd7b7216be30a36] Merge tag 'xfs-5.17-merge-2' of git://git.kernel.org/pub/scm/fs/xfs/xfs-linux
+git bisect good 11fc88c2e49ba8e3ca827dc9bdd7b7216be30a36
+# bad: [1dbfae0113f1423b42c304989a3cc8a7dd0ea53e] Merge tag 'ext4_for_linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tytso/ext4
+git bisect bad 1dbfae0113f1423b42c304989a3cc8a7dd0ea53e
+# bad: [ab047d516dea72f011c15c04a929851e4d053109] ext4: destroy ext4_fc_dentry_cachep kmemcache on module removal
+git bisect bad ab047d516dea72f011c15c04a929851e4d053109
+# bad: [cebe85d570cf84804e848332d6721bc9e5300e07] ext4: switch to the new mount api
+git bisect bad cebe85d570cf84804e848332d6721bc9e5300e07
+# good: [e6e268cb682290da29e3c8408493a4474307b8cc] ext4: move quota configuration out of handle_mount_opt()
+git bisect good e6e268cb682290da29e3c8408493a4474307b8cc
+# good: [7edfd85b1ffd36593011dec96ab395912a340418] ext4: Completely separate options parsing and sb setup
+git bisect good 7edfd85b1ffd36593011dec96ab395912a340418
+# good: [97d8a670b4531437d5b842cf68dafa6d1a932ddf] ext4: change token2str() to use ext4_param_specs
+git bisect good 97d8a670b4531437d5b842cf68dafa6d1a932ddf
+# first bad commit: [cebe85d570cf84804e848332d6721bc9e5300e07] ext4: switch to the new mount api
+|1207_160506|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 76dcd734eca23168cb008912c0f69ff408905235 -b cebe85d570cf84804e848332d6721bc9e5300e07 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_cebe85d570cf84804e848332d6721bc9e5300e07_revert|
+|1207_160758|FAIL|bzImage:/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_cebe85d570cf84804e848332d6721bc9e5300e07_revert does not exist:|
