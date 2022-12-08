@@ -1,0 +1,797 @@
+|1207_222843|CMD=cd /root/os.linux.intelnext.kernel|
+|1207_222843|git log 76dcd734eca23168cb008912c0f69ff408905235 check_result:commit 76dcd734eca23168cb008912c0f69ff408905235|
+|1207_222843|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|1207_222843|CMD=git checkout -f 76dcd734eca23168cb008912c0f69ff408905235|
+|1207_222843|CMD=cd /root/os.linux.intelnext.kernel|
+|1207_222843||/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235| exist, no need make|
+|1207_222843|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1207_222859|Run /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235 with image:/root/image/centos8_2.img in local port:10022|
+|1207_222924|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1207_222924|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1207_222925|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1207_222927|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1207_222937|/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235 contained free_event:[   32.674118] WARNING: CPU: 0 PID: 866 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   32.675860] RIP: 0010:free_event+0x75/0x80
+[   33.690638] WARNING: CPU: 0 PID: 918 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   33.692423] RIP: 0010:free_event+0x75/0x80
+[   34.040889] WARNING: CPU: 0 PID: 946 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   34.042727] RIP: 0010:free_event+0x75/0x80
+[   34.973246] WARNING: CPU: 0 PID: 1010 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   34.975086] RIP: 0010:free_event+0x75/0x80
+[   36.592612] WARNING: CPU: 0 PID: 1115 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   36.594454] RIP: 0010:free_event+0x75/0x80
+[   37.068361] WARNING: CPU: 0 PID: 1143 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   37.070168] RIP: 0010:free_event+0x75/0x80
+[   37.530290] WARNING: CPU: 0 PID: 1182 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   37.532097] RIP: 0010:free_event+0x75/0x80, FAIL|
+|1207_222937|Found time:32 in /home/bzimage/1207_222842_free_event/76dcd734eca23168cb008912c0f69ff408905235_dmesg.log|
+|1207_222937|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:152|
+|1207_222937|-END- commit 76dcd734eca23168cb008912c0f69ff408905235 FAIL bad|
+|1207_222937||/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|1207_222937|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1207_222952|Run /home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|1207_223017|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1207_223017|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1207_223019|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1207_223020|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1207_223252|/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain free_event: in dmesg, pass|
+|1207_223252|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|1207_223252|CMD=git checkout -f 76dcd734eca23168cb008912c0f69ff408905235|
+|1207_223252|CMD=git bisect start|
+|1207_223252|CMD=git bisect bad 76dcd734eca23168cb008912c0f69ff408905235|
+|1207_223252|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|1207_223252|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|1207_223306||/home/bzimage/bzImage_f2b551fad8d8f2ac5e1f810ad595298381e0b0c5| was not exist, will make it|
+|1207_230036|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1207_230059|Run /home/bzimage/bzImage_f2b551fad8d8f2ac5e1f810ad595298381e0b0c5 with image:/root/image/centos8_2.img in local port:10022|
+|1207_230124|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1207_230124|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1207_230125|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1207_230127|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1207_230359|/home/bzimage/bzImage_f2b551fad8d8f2ac5e1f810ad595298381e0b0c5 didn't contain free_event: in dmesg, pass|
+|1207_230359|git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5|
+|1207_230410||/home/bzimage/bzImage_9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34| was not exist, will make it|
+|1207_232947|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1207_233001|Run /home/bzimage/bzImage_9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34 with image:/root/image/centos8_2.img in local port:10022|
+|1207_233026|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1207_233026|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1207_233027|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1207_233029|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1207_233301|/home/bzimage/bzImage_9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34 didn't contain free_event: in dmesg, pass|
+|1207_233301|git bisect good 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34|
+|1207_233305||/home/bzimage/bzImage_1d239c1eb873c7d6c6cbc80d68330c939fd86136| was not exist, will make it|
+|1207_235803|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1207_235820|Run /home/bzimage/bzImage_1d239c1eb873c7d6c6cbc80d68330c939fd86136 with image:/root/image/centos8_2.img in local port:10022|
+|1207_235845|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1207_235846|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1207_235847|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1207_235848|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_000120|/home/bzimage/bzImage_1d239c1eb873c7d6c6cbc80d68330c939fd86136 didn't contain free_event: in dmesg, pass|
+|1208_000120|git bisect good 1d239c1eb873c7d6c6cbc80d68330c939fd86136|
+|1208_000123||/home/bzimage/bzImage_40285e64c5654c956505dad34ed2ee4be163b1f0| was not exist, will make it|
+|1208_002720|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_002734|Run /home/bzimage/bzImage_40285e64c5654c956505dad34ed2ee4be163b1f0 with image:/root/image/centos8_2.img in local port:10022|
+|1208_002759|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_002800|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_002801|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_002802|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_003034|/home/bzimage/bzImage_40285e64c5654c956505dad34ed2ee4be163b1f0 didn't contain free_event: in dmesg, pass|
+|1208_003034|git bisect good 40285e64c5654c956505dad34ed2ee4be163b1f0|
+|1208_003036||/home/bzimage/bzImage_f23cdfcd04f7c044ee47dac04484b8d289088776| was not exist, will make it|
+|1208_005622|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_005636|Run /home/bzimage/bzImage_f23cdfcd04f7c044ee47dac04484b8d289088776 with image:/root/image/centos8_2.img in local port:10022|
+|1208_005701|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_005701|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_005702|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_005704|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_005936|/home/bzimage/bzImage_f23cdfcd04f7c044ee47dac04484b8d289088776 didn't contain free_event: in dmesg, pass|
+|1208_005936|git bisect good f23cdfcd04f7c044ee47dac04484b8d289088776|
+|1208_005937||/home/bzimage/bzImage_334fe5d3a99aea2e92b934b4c58fffee9b056c5d| was not exist, will make it|
+|1208_012628|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_012642|Run /home/bzimage/bzImage_334fe5d3a99aea2e92b934b4c58fffee9b056c5d with image:/root/image/centos8_2.img in local port:10022|
+|1208_012707|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_012708|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_012709|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_012710|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_012943|/home/bzimage/bzImage_334fe5d3a99aea2e92b934b4c58fffee9b056c5d didn't contain free_event: in dmesg, pass|
+|1208_012943|git bisect good 334fe5d3a99aea2e92b934b4c58fffee9b056c5d|
+|1208_012944||/home/bzimage/bzImage_1d351f1894342c378b96bb9ed89f8debb1e24e9f| was not exist, will make it|
+|1208_015843|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_015858|Run /home/bzimage/bzImage_1d351f1894342c378b96bb9ed89f8debb1e24e9f with image:/root/image/centos8_2.img in local port:10022|
+|1208_015923|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_015923|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_015925|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_015926|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_020158|/home/bzimage/bzImage_1d351f1894342c378b96bb9ed89f8debb1e24e9f didn't contain free_event: in dmesg, pass|
+|1208_020158|git bisect good 1d351f1894342c378b96bb9ed89f8debb1e24e9f|
+|1208_020159||/home/bzimage/bzImage_39f59bca275d2d819a8788c0f962e9e89843efc9| was not exist, will make it|
+|1208_023135|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_023154|Run /home/bzimage/bzImage_39f59bca275d2d819a8788c0f962e9e89843efc9 with image:/root/image/centos8_2.img in local port:10022|
+|1208_023219|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_023219|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_023221|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_023222|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_023454|/home/bzimage/bzImage_39f59bca275d2d819a8788c0f962e9e89843efc9 didn't contain free_event: in dmesg, pass|
+|1208_023454|git bisect good 39f59bca275d2d819a8788c0f962e9e89843efc9|
+|1208_023455||/home/bzimage/bzImage_cd89db60e22824b82f9458753fa6cb770cca8bde| was not exist, will make it|
+|1208_030210|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_030231|Run /home/bzimage/bzImage_cd89db60e22824b82f9458753fa6cb770cca8bde with image:/root/image/centos8_2.img in local port:10022|
+|1208_030256|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_030257|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_030258|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_030259|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_030531|/home/bzimage/bzImage_cd89db60e22824b82f9458753fa6cb770cca8bde didn't contain free_event: in dmesg, pass|
+|1208_030531|git bisect good cd89db60e22824b82f9458753fa6cb770cca8bde|
+|1208_030532||/home/bzimage/bzImage_715d2d960871c238e5860d121ba9735e7f6a7ff1| was not exist, will make it|
+|1208_033133|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_033152|Run /home/bzimage/bzImage_715d2d960871c238e5860d121ba9735e7f6a7ff1 with image:/root/image/centos8_2.img in local port:10022|
+|1208_033217|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_033217|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_033219|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_033220|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_033452|/home/bzimage/bzImage_715d2d960871c238e5860d121ba9735e7f6a7ff1 didn't contain free_event: in dmesg, pass|
+|1208_033452|git bisect good 715d2d960871c238e5860d121ba9735e7f6a7ff1|
+|1208_033452||/home/bzimage/bzImage_355479c70a489415ef6e2624e514f8f15a40861b| was not exist, will make it|
+|1208_040037|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_040051|Run /home/bzimage/bzImage_355479c70a489415ef6e2624e514f8f15a40861b with image:/root/image/centos8_2.img in local port:10022|
+|1208_040116|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_040116|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_040117|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_040118|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_040351|/home/bzimage/bzImage_355479c70a489415ef6e2624e514f8f15a40861b didn't contain free_event: in dmesg, pass|
+|1208_040351|git bisect good 355479c70a489415ef6e2624e514f8f15a40861b|
+|1208_040351||/home/bzimage/bzImage_2df2adc3e69d32751eb534ed55c591854260c4a3| was not exist, will make it|
+|1208_043346|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_043406|Run /home/bzimage/bzImage_2df2adc3e69d32751eb534ed55c591854260c4a3 with image:/root/image/centos8_2.img in local port:10022|
+|1208_043431|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_043432|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_043433|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_043434|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_043707|/home/bzimage/bzImage_2df2adc3e69d32751eb534ed55c591854260c4a3 didn't contain free_event: in dmesg, pass|
+|1208_043707|git bisect good 2df2adc3e69d32751eb534ed55c591854260c4a3|
+|1208_043708||/home/bzimage/bzImage_97ee9d1c16963375eefdf964c429897d27e28956| was not exist, will make it|
+|1208_050916|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_050938|Run /home/bzimage/bzImage_97ee9d1c16963375eefdf964c429897d27e28956 with image:/root/image/centos8_2.img in local port:10022|
+|1208_051003|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_051003|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_051005|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_051006|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_051238|/home/bzimage/bzImage_97ee9d1c16963375eefdf964c429897d27e28956 didn't contain free_event: in dmesg, pass|
+|1208_051238|git bisect good 97ee9d1c16963375eefdf964c429897d27e28956|
+|1208_051238||/home/bzimage/bzImage_c2bf05db6c78f53ca5cd4b48f3b9b71f78d215f1| was not exist, will make it|
+|1208_053851|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_053911|Run /home/bzimage/bzImage_c2bf05db6c78f53ca5cd4b48f3b9b71f78d215f1 with image:/root/image/centos8_2.img in local port:10022|
+|1208_053936|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_053936|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_053937|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_053938|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_054211|/home/bzimage/bzImage_c2bf05db6c78f53ca5cd4b48f3b9b71f78d215f1 didn't contain free_event: in dmesg, pass|
+|1208_054211|git bisect good c2bf05db6c78f53ca5cd4b48f3b9b71f78d215f1|
+|1208_054211||/home/bzimage/bzImage_ae6bb71711713e7b6b2d9ed2af7318dc8ae5cfb2| was not exist, will make it|
+|1208_060805|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_060825|Run /home/bzimage/bzImage_ae6bb71711713e7b6b2d9ed2af7318dc8ae5cfb2 with image:/root/image/centos8_2.img in local port:10022|
+|1208_060850|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_060850|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_060852|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_060853|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_061125|/home/bzimage/bzImage_ae6bb71711713e7b6b2d9ed2af7318dc8ae5cfb2 didn't contain free_event: in dmesg, pass|
+|1208_061125|git bisect good ae6bb71711713e7b6b2d9ed2af7318dc8ae5cfb2|
+|1208_061125||/home/bzimage/bzImage_0c3b5bcb484a659dd14466f92a073b57b2d3c1a5| was not exist, will make it|
+|1208_063832|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_063853|Run /home/bzimage/bzImage_0c3b5bcb484a659dd14466f92a073b57b2d3c1a5 with image:/root/image/centos8_2.img in local port:10022|
+|1208_063918|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_063919|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_063920|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_063922|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_064154|/home/bzimage/bzImage_0c3b5bcb484a659dd14466f92a073b57b2d3c1a5 contained free_event:[   32.807402] WARNING: CPU: 0 PID: 782 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   32.809391] RIP: 0010:free_event+0x75/0x80
+[   32.867568] WARNING: CPU: 0 PID: 774 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   32.869663] RIP: 0010:free_event+0x75/0x80
+[   33.556824] WARNING: CPU: 0 PID: 838 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   33.558700] RIP: 0010:free_event+0x75/0x80
+[   33.623725] WARNING: CPU: 0 PID: 850 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   33.625678] RIP: 0010:free_event+0x75/0x80
+[   33.702909] WARNING: CPU: 0 PID: 846 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   33.704750] RIP: 0010:free_event+0x75/0x80
+[   38.392986] WARNING: CPU: 0 PID: 1107 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   38.394868] RIP: 0010:free_event+0x75/0x80
+[   38.670899] WARNING: CPU: 0 PID: 1126 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   38.672863] RIP: 0010:free_event+0x75/0x80
+[   38.962752] WARNING: CPU: 0 PID: 1150 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   38.964621] RIP: 0010:free_event+0x75/0x80
+[   42.615004] WARNING: CPU: 0 PID: 1294 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   42.617233] RIP: 0010:free_event+0x75/0x80
+[   42.946775] WARNING: CPU: 0 PID: 1306 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   42.949123] RIP: 0010:free_event+0x75/0x80
+[   42.968061] WARNING: CPU: 0 PID: 1310 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   42.970433] RIP: 0010:free_event+0x75/0x80
+[   44.827602] WARNING: CPU: 0 PID: 1426 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   44.829894] RIP: 0010:free_event+0x75/0x80
+[   48.115138] WARNING: CPU: 0 PID: 1622 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   48.117039] RIP: 0010:free_event+0x75/0x80
+[   48.184960] WARNING: CPU: 0 PID: 1626 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   48.186828] RIP: 0010:free_event+0x75/0x80
+[   48.873000] WARNING: CPU: 0 PID: 1670 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   48.874872] RIP: 0010:free_event+0x75/0x80
+[   49.738529] WARNING: CPU: 0 PID: 1733 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   49.740550] RIP: 0010:free_event+0x75/0x80
+[   49.800019] WARNING: CPU: 0 PID: 1730 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   49.802112] RIP: 0010:free_event+0x75/0x80
+[   50.318731] WARNING: CPU: 0 PID: 1790 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   50.320632] RIP: 0010:free_event+0x75/0x80
+[   51.330402] WARNING: CPU: 0 PID: 1830 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   51.332274] RIP: 0010:free_event+0x75/0x80
+[   51.619912] WARNING: CPU: 0 PID: 1842 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   51.621984] RIP: 0010:free_event+0x75/0x80
+[   52.732887] WARNING: CPU: 0 PID: 1922 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   52.734761] RIP: 0010:free_event+0x75/0x80
+[   54.000202] WARNING: CPU: 0 PID: 1978 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   54.002092] RIP: 0010:free_event+0x75/0x80
+[   54.590314] WARNING: CPU: 0 PID: 2062 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   54.592118] RIP: 0010:free_event+0x75/0x80
+[   55.616196] WARNING: CPU: 0 PID: 2110 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   55.618216] RIP: 0010:free_event+0x75/0x80
+[   61.771969] WARNING: CPU: 0 PID: 2430 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   61.774206] RIP: 0010:free_event+0x75/0x80
+[   71.563327] WARNING: CPU: 0 PID: 2845 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   71.565722] RIP: 0010:free_event+0x75/0x80
+[   71.655385] WARNING: CPU: 0 PID: 2841 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   71.657797] RIP: 0010:free_event+0x75/0x80
+[   71.670611] WARNING: CPU: 1 PID: 2850 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   71.674626] RIP: 0010:free_event+0x75/0x80
+[   73.248846] WARNING: CPU: 0 PID: 2950 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   73.251056] RIP: 0010:free_event+0x75/0x80
+[   76.391038] WARNING: CPU: 0 PID: 3070 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   76.393726] RIP: 0010:free_event+0x75/0x80
+[   78.096583] WARNING: CPU: 0 PID: 3122 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   78.099832] RIP: 0010:free_event+0x75/0x80
+[   80.891870] WARNING: CPU: 0 PID: 3294 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   80.894106] RIP: 0010:free_event+0x75/0x80
+[   83.500227] WARNING: CPU: 0 PID: 3406 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   83.503477] RIP: 0010:free_event+0x75/0x80
+[   86.455568] WARNING: CPU: 0 PID: 3598 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   86.457739] RIP: 0010:free_event+0x75/0x80
+[   87.270685] WARNING: CPU: 0 PID: 3626 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   87.272796] RIP: 0010:free_event+0x75/0x80
+[   88.508010] WARNING: CPU: 0 PID: 3718 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   88.510572] RIP: 0010:free_event+0x75/0x80
+[   88.583433] WARNING: CPU: 0 PID: 3722 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   88.585568] RIP: 0010:free_event+0x75/0x80
+[   90.684684] WARNING: CPU: 0 PID: 3834 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   90.686864] RIP: 0010:free_event+0x75/0x80
+[   90.787188] WARNING: CPU: 0 PID: 3838 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   90.789388] RIP: 0010:free_event+0x75/0x80
+[   95.784246] WARNING: CPU: 0 PID: 4110 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   95.786580] RIP: 0010:free_event+0x75/0x80
+[   95.959321] WARNING: CPU: 0 PID: 4113 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   95.961707] RIP: 0010:free_event+0x75/0x80
+[   98.799486] WARNING: CPU: 0 PID: 4262 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   98.801566] RIP: 0010:free_event+0x75/0x80
+[   99.755718] WARNING: CPU: 0 PID: 4310 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   99.757684] RIP: 0010:free_event+0x75/0x80
+[  100.774358] WARNING: CPU: 0 PID: 4366 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  100.776331] RIP: 0010:free_event+0x75/0x80
+[  100.996367] WARNING: CPU: 0 PID: 4382 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  100.998326] RIP: 0010:free_event+0x75/0x80
+[  101.228711] WARNING: CPU: 0 PID: 4398 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  101.230647] RIP: 0010:free_event+0x75/0x80
+[  101.455550] WARNING: CPU: 0 PID: 4414 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  101.457465] RIP: 0010:free_event+0x75/0x80
+[  103.261466] WARNING: CPU: 1 PID: 4486 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  103.263227] RIP: 0010:free_event+0x75/0x80
+[  103.418312] WARNING: CPU: 0 PID: 4490 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  103.420677] RIP: 0010:free_event+0x75/0x80
+[  103.516006] WARNING: CPU: 0 PID: 4497 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  103.518003] RIP: 0010:free_event+0x75/0x80
+[  105.482864] WARNING: CPU: 0 PID: 4594 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  105.484868] RIP: 0010:free_event+0x75/0x80
+[  105.791653] WARNING: CPU: 0 PID: 4590 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  105.793462] RIP: 0010:free_event+0x75/0x80
+[  110.338794] WARNING: CPU: 0 PID: 4929 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  110.340732] RIP: 0010:free_event+0x75/0x80
+[  110.406921] WARNING: CPU: 0 PID: 4925 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  110.408830] RIP: 0010:free_event+0x75/0x80
+[  111.646705] WARNING: CPU: 0 PID: 5005 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  111.648672] RIP: 0010:free_event+0x75/0x80
+[  113.066670] WARNING: CPU: 0 PID: 5061 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  113.068627] RIP: 0010:free_event+0x75/0x80
+[  113.190745] WARNING: CPU: 0 PID: 5065 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  113.192822] RIP: 0010:free_event+0x75/0x80
+[  113.471529] WARNING: CPU: 0 PID: 5085 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  113.473710] RIP: 0010:free_event+0x75/0x80
+[  117.676789] WARNING: CPU: 0 PID: 5305 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  117.679198] RIP: 0010:free_event+0x75/0x80
+[  118.312294] WARNING: CPU: 0 PID: 5337 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  118.315013] RIP: 0010:free_event+0x75/0x80
+[  120.582596] WARNING: CPU: 0 PID: 5490 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  120.585234] RIP: 0010:free_event+0x75/0x80
+[  120.670581] WARNING: CPU: 0 PID: 5494 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  120.672666] RIP: 0010:free_event+0x75/0x80
+[  120.938969] WARNING: CPU: 0 PID: 5498 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  120.941057] RIP: 0010:free_event+0x75/0x80
+[  121.203750] WARNING: CPU: 0 PID: 5518 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  121.205909] RIP: 0010:free_event+0x75/0x80
+[  122.175617] WARNING: CPU: 0 PID: 5613 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  122.177982] RIP: 0010:free_event+0x75/0x80
+[  124.857271] WARNING: CPU: 0 PID: 5749 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  124.859818] RIP: 0010:free_event+0x75/0x80
+[  124.960840] WARNING: CPU: 0 PID: 5753 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  124.963361] RIP: 0010:free_event+0x75/0x80
+[  126.196128] WARNING: CPU: 0 PID: 5821 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  126.198744] RIP: 0010:free_event+0x75/0x80
+[  126.827736] WARNING: CPU: 0 PID: 5853 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  126.829818] RIP: 0010:free_event+0x75/0x80
+[  127.526044] WARNING: CPU: 0 PID: 5893 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  127.528077] RIP: 0010:free_event+0x75/0x80
+[  130.213271] WARNING: CPU: 0 PID: 6021 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  130.215049] RIP: 0010:free_event+0x75/0x80
+[  130.460429] WARNING: CPU: 0 PID: 6037 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  130.462285] RIP: 0010:free_event+0x75/0x80
+[  131.594953] WARNING: CPU: 0 PID: 6093 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  131.596820] RIP: 0010:free_event+0x75/0x80
+[  132.498150] WARNING: CPU: 0 PID: 6141 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  132.499942] RIP: 0010:free_event+0x75/0x80
+[  132.768288] WARNING: CPU: 0 PID: 6157 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  132.770096] RIP: 0010:free_event+0x75/0x80
+[  133.606215] WARNING: CPU: 0 PID: 6205 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  133.608320] RIP: 0010:free_event+0x75/0x80
+[  134.622751] WARNING: CPU: 0 PID: 6253 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  134.624816] RIP: 0010:free_event+0x75/0x80
+[  136.068374] WARNING: CPU: 0 PID: 6313 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  136.070426] RIP: 0010:free_event+0x75/0x80
+[  138.250337] WARNING: CPU: 0 PID: 6428 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  138.252215] RIP: 0010:free_event+0x75/0x80
+[  139.349095] WARNING: CPU: 0 PID: 6484 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  139.351049] RIP: 0010:free_event+0x75/0x80
+[  139.402208] WARNING: CPU: 0 PID: 6488 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  139.404146] RIP: 0010:free_event+0x75/0x80
+[  142.352540] WARNING: CPU: 0 PID: 6628 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  142.354316] RIP: 0010:free_event+0x75/0x80
+[  143.150247] WARNING: CPU: 0 PID: 6668 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  143.152033] RIP: 0010:free_event+0x75/0x80
+[  144.551549] WARNING: CPU: 0 PID: 6740 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  144.553386] RIP: 0010:free_event+0x75/0x80
+[  145.480315] WARNING: CPU: 0 PID: 6812 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  145.482108] RIP: 0010:free_event+0x75/0x80
+[  146.610648] WARNING: CPU: 1 PID: 6868 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  146.612484] RIP: 0010:free_event+0x75/0x80
+[  147.076472] WARNING: CPU: 0 PID: 6892 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  147.079033] RIP: 0010:free_event+0x75/0x80
+[  147.534579] WARNING: CPU: 0 PID: 6924 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  147.536352] RIP: 0010:free_event+0x75/0x80
+[  148.681241] WARNING: CPU: 0 PID: 6980 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  148.683086] RIP: 0010:free_event+0x75/0x80
+[  150.103325] WARNING: CPU: 0 PID: 7052 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  150.105228] RIP: 0010:free_event+0x75/0x80
+[  151.128768] WARNING: CPU: 0 PID: 7108 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  151.130633] RIP: 0010:free_event+0x75/0x80
+[  151.574283] WARNING: CPU: 0 PID: 7140 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  151.576184] RIP: 0010:free_event+0x75/0x80
+[  151.803814] WARNING: CPU: 0 PID: 7156 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  151.805807] RIP: 0010:free_event+0x75/0x80
+[  154.486235] WARNING: CPU: 0 PID: 7317 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  154.488560] RIP: 0010:free_event+0x75/0x80
+[  154.758608] WARNING: CPU: 0 PID: 7333 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  154.760881] RIP: 0010:free_event+0x75/0x80
+[  155.473276] WARNING: CPU: 0 PID: 7373 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  155.475380] RIP: 0010:free_event+0x75/0x80
+[  156.103066] WARNING: CPU: 0 PID: 7413 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  156.104991] RIP: 0010:free_event+0x75/0x80
+[  156.366892] WARNING: CPU: 0 PID: 7429 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  156.368788] RIP: 0010:free_event+0x75/0x80
+[  158.647000] WARNING: CPU: 0 PID: 7588 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  158.648943] RIP: 0010:free_event+0x75/0x80
+[  159.871745] WARNING: CPU: 0 PID: 7624 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  159.873808] RIP: 0010:free_event+0x75/0x80
+[  160.018367] WARNING: CPU: 0 PID: 7620 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  160.020360] RIP: 0010:free_event+0x75/0x80
+[  160.547622] WARNING: CPU: 0 PID: 7648 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  160.549636] RIP: 0010:free_event+0x75/0x80
+[  160.822764] WARNING: CPU: 0 PID: 7668 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  160.824810] RIP: 0010:free_event+0x75/0x80
+[  161.486176] WARNING: CPU: 0 PID: 7767 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  161.488191] RIP: 0010:free_event+0x75/0x80
+[  161.514862] WARNING: CPU: 0 PID: 7764 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  161.516860] RIP: 0010:free_event+0x75/0x80
+[  167.074225] WARNING: CPU: 0 PID: 8000 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  167.076205] RIP: 0010:free_event+0x75/0x80
+[  167.575025] WARNING: CPU: 0 PID: 8012 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  167.576966] RIP: 0010:free_event+0x75/0x80
+[  169.145098] WARNING: CPU: 0 PID: 8164 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  169.146968] RIP: 0010:free_event+0x75/0x80
+[  169.372067] WARNING: CPU: 0 PID: 8180 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  169.374047] RIP: 0010:free_event+0x75/0x80
+[  169.592797] WARNING: CPU: 0 PID: 8196 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  169.594705] RIP: 0010:free_event+0x75/0x80
+[  171.460022] WARNING: CPU: 0 PID: 8316 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  171.462088] RIP: 0010:free_event+0x75/0x80
+[  172.674525] WARNING: CPU: 0 PID: 8372 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  172.676397] RIP: 0010:free_event+0x75/0x80
+[  174.426412] WARNING: CPU: 0 PID: 8468 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  174.428381] RIP: 0010:free_event+0x75/0x80
+[  175.590709] WARNING: CPU: 0 PID: 8524 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  175.592739] RIP: 0010:free_event+0x75/0x80
+[  176.255162] WARNING: CPU: 0 PID: 8544 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  176.257113] RIP: 0010:free_event+0x75/0x80
+[  176.415520] WARNING: CPU: 0 PID: 8540 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  176.417580] RIP: 0010:free_event+0x75/0x80
+[  176.450518] WARNING: CPU: 0 PID: 8556 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  176.452575] RIP: 0010:free_event+0x75/0x80
+[  177.100552] WARNING: CPU: 0 PID: 8612 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  177.102511] RIP: 0010:free_event+0x75/0x80
+[  177.182329] WARNING: CPU: 0 PID: 8616 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  177.184268] RIP: 0010:free_event+0x75/0x80
+[  177.678575] WARNING: CPU: 0 PID: 8659 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  177.680631] RIP: 0010:free_event+0x75/0x80
+[  178.098324] WARNING: CPU: 0 PID: 8675 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  178.100283] RIP: 0010:free_event+0x75/0x80
+[  178.195714] WARNING: CPU: 0 PID: 8679 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  178.197721] RIP: 0010:free_event+0x75/0x80
+[  178.481178] WARNING: CPU: 0 PID: 8694 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  178.483080] RIP: 0010:free_event+0x75/0x80
+[  178.830129] WARNING: CPU: 0 PID: 8738 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  178.832153] RIP: 0010:free_event+0x75/0x80, FAIL|
+|1208_064154|git bisect bad 0c3b5bcb484a659dd14466f92a073b57b2d3c1a5|
+|1208_064154||/home/bzimage/bzImage_eea8bebd51739cc7a3bb501032ee877b4aada553| was not exist, will make it|
+|1208_070753|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_070811|Run /home/bzimage/bzImage_eea8bebd51739cc7a3bb501032ee877b4aada553 with image:/root/image/centos8_2.img in local port:10022|
+|1208_070836|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_070836|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_070837|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_070838|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_071111|/home/bzimage/bzImage_eea8bebd51739cc7a3bb501032ee877b4aada553 didn't contain free_event: in dmesg, pass|
+|1208_071111|git bisect good eea8bebd51739cc7a3bb501032ee877b4aada553|
+|1208_071111||/home/bzimage/bzImage_517e6a301f34613bff24a8e35b5455884f2d83d8| was not exist, will make it|
+|1208_073711|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_073728|Run /home/bzimage/bzImage_517e6a301f34613bff24a8e35b5455884f2d83d8 with image:/root/image/centos8_2.img in local port:10022|
+|1208_073753|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_073753|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_073754|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_073756|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_074028|/home/bzimage/bzImage_517e6a301f34613bff24a8e35b5455884f2d83d8 contained free_event:[   28.819600] WARNING: CPU: 1 PID: 575 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   28.821264] RIP: 0010:free_event+0x75/0x80
+[   28.973135] WARNING: CPU: 1 PID: 587 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   28.974847] RIP: 0010:free_event+0x75/0x80
+[   29.134370] WARNING: CPU: 1 PID: 603 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   29.136569] RIP: 0010:free_event+0x75/0x80
+[   30.003436] WARNING: CPU: 0 PID: 707 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   30.005128] RIP: 0010:free_event+0x75/0x80
+[   31.555898] WARNING: CPU: 0 PID: 799 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   31.557548] RIP: 0010:free_event+0x75/0x80
+[   32.061926] WARNING: CPU: 0 PID: 831 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   32.063570] RIP: 0010:free_event+0x75/0x80
+[   32.588446] WARNING: CPU: 0 PID: 863 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   32.590148] RIP: 0010:free_event+0x75/0x80
+[   32.938792] WARNING: CPU: 0 PID: 887 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   32.940532] RIP: 0010:free_event+0x75/0x80
+[   34.090477] WARNING: CPU: 0 PID: 951 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   34.092292] RIP: 0010:free_event+0x75/0x80
+[   34.270716] WARNING: CPU: 0 PID: 975 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   34.272508] RIP: 0010:free_event+0x75/0x80
+[   34.987325] WARNING: CPU: 0 PID: 1023 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   34.989068] RIP: 0010:free_event+0x75/0x80
+[   35.205471] WARNING: CPU: 0 PID: 1039 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   35.207199] RIP: 0010:free_event+0x75/0x80
+[   36.748278] WARNING: CPU: 0 PID: 1123 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   36.750003] RIP: 0010:free_event+0x75/0x80
+[   37.305622] WARNING: CPU: 0 PID: 1179 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   37.307336] RIP: 0010:free_event+0x75/0x80
+[   38.714871] WARNING: CPU: 0 PID: 1267 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   38.716645] RIP: 0010:free_event+0x75/0x80
+[   39.016187] WARNING: CPU: 0 PID: 1291 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   39.017903] RIP: 0010:free_event+0x75/0x80
+[   39.878667] WARNING: CPU: 0 PID: 1339 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   39.880430] RIP: 0010:free_event+0x75/0x80
+[   40.095452] WARNING: CPU: 0 PID: 1343 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   40.097192] RIP: 0010:free_event+0x75/0x80
+[   40.299733] WARNING: CPU: 0 PID: 1351 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   40.301487] RIP: 0010:free_event+0x75/0x80
+[   40.659680] WARNING: CPU: 0 PID: 1371 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   40.661411] RIP: 0010:free_event+0x75/0x80
+[   40.803466] WARNING: CPU: 0 PID: 1375 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   40.805247] RIP: 0010:free_event+0x75/0x80
+[   42.511034] WARNING: CPU: 0 PID: 1555 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   42.512821] RIP: 0010:free_event+0x75/0x80
+[   42.698508] WARNING: CPU: 0 PID: 1571 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   42.700284] RIP: 0010:free_event+0x75/0x80
+[   44.951859] WARNING: CPU: 0 PID: 1707 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   44.953880] RIP: 0010:free_event+0x75/0x80
+[   45.638459] WARNING: CPU: 0 PID: 1739 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   45.640406] RIP: 0010:free_event+0x75/0x80
+[   45.859278] WARNING: CPU: 0 PID: 1751 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   45.861042] RIP: 0010:free_event+0x75/0x80
+[   46.291480] WARNING: CPU: 0 PID: 1763 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   46.293186] RIP: 0010:free_event+0x75/0x80
+[   46.307648] WARNING: CPU: 0 PID: 1778 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   46.309359] RIP: 0010:free_event+0x75/0x80
+[   47.086952] WARNING: CPU: 0 PID: 1870 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   47.088849] RIP: 0010:free_event+0x75/0x80
+[   48.565667] WARNING: CPU: 0 PID: 1963 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   48.567519] RIP: 0010:free_event+0x75/0x80
+[   50.106377] WARNING: CPU: 0 PID: 2043 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   50.108201] RIP: 0010:free_event+0x75/0x80
+[   50.492038] WARNING: CPU: 0 PID: 2067 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   50.493791] RIP: 0010:free_event+0x75/0x80
+[   54.281652] WARNING: CPU: 0 PID: 2291 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   54.283460] RIP: 0010:free_event+0x75/0x80
+[   55.561815] WARNING: CPU: 0 PID: 2363 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   55.563788] RIP: 0010:free_event+0x75/0x80
+[   55.599358] WARNING: CPU: 0 PID: 2367 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   55.601293] RIP: 0010:free_event+0x75/0x80
+[   55.834316] WARNING: CPU: 0 PID: 2395 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   55.836236] RIP: 0010:free_event+0x75/0x80
+[   56.215824] WARNING: CPU: 0 PID: 2419 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   56.217679] RIP: 0010:free_event+0x75/0x80
+[   56.966956] WARNING: CPU: 1 PID: 2467 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   56.968796] RIP: 0010:free_event+0x75/0x80
+[   59.305516] WARNING: CPU: 0 PID: 2611 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   59.307346] RIP: 0010:free_event+0x75/0x80
+[   60.242655] WARNING: CPU: 0 PID: 2675 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   60.244535] RIP: 0010:free_event+0x75/0x80
+[   62.602598] WARNING: CPU: 0 PID: 2803 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   62.604422] RIP: 0010:free_event+0x75/0x80
+[   63.637872] WARNING: CPU: 0 PID: 2847 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   63.639664] RIP: 0010:free_event+0x75/0x80
+[   63.960437] WARNING: CPU: 0 PID: 2859 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   63.962235] RIP: 0010:free_event+0x75/0x80
+[   64.058737] WARNING: CPU: 0 PID: 2875 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   64.060571] RIP: 0010:free_event+0x75/0x80
+[   65.121934] WARNING: CPU: 0 PID: 2996 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   65.123743] RIP: 0010:free_event+0x75/0x80
+[   67.658433] WARNING: CPU: 0 PID: 3144 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   67.660242] RIP: 0010:free_event+0x75/0x80
+[   67.693670] WARNING: CPU: 0 PID: 3136 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   67.695468] RIP: 0010:free_event+0x75/0x80
+[   68.631684] WARNING: CPU: 0 PID: 3175 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   68.633509] RIP: 0010:free_event+0x75/0x80
+[   68.640523] WARNING: CPU: 1 PID: 3186 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   68.642673] RIP: 0010:free_event+0x75/0x80
+[   69.070876] WARNING: CPU: 0 PID: 3322 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   69.072723] RIP: 0010:free_event+0x75/0x80
+[   69.760032] WARNING: CPU: 0 PID: 3362 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   69.761841] RIP: 0010:free_event+0x75/0x80
+[   71.567732] WARNING: CPU: 0 PID: 3466 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   71.569565] RIP: 0010:free_event+0x75/0x80
+[   72.125970] WARNING: CPU: 0 PID: 3506 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   72.127799] RIP: 0010:free_event+0x75/0x80
+[   73.238556] WARNING: CPU: 0 PID: 3586 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   73.240427] RIP: 0010:free_event+0x75/0x80
+[   73.636352] WARNING: CPU: 0 PID: 3618 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   73.638161] RIP: 0010:free_event+0x75/0x80
+[   74.729703] WARNING: CPU: 0 PID: 3682 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   74.731503] RIP: 0010:free_event+0x75/0x80
+[   75.663621] WARNING: CPU: 0 PID: 3730 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   75.665435] RIP: 0010:free_event+0x75/0x80
+[   77.263827] WARNING: CPU: 0 PID: 3882 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   77.265695] RIP: 0010:free_event+0x75/0x80
+[   78.859721] WARNING: CPU: 0 PID: 3962 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   78.861532] RIP: 0010:free_event+0x75/0x80
+[   80.078309] WARNING: CPU: 0 PID: 4042 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   80.080129] RIP: 0010:free_event+0x75/0x80
+[   80.281871] WARNING: CPU: 0 PID: 4058 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   80.283662] RIP: 0010:free_event+0x75/0x80
+[   81.050949] WARNING: CPU: 0 PID: 4114 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   81.052755] RIP: 0010:free_event+0x75/0x80
+[   82.205359] WARNING: CPU: 0 PID: 4194 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   82.207158] RIP: 0010:free_event+0x75/0x80
+[   83.300314] WARNING: CPU: 0 PID: 4266 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   83.302118] RIP: 0010:free_event+0x75/0x80
+[   83.644330] WARNING: CPU: 0 PID: 4286 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   83.646086] RIP: 0010:free_event+0x75/0x80
+[   85.854810] WARNING: CPU: 0 PID: 4418 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   85.856654] RIP: 0010:free_event+0x75/0x80
+[   87.017882] WARNING: CPU: 0 PID: 4474 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   87.019698] RIP: 0010:free_event+0x75/0x80
+[   87.093386] WARNING: CPU: 0 PID: 4478 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   87.095180] RIP: 0010:free_event+0x75/0x80
+[   87.133641] WARNING: CPU: 0 PID: 4482 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   87.135426] RIP: 0010:free_event+0x75/0x80
+[   87.183869] WARNING: CPU: 0 PID: 4486 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   87.185654] RIP: 0010:free_event+0x75/0x80
+[   87.738526] WARNING: CPU: 0 PID: 4538 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   87.740329] RIP: 0010:free_event+0x75/0x80
+[   89.942482] WARNING: CPU: 0 PID: 4658 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   89.944285] RIP: 0010:free_event+0x75/0x80
+[   90.141557] WARNING: CPU: 0 PID: 4674 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   90.143382] RIP: 0010:free_event+0x75/0x80
+[   90.741334] WARNING: CPU: 0 PID: 4722 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   90.743133] RIP: 0010:free_event+0x75/0x80
+[   92.653886] WARNING: CPU: 0 PID: 4851 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   92.655736] RIP: 0010:free_event+0x75/0x80
+[   94.894443] WARNING: CPU: 0 PID: 4987 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   94.896313] RIP: 0010:free_event+0x75/0x80
+[   95.834173] WARNING: CPU: 0 PID: 5033 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   95.835955] RIP: 0010:free_event+0x75/0x80
+[   96.036183] WARNING: CPU: 0 PID: 5045 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   96.037962] RIP: 0010:free_event+0x75/0x80
+[   98.614624] WARNING: CPU: 1 PID: 5213 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   98.616437] RIP: 0010:free_event+0x75/0x80
+[   99.163210] WARNING: CPU: 0 PID: 5253 at kernel/events/core.c:5041 free_event+0x75/0x80
+[   99.165042] RIP: 0010:free_event+0x75/0x80
+[  100.053579] WARNING: CPU: 0 PID: 5309 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  100.055351] RIP: 0010:free_event+0x75/0x80
+[  102.233786] WARNING: CPU: 0 PID: 5429 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  102.235577] RIP: 0010:free_event+0x75/0x80
+[  103.118934] WARNING: CPU: 0 PID: 5485 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  103.120755] RIP: 0010:free_event+0x75/0x80
+[  103.315938] WARNING: CPU: 0 PID: 5501 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  103.317747] RIP: 0010:free_event+0x75/0x80
+[  103.901404] WARNING: CPU: 0 PID: 5549 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  103.903194] RIP: 0010:free_event+0x75/0x80
+[  105.479569] WARNING: CPU: 0 PID: 5645 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  105.481378] RIP: 0010:free_event+0x75/0x80
+[  106.653847] WARNING: CPU: 0 PID: 5709 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  106.655647] RIP: 0010:free_event+0x75/0x80
+[  106.855514] WARNING: CPU: 0 PID: 5725 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  106.857321] RIP: 0010:free_event+0x75/0x80
+[  107.218650] WARNING: CPU: 0 PID: 5749 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  107.220460] RIP: 0010:free_event+0x75/0x80
+[  107.763903] WARNING: CPU: 0 PID: 5789 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  107.765700] RIP: 0010:free_event+0x75/0x80
+[  109.043618] WARNING: CPU: 0 PID: 5877 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  109.045475] RIP: 0010:free_event+0x75/0x80
+[  109.430765] WARNING: CPU: 0 PID: 5901 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  109.432671] RIP: 0010:free_event+0x75/0x80
+[  109.781367] WARNING: CPU: 0 PID: 5925 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  109.783145] RIP: 0010:free_event+0x75/0x80
+[  110.894569] WARNING: CPU: 0 PID: 6005 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  110.896365] RIP: 0010:free_event+0x75/0x80
+[  113.567556] WARNING: CPU: 0 PID: 6141 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  113.569404] RIP: 0010:free_event+0x75/0x80
+[  118.008682] WARNING: CPU: 1 PID: 6397 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  118.010462] RIP: 0010:free_event+0x75/0x80
+[  121.194415] WARNING: CPU: 0 PID: 6605 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  121.196252] RIP: 0010:free_event+0x75/0x80
+[  121.573590] WARNING: CPU: 0 PID: 6629 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  121.575388] RIP: 0010:free_event+0x75/0x80
+[  122.133597] WARNING: CPU: 0 PID: 6669 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  122.135389] RIP: 0010:free_event+0x75/0x80
+[  122.729461] WARNING: CPU: 0 PID: 6717 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  122.731260] RIP: 0010:free_event+0x75/0x80
+[  123.711570] WARNING: CPU: 0 PID: 6765 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  123.713366] RIP: 0010:free_event+0x75/0x80
+[  123.791289] WARNING: CPU: 1 PID: 6769 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  123.793111] RIP: 0010:free_event+0x75/0x80
+[  123.893466] WARNING: CPU: 0 PID: 6773 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  123.895247] RIP: 0010:free_event+0x75/0x80
+[  126.028030] WARNING: CPU: 0 PID: 6913 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  126.029854] RIP: 0010:free_event+0x75/0x80
+[  126.743797] WARNING: CPU: 0 PID: 7001 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  126.745639] RIP: 0010:free_event+0x75/0x80
+[  127.345784] WARNING: CPU: 0 PID: 7053 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  127.347581] RIP: 0010:free_event+0x75/0x80
+[  127.895670] WARNING: CPU: 0 PID: 7077 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  127.897505] RIP: 0010:free_event+0x75/0x80
+[  128.032246] WARNING: CPU: 0 PID: 7081 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  128.034013] RIP: 0010:free_event+0x75/0x80
+[  128.745324] WARNING: CPU: 0 PID: 7165 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  128.747109] RIP: 0010:free_event+0x75/0x80
+[  129.087784] WARNING: CPU: 0 PID: 7185 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  129.089628] RIP: 0010:free_event+0x75/0x80
+[  129.259359] WARNING: CPU: 0 PID: 7181 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  129.261182] RIP: 0010:free_event+0x75/0x80
+[  129.398154] WARNING: CPU: 0 PID: 7200 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  129.399960] RIP: 0010:free_event+0x75/0x80
+[  131.732260] WARNING: CPU: 0 PID: 7357 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  131.734036] RIP: 0010:free_event+0x75/0x80
+[  133.725529] WARNING: CPU: 0 PID: 7469 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  133.727387] RIP: 0010:free_event+0x75/0x80
+[  134.302198] WARNING: CPU: 0 PID: 7509 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  134.304145] RIP: 0010:free_event+0x75/0x80
+[  135.133878] WARNING: CPU: 0 PID: 7565 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  135.135726] RIP: 0010:free_event+0x75/0x80
+[  135.921930] WARNING: CPU: 0 PID: 7613 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  135.923760] RIP: 0010:free_event+0x75/0x80
+[  136.817473] WARNING: CPU: 0 PID: 7645 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  136.819290] RIP: 0010:free_event+0x75/0x80
+[  137.454155] WARNING: CPU: 0 PID: 7661 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  137.456018] RIP: 0010:free_event+0x75/0x80
+[  137.608335] WARNING: CPU: 0 PID: 7684 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  137.610162] RIP: 0010:free_event+0x75/0x80
+[  140.134996] WARNING: CPU: 0 PID: 7877 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  140.136854] RIP: 0010:free_event+0x75/0x80
+[  140.253451] WARNING: CPU: 0 PID: 7881 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  140.255261] RIP: 0010:free_event+0x75/0x80
+[  140.506140] WARNING: CPU: 0 PID: 7885 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  140.507947] RIP: 0010:free_event+0x75/0x80
+[  143.201573] WARNING: CPU: 0 PID: 8085 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  143.203394] RIP: 0010:free_event+0x75/0x80
+[  143.481808] WARNING: CPU: 0 PID: 8109 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  143.483621] RIP: 0010:free_event+0x75/0x80
+[  147.619246] WARNING: CPU: 0 PID: 8373 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  147.621093] RIP: 0010:free_event+0x75/0x80
+[  148.778198] WARNING: CPU: 0 PID: 8453 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  148.780137] RIP: 0010:free_event+0x75/0x80
+[  149.573373] WARNING: CPU: 0 PID: 8509 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  149.575206] RIP: 0010:free_event+0x75/0x80
+[  152.718450] WARNING: CPU: 0 PID: 8686 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  152.720316] RIP: 0010:free_event+0x75/0x80
+[  152.915198] WARNING: CPU: 0 PID: 8702 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  152.917064] RIP: 0010:free_event+0x75/0x80
+[  154.215760] WARNING: CPU: 0 PID: 8790 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  154.217671] RIP: 0010:free_event+0x75/0x80
+[  159.332333] WARNING: CPU: 0 PID: 9066 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  159.334144] RIP: 0010:free_event+0x75/0x80
+[  159.584313] WARNING: CPU: 0 PID: 9094 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  159.586131] RIP: 0010:free_event+0x75/0x80
+[  160.478108] WARNING: CPU: 0 PID: 9142 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  160.479931] RIP: 0010:free_event+0x75/0x80
+[  160.514374] WARNING: CPU: 0 PID: 9146 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  160.516211] RIP: 0010:free_event+0x75/0x80
+[  161.619541] WARNING: CPU: 0 PID: 9246 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  161.621443] RIP: 0010:free_event+0x75/0x80
+[  161.823689] WARNING: CPU: 0 PID: 9262 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  161.825522] RIP: 0010:free_event+0x75/0x80
+[  164.135913] WARNING: CPU: 0 PID: 9398 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  164.137719] RIP: 0010:free_event+0x75/0x80
+[  165.104512] WARNING: CPU: 0 PID: 9470 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  165.106338] RIP: 0010:free_event+0x75/0x80
+[  166.393415] WARNING: CPU: 0 PID: 9550 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  166.395250] RIP: 0010:free_event+0x75/0x80
+[  170.806024] WARNING: CPU: 0 PID: 9806 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  170.807829] RIP: 0010:free_event+0x75/0x80
+[  171.114555] WARNING: CPU: 0 PID: 9829 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  171.116423] RIP: 0010:free_event+0x75/0x80
+[  171.311246] WARNING: CPU: 0 PID: 9853 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  171.313068] RIP: 0010:free_event+0x75/0x80
+[  176.134892] WARNING: CPU: 0 PID: 10133 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  176.136612] RIP: 0010:free_event+0x75/0x80
+[  177.099365] WARNING: CPU: 0 PID: 10205 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  177.101096] RIP: 0010:free_event+0x75/0x80
+[  178.527124] WARNING: CPU: 0 PID: 10285 at kernel/events/core.c:5041 free_event+0x75/0x80
+[  178.528869] RIP: 0010:free_event+0x75/0x80, FAIL|
+|1208_074028|git bisect bad 517e6a301f34613bff24a8e35b5455884f2d83d8|
+|1208_074028|Bisect PASS: find 517e6a301f34613bff24a8e35b5455884f2d83d8 is the first bad commit|
+|1208_074028|CMD=git bisect log >> /home/bzimage/bi.log|
+|1208_074028|CMD=git bisect log >> /home/bzimage/1207_222842_free_event/bisect.log|
+git bisect start
+# bad: [76dcd734eca23168cb008912c0f69ff408905235] Linux 6.1-rc8
+git bisect bad 76dcd734eca23168cb008912c0f69ff408905235
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [f2b551fad8d8f2ac5e1f810ad595298381e0b0c5] Merge tag 'wireless-drivers-next-2021-12-23' of git://git.kernel.org/pub/scm/linux/kernel/git/kvalo/wireless-drivers-next
+git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5
+# good: [9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34] Merge tag 'optee-warning-for-v5.19' of https://git.linaro.org/people/jens.wiklander/linux-tee into arm/late
+git bisect good 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34
+# good: [1d239c1eb873c7d6c6cbc80d68330c939fd86136] Merge tag 'iommu-updates-v5.20-or-v6.0' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect good 1d239c1eb873c7d6c6cbc80d68330c939fd86136
+# good: [40285e64c5654c956505dad34ed2ee4be163b1f0] Merge tag 'arm-defconfig-6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 40285e64c5654c956505dad34ed2ee4be163b1f0
+# good: [f23cdfcd04f7c044ee47dac04484b8d289088776] Merge tag 'iommu-updates-v6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect good f23cdfcd04f7c044ee47dac04484b8d289088776
+# good: [334fe5d3a99aea2e92b934b4c58fffee9b056c5d] Merge tag 'for-linus-2022102101' of git://git.kernel.org/pub/scm/linux/kernel/git/hid/hid
+git bisect good 334fe5d3a99aea2e92b934b4c58fffee9b056c5d
+# good: [1d351f1894342c378b96bb9ed89f8debb1e24e9f] revert "kbuild: fix -Wimplicit-function-declaration in license_is_gpl_compatible"
+git bisect good 1d351f1894342c378b96bb9ed89f8debb1e24e9f
+# good: [39f59bca275d2d819a8788c0f962e9e89843efc9] dsa: lan9303: Correct stat name
+git bisect good 39f59bca275d2d819a8788c0f962e9e89843efc9
+# good: [cd89db60e22824b82f9458753fa6cb770cca8bde] Merge tag 'soc-fixes-6.1-4' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good cd89db60e22824b82f9458753fa6cb770cca8bde
+# good: [715d2d960871c238e5860d121ba9735e7f6a7ff1] Merge tag 'timers_urgent_for_v6.1_rc7' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 715d2d960871c238e5860d121ba9735e7f6a7ff1
+# good: [355479c70a489415ef6e2624e514f8f15a40861b] Merge tag 'efi-fixes-for-v6.1-4' of git://git.kernel.org/pub/scm/linux/kernel/git/efi/efi
+git bisect good 355479c70a489415ef6e2624e514f8f15a40861b
+# good: [2df2adc3e69d32751eb534ed55c591854260c4a3] Merge tag 'mmc-v6.1-rc5-2' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc
+git bisect good 2df2adc3e69d32751eb534ed55c591854260c4a3
+# good: [97ee9d1c16963375eefdf964c429897d27e28956] Merge tag 'block-6.1-2022-12-02' of git://git.kernel.dk/linux
+git bisect good 97ee9d1c16963375eefdf964c429897d27e28956
+# good: [c2bf05db6c78f53ca5cd4b48f3b9b71f78d215f1] Merge tag 'i2c-for-6.1-rc8' of git://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux
+git bisect good c2bf05db6c78f53ca5cd4b48f3b9b71f78d215f1
+# good: [ae6bb71711713e7b6b2d9ed2af7318dc8ae5cfb2] Merge tag 'powerpc-6.1-6' of git://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux
+git bisect good ae6bb71711713e7b6b2d9ed2af7318dc8ae5cfb2
+# bad: [0c3b5bcb484a659dd14466f92a073b57b2d3c1a5] Merge tag 'perf_urgent_for_v6.1_rc8' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 0c3b5bcb484a659dd14466f92a073b57b2d3c1a5
+# good: [eea8bebd51739cc7a3bb501032ee877b4aada553] Merge tag 'timers_urgent_for_v6.1_rc8' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good eea8bebd51739cc7a3bb501032ee877b4aada553
+# bad: [517e6a301f34613bff24a8e35b5455884f2d83d8] perf: Fix perf_pending_task() UaF
+git bisect bad 517e6a301f34613bff24a8e35b5455884f2d83d8
+# first bad commit: [517e6a301f34613bff24a8e35b5455884f2d83d8] perf: Fix perf_pending_task() UaF
+|1208_074028|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 76dcd734eca23168cb008912c0f69ff408905235 -b 517e6a301f34613bff24a8e35b5455884f2d83d8 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_517e6a301f34613bff24a8e35b5455884f2d83d8_revert|
+|1208_080713|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_080724|Run /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_517e6a301f34613bff24a8e35b5455884f2d83d8_revert with image:/root/image/centos8_2.img in local port:10022|
+|1208_080749|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_080749|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_080750|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/f7450857b63a451bbdc777f6e7ed9d34978842eb/repro.cprog root@localhost:/root/repro.c|
+|1208_080751|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_081024|/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_517e6a301f34613bff24a8e35b5455884f2d83d8_revert didn't contain free_event: in dmesg, pass|
+|1208_081024|Bisect successfully! 76dcd734eca23168cb008912c0f69ff408905235_517e6a301f34613bff24a8e35b5455884f2d83d8_revert bzimage passed!|
