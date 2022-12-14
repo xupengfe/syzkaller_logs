@@ -1,0 +1,51 @@
+git bisect start
+# bad: [76dcd734eca23168cb008912c0f69ff408905235] Linux 6.1-rc8
+git bisect bad 76dcd734eca23168cb008912c0f69ff408905235
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [f2b551fad8d8f2ac5e1f810ad595298381e0b0c5] Merge tag 'wireless-drivers-next-2021-12-23' of git://git.kernel.org/pub/scm/linux/kernel/git/kvalo/wireless-dt
+git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5
+# good: [9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34] Merge tag 'optee-warning-for-v5.19' of https://git.linaro.org/people/jens.wiklander/linux-tee into arm/late
+git bisect good 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34
+# bad: [1d239c1eb873c7d6c6cbc80d68330c939fd86136] Merge tag 'iommu-updates-v5.20-or-v6.0' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect bad 1d239c1eb873c7d6c6cbc80d68330c939fd86136
+# bad: [8374cfe647a1f360be3228b949dd6d753c55c19c] Merge tag 'for-6.0/dm-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/device-mapper/linux-dm
+git bisect bad 8374cfe647a1f360be3228b949dd6d753c55c19c
+# bad: [6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9] spi: stm32-qspi: Remove unused parameters
+git bisect bad 6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9
+# bad: [4f58afd6eb177a75dec61c65fdc72db31db93c82] virtio: Directly use ida_alloc()/free()
+git bisect bad 4f58afd6eb177a75dec61c65fdc72db31db93c82
+# bad: [3cc30140dbe2df9b5ac000898e0ae3d1df980f2c] Merge tag 'pci-v5.19-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/helgaas/pci
+git bisect bad 3cc30140dbe2df9b5ac000898e0ae3d1df980f2c
+# bad: [bf9095424d027e942e1d1ee74977e17b7df8e455] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect bad bf9095424d027e942e1d1ee74977e17b7df8e455
+# bad: [b265cdebdfefbee4ef1ae2972af36f7a7cac5148] sched: coredump.h: clarify the use of MMF_VM_HUGEPAGE
+git bisect bad b265cdebdfefbee4ef1ae2972af36f7a7cac5148
+# good: [4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8] mm: move responsibility for setting SWP_FS_OPS to ->swap_activate
+git bisect good 4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8
+# bad: [6e263fff1de48fcd97b680b54cd8d1695fc3c776] mm: page_isolation: enable arbitrary range page isolation.
+git bisect bad 6e263fff1de48fcd97b680b54cd8d1695fc3c776
+# good: [97d482f4592fde2322c319f07bc54f3a0d37861c] mm/damon/sysfs: reuse damon_set_regions() for regions setting
+git bisect good 97d482f4592fde2322c319f07bc54f3a0d37861c
+# good: [6041c69179034278ac6d57f90a55b09e588f4b90] mm/hugetlb: take care of UFFDIO_COPY_MODE_WP
+git bisect good 6041c69179034278ac6d57f90a55b09e588f4b90
+# bad: [c0eeeb02d9df878c71a457008900b650d94bd0d9] selftests/uffd: enable uffd-wp for shmem/hugetlbfs
+git bisect bad c0eeeb02d9df878c71a457008900b650d94bd0d9
+# good: [bc70fbf269fdff410b0b6d75c3770b9f59117b90] mm/hugetlb: handle uffd-wp during fork()
+git bisect good bc70fbf269fdff410b0b6d75c3770b9f59117b90
+# good: [8e165e733bfa06edbcdbe491ef13b2bf1a3fa883] mm/pagemap: recognize uffd-wp bit for shmem/hugetlbfs
+git bisect good 8e165e733bfa06edbcdbe491ef13b2bf1a3fa883
+# bad: [81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38] mm: enable PTE markers by default
+git bisect bad 81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38
+# good: [b1f9e876862d8f7176299ec4fb2108bc1045cbc8] mm/uffd: enable write protection for shmem & hugetlbfs
+git bisect good b1f9e876862d8f7176299ec4fb2108bc1045cbc8
+# first bad commit: [81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38] mm: enable PTE markers by default
+|1208_204608|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 76dcd734eca23168cb008912c0f69ff408905235 -b 81e0f15f2ef6dad7ccb9c03d8e61ef7ded|
+|1208_211641|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_211656|Run /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert with image:/root/image/centos8_2.|
+|1208_211721|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_211722|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_211723|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/|
+|1208_211725|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_211953|/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert didn't contain copy_page_range: in dm|
+|1208_211953|Bisect successfully! 76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert bzimage passed!|

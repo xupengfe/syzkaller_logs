@@ -1,0 +1,298 @@
+|1208_115556|CMD=cd /root/os.linux.intelnext.kernel|
+|1208_115556|git log 76dcd734eca23168cb008912c0f69ff408905235 check_result:commit 76dcd734eca23168cb008912c0f69ff408905235|
+|1208_115556|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|1208_115556|There was old bisect log:git bisect start
+# bad: [76dcd734eca23168cb008912c0f69ff408905235] Linux 6.1-rc8
+git bisect bad 76dcd734eca23168cb008912c0f69ff408905235
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [f2b551fad8d8f2ac5e1f810ad595298381e0b0c5] Merge tag 'wireless-drivers-next-2021-12-23' of git://git.kernel.org/pub/scm/linux/kernel/git/kvalo/wireless-drivers-next
+git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5
+# bad: [9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34] Merge tag 'optee-warning-for-v5.19' of https://git.linaro.org/people/jens.wiklander/linux-tee into arm/late
+git bisect bad 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34
+# bad: [7403e6d8263937dea206dd201fed1ceed190ca18] Merge tag 'vfio-v5.18-rc1' of https://github.com/awilliam/linux-vfio
+git bisect bad 7403e6d8263937dea206dd201fed1ceed190ca18
+# bad: [88db8458086b1dcf20b56682504bdb34d2bca0e2] Merge tag 'exfat-for-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/linkinjeon/exfat
+git bisect bad 88db8458086b1dcf20b56682504bdb34d2bca0e2
+# good: [5c947d0dbae8038ec1c8b538891f6475350542ee] Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/kernel/git/herbert/crypto-2.6
+git bisect good 5c947d0dbae8038ec1c8b538891f6475350542ee
+# bad: [64ad9461521b1a357846ef6cedc4bccd48a046e0] Merge tag 'x86_core_for_v5.17_rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 64ad9461521b1a357846ef6cedc4bccd48a046e0
+# bad: [d3c810803576d867265277df8e94eee386351c9d] Merge tag 'for-5.17/block-2022-01-11' of git://git.kernel.dk/linux-block
+git bisect bad d3c810803576d867265277df8e94eee386351c9d
+# good: [a135ce4400bb87f229ab33a663987327d9e0b2a0] Merge tag 'selinux-pr-20220110' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/selinux
+git bisect good a135ce4400bb87f229ab33a663987327d9e0b2a0
+# bad: [5672cdfba4fefd6178b6c4078cb1bb7bf6ce0573] Merge tag 'for-linus-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rw/ubifs
+git bisect bad 5672cdfba4fefd6178b6c4078cb1bb7bf6ce0573
+# good: [36c86a9e1be3b29f9f075a946df55dfe1d818019] btrfs: output more debug messages for uncommitted transaction
+git bisect good 36c86a9e1be3b29f9f075a946df55dfe1d818019
+# good: [11fc88c2e49ba8e3ca827dc9bdd7b7216be30a36] Merge tag 'xfs-5.17-merge-2' of git://git.kernel.org/pub/scm/fs/xfs/xfs-linux
+git bisect good 11fc88c2e49ba8e3ca827dc9bdd7b7216be30a36
+# bad: [1dbfae0113f1423b42c304989a3cc8a7dd0ea53e] Merge tag 'ext4_for_linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tytso/ext4
+git bisect bad 1dbfae0113f1423b42c304989a3cc8a7dd0ea53e
+# bad: [ab047d516dea72f011c15c04a929851e4d053109] ext4: destroy ext4_fc_dentry_cachep kmemcache on module removal
+git bisect bad ab047d516dea72f011c15c04a929851e4d053109
+# bad: [cebe85d570cf84804e848332d6721bc9e5300e07] ext4: switch to the new mount api
+git bisect bad cebe85d570cf84804e848332d6721bc9e5300e07
+# good: [e6e268cb682290da29e3c8408493a4474307b8cc] ext4: move quota configuration out of handle_mount_opt()
+git bisect good e6e268cb682290da29e3c8408493a4474307b8cc
+# good: [7edfd85b1ffd36593011dec96ab395912a340418] ext4: Completely separate options parsing and sb setup
+git bisect good 7edfd85b1ffd36593011dec96ab395912a340418
+# good: [97d8a670b4531437d5b842cf68dafa6d1a932ddf] ext4: change token2str() to use ext4_param_specs
+git bisect good 97d8a670b4531437d5b842cf68dafa6d1a932ddf
+# first bad commit: [cebe85d570cf84804e848332d6721bc9e5300e07] ext4: switch to the new mount api, will clean it|
+|1208_115556|CMD=git bisect reset|
+|1208_115602|CMD=git checkout -f 76dcd734eca23168cb008912c0f69ff408905235|
+|1208_115602|CMD=cd /root/os.linux.intelnext.kernel|
+|1208_115602||/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235| exist, no need make|
+|1208_115602|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_115615|Run /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235 with image:/root/image/centos8_2.img in local port:10022|
+|1208_115640|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_115641|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_115642|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_115643|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_115654|/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235 contained copy_page_range:[   28.681400] WARNING: CPU: 0 PID: 582 at mm/memory.c:882 copy_page_range+0x1746/0x2880
+[   28.684590] RIP: 0010:copy_page_range+0x1746/0x2880, FAIL|
+|1208_115654|Found time:28 in /home/bzimage/1208_115556_copy_page_range/76dcd734eca23168cb008912c0f69ff408905235_dmesg.log|
+|1208_115654|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:148|
+|1208_115654|-END- commit 76dcd734eca23168cb008912c0f69ff408905235 FAIL bad|
+|1208_115654||/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|1208_115654|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_115707|Run /home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|1208_115732|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_115732|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_115734|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_115735|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_120003|/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain copy_page_range: in dmesg, pass|
+|1208_120003|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|1208_120003|CMD=git checkout -f 76dcd734eca23168cb008912c0f69ff408905235|
+|1208_120004|CMD=git bisect start|
+|1208_120004|CMD=git bisect bad 76dcd734eca23168cb008912c0f69ff408905235|
+|1208_120004|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|1208_120004|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|1208_120055||/home/bzimage/bzImage_f2b551fad8d8f2ac5e1f810ad595298381e0b0c5| exist, no need make|
+|1208_120055|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_120107|Run /home/bzimage/bzImage_f2b551fad8d8f2ac5e1f810ad595298381e0b0c5 with image:/root/image/centos8_2.img in local port:10022|
+|1208_120132|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_120133|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_120134|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_120135|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_120403|/home/bzimage/bzImage_f2b551fad8d8f2ac5e1f810ad595298381e0b0c5 didn't contain copy_page_range: in dmesg, pass|
+|1208_120403|git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5|
+|1208_120458||/home/bzimage/bzImage_9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34| exist, no need make|
+|1208_120458|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_120510|Run /home/bzimage/bzImage_9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34 with image:/root/image/centos8_2.img in local port:10022|
+|1208_120535|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_120535|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_120536|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_120538|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_120806|/home/bzimage/bzImage_9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34 didn't contain copy_page_range: in dmesg, pass|
+|1208_120806|git bisect good 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34|
+|1208_120817||/home/bzimage/bzImage_1d239c1eb873c7d6c6cbc80d68330c939fd86136| was not exist, will make it|
+|1208_123439|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_123452|Run /home/bzimage/bzImage_1d239c1eb873c7d6c6cbc80d68330c939fd86136 with image:/root/image/centos8_2.img in local port:10022|
+|1208_123517|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_123518|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_123519|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_123520|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_123748|/home/bzimage/bzImage_1d239c1eb873c7d6c6cbc80d68330c939fd86136 contained copy_page_range:[   28.208055] WARNING: CPU: 1 PID: 572 at mm/memory.c:882 copy_page_range+0x1861/0x2960
+[   28.209588] RIP: 0010:copy_page_range+0x1861/0x2960, FAIL|
+|1208_123748|git bisect bad 1d239c1eb873c7d6c6cbc80d68330c939fd86136|
+|1208_123752||/home/bzimage/bzImage_8374cfe647a1f360be3228b949dd6d753c55c19c| was not exist, will make it|
+|1208_130349|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_130402|Run /home/bzimage/bzImage_8374cfe647a1f360be3228b949dd6d753c55c19c with image:/root/image/centos8_2.img in local port:10022|
+|1208_130427|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_130427|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_130429|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_130430|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_130658|/home/bzimage/bzImage_8374cfe647a1f360be3228b949dd6d753c55c19c contained copy_page_range:[   27.972943] WARNING: CPU: 0 PID: 562 at mm/memory.c:874 copy_page_range+0x1861/0x2960
+[   27.974500] RIP: 0010:copy_page_range+0x1861/0x2960, FAIL|
+|1208_130658|git bisect bad 8374cfe647a1f360be3228b949dd6d753c55c19c|
+|1208_130701||/home/bzimage/bzImage_6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9| was not exist, will make it|
+|1208_133218|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_133233|Run /home/bzimage/bzImage_6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9 with image:/root/image/centos8_2.img in local port:10022|
+|1208_133258|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_133258|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_133300|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_133301|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_133529|/home/bzimage/bzImage_6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9 contained copy_page_range:[   28.138277] WARNING: CPU: 1 PID: 568 at mm/memory.c:874 copy_page_range+0x1858/0x2960
+[   28.140306] RIP: 0010:copy_page_range+0x1858/0x2960, FAIL|
+|1208_133529|git bisect bad 6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9|
+|1208_133532||/home/bzimage/bzImage_4f58afd6eb177a75dec61c65fdc72db31db93c82| was not exist, will make it|
+|1208_140428|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_140442|Run /home/bzimage/bzImage_4f58afd6eb177a75dec61c65fdc72db31db93c82 with image:/root/image/centos8_2.img in local port:10022|
+|1208_140507|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_140507|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_140509|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_140510|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_140738|/home/bzimage/bzImage_4f58afd6eb177a75dec61c65fdc72db31db93c82 contained copy_page_range:[   28.344795] WARNING: CPU: 1 PID: 573 at mm/memory.c:874 copy_page_range+0x1858/0x2990
+[   28.350145] RIP: 0010:copy_page_range+0x1858/0x2990, FAIL|
+|1208_140738|git bisect bad 4f58afd6eb177a75dec61c65fdc72db31db93c82|
+|1208_140740||/home/bzimage/bzImage_3cc30140dbe2df9b5ac000898e0ae3d1df980f2c| was not exist, will make it|
+|1208_143708|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_143723|Run /home/bzimage/bzImage_3cc30140dbe2df9b5ac000898e0ae3d1df980f2c with image:/root/image/centos8_2.img in local port:10022|
+|1208_143748|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_143749|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_143750|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_143751|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_144020|/home/bzimage/bzImage_3cc30140dbe2df9b5ac000898e0ae3d1df980f2c contained copy_page_range:[   28.352849] WARNING: CPU: 0 PID: 575 at mm/memory.c:874 copy_page_range+0x1858/0x2990
+[   28.356095] RIP: 0010:copy_page_range+0x1858/0x2990, FAIL|
+|1208_144020|git bisect bad 3cc30140dbe2df9b5ac000898e0ae3d1df980f2c|
+|1208_144022||/home/bzimage/bzImage_bf9095424d027e942e1d1ee74977e17b7df8e455| was not exist, will make it|
+|1208_150924|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_150938|Run /home/bzimage/bzImage_bf9095424d027e942e1d1ee74977e17b7df8e455 with image:/root/image/centos8_2.img in local port:10022|
+|1208_151003|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_151003|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_151005|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_151006|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_151234|/home/bzimage/bzImage_bf9095424d027e942e1d1ee74977e17b7df8e455 contained copy_page_range:[   30.656314] WARNING: CPU: 1 PID: 562 at mm/memory.c:874 copy_page_range+0x1858/0x2960
+[   30.659258] RIP: 0010:copy_page_range+0x1858/0x2960, FAIL|
+|1208_151234|git bisect bad bf9095424d027e942e1d1ee74977e17b7df8e455|
+|1208_151238||/home/bzimage/bzImage_b265cdebdfefbee4ef1ae2972af36f7a7cac5148| was not exist, will make it|
+|1208_154144|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_154159|Run /home/bzimage/bzImage_b265cdebdfefbee4ef1ae2972af36f7a7cac5148 with image:/root/image/centos8_2.img in local port:10022|
+|1208_154224|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_154225|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_154226|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_154227|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_154456|/home/bzimage/bzImage_b265cdebdfefbee4ef1ae2972af36f7a7cac5148 contained copy_page_range:[   28.152579] WARNING: CPU: 0 PID: 557 at mm/memory.c:874 copy_page_range+0x1858/0x2990
+[   28.155092] RIP: 0010:copy_page_range+0x1858/0x2990, FAIL|
+|1208_154456|git bisect bad b265cdebdfefbee4ef1ae2972af36f7a7cac5148|
+|1208_154457||/home/bzimage/bzImage_4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8| was not exist, will make it|
+|1208_161458|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_161514|Run /home/bzimage/bzImage_4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8 with image:/root/image/centos8_2.img in local port:10022|
+|1208_161539|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_161539|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_161541|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_161542|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_161810|/home/bzimage/bzImage_4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8 didn't contain copy_page_range: in dmesg, pass|
+|1208_161810|git bisect good 4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8|
+|1208_161811||/home/bzimage/bzImage_6e263fff1de48fcd97b680b54cd8d1695fc3c776| was not exist, will make it|
+|1208_164751|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_164810|Run /home/bzimage/bzImage_6e263fff1de48fcd97b680b54cd8d1695fc3c776 with image:/root/image/centos8_2.img in local port:10022|
+|1208_164835|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_164836|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_164837|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_164838|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_165106|/home/bzimage/bzImage_6e263fff1de48fcd97b680b54cd8d1695fc3c776 contained copy_page_range:[   28.249424] WARNING: CPU: 0 PID: 560 at mm/memory.c:875 copy_page_range+0x1858/0x2990
+[   28.252491] RIP: 0010:copy_page_range+0x1858/0x2990, FAIL|
+|1208_165106|git bisect bad 6e263fff1de48fcd97b680b54cd8d1695fc3c776|
+|1208_165107||/home/bzimage/bzImage_97d482f4592fde2322c319f07bc54f3a0d37861c| was not exist, will make it|
+|1208_172229|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_172244|Run /home/bzimage/bzImage_97d482f4592fde2322c319f07bc54f3a0d37861c with image:/root/image/centos8_2.img in local port:10022|
+|1208_172310|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_172310|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_172311|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_172313|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_172541|/home/bzimage/bzImage_97d482f4592fde2322c319f07bc54f3a0d37861c didn't contain copy_page_range: in dmesg, pass|
+|1208_172541|git bisect good 97d482f4592fde2322c319f07bc54f3a0d37861c|
+|1208_172542||/home/bzimage/bzImage_6041c69179034278ac6d57f90a55b09e588f4b90| was not exist, will make it|
+|1208_175824|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_175839|Run /home/bzimage/bzImage_6041c69179034278ac6d57f90a55b09e588f4b90 with image:/root/image/centos8_2.img in local port:10022|
+|1208_175904|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_175904|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_175905|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_175907|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_180135|/home/bzimage/bzImage_6041c69179034278ac6d57f90a55b09e588f4b90 didn't contain copy_page_range: in dmesg, pass|
+|1208_180135|git bisect good 6041c69179034278ac6d57f90a55b09e588f4b90|
+|1208_180136||/home/bzimage/bzImage_c0eeeb02d9df878c71a457008900b650d94bd0d9| was not exist, will make it|
+|1208_183308|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_183330|Run /home/bzimage/bzImage_c0eeeb02d9df878c71a457008900b650d94bd0d9 with image:/root/image/centos8_2.img in local port:10022|
+|1208_183355|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_183356|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_183357|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_183359|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_183627|/home/bzimage/bzImage_c0eeeb02d9df878c71a457008900b650d94bd0d9 contained copy_page_range:[   28.928083] WARNING: CPU: 0 PID: 558 at mm/memory.c:875 copy_page_range+0x191d/0x2a60
+[   28.932758] RIP: 0010:copy_page_range+0x191d/0x2a60, FAIL|
+|1208_183627|git bisect bad c0eeeb02d9df878c71a457008900b650d94bd0d9|
+|1208_183628||/home/bzimage/bzImage_bc70fbf269fdff410b0b6d75c3770b9f59117b90| was not exist, will make it|
+|1208_190952|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_191007|Run /home/bzimage/bzImage_bc70fbf269fdff410b0b6d75c3770b9f59117b90 with image:/root/image/centos8_2.img in local port:10022|
+|1208_191032|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_191032|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_191034|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_191035|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_191304|/home/bzimage/bzImage_bc70fbf269fdff410b0b6d75c3770b9f59117b90 didn't contain copy_page_range: in dmesg, pass|
+|1208_191304|git bisect good bc70fbf269fdff410b0b6d75c3770b9f59117b90|
+|1208_191305||/home/bzimage/bzImage_8e165e733bfa06edbcdbe491ef13b2bf1a3fa883| was not exist, will make it|
+|1208_194112|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_194127|Run /home/bzimage/bzImage_8e165e733bfa06edbcdbe491ef13b2bf1a3fa883 with image:/root/image/centos8_2.img in local port:10022|
+|1208_194152|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_194152|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_194200|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_194201|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_194430|/home/bzimage/bzImage_8e165e733bfa06edbcdbe491ef13b2bf1a3fa883 didn't contain copy_page_range: in dmesg, pass|
+|1208_194430|git bisect good 8e165e733bfa06edbcdbe491ef13b2bf1a3fa883|
+|1208_194431||/home/bzimage/bzImage_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38| was not exist, will make it|
+|1208_201125|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_201138|Run /home/bzimage/bzImage_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38 with image:/root/image/centos8_2.img in local port:10022|
+|1208_201203|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_201204|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_201205|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_201207|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_201435|/home/bzimage/bzImage_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38 contained copy_page_range:[   27.564977] WARNING: CPU: 0 PID: 558 at mm/memory.c:875 copy_page_range+0x191d/0x2a60
+[   27.567502] RIP: 0010:copy_page_range+0x191d/0x2a60, FAIL|
+|1208_201435|git bisect bad 81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38|
+|1208_201436||/home/bzimage/bzImage_b1f9e876862d8f7176299ec4fb2108bc1045cbc8| was not exist, will make it|
+|1208_204257|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_204311|Run /home/bzimage/bzImage_b1f9e876862d8f7176299ec4fb2108bc1045cbc8 with image:/root/image/centos8_2.img in local port:10022|
+|1208_204336|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_204336|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_204338|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_204339|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_204608|/home/bzimage/bzImage_b1f9e876862d8f7176299ec4fb2108bc1045cbc8 didn't contain copy_page_range: in dmesg, pass|
+|1208_204608|git bisect good b1f9e876862d8f7176299ec4fb2108bc1045cbc8|
+|1208_204608|Bisect PASS: find 81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38 is the first bad commit|
+|1208_204608|CMD=git bisect log >> /home/bzimage/bi.log|
+|1208_204608|CMD=git bisect log >> /home/bzimage/1208_115556_copy_page_range/bisect.log|
+git bisect start
+# bad: [76dcd734eca23168cb008912c0f69ff408905235] Linux 6.1-rc8
+git bisect bad 76dcd734eca23168cb008912c0f69ff408905235
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [f2b551fad8d8f2ac5e1f810ad595298381e0b0c5] Merge tag 'wireless-drivers-next-2021-12-23' of git://git.kernel.org/pub/scm/linux/kernel/git/kvalo/wireless-drivers-next
+git bisect good f2b551fad8d8f2ac5e1f810ad595298381e0b0c5
+# good: [9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34] Merge tag 'optee-warning-for-v5.19' of https://git.linaro.org/people/jens.wiklander/linux-tee into arm/late
+git bisect good 9c76d723edd4f4d7d10b33e7e56f72ecbe6cee34
+# bad: [1d239c1eb873c7d6c6cbc80d68330c939fd86136] Merge tag 'iommu-updates-v5.20-or-v6.0' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect bad 1d239c1eb873c7d6c6cbc80d68330c939fd86136
+# bad: [8374cfe647a1f360be3228b949dd6d753c55c19c] Merge tag 'for-6.0/dm-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/device-mapper/linux-dm
+git bisect bad 8374cfe647a1f360be3228b949dd6d753c55c19c
+# bad: [6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9] spi: stm32-qspi: Remove unused parameters
+git bisect bad 6ff40f00e5a4db029c05d747ea50c3d2a5a6ebd9
+# bad: [4f58afd6eb177a75dec61c65fdc72db31db93c82] virtio: Directly use ida_alloc()/free()
+git bisect bad 4f58afd6eb177a75dec61c65fdc72db31db93c82
+# bad: [3cc30140dbe2df9b5ac000898e0ae3d1df980f2c] Merge tag 'pci-v5.19-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/helgaas/pci
+git bisect bad 3cc30140dbe2df9b5ac000898e0ae3d1df980f2c
+# bad: [bf9095424d027e942e1d1ee74977e17b7df8e455] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect bad bf9095424d027e942e1d1ee74977e17b7df8e455
+# bad: [b265cdebdfefbee4ef1ae2972af36f7a7cac5148] sched: coredump.h: clarify the use of MMF_VM_HUGEPAGE
+git bisect bad b265cdebdfefbee4ef1ae2972af36f7a7cac5148
+# good: [4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8] mm: move responsibility for setting SWP_FS_OPS to ->swap_activate
+git bisect good 4b60c0ff2f2021ab99b7fb9da63b7ed1579ef1d8
+# bad: [6e263fff1de48fcd97b680b54cd8d1695fc3c776] mm: page_isolation: enable arbitrary range page isolation.
+git bisect bad 6e263fff1de48fcd97b680b54cd8d1695fc3c776
+# good: [97d482f4592fde2322c319f07bc54f3a0d37861c] mm/damon/sysfs: reuse damon_set_regions() for regions setting
+git bisect good 97d482f4592fde2322c319f07bc54f3a0d37861c
+# good: [6041c69179034278ac6d57f90a55b09e588f4b90] mm/hugetlb: take care of UFFDIO_COPY_MODE_WP
+git bisect good 6041c69179034278ac6d57f90a55b09e588f4b90
+# bad: [c0eeeb02d9df878c71a457008900b650d94bd0d9] selftests/uffd: enable uffd-wp for shmem/hugetlbfs
+git bisect bad c0eeeb02d9df878c71a457008900b650d94bd0d9
+# good: [bc70fbf269fdff410b0b6d75c3770b9f59117b90] mm/hugetlb: handle uffd-wp during fork()
+git bisect good bc70fbf269fdff410b0b6d75c3770b9f59117b90
+# good: [8e165e733bfa06edbcdbe491ef13b2bf1a3fa883] mm/pagemap: recognize uffd-wp bit for shmem/hugetlbfs
+git bisect good 8e165e733bfa06edbcdbe491ef13b2bf1a3fa883
+# bad: [81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38] mm: enable PTE markers by default
+git bisect bad 81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38
+# good: [b1f9e876862d8f7176299ec4fb2108bc1045cbc8] mm/uffd: enable write protection for shmem & hugetlbfs
+git bisect good b1f9e876862d8f7176299ec4fb2108bc1045cbc8
+# first bad commit: [81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38] mm: enable PTE markers by default
+|1208_204608|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 76dcd734eca23168cb008912c0f69ff408905235 -b 81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert|
+|1208_211641|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|1208_211656|Run /home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert with image:/root/image/centos8_2.img in local port:10022|
+|1208_211721|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|1208_211722|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|1208_211723|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/30f80095c5ab8af7828413cc249a5853cd5b895c/repro.cprog root@localhost:/root/repro.c|
+|1208_211725|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|1208_211953|/home/bzimage/bzImage_76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert didn't contain copy_page_range: in dmesg, pass|
+|1208_211953|Bisect successfully! 76dcd734eca23168cb008912c0f69ff408905235_81e0f15f2ef6dad7ccb9c03d8e61ef7ded836b38_revert bzimage passed!|
