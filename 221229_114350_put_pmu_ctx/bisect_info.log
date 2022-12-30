@@ -1,0 +1,44 @@
+git bisect start
+# bad: [1b929c02afd37871d5afb9d498426f83432e71c2] Linux 6.2-rc1
+git bisect bad 1b929c02afd37871d5afb9d498426f83432e71c2
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [e1a7aa25ff45636a6c1930bf2430c8b802e93d9c] Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect good e1a7aa25ff45636a6c1930bf2430c8b802e93d9c
+# good: [526942b8134cc34d25d27f95dfff98b8ce2f6fcd] Merge tag 'ata-5.20-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/dlemoal/libata
+git bisect good 526942b8134cc34d25d27f95dfff98b8ce2f6fcd
+# good: [29926f1cd3535f565f200430d5b6a794543fe130] fbdev: mb862xx: Fix check of return value from irq_of_parse_and_map()
+git bisect good 29926f1cd3535f565f200430d5b6a794543fe130
+# bad: [8715c6d3100fc7c6edddf29af4a399a1c12d028c] Merge tag 'for-6.2/dm-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/device-mapper/linux-dm
+git bisect bad 8715c6d3100fc7c6edddf29af4a399a1c12d028c
+# good: [9521c9d6a53df9c44a5f5ddbc229ceaf3cf79ef6] Merge tag 'net-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 9521c9d6a53df9c44a5f5ddbc229ceaf3cf79ef6
+# good: [8e17b16a2c13406c56a4d292df3ca083f8729666] Merge tag 'soc-drivers-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 8e17b16a2c13406c56a4d292df3ca083f8729666
+# good: [456ed864fd907d5f5484c7c4795da212537842fe] Merge tag 'acpi-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good 456ed864fd907d5f5484c7c4795da212537842fe
+# bad: [97971df811b8854882c0f6c6631e23ab8cdcc44f] Merge tag 'dlm-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/teigland/linux-dlm
+git bisect bad 97971df811b8854882c0f6c6631e23ab8cdcc44f
+# bad: [a7cacfb0688e3988660e90fad7017cc9a18ab390] Merge tag 'docs-6.2' of git://git.lwn.net/linux
+git bisect bad a7cacfb0688e3988660e90fad7017cc9a18ab390
+# bad: [a312a8cc3c7fe96f5e54e69c676f5bd12995f44e] Merge tag 'cgroup-for-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+git bisect bad a312a8cc3c7fe96f5e54e69c676f5bd12995f44e
+# good: [c1f0fcd85d3d66f002fc1a4986363840fcca766d] Merge tag 'cxl-for-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/cxl/cxl
+git bisect good c1f0fcd85d3d66f002fc1a4986363840fcca766d
+# good: [617fe4fa82b2fe5bcb99f97f223f408603bfa5a0] Merge tag 'locking-core-2022-12-12' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 617fe4fa82b2fe5bcb99f97f223f408603bfa5a0
+# bad: [add76959575736c194b3118d96e43f8cd7bcec82] Merge tag 'perf-core-2022-12-12' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad add76959575736c194b3118d96e43f8cd7bcec82
+# bad: [6532783310e2b2f50dc13f46c49aa6546cb6e7a3] perf/x86/intel/uncore: Clear attr_update properly
+git bisect bad 6532783310e2b2f50dc13f46c49aa6546cb6e7a3
+# bad: [e8d7a90c08ce963c592fb49845f2ccc606a2ac21] perf: Fix possible memleak in pmu_dev_alloc()
+git bisect bad e8d7a90c08ce963c592fb49845f2ccc606a2ac21
+# bad: [8e356858be2989355aafcc96af541fedf9fb486f] perf/x86: Remove unused variable 'cpu_type'
+git bisect bad 8e356858be2989355aafcc96af541fedf9fb486f
+# bad: [571f97f7d51fa81e6cc0e00f0f6314792ce533a3] perf: Optimize perf_tp_event()
+git bisect bad 571f97f7d51fa81e6cc0e00f0f6314792ce533a3
+# bad: [bd27568117664b8b3e259721393df420ed51f57b] perf: Rewrite core context handling
+git bisect bad bd27568117664b8b3e259721393df420ed51f57b
+# first bad commit: [bd27568117664b8b3e259721393df420ed51f57b] perf: Rewrite core context handling
+|1229_125636|/root/bzimage_bisect/make_bz.sh -k /root/linux -m 1b929c02afd37871d5afb9d498426f83432e71c2 -b bd27568117664b8b3e259721393df420ed51f57b -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_1b929c02afd37871d5afb9d498426f83432e71c2_bd27568117664b8b3e259721393df420ed51f57b_revert|
+|1229_125726|FAIL|bzImage:/home/bzimage/bzImage_1b929c02afd37871d5afb9d498426f83432e71c2_bd27568117664b8b3e259721393df420ed51f57b_revert does not exist:|
