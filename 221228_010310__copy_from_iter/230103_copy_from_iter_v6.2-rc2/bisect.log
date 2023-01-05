@@ -1,0 +1,243 @@
+|0103_104234|CMD=cd /root/linux|
+|0103_104234|git log 88603b6dc419445847923fcb7fe5080067a30f98 check_result:commit 88603b6dc419445847923fcb7fe5080067a30f98|
+|0103_104234|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0103_104234|CMD=git checkout -f 88603b6dc419445847923fcb7fe5080067a30f98|
+|0103_104235|CMD=cd /root/linux|
+|0103_104235||/home/bzimage/bzImage_88603b6dc419445847923fcb7fe5080067a30f98| exist, no need make|
+|0103_104235|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_104532|Run /home/bzimage/bzImage_88603b6dc419445847923fcb7fe5080067a30f98 with image:/root/image/centos8_2.img in local port:10022|
+|0103_104558|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_104558|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_104600|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_104602|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_104612|/home/bzimage/bzImage_88603b6dc419445847923fcb7fe5080067a30f98 contained _copy_from_iter:[   29.807212] WARNING: CPU: 0 PID: 514 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   29.811422] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_104612|Found time:29 in /home/bzimage/0103_104234__copy_from_iter/88603b6dc419445847923fcb7fe5080067a30f98_dmesg.log|
+|0103_104612|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:149|
+|0103_104612|-END- commit 88603b6dc419445847923fcb7fe5080067a30f98 FAIL bad|
+|0103_104612||/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0103_104612|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_104839|Run /home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|0103_104904|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_104904|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_104906|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_104907|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_105136|/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain _copy_from_iter: in dmesg, pass|
+|0103_105136|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0103_105136|CMD=git checkout -f 88603b6dc419445847923fcb7fe5080067a30f98|
+|0103_105137|CMD=git bisect start|
+|0103_105137|CMD=git bisect bad 88603b6dc419445847923fcb7fe5080067a30f98|
+|0103_105137|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0103_105137|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0103_105456||/home/bzimage/bzImage_e1a7aa25ff45636a6c1930bf2430c8b802e93d9c| exist, no need make|
+|0103_105456|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_105728|Run /home/bzimage/bzImage_e1a7aa25ff45636a6c1930bf2430c8b802e93d9c with image:/root/image/centos8_2.img in local port:10022|
+|0103_105753|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_105754|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_105755|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_105757|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_110026|/home/bzimage/bzImage_e1a7aa25ff45636a6c1930bf2430c8b802e93d9c didn't contain _copy_from_iter: in dmesg, pass|
+|0103_110026|git bisect good e1a7aa25ff45636a6c1930bf2430c8b802e93d9c|
+|0103_110246||/home/bzimage/bzImage_526942b8134cc34d25d27f95dfff98b8ce2f6fcd| exist, no need make|
+|0103_110246|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_110547|Run /home/bzimage/bzImage_526942b8134cc34d25d27f95dfff98b8ce2f6fcd with image:/root/image/centos8_2.img in local port:10022|
+|0103_110612|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_110613|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_110615|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_110616|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_110846|/home/bzimage/bzImage_526942b8134cc34d25d27f95dfff98b8ce2f6fcd didn't contain _copy_from_iter: in dmesg, pass|
+|0103_110846|git bisect good 526942b8134cc34d25d27f95dfff98b8ce2f6fcd|
+|0103_110914||/home/bzimage/bzImage_a09476668e3016ea4a7b0a7ebd02f44e0546c12c| was not exist, will make it|
+|0103_114906|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_115211|Run /home/bzimage/bzImage_a09476668e3016ea4a7b0a7ebd02f44e0546c12c with image:/root/image/centos8_2.img in local port:10022|
+|0103_115236|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_115236|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_115238|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_115239|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_115509|/home/bzimage/bzImage_a09476668e3016ea4a7b0a7ebd02f44e0546c12c didn't contain _copy_from_iter: in dmesg, pass|
+|0103_115509|git bisect good a09476668e3016ea4a7b0a7ebd02f44e0546c12c|
+|0103_115519||/home/bzimage/bzImage_102f9d3d455870844c47b82322c2dfc0a35eb745| was not exist, will make it|
+|0103_123656|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_123929|Run /home/bzimage/bzImage_102f9d3d455870844c47b82322c2dfc0a35eb745 with image:/root/image/centos8_2.img in local port:10022|
+|0103_123954|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_123955|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_123956|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_123958|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_124227|/home/bzimage/bzImage_102f9d3d455870844c47b82322c2dfc0a35eb745 contained _copy_from_iter:[   29.789058] WARNING: CPU: 1 PID: 581 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   29.793039] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_124227|git bisect bad 102f9d3d455870844c47b82322c2dfc0a35eb745|
+|0103_124233||/home/bzimage/bzImage_64b4aef17ea65c423fbcdee323b503d8e3ffb3a2| was not exist, will make it|
+|0103_132955|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_133216|Run /home/bzimage/bzImage_64b4aef17ea65c423fbcdee323b503d8e3ffb3a2 with image:/root/image/centos8_2.img in local port:10022|
+|0103_133241|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_133242|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_133243|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_133245|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_133515|/home/bzimage/bzImage_64b4aef17ea65c423fbcdee323b503d8e3ffb3a2 didn't contain _copy_from_iter: in dmesg, pass|
+|0103_133515|git bisect good 64b4aef17ea65c423fbcdee323b503d8e3ffb3a2|
+|0103_133520||/home/bzimage/bzImage_01f3cbb296a9ad378167c01758c99557b5bc3208| was not exist, will make it|
+|0103_141114|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_141327|Run /home/bzimage/bzImage_01f3cbb296a9ad378167c01758c99557b5bc3208 with image:/root/image/centos8_2.img in local port:10022|
+|0103_141352|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_141353|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_141354|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_141355|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_141625|/home/bzimage/bzImage_01f3cbb296a9ad378167c01758c99557b5bc3208 didn't contain _copy_from_iter: in dmesg, pass|
+|0103_141625|git bisect good 01f3cbb296a9ad378167c01758c99557b5bc3208|
+|0103_141626||/home/bzimage/bzImage_56c003e4db4adb1d57e599fb4c7d39f9130f9db1| was not exist, will make it|
+|0103_144650|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_144905|Run /home/bzimage/bzImage_56c003e4db4adb1d57e599fb4c7d39f9130f9db1 with image:/root/image/centos8_2.img in local port:10022|
+|0103_144930|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_144930|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_144932|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_144933|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_145203|/home/bzimage/bzImage_56c003e4db4adb1d57e599fb4c7d39f9130f9db1 contained _copy_from_iter:[   28.728862] WARNING: CPU: 0 PID: 567 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   28.731874] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_145203|git bisect bad 56c003e4db4adb1d57e599fb4c7d39f9130f9db1|
+|0103_145205||/home/bzimage/bzImage_a89ef2aa552db985e0ee8cb458846298c007704c| was not exist, will make it|
+|0103_153217|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_153543|Run /home/bzimage/bzImage_a89ef2aa552db985e0ee8cb458846298c007704c with image:/root/image/centos8_2.img in local port:10022|
+|0103_153608|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_153609|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_153610|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_153612|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_153842|/home/bzimage/bzImage_a89ef2aa552db985e0ee8cb458846298c007704c didn't contain _copy_from_iter: in dmesg, pass|
+|0103_153842|git bisect good a89ef2aa552db985e0ee8cb458846298c007704c|
+|0103_153844||/home/bzimage/bzImage_a7cacfb0688e3988660e90fad7017cc9a18ab390| exist, no need make|
+|0103_153844|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_154052|Run /home/bzimage/bzImage_a7cacfb0688e3988660e90fad7017cc9a18ab390 with image:/root/image/centos8_2.img in local port:10022|
+|0103_154117|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_154118|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_154120|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_154122|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_154352|/home/bzimage/bzImage_a7cacfb0688e3988660e90fad7017cc9a18ab390 didn't contain _copy_from_iter: in dmesg, pass|
+|0103_154352|git bisect good a7cacfb0688e3988660e90fad7017cc9a18ab390|
+|0103_154353||/home/bzimage/bzImage_6a518afcc2066732e6c5c24281ce017bbbd85506| was not exist, will make it|
+|0103_162450|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_162732|Run /home/bzimage/bzImage_6a518afcc2066732e6c5c24281ce017bbbd85506 with image:/root/image/centos8_2.img in local port:10022|
+|0103_162757|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_162757|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_162759|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_162800|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_163030|/home/bzimage/bzImage_6a518afcc2066732e6c5c24281ce017bbbd85506 contained _copy_from_iter:[   29.340810] WARNING: CPU: 0 PID: 565 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   29.343674] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_163030|git bisect bad 6a518afcc2066732e6c5c24281ce017bbbd85506|
+|0103_163033||/home/bzimage/bzImage_9f2b5debc07073e6dfdd774e3594d0224b991927| was not exist, will make it|
+|0103_171530|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_171927|Run /home/bzimage/bzImage_9f2b5debc07073e6dfdd774e3594d0224b991927 with image:/root/image/centos8_2.img in local port:10022|
+|0103_171952|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_171953|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_171955|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_171956|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_172226|/home/bzimage/bzImage_9f2b5debc07073e6dfdd774e3594d0224b991927 didn't contain _copy_from_iter: in dmesg, pass|
+|0103_172226|git bisect good 9f2b5debc07073e6dfdd774e3594d0224b991927|
+|0103_172230||/home/bzimage/bzImage_bd90741318ee0a48244e8e4b9364023d730a80a9| was not exist, will make it|
+|0103_175544|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_175758|Run /home/bzimage/bzImage_bd90741318ee0a48244e8e4b9364023d730a80a9 with image:/root/image/centos8_2.img in local port:10022|
+|0103_175823|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_175824|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_175825|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_175827|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_180056|/home/bzimage/bzImage_bd90741318ee0a48244e8e4b9364023d730a80a9 contained _copy_from_iter:[   28.852939] WARNING: CPU: 0 PID: 573 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   28.856025] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_180056|git bisect bad bd90741318ee0a48244e8e4b9364023d730a80a9|
+|0103_180058||/home/bzimage/bzImage_268369b171ff1be6a68ae8f33d0602c6bea48d2e| was not exist, will make it|
+|0103_183025|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_183243|Run /home/bzimage/bzImage_268369b171ff1be6a68ae8f33d0602c6bea48d2e with image:/root/image/centos8_2.img in local port:10022|
+|0103_183308|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_183308|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_183310|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_183311|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_183541|/home/bzimage/bzImage_268369b171ff1be6a68ae8f33d0602c6bea48d2e didn't contain _copy_from_iter: in dmesg, pass|
+|0103_183541|git bisect good 268369b171ff1be6a68ae8f33d0602c6bea48d2e|
+|0103_183542||/home/bzimage/bzImage_fc02f33787d8dd227b54f263eba983d5b249c032| was not exist, will make it|
+|0103_190524|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_190745|Run /home/bzimage/bzImage_fc02f33787d8dd227b54f263eba983d5b249c032 with image:/root/image/centos8_2.img in local port:10022|
+|0103_190810|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_190811|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_190812|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_190813|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_191043|/home/bzimage/bzImage_fc02f33787d8dd227b54f263eba983d5b249c032 didn't contain _copy_from_iter: in dmesg, pass|
+|0103_191043|git bisect good fc02f33787d8dd227b54f263eba983d5b249c032|
+|0103_191045||/home/bzimage/bzImage_13c574fec815f449fa812df60844bbb4b1548d19| exist, no need make|
+|0103_191045|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_191225|Run /home/bzimage/bzImage_13c574fec815f449fa812df60844bbb4b1548d19 with image:/root/image/centos8_2.img in local port:10022|
+|0103_191250|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_191251|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_191252|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_191253|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_191523|/home/bzimage/bzImage_13c574fec815f449fa812df60844bbb4b1548d19 contained _copy_from_iter:[   28.457957] WARNING: CPU: 1 PID: 567 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   28.460736] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_191523|git bisect bad 13c574fec815f449fa812df60844bbb4b1548d19|
+|0103_191524||/home/bzimage/bzImage_de4eda9de2d957ef2d6a8365a01e26a435e958cb| was not exist, will make it|
+|0103_195654|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_195955|Run /home/bzimage/bzImage_de4eda9de2d957ef2d6a8365a01e26a435e958cb with image:/root/image/centos8_2.img in local port:10022|
+|0103_200020|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_200021|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_200022|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_200023|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_200253|/home/bzimage/bzImage_de4eda9de2d957ef2d6a8365a01e26a435e958cb contained _copy_from_iter:[   28.374018] WARNING: CPU: 1 PID: 582 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   28.376882] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_200253|git bisect bad de4eda9de2d957ef2d6a8365a01e26a435e958cb|
+|0103_200255||/home/bzimage/bzImage_a41dad905e5a388f88435a517de102e9b2c8e43d| exist, no need make|
+|0103_200255|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_200441|Run /home/bzimage/bzImage_a41dad905e5a388f88435a517de102e9b2c8e43d with image:/root/image/centos8_2.img in local port:10022|
+|0103_200506|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_200506|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_200508|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_200509|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_200739|/home/bzimage/bzImage_a41dad905e5a388f88435a517de102e9b2c8e43d contained _copy_from_iter:[   28.766902] WARNING: CPU: 0 PID: 579 at lib/iov_iter.c:629 _copy_from_iter+0x130/0xa60
+[   28.769705] RIP: 0010:_copy_from_iter+0x130/0xa60, FAIL|
+|0103_200739|git bisect bad a41dad905e5a388f88435a517de102e9b2c8e43d|
+|0103_200739|Bisect PASS: find a41dad905e5a388f88435a517de102e9b2c8e43d is the first bad commit|
+|0103_200739|CMD=git bisect log >> /home/bzimage/bi.log|
+|0103_200739|CMD=git bisect log >> /home/bzimage/0103_104234__copy_from_iter/bisect.log|
+git bisect start
+# bad: [88603b6dc419445847923fcb7fe5080067a30f98] Linux 6.2-rc2
+git bisect bad 88603b6dc419445847923fcb7fe5080067a30f98
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [e1a7aa25ff45636a6c1930bf2430c8b802e93d9c] Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect good e1a7aa25ff45636a6c1930bf2430c8b802e93d9c
+# good: [526942b8134cc34d25d27f95dfff98b8ce2f6fcd] Merge tag 'ata-5.20-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/dlemoal/libata
+git bisect good 526942b8134cc34d25d27f95dfff98b8ce2f6fcd
+# good: [a09476668e3016ea4a7b0a7ebd02f44e0546c12c] Merge tag 'char-misc-6.1-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good a09476668e3016ea4a7b0a7ebd02f44e0546c12c
+# bad: [102f9d3d455870844c47b82322c2dfc0a35eb745] Merge tag 'sound-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect bad 102f9d3d455870844c47b82322c2dfc0a35eb745
+# good: [64b4aef17ea65c423fbcdee323b503d8e3ffb3a2] Merge tag 'sound-6.1-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good 64b4aef17ea65c423fbcdee323b503d8e3ffb3a2
+# good: [01f3cbb296a9ad378167c01758c99557b5bc3208] Merge tag 'soc-dt-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 01f3cbb296a9ad378167c01758c99557b5bc3208
+# bad: [56c003e4db4adb1d57e599fb4c7d39f9130f9db1] Merge tag 'jfs-6.2' of https://github.com/kleikamp/linux-shaggy
+git bisect bad 56c003e4db4adb1d57e599fb4c7d39f9130f9db1
+# good: [a89ef2aa552db985e0ee8cb458846298c007704c] Merge tag 'x86_tdx_for_6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good a89ef2aa552db985e0ee8cb458846298c007704c
+# good: [a7cacfb0688e3988660e90fad7017cc9a18ab390] Merge tag 'docs-6.2' of git://git.lwn.net/linux
+git bisect good a7cacfb0688e3988660e90fad7017cc9a18ab390
+# bad: [6a518afcc2066732e6c5c24281ce017bbbd85506] Merge tag 'fs.acl.rework.v6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/idmapping
+git bisect bad 6a518afcc2066732e6c5c24281ce017bbbd85506
+# good: [9f2b5debc07073e6dfdd774e3594d0224b991927] hfsplus: fix bug causing custom uid and gid being unable to be assigned with mount
+git bisect good 9f2b5debc07073e6dfdd774e3594d0224b991927
+# bad: [bd90741318ee0a48244e8e4b9364023d730a80a9] Merge tag 'pull-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect bad bd90741318ee0a48244e8e4b9364023d730a80a9
+# good: [268369b171ff1be6a68ae8f33d0602c6bea48d2e] Merge tag 'pull-alpha' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect good 268369b171ff1be6a68ae8f33d0602c6bea48d2e
+# good: [fc02f33787d8dd227b54f263eba983d5b249c032] [xen] fix "direction" argument of iov_iter_kvec()
+git bisect good fc02f33787d8dd227b54f263eba983d5b249c032
+# bad: [13c574fec815f449fa812df60844bbb4b1548d19] Merge tag 'pull-namespace' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect bad 13c574fec815f449fa812df60844bbb4b1548d19
+# bad: [de4eda9de2d957ef2d6a8365a01e26a435e958cb] use less confusing names for iov_iter direction initializers
+git bisect bad de4eda9de2d957ef2d6a8365a01e26a435e958cb
+# bad: [a41dad905e5a388f88435a517de102e9b2c8e43d] iov_iter: saner checks for attempt to copy to/from iterator
+git bisect bad a41dad905e5a388f88435a517de102e9b2c8e43d
+# first bad commit: [a41dad905e5a388f88435a517de102e9b2c8e43d] iov_iter: saner checks for attempt to copy to/from iterator
+|0103_200739|/root/bzimage_bisect/make_bz.sh -k /root/linux -m 88603b6dc419445847923fcb7fe5080067a30f98 -b a41dad905e5a388f88435a517de102e9b2c8e43d -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_88603b6dc419445847923fcb7fe5080067a30f98_a41dad905e5a388f88435a517de102e9b2c8e43d_revert|
+|0103_204058|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0103_204352|Run /home/bzimage/bzImage_88603b6dc419445847923fcb7fe5080067a30f98_a41dad905e5a388f88435a517de102e9b2c8e43d_revert with image:/root/image/centos8_2.img in local port:10022|
+|0103_204417|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0103_204417|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0103_204419|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/5ae29a0292a3a30d42fbb781181faeaed5c45f0a/repro.cprog root@localhost:/root/repro.c|
+|0103_204420|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0103_204650|/home/bzimage/bzImage_88603b6dc419445847923fcb7fe5080067a30f98_a41dad905e5a388f88435a517de102e9b2c8e43d_revert didn't contain _copy_from_iter: in dmesg, pass|
+|0103_204650|Bisect successfully! 88603b6dc419445847923fcb7fe5080067a30f98_a41dad905e5a388f88435a517de102e9b2c8e43d_revert bzimage passed!|
