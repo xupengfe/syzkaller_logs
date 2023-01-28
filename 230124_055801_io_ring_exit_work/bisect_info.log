@@ -1,0 +1,46 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [2241ab53cbb5cdb08a6b2d4688feb13971058f65] Linux 6.2-rc5
+git bisect bad 2241ab53cbb5cdb08a6b2d4688feb13971058f65
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [29ec39fcf11e4583eb8d5174f756ea109c77cc44] Merge tag 'powerpc-5.17-1' of git://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux
+git bisect bad 29ec39fcf11e4583eb8d5174f756ea109c77cc44
+# bad: [a16d8644bad461bb073b92e812080ea6715ddf2b] Merge tag 'staging-5.14-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging
+git bisect bad a16d8644bad461bb073b92e812080ea6715ddf2b
+# bad: [625434dafdd97372d15de21972be4b682709e854] Merge tag 'for-5.13/io_uring-2021-04-27' of git://git.kernel.dk/linux-block
+git bisect bad 625434dafdd97372d15de21972be4b682709e854
+# good: [cf64c2a905e0dabcc473ca70baf275fb3a61fac4] Merge branch 'work.sparc32' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect good cf64c2a905e0dabcc473ca70baf275fb3a61fac4
+# bad: [8900d92fd666d936a7bfb4c567ac26736a414fb4] Merge tag 'staging-5.13-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging
+git bisect bad 8900d92fd666d936a7bfb4c567ac26736a414fb4
+# bad: [9c15db92a8e56bcde0f58064ac1adc28c0579b51] Merge tag 'iio-for-5.13a' of https://git.kernel.org/pub/scm/linux/kernel/git/jic23/iio into staging-next
+git bisect bad 9c15db92a8e56bcde0f58064ac1adc28c0579b51
+# good: [e93aa38475d6bc5b077b3007982e5ddc071b747d] staging:rtl8712: use IEEE80211_FCTL_* kernel definitions
+git bisect good e93aa38475d6bc5b077b3007982e5ddc071b747d
+# bad: [6417f03132a6952cd17ddd8eaddbac92b61b17e0] module: remove never implemented MODULE_SUPPORTED_DEVICE
+git bisect bad 6417f03132a6952cd17ddd8eaddbac92b61b17e0
+# good: [f0b15b6081291367634a8f3c557f7a68fdaa35e4] MAINTAINERS: exclude uapi directories in API/ABI section
+git bisect good f0b15b6081291367634a8f3c557f7a68fdaa35e4
+# bad: [420623430a7015ae9adab8a087de82c186bc9989] Merge tag 'erofs-for-5.12-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs
+git bisect bad 420623430a7015ae9adab8a087de82c186bc9989
+# good: [261410082d01f2f2d4fcd19abee6b8e84f399c51] Merge tag 'devprop-5.12-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good 261410082d01f2f2d4fcd19abee6b8e84f399c51
+# bad: [ce307084c96d0ec92c04fcc38b107241b168df11] Merge tag 'block-5.12-2021-03-12-v2' of git://git.kernel.dk/linux-block
+git bisect bad ce307084c96d0ec92c04fcc38b107241b168df11
+# bad: [5c2469e0a22e035d52f3ba768151cc75e3d4a1cd] io_uring: force creation of separate context for ATTACH_WQ and non-threads
+git bisect bad 5c2469e0a22e035d52f3ba768151cc75e3d4a1cd
+# bad: [f458dd8441e56d122ddf1d8e2af0b6ee62f52af9] io_uring: fix unrelated ctx reqs cancellation
+git bisect bad f458dd8441e56d122ddf1d8e2af0b6ee62f52af9
+# bad: [baf186c4d345f5a105e63df01100936ad622f369] io_uring: index io_uring->xa by ctx not file
+git bisect bad baf186c4d345f5a105e63df01100936ad622f369
+# good: [2941267bd3dad018de1d51fe2cd996b7bc1e5a5d] io_uring: make del_task_file more forgiving
+git bisect good 2941267bd3dad018de1d51fe2cd996b7bc1e5a5d
+# good: [d56d938b4bef3e1421a42023cdcd6e13c1f50831] io_uring: do ctx initiated file note removal
+git bisect good d56d938b4bef3e1421a42023cdcd6e13c1f50831
+# bad: [eebd2e37e662617a6b8041db75205f0a262ce870] io_uring: don't take task ring-file notes
+git bisect bad eebd2e37e662617a6b8041db75205f0a262ce870
+# first bad commit: [eebd2e37e662617a6b8041db75205f0a262ce870] io_uring: don't take task ring-file notes
+|0125_025324|/root/bzimage_bisect/make_bz.sh -k /root/linux -m 2241ab53cbb5cdb08a6b2d4688feb13971058f65 -b eebd2e37e662617a6b8041db75205f0a262ce870 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65_eebd2e37e662617a6b8041db75205f0a262ce870_revert|
+|0125_025344|FAIL|bzImage:/home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65_eebd2e37e662617a6b8041db75205f0a262ce870_revert does not exist:|

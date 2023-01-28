@@ -1,0 +1,470 @@
+|0124_055801|CMD=cd /root/linux|
+|0124_055801|git log 2241ab53cbb5cdb08a6b2d4688feb13971058f65 check_result:commit 2241ab53cbb5cdb08a6b2d4688feb13971058f65|
+|0124_055801|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0124_055801|CMD=git checkout -f 2241ab53cbb5cdb08a6b2d4688feb13971058f65|
+|0124_055801|CMD=cd /root/linux|
+|0124_055801||/home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65| exist, no need make|
+|0124_055801|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_055826|Run /home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65 with image:/root/image/centos8_2.img in local port:10022|
+|0124_055851|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_055852|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_055854|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_055856|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_060332|/home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65 contained io_ring_exit_work:[  300.214849] Workqueue: events_unbound io_ring_exit_work
+[  300.222897]  io_ring_exit_work+0x2f7/0x747, FAIL|
+|0124_060332|Found time:300 in /home/bzimage/0124_055801_io_ring_exit_work/2241ab53cbb5cdb08a6b2d4688feb13971058f65_dmesg.log|
+|0124_060332|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:2100|
+|0124_060332|-END- commit 2241ab53cbb5cdb08a6b2d4688feb13971058f65 FAIL bad|
+|0124_060332||/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0124_060332|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_060400|Run /home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|0124_060425|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_060426|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_060427|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_060428|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_063929|/home/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain io_ring_exit_work: in dmesg, pass|
+|0124_063929|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0124_063929|CMD=git checkout -f 2241ab53cbb5cdb08a6b2d4688feb13971058f65|
+|0124_063929|CMD=git bisect start|
+|0124_063929|CMD=git bisect bad 2241ab53cbb5cdb08a6b2d4688feb13971058f65|
+|0124_063929|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0124_063929|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0124_064012||/home/bzimage/bzImage_29ec39fcf11e4583eb8d5174f756ea109c77cc44| was not exist, will make it|
+|0124_072410|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_072440|Run /home/bzimage/bzImage_29ec39fcf11e4583eb8d5174f756ea109c77cc44 with image:/root/image/centos8_2.img in local port:10022|
+|0124_072505|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_072505|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_072507|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_072508|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_080009|/home/bzimage/bzImage_29ec39fcf11e4583eb8d5174f756ea109c77cc44 contained io_ring_exit_work:[  300.383309] Workqueue: events_unbound io_ring_exit_work
+[  300.390902]  io_ring_exit_work+0x247/0x5e8
+[  447.839405] Workqueue: events_unbound io_ring_exit_work
+[  447.847589]  io_ring_exit_work+0x247/0x5e8
+[  595.295421] Workqueue: events_unbound io_ring_exit_work
+[  595.303525]  io_ring_exit_work+0x247/0x5e8
+[  742.751558] Workqueue: events_unbound io_ring_exit_work
+[  742.759693]  io_ring_exit_work+0x247/0x5e8
+[  890.207415] Workqueue: events_unbound io_ring_exit_work
+[  890.215580]  io_ring_exit_work+0x247/0x5e8
+[ 1037.661688] Workqueue: events_unbound io_ring_exit_work
+[ 1037.665721]  io_ring_exit_work+0x247/0x5e8
+[ 1185.117714] Workqueue: events_unbound io_ring_exit_work
+[ 1185.121849]  io_ring_exit_work+0x247/0x5e8
+[ 1332.575447] Workqueue: events_unbound io_ring_exit_work
+[ 1332.583534]  io_ring_exit_work+0x247/0x5e8
+[ 1480.031424] Workqueue: events_unbound io_ring_exit_work
+[ 1480.039464]  io_ring_exit_work+0x247/0x5e8
+[ 1627.487351] Workqueue: events_unbound io_ring_exit_work
+[ 1627.495280]  io_ring_exit_work+0x247/0x5e8, FAIL|
+|0124_080009|git bisect bad 29ec39fcf11e4583eb8d5174f756ea109c77cc44|
+|0124_080053||/home/bzimage/bzImage_a16d8644bad461bb073b92e812080ea6715ddf2b| was not exist, will make it|
+|0124_083716|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_083748|Run /home/bzimage/bzImage_a16d8644bad461bb073b92e812080ea6715ddf2b with image:/root/image/centos8_2.img in local port:10022|
+|0124_083813|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_083814|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_083815|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_083817|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_091317|/home/bzimage/bzImage_a16d8644bad461bb073b92e812080ea6715ddf2b contained io_ring_exit_work:[  300.378426] Workqueue: events_unbound io_ring_exit_work
+[  300.383625]  io_ring_exit_work+0x234/0x790
+[  447.837536] Workqueue: events_unbound io_ring_exit_work
+[  447.849111]  io_ring_exit_work+0x234/0x790
+[  595.292772] Workqueue: events_unbound io_ring_exit_work
+[  595.302966]  io_ring_exit_work+0x234/0x790
+[  742.749216] Workqueue: events_unbound io_ring_exit_work
+[  742.760366]  io_ring_exit_work+0x234/0x790
+[  890.205415] Workqueue: events_unbound io_ring_exit_work
+[  890.216789]  io_ring_exit_work+0x234/0x790
+[ 1037.661699] Workqueue: events_unbound io_ring_exit_work
+[ 1037.673599]  io_ring_exit_work+0x234/0x790
+[ 1185.117541] Workqueue: events_unbound io_ring_exit_work
+[ 1185.129389]  io_ring_exit_work+0x234/0x790
+[ 1332.573826] Workqueue: events_unbound io_ring_exit_work
+[ 1332.585846]  io_ring_exit_work+0x234/0x790
+[ 1480.029850] Workqueue: events_unbound io_ring_exit_work
+[ 1480.042008]  io_ring_exit_work+0x234/0x790
+[ 1627.485696] Workqueue: events_unbound io_ring_exit_work
+[ 1627.497755]  io_ring_exit_work+0x234/0x790, FAIL|
+|0124_091317|git bisect bad a16d8644bad461bb073b92e812080ea6715ddf2b|
+|0124_091332||/home/bzimage/bzImage_625434dafdd97372d15de21972be4b682709e854| was not exist, will make it|
+|0124_094500|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_094527|Run /home/bzimage/bzImage_625434dafdd97372d15de21972be4b682709e854 with image:/root/image/centos8_2.img in local port:10022|
+|0124_094552|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_094552|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_094554|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_094555|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_102056|/home/bzimage/bzImage_625434dafdd97372d15de21972be4b682709e854 contained io_ring_exit_work:[  300.359691] Workqueue: events_unbound io_ring_exit_work
+[  300.371146]  io_ring_exit_work+0x238/0x790
+[  447.815642] Workqueue: events_unbound io_ring_exit_work
+[  447.826860]  io_ring_exit_work+0x238/0x790
+[  595.271498] Workqueue: events_unbound io_ring_exit_work
+[  595.282132]  io_ring_exit_work+0x238/0x790
+[  742.727732] Workqueue: events_unbound io_ring_exit_work
+[  742.739071]  io_ring_exit_work+0x238/0x790
+[  890.183613] Workqueue: events_unbound io_ring_exit_work
+[  890.195082]  io_ring_exit_work+0x238/0x790
+[ 1037.639604] Workqueue: events_unbound io_ring_exit_work
+[ 1037.651000]  io_ring_exit_work+0x238/0x790
+[ 1185.095566] Workqueue: events_unbound io_ring_exit_work
+[ 1185.107018]  io_ring_exit_work+0x238/0x790
+[ 1332.551814] Workqueue: events_unbound io_ring_exit_work
+[ 1332.563312]  io_ring_exit_work+0x238/0x790
+[ 1480.007635] Workqueue: events_unbound io_ring_exit_work
+[ 1480.019183]  io_ring_exit_work+0x238/0x790
+[ 1627.463627] Workqueue: events_unbound io_ring_exit_work
+[ 1627.474930]  io_ring_exit_work+0x238/0x790, FAIL|
+|0124_102056|git bisect bad 625434dafdd97372d15de21972be4b682709e854|
+|0124_102100||/home/bzimage/bzImage_cf64c2a905e0dabcc473ca70baf275fb3a61fac4| was not exist, will make it|
+|0124_110704|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_110737|Run /home/bzimage/bzImage_cf64c2a905e0dabcc473ca70baf275fb3a61fac4 with image:/root/image/centos8_2.img in local port:10022|
+|0124_110802|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_110803|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_110804|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_110806|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_114306|/home/bzimage/bzImage_cf64c2a905e0dabcc473ca70baf275fb3a61fac4 didn't contain io_ring_exit_work: in dmesg, pass|
+|0124_114306|git bisect good cf64c2a905e0dabcc473ca70baf275fb3a61fac4|
+|0124_114309||/home/bzimage/bzImage_8900d92fd666d936a7bfb4c567ac26736a414fb4| was not exist, will make it|
+|0124_122905|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_122936|Run /home/bzimage/bzImage_8900d92fd666d936a7bfb4c567ac26736a414fb4 with image:/root/image/centos8_2.img in local port:10022|
+|0124_123001|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_123002|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_123003|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_123005|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_130506|/home/bzimage/bzImage_8900d92fd666d936a7bfb4c567ac26736a414fb4 contained io_ring_exit_work:[  300.365438] Workqueue: events_unbound io_ring_exit_work
+[  300.376323]  io_ring_exit_work+0x251/0x680
+[  447.821382] Workqueue: events_unbound io_ring_exit_work
+[  447.832266]  io_ring_exit_work+0x251/0x680
+[  595.277353] Workqueue: events_unbound io_ring_exit_work
+[  595.288532]  io_ring_exit_work+0x251/0x680
+[  742.733245] Workqueue: events_unbound io_ring_exit_work
+[  742.744209]  io_ring_exit_work+0x251/0x680
+[  890.189406] Workqueue: events_unbound io_ring_exit_work
+[  890.200551]  io_ring_exit_work+0x251/0x680
+[ 1037.645395] Workqueue: events_unbound io_ring_exit_work
+[ 1037.656502]  io_ring_exit_work+0x251/0x680
+[ 1185.101365] Workqueue: events_unbound io_ring_exit_work
+[ 1185.112378]  io_ring_exit_work+0x251/0x680
+[ 1332.557455] Workqueue: events_unbound io_ring_exit_work
+[ 1332.568466]  io_ring_exit_work+0x251/0x680
+[ 1480.013380] Workqueue: events_unbound io_ring_exit_work
+[ 1480.024436]  io_ring_exit_work+0x251/0x680
+[ 1627.469304] Workqueue: events_unbound io_ring_exit_work
+[ 1627.480236]  io_ring_exit_work+0x251/0x680, FAIL|
+|0124_130506|git bisect bad 8900d92fd666d936a7bfb4c567ac26736a414fb4|
+|0124_130508||/home/bzimage/bzImage_9c15db92a8e56bcde0f58064ac1adc28c0579b51| was not exist, will make it|
+|0124_135052|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_135120|Run /home/bzimage/bzImage_9c15db92a8e56bcde0f58064ac1adc28c0579b51 with image:/root/image/centos8_2.img in local port:10022|
+|0124_135145|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_135146|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_135147|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_135148|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_142649|/home/bzimage/bzImage_9c15db92a8e56bcde0f58064ac1adc28c0579b51 contained io_ring_exit_work:[  300.361005] Workqueue: events_unbound io_ring_exit_work
+[  300.372016]  io_ring_exit_work+0x194/0x5d0
+[  447.816958] Workqueue: events_unbound io_ring_exit_work
+[  447.828204]  io_ring_exit_work+0x194/0x5d0
+[  595.272914] Workqueue: events_unbound io_ring_exit_work
+[  595.283987]  io_ring_exit_work+0x194/0x5d0
+[  742.728926] Workqueue: events_unbound io_ring_exit_work
+[  742.739781]  io_ring_exit_work+0x194/0x5d0
+[  890.184908] Workqueue: events_unbound io_ring_exit_work
+[  890.196006]  io_ring_exit_work+0x194/0x5d0
+[ 1037.640905] Workqueue: events_unbound io_ring_exit_work
+[ 1037.651995]  io_ring_exit_work+0x194/0x5d0
+[ 1185.096931] Workqueue: events_unbound io_ring_exit_work
+[ 1185.108036]  io_ring_exit_work+0x194/0x5d0
+[ 1332.552931] Workqueue: events_unbound io_ring_exit_work
+[ 1332.564025]  io_ring_exit_work+0x194/0x5d0
+[ 1480.008926] Workqueue: events_unbound io_ring_exit_work
+[ 1480.020003]  io_ring_exit_work+0x194/0x5d0
+[ 1627.464921] Workqueue: events_unbound io_ring_exit_work
+[ 1627.476018]  io_ring_exit_work+0x194/0x5d0, FAIL|
+|0124_142649|git bisect bad 9c15db92a8e56bcde0f58064ac1adc28c0579b51|
+|0124_142651||/home/bzimage/bzImage_e93aa38475d6bc5b077b3007982e5ddc071b747d| was not exist, will make it|
+|0124_145755|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_145825|Run /home/bzimage/bzImage_e93aa38475d6bc5b077b3007982e5ddc071b747d with image:/root/image/centos8_2.img in local port:10022|
+|0124_145850|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_145850|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_145851|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_145853|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_153353|/home/bzimage/bzImage_e93aa38475d6bc5b077b3007982e5ddc071b747d didn't contain io_ring_exit_work: in dmesg, pass|
+|0124_153353|git bisect good e93aa38475d6bc5b077b3007982e5ddc071b747d|
+|0124_153354||/home/bzimage/bzImage_6417f03132a6952cd17ddd8eaddbac92b61b17e0| was not exist, will make it|
+|0124_155943|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_160011|Run /home/bzimage/bzImage_6417f03132a6952cd17ddd8eaddbac92b61b17e0 with image:/root/image/centos8_2.img in local port:10022|
+|0124_160036|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_160037|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_160038|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_160039|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_163540|/home/bzimage/bzImage_6417f03132a6952cd17ddd8eaddbac92b61b17e0 contained io_ring_exit_work:[  300.195037] Workqueue: events_unbound io_ring_exit_work
+[  300.200409]  io_ring_exit_work+0x192/0x560
+[  447.650970] Workqueue: events_unbound io_ring_exit_work
+[  447.656369]  io_ring_exit_work+0x192/0x560
+[  595.106984] Workqueue: events_unbound io_ring_exit_work
+[  595.112376]  io_ring_exit_work+0x192/0x560
+[  742.562992] Workqueue: events_unbound io_ring_exit_work
+[  742.568383]  io_ring_exit_work+0x192/0x560
+[  890.019138] Workqueue: events_unbound io_ring_exit_work
+[  890.024538]  io_ring_exit_work+0x192/0x560
+[ 1037.474961] Workqueue: events_unbound io_ring_exit_work
+[ 1037.480323]  io_ring_exit_work+0x192/0x560
+[ 1184.930971] Workqueue: events_unbound io_ring_exit_work
+[ 1184.936315]  io_ring_exit_work+0x192/0x560
+[ 1332.386991] Workqueue: events_unbound io_ring_exit_work
+[ 1332.392299]  io_ring_exit_work+0x192/0x560
+[ 1479.843000] Workqueue: events_unbound io_ring_exit_work
+[ 1479.848381]  io_ring_exit_work+0x192/0x560
+[ 1627.298980] Workqueue: events_unbound io_ring_exit_work
+[ 1627.304295]  io_ring_exit_work+0x192/0x560, FAIL|
+|0124_163540|git bisect bad 6417f03132a6952cd17ddd8eaddbac92b61b17e0|
+|0124_163540||/home/bzimage/bzImage_f0b15b6081291367634a8f3c557f7a68fdaa35e4| was not exist, will make it|
+|0124_170149|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_170215|Run /home/bzimage/bzImage_f0b15b6081291367634a8f3c557f7a68fdaa35e4 with image:/root/image/centos8_2.img in local port:10022|
+|0124_170240|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_170241|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_170242|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_170243|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_173744|/home/bzimage/bzImage_f0b15b6081291367634a8f3c557f7a68fdaa35e4 didn't contain io_ring_exit_work: in dmesg, pass|
+|0124_173744|git bisect good f0b15b6081291367634a8f3c557f7a68fdaa35e4|
+|0124_173744||/home/bzimage/bzImage_420623430a7015ae9adab8a087de82c186bc9989| was not exist, will make it|
+|0124_180335|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_180405|Run /home/bzimage/bzImage_420623430a7015ae9adab8a087de82c186bc9989 with image:/root/image/centos8_2.img in local port:10022|
+|0124_180430|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_180430|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_180431|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_180433|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_183933|/home/bzimage/bzImage_420623430a7015ae9adab8a087de82c186bc9989 contained io_ring_exit_work:[  300.194833] Workqueue: events_unbound io_ring_exit_work
+[  300.200130]  io_ring_exit_work+0x192/0x560
+[  447.650758] Workqueue: events_unbound io_ring_exit_work
+[  447.656059]  io_ring_exit_work+0x192/0x560
+[  595.106732] Workqueue: events_unbound io_ring_exit_work
+[  595.112028]  io_ring_exit_work+0x192/0x560
+[  742.562782] Workqueue: events_unbound io_ring_exit_work
+[  742.568107]  io_ring_exit_work+0x192/0x560
+[  890.018866] Workqueue: events_unbound io_ring_exit_work
+[  890.024228]  io_ring_exit_work+0x192/0x560
+[ 1037.474735] Workqueue: events_unbound io_ring_exit_work
+[ 1037.480060]  io_ring_exit_work+0x192/0x560
+[ 1184.930846] Workqueue: events_unbound io_ring_exit_work
+[ 1184.936245]  io_ring_exit_work+0x192/0x560
+[ 1332.386741] Workqueue: events_unbound io_ring_exit_work
+[ 1332.392019]  io_ring_exit_work+0x192/0x560
+[ 1479.842715] Workqueue: events_unbound io_ring_exit_work
+[ 1479.847980]  io_ring_exit_work+0x192/0x560
+[ 1627.298757] Workqueue: events_unbound io_ring_exit_work
+[ 1627.304132]  io_ring_exit_work+0x192/0x560, FAIL|
+|0124_183933|git bisect bad 420623430a7015ae9adab8a087de82c186bc9989|
+|0124_183933||/home/bzimage/bzImage_261410082d01f2f2d4fcd19abee6b8e84f399c51| was not exist, will make it|
+|0124_190519|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_190548|Run /home/bzimage/bzImage_261410082d01f2f2d4fcd19abee6b8e84f399c51 with image:/root/image/centos8_2.img in local port:10022|
+|0124_190613|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_190613|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_190615|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_190616|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_194116|/home/bzimage/bzImage_261410082d01f2f2d4fcd19abee6b8e84f399c51 didn't contain io_ring_exit_work: in dmesg, pass|
+|0124_194116|git bisect good 261410082d01f2f2d4fcd19abee6b8e84f399c51|
+|0124_194116||/home/bzimage/bzImage_ce307084c96d0ec92c04fcc38b107241b168df11| was not exist, will make it|
+|0124_200657|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_200724|Run /home/bzimage/bzImage_ce307084c96d0ec92c04fcc38b107241b168df11 with image:/root/image/centos8_2.img in local port:10022|
+|0124_200749|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_200749|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_200750|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_200752|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_204252|/home/bzimage/bzImage_ce307084c96d0ec92c04fcc38b107241b168df11 contained io_ring_exit_work:[  300.199037] Workqueue: events_unbound io_ring_exit_work
+[  300.204386]  io_ring_exit_work+0x192/0x560
+[  447.654976] Workqueue: events_unbound io_ring_exit_work
+[  447.660341]  io_ring_exit_work+0x192/0x560
+[  595.110969] Workqueue: events_unbound io_ring_exit_work
+[  595.116333]  io_ring_exit_work+0x192/0x560
+[  742.566956] Workqueue: events_unbound io_ring_exit_work
+[  742.572300]  io_ring_exit_work+0x192/0x560
+[  890.022942] Workqueue: events_unbound io_ring_exit_work
+[  890.028264]  io_ring_exit_work+0x192/0x560
+[ 1037.478955] Workqueue: events_unbound io_ring_exit_work
+[ 1037.484301]  io_ring_exit_work+0x192/0x560
+[ 1184.934965] Workqueue: events_unbound io_ring_exit_work
+[ 1184.940310]  io_ring_exit_work+0x192/0x560
+[ 1332.390964] Workqueue: events_unbound io_ring_exit_work
+[ 1332.396305]  io_ring_exit_work+0x192/0x560
+[ 1479.846928] Workqueue: events_unbound io_ring_exit_work
+[ 1479.852284]  io_ring_exit_work+0x192/0x560
+[ 1627.302944] Workqueue: events_unbound io_ring_exit_work
+[ 1627.308308]  io_ring_exit_work+0x192/0x560, FAIL|
+|0124_204252|git bisect bad ce307084c96d0ec92c04fcc38b107241b168df11|
+|0124_204252||/home/bzimage/bzImage_5c2469e0a22e035d52f3ba768151cc75e3d4a1cd| was not exist, will make it|
+|0124_210848|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_210914|Run /home/bzimage/bzImage_5c2469e0a22e035d52f3ba768151cc75e3d4a1cd with image:/root/image/centos8_2.img in local port:10022|
+|0124_210939|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_210940|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_210941|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_210943|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_214443|/home/bzimage/bzImage_5c2469e0a22e035d52f3ba768151cc75e3d4a1cd contained io_ring_exit_work:[  300.196547] Workqueue: events_unbound io_ring_exit_work
+[  300.201944]  io_ring_exit_work+0x192/0x560
+[  447.652444] Workqueue: events_unbound io_ring_exit_work
+[  447.657834]  io_ring_exit_work+0x192/0x560
+[  595.108447] Workqueue: events_unbound io_ring_exit_work
+[  595.113849]  io_ring_exit_work+0x192/0x560
+[  742.564431] Workqueue: events_unbound io_ring_exit_work
+[  742.569809]  io_ring_exit_work+0x192/0x560
+[  890.020568] Workqueue: events_unbound io_ring_exit_work
+[  890.025958]  io_ring_exit_work+0x192/0x560
+[ 1037.476477] Workqueue: events_unbound io_ring_exit_work
+[ 1037.481881]  io_ring_exit_work+0x192/0x560
+[ 1184.932416] Workqueue: events_unbound io_ring_exit_work
+[ 1184.937807]  io_ring_exit_work+0x192/0x560
+[ 1332.388404] Workqueue: events_unbound io_ring_exit_work
+[ 1332.393740]  io_ring_exit_work+0x192/0x560
+[ 1479.844461] Workqueue: events_unbound io_ring_exit_work
+[ 1479.849858]  io_ring_exit_work+0x192/0x560
+[ 1627.300453] Workqueue: events_unbound io_ring_exit_work
+[ 1627.305826]  io_ring_exit_work+0x192/0x560, FAIL|
+|0124_214443|git bisect bad 5c2469e0a22e035d52f3ba768151cc75e3d4a1cd|
+|0124_214443||/home/bzimage/bzImage_f458dd8441e56d122ddf1d8e2af0b6ee62f52af9| was not exist, will make it|
+|0124_221033|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_221103|Run /home/bzimage/bzImage_f458dd8441e56d122ddf1d8e2af0b6ee62f52af9 with image:/root/image/centos8_2.img in local port:10022|
+|0124_221128|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_221128|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_221130|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_221131|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_224631|/home/bzimage/bzImage_f458dd8441e56d122ddf1d8e2af0b6ee62f52af9 contained io_ring_exit_work:[  300.196368] Workqueue: events_unbound io_ring_exit_work
+[  300.201765]  io_ring_exit_work+0x192/0x570
+[  447.652322] Workqueue: events_unbound io_ring_exit_work
+[  447.657702]  io_ring_exit_work+0x192/0x570
+[  595.108335] Workqueue: events_unbound io_ring_exit_work
+[  595.113713]  io_ring_exit_work+0x192/0x570
+[  742.564310] Workqueue: events_unbound io_ring_exit_work
+[  742.569673]  io_ring_exit_work+0x192/0x570
+[  890.020314] Workqueue: events_unbound io_ring_exit_work
+[  890.025696]  io_ring_exit_work+0x192/0x570
+[ 1037.476280] Workqueue: events_unbound io_ring_exit_work
+[ 1037.481659]  io_ring_exit_work+0x192/0x570
+[ 1184.932292] Workqueue: events_unbound io_ring_exit_work
+[ 1184.937666]  io_ring_exit_work+0x192/0x570
+[ 1332.388288] Workqueue: events_unbound io_ring_exit_work
+[ 1332.393652]  io_ring_exit_work+0x192/0x570
+[ 1479.844276] Workqueue: events_unbound io_ring_exit_work
+[ 1479.849634]  io_ring_exit_work+0x192/0x570
+[ 1627.300366] Workqueue: events_unbound io_ring_exit_work
+[ 1627.305794]  io_ring_exit_work+0x192/0x570, FAIL|
+|0124_224631|git bisect bad f458dd8441e56d122ddf1d8e2af0b6ee62f52af9|
+|0124_224632||/home/bzimage/bzImage_baf186c4d345f5a105e63df01100936ad622f369| was not exist, will make it|
+|0124_231223|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0124_231250|Run /home/bzimage/bzImage_baf186c4d345f5a105e63df01100936ad622f369 with image:/root/image/centos8_2.img in local port:10022|
+|0124_231315|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0124_231315|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0124_231316|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0124_231318|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0124_234818|/home/bzimage/bzImage_baf186c4d345f5a105e63df01100936ad622f369 contained io_ring_exit_work:[  300.200386] Workqueue: events_unbound io_ring_exit_work
+[  300.205770]  io_ring_exit_work+0x132/0x510
+[  447.656341] Workqueue: events_unbound io_ring_exit_work
+[  447.661714]  io_ring_exit_work+0x132/0x510
+[  595.112342] Workqueue: events_unbound io_ring_exit_work
+[  595.117707]  io_ring_exit_work+0x132/0x510
+[  742.568380] Workqueue: events_unbound io_ring_exit_work
+[  742.573764]  io_ring_exit_work+0x132/0x510
+[  890.024382] Workqueue: events_unbound io_ring_exit_work
+[  890.029852]  io_ring_exit_work+0x132/0x510
+[ 1037.480321] Workqueue: events_unbound io_ring_exit_work
+[ 1037.485691]  io_ring_exit_work+0x132/0x510
+[ 1184.936297] Workqueue: events_unbound io_ring_exit_work
+[ 1184.941691]  io_ring_exit_work+0x132/0x510
+[ 1332.393172] Workqueue: events_unbound io_ring_exit_work
+[ 1332.398481]  io_ring_exit_work+0x132/0x510
+[ 1479.848317] Workqueue: events_unbound io_ring_exit_work
+[ 1479.857761]  io_ring_exit_work+0x132/0x510
+[ 1627.306410] Workqueue: events_unbound io_ring_exit_work
+[ 1627.315971]  io_ring_exit_work+0x132/0x510, FAIL|
+|0124_234818|git bisect bad baf186c4d345f5a105e63df01100936ad622f369|
+|0124_234818||/home/bzimage/bzImage_2941267bd3dad018de1d51fe2cd996b7bc1e5a5d| was not exist, will make it|
+|0125_001354|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0125_001423|Run /home/bzimage/bzImage_2941267bd3dad018de1d51fe2cd996b7bc1e5a5d with image:/root/image/centos8_2.img in local port:10022|
+|0125_001448|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0125_001448|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0125_001450|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0125_001451|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0125_004951|/home/bzimage/bzImage_2941267bd3dad018de1d51fe2cd996b7bc1e5a5d didn't contain io_ring_exit_work: in dmesg, pass|
+|0125_004951|git bisect good 2941267bd3dad018de1d51fe2cd996b7bc1e5a5d|
+|0125_004952||/home/bzimage/bzImage_d56d938b4bef3e1421a42023cdcd6e13c1f50831| was not exist, will make it|
+|0125_011541|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0125_011613|Run /home/bzimage/bzImage_d56d938b4bef3e1421a42023cdcd6e13c1f50831 with image:/root/image/centos8_2.img in local port:10022|
+|0125_011638|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0125_011638|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0125_011640|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0125_011641|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0125_015141|/home/bzimage/bzImage_d56d938b4bef3e1421a42023cdcd6e13c1f50831 didn't contain io_ring_exit_work: in dmesg, pass|
+|0125_015141|git bisect good d56d938b4bef3e1421a42023cdcd6e13c1f50831|
+|0125_015142||/home/bzimage/bzImage_eebd2e37e662617a6b8041db75205f0a262ce870| was not exist, will make it|
+|0125_021727|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0125_021756|Run /home/bzimage/bzImage_eebd2e37e662617a6b8041db75205f0a262ce870 with image:/root/image/centos8_2.img in local port:10022|
+|0125_021821|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0125_021821|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0125_021822|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fc35e9b0cd548b8d1cd5c7ca723138ad5e82ac71/repro.cprog root@localhost:/root/repro.c|
+|0125_021824|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0125_025324|/home/bzimage/bzImage_eebd2e37e662617a6b8041db75205f0a262ce870 contained io_ring_exit_work:[  300.200491] Workqueue: events_unbound io_ring_exit_work
+[  300.205839]  io_ring_exit_work+0x134/0x510
+[  447.656444] Workqueue: events_unbound io_ring_exit_work
+[  447.661853]  io_ring_exit_work+0x134/0x510
+[  595.112423] Workqueue: events_unbound io_ring_exit_work
+[  595.117750]  io_ring_exit_work+0x134/0x510
+[  742.568404] Workqueue: events_unbound io_ring_exit_work
+[  742.573741]  io_ring_exit_work+0x134/0x510
+[  890.024399] Workqueue: events_unbound io_ring_exit_work
+[  890.029773]  io_ring_exit_work+0x134/0x510
+[ 1037.480411] Workqueue: events_unbound io_ring_exit_work
+[ 1037.485766]  io_ring_exit_work+0x134/0x510
+[ 1184.936423] Workqueue: events_unbound io_ring_exit_work
+[ 1184.941773]  io_ring_exit_work+0x134/0x510
+[ 1332.392412] Workqueue: events_unbound io_ring_exit_work
+[ 1332.397733]  io_ring_exit_work+0x134/0x510
+[ 1479.848399] Workqueue: events_unbound io_ring_exit_work
+[ 1479.853714]  io_ring_exit_work+0x134/0x510
+[ 1627.304482] Workqueue: events_unbound io_ring_exit_work
+[ 1627.309957]  io_ring_exit_work+0x134/0x510, FAIL|
+|0125_025324|git bisect bad eebd2e37e662617a6b8041db75205f0a262ce870|
+|0125_025324|Bisect PASS: find eebd2e37e662617a6b8041db75205f0a262ce870 is the first bad commit|
+|0125_025324|CMD=git bisect log >> /home/bzimage/bi.log|
+|0125_025324|CMD=git bisect log >> /home/bzimage/0124_055801_io_ring_exit_work/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [2241ab53cbb5cdb08a6b2d4688feb13971058f65] Linux 6.2-rc5
+git bisect bad 2241ab53cbb5cdb08a6b2d4688feb13971058f65
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [29ec39fcf11e4583eb8d5174f756ea109c77cc44] Merge tag 'powerpc-5.17-1' of git://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux
+git bisect bad 29ec39fcf11e4583eb8d5174f756ea109c77cc44
+# bad: [a16d8644bad461bb073b92e812080ea6715ddf2b] Merge tag 'staging-5.14-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging
+git bisect bad a16d8644bad461bb073b92e812080ea6715ddf2b
+# bad: [625434dafdd97372d15de21972be4b682709e854] Merge tag 'for-5.13/io_uring-2021-04-27' of git://git.kernel.dk/linux-block
+git bisect bad 625434dafdd97372d15de21972be4b682709e854
+# good: [cf64c2a905e0dabcc473ca70baf275fb3a61fac4] Merge branch 'work.sparc32' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect good cf64c2a905e0dabcc473ca70baf275fb3a61fac4
+# bad: [8900d92fd666d936a7bfb4c567ac26736a414fb4] Merge tag 'staging-5.13-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging
+git bisect bad 8900d92fd666d936a7bfb4c567ac26736a414fb4
+# bad: [9c15db92a8e56bcde0f58064ac1adc28c0579b51] Merge tag 'iio-for-5.13a' of https://git.kernel.org/pub/scm/linux/kernel/git/jic23/iio into staging-next
+git bisect bad 9c15db92a8e56bcde0f58064ac1adc28c0579b51
+# good: [e93aa38475d6bc5b077b3007982e5ddc071b747d] staging:rtl8712: use IEEE80211_FCTL_* kernel definitions
+git bisect good e93aa38475d6bc5b077b3007982e5ddc071b747d
+# bad: [6417f03132a6952cd17ddd8eaddbac92b61b17e0] module: remove never implemented MODULE_SUPPORTED_DEVICE
+git bisect bad 6417f03132a6952cd17ddd8eaddbac92b61b17e0
+# good: [f0b15b6081291367634a8f3c557f7a68fdaa35e4] MAINTAINERS: exclude uapi directories in API/ABI section
+git bisect good f0b15b6081291367634a8f3c557f7a68fdaa35e4
+# bad: [420623430a7015ae9adab8a087de82c186bc9989] Merge tag 'erofs-for-5.12-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs
+git bisect bad 420623430a7015ae9adab8a087de82c186bc9989
+# good: [261410082d01f2f2d4fcd19abee6b8e84f399c51] Merge tag 'devprop-5.12-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good 261410082d01f2f2d4fcd19abee6b8e84f399c51
+# bad: [ce307084c96d0ec92c04fcc38b107241b168df11] Merge tag 'block-5.12-2021-03-12-v2' of git://git.kernel.dk/linux-block
+git bisect bad ce307084c96d0ec92c04fcc38b107241b168df11
+# bad: [5c2469e0a22e035d52f3ba768151cc75e3d4a1cd] io_uring: force creation of separate context for ATTACH_WQ and non-threads
+git bisect bad 5c2469e0a22e035d52f3ba768151cc75e3d4a1cd
+# bad: [f458dd8441e56d122ddf1d8e2af0b6ee62f52af9] io_uring: fix unrelated ctx reqs cancellation
+git bisect bad f458dd8441e56d122ddf1d8e2af0b6ee62f52af9
+# bad: [baf186c4d345f5a105e63df01100936ad622f369] io_uring: index io_uring->xa by ctx not file
+git bisect bad baf186c4d345f5a105e63df01100936ad622f369
+# good: [2941267bd3dad018de1d51fe2cd996b7bc1e5a5d] io_uring: make del_task_file more forgiving
+git bisect good 2941267bd3dad018de1d51fe2cd996b7bc1e5a5d
+# good: [d56d938b4bef3e1421a42023cdcd6e13c1f50831] io_uring: do ctx initiated file note removal
+git bisect good d56d938b4bef3e1421a42023cdcd6e13c1f50831
+# bad: [eebd2e37e662617a6b8041db75205f0a262ce870] io_uring: don't take task ring-file notes
+git bisect bad eebd2e37e662617a6b8041db75205f0a262ce870
+# first bad commit: [eebd2e37e662617a6b8041db75205f0a262ce870] io_uring: don't take task ring-file notes
+|0125_025324|/root/bzimage_bisect/make_bz.sh -k /root/linux -m 2241ab53cbb5cdb08a6b2d4688feb13971058f65 -b eebd2e37e662617a6b8041db75205f0a262ce870 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65_eebd2e37e662617a6b8041db75205f0a262ce870_revert|
+|0125_025344|FAIL|bzImage:/home/bzimage/bzImage_2241ab53cbb5cdb08a6b2d4688feb13971058f65_eebd2e37e662617a6b8041db75205f0a262ce870_revert does not exist:|
