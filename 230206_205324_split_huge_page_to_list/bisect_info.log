@@ -1,0 +1,44 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [4ec5183ec48656cec489c49f989c508b68b518e3] Linux 6.2-rc7
+git bisect bad 4ec5183ec48656cec489c49f989c508b68b518e3
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [3bad80dab94a16c9b7991105e3bffd5fe5957e9a] Merge tag 'char-misc-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect bad 3bad80dab94a16c9b7991105e3bffd5fe5957e9a
+# good: [c932ed0adb09a7fa6d6649ee04dd78c83ab07ada] Merge tag 'tty-5.14-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/tty
+git bisect good c932ed0adb09a7fa6d6649ee04dd78c83ab07ada
+# good: [fc02cb2b37fe2cbf1d3334b9f0f0eab9431766c4] Merge tag 'net-next-for-5.16' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect good fc02cb2b37fe2cbf1d3334b9f0f0eab9431766c4
+# bad: [0109841fc4565bb3cefcdfb2991da0c47cd94b23] Merge tag 'mlx5-updates-2021-12-02' of git://git.kernel.org/pub/scm/linux/kernel/git/saeed/linux
+git bisect bad 0109841fc4565bb3cefcdfb2991da0c47cd94b23
+# good: [5c904c66ed4e86c31ac7c033b64274cebed04e0e] Merge tag 'char-misc-5.16-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good 5c904c66ed4e86c31ac7c033b64274cebed04e0e
+# bad: [e5bc4d4602b8e0e63c9d00d210120d6bcfaea590] Merge branch 'kvm-selftest' into kvm-master
+git bisect bad e5bc4d4602b8e0e63c9d00d210120d6bcfaea590
+# bad: [0c5c62ddf88c34bc83b66e4ac9beb2bb0e1887d4] Merge tag 'pci-v5.16-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/helgaas/pci
+git bisect bad 0c5c62ddf88c34bc83b66e4ac9beb2bb0e1887d4
+# good: [5af06603c4090617be216a9185193a7be3ca60af] Merge branch 'for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/hid/hid
+git bisect good 5af06603c4090617be216a9185193a7be3ca60af
+# good: [fe91c4725aeed35023ba4f7a1e1adfebb6878c23] Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect good fe91c4725aeed35023ba4f7a1e1adfebb6878c23
+# bad: [f9803a9918468d70d98d31c23cb7613d873e723f] MAINTAINERS: update SeongJae's email address
+git bisect bad f9803a9918468d70d98d31c23cb7613d873e723f
+# good: [61bb6cd2f765b90cfc5f0f91696889c366a6a13d] mm: move node_reclaim_distance to fix NUMA without SMP
+git bisect good 61bb6cd2f765b90cfc5f0f91696889c366a6a13d
+# bad: [c486514dd40980b2dbb0e15fabddfe1324ed0197] xen/x86: free_p2m_page: use memblock_free_ptr() to free a virtual pointer
+git bisect bad c486514dd40980b2dbb0e15fabddfe1324ed0197
+# bad: [38e719ab26735aa2c5d9d422fc4b741cbd36e700] hugetlb: support node specified when using cma for gigantic hugepages
+git bisect bad 38e719ab26735aa2c5d9d422fc4b741cbd36e700
+# good: [e0f43fa50605f89d45708bce3b94e408ef5c4342] mm: filemap: coding style cleanup for filemap_map_pmd()
+git bisect good e0f43fa50605f89d45708bce3b94e408ef5c4342
+# bad: [9871e2ded6c1ff61a59988d7a0e975f012105d52] mm/cma: add cma_pages_valid to determine if pages are in CMA
+git bisect bad 9871e2ded6c1ff61a59988d7a0e975f012105d52
+# bad: [4966455d9100236fd6dd72b0cd00818435fdb25d] mm: hwpoison: handle non-anonymous THP correctly
+git bisect bad 4966455d9100236fd6dd72b0cd00818435fdb25d
+# good: [b9d02f1bdd98f38e6e5ecacc9786a8f58f3f8b2c] mm: shmem: don't truncate page if memory failure happens
+git bisect good b9d02f1bdd98f38e6e5ecacc9786a8f58f3f8b2c
+# first bad commit: [4966455d9100236fd6dd72b0cd00818435fdb25d] mm: hwpoison: handle non-anonymous THP correctly
+|0207_073843|/root/bzimage_bisect/make_bz.sh -k /root/linux -m 4ec5183ec48656cec489c49f989c508b68b518e3 -b 4966455d9100236fd6dd72b0cd00818435fdb25d -d /home/bzim|
+|0207_073921|FAIL|bzImage:/home/bzimage/bzImage_4ec5183ec48656cec489c49f989c508b68b518e3_4966455d9100236fd6dd72b0cd00818435fdb25d_revert does not exist:|
