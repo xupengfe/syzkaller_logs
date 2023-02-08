@@ -1,0 +1,44 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [4ec5183ec48656cec489c49f989c508b68b518e3] Linux 6.2-rc7
+git bisect bad 4ec5183ec48656cec489c49f989c508b68b518e3
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [3bad80dab94a16c9b7991105e3bffd5fe5957e9a] Merge tag 'char-misc-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good 3bad80dab94a16c9b7991105e3bffd5fe5957e9a
+# good: [c2e75634cbe368065f140dd30bf8b1a0355158fd] net: atm: bring back zatm uAPI
+git bisect good c2e75634cbe368065f140dd30bf8b1a0355158fd
+# good: [70442fc54e6889a2a77f0e9554e8188a1557f00e] Merge tag 'x86_mm_for_v6.1_rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 70442fc54e6889a2a77f0e9554e8188a1557f00e
+# good: [a594533df0f6ca391da003f43d53b336a2d23ffa] Merge tag 'drm-next-2022-12-13' of git://anongit.freedesktop.org/drm/drm
+git bisect good a594533df0f6ca391da003f43d53b336a2d23ffa
+# good: [0948a9ef1d59d1bc7fae29f32058e463bbff4a6c] Merge branches 'acpi-resource' and 'acpi-video'
+git bisect good 0948a9ef1d59d1bc7fae29f32058e463bbff4a6c
+# bad: [0bc1d0e2c16736a75f73a94d3a73370801a6ceb2] tools headers disabled-cpufeatures: Sync with the kernel sources
+git bisect bad 0bc1d0e2c16736a75f73a94d3a73370801a6ceb2
+# good: [ba54ff1fb662215de683777f815b9e96276d55cf] Merge tag 'char-misc-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good ba54ff1fb662215de683777f815b9e96276d55cf
+# bad: [a6e3e6f138058ff184d8ef5064a033b3f5fee8f8] Merge tag 'mm-nonmm-stable-2022-12-17-20-32' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect bad a6e3e6f138058ff184d8ef5064a033b3f5fee8f8
+# good: [e8478b84d6ba9ccfac15dfce103062c4fa7ded2f] perf test: add new task-analyzer tests
+git bisect good e8478b84d6ba9ccfac15dfce103062c4fa7ded2f
+# bad: [b611996ef270a88ebb350c82832c4d76913887e9] Merge tag 'linux-watchdog-6.2-rc1' of git://www.linux-watchdog.org/linux-watchdog
+git bisect bad b611996ef270a88ebb350c82832c4d76913887e9
+# bad: [dcde56bb37a9f900c11eec56b0ecaca5653cc829] Fix mismerge due to devnode now taking a 'const *' device
+git bisect bad dcde56bb37a9f900c11eec56b0ecaca5653cc829
+# good: [2a4e628570d42fcc13a94f1acf25e3cfeaec08f6] resource: Replace printk(KERN_WARNING) by pr_warn(), printk() by pr_info()
+git bisect good 2a4e628570d42fcc13a94f1acf25e3cfeaec08f6
+# good: [40eb28dc17f87cfac69d7755447039e92ac5fbda] device property: Get rid of __PROPERTY_ENTRY_ARRAY_EL*SIZE*()
+git bisect good 40eb28dc17f87cfac69d7755447039e92ac5fbda
+# good: [69b14fde0b8dd159ba19d2b2083a0f2958a9130c] driver core: fix up missed scsi/cxlflash class.devnode() conversion.
+git bisect good 69b14fde0b8dd159ba19d2b2083a0f2958a9130c
+# good: [c3da679286bee1d897bb24a804cca4ff58781bec] usb.h: take advantage of container_of_const()
+git bisect good c3da679286bee1d897bb24a804cca4ff58781bec
+# good: [f18caf261398a7f2de4fa3f600deb87072fe7b8d] device property: Fix documentation for fwnode_get_next_parent()
+git bisect good f18caf261398a7f2de4fa3f600deb87072fe7b8d
+# bad: [71a7507afbc3f27c346898f13ab9bfd918613c34] Merge tag 'driver-core-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/driver-core
+git bisect bad 71a7507afbc3f27c346898f13ab9bfd918613c34
+# first bad commit: [71a7507afbc3f27c346898f13ab9bfd918613c34] Merge tag 'driver-core-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/driver-core
+|0208_090424|/root/bzimage_bisect/make_bz.sh -k /root/linux -m 4ec5183ec48656cec489c49f989c508b68b518e3 -b 71a7507afbc3f27c346898f13ab9bfd918613c34 -d /home/bzimage -o /tmp/kernel -f /home/bzimage/bzImage_4ec5183ec48656cec489c49f989c508b68b518e3_71a7507afbc3f27c346898f13ab9bfd918613c34_revert|
+|0208_090505|FAIL|bzImage:/home/bzimage/bzImage_4ec5183ec48656cec489c49f989c508b68b518e3_71a7507afbc3f27c346898f13ab9bfd918613c34_revert does not exist:|
