@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [c9c3395d5e3dcc6daee66c6908354d47bf98cb0c] Linux 6.2
+git bisect bad c9c3395d5e3dcc6daee66c6908354d47bf98cb0c
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [3bad80dab94a16c9b7991105e3bffd5fe5957e9a] Merge tag 'char-misc-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good 3bad80dab94a16c9b7991105e3bffd5fe5957e9a
+# good: [12b68040a5e468068fd7f4af1150eab8f6e96235] Merge tag 'media/v5.20-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 12b68040a5e468068fd7f4af1150eab8f6e96235
+# good: [27bc50fc90647bbf7b734c3fc306a5e61350da53] Merge tag 'mm-stable-2022-10-08' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good 27bc50fc90647bbf7b734c3fc306a5e61350da53
+# bad: [b8cc9174ff9e7b739c6fa61037759f885748fbf5] Merge tag 'regmap-v6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/broonie/regmap
+git bisect bad b8cc9174ff9e7b739c6fa61037759f885748fbf5
+# good: [66efff515a6500d4b4976fbab3bee8b92a1137fb] Merge tag 'amd-drm-next-6.2-2022-12-07' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+git bisect good 66efff515a6500d4b4976fbab3bee8b92a1137fb
+# good: [0a1d4434db5f86c50018fe0aab299ac97dc15b76] Merge tag 'timers-core-2022-12-10' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 0a1d4434db5f86c50018fe0aab299ac97dc15b76
+# bad: [96f7e448b9f4546ffd0356ffceb2b9586777f316] Merge tag 'for-6.2/io_uring-next-2022-12-08' of git://git.kernel.dk/linux
+git bisect bad 96f7e448b9f4546ffd0356ffceb2b9586777f316
+# bad: [13c574fec815f449fa812df60844bbb4b1548d19] Merge tag 'pull-namespace' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect bad 13c574fec815f449fa812df60844bbb4b1548d19
+# good: [add76959575736c194b3118d96e43f8cd7bcec82] Merge tag 'perf-core-2022-12-12' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good add76959575736c194b3118d96e43f8cd7bcec82
+# good: [96f42635684739cb563aa48d92d0d16b8dc9bda8] Merge tag 'rust-6.2' of https://github.com/Rust-for-Linux/linux
+git bisect good 96f42635684739cb563aa48d92d0d16b8dc9bda8
+# good: [12b677f2c697d61e5ddbcb6c1650050a39392f54] ipc: fix memory leak in init_mqueue_fs()
+git bisect good 12b677f2c697d61e5ddbcb6c1650050a39392f54
+# good: [84de206f63353ca46c5eab887b9d7b5233d856de] Documentation: devres: add missing PWM helper
+git bisect good 84de206f63353ca46c5eab887b9d7b5233d856de
+# good: [8702f2c611bf124c48b21b5c57bfc156cd11f4ca] Merge tag 'mm-nonmm-stable-2022-12-12' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good 8702f2c611bf124c48b21b5c57bfc156cd11f4ca
+# good: [268369b171ff1be6a68ae8f33d0602c6bea48d2e] Merge tag 'pull-alpha' of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs
+git bisect good 268369b171ff1be6a68ae8f33d0602c6bea48d2e
+# good: [77729412acde120712f5793e9134c2b1cbd1ee02] [s390] memcpy_real(): WRITE is "data source", not destination...
+git bisect good 77729412acde120712f5793e9134c2b1cbd1ee02
+# bad: [a41dad905e5a388f88435a517de102e9b2c8e43d] iov_iter: saner checks for attempt to copy to/from iterator
+git bisect bad a41dad905e5a388f88435a517de102e9b2c8e43d
+# good: [e3bf3df824675ea9cadc3cd2c75d08ee83a6ae26] [vhost] fix 'direction' argument of iov_iter_{init,bvec}()
+git bisect good e3bf3df824675ea9cadc3cd2c75d08ee83a6ae26
+# good: [fc02f33787d8dd227b54f263eba983d5b249c032] [xen] fix "direction" argument of iov_iter_kvec()
+git bisect good fc02f33787d8dd227b54f263eba983d5b249c032
+# first bad commit: [a41dad905e5a388f88435a517de102e9b2c8e43d] iov_iter: saner checks for attempt to copy to/from iterator
+|0220_224155|Bisect successfully! c9c3395d5e3dcc6daee66c6908354d47bf98cb0c_a41dad905e5a388f88435a517de102e9b2c8e43d_revert bzimage passed!|
