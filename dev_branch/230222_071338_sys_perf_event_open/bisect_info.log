@@ -1,0 +1,24 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [ec5d59dacc4db4b6d853ad429b2a99953422526e] x86/shstk: Add ARCH_SHSTK_STATUS
+git bisect bad ec5d59dacc4db4b6d853ad429b2a99953422526e
+# status: waiting for good commit(s), bad commit known
+# good: [ceaa837f96adb69c0df0397937cd74991d5d821a] Linux 6.2-rc8
+git bisect good ceaa837f96adb69c0df0397937cd74991d5d821a
+# bad: [a5dbe9bec233bc079e77627d4940a4a8145c9ee6] Merge branch into tip/master: 'sched/core'
+git bisect bad a5dbe9bec233bc079e77627d4940a4a8145c9ee6
+# bad: [1c38b0615f84f622cd6c821aa40be60fc7f7a096] arm64, riscv, perf: Remove RCU_NONIDLE() usage
+git bisect bad 1c38b0615f84f622cd6c821aa40be60fc7f7a096
+# good: [5e26aa93391195a64871db5d96d7163f0062ca4f] cpuidle/poll: Ensure IRQs stay disabled after cpuidle_state::enter() calls
+git bisect good 5e26aa93391195a64871db5d96d7163f0062ca4f
+# good: [4a3182e6d62c95f8572630c22aafee2306cfea58] arm64, smp: Remove trace_.*_rcuidle() usage
+git bisect good 4a3182e6d62c95f8572630c22aafee2306cfea58
+# bad: [9aedeaed6fc6fe8452b9b8225e95cc2b8631ff91] tracing, hardirq: No moar _rcuidle() tracing
+git bisect bad 9aedeaed6fc6fe8452b9b8225e95cc2b8631ff91
+# good: [c3982c1a36f70bd4521a9852246ea50105912084] cpuidle, tdx: Make TDX code noinstr clean
+git bisect good c3982c1a36f70bd4521a9852246ea50105912084
+# good: [6a123d6ae6ea930b9bb3c595ceac2b2f93039f67] cpuidle, ACPI: Make noinstr clean
+git bisect good 6a123d6ae6ea930b9bb3c595ceac2b2f93039f67
+# good: [408b961146be4c1a776ce285c3c289afab15298a] tracing: WARN on rcuidle
+git bisect good 408b961146be4c1a776ce285c3c289afab15298a
+# first bad commit: [9aedeaed6fc6fe8452b9b8225e95cc2b8631ff91] tracing, hardirq: No moar _rcuidle() tracing
