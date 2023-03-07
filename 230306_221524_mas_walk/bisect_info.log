@@ -1,0 +1,44 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [c9c3395d5e3dcc6daee66c6908354d47bf98cb0c] Linux 6.2
+git bisect bad c9c3395d5e3dcc6daee66c6908354d47bf98cb0c
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [3bad80dab94a16c9b7991105e3bffd5fe5957e9a] Merge tag 'char-misc-5.17-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good 3bad80dab94a16c9b7991105e3bffd5fe5957e9a
+# good: [12b68040a5e468068fd7f4af1150eab8f6e96235] Merge tag 'media/v5.20-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 12b68040a5e468068fd7f4af1150eab8f6e96235
+# bad: [27bc50fc90647bbf7b734c3fc306a5e61350da53] Merge tag 'mm-stable-2022-10-08' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect bad 27bc50fc90647bbf7b734c3fc306a5e61350da53
+# good: [5947b7f794ca5b96fa097d8d73259aaf18878c31] Merge tag 'linux-can-next-for-6.1-20220915' of git://git.kernel.org/pub/scm/linux/kernel/git/mkl/linux-can-next
+git bisect good 5947b7f794ca5b96fa097d8d73259aaf18878c31
+# good: [ff6862c23d2e83d12d1759bf4337d41248fb4dc8] Merge tag 'arm-drivers-6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good ff6862c23d2e83d12d1759bf4337d41248fb4dc8
+# good: [e8bc52cb8df80c31c73c726ab58ea9746e9ff734] Merge tag 'driver-core-6.1-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/driver-core
+git bisect good e8bc52cb8df80c31c73c726ab58ea9746e9ff734
+# good: [4899a36f91a9f9b06878471096bd143e7253006d] Merge tag 'powerpc-6.1-1' of git://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux
+git bisect good 4899a36f91a9f9b06878471096bd143e7253006d
+# good: [f23cdfcd04f7c044ee47dac04484b8d289088776] Merge tag 'iommu-updates-v6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect good f23cdfcd04f7c044ee47dac04484b8d289088776
+# bad: [e4a2ed94908cc0104b8826ed8d831661ed1c3ea1] mm: convert do_wp_page() to use a folio
+git bisect bad e4a2ed94908cc0104b8826ed8d831661ed1c3ea1
+# good: [577be05c8927aa593cf7e29e2b4940607f5756ff] migrate_pages(): fix failure counting for THP on -ENOSYS
+git bisect good 577be05c8927aa593cf7e29e2b4940607f5756ff
+# good: [becc8cdb6cb28d9fd3ecf890d1d6e59118a6a53d] bpf: remove VMA linked list
+git bisect good becc8cdb6cb28d9fd3ecf890d1d6e59118a6a53d
+# bad: [58730ab6c7cab4e8525b7492ac369ccbfff5093a] ksm: convert to use common struct mm_slot
+git bisect bad 58730ab6c7cab4e8525b7492ac369ccbfff5093a
+# bad: [c154124fe925a451e471233aa7d1ab9a91f0a5ad] mm/mmap.c: pass in mapping to __vma_link_file()
+git bisect bad c154124fe925a451e471233aa7d1ab9a91f0a5ad
+# bad: [4267d1fd7825454ed41ebf53af62e7cedd779f83] mm/msync: use vma_find() instead of vma linked list
+git bisect bad 4267d1fd7825454ed41ebf53af62e7cedd779f83
+# bad: [ba0aff8ea6ff0ba4dacfc896facadf3d91c8cd8a] mm/memcontrol: stop using mm->highest_vm_end
+git bisect bad ba0aff8ea6ff0ba4dacfc896facadf3d91c8cd8a
+# good: [685405020b9f24ec979d41e6c27207be97c000cf] mm/khugepaged: stop using vma linked list
+git bisect good 685405020b9f24ec979d41e6c27207be97c000cf
+# bad: [3547481831acd99d6f9c3b2cef16f269e6eaad9c] mm/madvise: use vma_find() instead of vma linked list
+git bisect bad 3547481831acd99d6f9c3b2cef16f269e6eaad9c
+# bad: [a5f18ba0727656bd1fe3bcdb0d563f81790f9a04] mm/ksm: use vma iterators instead of vma linked list
+git bisect bad a5f18ba0727656bd1fe3bcdb0d563f81790f9a04
+# first bad commit: [a5f18ba0727656bd1fe3bcdb0d563f81790f9a04] mm/ksm: use vma iterators instead of vma linked list
