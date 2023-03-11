@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [fe15c26ee26efa11741a7b632e9f23b01aca4cc6] Linux 6.3-rc1
+git bisect bad fe15c26ee26efa11741a7b632e9f23b01aca4cc6
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [92ebb2361e1b32d4b5975f017289473ed84ab86d] Merge branch 'dsa-felix-qos'
+git bisect good 92ebb2361e1b32d4b5975f017289473ed84ab86d
+# good: [9837ec955b46b62d1dd2d00311461a950c50a791] Merge tag 'wireless-next-2022-09-03' of git://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+git bisect good 9837ec955b46b62d1dd2d00311461a950c50a791
+# good: [3ba2c3ff98ea8bfb219288dbacf2a23a902c751b] Merge tag 'modules-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/linux
+git bisect good 3ba2c3ff98ea8bfb219288dbacf2a23a902c751b
+# good: [871489dd01b67483248edc8873c389a66e469f30] Merge tag 'ieee802154-for-net-next-2023-02-20' of git://git.kernel.org/pub/scm/linux/kernel/git/sschmidt/wpan-next
+git bisect good 871489dd01b67483248edc8873c389a66e469f30
+# good: [a5c95ca18a98d742d0a4a04063c32556b5b66378] Merge tag 'drm-next-2023-02-23' of git://anongit.freedesktop.org/drm/drm
+git bisect good a5c95ca18a98d742d0a4a04063c32556b5b66378
+# good: [7c3dc440b1f5c75f45e24430f913e561dc82a419] Merge tag 'cxl-for-6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/cxl/cxl
+git bisect good 7c3dc440b1f5c75f45e24430f913e561dc82a419
+# good: [4b8c673b761e74add4fd185d806ac16c9b40158f] Merge tag 'media/v6.3-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 4b8c673b761e74add4fd185d806ac16c9b40158f
+# good: [e492250d5252635b6c97d52eddf2792ec26f1ec1] Merge tag 'pwm/for-6.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/thierry.reding/linux-pwm
+git bisect good e492250d5252635b6c97d52eddf2792ec26f1ec1
+# bad: [2eb29d59ddf02e39774abfb60b2030b0b7e27c1f] Merge tag 'drm-next-2023-03-03-1' of git://anongit.freedesktop.org/drm/drm
+git bisect bad 2eb29d59ddf02e39774abfb60b2030b0b7e27c1f
+# bad: [1d2aea1bcf68992c90218f47405bee29efd722cd] Merge tag 'sh-for-v6.3-tag1' of git://git.kernel.org/pub/scm/linux/kernel/git/glaubitz/sh-linux
+git bisect bad 1d2aea1bcf68992c90218f47405bee29efd722cd
+# bad: [3808330b20ee0b23e1e3c192610c3a2ee65605e9] Merge tag '9p-6.3-for-linus-part1' of git://git.kernel.org/pub/scm/linux/kernel/git/ericvh/v9fs
+git bisect bad 3808330b20ee0b23e1e3c192610c3a2ee65605e9
+# good: [3e43877a9dac13771ac722462c87bea0bdc50759] xfs: remove xfs_filestream_select_ag() longest extent check
+git bisect good 3e43877a9dac13771ac722462c87bea0bdc50759
+# bad: [c0927a7a5391f7d8e593e5e50ead7505a23cadf9] Merge tag 'xfs-6.3-merge-4' of git://git.kernel.org/pub/scm/fs/xfs/xfs-linux
+git bisect bad c0927a7a5391f7d8e593e5e50ead7505a23cadf9
+# bad: [6e2985c938e8b765b3de299c561d87f98330c546] xfs: restore old agirotor behavior
+git bisect bad 6e2985c938e8b765b3de299c561d87f98330c546
+# skip: [571e259282a43f58b1f70dcbf2add20d8c83a72b] xfs: pass perag to filestreams tracing
+git bisect skip 571e259282a43f58b1f70dcbf2add20d8c83a72b
+# good: [f8f1ed1ab3babad46b25e2dbe8de43b33fe7aaa6] xfs: return a referenced perag from filestreams allocator
+git bisect good f8f1ed1ab3babad46b25e2dbe8de43b33fe7aaa6
+# bad: [571dc9ae4eefb452d32cfb3761a87089e8f37ca7] Merge tag 'xfs-alloc-perag-conversion' of git://git.kernel.org/pub/scm/linux/kernel/git/dgc/linux-xfs into xfs-6.3-merge-A
+git bisect bad 571dc9ae4eefb452d32cfb3761a87089e8f37ca7
+# bad: [bd4f5d09cc93c8ca51e4efea86ac90a4bb553d6e] xfs: refactor the filestreams allocator pick functions
+git bisect bad bd4f5d09cc93c8ca51e4efea86ac90a4bb553d6e
+# first bad commit: [bd4f5d09cc93c8ca51e4efea86ac90a4bb553d6e] xfs: refactor the filestreams allocator pick functions
+|0311_081419|Bisect successfully! fe15c26ee26efa11741a7b632e9f23b01aca4cc6_bd4f5d09cc93c8ca51e4efea86ac90a4bb553d6e_revert bzimage passed!|
