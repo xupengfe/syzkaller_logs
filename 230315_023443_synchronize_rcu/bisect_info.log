@@ -1,0 +1,43 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [eeac8ede17557680855031c6f305ece2378af326] Linux 6.3-rc2
+git bisect bad eeac8ede17557680855031c6f305ece2378af326
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [e243f39685af1bd6d837fa7bff40c1afdf3eb7fa] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good e243f39685af1bd6d837fa7bff40c1afdf3eb7fa
+# good: [bfa8fe95ffe8d62576cf47bf58df5c9da9214723] Merge branch 'bpf: Small nf_conn cleanups'
+git bisect good bfa8fe95ffe8d62576cf47bf58df5c9da9214723
+# bad: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect bad 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# good: [694b37a5dd3c87235e02fabbe7b394f6ab1f444b] Merge tag 'input-for-v6.1-rc0' of git://git.kernel.org/pub/scm/linux/kernel/git/dtor/input
+git bisect good 694b37a5dd3c87235e02fabbe7b394f6ab1f444b
+# bad: [01f3cbb296a9ad378167c01758c99557b5bc3208] Merge tag 'soc-dt-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect bad 01f3cbb296a9ad378167c01758c99557b5bc3208
+# bad: [91c77a6ec4e207085b9d4c27e6710f349d43195d] Merge tag 'dmaengine-fix-6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/vkoul/dmaengine
+git bisect bad 91c77a6ec4e207085b9d4c27e6710f349d43195d
+# good: [c99f0f7e68376dda5df8db7950cd6b67e73c6d3c] net: fman: Use physical address for userspace interfaces
+git bisect good c99f0f7e68376dda5df8db7950cd6b67e73c6d3c
+# good: [3c339dbd139e14c612c521083023eabfcadfd8a5] Merge tag 'mm-hotfixes-stable-2022-10-28' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good 3c339dbd139e14c612c521083023eabfcadfd8a5
+# good: [abd5ac18ae661681fbacd8c9d0a577943da4c89e] Merge tag 'mlx5-fixes-2022-11-09' of git://git.kernel.org/pub/scm/linux/kernel/git/saeed/linux
+git bisect good abd5ac18ae661681fbacd8c9d0a577943da4c89e
+# bad: [6e8c78d32b5c60737bcd71346130f0bf91d6e066] Merge tag 'for-linus-6.1-rc4-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip
+git bisect bad 6e8c78d32b5c60737bcd71346130f0bf91d6e066
+# good: [10d916c86ecafeccaed89175ebf9b832dddde380] Merge tag 'soc-fixes-6.1-2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 10d916c86ecafeccaed89175ebf9b832dddde380
+# good: [64c3dd0b98f586a5b7c8f5f4759ebb41cfd03861] Merge tag 'xfs-6.1-fixes-4' of git://git.kernel.org/pub/scm/fs/xfs/xfs-linux
+git bisect good 64c3dd0b98f586a5b7c8f5f4759ebb41cfd03861
+# good: [2f5065a0bc9d0afb45f2ae284bd525d55ce82c33] Merge tag 'acpi-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good 2f5065a0bc9d0afb45f2ae284bd525d55ce82c33
+# bad: [90153f928bee544c794a2410afba6d936a09edce] Merge tag '6.1-rc4-smb3-fixes' of git://git.samba.org/sfrench/cifs-2.6
+git bisect bad 90153f928bee544c794a2410afba6d936a09edce
+# bad: [61b304b73ab4b48b1cd7796efe42a570e2a0e0fc] tracing/fprobe: Fix to check whether fprobe is registered correctly
+git bisect bad 61b304b73ab4b48b1cd7796efe42a570e2a0e0fc
+# bad: [0e792b89e6800cd9cb4757a76a96f7ef3e8b6294] ftrace: Fix use-after-free for dynamic ftrace_ops
+git bisect bad 0e792b89e6800cd9cb4757a76a96f7ef3e8b6294
+# good: [7433632c9ff68a991bd0bc38cabf354e9d2de410] ring-buffer: Check for NULL cpu_buffer in ring_buffer_wake_waiters()
+git bisect good 7433632c9ff68a991bd0bc38cabf354e9d2de410
+# first bad commit: [0e792b89e6800cd9cb4757a76a96f7ef3e8b6294] ftrace: Fix use-after-free for dynamic ftrace_ops
+|0315_181704|Bisect successfully! eeac8ede17557680855031c6f305ece2378af326_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294_revert bzimage passed!|
