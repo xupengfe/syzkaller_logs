@@ -1,0 +1,470 @@
+|0318_215818|CMD=cd /root/internal-devel|
+|0318_215818|git log eeac8ede17557680855031c6f305ece2378af326 check_result:commit eeac8ede17557680855031c6f305ece2378af326|
+|0318_215818|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0318_215818|CMD=git checkout -f eeac8ede17557680855031c6f305ece2378af326|
+|0318_215818|CMD=cd /root/internal-devel|
+|0318_215818||/var/www/html/bzimage/bzImage_eeac8ede17557680855031c6f305ece2378af326| exist, no need make|
+|0318_215818|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0318_215834|Run /var/www/html/bzimage/bzImage_eeac8ede17557680855031c6f305ece2378af326 with image:/root/image/centos8_2.img in local port:10022|
+|0318_215859|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0318_215900|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0318_215901|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0318_215902|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0318_220833|/var/www/html/bzimage/bzImage_eeac8ede17557680855031c6f305ece2378af326 contained tp_perf_event_destroy:[  595.061399]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.062053]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.062396]  tp_perf_event_destroy+0x1e/0x30
+[  595.077560]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.078840]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.079183]  tp_perf_event_destroy+0x1e/0x30
+[  595.094350]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.095657]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.096016]  tp_perf_event_destroy+0x1e/0x30
+[  595.111114]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.112531]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.112873]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0318_220833|Found time:595 in /var/www/html/bzimage/0318_215818_tp_perf_event_destroy/eeac8ede17557680855031c6f305ece2378af326_dmesg.log|
+|0318_220833|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:2395|
+|0318_220833|-END- commit eeac8ede17557680855031c6f305ece2378af326 FAIL bad|
+|0318_220833|issue_folder alreayd exist:/var/www/html//syzkaller/2023_03_18/20d251dcdf1dcf3e2f948700a93367f53465c540|
+|0318_220833|CMD=cp -rf /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog /var/www/html//syzkaller/2023_03_18/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.c|
+|0318_220833|CMD=cp -rf /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/description /var/www/html//syzkaller/2023_03_18/20d251dcdf1dcf3e2f948700a93367f53465c540|
+|0318_220835|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0318_215818_tp_perf_event_destroy/kconfig_origin:0|
+|0318_220835|CMD=cd /root/internal-devel|
+|0318_220835||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0318_220835|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0318_220851|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|0318_220916|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0318_220916|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0318_220917|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0318_220919|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0318_224914|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0318_224914|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0318_224914|CMD=git checkout -f eeac8ede17557680855031c6f305ece2378af326|
+|0318_224914|CMD=git bisect start|
+|0318_224914|CMD=git bisect bad eeac8ede17557680855031c6f305ece2378af326|
+|0318_224914|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0318_224914|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0318_224928||/var/www/html/bzimage/bzImage_e243f39685af1bd6d837fa7bff40c1afdf3eb7fa| exist, no need make|
+|0318_224928|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0318_224942|Run /var/www/html/bzimage/bzImage_e243f39685af1bd6d837fa7bff40c1afdf3eb7fa with image:/root/image/centos8_2.img in local port:10022|
+|0318_225007|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0318_225007|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0318_225009|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0318_225010|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0318_233005|/var/www/html/bzimage/bzImage_e243f39685af1bd6d837fa7bff40c1afdf3eb7fa didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0318_233005|git bisect good e243f39685af1bd6d837fa7bff40c1afdf3eb7fa|
+|0318_233012||/var/www/html/bzimage/bzImage_bfa8fe95ffe8d62576cf47bf58df5c9da9214723| exist, no need make|
+|0318_233012|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0318_233028|Run /var/www/html/bzimage/bzImage_bfa8fe95ffe8d62576cf47bf58df5c9da9214723 with image:/root/image/centos8_2.img in local port:10022|
+|0318_233053|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0318_233053|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0318_233054|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0318_233056|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_001051|/var/www/html/bzimage/bzImage_bfa8fe95ffe8d62576cf47bf58df5c9da9214723 didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_001051|git bisect good bfa8fe95ffe8d62576cf47bf58df5c9da9214723|
+|0319_001056||/var/www/html/bzimage/bzImage_1ca06f1c1acecbe02124f14a37cce347b8c1a90c| exist, no need make|
+|0319_001056|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_001114|Run /var/www/html/bzimage/bzImage_1ca06f1c1acecbe02124f14a37cce347b8c1a90c with image:/root/image/centos8_2.img in local port:10022|
+|0319_001139|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_001139|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_001141|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_001142|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_005137|/var/www/html/bzimage/bzImage_1ca06f1c1acecbe02124f14a37cce347b8c1a90c didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_005137|git bisect good 1ca06f1c1acecbe02124f14a37cce347b8c1a90c|
+|0319_005140||/var/www/html/bzimage/bzImage_8ca8d89b43caf9a02a18414d6eeff966d2b14512| exist, no need make|
+|0319_005140|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_005154|Run /var/www/html/bzimage/bzImage_8ca8d89b43caf9a02a18414d6eeff966d2b14512 with image:/root/image/centos8_2.img in local port:10022|
+|0319_005219|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_005220|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_005221|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_005222|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_013218|/var/www/html/bzimage/bzImage_8ca8d89b43caf9a02a18414d6eeff966d2b14512 contained tp_perf_event_destroy:[  300.134071]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.135235]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.135548]  tp_perf_event_destroy+0x1e/0x30
+[  300.153853]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.154452]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.154772]  tp_perf_event_destroy+0x1e/0x30
+[  300.168386]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.169757]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.170082]  tp_perf_event_destroy+0x1e/0x30
+[  300.183700]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.184881]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.185200]  tp_perf_event_destroy+0x1e/0x30
+[  447.592821]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.594899]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.595443]  tp_perf_event_destroy+0x1e/0x30
+[  447.616769]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.617359]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.617760]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_013218|git bisect bad 8ca8d89b43caf9a02a18414d6eeff966d2b14512|
+|0319_013220||/var/www/html/bzimage/bzImage_a6e3e6f138058ff184d8ef5064a033b3f5fee8f8| exist, no need make|
+|0319_013220|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_013237|Run /var/www/html/bzimage/bzImage_a6e3e6f138058ff184d8ef5064a033b3f5fee8f8 with image:/root/image/centos8_2.img in local port:10022|
+|0319_013302|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_013303|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_013304|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_013305|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_021301|/var/www/html/bzimage/bzImage_a6e3e6f138058ff184d8ef5064a033b3f5fee8f8 didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_021301|git bisect good a6e3e6f138058ff184d8ef5064a033b3f5fee8f8|
+|0319_021302||/var/www/html/bzimage/bzImage_bc6bc34b1095b64840308fa0fc325c028bd9b89a| was not exist, will make it|
+|0319_023322|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_023336|Run /var/www/html/bzimage/bzImage_bc6bc34b1095b64840308fa0fc325c028bd9b89a with image:/root/image/centos8_2.img in local port:10022|
+|0319_023401|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_023401|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_023403|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_023404|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_031359|/var/www/html/bzimage/bzImage_bc6bc34b1095b64840308fa0fc325c028bd9b89a didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_031400|git bisect good bc6bc34b1095b64840308fa0fc325c028bd9b89a|
+|0319_031401||/var/www/html/bzimage/bzImage_c72e04c26faefc6650709066a8f019a7fb4cbb84| was not exist, will make it|
+|0319_033505|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_033519|Run /var/www/html/bzimage/bzImage_c72e04c26faefc6650709066a8f019a7fb4cbb84 with image:/root/image/centos8_2.img in local port:10022|
+|0319_033544|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_033544|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_033546|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_033547|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_041542|/var/www/html/bzimage/bzImage_c72e04c26faefc6650709066a8f019a7fb4cbb84 contained tp_perf_event_destroy:[  447.589045]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.590119]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.590408]  tp_perf_event_destroy+0x1e/0x30
+[  447.607241]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.607769]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.608052]  tp_perf_event_destroy+0x1e/0x30
+[  447.620365]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.621473]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.621756]  tp_perf_event_destroy+0x1e/0x30
+[  447.634147]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.635207]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.635497]  tp_perf_event_destroy+0x1e/0x30
+[  595.045214]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.046290]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.046585]  tp_perf_event_destroy+0x1e/0x30
+[  595.063805]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.064352]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.064639]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_041542|git bisect bad c72e04c26faefc6650709066a8f019a7fb4cbb84|
+|0319_041543||/var/www/html/bzimage/bzImage_d644c670ef24189a93945528720ed545d77dc514| was not exist, will make it|
+|0319_043614|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_043629|Run /var/www/html/bzimage/bzImage_d644c670ef24189a93945528720ed545d77dc514 with image:/root/image/centos8_2.img in local port:10022|
+|0319_043654|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_043655|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_043656|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_043657|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_051653|/var/www/html/bzimage/bzImage_d644c670ef24189a93945528720ed545d77dc514 didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_051653|git bisect good d644c670ef24189a93945528720ed545d77dc514|
+|0319_051653||/var/www/html/bzimage/bzImage_cce5fe5eda0581363a9c585dabf8a5923f15a708| was not exist, will make it|
+|0319_053744|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_053758|Run /var/www/html/bzimage/bzImage_cce5fe5eda0581363a9c585dabf8a5923f15a708 with image:/root/image/centos8_2.img in local port:10022|
+|0319_053823|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_053823|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_053824|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_053826|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_061821|/var/www/html/bzimage/bzImage_cce5fe5eda0581363a9c585dabf8a5923f15a708 contained tp_perf_event_destroy:[  300.128647]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.130089]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.130473]  tp_perf_event_destroy+0x1e/0x30
+[  300.155243]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.155954]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.156331]  tp_perf_event_destroy+0x1e/0x30
+[  300.174393]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.176067]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.176442]  tp_perf_event_destroy+0x1e/0x30
+[  300.194578]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.196184]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.196561]  tp_perf_event_destroy+0x1e/0x30
+[  300.214163]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.215759]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.216135]  tp_perf_event_destroy+0x1e/0x30
+[  300.332346]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.333791]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.334169]  tp_perf_event_destroy+0x1e/0x30
+[  447.584731]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.586175]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.586568]  tp_perf_event_destroy+0x1e/0x30
+[  447.611514]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.612227]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.612614]  tp_perf_event_destroy+0x1e/0x30
+[  447.630692]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.632303]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.632680]  tp_perf_event_destroy+0x1e/0x30
+[  447.650616]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.652222]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.652600]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_061821|git bisect bad cce5fe5eda0581363a9c585dabf8a5923f15a708|
+|0319_061821||/var/www/html/bzimage/bzImage_274978f173276c5720a3cd8d0b6047d2c0d3a684| was not exist, will make it|
+|0319_063958|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_064014|Run /var/www/html/bzimage/bzImage_274978f173276c5720a3cd8d0b6047d2c0d3a684 with image:/root/image/centos8_2.img in local port:10022|
+|0319_064039|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_064039|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_064041|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_064042|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_072037|/var/www/html/bzimage/bzImage_274978f173276c5720a3cd8d0b6047d2c0d3a684 didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_072037|git bisect good 274978f173276c5720a3cd8d0b6047d2c0d3a684|
+|0319_072038||/var/www/html/bzimage/bzImage_79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc| was not exist, will make it|
+|0319_074212|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_074227|Run /var/www/html/bzimage/bzImage_79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc with image:/root/image/centos8_2.img in local port:10022|
+|0319_074252|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_074253|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_074254|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_074255|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_082251|/var/www/html/bzimage/bzImage_79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_082251|git bisect good 79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc|
+|0319_082251||/var/www/html/bzimage/bzImage_6bb30855560e6343e7b88595d7c3159d0f848a04| was not exist, will make it|
+|0319_084429|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_084447|Run /var/www/html/bzimage/bzImage_6bb30855560e6343e7b88595d7c3159d0f848a04 with image:/root/image/centos8_2.img in local port:10022|
+|0319_084512|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_084512|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_084513|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_084515|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_092510|/var/www/html/bzimage/bzImage_6bb30855560e6343e7b88595d7c3159d0f848a04 contained tp_perf_event_destroy:[  300.141274]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.142276]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.142552]  tp_perf_event_destroy+0x1e/0x30
+[  300.154232]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.155231]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.155506]  tp_perf_event_destroy+0x1e/0x30
+[  300.171148]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.171655]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.171927]  tp_perf_event_destroy+0x1e/0x30
+[  447.598882]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.600663]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.601133]  tp_perf_event_destroy+0x1e/0x30
+[  447.616976]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.618014]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.618299]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_092510|git bisect bad 6bb30855560e6343e7b88595d7c3159d0f848a04|
+|0319_092511||/var/www/html/bzimage/bzImage_d80c0f00d04766972c95e72b7535a842d6f4680d| was not exist, will make it|
+|0319_094624|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_094638|Run /var/www/html/bzimage/bzImage_d80c0f00d04766972c95e72b7535a842d6f4680d with image:/root/image/centos8_2.img in local port:10022|
+|0319_094703|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_094703|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_094704|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_094706|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_102701|/var/www/html/bzimage/bzImage_d80c0f00d04766972c95e72b7535a842d6f4680d contained tp_perf_event_destroy:[  300.158116]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.167242]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.170489]  tp_perf_event_destroy+0x1e/0x30
+[  300.310270]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.319479]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.321405]  tp_perf_event_destroy+0x1e/0x30
+[  300.443796]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.454269]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.456034]  tp_perf_event_destroy+0x1e/0x30
+[  300.561426]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.568748]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.571658]  tp_perf_event_destroy+0x1e/0x30
+[  300.689662]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.699624]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.701629]  tp_perf_event_destroy+0x1e/0x30
+[  300.816461]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.824384]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.827145]  tp_perf_event_destroy+0x1e/0x30
+[  300.981278]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.984468]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.987251]  tp_perf_event_destroy+0x1e/0x30
+[  447.620470]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.630935]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.632676]  tp_perf_event_destroy+0x1e/0x30
+[  447.751066]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.759543]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.761605]  tp_perf_event_destroy+0x1e/0x30
+[  447.882966]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.891558]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.893517]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_102701|git bisect bad d80c0f00d04766972c95e72b7535a842d6f4680d|
+|0319_102701||/var/www/html/bzimage/bzImage_cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54| was not exist, will make it|
+|0319_104827|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_104842|Run /var/www/html/bzimage/bzImage_cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54 with image:/root/image/centos8_2.img in local port:10022|
+|0319_104907|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_104908|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_104909|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_104910|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_112905|/var/www/html/bzimage/bzImage_cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54 contained tp_perf_event_destroy:[  447.595952]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.597206]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.597540]  tp_perf_event_destroy+0x1e/0x30
+[  447.618125]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.618752]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.619199]  tp_perf_event_destroy+0x1e/0x30
+[  447.634396]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.635749]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.636081]  tp_perf_event_destroy+0x1e/0x30
+[  447.651508]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.652763]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.653101]  tp_perf_event_destroy+0x1e/0x30
+[  447.668462]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.669715]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.670051]  tp_perf_event_destroy+0x1e/0x30
+[  447.685444]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.686702]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.687232]  tp_perf_event_destroy+0x1e/0x30
+[  595.054821]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.057010]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.057559]  tp_perf_event_destroy+0x1e/0x30
+[  595.081459]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.082105]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.082455]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_112905|git bisect bad cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54|
+|0319_112906||/var/www/html/bzimage/bzImage_3fcf19d592d5cb63eb209400b22055651e3c27d0| was not exist, will make it|
+|0319_115109|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_115125|Run /var/www/html/bzimage/bzImage_3fcf19d592d5cb63eb209400b22055651e3c27d0 with image:/root/image/centos8_2.img in local port:10022|
+|0319_115150|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_115151|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_115152|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_115154|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_123149|/var/www/html/bzimage/bzImage_3fcf19d592d5cb63eb209400b22055651e3c27d0 didn't contain tp_perf_event_destroy: in dmesg, pass|
+|0319_123149|git bisect good 3fcf19d592d5cb63eb209400b22055651e3c27d0|
+|0319_123149||/var/www/html/bzimage/bzImage_326a9e482e2134d7a44b7f8f9a721b38c6bbb146| was not exist, will make it|
+|0319_125256|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_125310|Run /var/www/html/bzimage/bzImage_326a9e482e2134d7a44b7f8f9a721b38c6bbb146 with image:/root/image/centos8_2.img in local port:10022|
+|0319_125335|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_125336|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_125337|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_125338|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_133334|/var/www/html/bzimage/bzImage_326a9e482e2134d7a44b7f8f9a721b38c6bbb146 contained tp_perf_event_destroy:[  300.204972]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.207973]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.210628]  tp_perf_event_destroy+0x1e/0x30
+[  300.310419]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.318003]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.319536]  tp_perf_event_destroy+0x1e/0x30
+[  300.422041]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.430500]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.432032]  tp_perf_event_destroy+0x1e/0x30
+[  300.535766]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.543356]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.545121]  tp_perf_event_destroy+0x1e/0x30
+[  300.650241]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.657153]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.658683]  tp_perf_event_destroy+0x1e/0x30
+[  300.761665]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.770971]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.772755]  tp_perf_event_destroy+0x1e/0x30
+[  300.877088]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.884368]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.886968]  tp_perf_event_destroy+0x1e/0x30
+[  447.662698]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.666772]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.668276]  tp_perf_event_destroy+0x1e/0x30
+[  447.767302]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.775984]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.778578]  tp_perf_event_destroy+0x1e/0x30
+[  447.879514]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.890653]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.892159]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_133334|git bisect bad 326a9e482e2134d7a44b7f8f9a721b38c6bbb146|
+|0319_133334||/var/www/html/bzimage/bzImage_490c00eb4fa5e5e25e0127240f6d6c1b499da95b| was not exist, will make it|
+|0319_135459|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_135513|Run /var/www/html/bzimage/bzImage_490c00eb4fa5e5e25e0127240f6d6c1b499da95b with image:/root/image/centos8_2.img in local port:10022|
+|0319_135538|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_135539|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_135540|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_135541|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_143537|/var/www/html/bzimage/bzImage_490c00eb4fa5e5e25e0127240f6d6c1b499da95b contained tp_perf_event_destroy:[  300.183850]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.191466]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.194092]  tp_perf_event_destroy+0x1e/0x30
+[  300.310141]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.317679]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.319210]  tp_perf_event_destroy+0x1e/0x30
+[  300.427570]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.435346]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.437949]  tp_perf_event_destroy+0x1e/0x30
+[  300.575260]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.579318]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.581930]  tp_perf_event_destroy+0x1e/0x30
+[  300.685385]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.694247]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.695784]  tp_perf_event_destroy+0x1e/0x30
+[  300.801402]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.808996]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.810534]  tp_perf_event_destroy+0x1e/0x30
+[  300.919331]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.927739]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.930768]  tp_perf_event_destroy+0x1e/0x30
+[  447.631455]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.639757]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.642357]  tp_perf_event_destroy+0x1e/0x30
+[  447.741307]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.748803]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.750311]  tp_perf_event_destroy+0x1e/0x30
+[  447.857155]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.863645]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.866281]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_143537|git bisect bad 490c00eb4fa5e5e25e0127240f6d6c1b499da95b|
+|0319_143537||/var/www/html/bzimage/bzImage_846072f16eed3b3fb4e59b677f3ed8afb8509b89| was not exist, will make it|
+|0319_145710|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0319_145724|Run /var/www/html/bzimage/bzImage_846072f16eed3b3fb4e59b677f3ed8afb8509b89 with image:/root/image/centos8_2.img in local port:10022|
+|0319_145749|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0319_145750|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0319_145751|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/20d251dcdf1dcf3e2f948700a93367f53465c540/repro.cprog root@localhost:/root/repro.c|
+|0319_145752|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0319_153748|/var/www/html/bzimage/bzImage_846072f16eed3b3fb4e59b677f3ed8afb8509b89 contained tp_perf_event_destroy:[  300.147301]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.148398]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.148984]  tp_perf_event_destroy+0x1e/0x30
+[  300.172767]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.174153]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.174493]  tp_perf_event_destroy+0x1e/0x30
+[  300.190081]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.191350]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.191692]  tp_perf_event_destroy+0x1e/0x30
+[  300.207307]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.208571]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.208911]  tp_perf_event_destroy+0x1e/0x30
+[  300.224419]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.225805]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.226146]  tp_perf_event_destroy+0x1e/0x30
+[  300.241312]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.242703]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  300.243047]  tp_perf_event_destroy+0x1e/0x30
+[  447.596082]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.596722]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.597067]  tp_perf_event_destroy+0x1e/0x30
+[  447.612685]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.614078]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  447.614419]  tp_perf_event_destroy+0x1e/0x30, FAIL|
+|0319_153748|git bisect bad 846072f16eed3b3fb4e59b677f3ed8afb8509b89|
+|0319_153748|Bisect PASS: find 846072f16eed3b3fb4e59b677f3ed8afb8509b89 is the first bad commit|
+|0319_153748|CMD=git bisect log >> /var/www/html/bzimage/bi.log|
+|0319_153748|CMD=git bisect log >> /var/www/html/bzimage/0318_215818_tp_perf_event_destroy/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [eeac8ede17557680855031c6f305ece2378af326] Linux 6.3-rc2
+git bisect bad eeac8ede17557680855031c6f305ece2378af326
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [e243f39685af1bd6d837fa7bff40c1afdf3eb7fa] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good e243f39685af1bd6d837fa7bff40c1afdf3eb7fa
+# good: [bfa8fe95ffe8d62576cf47bf58df5c9da9214723] Merge branch 'bpf: Small nf_conn cleanups'
+git bisect good bfa8fe95ffe8d62576cf47bf58df5c9da9214723
+# good: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect good 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# bad: [8ca8d89b43caf9a02a18414d6eeff966d2b14512] Merge tag 'cgroup-for-6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+git bisect bad 8ca8d89b43caf9a02a18414d6eeff966d2b14512
+# good: [a6e3e6f138058ff184d8ef5064a033b3f5fee8f8] Merge tag 'mm-nonmm-stable-2022-12-17-20-32' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good a6e3e6f138058ff184d8ef5064a033b3f5fee8f8
+# good: [bc6bc34b1095b64840308fa0fc325c028bd9b89a] Merge tag 'x86_urgent_for_v6.2_rc6' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good bc6bc34b1095b64840308fa0fc325c028bd9b89a
+# bad: [c72e04c26faefc6650709066a8f019a7fb4cbb84] Merge tag 'soc-defconfig-6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect bad c72e04c26faefc6650709066a8f019a7fb4cbb84
+# good: [d644c670ef24189a93945528720ed545d77dc514] Merge tag 'remove-get_kernel_pages-for-6.3' of https://git.linaro.org/people/jens.wiklander/linux-tee
+git bisect good d644c670ef24189a93945528720ed545d77dc514
+# bad: [cce5fe5eda0581363a9c585dabf8a5923f15a708] Merge tag 'for-6.3/io_uring-2023-02-16' of git://git.kernel.dk/linux
+git bisect bad cce5fe5eda0581363a9c585dabf8a5923f15a708
+# good: [274978f173276c5720a3cd8d0b6047d2c0d3a684] Merge tag 'fixes_for_v6.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs
+git bisect good 274978f173276c5720a3cd8d0b6047d2c0d3a684
+# good: [79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc] btrfs: replace btrfs_wait_tree_block_writeback by wait_on_extent_buffer_writeback
+git bisect good 79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc
+# bad: [6bb30855560e6343e7b88595d7c3159d0f848a04] io_uring: if a linked request has REQ_F_FORCE_ASYNC then run it async
+git bisect bad 6bb30855560e6343e7b88595d7c3159d0f848a04
+# bad: [d80c0f00d04766972c95e72b7535a842d6f4680d] io_uring: add io_req_local_work_add wake fast path
+git bisect bad d80c0f00d04766972c95e72b7535a842d6f4680d
+# bad: [cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54] io_uring/msg_ring: Pass custom flags to the cqe
+git bisect bad cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54
+# good: [3fcf19d592d5cb63eb209400b22055651e3c27d0] io_uring: parse check_cq out of wq waiting
+git bisect good 3fcf19d592d5cb63eb209400b22055651e3c27d0
+# bad: [326a9e482e2134d7a44b7f8f9a721b38c6bbb146] io_uring: set TASK_RUNNING right after schedule
+git bisect bad 326a9e482e2134d7a44b7f8f9a721b38c6bbb146
+# bad: [490c00eb4fa5e5e25e0127240f6d6c1b499da95b] io_uring: simplify io_has_work
+git bisect bad 490c00eb4fa5e5e25e0127240f6d6c1b499da95b
+# bad: [846072f16eed3b3fb4e59b677f3ed8afb8509b89] io_uring: mimimise io_cqring_wait_schedule
+git bisect bad 846072f16eed3b3fb4e59b677f3ed8afb8509b89
+# first bad commit: [846072f16eed3b3fb4e59b677f3ed8afb8509b89] io_uring: mimimise io_cqring_wait_schedule
+|0319_153748|/root/bzimage_bisect/make_bz.sh -k /root/internal-devel -m eeac8ede17557680855031c6f305ece2378af326 -b 846072f16eed3b3fb4e59b677f3ed8afb8509b89 -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_eeac8ede17557680855031c6f305ece2378af326_846072f16eed3b3fb4e59b677f3ed8afb8509b89_revert|
+|0319_153820|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0319_153820|FAIL|bzImage:/var/www/html/bzimage/bzImage_eeac8ede17557680855031c6f305ece2378af326_846072f16eed3b3fb4e59b677f3ed8afb8509b89_revert does not exist:|
+|0319_153820|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0319_153820|ISSUE:20d251dcdf1dcf3e2f948700a93367f53465c540  EMAIL status after check:Email_not_sent|

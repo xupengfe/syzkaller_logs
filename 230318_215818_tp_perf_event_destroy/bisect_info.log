@@ -1,0 +1,44 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [eeac8ede17557680855031c6f305ece2378af326] Linux 6.3-rc2
+git bisect bad eeac8ede17557680855031c6f305ece2378af326
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [e243f39685af1bd6d837fa7bff40c1afdf3eb7fa] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good e243f39685af1bd6d837fa7bff40c1afdf3eb7fa
+# good: [bfa8fe95ffe8d62576cf47bf58df5c9da9214723] Merge branch 'bpf: Small nf_conn cleanups'
+git bisect good bfa8fe95ffe8d62576cf47bf58df5c9da9214723
+# good: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect good 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# bad: [8ca8d89b43caf9a02a18414d6eeff966d2b14512] Merge tag 'cgroup-for-6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+git bisect bad 8ca8d89b43caf9a02a18414d6eeff966d2b14512
+# good: [a6e3e6f138058ff184d8ef5064a033b3f5fee8f8] Merge tag 'mm-nonmm-stable-2022-12-17-20-32' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good a6e3e6f138058ff184d8ef5064a033b3f5fee8f8
+# good: [bc6bc34b1095b64840308fa0fc325c028bd9b89a] Merge tag 'x86_urgent_for_v6.2_rc6' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good bc6bc34b1095b64840308fa0fc325c028bd9b89a
+# bad: [c72e04c26faefc6650709066a8f019a7fb4cbb84] Merge tag 'soc-defconfig-6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect bad c72e04c26faefc6650709066a8f019a7fb4cbb84
+# good: [d644c670ef24189a93945528720ed545d77dc514] Merge tag 'remove-get_kernel_pages-for-6.3' of https://git.linaro.org/people/jens.wiklander/linux-tee
+git bisect good d644c670ef24189a93945528720ed545d77dc514
+# bad: [cce5fe5eda0581363a9c585dabf8a5923f15a708] Merge tag 'for-6.3/io_uring-2023-02-16' of git://git.kernel.dk/linux
+git bisect bad cce5fe5eda0581363a9c585dabf8a5923f15a708
+# good: [274978f173276c5720a3cd8d0b6047d2c0d3a684] Merge tag 'fixes_for_v6.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs
+git bisect good 274978f173276c5720a3cd8d0b6047d2c0d3a684
+# good: [79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc] btrfs: replace btrfs_wait_tree_block_writeback by wait_on_extent_buffer_writeback
+git bisect good 79b02ec1d8ce1fafc8c39f888dbba6a3aa9a35cc
+# bad: [6bb30855560e6343e7b88595d7c3159d0f848a04] io_uring: if a linked request has REQ_F_FORCE_ASYNC then run it async
+git bisect bad 6bb30855560e6343e7b88595d7c3159d0f848a04
+# bad: [d80c0f00d04766972c95e72b7535a842d6f4680d] io_uring: add io_req_local_work_add wake fast path
+git bisect bad d80c0f00d04766972c95e72b7535a842d6f4680d
+# bad: [cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54] io_uring/msg_ring: Pass custom flags to the cqe
+git bisect bad cbeb47a7b5f003429ded32b1fb3a7108ce5c1b54
+# good: [3fcf19d592d5cb63eb209400b22055651e3c27d0] io_uring: parse check_cq out of wq waiting
+git bisect good 3fcf19d592d5cb63eb209400b22055651e3c27d0
+# bad: [326a9e482e2134d7a44b7f8f9a721b38c6bbb146] io_uring: set TASK_RUNNING right after schedule
+git bisect bad 326a9e482e2134d7a44b7f8f9a721b38c6bbb146
+# bad: [490c00eb4fa5e5e25e0127240f6d6c1b499da95b] io_uring: simplify io_has_work
+git bisect bad 490c00eb4fa5e5e25e0127240f6d6c1b499da95b
+# bad: [846072f16eed3b3fb4e59b677f3ed8afb8509b89] io_uring: mimimise io_cqring_wait_schedule
+git bisect bad 846072f16eed3b3fb4e59b677f3ed8afb8509b89
+# first bad commit: [846072f16eed3b3fb4e59b677f3ed8afb8509b89] io_uring: mimimise io_cqring_wait_schedule
