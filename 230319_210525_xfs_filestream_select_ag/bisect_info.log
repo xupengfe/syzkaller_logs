@@ -1,0 +1,43 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [eeac8ede17557680855031c6f305ece2378af326] Linux 6.3-rc2
+git bisect bad eeac8ede17557680855031c6f305ece2378af326
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [e243f39685af1bd6d837fa7bff40c1afdf3eb7fa] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good e243f39685af1bd6d837fa7bff40c1afdf3eb7fa
+# good: [bfa8fe95ffe8d62576cf47bf58df5c9da9214723] Merge branch 'bpf: Small nf_conn cleanups'
+git bisect good bfa8fe95ffe8d62576cf47bf58df5c9da9214723
+# good: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect good 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# good: [8ca8d89b43caf9a02a18414d6eeff966d2b14512] Merge tag 'cgroup-for-6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+git bisect good 8ca8d89b43caf9a02a18414d6eeff966d2b14512
+# good: [a5c95ca18a98d742d0a4a04063c32556b5b66378] Merge tag 'drm-next-2023-02-23' of git://anongit.freedesktop.org/drm/drm
+git bisect good a5c95ca18a98d742d0a4a04063c32556b5b66378
+# good: [d0a32f5520a33e7f2ace396db6913625e0d29544] Merge tag 'powerpc-6.3-1' of git://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux
+git bisect good d0a32f5520a33e7f2ace396db6913625e0d29544
+# good: [cc38a46de76e15d20bea5768e99af17b65a9caeb] Merge tag 'rpmsg-v6.3' of git://git.kernel.org/pub/scm/linux/kernel/git/remoteproc/linux
+git bisect good cc38a46de76e15d20bea5768e99af17b65a9caeb
+# good: [6972633c58fd13c02dcaabcb6be380a98feda9fa] Merge tag 'auxdisplay-6.3' of https://github.com/ojeda/linux
+git bisect good 6972633c58fd13c02dcaabcb6be380a98feda9fa
+# good: [d172859ebff33598d80089c0bec44471872d2628] Merge tag 'sound-fix-6.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good d172859ebff33598d80089c0bec44471872d2628
+# good: [44889ba56cbb3d51154660ccd15818bc77276696] Merge tag 'net-6.3-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 44889ba56cbb3d51154660ccd15818bc77276696
+# good: [b0d14d2aaf7d4b36b44f5a09955ebdf9eef4b0f8] Merge tag 'drm-fixes-2023-03-10' of git://anongit.freedesktop.org/drm/drm
+git bisect good b0d14d2aaf7d4b36b44f5a09955ebdf9eef4b0f8
+# good: [81ff855485a366a391dc3aed3942715e676ed132] Merge tag 'i2c-for-6.3-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux
+git bisect good 81ff855485a366a391dc3aed3942715e676ed132
+# good: [3b11717f95b1880b9cab4b90bbaf61268e6bda2b] Merge tag 'vfs.misc.v6.3-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/idmapping
+git bisect good 3b11717f95b1880b9cab4b90bbaf61268e6bda2b
+# good: [134231664868e163580cfe79e8c923560d7de302] Merge tag 'staging-6.3-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging
+git bisect good 134231664868e163580cfe79e8c923560d7de302
+# bad: [80a6c216b16d7f5c584d2148c2e4345ea4eb06ce] tpm/eventlog: Don't abort tpm_read_log on faulty ACPI address
+git bisect bad 80a6c216b16d7f5c584d2148c2e4345ea4eb06ce
+# bad: [8ac5b996bf5199f15b7687ceae989f8b2a410dda] xfs: fix off-by-one-block in xfs_discard_folio()
+git bisect bad 8ac5b996bf5199f15b7687ceae989f8b2a410dda
+# good: [0c7273e494dd5121e20e160cb2f047a593ee14a8] xfs: quotacheck failure can race with background inode inactivation
+git bisect good 0c7273e494dd5121e20e160cb2f047a593ee14a8
+# first bad commit: [8ac5b996bf5199f15b7687ceae989f8b2a410dda] xfs: fix off-by-one-block in xfs_discard_folio()
+|0320_062111|Bisect successfully! eeac8ede17557680855031c6f305ece2378af326_8ac5b996bf5199f15b7687ceae989f8b2a410dda_revert bzimage passed!|
