@@ -1,0 +1,122 @@
+00000070: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+XFS (loop0): metadata I/O error in "xfs_read_agf+0xd0/0x2c0" at daddr 0x8001 len 1 error 74
+XFS (loop0): page discard on page 00000000b8174cbd, inode 0x46, pos 0.
+BUG: kernel NULL pointer dereference, address: 0000000000000010
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 0 P4D 0 
+Oops: 0002 [#1] PREEMPT SMP NOPTI
+CPU: 1 PID: 34 Comm: kworker/u4:2 Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Workqueue: writeback wb_workfn (flush-7:0)
+RIP: 0010:arch_atomic_inc arch/x86/include/asm/atomic.h:95 [inline]
+RIP: 0010:atomic_inc include/linux/atomic/atomic-instrumented.h:191 [inline]
+RIP: 0010:xfs_filestream_create_association fs/xfs/xfs_filestream.c:321 [inline]
+RIP: 0010:xfs_filestream_select_ag+0x5d5/0xce0 fs/xfs/xfs_filestream.c:372
+Code: 80 ff 49 89 5d 18 be 08 00 00 00 bf 20 00 00 00 e8 80 f9 03 00 48 89 c3 48 85 c0 0f 84 3a 05 00 00 e8 9f 8a 80 ff 49 8b 45 18 <f0> ff 40 10 49 8b 45 18 48 8b 75 b8 48 89 da 48 89 43 18 48 8b 45
+RSP: 0018:ffffc900001274c0 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800dbeae40 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff88800791a340 RDI: 0000000000000002
+RBP: ffffc90000127548 R08: ffffc90000127400 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000000
+R13: ffffc90000127588 R14: 0000000000000001 R15: ffffc90000127708
+FS:  0000000000000000(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000010 CR3: 000000000b85c002 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ xfs_bmap_btalloc_filestreams fs/xfs/libxfs/xfs_bmap.c:3558 [inline]
+ xfs_bmap_btalloc+0x706/0xb90 fs/xfs/libxfs/xfs_bmap.c:3672
+ xfs_bmap_alloc_userdata fs/xfs/libxfs/xfs_bmap.c:4046 [inline]
+ xfs_bmapi_allocate+0x25b/0x5e0 fs/xfs/libxfs/xfs_bmap.c:4089
+ xfs_bmapi_convert_delalloc+0x335/0x6c0 fs/xfs/libxfs/xfs_bmap.c:4554
+ xfs_convert_blocks fs/xfs/xfs_aops.c:266 [inline]
+ xfs_map_blocks+0x2ff/0x8a0 fs/xfs/xfs_aops.c:389
+ iomap_writepage_map fs/iomap/buffered-io.c:1641 [inline]
+ iomap_do_writepage+0x43f/0x1070 fs/iomap/buffered-io.c:1803
+ write_cache_pages+0x2b8/0x8a0 mm/page-writeback.c:2473
+ iomap_writepages+0x3e/0x80 fs/iomap/buffered-io.c:1820
+ xfs_vm_writepages+0x97/0xe0 fs/xfs/xfs_aops.c:513
+ do_writepages+0x10f/0x240 mm/page-writeback.c:2551
+ __writeback_single_inode+0x9f/0xb20 fs/fs-writeback.c:1600
+ writeback_sb_inodes+0x301/0x8b0 fs/fs-writeback.c:1891
+ wb_writeback+0x18b/0x7c0 fs/fs-writeback.c:2065
+ wb_do_writeback fs/fs-writeback.c:2208 [inline]
+ wb_workfn+0xc0/0xad0 fs/fs-writeback.c:2248
+ process_one_work+0x3b1/0x9e0 kernel/workqueue.c:2390
+ worker_thread+0x52/0x660 kernel/workqueue.c:2537
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:308
+ </TASK>
+Modules linked in:
+CR2: 0000000000000010
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_atomic_inc arch/x86/include/asm/atomic.h:95 [inline]
+RIP: 0010:atomic_inc include/linux/atomic/atomic-instrumented.h:191 [inline]
+RIP: 0010:xfs_filestream_create_association fs/xfs/xfs_filestream.c:321 [inline]
+RIP: 0010:xfs_filestream_select_ag+0x5d5/0xce0 fs/xfs/xfs_filestream.c:372
+Code: 80 ff 49 89 5d 18 be 08 00 00 00 bf 20 00 00 00 e8 80 f9 03 00 48 89 c3 48 85 c0 0f 84 3a 05 00 00 e8 9f 8a 80 ff 49 8b 45 18 <f0> ff 40 10 49 8b 45 18 48 8b 75 b8 48 89 da 48 89 43 18 48 8b 45
+RSP: 0018:ffffc900001274c0 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800dbeae40 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff88800791a340 RDI: 0000000000000002
+RBP: ffffc90000127548 R08: ffffc90000127400 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000000
+R13: ffffc90000127588 R14: 0000000000000001 R15: ffffc90000127708
+FS:  0000000000000000(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000010 CR3: 000000000b85c002 CR4: 0000000000f70ee0
+PKRU: 55555554
+note: kworker/u4:2[34] exited with irqs disabled
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 34 at kernel/exit.c:814 do_exit+0xf68/0x1360 kernel/exit.c:814
+Modules linked in:
+CPU: 1 PID: 34 Comm: kworker/u4:2 Tainted: G      D            6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Workqueue: writeback wb_workfn (flush-7:0)
+RIP: 0010:do_exit+0xf68/0x1360 kernel/exit.c:814
+Code: ff ff e8 2b 7e 1b 00 4c 89 ee bf 05 06 00 00 e8 7e c1 01 00 e9 a7 f2 ff ff e8 14 7e 1b 00 0f 0b e9 f8 f0 ff ff e8 08 7e 1b 00 <0f> 0b e9 60 f1 ff ff e8 fc 7d 1b 00 48 89 df e8 54 ff 1a 00 e9 ec
+RSP: 0018:ffffc90000127eb0 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800791a340 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: ffff88800791a340 RDI: 0000000000000002
+RBP: ffffc90000127f18 R08: 0000000000000000 R09: 0000000000000000
+R10: 34752f72656b726f R11: 776b203a65746f6e R12: 0000000000000000
+R13: 0000000000000009 R14: ffff8880079292c0 R15: ffff888007924600
+FS:  0000000000000000(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000010 CR3: 000000000b85c002 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ make_task_dead+0x100/0x290 kernel/exit.c:981
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1541
+ </TASK>
+irq event stamp: 46556
+hardirqs last  enabled at (46555): [<ffffffff8218402d>] get_random_u32+0x1dd/0x360 drivers/char/random.c:532
+hardirqs last disabled at (46556): [<ffffffff8300582e>] exc_page_fault+0x4e/0x500 arch/x86/mm/fault.c:1551
+softirqs last  enabled at (37844): [<ffffffff83029bdc>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (37844): [<ffffffff83029bdc>] __do_softirq+0x31c/0x49c kernel/softirq.c:600
+softirqs last disabled at (37835): [<ffffffff8112e774>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (37835): [<ffffffff8112e774>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (37835): [<ffffffff8112e774>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+----------------
+Code disassembly (best guess):
+   0:	80 ff 49             	cmp    $0x49,%bh
+   3:	89 5d 18             	mov    %ebx,0x18(%rbp)
+   6:	be 08 00 00 00       	mov    $0x8,%esi
+   b:	bf 20 00 00 00       	mov    $0x20,%edi
+  10:	e8 80 f9 03 00       	call   0x3f995
+  15:	48 89 c3             	mov    %rax,%rbx
+  18:	48 85 c0             	test   %rax,%rax
+  1b:	0f 84 3a 05 00 00    	je     0x55b
+  21:	e8 9f 8a 80 ff       	call   0xff808ac5
+  26:	49 8b 45 18          	mov    0x18(%r13),%rax
+* 2a:	f0 ff 40 10          	lock incl 0x10(%rax) <-- trapping instruction
+  2e:	49 8b 45 18          	mov    0x18(%r13),%rax
+  32:	48 8b 75 b8          	mov    -0x48(%rbp),%rsi
+  36:	48 89 da             	mov    %rbx,%rdx
+  39:	48 89 43 18          	mov    %rax,0x18(%rbx)
+  3d:	48                   	rex.W
+  3e:	8b                   	.byte 0x8b
+  3f:	45                   	rex.RB
