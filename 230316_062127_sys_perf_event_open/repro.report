@@ -1,0 +1,83 @@
+hrtimer: interrupt took 14923450 ns
+watchdog: BUG: soft lockup - CPU#0 stuck for 26s! [syz-executor137:522]
+Modules linked in:
+irq event stamp: 661076
+hardirqs last  enabled at (661075): [<ffffffff810778fc>] __text_poke+0x2ec/0x4e0 arch/x86/kernel/alternative.c:1644
+hardirqs last disabled at (661076): [<ffffffff83004863>] sysvec_apic_timer_interrupt+0x13/0xe0 arch/x86/kernel/apic/apic.c:1107
+softirqs last  enabled at (660584): [<ffffffff83029bdc>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (660584): [<ffffffff83029bdc>] __do_softirq+0x31c/0x49c kernel/softirq.c:600
+softirqs last disabled at (660579): [<ffffffff8112e774>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (660579): [<ffffffff8112e774>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (660579): [<ffffffff8112e774>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+CPU: 0 PID: 522 Comm: syz-executor137 Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:write_comp_data+0xe/0x90 kernel/kcov.c:236
+Code: c0 5d c3 cc cc cc cc 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 55 48 89 e5 41 57 49 89 d7 41 56 49 89 fe <bf> 03 00 00 00 41 55 49 89 f5 41 54 49 89 cc 53 65 48 8b 1c 25 c0
+RSP: 0018:ffffc90000fa76c8 EFLAGS: 00000246
+RAX: 0000000000000000 RBX: 0000000000000008 RCX: ffffffff81361cd2
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000005
+RBP: ffffc90000fa76d8 R08: 0000000000000001 R09: 0000000000000000
+R10: ffffc90000fa7708 R11: 0000000000000001 R12: ffff88800d0f3748
+R13: 0000000000000100 R14: 0000000000000005 R15: 0000000000000000
+FS:  00000000008cd3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffc086c44c8 CR3: 000000000ec8c006 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __sanitizer_cov_trace_const_cmp4+0x1a/0x20 kernel/kcov.c:304
+ trace_test_and_set_recursion include/linux/trace_recursion.h:166 [inline]
+ ftrace_test_recursion_trylock include/linux/trace_recursion.h:213 [inline]
+ perf_ftrace_function_call+0x1a2/0x340 kernel/trace/trace_event_perf.c:442
+ __ftrace_ops_list_func kernel/trace/ftrace.c:7663 [inline]
+ arch_ftrace_ops_list_func+0x2c6/0x360 kernel/trace/ftrace.c:7690
+ ftrace_call+0x5/0x44
+ rcu_read_lock_held_common+0x5/0x50 kernel/rcu/update.c:103
+ rcu_read_lock_sched_held+0x29/0x80 kernel/rcu/update.c:123
+ trace_lock_acquire include/trace/events/lock.h:24 [inline]
+ lock_acquire+0x2ad/0x320 kernel/locking/lockdep.c:5640
+ __raw_spin_lock include/linux/spinlock_api_smp.h:133 [inline]
+ _raw_spin_lock+0x36/0x50 kernel/locking/spinlock.c:154
+ spin_lock include/linux/spinlock.h:350 [inline]
+ __get_locked_pte+0x96/0xe0 mm/memory.c:1783
+ get_locked_pte include/linux/mm.h:2448 [inline]
+ __text_poke+0xf4/0x4e0 arch/x86/kernel/alternative.c:1584
+ text_poke+0x3a/0x60 arch/x86/kernel/alternative.c:1669
+ text_poke_bp_batch+0x172/0x310 arch/x86/kernel/alternative.c:1992
+ text_poke_flush arch/x86/kernel/alternative.c:2161 [inline]
+ text_poke_queue+0x93/0xb0 arch/x86/kernel/alternative.c:2175
+ ftrace_replace_code+0x12a/0x1b0 arch/x86/kernel/ftrace.c:249
+ ftrace_modify_all_code+0x1b9/0x2a0 kernel/trace/ftrace.c:2898
+ arch_ftrace_update_code+0xd/0x20 arch/x86/kernel/ftrace.c:257
+ ftrace_run_update_code kernel/trace/ftrace.c:2963 [inline]
+ ftrace_startup_enable+0x67/0xa0 kernel/trace/ftrace.c:3042
+ ftrace_startup kernel/trace/ftrace.c:3089 [inline]
+ ftrace_startup+0x124/0x200 kernel/trace/ftrace.c:3052
+ register_ftrace_function_nolock+0x43/0x90 kernel/trace/ftrace.c:8321
+ register_ftrace_function+0x1eb/0x280 kernel/trace/ftrace.c:8348
+ perf_ftrace_function_register kernel/trace/trace_event_perf.c:488 [inline]
+ perf_ftrace_event_register+0xcd/0xf0 kernel/trace/trace_event_perf.c:512
+ perf_trace_event_open kernel/trace/trace_event_perf.c:184 [inline]
+ perf_trace_event_init kernel/trace/trace_event_perf.c:206 [inline]
+ perf_trace_event_init+0x98/0x4b0 kernel/trace/trace_event_perf.c:193
+ perf_trace_init+0xde/0x170 kernel/trace/trace_event_perf.c:226
+ perf_tp_event_init+0x60/0xa0 kernel/events/core.c:10026
+ perf_try_init_event+0x88/0x280 kernel/events/core.c:11572
+ perf_init_event kernel/events/core.c:11636 [inline]
+ perf_event_alloc kernel/events/core.c:11916 [inline]
+ perf_event_alloc+0xe25/0x1c00 kernel/events/core.c:11782
+ __do_sys_perf_event_open+0x3b6/0x1910 kernel/events/core.c:12423
+ __se_sys_perf_event_open kernel/events/core.c:12314 [inline]
+ __x64_sys_perf_event_open+0x2f/0x40 kernel/events/core.c:12314
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45013d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc086c44f8 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 000000000045013d
+RDX: 0000000000000000 RSI: 00000000ffffffff RDI: 00000000200000c0
+RBP: 00000000ffffffff R08: 0000000000000000 R09: 0000000000411d40
+R10: 00000000ffffffff R11: 0000000000000246 R12: 0000000000027e03
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
