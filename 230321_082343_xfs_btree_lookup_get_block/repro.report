@@ -1,0 +1,1147 @@
+loop0: detected capacity change from 0 to 32768
+loop5: detected capacity change from 0 to 32768
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop4): Starting recovery (logdev: internal)
+general protection fault, probably for non-canonical address 0x696c6f665f647261: 0000 [#1] PREEMPT SMP NOPTI
+CPU: 0 PID: 2893 Comm: syz-executor129 Not tainted 6.3.0-rc3-intel-next-213f5bdb6525+ #1
+loop2: detected capacity change from 0 to 32768
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+loop6: detected capacity change from 0 to 32768
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+RSP: 0018:ffffc900040d3910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d284258 RCX: 0000000000000028
+RDX: 696c6f665f647261 RSI: ffff88800f3bc680 RDI: 0000000000000002
+RBP: ffffc900040d3968 R08: ffffc900040d3b88 R09: ffff88800d284258
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000000007
+XFS (loop7): Unmount and run xfs_repair
+R13: ffffc900040d39a8 R14: ffffffff83297640 R15: 0000000000000000
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+CR2: 00007f431662e020 CR3: 000000000c8ac003 CR4: 0000000000f70ef0
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ xfs_btree_lookup+0xfe/0x800 fs/xfs/libxfs/xfs_btree.c:1913
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+ xfs_btree_simple_query_range+0x54/0x280 fs/xfs/libxfs/xfs_btree.c:4732
+XFS (loop0): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+ xfs_btree_query_range+0x18a/0x1a0 fs/xfs/libxfs/xfs_btree.c:4972
+XFS (loop5): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+ xfs_refcount_recover_cow_leftovers+0x18c/0x4a0 fs/xfs/libxfs/xfs_refcount.c:1936
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+ xfs_reflink_recover_cow+0x79/0xf0 fs/xfs/xfs_reflink.c:928
+XFS (loop6): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+ xlog_recover_finish+0x136/0x420 fs/xfs/xfs_log_recover.c:3493
+ xfs_log_mount_finish+0x187/0x1d0 fs/xfs/xfs_log.c:829
+ xfs_mountfs+0x76e/0xce0 fs/xfs/xfs_mount.c:933
+ xfs_fs_fill_super+0x7aa/0xdc0 fs/xfs/xfs_super.c:1676
+ get_tree_bdev+0x24b/0x350 fs/super.c:1294
+ xfs_fs_get_tree+0x25/0x30 fs/xfs/xfs_super.c:1723
+ vfs_get_tree+0x3b/0x140 fs/super.c:1501
+ do_new_mount fs/namespace.c:3042 [inline]
+ path_mount+0x769/0x10f0 fs/namespace.c:3372
+XFS (loop0): Starting recovery (logdev: internal)
+ do_mount+0xaf/0xd0 fs/namespace.c:3385
+ __do_sys_mount fs/namespace.c:3594 [inline]
+ __se_sys_mount fs/namespace.c:3571 [inline]
+ __x64_sys_mount+0x14b/0x160 fs/namespace.c:3571
+XFS (loop0): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+XFS (loop0): Unmount and run xfs_repair
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+XFS (loop0): Failed to recover leftover CoW staging extents, err -117.
+RIP: 0033:0x45665e
+XFS (loop0): Filesystem has been shut down due to log error (0x2).
+Code: 89 c7 b8 3c 00 00 00 0f 05 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+XFS (loop0): Please unmount the filesystem and rectify the problem(s).
+RSP: 002b:00007ffc1d6ffdf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+XFS (loop0): Ending recovery (logdev: internal)
+RAX: ffffffffffffffda RBX: 00007ffc1d6ffe10 RCX: 000000000045665e
+XFS (loop0): Error -5 reserving per-AG metadata reserve pool.
+RDX: 0000000020009580 RSI: 00000000200095c0 RDI: 00007ffc1d6ffe10
+RBP: 0000000000000004 R08: 00007ffc1d6ffe50 R09: 00000000000095b2
+R10: 0000000000000800 R11: 0000000000000246 R12: 00007ffc1d6ffe50
+R13: 00000000014dc368 R14: 0000000000000800 R15: 0000000000000003
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+XFS (loop5): Starting recovery (logdev: internal)
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+XFS (loop5): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+RSP: 0018:ffffc900040d3910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d284258 RCX: 0000000000000028
+XFS (loop5): Unmount and run xfs_repair
+RDX: 696c6f665f647261 RSI: ffff88800f3bc680 RDI: 0000000000000002
+XFS (loop5): Failed to recover leftover CoW staging extents, err -117.
+RBP: ffffc900040d3968 R08: ffffc900040d3b88 R09: ffff88800d284258
+XFS (loop5): Filesystem has been shut down due to log error (0x2).
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000000007
+XFS (loop5): Please unmount the filesystem and rectify the problem(s).
+R13: ffffc900040d39a8 R14: ffffffff83297640 R15: 0000000000000000
+XFS (loop5): Ending recovery (logdev: internal)
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+XFS (loop5): Error -5 reserving per-AG metadata reserve pool.
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f431662e020 CR3: 000000000c8ac003 CR4: 0000000000f70ef0
+PKRU: 55555554
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop6): Starting recovery (logdev: internal)
+XFS (loop6): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop6): Unmount and run xfs_repair
+XFS (loop6): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop6): Filesystem has been shut down due to log error (0x2).
+XFS (loop6): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop6): Ending recovery (logdev: internal)
+XFS (loop6): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop1: detected capacity change from 0 to 32768
+loop2: detected capacity change from 0 to 32768
+loop5: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+loop0: detected capacity change from 0 to 32768
+XFS (loop1): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop7: detected capacity change from 0 to 32768
+loop6: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop5): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop1): Starting recovery (logdev: internal)
+XFS (loop1): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop1): Unmount and run xfs_repair
+XFS (loop1): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop1): Filesystem has been shut down due to log error (0x2).
+XFS (loop1): Please unmount the filesystem and rectify the problem(s).
+XFS (loop1): Ending recovery (logdev: internal)
+XFS (loop1): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop6): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop0): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop5): Starting recovery (logdev: internal)
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop3): Starting recovery (logdev: internal)
+general protection fault, probably for non-canonical address 0x696c6f665f647261: 0000 [#2] PREEMPT SMP NOPTI
+CPU: 0 PID: 2988 Comm: syz-executor129 Tainted: G      D            6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+RSP: 0018:ffffc9000442b910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d284190 RCX: 0000000000000028
+XFS (loop7): Starting recovery (logdev: internal)
+RDX: 696c6f665f647261 RSI: ffff888016fc8000 RDI: 0000000000000002
+RBP: ffffc9000442b968 R08: ffffc9000442bb88 R09: ffff88800d284190
+R10: ffffc9000442bc28 R11: 0000000000000000 R12: 0000000000000007
+R13: ffffc9000442b9a8 R14: ffffffff83297640 R15: 0000000000000000
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+XFS (loop7): Unmount and run xfs_repair
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+CR2: 00007f431663d000 CR3: 000000000e7c2004 CR4: 0000000000f70ef0
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+PKRU: 55555554
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+Call Trace:
+ <TASK>
+ xfs_btree_lookup+0xfe/0x800 fs/xfs/libxfs/xfs_btree.c:1913
+ xfs_btree_simple_query_range+0x54/0x280 fs/xfs/libxfs/xfs_btree.c:4732
+ xfs_btree_query_range+0x18a/0x1a0 fs/xfs/libxfs/xfs_btree.c:4972
+XFS (loop6): Starting recovery (logdev: internal)
+ xfs_refcount_recover_cow_leftovers+0x18c/0x4a0 fs/xfs/libxfs/xfs_refcount.c:1936
+XFS (loop6): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+ xfs_reflink_recover_cow+0x79/0xf0 fs/xfs/xfs_reflink.c:928
+XFS (loop6): Unmount and run xfs_repair
+ xlog_recover_finish+0x136/0x420 fs/xfs/xfs_log_recover.c:3493
+XFS (loop6): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop6): Filesystem has been shut down due to log error (0x2).
+ xfs_log_mount_finish+0x187/0x1d0 fs/xfs/xfs_log.c:829
+XFS (loop6): Please unmount the filesystem and rectify the problem(s).
+ xfs_mountfs+0x76e/0xce0 fs/xfs/xfs_mount.c:933
+ xfs_fs_fill_super+0x7aa/0xdc0 fs/xfs/xfs_super.c:1676
+ get_tree_bdev+0x24b/0x350 fs/super.c:1294
+ xfs_fs_get_tree+0x25/0x30 fs/xfs/xfs_super.c:1723
+XFS (loop7): Ending recovery (logdev: internal)
+ vfs_get_tree+0x3b/0x140 fs/super.c:1501
+ do_new_mount fs/namespace.c:3042 [inline]
+ path_mount+0x769/0x10f0 fs/namespace.c:3372
+ do_mount+0xaf/0xd0 fs/namespace.c:3385
+ __do_sys_mount fs/namespace.c:3594 [inline]
+ __se_sys_mount fs/namespace.c:3571 [inline]
+ __x64_sys_mount+0x14b/0x160 fs/namespace.c:3571
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45665e
+Code: 89 c7 b8 3c 00 00 00 0f 05 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+XFS (loop6): Ending recovery (logdev: internal)
+RSP: 002b:00007ffc1d6ffdf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00007ffc1d6ffe10 RCX: 000000000045665e
+XFS (loop6): Error -5 reserving per-AG metadata reserve pool.
+RDX: 0000000020009580 RSI: 00000000200095c0 RDI: 00007ffc1d6ffe10
+RBP: 0000000000000004 R08: 00007ffc1d6ffe50 R09: 00000000000095b2
+R10: 0000000000000800 R11: 0000000000000246 R12: 00007ffc1d6ffe50
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+R13: 00000000014dc368 R14: 0000000000000800 R15: 0000000000000003
+XFS (loop2): Unmount and run xfs_repair
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+RSP: 0018:ffffc900040d3910 EFLAGS: 00010246
+XFS (loop2): Ending recovery (logdev: internal)
+
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+RAX: 0000000000000000 RBX: ffff88800d284258 RCX: 0000000000000028
+RDX: 696c6f665f647261 RSI: ffff88800f3bc680 RDI: 0000000000000002
+RBP: ffffc900040d3968 R08: ffffc900040d3b88 R09: ffff88800d284258
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000000007
+R13: ffffc900040d39a8 R14: ffffffff83297640 R15: 0000000000000000
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f431663d000 CR3: 000000000e7c2004 CR4: 0000000000f70ef0
+PKRU: 55555554
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop0): Starting recovery (logdev: internal)
+XFS (loop0): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop0): Unmount and run xfs_repair
+XFS (loop0): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop0): Filesystem has been shut down due to log error (0x2).
+XFS (loop0): Please unmount the filesystem and rectify the problem(s).
+XFS (loop0): Ending recovery (logdev: internal)
+XFS (loop0): Error -5 reserving per-AG metadata reserve pool.
+loop6: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+loop0: detected capacity change from 0 to 32768
+loop1: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop6): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop0): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop2: detected capacity change from 0 to 32768
+XFS (loop1): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop6): Starting recovery (logdev: internal)
+XFS (loop0): Starting recovery (logdev: internal)
+general protection fault, probably for non-canonical address 0x696c6f665f647261: 0000 [#3] PREEMPT SMP NOPTI
+CPU: 0 PID: 3073 Comm: syz-executor129 Tainted: G      D            6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+RSP: 0018:ffffc900043bb910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d2840c8 RCX: 0000000000000028
+RDX: 696c6f665f647261 RSI: ffff88801779a340 RDI: 0000000000000002
+RBP: ffffc900043bb968 R08: ffffc900043bbb88 R09: ffff88800d2840c8
+R10: ffffc900043bbc28 R11: 0000000000000000 R12: 0000000000000007
+R13: ffffc900043bb9a8 R14: ffffffff83297640 R15: 0000000000000000
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f30a9159000 CR3: 000000000aa90001 CR4: 0000000000f70ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ xfs_btree_lookup+0xfe/0x800 fs/xfs/libxfs/xfs_btree.c:1913
+ xfs_btree_simple_query_range+0x54/0x280 fs/xfs/libxfs/xfs_btree.c:4732
+ xfs_btree_query_range+0x18a/0x1a0 fs/xfs/libxfs/xfs_btree.c:4972
+ xfs_refcount_recover_cow_leftovers+0x18c/0x4a0 fs/xfs/libxfs/xfs_refcount.c:1936
+ xfs_reflink_recover_cow+0x79/0xf0 fs/xfs/xfs_reflink.c:928
+ xlog_recover_finish+0x136/0x420 fs/xfs/xfs_log_recover.c:3493
+ xfs_log_mount_finish+0x187/0x1d0 fs/xfs/xfs_log.c:829
+ xfs_mountfs+0x76e/0xce0 fs/xfs/xfs_mount.c:933
+ xfs_fs_fill_super+0x7aa/0xdc0 fs/xfs/xfs_super.c:1676
+ get_tree_bdev+0x24b/0x350 fs/super.c:1294
+ xfs_fs_get_tree+0x25/0x30 fs/xfs/xfs_super.c:1723
+ vfs_get_tree+0x3b/0x140 fs/super.c:1501
+ do_new_mount fs/namespace.c:3042 [inline]
+ path_mount+0x769/0x10f0 fs/namespace.c:3372
+ do_mount+0xaf/0xd0 fs/namespace.c:3385
+ __do_sys_mount fs/namespace.c:3594 [inline]
+ __se_sys_mount fs/namespace.c:3571 [inline]
+ __x64_sys_mount+0x14b/0x160 fs/namespace.c:3571
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45665e
+Code: 89 c7 b8 3c 00 00 00 0f 05 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc1d6ffdf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00007ffc1d6ffe10 RCX: 000000000045665e
+RDX: 0000000020009580 RSI: 00000000200095c0 RDI: 00007ffc1d6ffe10
+RBP: 0000000000000004 R08: 00007ffc1d6ffe50 R09: 00000000000095b2
+R10: 0000000000000800 R11: 0000000000000246 R12: 00007ffc1d6ffe50
+R13: 00000000014dc368 R14: 0000000000000800 R15: 0000000000000003
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+RSP: 0018:ffffc900040d3910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d284258 RCX: 0000000000000028
+XFS (loop1): Starting recovery (logdev: internal)
+RDX: 696c6f665f647261 RSI: ffff88800f3bc680 RDI: 0000000000000002
+XFS (loop1): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+RBP: ffffc900040d3968 R08: ffffc900040d3b88 R09: ffff88800d284258
+XFS (loop1): Unmount and run xfs_repair
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000000007
+XFS (loop1): Failed to recover leftover CoW staging extents, err -117.
+R13: ffffc900040d39a8 R14: ffffffff83297640 R15: 0000000000000000
+XFS (loop1): Filesystem has been shut down due to log error (0x2).
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+XFS (loop1): Please unmount the filesystem and rectify the problem(s).
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+XFS (loop1): Ending recovery (logdev: internal)
+CR2: 00007f30a9159000 CR3: 000000000aa90001 CR4: 0000000000f70ef0
+XFS (loop1): Error -5 reserving per-AG metadata reserve pool.
+PKRU: 55555554
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop6): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop6): Unmount and run xfs_repair
+BUG: kernel NULL pointer dereference, address: 00000000000000a4
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD ba08067 P4D ba08067 PUD ba09067 PMD 0 
+Oops: 0000 [#4] PREEMPT SMP NOPTI
+CPU: 1 PID: 3072 Comm: syz-executor129 Tainted: G      D            6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:xfs_trans_brelse+0x66/0x210 fs/xfs/xfs_trans_buf.c:366
+Code: 65 8b 05 69 e5 52 7e 89 c0 48 0f a3 05 f3 43 56 02 0f 92 c3 31 ff 89 de e8 17 10 7d ff 84 db 0f 85 ef 00 00 00 e8 aa 0e 7d ff <41> 8b 9c 24 a4 00 00 00 31 ff 89 de e8 79 10 7d ff 85 db 0f 85 fa
+RSP: 0018:ffffc90004603b00 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000001 RCX: ffffffff81b06485
+RDX: 0000000000000000 RSI: ffff888017798000 RDI: 0000000000000002
+RBP: ffffc90004603b18 R08: 0000000000000000 R09: 0000000000000000
+R10: 000000000000131d R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880174cb3a0 R14: ffff8880174cb3a0 R15: ffff888013b2c000
+FS:  00000000014dc3c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000000000a4 CR3: 000000000d2d0003 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ xfs_btree_del_cursor+0x49/0x120 fs/xfs/libxfs/xfs_btree.c:440
+ xfs_refcount_recover_cow_leftovers+0x19f/0x4a0 fs/xfs/libxfs/xfs_refcount.c:1938
+ xfs_reflink_recover_cow+0x79/0xf0 fs/xfs/xfs_reflink.c:928
+ xlog_recover_finish+0x136/0x420 fs/xfs/xfs_log_recover.c:3493
+ xfs_log_mount_finish+0x187/0x1d0 fs/xfs/xfs_log.c:829
+ xfs_mountfs+0x76e/0xce0 fs/xfs/xfs_mount.c:933
+ xfs_fs_fill_super+0x7aa/0xdc0 fs/xfs/xfs_super.c:1676
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+ get_tree_bdev+0x24b/0x350 fs/super.c:1294
+ xfs_fs_get_tree+0x25/0x30 fs/xfs/xfs_super.c:1723
+ vfs_get_tree+0x3b/0x140 fs/super.c:1501
+ do_new_mount fs/namespace.c:3042 [inline]
+ path_mount+0x769/0x10f0 fs/namespace.c:3372
+ do_mount+0xaf/0xd0 fs/namespace.c:3385
+ __do_sys_mount fs/namespace.c:3594 [inline]
+ __se_sys_mount fs/namespace.c:3571 [inline]
+ __x64_sys_mount+0x14b/0x160 fs/namespace.c:3571
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45665e
+Code: 89 c7 b8 3c 00 00 00 0f 05 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc1d6ffdf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00007ffc1d6ffe10 RCX: 000000000045665e
+RDX: 0000000020009580 RSI: 00000000200095c0 RDI: 00007ffc1d6ffe10
+RBP: 0000000000000004 R08: 00007ffc1d6ffe50 R09: 00000000000095b2
+R10: 0000000000000800 R11: 0000000000000246 R12: 00007ffc1d6ffe50
+R13: 00000000014dc368 R14: 0000000000000800 R15: 0000000000000003
+ </TASK>
+Modules linked in:
+CR2: 00000000000000a4
+---[ end trace 0000000000000000 ]---
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+RSP: 0018:ffffc900040d3910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d284258 RCX: 0000000000000028
+RDX: 696c6f665f647261 RSI: ffff88800f3bc680 RDI: 0000000000000002
+RBP: ffffc900040d3968 R08: ffffc900040d3b88 R09: ffff88800d284258
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000000007
+R13: ffffc900040d39a8 R14: ffffffff83297640 R15: 0000000000000000
+FS:  00000000014dc3c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000000000a4 CR3: 000000000d2d0003 CR4: 0000000000f70ee0
+PKRU: 55555554
+note: syz-executor129[3072] exited with irqs disabled
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop1: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop7: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop1): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop1): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop1): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop1): Unmount and run xfs_repair
+BUG: unable to handle page fault for address: 00000001000000a3
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD d029067 P4D d029067 PUD 0 
+Oops: 0000 [#5] PREEMPT SMP NOPTI
+CPU: 0 PID: 3145 Comm: syz-executor129 Tainted: G      D            6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:xfs_trans_brelse+0x66/0x210 fs/xfs/xfs_trans_buf.c:366
+Code: 65 8b 05 69 e5 52 7e 89 c0 48 0f a3 05 f3 43 56 02 0f 92 c3 31 ff 89 de e8 17 10 7d ff 84 db 0f 85 ef 00 00 00 e8 aa 0e 7d ff <41> 8b 9c 24 a4 00 00 00 31 ff 89 de e8 79 10 7d ff 85 db 0f 85 fa
+RSP: 0018:ffffc9000449bb00 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000001 RCX: ffffffff81b06485
+RDX: 0000000000000000 RSI: ffff88801618a340 RDI: 0000000000000002
+RBP: ffffc9000449bb18 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000630 R11: 0000000000000000 R12: 00000000ffffffff
+R13: ffff8880174cb570 R14: ffff8880174cb570 R15: ffff88800f332000
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000001000000a3 CR3: 000000000f11e005 CR4: 0000000000f70ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ xfs_btree_del_cursor+0x49/0x120 fs/xfs/libxfs/xfs_btree.c:440
+ xfs_refcount_recover_cow_leftovers+0x19f/0x4a0 fs/xfs/libxfs/xfs_refcount.c:1938
+ xfs_reflink_recover_cow+0x79/0xf0 fs/xfs/xfs_reflink.c:928
+ xlog_recover_finish+0x136/0x420 fs/xfs/xfs_log_recover.c:3493
+ xfs_log_mount_finish+0x187/0x1d0 fs/xfs/xfs_log.c:829
+ xfs_mountfs+0x76e/0xce0 fs/xfs/xfs_mount.c:933
+ xfs_fs_fill_super+0x7aa/0xdc0 fs/xfs/xfs_super.c:1676
+ get_tree_bdev+0x24b/0x350 fs/super.c:1294
+ xfs_fs_get_tree+0x25/0x30 fs/xfs/xfs_super.c:1723
+ vfs_get_tree+0x3b/0x140 fs/super.c:1501
+ do_new_mount fs/namespace.c:3042 [inline]
+ path_mount+0x769/0x10f0 fs/namespace.c:3372
+ do_mount+0xaf/0xd0 fs/namespace.c:3385
+ __do_sys_mount fs/namespace.c:3594 [inline]
+ __se_sys_mount fs/namespace.c:3571 [inline]
+ __x64_sys_mount+0x14b/0x160 fs/namespace.c:3571
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45665e
+Code: 89 c7 b8 3c 00 00 00 0f 05 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc1d6ffdf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00007ffc1d6ffe10 RCX: 000000000045665e
+RDX: 0000000020009580 RSI: 00000000200095c0 RDI: 00007ffc1d6ffe10
+RBP: 0000000000000004 R08: 00007ffc1d6ffe50 R09: 00000000000095b2
+R10: 0000000000000800 R11: 0000000000000246 R12: 00007ffc1d6ffe50
+R13: 00000000014dc368 R14: 0000000000000800 R15: 0000000000000003
+ </TASK>
+Modules linked in:
+CR2: 00000001000000a3
+---[ end trace 0000000000000000 ]---
+RIP: 0010:xfs_buf_daddr fs/xfs/xfs_buf.h:314 [inline]
+RIP: 0010:xfs_btree_lookup_get_block+0xcf/0x300 fs/xfs/libxfs/xfs_btree.c:1817
+Code: 1c 8a ff 45 85 ff 0f 85 1d 01 00 00 e8 3a 1a 8a ff 4c 8b 75 c0 4d 85 f6 74 37 e8 2c 1a 8a ff 49 8b 96 28 02 00 00 48 8b 4d c8 <48> 8b 12 48 89 cf 48 89 4d b0 48 89 d6 48 89 55 a8 e8 2b 1b 8a ff
+RSP: 0018:ffffc900040d3910 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800d284258 RCX: 0000000000000028
+RDX: 696c6f665f647261 RSI: ffff88800f3bc680 RDI: 0000000000000002
+RBP: ffffc900040d3968 R08: ffffc900040d3b88 R09: ffff88800d284258
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000000007
+R13: ffffc900040d39a8 R14: ffffffff83297640 R15: 0000000000000000
+FS:  00000000014dc3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000001000000a3 CR3: 000000000f11e005 CR4: 0000000000f70ef0
+PKRU: 55555554
+note: syz-executor129[3145] exited with irqs disabled
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop2: detected capacity change from 0 to 32768
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop2: detected capacity change from 0 to 32768
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop2: detected capacity change from 0 to 32768
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop7: detected capacity change from 0 to 32768
+loop2: detected capacity change from 0 to 32768
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+loop2: detected capacity change from 0 to 32768
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop7: detected capacity change from 0 to 32768
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop2: detected capacity change from 0 to 32768
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop2: detected capacity change from 0 to 32768
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+loop7: detected capacity change from 0 to 32768
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop7: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+loop2: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+loop2: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop3: detected capacity change from 0 to 32768
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+loop3: detected capacity change from 0 to 32768
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop7): Starting recovery (logdev: internal)
+XFS (loop7): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop7): Unmount and run xfs_repair
+XFS (loop7): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop7): Filesystem has been shut down due to log error (0x2).
+XFS (loop7): Please unmount the filesystem and rectify the problem(s).
+XFS (loop7): Ending recovery (logdev: internal)
+XFS (loop7): Error -5 reserving per-AG metadata reserve pool.
+loop2: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop3): Unmount and run xfs_repair
+XFS (loop3): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop3): Filesystem has been shut down due to log error (0x2).
+XFS (loop3): Please unmount the filesystem and rectify the problem(s).
+XFS (loop3): Ending recovery (logdev: internal)
+XFS (loop3): Error -5 reserving per-AG metadata reserve pool.
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Starting recovery (logdev: internal)
+XFS (loop2): Metadata corruption detected at xfs_btree_lookup_get_block+0x27a/0x300 fs/xfs/libxfs/xfs_btree.c:1829, xfs_refcountbt block 0x28
+XFS (loop2): Unmount and run xfs_repair
+XFS (loop2): Failed to recover leftover CoW staging extents, err -117.
+XFS (loop2): Filesystem has been shut down due to log error (0x2).
+XFS (loop2): Please unmount the filesystem and rectify the problem(s).
+XFS (loop2): Ending recovery (logdev: internal)
+XFS (loop2): Error -5 reserving per-AG metadata reserve pool.
+----------------
+Code disassembly (best guess):
+   0:	1c 8a                	sbb    $0x8a,%al
+   2:	ff 45 85             	incl   -0x7b(%rbp)
+   5:	ff 0f                	decl   (%rdi)
+   7:	85 1d 01 00 00 e8    	test   %ebx,-0x17ffffff(%rip)        # 0xe800000e
+   d:	3a 1a                	cmp    (%rdx),%bl
+   f:	8a ff                	mov    %bh,%bh
+  11:	4c 8b 75 c0          	mov    -0x40(%rbp),%r14
+  15:	4d 85 f6             	test   %r14,%r14
+  18:	74 37                	je     0x51
+  1a:	e8 2c 1a 8a ff       	call   0xff8a1a4b
+  1f:	49 8b 96 28 02 00 00 	mov    0x228(%r14),%rdx
+  26:	48 8b 4d c8          	mov    -0x38(%rbp),%rcx
+* 2a:	48 8b 12             	mov    (%rdx),%rdx <-- trapping instruction
+  2d:	48 89 cf             	mov    %rcx,%rdi
+  30:	48 89 4d b0          	mov    %rcx,-0x50(%rbp)
+  34:	48 89 d6             	mov    %rdx,%rsi
+  37:	48 89 55 a8          	mov    %rdx,-0x58(%rbp)
+  3b:	e8 2b 1b 8a ff       	call   0xff8a1b6b
