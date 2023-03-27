@@ -1,0 +1,575 @@
+Extracting prog: 1m23.311593675s
+Minimizing prog: 4m53.116480614s
+Simplifying prog options: 0s
+Extracting C: 16.59564063s
+Simplifying C: 1m13.87694015s
+
+
+410 programs, 4 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 399 programs
+single: executing 8 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5415, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): mmap$IORING_OFF_SQ_RING-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_IOAS_ALLOC-openat$sw_sync_info-ioctl$IOMMU_TEST_OP_MOCK_DOMAIN-ioctl$IOMMU_IOAS_MAP$PAGES
+detailed listing:
+executing program 0:
+mmap$IORING_OFF_SQ_RING(&(0x7f0000ff9000/0x4000)=nil, 0x4000, 0x0, 0x20031, 0xffffffffffffffff, 0x0)
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000280), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000040)={0xc, 0x0, <r1=>0x0})
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000080)={0xc, 0x0, <r2=>0x0})
+r3 = openat$sw_sync_info(0xffffffffffffff9c, &(0x7f00000000c0), 0x200000, 0x0)
+ioctl$IOMMU_TEST_OP_MOCK_DOMAIN(r3, 0x3ba0, &(0x7f0000000000)={0x38, 0x2, r2})
+ioctl$IOMMU_IOAS_MAP$PAGES(r0, 0x3b85, &(0x7f0000000100)={0x28, 0x0, r1, 0x0, &(0x7f0000ff3000/0xc000)=nil, 0xc000})
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): keyctl$KEYCTL_PKEY_QUERY-keyctl$get_keyring_id-socket$nl_route-socket$nl_route-sendmsg$nl_route_sched
+detailed listing:
+executing program 0:
+keyctl$KEYCTL_PKEY_QUERY(0x18, 0x0, 0x0, &(0x7f0000000000)=':,\',#[\\\x00', &(0x7f0000000040))
+keyctl$get_keyring_id(0x0, 0x0, 0x9)
+socket$nl_route(0x10, 0x3, 0x0) (async)
+r0 = socket$nl_route(0x10, 0x3, 0x0)
+sendmsg$nl_route_sched(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000380)=@deltaction={0x18, 0x31, 0x1, 0x0, 0x0, {}, [@TCA_ACT_TAB={0x4}]}, 0x18}}, 0x0)
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+single: successfully extracted reproducer
+found reproducer with 7 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter
+detailed listing:
+executing program 0:
+syz_open_dev$tty20(0xc, 0x4, 0x0)
+r0 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r1 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r2 = dup2(r0, r1)
+io_uring_enter(r2, 0x8, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+dup2(r1, r2)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+io_uring_enter(0xffffffffffffffff, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r2 = dup2(r1, 0xffffffffffffffff)
+io_uring_enter(r2, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r2 = dup2(0xffffffffffffffff, r1)
+io_uring_enter(r2, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r1 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r2 = dup2(r0, r1)
+io_uring_enter(r2, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(0xffffffffffffffff, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, 0x0, &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, 0x0, &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), 0x0)
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, 0x0, 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, 0x0, 0x0)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, &(0x7f0000000080)=0x4)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+r1 = syz_io_uring_setup(0x7b51, &(0x7f0000000100), &(0x7f0000000000/0x3000)=nil, &(0x7f0000000000/0x2000)=nil, &(0x7f0000000040), &(0x7f0000000000))
+r2 = openat$khugepaged_scan(0xffffffffffffff9c, &(0x7f00000001c0), 0x1, 0x0)
+bpf$PROG_LOAD(0x5, &(0x7f0000000000)={0x16, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, '\x00', 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 0x80)
+r3 = dup2(r1, r2)
+io_uring_enter(r3, 0x8, 0x0, 0x0, 0x0, 0x0)
+ioctl$TIOCSTI(r0, 0x5437, 0x0)
+
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty20-syz_io_uring_setup-openat$khugepaged_scan-bpf$PROG_LOAD-dup2-io_uring_enter-ioctl$TIOCSTI
+program crashed: BUG: unable to handle kernel NULL pointer dereference in io_poll_remove_entries
+reproducing took 7m46.900664843s
+repro crashed as (corrupted=false):
+BUG: kernel NULL pointer dereference, address: 0000000000000008
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD af52067 P4D af52067 PUD adce067 PMD 0 
+Oops: 0000 [#1] PREEMPT SMP NOPTI
+CPU: 0 PID: 486 Comm: syz-executor376 Not tainted 6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:io_poll_remove_entry io_uring/poll.c:182 [inline]
+RIP: 0010:io_poll_remove_entries.part.16+0x14a/0x310 io_uring/poll.c:220
+Code: 06 00 00 00 89 de e8 75 1e 59 ff 80 fb 06 0f 84 c5 01 00 00 e8 07 1d 59 ff 49 8b 84 24 a8 00 00 00 48 8b 58 40 e8 f6 1c 59 ff <4c> 8b 63 08 4d 85 e4 74 38 e8 e8 1c 59 ff 4c 89 e7 e8 70 91 26 01
+RSP: 0018:ffffc90000f2bb78 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff81d4551b
+RDX: 0000000000000000 RSI: ffff888013124680 RDI: 0000000000000002
+RBP: ffffc90000f2bb90 R08: 0000000000000019 R09: 0000000000000001
+R10: ffff888013125418 R11: 0000000000000000 R12: ffff88800aea8b00
+R13: 0000000000000000 R14: 0000000000000059 R15: 0000000001000000
+FS:  000000000218c3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000008 CR3: 000000000bb0e002 CR4: 0000000000f70ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ io_poll_remove_entries io_uring/poll.c:198 [inline]
+ __io_arm_poll_handler+0x30c/0x520 io_uring/poll.c:603
+ io_arm_poll_handler+0x2cf/0x530 io_uring/poll.c:734
+ io_queue_async+0x88/0x2f0 io_uring/io_uring.c:2057
+ io_queue_sqe io_uring/io_uring.c:2088 [inline]
+ io_req_task_submit+0x122/0x140 io_uring/io_uring.c:1425
+ io_poll_task_func+0x4c6/0x700 io_uring/poll.c:346
+ handle_tw_list io_uring/io_uring.c:1184 [inline]
+ tctx_task_work+0x1d3/0x650 io_uring/io_uring.c:1246
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ get_signal+0xd6b/0x14a0 kernel/signal.c:2635
+ arch_do_signal_or_restart+0x33/0x280 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:203
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:296
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x44f3fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffcb61e16d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 000000000044f3fd
+RDX: 0000000000000000 RSI: 0000000000005437 RDI: 0000000000000003
+RBP: 0000000000411820 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000004118c0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+CR2: 0000000000000008
+---[ end trace 0000000000000000 ]---
+RIP: 0010:io_poll_remove_entry io_uring/poll.c:182 [inline]
+RIP: 0010:io_poll_remove_entries.part.16+0x14a/0x310 io_uring/poll.c:220
+Code: 06 00 00 00 89 de e8 75 1e 59 ff 80 fb 06 0f 84 c5 01 00 00 e8 07 1d 59 ff 49 8b 84 24 a8 00 00 00 48 8b 58 40 e8 f6 1c 59 ff <4c> 8b 63 08 4d 85 e4 74 38 e8 e8 1c 59 ff 4c 89 e7 e8 70 91 26 01
+RSP: 0018:ffffc90000f2bb78 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff81d4551b
+RDX: 0000000000000000 RSI: ffff888013124680 RDI: 0000000000000002
+RBP: ffffc90000f2bb90 R08: 0000000000000019 R09: 0000000000000001
+R10: ffff888013125418 R11: 0000000000000000 R12: ffff88800aea8b00
+R13: 0000000000000000 R14: 0000000000000059 R15: 0000000001000000
+FS:  000000000218c3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000008 CR3: 000000000bb0e002 CR4: 0000000000f70ef0
+PKRU: 55555554
+note: syz-executor376[486] exited with irqs disabled
+BUG: sleeping function called from invalid context at kernel/locking/mutex.c:580
+in_atomic(): 0, irqs_disabled(): 0, non_block: 0, pid: 486, name: syz-executor376
+preempt_count: 0, expected: 0
+RCU nest depth: 1, expected: 0
+INFO: lockdep is turned off.
+CPU: 0 PID: 486 Comm: syz-executor376 Tainted: G      D            6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe0/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ __might_resched+0x1c2/0x2e0 kernel/sched/core.c:10058
+ __might_sleep+0x46/0x70 kernel/sched/core.c:9987
+ __mutex_lock_common kernel/locking/mutex.c:580 [inline]
+ __mutex_lock+0x54/0xcb0 kernel/locking/mutex.c:747
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+ io_uring_del_tctx_node+0x84/0x110 io_uring/tctx.c:169
+ io_uring_clean_tctx+0x74/0xf0 io_uring/tctx.c:185
+ io_uring_cancel_generic+0x452/0x4e0 io_uring/io_uring.c:3260
+ __io_uring_cancel+0x1f/0x30 io_uring/io_uring.c:3274
+ io_uring_files_cancel include/linux/io_uring.h:55 [inline]
+ do_exit+0x227/0x12b0 kernel/exit.c:824
+ make_task_dead+0x100/0x290 kernel/exit.c:981
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1541
+RIP: 0033:0x44f3fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffcb61e16d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 000000000044f3fd
+RDX: 0000000000000000 RSI: 0000000000005437 RDI: 0000000000000003
+RBP: 0000000000411820 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000004118c0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+------------[ cut here ]------------
+Voluntary context switch within RCU read-side critical section!
+WARNING: CPU: 1 PID: 486 at kernel/rcu/tree_plugin.h:318 rcu_note_context_switch+0x4f0/0x5b0 kernel/rcu/tree_plugin.h:318
+Modules linked in:
+CPU: 1 PID: 486 Comm: syz-executor376 Tainted: G      D W          6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:rcu_note_context_switch+0x4f0/0x5b0 kernel/rcu/tree_plugin.h:318
+Code: 1f d7 01 85 c0 75 02 0f 0b 49 8b 4c 24 58 48 8b 53 20 e9 6f fd ff ff 48 c7 c7 c0 8d 99 83 c6 05 52 58 dd 02 01 e8 10 c0 ef ff <0f> 0b e9 a4 fb ff ff a9 ff ff ff 7f 0f 84 0c fc ff ff 65 48 8b 3c
+RSP: 0018:ffffc90000f2bbf8 EFLAGS: 00010082
+RAX: 0000000000000000 RBX: ffff88807dd36180 RCX: ffffffff8111835b
+RDX: 0000000000000000 RSI: ffff888013124680 RDI: 0000000000000002
+RBP: ffffc90000f2bc20 R08: 0000000000000000 R09: 0000000000000000
+R10: 000000002d2d2d2d R11: 000000002d2d2d2d R12: ffff88807dd352c0
+R13: ffff888013124680 R14: 0000000000000000 R15: ffff888013124680
+FS:  000000000218c3c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f8f9a216000 CR3: 000000000bb0e002 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __schedule+0xe1/0xc30 kernel/sched/core.c:6522
+ schedule+0x5b/0xe0 kernel/sched/core.c:6698
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6757
+ mutex_optimistic_spin kernel/locking/mutex.c:510 [inline]
+ __mutex_lock_common kernel/locking/mutex.c:607 [inline]
+ __mutex_lock+0xad4/0xcb0 kernel/locking/mutex.c:747
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+ io_uring_del_tctx_node+0x84/0x110 io_uring/tctx.c:169
+ io_uring_clean_tctx+0x74/0xf0 io_uring/tctx.c:185
+ io_uring_cancel_generic+0x452/0x4e0 io_uring/io_uring.c:3260
+ __io_uring_cancel+0x1f/0x30 io_uring/io_uring.c:3274
+ io_uring_files_cancel include/linux/io_uring.h:55 [inline]
+ do_exit+0x227/0x12b0 kernel/exit.c:824
+ make_task_dead+0x100/0x290 kernel/exit.c:981
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1541
+RIP: 0033:0x44f3fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffcb61e16d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 000000000044f3fd
+RDX: 0000000000000000 RSI: 0000000000005437 RDI: 0000000000000003
+RBP: 0000000000411820 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000004118c0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 25276
+hardirqs last  enabled at (25275): [<ffffffff82faea5b>] __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (25275): [<ffffffff82faea5b>] _raw_spin_unlock_irq+0x2b/0x60 kernel/locking/spinlock.c:202
+hardirqs last disabled at (25276): [<ffffffff82f8d8de>] exc_page_fault+0x4e/0x3b0 arch/x86/mm/fault.c:1573
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] _static_cpu_has arch/x86/include/asm/cpufeature.h:176 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] use_xsave arch/x86/kernel/fpu/internal.h:10 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] init_fpstate_copy_size arch/x86/kernel/fpu/core.c:474 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] fpu_reset_fpregs arch/x86/kernel/fpu/core.c:730 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] fpu_flush_thread+0xd1/0x130 arch/x86/kernel/fpu/core.c:776
+softirqs last disabled at (23616): [<ffffffff8107abd9>] fpu_flush_thread+0x9/0x130 arch/x86/kernel/fpu/core.c:774
+---[ end trace 0000000000000000 ]---
+----------------
+Code disassembly (best guess), 2 bytes skipped:
+   0:	00 00                	add    %al,(%rax)
+   2:	89 de                	mov    %ebx,%esi
+   4:	e8 75 1e 59 ff       	call   0xff591e7e
+   9:	80 fb 06             	cmp    $0x6,%bl
+   c:	0f 84 c5 01 00 00    	je     0x1d7
+  12:	e8 07 1d 59 ff       	call   0xff591d1e
+  17:	49 8b 84 24 a8 00 00 	mov    0xa8(%r12),%rax
+  1e:	00
+  1f:	48 8b 58 40          	mov    0x40(%rax),%rbx
+  23:	e8 f6 1c 59 ff       	call   0xff591d1e
+* 28:	4c 8b 63 08          	mov    0x8(%rbx),%r12 <-- trapping instruction
+  2c:	4d 85 e4             	test   %r12,%r12
+  2f:	74 38                	je     0x69
+  31:	e8 e8 1c 59 ff       	call   0xff591d1e
+  36:	4c 89 e7             	mov    %r12,%rdi
+  39:	e8 70 91 26 01       	call   0x12691ae
+
+final repro crashed as (corrupted=false):
+BUG: kernel NULL pointer dereference, address: 0000000000000008
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD af52067 P4D af52067 PUD adce067 PMD 0 
+Oops: 0000 [#1] PREEMPT SMP NOPTI
+CPU: 0 PID: 486 Comm: syz-executor376 Not tainted 6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:io_poll_remove_entry io_uring/poll.c:182 [inline]
+RIP: 0010:io_poll_remove_entries.part.16+0x14a/0x310 io_uring/poll.c:220
+Code: 06 00 00 00 89 de e8 75 1e 59 ff 80 fb 06 0f 84 c5 01 00 00 e8 07 1d 59 ff 49 8b 84 24 a8 00 00 00 48 8b 58 40 e8 f6 1c 59 ff <4c> 8b 63 08 4d 85 e4 74 38 e8 e8 1c 59 ff 4c 89 e7 e8 70 91 26 01
+RSP: 0018:ffffc90000f2bb78 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff81d4551b
+RDX: 0000000000000000 RSI: ffff888013124680 RDI: 0000000000000002
+RBP: ffffc90000f2bb90 R08: 0000000000000019 R09: 0000000000000001
+R10: ffff888013125418 R11: 0000000000000000 R12: ffff88800aea8b00
+R13: 0000000000000000 R14: 0000000000000059 R15: 0000000001000000
+FS:  000000000218c3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000008 CR3: 000000000bb0e002 CR4: 0000000000f70ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ io_poll_remove_entries io_uring/poll.c:198 [inline]
+ __io_arm_poll_handler+0x30c/0x520 io_uring/poll.c:603
+ io_arm_poll_handler+0x2cf/0x530 io_uring/poll.c:734
+ io_queue_async+0x88/0x2f0 io_uring/io_uring.c:2057
+ io_queue_sqe io_uring/io_uring.c:2088 [inline]
+ io_req_task_submit+0x122/0x140 io_uring/io_uring.c:1425
+ io_poll_task_func+0x4c6/0x700 io_uring/poll.c:346
+ handle_tw_list io_uring/io_uring.c:1184 [inline]
+ tctx_task_work+0x1d3/0x650 io_uring/io_uring.c:1246
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ get_signal+0xd6b/0x14a0 kernel/signal.c:2635
+ arch_do_signal_or_restart+0x33/0x280 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:203
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:296
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x44f3fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffcb61e16d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 000000000044f3fd
+RDX: 0000000000000000 RSI: 0000000000005437 RDI: 0000000000000003
+RBP: 0000000000411820 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000004118c0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+CR2: 0000000000000008
+---[ end trace 0000000000000000 ]---
+RIP: 0010:io_poll_remove_entry io_uring/poll.c:182 [inline]
+RIP: 0010:io_poll_remove_entries.part.16+0x14a/0x310 io_uring/poll.c:220
+Code: 06 00 00 00 89 de e8 75 1e 59 ff 80 fb 06 0f 84 c5 01 00 00 e8 07 1d 59 ff 49 8b 84 24 a8 00 00 00 48 8b 58 40 e8 f6 1c 59 ff <4c> 8b 63 08 4d 85 e4 74 38 e8 e8 1c 59 ff 4c 89 e7 e8 70 91 26 01
+RSP: 0018:ffffc90000f2bb78 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff81d4551b
+RDX: 0000000000000000 RSI: ffff888013124680 RDI: 0000000000000002
+RBP: ffffc90000f2bb90 R08: 0000000000000019 R09: 0000000000000001
+R10: ffff888013125418 R11: 0000000000000000 R12: ffff88800aea8b00
+R13: 0000000000000000 R14: 0000000000000059 R15: 0000000001000000
+FS:  000000000218c3c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000008 CR3: 000000000bb0e002 CR4: 0000000000f70ef0
+PKRU: 55555554
+note: syz-executor376[486] exited with irqs disabled
+BUG: sleeping function called from invalid context at kernel/locking/mutex.c:580
+in_atomic(): 0, irqs_disabled(): 0, non_block: 0, pid: 486, name: syz-executor376
+preempt_count: 0, expected: 0
+RCU nest depth: 1, expected: 0
+INFO: lockdep is turned off.
+CPU: 0 PID: 486 Comm: syz-executor376 Tainted: G      D            6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe0/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ __might_resched+0x1c2/0x2e0 kernel/sched/core.c:10058
+ __might_sleep+0x46/0x70 kernel/sched/core.c:9987
+ __mutex_lock_common kernel/locking/mutex.c:580 [inline]
+ __mutex_lock+0x54/0xcb0 kernel/locking/mutex.c:747
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+ io_uring_del_tctx_node+0x84/0x110 io_uring/tctx.c:169
+ io_uring_clean_tctx+0x74/0xf0 io_uring/tctx.c:185
+ io_uring_cancel_generic+0x452/0x4e0 io_uring/io_uring.c:3260
+ __io_uring_cancel+0x1f/0x30 io_uring/io_uring.c:3274
+ io_uring_files_cancel include/linux/io_uring.h:55 [inline]
+ do_exit+0x227/0x12b0 kernel/exit.c:824
+ make_task_dead+0x100/0x290 kernel/exit.c:981
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1541
+RIP: 0033:0x44f3fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffcb61e16d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 000000000044f3fd
+RDX: 0000000000000000 RSI: 0000000000005437 RDI: 0000000000000003
+RBP: 0000000000411820 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000004118c0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+------------[ cut here ]------------
+Voluntary context switch within RCU read-side critical section!
+WARNING: CPU: 1 PID: 486 at kernel/rcu/tree_plugin.h:318 rcu_note_context_switch+0x4f0/0x5b0 kernel/rcu/tree_plugin.h:318
+Modules linked in:
+CPU: 1 PID: 486 Comm: syz-executor376 Tainted: G      D W          6.3.0-rc3-intel-next-213f5bdb6525+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:rcu_note_context_switch+0x4f0/0x5b0 kernel/rcu/tree_plugin.h:318
+Code: 1f d7 01 85 c0 75 02 0f 0b 49 8b 4c 24 58 48 8b 53 20 e9 6f fd ff ff 48 c7 c7 c0 8d 99 83 c6 05 52 58 dd 02 01 e8 10 c0 ef ff <0f> 0b e9 a4 fb ff ff a9 ff ff ff 7f 0f 84 0c fc ff ff 65 48 8b 3c
+RSP: 0018:ffffc90000f2bbf8 EFLAGS: 00010082
+RAX: 0000000000000000 RBX: ffff88807dd36180 RCX: ffffffff8111835b
+RDX: 0000000000000000 RSI: ffff888013124680 RDI: 0000000000000002
+RBP: ffffc90000f2bc20 R08: 0000000000000000 R09: 0000000000000000
+R10: 000000002d2d2d2d R11: 000000002d2d2d2d R12: ffff88807dd352c0
+R13: ffff888013124680 R14: 0000000000000000 R15: ffff888013124680
+FS:  000000000218c3c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f8f9a216000 CR3: 000000000bb0e002 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __schedule+0xe1/0xc30 kernel/sched/core.c:6522
+ schedule+0x5b/0xe0 kernel/sched/core.c:6698
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6757
+ mutex_optimistic_spin kernel/locking/mutex.c:510 [inline]
+ __mutex_lock_common kernel/locking/mutex.c:607 [inline]
+ __mutex_lock+0xad4/0xcb0 kernel/locking/mutex.c:747
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+ io_uring_del_tctx_node+0x84/0x110 io_uring/tctx.c:169
+ io_uring_clean_tctx+0x74/0xf0 io_uring/tctx.c:185
+ io_uring_cancel_generic+0x452/0x4e0 io_uring/io_uring.c:3260
+ __io_uring_cancel+0x1f/0x30 io_uring/io_uring.c:3274
+ io_uring_files_cancel include/linux/io_uring.h:55 [inline]
+ do_exit+0x227/0x12b0 kernel/exit.c:824
+ make_task_dead+0x100/0x290 kernel/exit.c:981
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1541
+RIP: 0033:0x44f3fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffcb61e16d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 000000000044f3fd
+RDX: 0000000000000000 RSI: 0000000000005437 RDI: 0000000000000003
+RBP: 0000000000411820 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000004118c0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 25276
+hardirqs last  enabled at (25275): [<ffffffff82faea5b>] __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (25275): [<ffffffff82faea5b>] _raw_spin_unlock_irq+0x2b/0x60 kernel/locking/spinlock.c:202
+hardirqs last disabled at (25276): [<ffffffff82f8d8de>] exc_page_fault+0x4e/0x3b0 arch/x86/mm/fault.c:1573
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] _static_cpu_has arch/x86/include/asm/cpufeature.h:176 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] use_xsave arch/x86/kernel/fpu/internal.h:10 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] init_fpstate_copy_size arch/x86/kernel/fpu/core.c:474 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] fpu_reset_fpregs arch/x86/kernel/fpu/core.c:730 [inline]
+softirqs last  enabled at (23618): [<ffffffff8107aca1>] fpu_flush_thread+0xd1/0x130 arch/x86/kernel/fpu/core.c:776
+softirqs last disabled at (23616): [<ffffffff8107abd9>] fpu_flush_thread+0x9/0x130 arch/x86/kernel/fpu/core.c:774
+---[ end trace 0000000000000000 ]---
+----------------
+Code disassembly (best guess), 2 bytes skipped:
+   0:	00 00                	add    %al,(%rax)
+   2:	89 de                	mov    %ebx,%esi
+   4:	e8 75 1e 59 ff       	call   0xff591e7e
+   9:	80 fb 06             	cmp    $0x6,%bl
+   c:	0f 84 c5 01 00 00    	je     0x1d7
+  12:	e8 07 1d 59 ff       	call   0xff591d1e
+  17:	49 8b 84 24 a8 00 00 	mov    0xa8(%r12),%rax
+  1e:	00
+  1f:	48 8b 58 40          	mov    0x40(%rax),%rbx
+  23:	e8 f6 1c 59 ff       	call   0xff591d1e
+* 28:	4c 8b 63 08          	mov    0x8(%rbx),%r12 <-- trapping instruction
+  2c:	4d 85 e4             	test   %r12,%r12
+  2f:	74 38                	je     0x69
+  31:	e8 e8 1c 59 ff       	call   0xff591d1e
+  36:	4c 89 e7             	mov    %r12,%rdi
+  39:	e8 70 91 26 01       	call   0x12691ae
+

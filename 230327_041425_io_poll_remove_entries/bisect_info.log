@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [e8d018dd0257f744ca50a729e3d042cf2ec9da65] Linux 6.3-rc3
+git bisect bad e8d018dd0257f744ca50a729e3d042cf2ec9da65
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [4b45e07907d87d0e218d9c4a125cdf1d9ea9b1c3] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf-next
+git bisect good 4b45e07907d87d0e218d9c4a125cdf1d9ea9b1c3
+# good: [9f8f1933dce555d3c246f447f54fca8de8889da9] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 9f8f1933dce555d3c246f447f54fca8de8889da9
+# good: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect good 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# good: [57b76324c2a03b7b75d2d93f5c83f4340fd9b621] Merge branches 'acpi-pm' and 'acpi-x86'
+git bisect good 57b76324c2a03b7b75d2d93f5c83f4340fd9b621
+# good: [9191423872f764dccc024d6bc4b68dfd138ccc38] Merge tag 'trace-v6.2-rc7-3' of git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace
+git bisect good 9191423872f764dccc024d6bc4b68dfd138ccc38
+# good: [49d575926890e6ada930bf6f06d62b2fde8fce95] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect good 49d575926890e6ada930bf6f06d62b2fde8fce95
+# good: [2d8cb0bfca6a05f1731d4570941e85d65c669386] Merge branch 'tools-ynl-fix-enum-as-flags-in-the-generic-cli'
+git bisect good 2d8cb0bfca6a05f1731d4570941e85d65c669386
+# bad: [95207db8166ab95c42a03fdc5e3abd212c9987dc] Remove Intel compiler support
+git bisect bad 95207db8166ab95c42a03fdc5e3abd212c9987dc
+# good: [c3f9b9fa10b9fb677966bfdab8c00da739c4af1b] Merge tag 'ceph-for-6.3-rc1' of https://github.com/ceph/ceph-client
+git bisect good c3f9b9fa10b9fb677966bfdab8c00da739c4af1b
+# good: [bf1a1bad82407ad81130c065f6495ec0f939ae60] Merge tag 'riscv-for-linus-6.3-mw2' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+git bisect good bf1a1bad82407ad81130c065f6495ec0f939ae60
+# bad: [06caa751545512fae98c21f282006a7fff852daf] Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect bad 06caa751545512fae98c21f282006a7fff852daf
+# bad: [53ae7e117637ff201fdf038b68e76a7202112dea] Merge tag 'io_uring-6.3-2023-03-03' of git://git.kernel.dk/linux
+git bisect bad 53ae7e117637ff201fdf038b68e76a7202112dea
+# good: [49d24398327e32265eccdeec4baeb5a6a609c0bd] blk-mq: enforce op-specific segment limits in blk_insert_cloned_request
+git bisect good 49d24398327e32265eccdeec4baeb5a6a609c0bd
+# good: [1bd1aee6cdb5c8cac8234fb72def4474012c2c49] Merge tag 'ata-6.3-fix' of git://git.kernel.org/pub/scm/linux/kernel/git/dlemoal/libata
+git bisect good 1bd1aee6cdb5c8cac8234fb72def4474012c2c49
+# good: [b000ae0ec2d709046ac1a3c5722fea417f8a067e] io_uring/rsrc: optimise single entry advance
+git bisect good b000ae0ec2d709046ac1a3c5722fea417f8a067e
+# bad: [c16bda37594f83147b167d381d54c010024efecf] io_uring/poll: allow some retries for poll triggering spuriously
+git bisect bad c16bda37594f83147b167d381d54c010024efecf
+# good: [977bc87356107fb946fb4ff24f1e4c241b5043ec] io_uring/rsrc: always initialize 'folio' to NULL
+git bisect good 977bc87356107fb946fb4ff24f1e4c241b5043ec
+# good: [7605c43d67face310b4b87dee1a28bc0c8cd8c0f] io_uring: remove MSG_NOSIGNAL from recvmsg
+git bisect good 7605c43d67face310b4b87dee1a28bc0c8cd8c0f
+# first bad commit: [c16bda37594f83147b167d381d54c010024efecf] io_uring/poll: allow some retries for poll triggering spuriously
+|0327_113415|Bisect successfully! e8d018dd0257f744ca50a729e3d042cf2ec9da65_c16bda37594f83147b167d381d54c010024efecf_revert bzimage passed!|
