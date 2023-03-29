@@ -1,0 +1,866 @@
+|0329_020715|CMD=cd /root/internal-devel|
+|0329_020715|git log 197b6b60ae7bc51dd0814953c562833143b292aa check_result:commit 197b6b60ae7bc51dd0814953c562833143b292aa|
+|0329_020715|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0329_020715|CMD=git checkout -f 197b6b60ae7bc51dd0814953c562833143b292aa|
+|0329_020716|CMD=cd /root/internal-devel|
+|0329_020716||/var/www/html/bzimage/bzImage_197b6b60ae7bc51dd0814953c562833143b292aa| exist, no need make|
+|0329_020716|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_020736|Run /var/www/html/bzimage/bzImage_197b6b60ae7bc51dd0814953c562833143b292aa with image:/root/image/centos8_2.img in local port:10022|
+|0329_020801|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_020802|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_020803|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_020805|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_020835|/var/www/html/bzimage/bzImage_197b6b60ae7bc51dd0814953c562833143b292aa contained sys_perf_event_open:[   56.598846]  __do_sys_perf_event_open+0x3b6/0x1910
+[   56.600490]  __x64_sys_perf_event_open+0x2f/0x40
+[   56.708602]  __do_sys_perf_event_open+0x3b6/0x1910
+[   56.710229]  __x64_sys_perf_event_open+0x2f/0x40, FAIL|
+|0329_020835|Found time:56 in /var/www/html/bzimage/0329_020715_sys_perf_event_open/197b6b60ae7bc51dd0814953c562833143b292aa_dmesg.log|
+|0329_020835|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:176|
+|0329_020835|-END- commit 197b6b60ae7bc51dd0814953c562833143b292aa FAIL bad|
+|0329_020835|issue_folder alreayd exist:/var/www/html//syzkaller/2023_03_29/fa79749efda953d6e34500270bfb7f552218b50a|
+|0329_020835|CMD=cp -rf /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog /var/www/html//syzkaller/2023_03_29/fa79749efda953d6e34500270bfb7f552218b50a/repro.c|
+|0329_020835|gcc -pthread /var/www/html//syzkaller/2023_03_29/fa79749efda953d6e34500270bfb7f552218b50a/repro.c -o /var/www/html//syzkaller/2023_03_29/fa79749efda953d6e34500270bfb7f552218b50a/repro|
+|0329_020835|CMD=cp -rf /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/description /var/www/html//syzkaller/2023_03_29/fa79749efda953d6e34500270bfb7f552218b50a|
+|0329_020835|FAIL|cp /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/machineInfo0 /var/www/html/bzimage/0329_020715_sys_perf_event_open/machineInfo0 failed!|
+|0329_020835|FAIL|cp /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/report0 /var/www/html/bzimage/0329_020715_sys_perf_event_open/report0 failed!|
+|0329_020835|FAIL|cp /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/log0 /var/www/html/bzimage/0329_020715_sys_perf_event_open/log0 failed!|
+|0329_020837|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0329_020715_sys_perf_event_open/kconfig_origin:0|
+|0329_020837|CMD=cd /root/internal-devel|
+|0329_020837||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0329_020837|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_020902|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|0329_020927|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_020927|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_020928|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_020930|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_021226|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_021226|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0329_021226|CMD=git checkout -f 197b6b60ae7bc51dd0814953c562833143b292aa|
+|0329_021227|CMD=git bisect start|
+|0329_021227|CMD=git bisect bad 197b6b60ae7bc51dd0814953c562833143b292aa|
+|0329_021227|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0329_021227|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0329_021302||/var/www/html/bzimage/bzImage_0db8640df59512dbd423c32077919f10cf35ebc6| exist, no need make|
+|0329_021302|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_021326|Run /var/www/html/bzimage/bzImage_0db8640df59512dbd423c32077919f10cf35ebc6 with image:/root/image/centos8_2.img in local port:10022|
+|0329_021351|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_021352|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_021353|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_021355|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_021651|/var/www/html/bzimage/bzImage_0db8640df59512dbd423c32077919f10cf35ebc6 contained sys_perf_event_open:[   68.646351]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   68.655787]  __x64_sys_perf_event_open+0x2b/0x30
+[   68.913455]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   68.922865]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_021651|git bisect bad 0db8640df59512dbd423c32077919f10cf35ebc6|
+|0329_021706||/var/www/html/bzimage/bzImage_4972bb90c3956817c8e0eea15a348ab635d1acdd| was not exist, will make it|
+|0329_030207|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_030244|Run /var/www/html/bzimage/bzImage_4972bb90c3956817c8e0eea15a348ab635d1acdd with image:/root/image/centos8_2.img in local port:10022|
+|0329_030309|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_030310|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_030311|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_030313|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_030610|/var/www/html/bzimage/bzImage_4972bb90c3956817c8e0eea15a348ab635d1acdd didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_030610|git bisect good 4972bb90c3956817c8e0eea15a348ab635d1acdd|
+|0329_030634||/var/www/html/bzimage/bzImage_e1959faf085b004e6c3afaaaa743381f00e7c015| was not exist, will make it|
+|0329_034834|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_034855|Run /var/www/html/bzimage/bzImage_e1959faf085b004e6c3afaaaa743381f00e7c015 with image:/root/image/centos8_2.img in local port:10022|
+|0329_034920|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_034921|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_034922|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_034924|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_035220|/var/www/html/bzimage/bzImage_e1959faf085b004e6c3afaaaa743381f00e7c015 contained sys_perf_event_open:[   76.814862]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   76.831329]  __x64_sys_perf_event_open+0x2b/0x30
+[   77.226582]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   77.243673]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_035220|git bisect bad e1959faf085b004e6c3afaaaa743381f00e7c015|
+|0329_035225||/var/www/html/bzimage/bzImage_ae79394a628530372e3b0aae4cb9e6495186558c| was not exist, will make it|
+|0329_042934|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_042954|Run /var/www/html/bzimage/bzImage_ae79394a628530372e3b0aae4cb9e6495186558c with image:/root/image/centos8_2.img in local port:10022|
+|0329_043019|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_043020|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_043021|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_043023|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_043319|/var/www/html/bzimage/bzImage_ae79394a628530372e3b0aae4cb9e6495186558c didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_043319|git bisect good ae79394a628530372e3b0aae4cb9e6495186558c|
+|0329_043323||/var/www/html/bzimage/bzImage_84882cf72cd774cf16fd338bdbf00f69ac9f9194| exist, no need make|
+|0329_043323|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_043344|Run /var/www/html/bzimage/bzImage_84882cf72cd774cf16fd338bdbf00f69ac9f9194 with image:/root/image/centos8_2.img in local port:10022|
+|0329_043409|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_043409|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_043411|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_043412|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_043709|/var/www/html/bzimage/bzImage_84882cf72cd774cf16fd338bdbf00f69ac9f9194 didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_043709|git bisect good 84882cf72cd774cf16fd338bdbf00f69ac9f9194|
+|0329_043711||/var/www/html/bzimage/bzImage_464fddbba1dfbc219f1e9145127a482d2159dee5| exist, no need make|
+|0329_043711|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_043729|Run /var/www/html/bzimage/bzImage_464fddbba1dfbc219f1e9145127a482d2159dee5 with image:/root/image/centos8_2.img in local port:10022|
+|0329_043754|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_043754|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_043756|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_043757|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_044054|/var/www/html/bzimage/bzImage_464fddbba1dfbc219f1e9145127a482d2159dee5 contained sys_perf_event_open:[   68.742583]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   68.746195]  __x64_sys_perf_event_open+0x2b/0x30
+[   68.996386]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.000099]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_044054|git bisect bad 464fddbba1dfbc219f1e9145127a482d2159dee5|
+|0329_044056||/var/www/html/bzimage/bzImage_bf953917bed6308daf2b5de49cc1bac58995a33c| exist, no need make|
+|0329_044056|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_044116|Run /var/www/html/bzimage/bzImage_bf953917bed6308daf2b5de49cc1bac58995a33c with image:/root/image/centos8_2.img in local port:10022|
+|0329_044141|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_044141|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_044143|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_044144|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_044441|/var/www/html/bzimage/bzImage_bf953917bed6308daf2b5de49cc1bac58995a33c contained sys_perf_event_open:[   29.066731]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.068018]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.104605]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.105891]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.144065]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.145315]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.183129]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.184354]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.221739]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.223028]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.260018]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.261279]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.298576]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.299838]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.337984]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.339196]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.375449]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.376701]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.414622]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.415813]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.053275]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.053757]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.149636]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.151683]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.301616]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.303640]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.393605]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.395637]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.503739]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.505771]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.605164]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.607124]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.099364]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.101260]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.345127]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.346983]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.516905]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.518765]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.605614]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.607453]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.713536]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.715268]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.099137]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.100932]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.213665]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.215519]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.313979]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.315807]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.411734]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.413591]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.520624]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.522404]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.375282]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.375768]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.459445]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.461332]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.702649]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.704443]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.844025]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.845881]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.928520]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.930406]  __x64_sys_perf_event_open+0x2b/0x30
+[   70.024531]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   70.026444]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.506440]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.509122]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.611755]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.612616]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.696326]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.697194]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.776651]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.777484]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.539543]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.542199]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.646846]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.647700]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.736144]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.737002]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.817432]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.818272]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.443282]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.444155]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.517411]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.518317]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.634141]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.635258]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.727791]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.728667]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.432017]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.433133]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.523870]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.524711]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.604910]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.605779]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.719158]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.720296]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.808949]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.809840]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.552778]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.560657]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.721400]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.724283]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.831659]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.832521]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.916702]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.917537]  __x64_sys_perf_event_open+0x2b/0x30
+[  100.000882]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  100.001783]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.490983]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.493777]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.589790]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.590649]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.672247]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.673077]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.754063]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.754935]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.838927]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.839788]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.620461]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.628284]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.772865]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.775750]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.870657]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.871520]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.484231]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.485146]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.573703]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.574580]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.681487]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.682636]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.794522]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.795427]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.892401]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.893317]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.460104]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.461006]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.553481]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.554350]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.640414]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.641362]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.746665]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.749596]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.834492]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.835683]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.503983]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.504914]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.599706]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.600592]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.695381]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.696570]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.802190]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.803103]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.898271]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.899211]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.477542]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.478725]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.580293]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.581810]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.691297]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.692474]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.789364]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.790547]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.881337]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.882741]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.494731]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.495921]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.577855]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.579246]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.811302]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.823036]  __x64_sys_perf_event_open+0x2b/0x30
+[  135.020502]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  135.025221]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.481462]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.482661]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.579104]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.580255]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.671447]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.672592]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.750976]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.752080]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.857966]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.862559]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.584391]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.589363]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.722891]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.724333]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.838693]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.840116]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.943586]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.945003]  __x64_sys_perf_event_open+0x2b/0x30
+[  145.065026]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  145.066462]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.646021]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.651465]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.801475]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.802952]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.914443]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.915898]  __x64_sys_perf_event_open+0x2b/0x30
+[  150.031816]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  150.033389]  __x64_sys_perf_event_open+0x2b/0x30
+[  150.160796]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  150.162534]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.527691]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.528831]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.635272]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.636352]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.739132]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.740318]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.866643]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.871240]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.962155]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.963502]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.602303]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.603988]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.720046]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.721728]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.809517]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.810559]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.493130]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.494817]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.628611]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.630313]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.833643]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.841583]  __x64_sys_perf_event_open+0x2b/0x30
+[  165.091971]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  165.099144]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.477595]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.479289]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.565732]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.567422]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.861813]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.875121]  __x64_sys_perf_event_open+0x2b/0x30
+[  170.111572]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  170.118239]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.497816]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.499504]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.607960]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.609648]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.697256]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.698934]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.948400]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.961835]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.591165]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.597678]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.688513]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.690200]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.774544]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.776223]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.972854]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.980710]  __x64_sys_perf_event_open+0x2b/0x30
+[  180.174733]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  180.181248]  __x64_sys_perf_event_open+0x2b/0x30
+[  184.542328]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  184.543993]  __x64_sys_perf_event_open+0x2b/0x30
+[  184.722159]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  184.730080]  __x64_sys_perf_event_open+0x2b/0x30
+[  184.931407]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  184.937942]  __x64_sys_perf_event_open+0x2b/0x30
+[  185.433599]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  185.447617]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.606901]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.613398]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.716394]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.718085]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.811938]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.813615]  __x64_sys_perf_event_open+0x2b/0x30
+[  190.021564]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  190.029442]  __x64_sys_perf_event_open+0x2b/0x30
+[  190.220093]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  190.226638]  __x64_sys_perf_event_open+0x2b/0x30
+[  194.650500]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  194.658373]  __x64_sys_perf_event_open+0x2b/0x30
+[  194.876742]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  194.883283]  __x64_sys_perf_event_open+0x2b/0x30
+[  194.980102]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  194.981790]  __x64_sys_perf_event_open+0x2b/0x30
+[  195.097467]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  195.099142]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.544124]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.545835]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.622173]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.623885]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.808132]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.816024]  __x64_sys_perf_event_open+0x2b/0x30
+[  200.028975]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  200.035703]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_044441|git bisect bad bf953917bed6308daf2b5de49cc1bac58995a33c|
+|0329_044442||/var/www/html/bzimage/bzImage_2cf3f8133bda2a0945cc4c70e681ecb25b52b913| exist, no need make|
+|0329_044442|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_044501|Run /var/www/html/bzimage/bzImage_2cf3f8133bda2a0945cc4c70e681ecb25b52b913 with image:/root/image/centos8_2.img in local port:10022|
+|0329_044526|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_044527|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_044528|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_044530|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_044826|/var/www/html/bzimage/bzImage_2cf3f8133bda2a0945cc4c70e681ecb25b52b913 didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_044826|git bisect good 2cf3f8133bda2a0945cc4c70e681ecb25b52b913|
+|0329_044827||/var/www/html/bzimage/bzImage_9a7e0a90a454a7826ecbca055a6ec9271b70c686| exist, no need make|
+|0329_044827|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_044845|Run /var/www/html/bzimage/bzImage_9a7e0a90a454a7826ecbca055a6ec9271b70c686 with image:/root/image/centos8_2.img in local port:10022|
+|0329_044910|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_044910|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_044912|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_044913|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_045210|/var/www/html/bzimage/bzImage_9a7e0a90a454a7826ecbca055a6ec9271b70c686 contained sys_perf_event_open:[   28.819765]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   28.820852]  __x64_sys_perf_event_open+0x2b/0x30
+[   28.853010]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   28.854083]  __x64_sys_perf_event_open+0x2b/0x30
+[   28.886208]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   28.887281]  __x64_sys_perf_event_open+0x2b/0x30
+[   28.919303]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   28.920447]  __x64_sys_perf_event_open+0x2b/0x30
+[   28.952592]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   28.953664]  __x64_sys_perf_event_open+0x2b/0x30
+[   28.985564]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   28.986636]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.017545]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.018574]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.049285]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.050319]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.080768]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.081813]  __x64_sys_perf_event_open+0x2b/0x30
+[   29.113539]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   29.114567]  __x64_sys_perf_event_open+0x2b/0x30
+[   33.843366]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   33.845020]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.060660]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.062359]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.203725]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.205435]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.296183]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.298170]  __x64_sys_perf_event_open+0x2b/0x30
+[   34.412830]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   34.414781]  __x64_sys_perf_event_open+0x2b/0x30
+[   43.848877]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   43.850536]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.018298]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.019950]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.184578]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.186227]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.275312]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.276967]  __x64_sys_perf_event_open+0x2b/0x30
+[   44.385531]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   44.387220]  __x64_sys_perf_event_open+0x2b/0x30
+[   53.862216]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   53.864171]  __x64_sys_perf_event_open+0x2b/0x30
+[   53.917510]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   53.919352]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.190945]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.192895]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.367475]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.369259]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.468818]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.470804]  __x64_sys_perf_event_open+0x2b/0x30
+[   54.584371]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   54.586261]  __x64_sys_perf_event_open+0x2b/0x30
+[   63.947156]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   63.949991]  __x64_sys_perf_event_open+0x2b/0x30
+[   64.047243]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   64.048049]  __x64_sys_perf_event_open+0x2b/0x30
+[   64.122365]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   64.123138]  __x64_sys_perf_event_open+0x2b/0x30
+[   64.195997]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   64.196720]  __x64_sys_perf_event_open+0x2b/0x30
+[   64.271125]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   64.271833]  __x64_sys_perf_event_open+0x2b/0x30
+[   68.934865]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   68.939993]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.072189]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.074673]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.153919]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.154627]  __x64_sys_perf_event_open+0x2b/0x30
+[   69.212958]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   69.213673]  __x64_sys_perf_event_open+0x2b/0x30
+[   73.860458]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   73.861371]  __x64_sys_perf_event_open+0x2b/0x30
+[   73.911072]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   73.912027]  __x64_sys_perf_event_open+0x2b/0x30
+[   73.990341]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   73.991047]  __x64_sys_perf_event_open+0x2b/0x30
+[   74.063146]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   74.063853]  __x64_sys_perf_event_open+0x2b/0x30
+[   74.147713]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   74.148666]  __x64_sys_perf_event_open+0x2b/0x30
+[   74.234898]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   74.235605]  __x64_sys_perf_event_open+0x2b/0x30
+[   78.888740]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   78.889448]  __x64_sys_perf_event_open+0x2b/0x30
+[   78.950864]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   78.951575]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.023216]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.023926]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.103361]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.104076]  __x64_sys_perf_event_open+0x2b/0x30
+[   79.176510]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   79.177221]  __x64_sys_perf_event_open+0x2b/0x30
+[   83.890906]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   83.891614]  __x64_sys_perf_event_open+0x2b/0x30
+[   83.964090]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   83.965041]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.044089]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.044797]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.113782]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.114490]  __x64_sys_perf_event_open+0x2b/0x30
+[   84.191502]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   84.192457]  __x64_sys_perf_event_open+0x2b/0x30
+[   88.892678]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   88.893634]  __x64_sys_perf_event_open+0x2b/0x30
+[   88.962518]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   88.963469]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.037494]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.038203]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.103096]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.103804]  __x64_sys_perf_event_open+0x2b/0x30
+[   89.180355]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   89.181306]  __x64_sys_perf_event_open+0x2b/0x30
+[   93.881681]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   93.882666]  __x64_sys_perf_event_open+0x2b/0x30
+[   93.950217]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   93.951182]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.024756]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.025478]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.091100]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.091834]  __x64_sys_perf_event_open+0x2b/0x30
+[   94.184012]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   94.184976]  __x64_sys_perf_event_open+0x2b/0x30
+[   98.961242]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   98.963842]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.057747]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.058488]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.135989]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.136734]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.213773]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.214513]  __x64_sys_perf_event_open+0x2b/0x30
+[   99.296776]  __do_sys_perf_event_open+0x3bf/0x1de0
+[   99.297519]  __x64_sys_perf_event_open+0x2b/0x30
+[  103.926857]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  103.927635]  __x64_sys_perf_event_open+0x2b/0x30
+[  103.997261]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  103.998038]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.068055]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.068845]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.148403]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.149291]  __x64_sys_perf_event_open+0x2b/0x30
+[  104.228089]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  104.228870]  __x64_sys_perf_event_open+0x2b/0x30
+[  108.910737]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  108.911749]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.000547]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.001799]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.095078]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.096096]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.181791]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.182800]  __x64_sys_perf_event_open+0x2b/0x30
+[  109.270522]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  109.271773]  __x64_sys_perf_event_open+0x2b/0x30
+[  113.948599]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  113.949638]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.023672]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.024712]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.101578]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.102857]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.187396]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.188436]  __x64_sys_perf_event_open+0x2b/0x30
+[  114.270307]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  114.271345]  __x64_sys_perf_event_open+0x2b/0x30
+[  118.934063]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  118.935408]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.019516]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.020868]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.104689]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.105789]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.181577]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.182677]  __x64_sys_perf_event_open+0x2b/0x30
+[  119.266931]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  119.268279]  __x64_sys_perf_event_open+0x2b/0x30
+[  123.949597]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  123.950945]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.039235]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.040337]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.117425]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.118522]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.192285]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.193628]  __x64_sys_perf_event_open+0x2b/0x30
+[  124.378315]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  124.386841]  __x64_sys_perf_event_open+0x2b/0x30
+[  128.924140]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  128.925217]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.021521]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.023292]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.102298]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.103372]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.204545]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.206314]  __x64_sys_perf_event_open+0x2b/0x30
+[  129.313199]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  129.314970]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.012181]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.019155]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.108059]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.109838]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.239560]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.241338]  __x64_sys_perf_event_open+0x2b/0x30
+[  134.500662]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  134.515054]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.159050]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.173434]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.404350]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.411320]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.503853]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.505631]  __x64_sys_perf_event_open+0x2b/0x30
+[  139.712430]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  139.714205]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.024932]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.031911]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.125374]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.127148]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.219141]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.220924]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.504922]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.519303]  __x64_sys_perf_event_open+0x2b/0x30
+[  144.730408]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  144.737399]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.043995]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.050999]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.147509]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.149310]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.292978]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.294776]  __x64_sys_perf_event_open+0x2b/0x30
+[  149.395932]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  149.397736]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.046494]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.053498]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.147694]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.149501]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.291644]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.293444]  __x64_sys_perf_event_open+0x2b/0x30
+[  154.430996]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  154.432799]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.101707]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.110194]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.300541]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.307553]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.401185]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.402984]  __x64_sys_perf_event_open+0x2b/0x30
+[  159.518384]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  159.520184]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.220939]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.235337]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.444626]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.451604]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.554343]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.556126]  __x64_sys_perf_event_open+0x2b/0x30
+[  164.652510]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  164.654288]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.061403]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.068422]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.164047]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.165826]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.251887]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.253682]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.461227]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.469772]  __x64_sys_perf_event_open+0x2b/0x30
+[  169.615884]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  169.621570]  __x64_sys_perf_event_open+0x2b/0x30
+[  170.111580]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  170.118227]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.305746]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.320312]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.550371]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.557382]  __x64_sys_perf_event_open+0x2b/0x30
+[  174.659673]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  174.661462]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.210441]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.224987]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.435297]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.442304]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.538297]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.540082]  __x64_sys_perf_event_open+0x2b/0x30
+[  179.633355]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  179.635199]  __x64_sys_perf_event_open+0x2b/0x30
+[  183.966308]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  183.967998]  __x64_sys_perf_event_open+0x2b/0x30
+[  184.315477]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  184.330040]  __x64_sys_perf_event_open+0x2b/0x30
+[  184.546538]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  184.553561]  __x64_sys_perf_event_open+0x2b/0x30
+[  184.652516]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  184.654299]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.108749]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.115775]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.230210]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.231986]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.319878]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.321656]  __x64_sys_perf_event_open+0x2b/0x30
+[  189.511196]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  189.519677]  __x64_sys_perf_event_open+0x2b/0x30
+[  194.301477]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  194.315873]  __x64_sys_perf_event_open+0x2b/0x30
+[  194.538281]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  194.545260]  __x64_sys_perf_event_open+0x2b/0x30
+[  194.645308]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  194.647080]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.237560]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.252085]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.489923]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.497049]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.601727]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.603500]  __x64_sys_perf_event_open+0x2b/0x30
+[  199.702488]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  199.704277]  __x64_sys_perf_event_open+0x2b/0x30
+[  204.093537]  __do_sys_perf_event_open+0x3bf/0x1de0
+[  204.100800]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_045210|git bisect bad 9a7e0a90a454a7826ecbca055a6ec9271b70c686|
+|0329_045211||/var/www/html/bzimage/bzImage_5a47ebe98e6e5113ea8213d019a794d5851fbd46| exist, no need make|
+|0329_045211|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_045229|Run /var/www/html/bzimage/bzImage_5a47ebe98e6e5113ea8213d019a794d5851fbd46 with image:/root/image/centos8_2.img in local port:10022|
+|0329_045254|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_045254|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_045255|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_045257|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_045553|/var/www/html/bzimage/bzImage_5a47ebe98e6e5113ea8213d019a794d5851fbd46 didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_045553|git bisect good 5a47ebe98e6e5113ea8213d019a794d5851fbd46|
+|0329_045554||/var/www/html/bzimage/bzImage_43aa0a195f06101bcb5d8d711bba0dd24b33a1a0| exist, no need make|
+|0329_045554|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_045613|Run /var/www/html/bzimage/bzImage_43aa0a195f06101bcb5d8d711bba0dd24b33a1a0 with image:/root/image/centos8_2.img in local port:10022|
+|0329_045638|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_045639|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_045640|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_045642|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_045938|/var/www/html/bzimage/bzImage_43aa0a195f06101bcb5d8d711bba0dd24b33a1a0 contained sys_perf_event_open:[  100.557081]  __do_sys_perf_event_open+0x3bf/0x1e00
+[  100.562697]  __x64_sys_perf_event_open+0x2b/0x30
+[  100.698138]  __do_sys_perf_event_open+0x3bf/0x1e00
+[  100.703727]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_045938|git bisect bad 43aa0a195f06101bcb5d8d711bba0dd24b33a1a0|
+|0329_045940||/var/www/html/bzimage/bzImage_f98a3dccfcb0b9b9c3bef8df9edd61cda80ad937| was not exist, will make it|
+|0329_061658|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_061730|Run /var/www/html/bzimage/bzImage_f98a3dccfcb0b9b9c3bef8df9edd61cda80ad937 with image:/root/image/centos8_2.img in local port:10022|
+|0329_061755|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_061756|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_061758|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_061800|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_062057|/var/www/html/bzimage/bzImage_f98a3dccfcb0b9b9c3bef8df9edd61cda80ad937 didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_062057|git bisect good f98a3dccfcb0b9b9c3bef8df9edd61cda80ad937|
+|0329_062101||/var/www/html/bzimage/bzImage_134ab5bd1883312d7a4b3033b05c6b5a1bb8889b| was not exist, will make it|
+|0329_071649|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_071708|Run /var/www/html/bzimage/bzImage_134ab5bd1883312d7a4b3033b05c6b5a1bb8889b with image:/root/image/centos8_2.img in local port:10022|
+|0329_071733|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_071734|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_071735|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_071737|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_072033|/var/www/html/bzimage/bzImage_134ab5bd1883312d7a4b3033b05c6b5a1bb8889b didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_072033|git bisect good 134ab5bd1883312d7a4b3033b05c6b5a1bb8889b|
+|0329_072039||/var/www/html/bzimage/bzImage_2de71ee153efa93099d2ab864acffeec70a8dcd5| exist, no need make|
+|0329_072039|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_072102|Run /var/www/html/bzimage/bzImage_2de71ee153efa93099d2ab864acffeec70a8dcd5 with image:/root/image/centos8_2.img in local port:10022|
+|0329_072127|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_072128|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_072129|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_072131|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_072427|/var/www/html/bzimage/bzImage_2de71ee153efa93099d2ab864acffeec70a8dcd5 didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_072427|git bisect good 2de71ee153efa93099d2ab864acffeec70a8dcd5|
+|0329_072433||/var/www/html/bzimage/bzImage_2f0cbb2a8e5bbf101e9de118fc0eb168111a5e1e| was not exist, will make it|
+|0329_080800|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_080821|Run /var/www/html/bzimage/bzImage_2f0cbb2a8e5bbf101e9de118fc0eb168111a5e1e with image:/root/image/centos8_2.img in local port:10022|
+|0329_080846|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_080847|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_080848|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_080849|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_081146|/var/www/html/bzimage/bzImage_2f0cbb2a8e5bbf101e9de118fc0eb168111a5e1e didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_081146|git bisect good 2f0cbb2a8e5bbf101e9de118fc0eb168111a5e1e|
+|0329_081147||/var/www/html/bzimage/bzImage_dceba0817ca329868a15e2e1dd46eb6340b69206| was not exist, will make it|
+|0329_084851|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_084913|Run /var/www/html/bzimage/bzImage_dceba0817ca329868a15e2e1dd46eb6340b69206 with image:/root/image/centos8_2.img in local port:10022|
+|0329_084938|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_084939|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_084940|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_084942|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_085238|/var/www/html/bzimage/bzImage_dceba0817ca329868a15e2e1dd46eb6340b69206 didn't contain sys_perf_event_open: in dmesg, pass|
+|0329_085238|git bisect good dceba0817ca329868a15e2e1dd46eb6340b69206|
+|0329_085241||/var/www/html/bzimage/bzImage_595b28fb0c8949463d8ec1e485f36d17c870ddb2| was not exist, will make it|
+|0329_093707|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_093728|Run /var/www/html/bzimage/bzImage_595b28fb0c8949463d8ec1e485f36d17c870ddb2 with image:/root/image/centos8_2.img in local port:10022|
+|0329_093753|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_093754|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_093755|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_093757|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_094053|/var/www/html/bzimage/bzImage_595b28fb0c8949463d8ec1e485f36d17c870ddb2 contained sys_perf_event_open:[   64.721374]  __do_sys_perf_event_open+0x3bf/0x1e00
+[   64.732898]  __x64_sys_perf_event_open+0x2b/0x30
+[   64.989152]  __do_sys_perf_event_open+0x3bf/0x1e00
+[   65.000652]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_094053|git bisect bad 595b28fb0c8949463d8ec1e485f36d17c870ddb2|
+|0329_094054||/var/www/html/bzimage/bzImage_91e1c99e175ae6bb6be765c6fcd40e869f8f6aee| exist, no need make|
+|0329_094054|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0329_094113|Run /var/www/html/bzimage/bzImage_91e1c99e175ae6bb6be765c6fcd40e869f8f6aee with image:/root/image/centos8_2.img in local port:10022|
+|0329_094138|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0329_094139|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0329_094140|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa79749efda953d6e34500270bfb7f552218b50a/repro.cprog root@localhost:/root/repro.c|
+|0329_094142|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0329_094438|/var/www/html/bzimage/bzImage_91e1c99e175ae6bb6be765c6fcd40e869f8f6aee contained sys_perf_event_open:[   68.650421]  __do_sys_perf_event_open+0x3bf/0x1e00
+[   68.661990]  __x64_sys_perf_event_open+0x2b/0x30
+[   68.914620]  __do_sys_perf_event_open+0x3bf/0x1e00
+[   68.925714]  __x64_sys_perf_event_open+0x2b/0x30, FAIL|
+|0329_094438|git bisect bad 91e1c99e175ae6bb6be765c6fcd40e869f8f6aee|
+|0329_094438|Bisect PASS: find 91e1c99e175ae6bb6be765c6fcd40e869f8f6aee is the first bad commit|
+|0329_094438|CMD=git bisect log >> /var/www/html/bzimage/bi.log|
+|0329_094438|CMD=git bisect log >> /var/www/html/bzimage/0329_020715_sys_perf_event_open/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [197b6b60ae7bc51dd0814953c562833143b292aa] Linux 6.3-rc4
+git bisect bad 197b6b60ae7bc51dd0814953c562833143b292aa
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [0db8640df59512dbd423c32077919f10cf35ebc6] Merge https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect bad 0db8640df59512dbd423c32077919f10cf35ebc6
+# good: [4972bb90c3956817c8e0eea15a348ab635d1acdd] Merge tag 'kbuild-fixes-v5.14-2' of git://git.kernel.org/pub/scm/linux/kernel/git/masahiroy/linux-kbuild
+git bisect good 4972bb90c3956817c8e0eea15a348ab635d1acdd
+# bad: [e1959faf085b004e6c3afaaaa743381f00e7c015] xhci: Fix USB 3.1 enumeration issues by increasing roothub power-on-good delay
+git bisect bad e1959faf085b004e6c3afaaaa743381f00e7c015
+# good: [ae79394a628530372e3b0aae4cb9e6495186558c] Merge tag 'sound-fix-5.15-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good ae79394a628530372e3b0aae4cb9e6495186558c
+# good: [84882cf72cd774cf16fd338bdbf00f69ac9f9194] Revert "net: avoid double accounting for pure zerocopy skbs"
+git bisect good 84882cf72cd774cf16fd338bdbf00f69ac9f9194
+# bad: [464fddbba1dfbc219f1e9145127a482d2159dee5] Merge tag 'pnp-5.16-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad 464fddbba1dfbc219f1e9145127a482d2159dee5
+# bad: [bf953917bed6308daf2b5de49cc1bac58995a33c] Merge tag 'kspp-misc-fixes-5.16-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gustavoars/linux
+git bisect bad bf953917bed6308daf2b5de49cc1bac58995a33c
+# good: [2cf3f8133bda2a0945cc4c70e681ecb25b52b913] btrfs: fix lzo_decompress_bio() kmap leakage
+git bisect good 2cf3f8133bda2a0945cc4c70e681ecb25b52b913
+# bad: [9a7e0a90a454a7826ecbca055a6ec9271b70c686] Merge tag 'sched-core-2021-11-01' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 9a7e0a90a454a7826ecbca055a6ec9271b70c686
+# good: [5a47ebe98e6e5113ea8213d019a794d5851fbd46] Merge tag 'irq-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 5a47ebe98e6e5113ea8213d019a794d5851fbd46
+# bad: [43aa0a195f06101bcb5d8d711bba0dd24b33a1a0] Merge tag 'objtool-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 43aa0a195f06101bcb5d8d711bba0dd24b33a1a0
+# good: [f98a3dccfcb0b9b9c3bef8df9edd61cda80ad937] locking: Remove spin_lock_flags() etc
+git bisect good f98a3dccfcb0b9b9c3bef8df9edd61cda80ad937
+# good: [134ab5bd1883312d7a4b3033b05c6b5a1bb8889b] objtool,x86: Replace alternatives with .retpoline_sites
+git bisect good 134ab5bd1883312d7a4b3033b05c6b5a1bb8889b
+# good: [2de71ee153efa93099d2ab864acffeec70a8dcd5] perf/x86/intel: Fix ICL/SPR INST_RETIRED.PREC_DIST encodings
+git bisect good 2de71ee153efa93099d2ab864acffeec70a8dcd5
+# good: [2f0cbb2a8e5bbf101e9de118fc0eb168111a5e1e] x86/alternative: Handle Jcc __x86_indirect_thunk_\reg
+git bisect good 2f0cbb2a8e5bbf101e9de118fc0eb168111a5e1e
+# good: [dceba0817ca329868a15e2e1dd46eb6340b69206] bpf,x86: Simplify computing label offsets
+git bisect good dceba0817ca329868a15e2e1dd46eb6340b69206
+# bad: [595b28fb0c8949463d8ec1e485f36d17c870ddb2] Merge tag 'locking-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 595b28fb0c8949463d8ec1e485f36d17c870ddb2
+# bad: [91e1c99e175ae6bb6be765c6fcd40e869f8f6aee] Merge tag 'perf-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 91e1c99e175ae6bb6be765c6fcd40e869f8f6aee
+# first bad commit: [91e1c99e175ae6bb6be765c6fcd40e869f8f6aee] Merge tag 'perf-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+|0329_094440|/root/bzimage_bisect/make_bz.sh -k /root/internal-devel -m 197b6b60ae7bc51dd0814953c562833143b292aa -b 91e1c99e175ae6bb6be765c6fcd40e869f8f6aee -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_197b6b60ae7bc51dd0814953c562833143b292aa_91e1c99e175ae6bb6be765c6fcd40e869f8f6aee_revert|
+|0329_094541|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0329_094541|FAIL|bzImage:/var/www/html/bzimage/bzImage_197b6b60ae7bc51dd0814953c562833143b292aa_91e1c99e175ae6bb6be765c6fcd40e869f8f6aee_revert does not exist:|
+|0329_094541|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0329_094541|ISSUE:fa79749efda953d6e34500270bfb7f552218b50a  EMAIL status after check:Email_not_sent|
