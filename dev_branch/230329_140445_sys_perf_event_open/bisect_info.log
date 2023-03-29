@@ -1,0 +1,17 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [2de71ee153efa93099d2ab864acffeec70a8dcd5] perf/x86/intel: Fix ICL/SPR INST_RETIRED.PREC_DIST encodings
+git bisect bad 2de71ee153efa93099d2ab864acffeec70a8dcd5
+# status: waiting for good commit(s), bad commit known
+# good: [6a371bafe613b7746c3d3ac486bdb3035f77e029] perf/x86/amd/ibs: Add bitfield definitions in new <asm/amd-ibs.h> header
+git bisect good 6a371bafe613b7746c3d3ac486bdb3035f77e029
+# good: [4034fb207e302cc0b1f304084d379640c1fb1436] perf/x86/intel/uncore: Fix Intel SPR M3UPI event constraints
+git bisect good 4034fb207e302cc0b1f304084d379640c1fb1436
+# bad: [f4c6217f7f5936f7173d028559ff5d25cce10816] perf: Add comment about current state of PERF_MEM_LVL_* namespace and remove an extra line
+git bisect bad f4c6217f7f5936f7173d028559ff5d25cce10816
+# good: [8b8ff8cc3b8155c18162e8b1f70e1230db176862] perf/x86: Add new event for AUX output counter index
+git bisect good 8b8ff8cc3b8155c18162e8b1f70e1230db176862
+# bad: [79df45731da68772d2285265864a52c900b8c65f] perf/core: Allow ftrace for functions in kernel/event/core.c
+git bisect bad 79df45731da68772d2285265864a52c900b8c65f
+# first bad commit: [79df45731da68772d2285265864a52c900b8c65f] perf/core: Allow ftrace for functions in kernel/event/core.c
+|0329_152805|Bisect successfully! 2de71ee153efa93099d2ab864acffeec70a8dcd5_79df45731da68772d2285265864a52c900b8c65f_revert bzimage passed!|
