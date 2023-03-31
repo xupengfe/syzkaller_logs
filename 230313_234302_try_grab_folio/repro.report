@@ -1,0 +1,137 @@
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 532 at mm/gup.c:75 try_get_folio mm/gup.c:75 [inline]
+WARNING: CPU: 1 PID: 532 at mm/gup.c:75 try_get_folio mm/gup.c:69 [inline]
+WARNING: CPU: 1 PID: 532 at mm/gup.c:75 try_grab_folio mm/gup.c:147 [inline]
+WARNING: CPU: 1 PID: 532 at mm/gup.c:75 try_grab_folio+0x503/0x740 mm/gup.c:124
+Modules linked in:
+CPU: 1 PID: 532 Comm: syz-executor300 Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:try_get_folio mm/gup.c:75 [inline]
+RIP: 0010:try_get_folio mm/gup.c:69 [inline]
+RIP: 0010:try_grab_folio mm/gup.c:147 [inline]
+RIP: 0010:try_grab_folio+0x503/0x740 mm/gup.c:124
+Code: e3 01 48 89 de e8 cd c0 dd ff 48 85 db 0f 84 7c fe ff ff e8 af be dd ff 49 8d 47 ff 48 89 45 d0 e9 73 fe ff ff e8 9d be dd ff <0f> 0b 31 db e9 d0 fc ff ff e8 8f be dd ff 48 8b 5d c8 31 ff 48 89
+RSP: 0018:ffffc90001067908 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: 00000000fffffc02 RCX: ffffffff81507fe6
+RDX: 0000000000000000 RSI: ffff88800e074680 RDI: 0000000000000002
+RBP: ffffc90001067948 R08: 000000000003da24 R09: 0000000000000005
+R10: 000000000003da00 R11: 0000000000000023 R12: ffffea0000613880
+R13: 0000000000000001 R14: 0000000000000000 R15: ffffea0000613880
+FS:  00000000013623c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000200011c0 CR3: 000000000a93e005 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ gup_pte_range mm/gup.c:2410 [inline]
+ gup_pmd_range mm/gup.c:2795 [inline]
+ gup_pud_range mm/gup.c:2823 [inline]
+ gup_p4d_range mm/gup.c:2848 [inline]
+ gup_pgd_range mm/gup.c:2876 [inline]
+ lockless_pages_from_mm mm/gup.c:2929 [inline]
+ internal_get_user_pages_fast+0xd32/0x2200 mm/gup.c:2976
+ pin_user_pages_fast+0x65/0x90 mm/gup.c:3086
+ pfn_reader_user_pin+0x376/0x390 drivers/iommu/iommufd/pages.c:781
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ pfn_reader_first drivers/iommu/iommufd/pages.c:1133 [inline]
+ pfn_reader_first+0x140/0x1b0 drivers/iommu/iommufd/pages.c:1121
+ iopt_area_fill_domain+0x74/0x210 drivers/iommu/iommufd/pages.c:1353
+ iopt_fill_domain drivers/iommu/iommufd/io_pagetable.c:754 [inline]
+ iopt_table_add_domain+0x30e/0x6e0 drivers/iommu/iommufd/io_pagetable.c:878
+ iommufd_device_selftest_attach+0x7f/0x140 drivers/iommu/iommufd/device.c:747
+ iommufd_test_mock_domain drivers/iommu/iommufd/selftest.c:295 [inline]
+ iommufd_test+0x10ff/0x16f0 drivers/iommu/iommufd/selftest.c:799
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45015d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffda912faf8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004b3082 RCX: 000000000045015d
+RDX: 00000000200001c0 RSI: 0000000000003ba0 RDI: 0000000000000003
+RBP: 00000000ffffffff R08: 0000000000411d60 R09: 0000000000411d60
+R10: 0000000000411d60 R11: 0000000000000246 R12: 000000000000942f
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 1008
+hardirqs last  enabled at (1007): [<ffffffff815f973b>] mod_objcg_state+0x16b/0x2f0 mm/memcontrol.c:3227
+hardirqs last disabled at (1008): [<ffffffff8150feae>] lockless_pages_from_mm mm/gup.c:2928 [inline]
+hardirqs last disabled at (1008): [<ffffffff8150feae>] internal_get_user_pages_fast+0x205e/0x2200 mm/gup.c:2976
+softirqs last  enabled at (984): [<ffffffff83029bdc>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (984): [<ffffffff83029bdc>] __do_softirq+0x31c/0x49c kernel/softirq.c:600
+softirqs last disabled at (973): [<ffffffff8112e774>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (973): [<ffffffff8112e774>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (973): [<ffffffff8112e774>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 532 at mm/gup.c:218 try_grab_page+0x1ac/0x1c0 mm/gup.c:218
+Modules linked in:
+CPU: 1 PID: 532 Comm: syz-executor300 Tainted: G        W          6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:try_grab_page+0x1ac/0x1c0 mm/gup.c:218
+Code: fe ff ff e8 c6 ba dd ff 49 8d 5e ff e9 b9 fe ff ff e8 b8 ba dd ff f0 83 43 34 01 f0 83 43 5c 01 e9 4b ff ff ff e8 a4 ba dd ff <0f> 0b 41 bd f4 ff ff ff e9 d6 fe ff ff 0f 1f 80 00 00 00 00 90 90
+RSP: 0018:ffffc900010676e8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffffea0000613880 RCX: ffffffff815086bf
+RDX: 0000000000000000 RSI: ffff88800e074680 RDI: 0000000000000002
+RBP: ffffc90001067708 R08: 000000000000001d R09: 0000000000000030
+R10: ffffc900010675c8 R11: ffff88800e075418 R12: 0000000000290101
+R13: 00000000fffffc02 R14: 0000000000000000 R15: ffffea0000613880
+FS:  00000000013623c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ff6cff1a000 CR3: 000000000a93e005 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ follow_page_pte+0x414/0xc00 mm/gup.c:605
+ follow_pmd_mask mm/gup.c:703 [inline]
+ follow_pud_mask mm/gup.c:734 [inline]
+ follow_p4d_mask mm/gup.c:751 [inline]
+ follow_page_mask+0x530/0xd80 mm/gup.c:808
+ __get_user_pages+0x33d/0xd80 mm/gup.c:1145
+ __get_user_pages_locked mm/gup.c:1381 [inline]
+ __gup_longterm_locked+0x1e9/0x1400 mm/gup.c:2084
+ internal_get_user_pages_fast+0x9d7/0x2200 mm/gup.c:2983
+ pin_user_pages_fast+0x65/0x90 mm/gup.c:3086
+ pfn_reader_user_pin+0x376/0x390 drivers/iommu/iommufd/pages.c:781
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ pfn_reader_first drivers/iommu/iommufd/pages.c:1133 [inline]
+ pfn_reader_first+0x140/0x1b0 drivers/iommu/iommufd/pages.c:1121
+ iopt_area_fill_domain+0x74/0x210 drivers/iommu/iommufd/pages.c:1353
+ iopt_fill_domain drivers/iommu/iommufd/io_pagetable.c:754 [inline]
+ iopt_table_add_domain+0x30e/0x6e0 drivers/iommu/iommufd/io_pagetable.c:878
+ iommufd_device_selftest_attach+0x7f/0x140 drivers/iommu/iommufd/device.c:747
+ iommufd_test_mock_domain drivers/iommu/iommufd/selftest.c:295 [inline]
+ iommufd_test+0x10ff/0x16f0 drivers/iommu/iommufd/selftest.c:799
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45015d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffda912faf8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004b3082 RCX: 000000000045015d
+RDX: 00000000200001c0 RSI: 0000000000003ba0 RDI: 0000000000000003
+RBP: 00000000ffffffff R08: 0000000000411d60 R09: 0000000000411d60
+R10: 0000000000411d60 R11: 0000000000000246 R12: 000000000000942f
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 1573
+hardirqs last  enabled at (1581): [<ffffffff811edf41>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (1588): [<ffffffff811edf26>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (1208): [<ffffffff83029bdc>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (1208): [<ffffffff83029bdc>] __do_softirq+0x31c/0x49c kernel/softirq.c:600
+softirqs last disabled at (1153): [<ffffffff8112e774>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (1153): [<ffffffff8112e774>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (1153): [<ffffffff8112e774>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---

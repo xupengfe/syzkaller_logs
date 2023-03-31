@@ -1,0 +1,192 @@
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 235130 at mm/gup.c:75 try_get_folio mm/gup.c:75 [inline]
+WARNING: CPU: 1 PID: 235130 at mm/gup.c:75 try_get_folio mm/gup.c:69 [inline]
+WARNING: CPU: 1 PID: 235130 at mm/gup.c:75 try_grab_folio mm/gup.c:147 [inline]
+WARNING: CPU: 1 PID: 235130 at mm/gup.c:75 try_grab_folio+0x503/0x740 mm/gup.c:124
+Modules linked in:
+CPU: 1 PID: 235130 Comm: syz-executor.0 Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:try_get_folio mm/gup.c:75 [inline]
+RIP: 0010:try_get_folio mm/gup.c:69 [inline]
+RIP: 0010:try_grab_folio mm/gup.c:147 [inline]
+RIP: 0010:try_grab_folio+0x503/0x740 mm/gup.c:124
+Code: e3 01 48 89 de e8 cd c0 dd ff 48 85 db 0f 84 7c fe ff ff e8 af be dd ff 49 8d 47 ff 48 89 45 d0 e9 73 fe ff ff e8 9d be dd ff <0f> 0b 31 db e9 d0 fc ff ff e8 8f be dd ff 48 8b 5d c8 31 ff 48 89
+RSP: 0018:ffffc9000080b908 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: 00000000fffffc02 RCX: ffffffff81507fe6
+RDX: 0000000000000000 RSI: ffff888007904680 RDI: 0000000000000002
+RBP: ffffc9000080b948 R08: 000000000003da24 R09: 0000000000000009
+R10: 000000000003da00 R11: 0000000000000023 R12: ffffea00014fa440
+R13: 0000000000000001 R14: 0000000000000000 R15: ffffea00014fa440
+FS:  00007f971a005700(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000200011c3 CR3: 00000000528ee003 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ gup_pte_range mm/gup.c:2410 [inline]
+ gup_pmd_range mm/gup.c:2795 [inline]
+ gup_pud_range mm/gup.c:2823 [inline]
+ gup_p4d_range mm/gup.c:2848 [inline]
+ gup_pgd_range mm/gup.c:2876 [inline]
+ lockless_pages_from_mm mm/gup.c:2929 [inline]
+ internal_get_user_pages_fast+0xd32/0x2200 mm/gup.c:2976
+ pin_user_pages_fast+0x65/0x90 mm/gup.c:3086
+ pfn_reader_user_pin+0x376/0x390 drivers/iommu/iommufd/pages.c:781
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ pfn_reader_first drivers/iommu/iommufd/pages.c:1133 [inline]
+ pfn_reader_first+0x140/0x1b0 drivers/iommu/iommufd/pages.c:1121
+ iopt_area_fill_domain+0x74/0x210 drivers/iommu/iommufd/pages.c:1353
+ iopt_fill_domain drivers/iommu/iommufd/io_pagetable.c:754 [inline]
+ iopt_table_add_domain+0x30e/0x6e0 drivers/iommu/iommufd/io_pagetable.c:878
+ iommufd_device_selftest_attach+0x7f/0x140 drivers/iommu/iommufd/device.c:747
+ iommufd_test_mock_domain drivers/iommu/iommufd/selftest.c:295 [inline]
+ iommufd_test+0x10ff/0x16f0 drivers/iommu/iommufd/selftest.c:799
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x4773bd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f971a005108 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 000000000059bf80 RCX: 00000000004773bd
+RDX: 00000000200001c0 RSI: 0000000000003ba0 RDI: 0000000000000003
+RBP: 000000000059bf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffff0f89baf R14: 00007ffff0f89d30 R15: 00007f971a005280
+ </TASK>
+irq event stamp: 1002
+hardirqs last  enabled at (1001): [<ffffffff815f973b>] mod_objcg_state+0x16b/0x2f0 mm/memcontrol.c:3227
+hardirqs last disabled at (1002): [<ffffffff8150feae>] lockless_pages_from_mm mm/gup.c:2928 [inline]
+hardirqs last disabled at (1002): [<ffffffff8150feae>] internal_get_user_pages_fast+0x205e/0x2200 mm/gup.c:2976
+softirqs last  enabled at (0): [<ffffffff8111acb8>] copy_process+0x1298/0x2d10 kernel/fork.c:2200
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+warn_alloc: 3 callbacks suppressed
+syz-executor.2: vmalloc error: size 2097152, page order 9, failed to allocate pages, mode:0x400dc2(GFP_KERNEL_ACCOUNT|__GFP_HIGHMEM|__GFP_ZERO), nodemask=(null),cpuset=/,mems_allowed=0
+CPU: 1 PID: 235468 Comm: syz-executor.2 Tainted: G        W          6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe0/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ warn_alloc+0x11b/0x190 mm/page_alloc.c:4398
+ __vmalloc_area_node mm/vmalloc.c:3027 [inline]
+ __vmalloc_node_range+0xc19/0xe40 mm/vmalloc.c:3181
+ kvmalloc_node+0x182/0x1c0 mm/util.c:628
+ kvmalloc include/linux/slab.h:737 [inline]
+ kvzalloc include/linux/slab.h:745 [inline]
+ iommufd_test_access_rw drivers/iommu/iommufd/selftest.c:740 [inline]
+ iommufd_test+0xc5e/0x16f0 drivers/iommu/iommufd/selftest.c:819
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x4773bd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f77fe57c108 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 000000000059c120 RCX: 00000000004773bd
+RDX: 0000000020000100 RSI: 0000000000003ba0 RDI: 0000000000000003
+RBP: 000000000059c120 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffea0d0485f R14: 00007ffea0d049e0 R15: 00007f77fe57c280
+ </TASK>
+Mem-Info:
+active_anon:757 inactive_anon:24723 isolated_anon:0
+ active_file:17869 inactive_file:23637 isolated_file:0
+ unevictable:0 dirty:66 writeback:0
+ slab_reclaimable:15975 slab_unreclaimable:6774
+ mapped:33771 shmem:2919 pagetables:1931
+ sec_pagetables:0 bounce:0
+ kernel_misc_reclaimable:0
+ free:326361 free_pcp:10355 free_cma:0
+Node 0 active_anon:3028kB inactive_anon:99144kB active_file:71476kB inactive_file:94548kB unevictable:0kB isolated(anon):0kB isolated(file):0kB mapped:135084kB dirty:264kB writeback:0kB shmem:11676kB shmem_thp: 0kB shmem_pmdmapped: 0kB anon_thp: 0kB writeback_tmp:0kB kernel_stack:2888kB pagetables:7724kB sec_pagetables:0kB all_unreclaimable? no
+Node 0 DMA free:15104kB boost:0kB min:352kB low:440kB high:528kB reserved_highatomic:0KB active_anon:0kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB writepending:0kB present:15992kB managed:15360kB mlocked:0kB bounce:0kB free_pcp:0kB local_pcp:0kB free_cma:0kB
+lowmem_reserve[]: 0 1904 1904 1904 1904
+Node 0 DMA32 free:1290088kB boost:0kB min:44700kB low:55872kB high:67044kB reserved_highatomic:0KB active_anon:3028kB inactive_anon:99396kB active_file:71476kB inactive_file:94548kB unevictable:0kB writepending:264kB present:2080640kB managed:1962780kB mlocked:0kB bounce:0kB free_pcp:41052kB local_pcp:22884kB free_cma:0kB
+lowmem_reserve[]: 0 0 0 0 0
+Node 0 DMA: 0*4kB 0*8kB 0*16kB 0*32kB 0*64kB 0*128kB 1*256kB (U) 1*512kB (U) 0*1024kB 1*2048kB (M) 3*4096kB (M) = 15104kB
+Node 0 DMA32: 938*4kB (UME) 934*8kB (UME) 1049*16kB (UME) 1092*32kB (UME) 856*64kB (UME) 535*128kB (UME) 350*256kB (UME) 283*512kB (UME) 265*1024kB (UME) 30*2048kB (UME) 130*4096kB (UM) = 1285992kB
+Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=1048576kB
+Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB
+44425 total pagecache pages
+0 pages in swap cache
+Free swap  = 0kB
+Total swap = 0kB
+524158 pages RAM
+0 pages HighMem/MovableOnly
+29623 pages reserved
+0 pages cma reserved
+0 pages hwpoisoned
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 235479 at mm/gup.c:218 try_grab_page+0x1ac/0x1c0 mm/gup.c:218
+Modules linked in:
+CPU: 1 PID: 235479 Comm: syz-executor.0 Tainted: G        W          6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:try_grab_page+0x1ac/0x1c0 mm/gup.c:218
+Code: fe ff ff e8 c6 ba dd ff 49 8d 5e ff e9 b9 fe ff ff e8 b8 ba dd ff f0 83 43 34 01 f0 83 43 5c 01 e9 4b ff ff ff e8 a4 ba dd ff <0f> 0b 41 bd f4 ff ff ff e9 d6 fe ff ff 0f 1f 80 00 00 00 00 90 90
+RSP: 0018:ffffc90000b7b690 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffffea0000d48e80 RCX: ffffffff815086bf
+RDX: 0000000000000000 RSI: ffff8880145d2340 RDI: 0000000000000002
+RBP: ffffc90000b7b6b0 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000000 R11: 0000000000000001 R12: 0000000000290100
+R13: 00000000fffffc01 R14: ffffea0000d48e48 R15: ffffea0000d48e80
+FS:  00007f971a005700(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000001aa8658 CR3: 0000000057c84005 CR4: 0000000000f70ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ follow_page_pte+0x414/0xc00 mm/gup.c:605
+ follow_pmd_mask mm/gup.c:703 [inline]
+ follow_pud_mask mm/gup.c:734 [inline]
+ follow_p4d_mask mm/gup.c:751 [inline]
+ follow_page_mask+0x530/0xd80 mm/gup.c:808
+ __get_user_pages+0x33d/0xd80 mm/gup.c:1145
+ __get_user_pages_locked mm/gup.c:1381 [inline]
+ __gup_longterm_locked+0x1e9/0x1400 mm/gup.c:2084
+ internal_get_user_pages_fast+0x9d7/0x2200 mm/gup.c:2983
+ pin_user_pages_fast+0x65/0x90 mm/gup.c:3086
+ pfn_reader_user_pin+0x376/0x390 drivers/iommu/iommufd/pages.c:781
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ iopt_pages_rw_slow+0x1d9/0x280 drivers/iommu/iommufd/pages.c:1753
+ iopt_pages_rw_access+0x2b2/0x5b0 drivers/iommu/iommufd/pages.c:1848
+ iommufd_access_rw+0x19f/0x2f0 drivers/iommu/iommufd/device.c:715
+ iommufd_test_access_rw drivers/iommu/iommufd/selftest.c:757 [inline]
+ iommufd_test+0xd11/0x16f0 drivers/iommu/iommufd/selftest.c:819
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x4773bd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f971a005108 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 000000000059bf80 RCX: 00000000004773bd
+RDX: 0000000020000100 RSI: 0000000000003ba0 RDI: 000000000000002a
+RBP: 000000000059bf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffff0f89baf R14: 00007ffff0f89d30 R15: 00007f971a005280
+ </TASK>
+irq event stamp: 37321
+hardirqs last  enabled at (37329): [<ffffffff811edf41>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (37338): [<ffffffff811edf26>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (37066): [<ffffffff83029bdc>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (37066): [<ffffffff83029bdc>] __do_softirq+0x31c/0x49c kernel/softirq.c:600
+softirqs last disabled at (37061): [<ffffffff8112e774>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (37061): [<ffffffff8112e774>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (37061): [<ffffffff8112e774>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
