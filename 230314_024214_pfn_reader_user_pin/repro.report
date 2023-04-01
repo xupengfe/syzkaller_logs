@@ -1,0 +1,54 @@
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 498 at drivers/iommu/iommufd/pages.c:793 pfn_reader_user_pin+0x2e6/0x390 drivers/iommu/iommufd/pages.c:793
+Modules linked in:
+CPU: 1 PID: 498 Comm: syz-executor371 Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:pfn_reader_user_pin+0x2e6/0x390 drivers/iommu/iommufd/pages.c:793
+Code: b1 11 e9 25 fe ff ff e8 28 dc 0f ff 31 ff 48 89 de e8 2e de 0f ff 48 85 db 74 0a e8 14 dc 0f ff e9 4d ff ff ff e8 0a dc 0f ff <0f> 0b bb f2 ff ff ff e9 3c ff ff ff e8 f9 db 0f ff ba 01 00 00 00
+RSP: 0018:ffffc90000f97a30 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff821e6692
+RDX: 0000000000000000 RSI: ffff88800ab38000 RDI: 0000000000000002
+RBP: ffffc90000f97a78 R08: 00000000000000ff R09: 0000000054a5eb9b
+R10: ffffc90000f97790 R11: ffff88800ab38d98 R12: ffffc90000f97c60
+R13: 0000000000000002 R14: ffff88800dc14200 R15: 0000000000000000
+FS:  00000000024b63c0(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000048 CR3: 000000000defe001 CR4: 0000000000770ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ pfn_reader_first drivers/iommu/iommufd/pages.c:1133 [inline]
+ pfn_reader_first+0x140/0x1b0 drivers/iommu/iommufd/pages.c:1121
+ iopt_pages_rw_slow+0x71/0x280 drivers/iommu/iommufd/pages.c:1740
+ iopt_pages_rw_access+0x2b2/0x5b0 drivers/iommu/iommufd/pages.c:1848
+ iommufd_access_rw+0x19f/0x2f0 drivers/iommu/iommufd/device.c:715
+ iommufd_test_access_rw drivers/iommu/iommufd/selftest.c:757 [inline]
+ iommufd_test+0xd11/0x16f0 drivers/iommu/iommufd/selftest.c:819
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x44f3ed
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc26409068 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004e2018 RCX: 000000000044f3ed
+RDX: 00000000200001c0 RSI: 0000000000003ba0 RDI: 0000000000000006
+RBP: 0000000000411810 R08: 00000000004e2018 R09: 00000000004e2018
+R10: 00000000004e2018 R11: 0000000000000246 R12: 00000000004118b0
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 25603
+hardirqs last  enabled at (25611): [<ffffffff811edf41>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (25620): [<ffffffff811edf26>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (25440): [<ffffffff83029bdc>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (25440): [<ffffffff83029bdc>] __do_softirq+0x31c/0x49c kernel/softirq.c:600
+softirqs last disabled at (25433): [<ffffffff8112e774>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (25433): [<ffffffff8112e774>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (25433): [<ffffffff8112e774>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---

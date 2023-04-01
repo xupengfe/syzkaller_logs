@@ -1,0 +1,427 @@
+Extracting prog: 29.311190929s
+Minimizing prog: 7m37.438838238s
+Simplifying prog options: 0s
+Extracting C: 17.101039348s
+Simplifying C: 1m13.700820795s
+
+
+385 programs, 4 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 337 programs
+single: executing 8 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program crashed: WARNING in pfn_reader_user_pin
+single: successfully extracted reproducer
+found reproducer with 9 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2})
+openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(0xffffffffffffffff, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r3, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, 0xffffffffffffffff, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, 0x0, 0x0, <r1=>0xffffffffffffffff})
+r2 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r2, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r1, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+ioctl$IOMMU_IOAS_ALLOC(0xffffffffffffffff, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r1=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r1})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r1, 0x0, <r2=>0xffffffffffffffff})
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r3, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r2, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+ioctl$IOMMU_IOAS_ALLOC(0xffffffffffffffff, 0x3b81, &(0x7f0000000000)={0xc})
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r1=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(0xffffffffffffffff, 0x3b88, &(0x7f00000000c0)={0xc, r1})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(0xffffffffffffffff, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(0xffffffffffffffff, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r1, 0x0, <r2=>0xffffffffffffffff})
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r3, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r2, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, 0x0)
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, 0x0)
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, 0x0, 0x0, <r2=>0xffffffffffffffff})
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r3, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r2, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, 0x0)
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, 0x0)
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, 0x0)
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r3, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, 0xffffffffffffffff, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x2, &(0x7f0000000200)='qK', 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2})
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r3, 0x3ba0, 0x0)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x0, 0x0, 0x10004})
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+detailed listing:
+executing program 0:
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000040), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r0, 0x3b81, &(0x7f0000000000)={0xc})
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000140)={0xc, 0x0, <r2=>0x0})
+ioctl$IOMMU_VFIO_IOAS$SET(r0, 0x3b88, &(0x7f00000000c0)={0xc, r2})
+ioctl$IOMMU_VFIO_IOMMU_MAP_DMA(r0, 0x3b71, &(0x7f0000000080)={0x20, 0x1, 0xffffffffffffffff, 0x0, 0x80000001})
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r0, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r3=>0xffffffffffffffff})
+r4 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000400), 0x0, 0x0)
+ioctl$IOMMU_TEST_OP_ACCESS_RW$syz(r4, 0x3ba0, &(0x7f00000001c0)={0x38, 0x8, r3, 0x3d27, 0x0, 0x0, 0x0, &(0x7f0000000200), 0x10004})
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-openat$iommufd-ioctl$IOMMU_IOAS_ALLOC-ioctl$IOMMU_VFIO_IOAS$SET-ioctl$IOMMU_VFIO_IOMMU_MAP_DMA-ioctl$IOMMU_TEST_OP_CREATE_ACCESS-openat$iommufd-ioctl$IOMMU_TEST_OP_ACCESS_RW$syz
+program crashed: WARNING in pfn_reader_user_pin
+reproducing took 9m37.551900411s
+repro crashed as (corrupted=false):
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 499 at drivers/iommu/iommufd/pages.c:793 pfn_reader_user_pin+0x2e6/0x390 drivers/iommu/iommufd/pages.c:793
+Modules linked in:
+CPU: 1 PID: 499 Comm: syz-executor122 Not tainted 6.3.0-rc4-e7f0adb355f3+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:pfn_reader_user_pin+0x2e6/0x390 drivers/iommu/iommufd/pages.c:793
+Code: b1 11 e9 25 fe ff ff e8 b8 7a 13 ff 31 ff 48 89 de e8 be 7c 13 ff 48 85 db 74 0a e8 a4 7a 13 ff e9 4d ff ff ff e8 9a 7a 13 ff <0f> 0b bb f2 ff ff ff e9 3c ff ff ff e8 89 7a 13 ff ba 01 00 00 00
+RSP: 0018:ffffc90001237a30 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff8219f832
+RDX: 0000000000000000 RSI: ffff888005288000 RDI: 0000000000000002
+RBP: ffffc90001237a78 R08: 00000000000000ff R09: 00000000f1661d5d
+R10: ffffc90001237790 R11: ffff888005288d98 R12: ffffc90001237c60
+R13: 0000000000000002 R14: ffff8880072ebc00 R15: 0000000000000000
+FS:  00000000006d43c0(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000040 CR3: 000000001382e005 CR4: 0000000000770ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ pfn_reader_first drivers/iommu/iommufd/pages.c:1133 [inline]
+ pfn_reader_first+0x140/0x1b0 drivers/iommu/iommufd/pages.c:1121
+ iopt_pages_rw_slow+0x71/0x280 drivers/iommu/iommufd/pages.c:1740
+ iopt_pages_rw_access+0x2b2/0x5b0 drivers/iommu/iommufd/pages.c:1848
+ iommufd_access_rw+0x19f/0x2f0 drivers/iommu/iommufd/device.c:715
+ iommufd_test_access_rw drivers/iommu/iommufd/selftest.c:757 [inline]
+ iommufd_test+0xd11/0x16f0 drivers/iommu/iommufd/selftest.c:819
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x44f3cd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc55fe5d78 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004e2018 RCX: 000000000044f3cd
+RDX: 00000000200001c0 RSI: 0000000000003ba0 RDI: 0000000000000006
+RBP: 00000000004117f0 R08: 00000000004e2018 R09: 00000000004e2018
+R10: 00000000004e2018 R11: 0000000000000246 R12: 0000000000411890
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 25265
+hardirqs last  enabled at (25273): [<ffffffff811e45e1>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (25280): [<ffffffff811e45c6>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (25230): [<ffffffff82fb7329>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (25230): [<ffffffff82fb7329>] __do_softirq+0x2d9/0x3c3 kernel/softirq.c:600
+softirqs last disabled at (25225): [<ffffffff811275f4>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (25225): [<ffffffff811275f4>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (25225): [<ffffffff811275f4>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+
+final repro crashed as (corrupted=false):
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 499 at drivers/iommu/iommufd/pages.c:793 pfn_reader_user_pin+0x2e6/0x390 drivers/iommu/iommufd/pages.c:793
+Modules linked in:
+CPU: 1 PID: 499 Comm: syz-executor122 Not tainted 6.3.0-rc4-e7f0adb355f3+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:pfn_reader_user_pin+0x2e6/0x390 drivers/iommu/iommufd/pages.c:793
+Code: b1 11 e9 25 fe ff ff e8 b8 7a 13 ff 31 ff 48 89 de e8 be 7c 13 ff 48 85 db 74 0a e8 a4 7a 13 ff e9 4d ff ff ff e8 9a 7a 13 ff <0f> 0b bb f2 ff ff ff e9 3c ff ff ff e8 89 7a 13 ff ba 01 00 00 00
+RSP: 0018:ffffc90001237a30 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff8219f832
+RDX: 0000000000000000 RSI: ffff888005288000 RDI: 0000000000000002
+RBP: ffffc90001237a78 R08: 00000000000000ff R09: 00000000f1661d5d
+R10: ffffc90001237790 R11: ffff888005288d98 R12: ffffc90001237c60
+R13: 0000000000000002 R14: ffff8880072ebc00 R15: 0000000000000000
+FS:  00000000006d43c0(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000040 CR3: 000000001382e005 CR4: 0000000000770ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ pfn_reader_fill_span drivers/iommu/iommufd/pages.c:1011 [inline]
+ pfn_reader_next+0x14a/0x7b0 drivers/iommu/iommufd/pages.c:1043
+ pfn_reader_first drivers/iommu/iommufd/pages.c:1133 [inline]
+ pfn_reader_first+0x140/0x1b0 drivers/iommu/iommufd/pages.c:1121
+ iopt_pages_rw_slow+0x71/0x280 drivers/iommu/iommufd/pages.c:1740
+ iopt_pages_rw_access+0x2b2/0x5b0 drivers/iommu/iommufd/pages.c:1848
+ iommufd_access_rw+0x19f/0x2f0 drivers/iommu/iommufd/device.c:715
+ iommufd_test_access_rw drivers/iommu/iommufd/selftest.c:757 [inline]
+ iommufd_test+0xd11/0x16f0 drivers/iommu/iommufd/selftest.c:819
+ iommufd_fops_ioctl+0x206/0x330 drivers/iommu/iommufd/main.c:337
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x44f3cd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffc55fe5d78 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004e2018 RCX: 000000000044f3cd
+RDX: 00000000200001c0 RSI: 0000000000003ba0 RDI: 0000000000000006
+RBP: 00000000004117f0 R08: 00000000004e2018 R09: 00000000004e2018
+R10: 00000000004e2018 R11: 0000000000000246 R12: 0000000000411890
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 25265
+hardirqs last  enabled at (25273): [<ffffffff811e45e1>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (25280): [<ffffffff811e45c6>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (25230): [<ffffffff82fb7329>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (25230): [<ffffffff82fb7329>] __do_softirq+0x2d9/0x3c3 kernel/softirq.c:600
+softirqs last disabled at (25225): [<ffffffff811275f4>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (25225): [<ffffffff811275f4>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (25225): [<ffffffff811275f4>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+
