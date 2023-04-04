@@ -1,0 +1,82 @@
+------------[ cut here ]------------
+refcount_t: addition on 0; use-after-free.
+WARNING: CPU: 0 PID: 532 at lib/refcount.c:25 refcount_warn_saturate+0xe6/0x1c0 lib/refcount.c:25
+Modules linked in:
+CPU: 0 PID: 532 Comm: kworker/u4:4 Not tainted 6.2.0-intel-next-abe175dd06a8+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Workqueue: events_unbound bpf_map_free_deferred
+RIP: 0010:refcount_warn_saturate+0xe6/0x1c0 lib/refcount.c:25
+Code: 1d 06 e2 28 02 31 ff 89 de e8 06 95 56 ff 84 db 75 97 e8 9d 93 56 ff 48 c7 c7 b8 cc a0 83 c6 05 e6 e1 28 02 01 e8 b1 65 18 01 <0f> 0b e9 78 ff ff ff e8 7e 93 56 ff 0f b6 1d d0 e1 28 02 31 ff 89
+RSP: 0018:ffffc90000fbbda0 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff811e230b
+RDX: 0000000000000000 RSI: ffff888012034680 RDI: 0000000000000002
+RBP: ffffc90000fbbdb0 R08: 0000000000000000 R09: 0000000000000001
+R10: 0000000000000000 R11: 0000000000000001 R12: ffff88800ed43c80
+R13: 0000000000000000 R14: ffff8880123d0000 R15: ffff88800988a000
+FS:  0000000000000000(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000004ea010 CR3: 0000000003c12002 CR4: 0000000000f70ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __refcount_add include/linux/refcount.h:199 [inline]
+ __refcount_inc include/linux/refcount.h:250 [inline]
+ refcount_inc include/linux/refcount.h:267 [inline]
+ sock_hold include/net/sock.h:775 [inline]
+ sock_map_free+0x349/0x350 net/core/sock_map.c:352
+ bpf_map_free_deferred+0x124/0x290 kernel/bpf/syscall.c:704
+ process_one_work+0x3b1/0x960 kernel/workqueue.c:2289
+ worker_thread+0x52/0x660 kernel/workqueue.c:2436
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+ </TASK>
+irq event stamp: 3289
+hardirqs last  enabled at (3297): [<ffffffff811e1a31>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (3304): [<ffffffff811e1a16>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (3062): [<ffffffff82fc5333>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (3062): [<ffffffff82fc5333>] __do_softirq+0x323/0x48a kernel/softirq.c:600
+softirqs last disabled at (3035): [<ffffffff81126122>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (3035): [<ffffffff81126122>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (3035): [<ffffffff81126122>] irq_exit_rcu+0xd2/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+refcount_t: underflow; use-after-free.
+WARNING: CPU: 0 PID: 532 at lib/refcount.c:28 refcount_warn_saturate+0x15e/0x1c0 lib/refcount.c:28
+Modules linked in:
+CPU: 0 PID: 532 Comm: kworker/u4:4 Tainted: G        W          6.2.0-intel-next-abe175dd06a8+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Workqueue: events_unbound bpf_map_free_deferred
+RIP: 0010:refcount_warn_saturate+0x15e/0x1c0 lib/refcount.c:28
+Code: 02 31 ff 89 de e8 92 94 56 ff 84 db 0f 85 1f ff ff ff e8 25 93 56 ff 48 c7 c7 e8 cc a0 83 c6 05 6d e1 28 02 01 e8 39 65 18 01 <0f> 0b e9 00 ff ff ff e8 06 93 56 ff 0f b6 1d 53 e1 28 02 31 ff 89
+RSP: 0018:ffffc90000fbbda0 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff811e230b
+RDX: 0000000000000000 RSI: ffff888012034680 RDI: 0000000000000002
+RBP: ffffc90000fbbdb0 R08: 0000000000000000 R09: 0000000000000001
+R10: 0000000000000000 R11: 0000000000000001 R12: ffff88800ed43c80
+R13: 0000000000000000 R14: ffff8880123d0000 R15: ffff88800988a000
+FS:  0000000000000000(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000004ea010 CR3: 0000000003c12002 CR4: 0000000000f70ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __refcount_sub_and_test include/linux/refcount.h:283 [inline]
+ __refcount_dec_and_test include/linux/refcount.h:315 [inline]
+ refcount_dec_and_test include/linux/refcount.h:333 [inline]
+ sock_put include/net/sock.h:1967 [inline]
+ sock_map_free+0x32e/0x350 net/core/sock_map.c:358
+ bpf_map_free_deferred+0x124/0x290 kernel/bpf/syscall.c:704
+ process_one_work+0x3b1/0x960 kernel/workqueue.c:2289
+ worker_thread+0x52/0x660 kernel/workqueue.c:2436
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+ </TASK>
+irq event stamp: 3645
+hardirqs last  enabled at (3653): [<ffffffff811e1a31>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (3662): [<ffffffff811e1a16>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (3430): [<ffffffff82fc5333>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (3430): [<ffffffff82fc5333>] __do_softirq+0x323/0x48a kernel/softirq.c:600
+softirqs last disabled at (3415): [<ffffffff81126122>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (3415): [<ffffffff81126122>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (3415): [<ffffffff81126122>] irq_exit_rcu+0xd2/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
