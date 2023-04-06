@@ -1,0 +1,290 @@
+loop0: p2 size 14876673 extends beyond EOD, truncated
+INFO: task syz-executor.5:119732 blocked for more than 143 seconds.
+      Not tainted 6.3.0-rc5-dc0e088e48e2+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.5  state:D stack:0     pid:119732 ppid:542    flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ xlog_grant_head_wait+0x53/0x3a0 fs/xfs/xfs_log.c:307
+ xlog_grant_head_check+0x1a5/0x1c0 fs/xfs/xfs_log.c:369
+ xfs_log_reserve+0x145/0x380 fs/xfs/xfs_log.c:486
+ xfs_trans_reserve+0x226/0x270 fs/xfs/xfs_trans.c:194
+ xfs_trans_alloc+0x147/0x470 fs/xfs/xfs_trans.c:283
+ xfs_trans_alloc_inode+0x98/0x210 fs/xfs/xfs_trans.c:1191
+ xfs_attr_set+0x1cd/0xce0 fs/xfs/libxfs/xfs_attr.c:1024
+ xfs_attr_change fs/xfs/xfs_xattr.c:106 [inline]
+ xfs_xattr_set+0x99/0xf0 fs/xfs/xfs_xattr.c:151
+ __vfs_setxattr+0x116/0x150 fs/xattr.c:203
+ __vfs_setxattr_noperm+0xb2/0x320 fs/xattr.c:237
+ __vfs_setxattr_locked+0x165/0x190 fs/xattr.c:298
+ vfs_setxattr+0xd9/0x220 fs/xattr.c:324
+ do_setxattr+0xe6/0xf0 fs/xattr.c:609
+ setxattr+0xdd/0x100 fs/xattr.c:632
+ path_setxattr+0x11e/0x140 fs/xattr.c:651
+ __do_sys_setxattr fs/xattr.c:667 [inline]
+ __se_sys_setxattr fs/xattr.c:663 [inline]
+ __x64_sys_setxattr+0x35/0x40 fs/xattr.c:663
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+RSP: 002b:00007f6a414b8108 EFLAGS: 00000246 ORIG_RAX: 00000000000000bc
+RAX: ffffffffffffffda RBX: 000000000059bf80 RCX: 000000000047742d
+RDX: 0000000020000600 RSI: 0000000020000040 RDI: 0000000020000000
+RBP: 000000000059bf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 000000000000ff41 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffd3f04ccff R14: 00007ffd3f04ce80 R15: 00007f6a414b8280
+ </TASK>
+INFO: task syz-executor.5:119816 blocked for more than 143 seconds.
+      Not tainted 6.3.0-rc5-dc0e088e48e2+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.5  state:D stack:0     pid:119816 ppid:542    flags:0x00000004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6760
+ rwsem_down_write_slowpath+0x3fa/0x7e0 kernel/locking/rwsem.c:1178
+ __down_write_common kernel/locking/rwsem.c:1306 [inline]
+ __down_write kernel/locking/rwsem.c:1315 [inline]
+ down_write+0x6d/0xe0 kernel/locking/rwsem.c:1574
+ inode_lock include/linux/fs.h:758 [inline]
+ chown_common+0x181/0x340 fs/open.c:764
+ do_fchownat+0xf5/0x190 fs/open.c:805
+ __do_sys_chown fs/open.c:825 [inline]
+ __se_sys_chown fs/open.c:823 [inline]
+ __x64_sys_chown+0x2f/0x40 fs/open.c:823
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+RSP: 002b:00007f6a3b097108 EFLAGS: 00000246 ORIG_RAX: 000000000000005c
+RAX: ffffffffffffffda RBX: 000000000059c050 RCX: 000000000047742d
+RDX: 0000000000000000 RSI: 00000000000081a4 RDI: 0000000020000140
+RBP: 000000000059c050 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffd3f04ccff R14: 00007ffd3f04ce80 R15: 00007f6a3b097280
+ </TASK>
+INFO: task syz-executor.5:119819 blocked for more than 143 seconds.
+loop1: detected capacity change from 0 to 65536
+      Not tainted 6.3.0-rc5-dc0e088e48e2+ #1
+loop6: detected capacity change from 0 to 65536
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.5  state:D stack:0     pid:119819 ppid:542    flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6760
+ rwsem_down_write_slowpath+0x3fa/0x7e0 kernel/locking/rwsem.c:1178
+ __down_write_common kernel/locking/rwsem.c:1306 [inline]
+ __down_write kernel/locking/rwsem.c:1315 [inline]
+ down_write+0x6d/0xe0 kernel/locking/rwsem.c:1574
+ inode_lock include/linux/fs.h:758 [inline]
+ vfs_setxattr+0xbb/0x220 fs/xattr.c:323
+ do_setxattr+0xe6/0xf0 fs/xattr.c:609
+ setxattr+0xdd/0x100 fs/xattr.c:632
+ path_setxattr+0x11e/0x140 fs/xattr.c:651
+ __do_sys_lsetxattr fs/xattr.c:674 [inline]
+ __se_sys_lsetxattr fs/xattr.c:670 [inline]
+ __x64_sys_lsetxattr+0x32/0x40 fs/xattr.c:670
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+RSP: 002b:00007f6a3b076108 EFLAGS: 00000246 ORIG_RAX: 00000000000000bd
+RAX: ffffffffffffffda RBX: 000000000059c120 RCX: 000000000047742d
+RDX: 0000000000000000 RSI: 00000000200000c0 RDI: 0000000020000080
+RBP: 000000000059c120 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffd3f04ccff R14: 00007ffd3f04ce80 R15: 00007f6a3b076280
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83d63610 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83d63390 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83d630d0 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+2 locks held by kworker/1:0/24:
+ #0: ffff88801643fd38 ((wq_completion)xfs-sync/loop5){+.+.}-{0:0}, at: wake_up_worker kernel/workqueue.c:859 [inline]
+ #0: ffff88801643fd38 ((wq_completion)xfs-sync/loop5){+.+.}-{0:0}, at: process_one_work+0x2ff/0x860 kernel/workqueue.c:2353
+ #1: ffffc900000dfe60 ((work_completion)(&(&log->l_work)->work)){+.+.}-{0:0}, at: wake_up_worker kernel/workqueue.c:859 [inline]
+ #1: ffffc900000dfe60 ((work_completion)(&(&log->l_work)->work)){+.+.}-{0:0}, at: process_one_work+0x303/0x860 kernel/workqueue.c:2353
+1 lock held by khungtaskd/29:
+ #0: ffffffff83d64020 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6495
+2 locks held by kworker/1:6/105720:
+ #0: ffff8880057ea938 ((wq_completion)xfs-sync/loop4){+.+.}-{0:0}, at: wake_up_worker kernel/workqueue.c:859 [inline]
+ #0: ffff8880057ea938 ((wq_completion)xfs-sync/loop4){+.+.}-{0:0}, at: process_one_work+0x2ff/0x860 kernel/workqueue.c:2353
+ #1: ffffc90000d5fe60 ((work_completion)(&(&log->l_work)->work)){+.+.}-{0:0}, at: wake_up_worker kernel/workqueue.c:859 [inline]
+ #1: ffffc90000d5fe60 ((work_completion)(&(&log->l_work)->work)){+.+.}-{0:0}, at: process_one_work+0x303/0x860 kernel/workqueue.c:2353
+3 locks held by syz-executor.5/119732:
+ #0: ffff88803d631448 (sb_writers#17){.+.+}-{0:0}, at: path_setxattr+0x78/0x140 fs/xattr.c:649
+ #1: ffff88801402d2f8 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88801402d2f8 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: vfs_setxattr+0xbb/0x220 fs/xattr.c:323
+ #2: ffff88803d631638 (sb_internal#2){.+.+}-{0:0}, at: xfs_trans_alloc_inode+0x98/0x210 fs/xfs/xfs_trans.c:1191
+2 locks held by syz-executor.5/119816:
+ #0: ffff88803d631448 (sb_writers#17){.+.+}-{0:0}, at: do_fchownat+0xd2/0x190 fs/open.c:802
+ #1: ffff88801402d2f8 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88801402d2f8 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: chown_common+0x181/0x340 fs/open.c:764
+2 locks held by syz-executor.5/119819:
+ #0: ffff88803d631448 (sb_writers#17){.+.+}-{0:0}, at: path_setxattr+0x78/0x140 fs/xattr.c:649
+ #1: ffff88801402d2f8 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88801402d2f8 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: vfs_setxattr+0xbb/0x220 fs/xattr.c:323
+3 locks held by syz-executor.4/123896:
+ #0: ffff88802d0aa448 (sb_writers#17){.+.+}-{0:0}, at: path_setxattr+0x78/0x140 fs/xattr.c:649
+ #1: ffff88801402a778 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88801402a778 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: vfs_setxattr+0xbb/0x220 fs/xattr.c:323
+ #2: ffff88802d0aa638 (sb_internal#2){.+.+}-{0:0}, at: xfs_trans_alloc_inode+0x98/0x210 fs/xfs/xfs_trans.c:1191
+2 locks held by syz-executor.4/123953:
+ #0: ffff88802d0aa448 (sb_writers#17){.+.+}-{0:0}, at: path_setxattr+0x78/0x140 fs/xattr.c:649
+ #1: ffff88801402a778 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88801402a778 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: vfs_setxattr+0xbb/0x220 fs/xattr.c:323
+2 locks held by syz-executor.4/123962:
+ #0: ffff88802d0aa448 (sb_writers#17){.+.+}-{0:0}, at: do_fchownat+0xd2/0x190 fs/open.c:802
+loop2: detected capacity change from 0 to 65536
+ #1: ffff88801402a778 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88801402a778 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{3:3}, at: chown_common+0x181/0x340 fs/open.c:764
+2 locks held by syz-executor.4/124691:
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __do_sys_sendfile64 fs/read_write.c:1323 [inline]
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __se_sys_sendfile64 fs/read_write.c:1309 [inline]
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __x64_sys_sendfile64+0x10d/0x120 fs/read_write.c:1309
+ #1: ffff8880143b8400 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff8880143b8400 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+2 locks held by syz-executor.4/124708:
+1 lock held by syz-executor.6/124706:
+ #0: ffff88803d6b80e0 (&type->s_umount_key#55/1){+.+.}-{3:3}, at: alloc_super+0x12b/0x480 fs/super.c:228
+2 locks held by syz-executor.3/124701:
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __do_sys_sendfile64 fs/read_write.c:1323 [inline]
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __se_sys_sendfile64 fs/read_write.c:1309 [inline]
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __x64_sys_sendfile64+0x10d/0x120 fs/read_write.c:1309
+ #1: ffff88800702ec80 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff88800702ec80 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+2 locks held by syz-executor.3/124710:
+1 lock held by syz-executor.1/124705:
+ #0: ffff88803c6e90e0 (&type->s_umount_key#55/1){+.+.}-{3:3}, at: alloc_super+0x12b/0x480 fs/super.c:228
+2 locks held by syz-executor.5/124702:
+3 locks held by syz-executor.7/124704:
+1 lock held by syz-executor.2/124707:
+ #0: ffff8880547040e0 (&type->s_umount_key#55/1){+.+.}-{3:3}, at: alloc_super+0x12b/0x480 fs/super.c:228
+loop7: detected capacity change from 0 to 65536
+2 locks held by syz-executor.0/124712:
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __do_sys_sendfile64 fs/read_write.c:1323 [inline]
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __se_sys_sendfile64 fs/read_write.c:1309 [inline]
+ #0: ffff88800459a448 (sb_writers#3){.+.+}-{0:0}, at: __x64_sys_sendfile64+0x10d/0x120 fs/read_write.c:1309
+ #1: ffff888007215980 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #1: ffff888007215980 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+2 locks held by syz-executor.0/124716:
+
+=============================================
+
+XFS (loop2): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop7): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop1): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop7): Ending clean mount
+XFS (loop2): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop2): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop2): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop1): Ending clean mount
+XFS (loop1): Quotacheck needed: Please wait.
+XFS (loop1): Quotacheck: Done.
+XFS (loop1): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+XFS (loop2): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop3: detected capacity change from 0 to 65536
+XFS (loop3): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop1: detected capacity change from 0 to 65536
+loop0: detected capacity change from 0 to 2048
+XFS (loop3): Ending clean mount
+XFS (loop3): Quotacheck needed: Please wait.
+XFS (loop3): Quotacheck: Done.
+loop7: detected capacity change from 0 to 65536
+loop2: detected capacity change from 0 to 65536
+loop6: detected capacity change from 0 to 65536
+XFS (loop3): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+ loop0: p1[EZD] p2
+loop0: p1 size 4797267 extends beyond EOD, truncated
+loop0: p2 size 14876673 extends beyond EOD, truncated
+ loop0: p1[EZD] p2
+XFS (loop2): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop0: p1 size 4797267 extends beyond EOD, truncated
+XFS (loop7): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop0: p2 size 14876673 extends beyond EOD, truncated
+XFS (loop1): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop2): Ending clean mount
+XFS (loop2): Quotacheck needed: Please wait.
+XFS (loop2): Quotacheck: Done.
+XFS (loop2): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+XFS (loop1): Ending clean mount
+XFS (loop1): Quotacheck needed: Please wait.
+XFS (loop1): Quotacheck: Done.
+XFS (loop6): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop1): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop3: detected capacity change from 0 to 2048
+ loop3: p1[EZD] p2
+loop3: p1 size 4797267 extends beyond EOD, truncated
+loop3: p2 size 14876673 extends beyond EOD, truncated
+loop0: detected capacity change from 0 to 32768
+XFS (loop0): Mounting V5 Filesystem a2f82aab-77f8-4286-afd4-a8f747a74bab
+XFS (loop0): Ending clean mount
+loop7: detected capacity change from 0 to 65536
+loop6: detected capacity change from 0 to 65536
+XFS (loop7): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+loop1: detected capacity change from 0 to 65536
+xfs: Unknown parameter '`rjquota'
+XFS (loop6): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop3: detected capacity change from 0 to 65536
+XFS (loop3): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop3): Ending clean mount
+XFS (loop3): Quotacheck needed: Please wait.
+XFS (loop3): Quotacheck: Done.
+XFS (loop3): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop2: detected capacity change from 0 to 65536
+XFS (loop2): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop2): Ending clean mount
+XFS (loop2): Quotacheck needed: Please wait.
+XFS (loop2): Quotacheck: Done.
+XFS (loop2): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+loop7: detected capacity change from 0 to 65536
+loop6: detected capacity change from 0 to 65536
+XFS (loop7): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Mounting V5 Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+loop1: detected capacity change from 0 to 65536
+xfs: Unknown parameter '`rjquota'
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop6): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
+XFS (loop6): Unmounting Filesystem d6f69dbd-8c5d-46be-b88e-92c0ae88ceb2
