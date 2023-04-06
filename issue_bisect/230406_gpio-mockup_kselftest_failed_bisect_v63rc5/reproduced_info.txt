@@ -1,0 +1,46 @@
+Reproduced way is check if gpio-mockup.sh test failed in kself-test.
+
+gpio-mockup.sh(gpio overflow test) in kself-test could reproduce this issue:
+cd linux/tools/testing/selftests
+ 1.  ./kselftest_install.sh
+ 2.  cd  linux/tools/testing/selftests/kselftest_install/gpio
+ # ./gpio-mockup.sh
+ 1.  Module load tests
+ 1.1.  dynamic allocation of gpio
+ 2.  Module load error tests
+ 2.1 gpio overflow
+ test failed: unexpected chip - gpiochip1
+ GPIO gpio-mockup test FAIL
+
+And the simplified steps to reproduce this issue are as follow:
+"
+modprobe -q gpio_mockup gpio_mockup_ranges="-1,1024"
+
+dmesg | grep -C 5 Call
+
+find "/sys/kernel/debug/gpio-mockup/" -name gpiochip* -type d | sort
+# in above step, should not generate any gpiochip generated like as follow:
+/sys/kernel/debug/gpio-mockup/gpiochip1
+Because load gpio_mockup with overflow ranges -1,1024
+
+modprobe -r gpio_mockup
+dmesg | grep -C 5 Call
+"
+
+
+It could be reproduced on TGL-H, and this issue could be reproduced on most of x86 platforms.
+
+1. modprobe -q gpio_mockup gpio_mockup_ranges="-1,1024"
+After above gpio_mockup module loaded with overflow range "-1,1024":
+Correct behavior as previous v6.1 or older kernel:"gpio should not load "gpiochip1" due to overflow range -1,1024";
+Wrong behavior in v6.3-rc5 kernel: "gpio *load* "gpiochip1" with overflow range -1,1024 and "gpiochip1" should not be loaded".
+The underlying problem was already buried here.
+
+2. Could use below command to check if "gpiochip1" generated:
+As before v6.1,  there was no "/sys/kernel/debug/gpio-mockup/gpiochip1" sysfs folder due to overflow range -1,1024";
+Wrong behavior in v6.3-rc5 kernel: "/sys/kernel/debug/gpio-mockup/gpiochip1" sysfs folder generated as follow command check:
+# find "/sys/kernel/debug/gpio-mockup/" -name gpiochip* -type d | sort
+/sys/kernel/debug/gpio-mockup/gpiochip1
+
+3. Then unloaded the "gpio_mockup",  the "refcount_t: underflow; use-after-free" WARNING generated:
+modprobe -r gpio_mockup
