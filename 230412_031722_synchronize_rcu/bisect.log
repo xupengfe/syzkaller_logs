@@ -1,0 +1,414 @@
+|0412_031723|CMD=cd /root/internal-devel|
+|0412_031723|git log 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d check_result:commit 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d|
+|0412_031723|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0412_031723|CMD=git checkout -f 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d|
+|0412_031726|CMD=cd /root/internal-devel|
+|0412_031726||/var/www/html/bzimage/bzImage_09a9639e56c01c7a00d6c0ca63f4c7c41abe075d| exist, no need make|
+|0412_031726|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_031759|Run /var/www/html/bzimage/bzImage_09a9639e56c01c7a00d6c0ca63f4c7c41abe075d with image:/root/image/centos8_2.img in local port:10022|
+|0412_031825|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_031826|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_031828|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_031830|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_032303|/var/www/html/bzimage/bzImage_09a9639e56c01c7a00d6c0ca63f4c7c41abe075d contained synchronize_rcu:[  300.667442]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.673394]  synchronize_rcu_tasks_generic+0x24/0x70
+[  300.674696]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_032304|Found time:300 in /var/www/html/bzimage/0412_031722_synchronize_rcu/09a9639e56c01c7a00d6c0ca63f4c7c41abe075d_dmesg.log|
+|0412_032304|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:2100|
+|0412_032304|-END- commit 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d FAIL bad|
+|0412_032304|issue_folder alreayd exist:/var/www/html//syzkaller/2023_04_12/3474b4f1e6a694d78abe6e53923207efeee5eb46|
+|0412_032304|CMD=cp -rf /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog /var/www/html//syzkaller/2023_04_12/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.c|
+|0412_032304|gcc -pthread /var/www/html//syzkaller/2023_04_12/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.c -o /var/www/html//syzkaller/2023_04_12/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro|
+|0412_032304|CMD=cp -rf /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/description /var/www/html//syzkaller/2023_04_12/3474b4f1e6a694d78abe6e53923207efeee5eb46|
+|0412_032307|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0412_031722_synchronize_rcu/kconfig_origin:0|
+|0412_032307|CMD=cd /root/internal-devel|
+|0412_032307||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0412_032307|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_032341|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos8_2.img in local port:10022|
+|0412_032406|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_032408|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_032410|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_032412|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_035913|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain synchronize_rcu: in dmesg, pass|
+|0412_035914|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0412_035914|CMD=git checkout -f 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d|
+|0412_035915|CMD=git bisect start|
+|0412_035915|CMD=git bisect bad 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d|
+|0412_035915|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0412_035915|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0412_040347||/var/www/html/bzimage/bzImage_182966e1cd74ec0e326cd376de241803ee79741b| exist, no need make|
+|0412_040347|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_040421|Run /var/www/html/bzimage/bzImage_182966e1cd74ec0e326cd376de241803ee79741b with image:/root/image/centos8_2.img in local port:10022|
+|0412_040446|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_040448|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_040449|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_040451|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_043952|/var/www/html/bzimage/bzImage_182966e1cd74ec0e326cd376de241803ee79741b didn't contain synchronize_rcu: in dmesg, pass|
+|0412_043952|git bisect good 182966e1cd74ec0e326cd376de241803ee79741b|
+|0412_044009||/var/www/html/bzimage/bzImage_8aebac82933ff1a7c8eede18cab11e1115e2062b| exist, no need make|
+|0412_044009|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_044033|Run /var/www/html/bzimage/bzImage_8aebac82933ff1a7c8eede18cab11e1115e2062b with image:/root/image/centos8_2.img in local port:10022|
+|0412_044058|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_044058|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_044100|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_044101|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_051602|/var/www/html/bzimage/bzImage_8aebac82933ff1a7c8eede18cab11e1115e2062b didn't contain synchronize_rcu: in dmesg, pass|
+|0412_051602|git bisect good 8aebac82933ff1a7c8eede18cab11e1115e2062b|
+|0412_051638||/var/www/html/bzimage/bzImage_7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91| exist, no need make|
+|0412_051638|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_051712|Run /var/www/html/bzimage/bzImage_7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91 with image:/root/image/centos8_2.img in local port:10022|
+|0412_051737|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_051739|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_051741|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_051743|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_055244|/var/www/html/bzimage/bzImage_7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91 contained synchronize_rcu:[  300.539078]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.542908]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.543791]  synchronize_rcu_tasks+0x19/0x20
+[  447.994481]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  447.998325]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  447.999201]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_055244|git bisect bad 7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91|
+|0412_055249||/var/www/html/bzimage/bzImage_e3c591c0735383f044798ee4a47d1a9194f09344| exist, no need make|
+|0412_055249|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_055310|Run /var/www/html/bzimage/bzImage_e3c591c0735383f044798ee4a47d1a9194f09344 with image:/root/image/centos8_2.img in local port:10022|
+|0412_055335|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_055335|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_055337|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_055338|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_062839|/var/www/html/bzimage/bzImage_e3c591c0735383f044798ee4a47d1a9194f09344 didn't contain synchronize_rcu: in dmesg, pass|
+|0412_062839|git bisect good e3c591c0735383f044798ee4a47d1a9194f09344|
+|0412_062842||/var/www/html/bzimage/bzImage_02bf43c7b7f7a19aa59a75f5244f0a3408bace1a| exist, no need make|
+|0412_062842|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_062903|Run /var/www/html/bzimage/bzImage_02bf43c7b7f7a19aa59a75f5244f0a3408bace1a with image:/root/image/centos8_2.img in local port:10022|
+|0412_062928|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_062929|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_062930|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_062932|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_070432|/var/www/html/bzimage/bzImage_02bf43c7b7f7a19aa59a75f5244f0a3408bace1a contained synchronize_rcu:[  300.278275]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.282350]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.283264]  synchronize_rcu_tasks+0x19/0x20
+[  447.736602]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  447.740517]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  447.741413]  synchronize_rcu_tasks+0x19/0x20
+[  595.190516]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  595.194383]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  595.195274]  synchronize_rcu_tasks+0x19/0x20
+[  742.652340]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  742.655791]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  742.656929]  synchronize_rcu_tasks+0x19/0x20
+[  890.109921]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  890.113620]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  890.114465]  synchronize_rcu_tasks+0x19/0x20
+[ 1037.561705]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1037.565768]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1037.566705]  synchronize_rcu_tasks+0x19/0x20
+[ 1185.017584]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1185.021625]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1185.022573]  synchronize_rcu_tasks+0x19/0x20
+[ 1332.476837]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1332.480843]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1332.481770]  synchronize_rcu_tasks+0x19/0x20
+[ 1479.925333]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1479.929105]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1479.929951]  synchronize_rcu_tasks+0x19/0x20
+[ 1627.383543]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1627.387140]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1627.387964]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_070432|git bisect bad 02bf43c7b7f7a19aa59a75f5244f0a3408bace1a|
+|0412_070435||/var/www/html/bzimage/bzImage_164f59000c19fa1ee5d09327a8055ec9f9b9905a| exist, no need make|
+|0412_070435|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_070453|Run /var/www/html/bzimage/bzImage_164f59000c19fa1ee5d09327a8055ec9f9b9905a with image:/root/image/centos8_2.img in local port:10022|
+|0412_070518|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_070519|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_070520|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_070521|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_074022|/var/www/html/bzimage/bzImage_164f59000c19fa1ee5d09327a8055ec9f9b9905a contained synchronize_rcu:[  300.251608]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.255847]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.256809]  synchronize_rcu_tasks+0x19/0x20
+[  447.703509]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  447.706911]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  447.707689]  synchronize_rcu_tasks+0x19/0x20
+[  595.161400]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  595.164947]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  595.166071]  synchronize_rcu_tasks+0x19/0x20
+[  742.615581]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  742.618943]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  742.619725]  synchronize_rcu_tasks+0x19/0x20
+[  890.072652]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  890.076275]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  890.077349]  synchronize_rcu_tasks+0x19/0x20
+[ 1037.529476]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1037.532896]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1037.534064]  synchronize_rcu_tasks+0x19/0x20
+[ 1184.981437]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1184.984856]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1184.985940]  synchronize_rcu_tasks+0x19/0x20
+[ 1332.440373]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1332.443953]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1332.444784]  synchronize_rcu_tasks+0x19/0x20
+[ 1479.896750]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1479.900468]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1479.901575]  synchronize_rcu_tasks+0x19/0x20
+[ 1627.351586]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1627.354976]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1627.355764]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_074022|git bisect bad 164f59000c19fa1ee5d09327a8055ec9f9b9905a|
+|0412_074024||/var/www/html/bzimage/bzImage_7c42d6f5e663f39bcf56d08685d84a7b1d011c77| was not exist, will make it|
+|0412_082408|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_082430|Run /var/www/html/bzimage/bzImage_7c42d6f5e663f39bcf56d08685d84a7b1d011c77 with image:/root/image/centos8_2.img in local port:10022|
+|0412_082455|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_082455|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_082457|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_082458|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_085959|/var/www/html/bzimage/bzImage_7c42d6f5e663f39bcf56d08685d84a7b1d011c77 contained synchronize_rcu:[  300.422582]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.426307]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.427405]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_085959|git bisect bad 7c42d6f5e663f39bcf56d08685d84a7b1d011c77|
+|0412_090001||/var/www/html/bzimage/bzImage_6b872a5ecece462ba02c8cad1c0203583631db2b| was not exist, will make it|
+|0412_104328|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_104406|Run /var/www/html/bzimage/bzImage_6b872a5ecece462ba02c8cad1c0203583631db2b with image:/root/image/centos8_2.img in local port:10022|
+|0412_104431|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_104433|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_104434|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_104436|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_111938|/var/www/html/bzimage/bzImage_6b872a5ecece462ba02c8cad1c0203583631db2b didn't contain synchronize_rcu: in dmesg, pass|
+|0412_111938|git bisect good 6b872a5ecece462ba02c8cad1c0203583631db2b|
+|0412_111940||/var/www/html/bzimage/bzImage_2b0145032877fe0fa3460dfff285cc2fdcc9fc2e| was not exist, will make it|
+|0412_132251|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_132315|Run /var/www/html/bzimage/bzImage_2b0145032877fe0fa3460dfff285cc2fdcc9fc2e with image:/root/image/centos8_2.img in local port:10022|
+|0412_132340|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_132340|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_132342|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_132343|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_135844|/var/www/html/bzimage/bzImage_2b0145032877fe0fa3460dfff285cc2fdcc9fc2e didn't contain synchronize_rcu: in dmesg, pass|
+|0412_135844|git bisect good 2b0145032877fe0fa3460dfff285cc2fdcc9fc2e|
+|0412_135845||/var/www/html/bzimage/bzImage_089d1c31224e6b266ece3ee555a3ea2c9acbe5c2| was not exist, will make it|
+|0412_155911|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_155942|Run /var/www/html/bzimage/bzImage_089d1c31224e6b266ece3ee555a3ea2c9acbe5c2 with image:/root/image/centos8_2.img in local port:10022|
+|0412_160007|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_160008|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_160010|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_160012|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_163512|/var/www/html/bzimage/bzImage_089d1c31224e6b266ece3ee555a3ea2c9acbe5c2 contained synchronize_rcu:[  300.965117]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.974221]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.976928]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_163513|git bisect bad 089d1c31224e6b266ece3ee555a3ea2c9acbe5c2|
+|0412_163514||/var/www/html/bzimage/bzImage_10d916c86ecafeccaed89175ebf9b832dddde380| was not exist, will make it|
+|0412_172144|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_172205|Run /var/www/html/bzimage/bzImage_10d916c86ecafeccaed89175ebf9b832dddde380 with image:/root/image/centos8_2.img in local port:10022|
+|0412_172230|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_172231|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_172232|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_172233|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_175734|/var/www/html/bzimage/bzImage_10d916c86ecafeccaed89175ebf9b832dddde380 didn't contain synchronize_rcu: in dmesg, pass|
+|0412_175734|git bisect good 10d916c86ecafeccaed89175ebf9b832dddde380|
+|0412_175736||/var/www/html/bzimage/bzImage_74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f| was not exist, will make it|
+|0412_193459|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_193531|Run /var/www/html/bzimage/bzImage_74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f with image:/root/image/centos8_2.img in local port:10022|
+|0412_193556|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_193557|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_193558|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_193600|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_201101|/var/www/html/bzimage/bzImage_74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f didn't contain synchronize_rcu: in dmesg, pass|
+|0412_201101|git bisect good 74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f|
+|0412_201103||/var/www/html/bzimage/bzImage_90153f928bee544c794a2410afba6d936a09edce| was not exist, will make it|
+|0412_214227|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_214259|Run /var/www/html/bzimage/bzImage_90153f928bee544c794a2410afba6d936a09edce with image:/root/image/centos8_2.img in local port:10022|
+|0412_214324|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_214325|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_214327|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_214328|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_221829|/var/www/html/bzimage/bzImage_90153f928bee544c794a2410afba6d936a09edce contained synchronize_rcu:[  300.434798]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.438594]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.439789]  synchronize_rcu_tasks+0x19/0x20
+[  447.891479]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  447.894962]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  447.896119]  synchronize_rcu_tasks+0x19/0x20
+[  595.346455]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  595.350220]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  595.351394]  synchronize_rcu_tasks+0x19/0x20
+[  742.802189]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  742.805968]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  742.806824]  synchronize_rcu_tasks+0x19/0x20
+[  890.258699]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  890.262493]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  890.263668]  synchronize_rcu_tasks+0x19/0x20
+[ 1037.714487]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1037.718279]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1037.719577]  synchronize_rcu_tasks+0x19/0x20
+[ 1185.170627]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1185.174471]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1185.175658]  synchronize_rcu_tasks+0x19/0x20
+[ 1332.626874]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1332.630673]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1332.631863]  synchronize_rcu_tasks+0x19/0x20
+[ 1480.084449]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1480.088271]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1480.089131]  synchronize_rcu_tasks+0x19/0x20
+[ 1627.538632]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1627.542403]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1627.543580]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0412_221829|git bisect bad 90153f928bee544c794a2410afba6d936a09edce|
+|0412_221831||/var/www/html/bzimage/bzImage_4869f5750afdb10a0e9cfa0252fce33e53ab681e| was not exist, will make it|
+|0412_230017|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0412_230036|Run /var/www/html/bzimage/bzImage_4869f5750afdb10a0e9cfa0252fce33e53ab681e with image:/root/image/centos8_2.img in local port:10022|
+|0412_230101|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0412_230102|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0412_230103|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0412_230105|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0412_233605|/var/www/html/bzimage/bzImage_4869f5750afdb10a0e9cfa0252fce33e53ab681e didn't contain synchronize_rcu: in dmesg, pass|
+|0412_233605|git bisect good 4869f5750afdb10a0e9cfa0252fce33e53ab681e|
+|0412_233607||/var/www/html/bzimage/bzImage_66f0919c953ef7b55e5ab94389a013da2ce80a2c| was not exist, will make it|
+|0413_001354|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0413_001413|Run /var/www/html/bzimage/bzImage_66f0919c953ef7b55e5ab94389a013da2ce80a2c with image:/root/image/centos8_2.img in local port:10022|
+|0413_001438|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0413_001439|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0413_001440|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0413_001442|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0413_004942|/var/www/html/bzimage/bzImage_66f0919c953ef7b55e5ab94389a013da2ce80a2c contained synchronize_rcu:[  300.242018]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.245768]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.247026]  synchronize_rcu_tasks+0x19/0x20
+[  447.697706]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  447.701457]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  447.702607]  synchronize_rcu_tasks+0x19/0x20
+[  595.153975]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  595.157741]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  595.158907]  synchronize_rcu_tasks+0x19/0x20
+[  742.610051]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  742.614046]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  742.615252]  synchronize_rcu_tasks+0x19/0x20
+[  890.065479]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  890.069502]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  890.070673]  synchronize_rcu_tasks+0x19/0x20
+[ 1037.521727]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1037.525485]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1037.526646]  synchronize_rcu_tasks+0x19/0x20
+[ 1184.977480]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1184.981245]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1184.982094]  synchronize_rcu_tasks+0x19/0x20
+[ 1332.434825]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1332.438833]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1332.439722]  synchronize_rcu_tasks+0x19/0x20
+[ 1479.890759]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1479.894748]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1479.895657]  synchronize_rcu_tasks+0x19/0x20
+[ 1627.347104]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1627.351050]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1627.351957]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0413_004942|git bisect bad 66f0919c953ef7b55e5ab94389a013da2ce80a2c|
+|0413_004943||/var/www/html/bzimage/bzImage_4a6f316d6855a434f56dbbeba05e14c01acde8f8| was not exist, will make it|
+|0413_013044|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0413_013104|Run /var/www/html/bzimage/bzImage_4a6f316d6855a434f56dbbeba05e14c01acde8f8 with image:/root/image/centos8_2.img in local port:10022|
+|0413_013129|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0413_013129|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0413_013130|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0413_013132|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0413_020633|/var/www/html/bzimage/bzImage_4a6f316d6855a434f56dbbeba05e14c01acde8f8 contained synchronize_rcu:[  300.241056]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.248206]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.250119]  synchronize_rcu_tasks+0x19/0x20
+[  447.697721]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  447.704342]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  447.706352]  synchronize_rcu_tasks+0x19/0x20
+[  595.154429]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  595.161986]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  595.163618]  synchronize_rcu_tasks+0x19/0x20
+[  742.603138]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  742.609881]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  742.611294]  synchronize_rcu_tasks+0x19/0x20
+[  890.057086]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  890.062108]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  890.063184]  synchronize_rcu_tasks+0x19/0x20
+[ 1037.522174]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1037.528818]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1037.530813]  synchronize_rcu_tasks+0x19/0x20
+[ 1184.982870]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1184.990564]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1184.992186]  synchronize_rcu_tasks+0x19/0x20
+[ 1332.434016]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1332.440399]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1332.442477]  synchronize_rcu_tasks+0x19/0x20
+[ 1479.894584]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1479.899638]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1479.900792]  synchronize_rcu_tasks+0x19/0x20
+[ 1627.337062]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[ 1627.342123]  synchronize_rcu_tasks_generic+0x2b/0x70
+[ 1627.343180]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0413_020633|git bisect bad 4a6f316d6855a434f56dbbeba05e14c01acde8f8|
+|0413_020635||/var/www/html/bzimage/bzImage_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294| was not exist, will make it|
+|0413_034156|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0413_034233|Run /var/www/html/bzimage/bzImage_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294 with image:/root/image/centos8_2.img in local port:10022|
+|0413_034258|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0413_034300|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0413_034302|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0413_034304|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0413_041805|/var/www/html/bzimage/bzImage_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294 contained synchronize_rcu:[  300.715103]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  300.721817]  synchronize_rcu_tasks_generic+0x2b/0x70
+[  300.723374]  synchronize_rcu_tasks+0x19/0x20, FAIL|
+|0413_041806|git bisect bad 0e792b89e6800cd9cb4757a76a96f7ef3e8b6294|
+|0413_041808||/var/www/html/bzimage/bzImage_7433632c9ff68a991bd0bc38cabf354e9d2de410| was not exist, will make it|
+|0413_061323|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0413_061351|Run /var/www/html/bzimage/bzImage_7433632c9ff68a991bd0bc38cabf354e9d2de410 with image:/root/image/centos8_2.img in local port:10022|
+|0413_061416|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0413_061417|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0413_061419|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0413_061421|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0413_064922|/var/www/html/bzimage/bzImage_7433632c9ff68a991bd0bc38cabf354e9d2de410 didn't contain synchronize_rcu: in dmesg, pass|
+|0413_064922|git bisect good 7433632c9ff68a991bd0bc38cabf354e9d2de410|
+|0413_064922|Bisect PASS: find 0e792b89e6800cd9cb4757a76a96f7ef3e8b6294 is the first bad commit|
+|0413_064922|CMD=git bisect log >> /var/www/html/bzimage/bi.log|
+|0413_064922|CMD=git bisect log >> /var/www/html/bzimage/0412_031722_synchronize_rcu/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [09a9639e56c01c7a00d6c0ca63f4c7c41abe075d] Linux 6.3-rc6
+git bisect bad 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [182966e1cd74ec0e326cd376de241803ee79741b] Merge tag 'media/v5.18-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 182966e1cd74ec0e326cd376de241803ee79741b
+# good: [8aebac82933ff1a7c8eede18cab11e1115e2062b] Merge tag 'rust-v6.1-rc1' of https://github.com/Rust-for-Linux/linux
+git bisect good 8aebac82933ff1a7c8eede18cab11e1115e2062b
+# bad: [7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91] Merge tag 'net-next-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect bad 7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91
+# good: [e3c591c0735383f044798ee4a47d1a9194f09344] ASoC: SOF: Intel: update D0i3 registers for MTL
+git bisect good e3c591c0735383f044798ee4a47d1a9194f09344
+# bad: [02bf43c7b7f7a19aa59a75f5244f0a3408bace1a] Merge tag 'fs.xattr.simple.rework.rbtree.rwlock.v6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/idmapping
+git bisect bad 02bf43c7b7f7a19aa59a75f5244f0a3408bace1a
+# bad: [164f59000c19fa1ee5d09327a8055ec9f9b9905a] Merge tag 'microblaze-v6.2' of git://git.monstr.eu/linux-2.6-microblaze
+git bisect bad 164f59000c19fa1ee5d09327a8055ec9f9b9905a
+# bad: [7c42d6f5e663f39bcf56d08685d84a7b1d011c77] Merge tag 'mmc-v6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc
+git bisect bad 7c42d6f5e663f39bcf56d08685d84a7b1d011c77
+# good: [6b872a5ecece462ba02c8cad1c0203583631db2b] Merge tag 'pm-6.1-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good 6b872a5ecece462ba02c8cad1c0203583631db2b
+# good: [2b0145032877fe0fa3460dfff285cc2fdcc9fc2e] Merge tag 'linux-can-fixes-for-6.1-20221107' of git://git.kernel.org/pub/scm/linux/kernel/git/mkl/linux-can
+git bisect good 2b0145032877fe0fa3460dfff285cc2fdcc9fc2e
+# bad: [089d1c31224e6b266ece3ee555a3ea2c9acbe5c2] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect bad 089d1c31224e6b266ece3ee555a3ea2c9acbe5c2
+# good: [10d916c86ecafeccaed89175ebf9b832dddde380] Merge tag 'soc-fixes-6.1-2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 10d916c86ecafeccaed89175ebf9b832dddde380
+# good: [74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f] Merge tag 'i2c-for-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux
+git bisect good 74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f
+# bad: [90153f928bee544c794a2410afba6d936a09edce] Merge tag '6.1-rc4-smb3-fixes' of git://git.samba.org/sfrench/cifs-2.6
+git bisect bad 90153f928bee544c794a2410afba6d936a09edce
+# good: [4869f5750afdb10a0e9cfa0252fce33e53ab681e] Merge tag 'block-6.1-2022-11-05' of git://git.kernel.dk/linux
+git bisect good 4869f5750afdb10a0e9cfa0252fce33e53ab681e
+# bad: [66f0919c953ef7b55e5ab94389a013da2ce80a2c] tracing: kprobe: Fix memory leak in test_gen_kprobe/kretprobe_cmd()
+git bisect bad 66f0919c953ef7b55e5ab94389a013da2ce80a2c
+# bad: [4a6f316d6855a434f56dbbeba05e14c01acde8f8] kprobe: reverse kp->flags when arm_kprobe failed
+git bisect bad 4a6f316d6855a434f56dbbeba05e14c01acde8f8
+# bad: [0e792b89e6800cd9cb4757a76a96f7ef3e8b6294] ftrace: Fix use-after-free for dynamic ftrace_ops
+git bisect bad 0e792b89e6800cd9cb4757a76a96f7ef3e8b6294
+# good: [7433632c9ff68a991bd0bc38cabf354e9d2de410] ring-buffer: Check for NULL cpu_buffer in ring_buffer_wake_waiters()
+git bisect good 7433632c9ff68a991bd0bc38cabf354e9d2de410
+# first bad commit: [0e792b89e6800cd9cb4757a76a96f7ef3e8b6294] ftrace: Fix use-after-free for dynamic ftrace_ops
+|0413_064922|/root/bzimage_bisect/make_bz.sh -k /root/internal-devel -m 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d -b 0e792b89e6800cd9cb4757a76a96f7ef3e8b6294 -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_09a9639e56c01c7a00d6c0ca63f4c7c41abe075d_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294_revert|
+|0413_083104|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0413_083104|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0413_083136|Run /var/www/html/bzimage/bzImage_09a9639e56c01c7a00d6c0ca63f4c7c41abe075d_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294_revert with image:/root/image/centos8_2.img in local port:10022|
+|0413_083201|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0413_083202|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0413_083203|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/3474b4f1e6a694d78abe6e53923207efeee5eb46/repro.cprog root@localhost:/root/repro.c|
+|0413_083205|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0413_090706|/var/www/html/bzimage/bzImage_09a9639e56c01c7a00d6c0ca63f4c7c41abe075d_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294_revert didn't contain synchronize_rcu: in dmesg, pass|
+|0413_090706|Bisect successfully! 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294_revert bzimage passed!|
+|0413_090706|ISSUE:3474b4f1e6a694d78abe6e53923207efeee5eb46  EMAIL status after check:Email_not_sent|

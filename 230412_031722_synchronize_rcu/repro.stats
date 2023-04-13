@@ -1,0 +1,324 @@
+Extracting prog: 39m28.941030171s
+Minimizing prog: 57m4.243741169s
+Simplifying prog options: 0s
+Extracting C: 2m58.062341854s
+Simplifying C: 29m27.123248915s
+
+
+473 programs, 4 VMs, timeouts [6m0s]
+extracting reproducer from 473 programs
+single: executing 8 programs separately with timeout 6m0s
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet_udplite-connect$inet-socket$inet_udplite-ioctl$sock_SIOCGIFINDEX-accept-ioctl$ifreq_SIOCGIFINDEX_team-setsockopt$inet_mreqsrc-getsockopt$inet_udp_int-openat$bsg-openat$tun-socket$inet_udplite-ioctl$sock_SIOCGIFINDEX-ioctl$TUNSETIFINDEX-sendmsg$inet-getpeername$unix
+detailed listing:
+executing program 0:
+r0 = socket$inet_udplite(0x2, 0x2, 0x88)
+connect$inet(0xffffffffffffffff, 0x0, 0x0)
+r1 = socket$inet_udplite(0x2, 0x2, 0x88)
+ioctl$sock_SIOCGIFINDEX(r1, 0x8933, &(0x7f0000000080)={'lo\x00'})
+r2 = accept(r1, 0x0, 0x0)
+ioctl$ifreq_SIOCGIFINDEX_team(r0, 0x8933, &(0x7f0000000140))
+setsockopt$inet_mreqsrc(r2, 0x0, 0x25, 0x0, 0x51)
+getsockopt$inet_udp_int(0xffffffffffffffff, 0x11, 0xb, 0x0, &(0x7f0000000040))
+r3 = openat$bsg(0xffffffffffffff9c, &(0x7f0000000180), 0x42a801, 0x0)
+r4 = openat$tun(0xffffffffffffff9c, &(0x7f0000000680), 0x0, 0x0)
+r5 = socket$inet_udplite(0x2, 0x2, 0x88)
+ioctl$sock_SIOCGIFINDEX(r5, 0x8927, &(0x7f0000000080)={'syz_tun\x00', <r6=>0x0})
+ioctl$TUNSETIFINDEX(r4, 0x400454da, &(0x7f0000000000)=r6)
+sendmsg$inet(r3, &(0x7f0000000500)={&(0x7f00000001c0)={0x2, 0x4e24, @rand_addr=0x64010100}, 0x10, &(0x7f0000000440)=[{&(0x7f0000000200)="fd25a3e06303a12db0bde0b0fe8e4687ee524e588e59b42485c6e3604676d68dcd1819e625ada4938846c1ea8c5290284af02540e2f2d6927bcb45624b78990645b01e210e5f406690f095cf54eb5198b06cd7001f556929726c4cbfb9a4ae308bf506ef380ad0bed77be3fbf2837f655056fba970c430e8ccfae1bc782f1121a3333b7bed86639dd0c40ce4256d44c917cbf6b0b44f7ac98c5738e9c570b4099d06efa0ea608468ce86ec9de27dbccdf97fb5d5ed467de34390cc9df4f9803615d22dcc9f28d9f4232cf69866", 0xcd}, {&(0x7f0000000300)="9dd99c035bd551b77af16bf5e497ab81fbe0bdf231caee0fac92166bd16d3459760a2be9967ebf3f53c7be085ef5b3bcc62d2f1eaf53c3274b6d0aff8f049b9724e432615c1f86667828c6fc5d025f4d133b00ce500c696790a8e56aba932d5867f8ecb12e6900bc44636604bdeaf79d0f28330f151b874f4b7c068f39", 0x7d}, {&(0x7f0000000380)="d5583c5e1e63def3c8c3bf824f6ac5a22fdf1502be0c0c22002fc34e3f16c7fb133ab10ee1c2c5632f54228addca52b0b9eed85028e780533fcadca5c6e7e98005827a543b1f24ffe075a3bd2be060dd5b0c74aae330719d17e859cd4792e1960c97fdfd566de2fdd8c299fd988d543af1118935ed1cd5d804d1ddce9d3a", 0x7e}, {&(0x7f0000000400)}], 0x4, &(0x7f0000000480)=[@ip_pktinfo={{0x1c, 0x0, 0x8, {r6, @multicast2, @remote}}}, @ip_tos_u8={{0x11, 0x0, 0x1, 0xfb}}, @ip_tos_int={{0x14, 0x0, 0x1, 0x100}}, @ip_ttl={{0x14}}, @ip_ttl={{0x14, 0x0, 0x2, 0x8}}], 0x80}, 0x4000)
+getpeername$unix(r2, &(0x7f00000000c0), &(0x7f0000000000)=0x6e)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet_udplite-getsockopt$inet_opts
+detailed listing:
+executing program 0:
+r0 = socket$inet_udplite(0x2, 0x2, 0x88)
+getsockopt$inet_opts(r0, 0x0, 0x4, &(0x7f0000000140)=""/90, &(0x7f00000000c0)=0x5a)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet_tcp-setsockopt$inet_mreqsrc-setsockopt$inet_mreqsrc-setsockopt$inet_mreqsrc
+detailed listing:
+executing program 0:
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+setsockopt$inet_mreqsrc(r0, 0x0, 0x27, &(0x7f0000000140)={@multicast2, @loopback, @local}, 0xc)
+setsockopt$inet_mreqsrc(r0, 0x0, 0x27, &(0x7f0000000080)={@multicast1, @remote, @initdev={0xac, 0x1e, 0x0, 0x0}}, 0xc)
+setsockopt$inet_mreqsrc(r0, 0x0, 0x28, &(0x7f0000000140)={@multicast2, @dev, @local}, 0xc)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet_tcp-socketpair-socket$inet_udplite-ioctl$sock_SIOCGIFINDEX-ioctl$sock_SIOCSIFVLAN_SET_VLAN_FLAG_CMD-socket$inet_udplite-ioctl$sock_SIOCGIFINDEX-syz_open_dev$mouse-read$char_usb-write$P9_RSETATTR-ioctl$ifreq_SIOCGIFINDEX_batadv_hard-syz_mount_image$vfat-socket-bind$unix-syz_genetlink_get_family_id$devlink-sendmsg$DEVLINK_CMD_SB_TC_POOL_BIND_GET-sendmsg$DEVLINK_CMD_RATE_GET-setsockopt$inet_mreqsrc-pidfd_getfd-syz_genetlink_get_family_id$tipc2-sendmsg$TIPC_NL_MON_PEER_GET-sendmsg$TIPC_NL_LINK_SET
+detailed listing:
+executing program 0:
+socket$inet_tcp(0x2, 0x1, 0x0)
+socketpair(0x28, 0xa, 0x9, &(0x7f0000000000)={0xffffffffffffffff, <r0=>0xffffffffffffffff})
+r1 = socket$inet_udplite(0x2, 0x2, 0x88)
+ioctl$sock_SIOCGIFINDEX(r1, 0x8927, &(0x7f0000000080)={'syz_tun\x00'})
+ioctl$sock_SIOCSIFVLAN_SET_VLAN_FLAG_CMD(r1, 0x8983, &(0x7f0000000240)={0x7, 'ip6tnl0\x00', {0x6}, 0x6})
+r2 = socket$inet_udplite(0x2, 0x2, 0x88)
+ioctl$sock_SIOCGIFINDEX(r2, 0x8927, &(0x7f0000000080)={'syz_tun\x00'})
+r3 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+read$char_usb(r3, 0x0, 0x0)
+write$P9_RSETATTR(r3, &(0x7f00000004c0)={0x7}, 0x7)
+ioctl$ifreq_SIOCGIFINDEX_batadv_hard(r0, 0x8933, &(0x7f0000000280)={'batadv_slave_0\x00'})
+r4 = syz_mount_image$vfat(&(0x7f0000000180), &(0x7f00000001c0)='./file0\x00', 0x92, &(0x7f0000000c00)=ANY=[@ANYBLOB="000abc3e7091440b837caf1b49496bc58394c8d685900bba2f4b265c11fa45371eeb0c5bef51783b09b6dbecb8df70e3a9a4d758b655b5db12bc1d205edeab4a9975e45de30b469ec499ea0eb497211de8bdf3700ad19e187dc2f1ace7112bed4646dcc9b12fd1139758a69ef9cb0ed44277c40600b2256e5c7b57dcdbe8bd4bdd20eb7383c60138b0385b0b08fff47b7529f15b41bfa8c610974457712a836a167977fcd74b15a2ecd678d1e9754a7821fc1d62171800000000000000e9fe5058f79f337d403aa704b713159df6c13bede384c1cdf5ffd74bebb3f329"], 0x1, 0x1a6, &(0x7f0000000d00)="$eJzs2zFrE2EYB/Dnam1THZLBSRwOXJxC009gkQpiQFAyKAiKbUB6WrAQ0MFmEQe/hB9HVzfnfgHHDsIr7SWkiekgNDlJfr8lD7zvP3nfQHL3HHcvbr3Z3z047D7vfotalsXK3cjjJItGrMRQPwCARXKSUvxKKaX1fmx8jZRSxMZw8Pt6tYsDAGZi2vF/gvYfABbMk6fPHm632zuP87wWUXzudXqd8rUc3+7G6yhiLzajHr/j9ARhoKzvP2jvbOZnGvGlOBrkj3qdK+P5VtSjMT3fKvP5eP5qXDuf34p63Jie35qaX4s7t8/lm1GPH6/iIIrYjdPsKP+xlef3HrUH+eO35c6vn80DAACARdDMh9ai7JvH+/fmaMJEf1/m/+H6wER/vho3V6vdOwAsq8P3H/ZfFsXeO8UFRe3/WIbiMoqfx/P4rKwfcfnvnM3xi8qq/l8CZm/0o794zqd5LggAAAAAAAAAAAAAAPhLef9/LWb5OFHVewQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABg+fwJAAD//6X2lN8=")
+r5 = socket(0x2, 0x2, 0x1)
+bind$unix(r5, &(0x7f0000000080)=@abs={0x0, 0x0, 0x6}, 0x6e)
+r6 = syz_genetlink_get_family_id$devlink(&(0x7f0000000080), r4)
+sendmsg$DEVLINK_CMD_SB_TC_POOL_BIND_GET(r5, &(0x7f0000000100)={&(0x7f00000002c0)={0x10, 0x0, 0x0, 0x20001}, 0xc, &(0x7f00000000c0)={&(0x7f0000000500)={0x188, r6, 0x100, 0x70bd2c, 0x25dfdbfb, {}, [{{@nsim={{0xe}, {0xf, 0x2, {'netdevsim', 0x0}}}, {0x8, 0x3, 0x3}}, {0x8, 0xb, 0x8}, {0x6, 0x16, 0x6}, {0x5, 0x12, 0x1}}, {{@nsim={{0xe}, {0xf, 0x2, {'netdevsim', 0x0}}}, {0x8, 0x3, 0x1}}, {0x8, 0xb, 0x1}, {0x6, 0x16, 0x2}, {0x5}}, {{@nsim={{0xe}, {0xf, 0x2, {'netdevsim', 0x0}}}, {0x8, 0x3, 0x1}}, {0x8, 0xb, 0x2}, {0x6, 0x16, 0x2ec}, {0x5}}, {{@pci={{0x8}, {0x11}}, {0x8}}, {0x8, 0xb, 0xfc}, {0x6, 0x16, 0x4}, {0x5}}, {{@pci={{0x8}, {0x11}}, {0x8}}, {0x8, 0xb, 0x7}, {0x6, 0x16, 0xfff}, {0x5}}, {{@pci={{0x8}, {0x11}}, {0x8, 0x3, 0x3}}, {0x8, 0xb, 0x800}, {0x6, 0x16, 0xd45}, {0x5}}]}, 0x188}, 0x1, 0x0, 0x0, 0x20008000}, 0x20000100)
+sendmsg$DEVLINK_CMD_RATE_GET(r3, &(0x7f0000000200)={&(0x7f0000000040)={0x10, 0x0, 0x0, 0x10}, 0xc, &(0x7f00000001c0)={&(0x7f00000000c0)={0xfc, r6, 0x800, 0x70bd28, 0x25dfdbfd, {}, [@DEVLINK_ATTR_PORT_INDEX={0x8, 0x3, 0x1}, @DEVLINK_ATTR_RATE_NODE_NAME={0xb3, 0xa8, @random="8042242cff592e7cd74cf53f905e60b8717c811618e21f8f4a11cf0bb72b8c76dc907ce62d440f80de4dc1422619132f11abd8408c37a95436bcd855449585f407ca10289fcb52409373421d75471b3cd249f39403901d561b59710c26d8567b61cc5d174549be7204f7985f770dc8abf00cd591b732a499a9d45e114dd827cf864490f8a6b74ee14c54f523b11b7ff404a820360fb34e7d3e38426f1e3f4d7d7e1182bb217a180323a2aa87662423"}, @handle=@pci={{0x8}, {0x11}}, @DEVLINK_ATTR_RATE_NODE_NAME={0xe}]}, 0xfc}}, 0x4800)
+setsockopt$inet_mreqsrc(r2, 0x0, 0x27, 0x0, 0xfffffffffffffcdc)
+r7 = pidfd_getfd(0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+r8 = syz_genetlink_get_family_id$tipc2(0x0, r7)
+sendmsg$TIPC_NL_MON_PEER_GET(r7, &(0x7f0000007800)={&(0x7f00000076c0)={0x10, 0x0, 0x0, 0x80000}, 0xc, &(0x7f00000077c0)={&(0x7f0000007740)={0x4c, r8, 0x400, 0x70bd2b, 0x25dfdbff, {}, [@TIPC_NLA_BEARER={0x4}, @TIPC_NLA_PUBL={0x14, 0x3, 0x0, 0x1, [@TIPC_NLA_PUBL_TYPE={0x8, 0x1, 0x7}, @TIPC_NLA_PUBL_TYPE={0x8, 0x1, 0x5}]}, @TIPC_NLA_NET={0x1c, 0x7, 0x0, 0x1, [@TIPC_NLA_NET_ADDR={0x8, 0x2, 0xeab5}, @TIPC_NLA_NET_ADDR={0x8}, @TIPC_NLA_NET_ID={0x8}]}, @TIPC_NLA_SOCK={0x4}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4811}, 0x0)
+sendmsg$TIPC_NL_LINK_SET(r0, &(0x7f0000000380)={&(0x7f0000000300)={0x10, 0x0, 0x0, 0x400000}, 0xc, &(0x7f0000000340)={&(0x7f0000000ec0)={0x1190, r8, 0x10, 0x70bd2a, 0x25dfdbfb, {}, [@TIPC_NLA_NODE={0x1020, 0x6, 0x0, 0x1, [@TIPC_NLA_NODE_ADDR={0x8, 0x1, 0x3d}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_ID={0x1004, 0x3, "41ae0cf83be689b02085538d5189366abd0532ca6d93dfc5a324aa25cae326404f45680717e525505df9a44e4bc885adc7f4b307f2740c116fbf320a1a781068375acaf22ff17075757f7f2b8771c64afa65712c140463c1af263815386e2df634b81e6a7794ba1191552250795546d200e8cab625c6cb28b10a161e7d8c9e2d3987f40fc2f67cf5e7d0b1ff0783cfdf638b3eefc472dd51b42d9d3960198e4835f4cff01960ffc6d67acf9f4273c74be20c095e01cbb750d02bcec9b265015980c8aadd30d1f4ea5bf39b1bcb504a61830f9e3c908694a419325c69ab341acaa37f5aa9f10117cc07d7d2f62e9a09036a4478098f90baf7aef60b46623110244cde749a750383f3633e7f36a41e88903eaf5de4bced07a68071b56885065d5b2642870c4f141c5d546974ed0d1e0d86ab58fc53497e9872b45e86792062b44b97e4d4c92096c549143b6025f64d4615dd4c491a958eae80d2dd3185d3c5c2848b443eb65684d0a2fd6ad7445c4438c0e73fdac861343ebd9e57c6bc74c6e47d82ebc541efc10671bdc2251b2d073ced92b6098d8641406b6027f59cfa45344e78143d243ef10f28d324a2b67b955c9a601ed6920fb49d52f0d8ed880feeab8a6b57a42df83afb01d0e673e8a9183b8f1c8878a20b0823492a2809a0ee016c952395927529ae43a14ee7ba9696516419b2910cfd6e091c12f4991e25ca24e410832418b60cece55d1aa7882b93008ee68e7c153e6c3516d9cde60cd79d6c76cb147665142a347585de8982e5822c71f306c4d464d17814de8784f09f2d0f360ee622147262aa87a347d59c84bd9cb1bcb633f594561f46f83b30f09892bbda88c3e94585001e3ecf06256b820f09308089bd0fac49354a74c6a88fa227828487065047f2ad86859bb743a51184fa73ac7136f3b8b6fcd37530efcd40933d7074485da9387ff7b6b5ebe0527c0ec08f2fb3ea415229a1b3bf4e0c3ada24a88b90527f884e27cac62fa8122966de55c0ac72350ec9f4c463ac0ce704f0754746751610983b9887fe0b1adc281123bde0d020618556e807fff8cfeb211aaf259a9a0e8281255d6ecff38dc3386099926fc71d8c831a82c43cb688e8703a9094590fae39594510602072cc6802d828e7cdfadab3b2f59abfd98fb73af32d199cf71472606dc666e8451cb5597a1e393612a0535e2ba4031da13699521bffb5cec1fd9a2bce6b97da12a937ba6794b61a4b193721ce027207c5be40bc8ef0896c6456c211ca5ec065939edd3a969dc035092fe002a3907046f83afa3dbdc67439450b9045ff134e7b45e7b09015c38dd9524dc192773ec62e7789931c652542d0441b74f2a097d6fa43b0292650961e5c6973cf2d47ea83658765866ece9d2dc2d242983876fe8afa35206f320232f7b235d92c1f9e1e7cd9f35e320f792256580c59e45e86c347f82fd31c71a19cb00cbffab8e51591dafbc1bfcc7a4c474e451cda1fc1ba7c557dc50d9cfbd11a53cc23759827db644e33aa4b9bd609f1d9947df1906d28dca3dd60277672d18a7f7eb6aaa67f5edbcf83fa39b5d37f45431e4796c56c143791e87abcdd217dae0044b44f79b0693ba1adb3df90439204002de6608f9c35f836e88ca348c2a1101dfa5f6a1a97759bd7d4431b23cedac3acf644ef51f575063bf7ea400f97c17a6225f5fc3f86d9563395748018a029a77e686216360717775d04fd7eaffe9f752e7250cdd9839ee9cd216f0a59b9c87819a3e46fc31620f57009013fa82b805398a06e44788bf12cfa5d6f65103c72956f68277e36d5581e15338ede3f848b87e3e687bf4326b0b065fab77edf574bc6453c9c127941343c5ca12b69d1f5e12b9d0ff18f102e8aaf40b82ad2f5a1ec476199423a86306274ec4c3fc427c3e82cafba659d5215c311e3a3d62f13978c81af1918c52c28a4bc499e7687fdee3418d7b3e66422488696fbce9f03a54e5c0e435a536289d3f67a9bc1208048931cbaecce27c1134192d0b8107744de3cf0bbad140fd2cb875ddb831cf1f9759eed13f9be97974d7d997823dd2e83922b977748232390270df17130453fab3b7f35dfc2ca81993804098a7f22c33e3a3def28e192c813dfa3e15f4e60c04d45ef5688ad22d2c47267a7903c6943fb7c66f1f48cdeabff8a789e3fa83f4520f62500ff6fc2b5e810ae141e4c8dbc22fba5a9cd572701fbb2e3bd87aba8abe1a42fed6a22aeaf6c40c12bb7a2e306b1d8a0930eed705189c7872c15a975d99904f7d3e4f997736e5a254fdf4ddfaa71d3a1e63e85bb134afcd9d90b091376f2a1b5343d8d6f14d0aa41b97fb80a5e42014936835df48d0526ddc5db14c1db3cfe7668afda66d0ec8a653744ae460dbb575185f54f69bfb72e3c1e36ad1837eeb6afc66f3963bfb5512a632c5e7d55a6ccf4e4313240545d0462b52b619d990ba510da97bbfd739c419149931ee425d0efcd83360ca82a11366dfd40730cc60c00db4e0d2341fde3aa543fb934927be41c1fb2027ff11124b9e76de38826a952933de0541982daea8663ced1d41dc05dc11fcc7f68d1d9ebf0282671234a0b6b219a1ad840a8f5db7e51cc8aa81ab3049a6ca7060d071d738360b79bc1a322afdd58f32bae5cb4ca14b8b4277219dae9d6768d434c2016aa44b2436512dcbeeaf65f28c9250c7b5670ac8a3e05c0915549ed7b797929818d12df7e1520e3743038e274d3924f839e34b18c05943e94d0ddebbdca491ca1571cecd92490ed0b357f3f7e34b0b40712cdf14d02d984484b86433076895128ebddf6e6adcbd5055294010dbce418a577a68bf8b0f900a13e59011e1df10f5ffd70370be5553e646e630b886f0434693d53c93db550ea50a448f197fb223213c96a0730c2d5258bf1830932acc117895ea2535f90c0b6aa3c7e2ab429783c1202f878d5ff1714c9fcddf6ff8f49e96b11f0f9b2a593e68846a911c3fb6a08bbd47e60b01beb6868f8f3f0f55528e0cb90da2af1f405049f9f15ce4c7f0a595c3f43b3f85c66b739d10ed776fc060109265858d18ff3cfffb98f9f2c80f127082e3a2d3435e7b1a2368537579e282995c24f3d9620f927944cd0ccf16244e4d84a2561c6367b6dd898c8b1cfb761bc8afb7c6ccb27033b5eded6657e03f0c3ff03eba6fc56155076ea01ba80bee59d22d32d97759eb72a18069cca846bb0721ecb556b670d72d53ca0b5c1b1f884c2fbe962a77bb92b62fabcbfe801d7d9c3eb977a71ffebce88d906540f61d05fe1e765f3ce348f402bcb58e5673a64ec16748dc1577ec02e59c2504c58c17026ebd95394410bf3e33ce4b8c9612c0c3773fba27fee3925b259f28921f71ee73c68eb6529be19e4ae674c8417a6f275473a058577470d791aaf5732dcf6236601e444e3a31185cd7a2715faf0db56decedfedf94f7fcaf4d9ff3b2054a9786c28e702877f06b8dc509ab53ca22c3e65a5469c182207d958c31cd671a4c4f79fbff9afed03d988394f5656ae0f55f41cd77867cfaec0d2de04c225553dfe2ea3106b1a6fb076e50217a7a5c0d77c34fae7672b34b2abac95822c5a51e9119e17ba3310527ce170fb4b06a61a8b738cfa14251918d63ccb0ba6369779fb3e1db28ce0d5b989c773d96f17d35f498585ea2187ccc55bd97b0064457d605af2231e7d928d1a19ba0878c1cf981b516a75b37f86e9498b9f26603248aa47c452d13040a1b14e6bbca48a1002fe3b7ab8f240195032566c5a80ef093a58d08e4952b48cd099a7d9d6d7ce30c4ebd55c91209ba214e73c5b78109ce14323f3f1f06aa0c839f1def202255ddb6245e43117a4e375e4bc81e82f22a445b892a92c9882674671d6764313fbde5c63bbeb40f04301f91c38f2a0fb36eef1892765868652fa1de19ec0287f50c5ae037cb4f56a7e1fca1999549de4abcdb4b9de2af82f1b5c237d297b7149cca6bc17782b1dda73e3fb927e36b34317eb69239f6ecb5b2aeeb79f209584a263cf4705156ede7a420d758be4c15f861d8929e601d41aca436b88445bfa5cd078332a7d4c1a2bde5ed4909b5de28580c77a4dfd6f4edd0363f9767a704bf1065951c22d046a30c629aaf42c392bbf6ba87312e908534adb89512101b52525a1e9c11ad5923e37c8ae3fca015e5aff58970628f214382d1e0147877c687b7d666cf4d9c5fced541dfca214c3db70cd2c28d7b7ceeb67db50fee14b6149e53f0214d00b923daa4f1f0dc9a14bf74dbe518d158db39598e2645745e63dffdb0325c8b01606831841dd6420da0bdaee3ff27429c4e924d05e6dd7a707cca1195b55c1fc6769f580573695c0a3c0964c824aa18fc393891def157a33dcab8082103b7c6742c0d2aec4c07702661e6fcf56578168916c5b536c0d1d537990fa943745893531cea6d9514fc42bd2b3780ea60966fb5f85ce362bcaf61808a1eedac4f67b1281f318fbc169fe781f8f924687bd1200885aa600a94d78b58acae5c2f23344178ae54952d8d0c6aad9eec610ffa0a14e079835ec315be72cd1571b771407d058d5c00d66a2a3d281cd70c6f31ba4c79e3c830cc03f254e3c43c511472d71b638d9b50a661fce9018317eb8b640c0f11e0b6462cbf4a1d399993bf3d023951fbdda7989f12a02fffa5ace795a5314c2a9f439f97408ab7d2c5acce9cdf0644f4f8c09ce56e802504c8bc34d89497dfa07b5fa122218d99ddb327937d95f7d29fef27f7fc90e3316734f159d207d462a6df06925583516bb95e305de974ea61c2f6c0d2150bdeb2de86d13e49779e3123dee0ff99f086cabe8a8fc2fea5772af2312d8b0eb109eadf1ab87d7a21edce2e5352062e356eb57b618402517e9eb8d59069dc8857aec5bee416e8c454810bd6efd8cba631d1c3b4eee35e922e178d4cbcc54b261cb8f2f78c72f3aa1f7db821e55450eeb6a069d48fb3ebbb7fa74f68acc41ee3d8769cf43697cf1d1b3d5e5c822e2085441a91fb21ae7a3dd572a810cf49ea29a93a2e09d9bf895f328ba9c47afefb1b6102c498776c349f7c1bf099b6ff0274e92044d91f0363cb7f9183c071e7770aaa7e7e49caed5a98d8c5d4e0599f2a4614226a33f2729c6f52bec92b7b18817612d6579fdb14ef1a14646f7417473816636993795a0bdf31e89c2d0e01991de7fbd959234b50e2c40ed3be07aa6e49050d59d2d4ea93e49b135f90273b69bf5a0008bd28a9c2b09e7de9a4324a508cf26a4ceeebdd4870f7b6e6a531fc661f13593983fd47f3b03c48ad245ef3ca4650cb2e2470e0267438f2c477333509a8ade2bc1a73819b609ff9773ed03126e40d054687ebcd78e8543750c747ee57342988b001f5a0d4e3ee405f7ec70ae6c35e1240853f9a1e0f7a37ef87889a5298bd3f57bceb1f5b66fa9faf9137108bd56535ae2ad17f73cb7649b885e451f7bb16673e1419157027d6928b05115bc28de90783700161a668be94d7d7c596afcbd980316bf3d7a1bf9ea8b4baa6d303b7a42642d5fd4cb2aa944b608efec7b6ee88a12b3c691618a8ae383d9125ceae8e7c6820ee21ef8039875bde8429574b907a92a73795fc8e018a82e5ef7f5f2356503d417ff219f3a4c862e0908338dca61043d5f63d1c2b31f5e218b9ac02de8b2af20c081ade763d37ca79c0f34ff36436e795ecbef0b31519b02db6a850b01869b7dd8b353bff05828db7a582324745196bcac1e96fdfda66e2e02657b1cadf9bd84e6ef60c9999487f5c365eafc69cf52fd6056422e8a03d91b52c444dd588b566325f396e0305866"}, @TIPC_NLA_NODE_ADDR={0x8, 0x1, 0x1}]}, @TIPC_NLA_NODE={0x58, 0x6, 0x0, 0x1, [@TIPC_NLA_NODE_KEY={0x3e, 0x4, {'gcm(aes)\x00', 0x16, "0eb938cf4324aa0d48d4303f0d7973f8c57d203998ea"}}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_ADDR={0x8, 0x1, 0x6}, @TIPC_NLA_NODE_KEY_MASTER={0x4}, @TIPC_NLA_NODE_UP={0x4}]}, @TIPC_NLA_LINK={0x60, 0x4, 0x0, 0x1, [@TIPC_NLA_LINK_NAME={0x13, 0x1, 'broadcast-link\x00'}, @TIPC_NLA_LINK_NAME={0x9, 0x1, 'syz1\x00'}, @TIPC_NLA_LINK_PROP={0x3c, 0x7, 0x0, 0x1, [@TIPC_NLA_PROP_PRIO={0x8, 0x1, 0x4}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x10001}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x6}, @TIPC_NLA_PROP_MTU={0x8, 0x4, 0x7}, @TIPC_NLA_PROP_TOL={0x8, 0x2, 0x6}, @TIPC_NLA_PROP_PRIO={0x8}, @TIPC_NLA_PROP_WIN={0x8, 0x3, 0x4086}]}]}, @TIPC_NLA_SOCK={0x60, 0x2, 0x0, 0x1, [@TIPC_NLA_SOCK_CON={0x44, 0x3, 0x0, 0x1, [@TIPC_NLA_CON_NODE={0x8, 0x2, 0x85d}, @TIPC_NLA_CON_NODE={0x8, 0x2, 0x80000001}, @TIPC_NLA_CON_NODE={0x8, 0x2, 0x8}, @TIPC_NLA_CON_FLAG={0x8, 0x1, 0xfe}, @TIPC_NLA_CON_NODE={0x8, 0x2, 0x2}, @TIPC_NLA_CON_FLAG={0x8, 0x1, 0x1f}, @TIPC_NLA_CON_NODE={0x8, 0x2, 0x5}, @TIPC_NLA_CON_NODE={0x8}]}, @TIPC_NLA_SOCK_CON={0x14, 0x3, 0x0, 0x1, [@TIPC_NLA_CON_FLAG={0x8, 0x1, 0x7}, @TIPC_NLA_CON_FLAG={0x8, 0x1, 0x5}]}, @TIPC_NLA_SOCK_HAS_PUBL={0x4}]}, @TIPC_NLA_SOCK={0x14, 0x2, 0x0, 0x1, [@TIPC_NLA_SOCK_CON={0xc, 0x3, 0x0, 0x1, [@TIPC_NLA_CON_NODE={0x8, 0x2, 0xe836}]}, @TIPC_NLA_SOCK_HAS_PUBL={0x4}]}, @TIPC_NLA_BEARER={0x24, 0x1, 0x0, 0x1, [@TIPC_NLA_BEARER_DOMAIN={0x8, 0x3, 0x8}, @TIPC_NLA_BEARER_DOMAIN={0x8, 0x3, 0x9}, @TIPC_NLA_BEARER_NAME={0xd, 0x1, @udp='udp:syz2\x00'}]}, @TIPC_NLA_SOCK={0xc, 0x2, 0x0, 0x1, [@TIPC_NLA_SOCK_ADDR={0x8, 0x1, 0x9}]}]}, 0x1190}, 0x1, 0x0, 0x0, 0xd4}, 0x24040001)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): socket$inet_tcp-setsockopt$inet_mreqsrc-setsockopt$inet_mreqsrc-setsockopt$inet_mreqsrc
+detailed listing:
+executing program 0:
+r0 = socket$inet_tcp(0x2, 0x1, 0x0)
+setsockopt$inet_mreqsrc(r0, 0x0, 0x27, &(0x7f0000000140)={@multicast2, @loopback, @local}, 0xc)
+setsockopt$inet_mreqsrc(r0, 0x0, 0x27, &(0x7f0000000080)={@multicast1, @remote, @initdev={0xac, 0x1e, 0x0, 0x0}}, 0xc)
+setsockopt$inet_mreqsrc(r0, 0x0, 0x28, &(0x7f0000000140)={@multicast2, @dev, @local}, 0xc)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$mouse-read$char_usb-ioctl$AUTOFS_DEV_IOCTL_SETPIPEFD-openat$uinput-ioctl$UI_SET_PHYS-ioctl$AUTOFS_DEV_IOCTL_VERSION-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+read$char_usb(r0, 0x0, 0x0) (async, rerun: 32)
+ioctl$AUTOFS_DEV_IOCTL_SETPIPEFD(r0, 0xc0189378, &(0x7f0000000000)={{0x1, 0x1, 0x18, 0xffffffffffffffff, {<r1=>r0}}, './file0\x00'}) (rerun: 32)
+r2 = openat$uinput(0xffffffffffffff9c, &(0x7f0000000000), 0x0, 0x0)
+ioctl$UI_SET_PHYS(r2, 0xc06855c8, &(0x7f0000000040)='syz1\x00') (async)
+ioctl$AUTOFS_DEV_IOCTL_VERSION(r1, 0xc0189371, &(0x7f0000000040)={{0x1, 0x1, 0x18, r2}, './file0\x00'}) (async)
+write$P9_RSETATTR(r0, &(0x7f00000004c0)={0x7}, 0x7)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER-syz_open_dev$mouse-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000080)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$PERF_EVENT_IOC_SET_FILTER(0xffffffffffffffff, 0x40082406, &(0x7f0000000040)='(\x00')
+r0 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+write$P9_RSETATTR(r0, &(0x7f00000004c0)={0x7}, 0xfffffff3)
+
+program crashed: INFO: task hung in synchronize_rcu
+single: successfully extracted reproducer
+found reproducer with 4 syscalls
+minimizing guilty program
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER-syz_open_dev$mouse
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000080)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$PERF_EVENT_IOC_SET_FILTER(0xffffffffffffffff, 0x40082406, &(0x7f0000000040)='(\x00')
+syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+
+program did not crash
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000080)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+ioctl$PERF_EVENT_IOC_SET_FILTER(0xffffffffffffffff, 0x40082406, &(0x7f0000000040)='(\x00')
+write$P9_RSETATTR(0xffffffffffffffff, &(0x7f00000004c0)={0x7}, 0xfffffff3)
+
+program did not crash
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000080)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+write$P9_RSETATTR(r0, &(0x7f00000004c0)={0x7}, 0xfffffff3)
+
+program crashed: INFO: task hung in synchronize_rcu
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$mouse-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+write$P9_RSETATTR(r0, &(0x7f00000004c0)={0x7}, 0xfffffff3)
+
+program did not crash
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+write$P9_RSETATTR(r0, &(0x7f00000004c0)={0x7}, 0xfffffff3)
+
+program did not crash
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000080)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$mouse(0x0, 0x0, 0x1ab302)
+write$P9_RSETATTR(r0, &(0x7f00000004c0)={0x7}, 0xfffffff3)
+
+program did not crash
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000080)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = syz_open_dev$mouse(&(0x7f0000000740), 0x0, 0x1ab302)
+write$P9_RSETATTR(r0, 0x0, 0x0)
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program crashed: INFO: task hung in tp_perf_event_destroy
+simplifying C reproducer
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program crashed: no output from test machine
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program did not crash
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program crashed: INFO: task hung in tp_perf_event_destroy
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program crashed: no output from test machine
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program crashed: INFO: task hung in synchronize_rcu
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-syz_open_dev$mouse-write$P9_RSETATTR
+program crashed: INFO: task hung in synchronize_rcu
+reproducing took 2h8m58.370744602s
+repro crashed as (corrupted=false):
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 2571 jiffies old.
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 10107 jiffies old.
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 32731 jiffies old.
+INFO: task syz-executor243:532 blocked for more than 147 seconds.
+      Not tainted 6.3.0-rc6-bc6394b8d171+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor243 state:D stack:0     pid:532   ppid:524    flags:0x00004006
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_timeout+0x4db/0x5b0 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __wait_rcu_gp+0x136/0x160 kernel/rcu/update.c:442
+ synchronize_rcu_tasks_generic.part.24+0x3b/0x60 kernel/rcu/tasks.h:572
+ synchronize_rcu_tasks_generic+0x24/0x70 kernel/rcu/tasks.h:571
+ synchronize_rcu_tasks+0x19/0x20 kernel/rcu/tasks.h:970
+ ftrace_shutdown kernel/trace/ftrace.c:3201 [inline]
+ ftrace_shutdown+0x1cc/0x410 kernel/trace/ftrace.c:3107
+ unregister_ftrace_function+0x35/0x230 kernel/trace/ftrace.c:8371
+ perf_ftrace_function_unregister kernel/trace/trace_event_perf.c:494 [inline]
+ perf_ftrace_event_register+0x95/0xf0 kernel/trace/trace_event_perf.c:514
+ perf_trace_event_close kernel/trace/trace_event_perf.c:190 [inline]
+ perf_trace_destroy+0x3a/0xa0 kernel/trace/trace_event_perf.c:240
+ tp_perf_event_destroy+0x1e/0x30 kernel/events/core.c:10010
+ _free_event+0x101/0x810 kernel/events/core.c:5174
+ put_event+0x3c/0x50 kernel/events/core.c:5271
+ perf_event_release_kernel+0x2de/0x360 kernel/events/core.c:5383
+ perf_release+0x22/0x30 kernel/events/core.c:5393
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0x547/0x12b0 kernel/exit.c:869
+ do_group_exit+0x5e/0xf0 kernel/exit.c:1019
+ get_signal+0x1465/0x14a0 kernel/signal.c:2859
+ arch_do_signal_or_restart+0x33/0x280 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45451d
+RSP: 002b:00007ffc712c4d78 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: 0000000000000003 RBX: 0000000000000000 RCX: 000000000045451d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000080
+RBP: 0000000000411b10 R08: 0000000000000000 R09: 0000000000411b10
+R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83d63610 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83d63390 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83d630d0 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by khungtaskd/29:
+ #0: ffffffff83d64020 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6495
+2 locks held by syz-executor243/532:
+ #0: ffffffff83e20848 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x21/0xa0 kernel/trace/trace_event_perf.c:239
+ #1: ffffffff83e1cee8 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x230 kernel/trace/ftrace.c:8370
+
+=============================================
+
+
+final repro crashed as (corrupted=false):
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 2571 jiffies old.
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 10107 jiffies old.
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 32731 jiffies old.
+INFO: task syz-executor243:532 blocked for more than 147 seconds.
+      Not tainted 6.3.0-rc6-bc6394b8d171+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor243 state:D stack:0     pid:532   ppid:524    flags:0x00004006
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_timeout+0x4db/0x5b0 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __wait_rcu_gp+0x136/0x160 kernel/rcu/update.c:442
+ synchronize_rcu_tasks_generic.part.24+0x3b/0x60 kernel/rcu/tasks.h:572
+ synchronize_rcu_tasks_generic+0x24/0x70 kernel/rcu/tasks.h:571
+ synchronize_rcu_tasks+0x19/0x20 kernel/rcu/tasks.h:970
+ ftrace_shutdown kernel/trace/ftrace.c:3201 [inline]
+ ftrace_shutdown+0x1cc/0x410 kernel/trace/ftrace.c:3107
+ unregister_ftrace_function+0x35/0x230 kernel/trace/ftrace.c:8371
+ perf_ftrace_function_unregister kernel/trace/trace_event_perf.c:494 [inline]
+ perf_ftrace_event_register+0x95/0xf0 kernel/trace/trace_event_perf.c:514
+ perf_trace_event_close kernel/trace/trace_event_perf.c:190 [inline]
+ perf_trace_destroy+0x3a/0xa0 kernel/trace/trace_event_perf.c:240
+ tp_perf_event_destroy+0x1e/0x30 kernel/events/core.c:10010
+ _free_event+0x101/0x810 kernel/events/core.c:5174
+ put_event+0x3c/0x50 kernel/events/core.c:5271
+ perf_event_release_kernel+0x2de/0x360 kernel/events/core.c:5383
+ perf_release+0x22/0x30 kernel/events/core.c:5393
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0x547/0x12b0 kernel/exit.c:869
+ do_group_exit+0x5e/0xf0 kernel/exit.c:1019
+ get_signal+0x1465/0x14a0 kernel/signal.c:2859
+ arch_do_signal_or_restart+0x33/0x280 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45451d
+RSP: 002b:00007ffc712c4d78 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: 0000000000000003 RBX: 0000000000000000 RCX: 000000000045451d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000080
+RBP: 0000000000411b10 R08: 0000000000000000 R09: 0000000000411b10
+R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83d63610 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83d63390 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83d630d0 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by khungtaskd/29:
+ #0: ffffffff83d64020 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6495
+2 locks held by syz-executor243/532:
+ #0: ffffffff83e20848 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x21/0xa0 kernel/trace/trace_event_perf.c:239
+ #1: ffffffff83e1cee8 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x230 kernel/trace/ftrace.c:8370
+
+=============================================
+
+

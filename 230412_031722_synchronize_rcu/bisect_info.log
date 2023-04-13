@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [09a9639e56c01c7a00d6c0ca63f4c7c41abe075d] Linux 6.3-rc6
+git bisect bad 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [182966e1cd74ec0e326cd376de241803ee79741b] Merge tag 'media/v5.18-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 182966e1cd74ec0e326cd376de241803ee79741b
+# good: [8aebac82933ff1a7c8eede18cab11e1115e2062b] Merge tag 'rust-v6.1-rc1' of https://github.com/Rust-for-Linux/linux
+git bisect good 8aebac82933ff1a7c8eede18cab11e1115e2062b
+# bad: [7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91] Merge tag 'net-next-6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect bad 7e68dd7d07a28faa2e6574dd6b9dbd90cdeaae91
+# good: [e3c591c0735383f044798ee4a47d1a9194f09344] ASoC: SOF: Intel: update D0i3 registers for MTL
+git bisect good e3c591c0735383f044798ee4a47d1a9194f09344
+# bad: [02bf43c7b7f7a19aa59a75f5244f0a3408bace1a] Merge tag 'fs.xattr.simple.rework.rbtree.rwlock.v6.2' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/idmapping
+git bisect bad 02bf43c7b7f7a19aa59a75f5244f0a3408bace1a
+# bad: [164f59000c19fa1ee5d09327a8055ec9f9b9905a] Merge tag 'microblaze-v6.2' of git://git.monstr.eu/linux-2.6-microblaze
+git bisect bad 164f59000c19fa1ee5d09327a8055ec9f9b9905a
+# bad: [7c42d6f5e663f39bcf56d08685d84a7b1d011c77] Merge tag 'mmc-v6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc
+git bisect bad 7c42d6f5e663f39bcf56d08685d84a7b1d011c77
+# good: [6b872a5ecece462ba02c8cad1c0203583631db2b] Merge tag 'pm-6.1-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good 6b872a5ecece462ba02c8cad1c0203583631db2b
+# good: [2b0145032877fe0fa3460dfff285cc2fdcc9fc2e] Merge tag 'linux-can-fixes-for-6.1-20221107' of git://git.kernel.org/pub/scm/linux/kernel/git/mkl/linux-can
+git bisect good 2b0145032877fe0fa3460dfff285cc2fdcc9fc2e
+# bad: [089d1c31224e6b266ece3ee555a3ea2c9acbe5c2] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect bad 089d1c31224e6b266ece3ee555a3ea2c9acbe5c2
+# good: [10d916c86ecafeccaed89175ebf9b832dddde380] Merge tag 'soc-fixes-6.1-2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 10d916c86ecafeccaed89175ebf9b832dddde380
+# good: [74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f] Merge tag 'i2c-for-6.1-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux
+git bisect good 74f3f1d79a1d17a319e20eb31d3edd25c03bdd9f
+# bad: [90153f928bee544c794a2410afba6d936a09edce] Merge tag '6.1-rc4-smb3-fixes' of git://git.samba.org/sfrench/cifs-2.6
+git bisect bad 90153f928bee544c794a2410afba6d936a09edce
+# good: [4869f5750afdb10a0e9cfa0252fce33e53ab681e] Merge tag 'block-6.1-2022-11-05' of git://git.kernel.dk/linux
+git bisect good 4869f5750afdb10a0e9cfa0252fce33e53ab681e
+# bad: [66f0919c953ef7b55e5ab94389a013da2ce80a2c] tracing: kprobe: Fix memory leak in test_gen_kprobe/kretprobe_cmd()
+git bisect bad 66f0919c953ef7b55e5ab94389a013da2ce80a2c
+# bad: [4a6f316d6855a434f56dbbeba05e14c01acde8f8] kprobe: reverse kp->flags when arm_kprobe failed
+git bisect bad 4a6f316d6855a434f56dbbeba05e14c01acde8f8
+# bad: [0e792b89e6800cd9cb4757a76a96f7ef3e8b6294] ftrace: Fix use-after-free for dynamic ftrace_ops
+git bisect bad 0e792b89e6800cd9cb4757a76a96f7ef3e8b6294
+# good: [7433632c9ff68a991bd0bc38cabf354e9d2de410] ring-buffer: Check for NULL cpu_buffer in ring_buffer_wake_waiters()
+git bisect good 7433632c9ff68a991bd0bc38cabf354e9d2de410
+# first bad commit: [0e792b89e6800cd9cb4757a76a96f7ef3e8b6294] ftrace: Fix use-after-free for dynamic ftrace_ops
+|0413_090706|Bisect successfully! 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d_0e792b89e6800cd9cb4757a76a96f7ef3e8b6294_revert bzimage passed!|

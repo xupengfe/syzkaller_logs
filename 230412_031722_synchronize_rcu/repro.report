@@ -1,0 +1,71 @@
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 2571 jiffies old.
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 10107 jiffies old.
+rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 32731 jiffies old.
+INFO: task syz-executor243:532 blocked for more than 147 seconds.
+      Not tainted 6.3.0-rc6-bc6394b8d171+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor243 state:D stack:0     pid:532   ppid:524    flags:0x00004006
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_timeout+0x4db/0x5b0 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __wait_rcu_gp+0x136/0x160 kernel/rcu/update.c:442
+ synchronize_rcu_tasks_generic.part.24+0x3b/0x60 kernel/rcu/tasks.h:572
+ synchronize_rcu_tasks_generic+0x24/0x70 kernel/rcu/tasks.h:571
+ synchronize_rcu_tasks+0x19/0x20 kernel/rcu/tasks.h:970
+ ftrace_shutdown kernel/trace/ftrace.c:3201 [inline]
+ ftrace_shutdown+0x1cc/0x410 kernel/trace/ftrace.c:3107
+ unregister_ftrace_function+0x35/0x230 kernel/trace/ftrace.c:8371
+ perf_ftrace_function_unregister kernel/trace/trace_event_perf.c:494 [inline]
+ perf_ftrace_event_register+0x95/0xf0 kernel/trace/trace_event_perf.c:514
+ perf_trace_event_close kernel/trace/trace_event_perf.c:190 [inline]
+ perf_trace_destroy+0x3a/0xa0 kernel/trace/trace_event_perf.c:240
+ tp_perf_event_destroy+0x1e/0x30 kernel/events/core.c:10010
+ _free_event+0x101/0x810 kernel/events/core.c:5174
+ put_event+0x3c/0x50 kernel/events/core.c:5271
+ perf_event_release_kernel+0x2de/0x360 kernel/events/core.c:5383
+ perf_release+0x22/0x30 kernel/events/core.c:5393
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0x547/0x12b0 kernel/exit.c:869
+ do_group_exit+0x5e/0xf0 kernel/exit.c:1019
+ get_signal+0x1465/0x14a0 kernel/signal.c:2859
+ arch_do_signal_or_restart+0x33/0x280 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x45451d
+RSP: 002b:00007ffc712c4d78 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: 0000000000000003 RBX: 0000000000000000 RCX: 000000000045451d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000080
+RBP: 0000000000411b10 R08: 0000000000000000 R09: 0000000000411b10
+R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83d63610 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83d63390 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83d630d0 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by khungtaskd/29:
+ #0: ffffffff83d64020 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6495
+2 locks held by syz-executor243/532:
+ #0: ffffffff83e20848 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x21/0xa0 kernel/trace/trace_event_perf.c:239
+ #1: ffffffff83e1cee8 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x230 kernel/trace/ftrace.c:8370
+
+=============================================
+

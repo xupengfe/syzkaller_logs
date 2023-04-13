@@ -1,0 +1,217 @@
+INFO: task rcu_tasks_kthre:11 blocked for more than 143 seconds.
+      Not tainted 6.3.0-rc6-bc6394b8d171+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:rcu_tasks_kthre state:D stack:0     pid:11    ppid:2      flags:0x00004000
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_timeout+0x4db/0x5b0 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __synchronize_srcu+0xcd/0x180 kernel/rcu/srcutree.c:1323
+ synchronize_srcu_expedited kernel/rcu/srcutree.c:1348 [inline]
+ synchronize_srcu+0xce/0x110 kernel/rcu/srcutree.c:1402
+ rcu_tasks_postscan+0x19/0x20 kernel/rcu/tasks.h:850
+ rcu_tasks_wait_gp+0x1ad/0x3e0 kernel/rcu/tasks.h:686
+ rcu_tasks_one_gp+0x36d/0x420 kernel/rcu/tasks.h:527
+ rcu_tasks_kthread+0x3a/0x50 kernel/rcu/tasks.h:555
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:308
+ </TASK>
+INFO: task syz-executor.0:31017 blocked for more than 143 seconds.
+      Not tainted 6.3.0-rc6-bc6394b8d171+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.0  state:D stack:0     pid:31017 ppid:29525  flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5307 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6625
+ schedule+0x5b/0xe0 kernel/sched/core.c:6701
+ schedule_timeout+0x4db/0x5b0 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __wait_rcu_gp+0x136/0x160 kernel/rcu/update.c:442
+ synchronize_rcu_tasks_generic.part.24+0x3b/0x60 kernel/rcu/tasks.h:572
+ synchronize_rcu_tasks_generic+0x24/0x70 kernel/rcu/tasks.h:571
+ synchronize_rcu_tasks+0x19/0x20 kernel/rcu/tasks.h:970
+ ftrace_shutdown kernel/trace/ftrace.c:3201 [inline]
+ ftrace_shutdown+0x1cc/0x410 kernel/trace/ftrace.c:3107
+ unregister_ftrace_function+0x35/0x230 kernel/trace/ftrace.c:8371
+ perf_ftrace_function_unregister kernel/trace/trace_event_perf.c:494 [inline]
+ perf_ftrace_event_register+0x95/0xf0 kernel/trace/trace_event_perf.c:514
+ perf_trace_event_close kernel/trace/trace_event_perf.c:190 [inline]
+ perf_trace_destroy+0x3a/0xa0 kernel/trace/trace_event_perf.c:240
+ tp_perf_event_destroy+0x1e/0x30 kernel/events/core.c:10010
+ _free_event+0x101/0x810 kernel/events/core.c:5174
+ put_event+0x3c/0x50 kernel/events/core.c:5271
+ perf_event_release_kernel+0x2de/0x360 kernel/events/core.c:5383
+ perf_release+0x22/0x30 kernel/events/core.c:5393
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x41fcf7
+RSP: 002b:00007fffb76c4110 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000005 RCX: 000000000041fcf7
+RDX: 0000000000000000 RSI: 00000000000001af RDI: 0000000000000005
+RBP: 000000000059d98c R08: 00007f48c6524000 R09: 000000000000047d
+R10: 00007fffb76c4220 R11: 0000000000000293 R12: 0000000000073f77
+R13: 0000000000073fa9 R14: 000000000059bf8c R15: 0000000000000000
+ </TASK>
+Pid 3083(syz-executor.1) over core_pipe_limit
+Skipping core dump
+Pid 3087(syz-executor.1) over core_pipe_limit
+Skipping core dump
+Pid 3090(syz-executor.1) over core_pipe_limit
+Skipping core dump
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83d63610 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83d63390 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83d630d0 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by khungtaskd/29:
+ #0: ffffffff83d64020 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6495
+3 locks held by auditd/206:
+ #0: ffff888005d5a0e8 (&f->f_pos_lock){+.+.}-{3:3}, at: __fdget_pos+0xa3/0xc0 fs/file.c:1047
+ #1: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: ksys_write+0x9f/0x170 fs/read_write.c:637
+ #2: ffff888006b92a00 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff888006b92a00 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+4 locks held by in:imjournal/514:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: do_renameat2+0x359/0x8f0 fs/namei.c:4859
+ #1: ffff888014014680 (&type->i_mutex_dir_key#3/1){+.+.}-{3:3}, at: inode_lock_nested include/linux/fs.h:793 [inline]
+ #1: ffff888014014680 (&type->i_mutex_dir_key#3/1){+.+.}-{3:3}, at: lock_rename+0x151/0x160 fs/namei.c:2991
+ #2: ffff888010ffd980 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff888010ffd980 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: lock_two_nondirectories+0xca/0xd0 fs/inode.c:1122
+ #3: ffff88802ab28400 (&sb->s_type->i_mutex_key#8/4){+.+.}-{3:3}, at: inode_lock_nested include/linux/fs.h:793 [inline]
+ #3: ffff88802ab28400 (&sb->s_type->i_mutex_key#8/4){+.+.}-{3:3}, at: lock_two_nondirectories+0xa8/0xd0 fs/inode.c:1124
+2 locks held by syz-executor.0/31017:
+Pid 3091(syz-executor.1) over core_pipe_limit
+ #0: ffffffff83e20848 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x21/0xa0 kernel/trace/trace_event_perf.c:239
+Skipping core dump
+ #1: ffffffff83e1cee8 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x230 kernel/trace/ftrace.c:8370
+2 locks held by syz-executor.0/31616:
+ #0: ffffffff8629c018 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc kernel/events/core.c:11914 [inline]
+ #0: ffffffff8629c018 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc+0x49e/0x1c00 kernel/events/core.c:11782
+ #1: ffffffff83e20848 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x2c/0x170 kernel/trace/trace_event_perf.c:221
+3 locks held by systemd-coredum/33841:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: __do_splice+0xf1/0x200 fs/splice.c:1230
+ #1: ffff88803b2b1e68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock_nested fs/pipe.c:82 [inline]
+ #1: ffff88803b2b1e68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock fs/pipe.c:90 [inline]
+ #1: ffff88803b2b1e68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_wait_readable+0x1ba/0x1d0 fs/pipe.c:1049
+ #2: ffff88802a9e6c80 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff88802a9e6c80 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+3 locks held by systemd-coredum/33876:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: __do_splice+0xf1/0x200 fs/splice.c:1230
+ #1: ffff88803b2b1868 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock_nested fs/pipe.c:82 [inline]
+ #1: ffff88803b2b1868 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock+0x4d/0x60 fs/pipe.c:90
+ #2: ffff88803ce01700 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff88803ce01700 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+3 locks held by systemd-coredum/34135:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: __do_splice+0xf1/0x200 fs/splice.c:1230
+ #1: ffff888052d9cc68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock_nested fs/pipe.c:82 [inline]
+ #1: ffff888052d9cc68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock+0x4d/0x60 fs/pipe.c:90
+ #2: ffff888042409700 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff888042409700 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+3 locks held by systemd-coredum/34136:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: __do_splice+0xf1/0x200 fs/splice.c:1230
+ #1: ffff888052d9c268 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock_nested fs/pipe.c:82 [inline]
+ #1: ffff888052d9c268 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock+0x4d/0x60 fs/pipe.c:90
+ #2: ffff888014102080 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff888014102080 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+3 locks held by systemd-coredum/34137:
+3 locks held by systemd-coredum/34649:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: __do_splice+0xf1/0x200 fs/splice.c:1230
+ #1: ffff88805208b868 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock_nested fs/pipe.c:82 [inline]
+ #1: ffff88805208b868 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock+0x4d/0x60 fs/pipe.c:90
+ #2: ffff88804240e300 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff88804240e300 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+1 lock held by systemd-coredum/34772:
+2 locks held by kworker/u4:2/34867:
+ #0: ffff88807ebd5d38 ((wq_completion)events_unbound){+.+.}-{0:0}, at: wake_up_worker kernel/workqueue.c:859 [inline]
+ #0: ffff88807ebd5d38 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0x2ff/0x860 kernel/workqueue.c:2353
+ #1: ffffc9001869be60 ((work_completion)(&sub_info->work)){+.+.}-{0:0}, at: wake_up_worker kernel/workqueue.c:859 [inline]
+ #1: ffffc9001869be60 ((work_completion)(&sub_info->work)){+.+.}-{0:0}, at: process_one_work+0x303/0x860 kernel/workqueue.c:2353
+3 locks held by systemd-coredum/35030:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: __do_splice+0xf1/0x200 fs/splice.c:1230
+ #1: ffff88804fc10e68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock_nested fs/pipe.c:82 [inline]
+ #1: ffff88804fc10e68 (&pipe->mutex/1){+.+.}-{3:3}, at: pipe_lock+0x4d/0x60 fs/pipe.c:90
+ #2: ffff88804240b380 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #2: ffff88804240b380 (&sb->s_type->i_mutex_key#8){++++}-{3:3}, at: ext4_buffered_write_iter+0x57/0x1e0 fs/ext4/file.c:283
+2 locks held by (coredump)/36381:
+ #0: ffff88800774c668 (&sb->s_type->i_mutex_key#9){++++}-{3:3}, at: inode_lock include/linux/fs.h:758 [inline]
+ #0: ffff88800774c668 (&sb->s_type->i_mutex_key#9){++++}-{3:3}, at: lock_mount+0x3d/0x150 fs/namespace.c:2294
+ #1: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: namespace_lock fs/namespace.c:1509 [inline]
+ #1: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: lock_mount+0x61/0x150 fs/namespace.c:2299
+2 locks held by (coredump)/36480:
+1 lock held by systemd-coredum/36540:
+1 lock held by syz-executor.3/36578:
+1 lock held by syz-executor.1/36557:
+ #0: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: namespace_lock fs/namespace.c:1509 [inline]
+ #0: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: copy_mnt_ns+0x144/0x580 fs/namespace.c:3477
+1 lock held by syz-executor.1/36575:
+ #0: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: namespace_lock fs/namespace.c:1509 [inline]
+ #0: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: copy_mnt_ns+0x144/0x580 fs/namespace.c:3477
+1 lock held by syz-executor.1/36576:
+ #0: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: namespace_lock fs/namespace.c:1509 [inline]
+ #0: ffffffff83e55af0 (namespace_sem){++++}-{3:3}, at: copy_mnt_ns+0x144/0x580 fs/namespace.c:3477
+1 lock held by syz-executor.6/36584:
+3 locks held by syz-executor.7/36579:
+1 lock held by syz-executor.4/36586:
+2 locks held by syz-executor.0/36580:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: filename_create+0x9b/0x290 fs/namei.c:3801
+ #1: ffff88803cf0d980 (&type->i_mutex_dir_key#3/1){+.+.}-{3:3}, at: inode_lock_nested include/linux/fs.h:793 [inline]
+ #1: ffff88803cf0d980 (&type->i_mutex_dir_key#3/1){+.+.}-{3:3}, at: filename_create+0xeb/0x290 fs/namei.c:3808
+2 locks held by syz-executor.5/36582:
+ #0: ffff8880045d5448 (sb_writers#3){.+.+}-{0:0}, at: filename_create+0x9b/0x290 fs/namei.c:3801
+ #1: ffff888042526c80 (&type->i_mutex_dir_key#3/1){+.+.}-{3:3}, at: inode_lock_nested include/linux/fs.h:793 [inline]
+ #1: ffff888042526c80 (&type->i_mutex_dir_key#3/1){+.+.}-{3:3}, at: filename_create+0xeb/0x290 fs/namei.c:3808
+1 lock held by syz-executor.1/36583:
+
+=============================================
+
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+Pid 3095(syz-executor.1) over core_pipe_limit
+Skipping core dump
+Pid 3098(syz-executor.1) over core_pipe_limit
+Skipping core dump
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+Pid 3099(syz-executor.1) over core_pipe_limit
+Skipping core dump
+Pid 3100(syz-executor.1) over core_pipe_limit
+Skipping core dump
+Pid 3101(syz-executor.1) over core_pipe_limit
+Skipping core dump
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning: 6 callbacks suppressed
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
+EXT4-fs warning (device sda): ext4_group_extend:1862: can't shrink FS - resize aborted
