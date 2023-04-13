@@ -1,0 +1,75 @@
+[root@test ~]# ./repro_rcu 
+[  402.329090] hrtimer CPU1: interrupt took 315678 ns
+[  416.589380] rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 2574 jiffies old.
+[  446.733426] rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 10110 jiffies old.
+[  537.230980] rcu_tasks_wait_gp: rcu_tasks grace period number 9 (since boot) is 32734 jiffies old.
+[  595.021113] INFO: task repro_rcu:388 blocked for more than 147 seconds.
+[  595.021637]       Not tainted 6.3.0-rc6-dbg-dirty #1
+[  595.021978] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[  595.022524] task:repro_rcu       state:D stack:0     pid:388   ppid:386    flags:0x00004006
+[  595.023159] Call Trace:
+[  595.023411]  <TASK>
+[  595.023718]  __schedule+0x40a/0xc30
+[  595.024196]  ? wait_for_completion+0x7b/0x180
+[  595.024556]  schedule+0x5b/0xe0
+[  595.025065]  schedule_timeout+0x4db/0x5b0
+[  595.025572]  ? schedule_timeout+0x9/0x5b0
+[  595.026025]  ? wait_for_completion+0x7b/0x180
+[  595.026418]  wait_for_completion+0xa6/0x180
+[  595.026917]  __wait_rcu_gp+0x136/0x160
+[  595.027299]  ? __pfx_arch_ftrace_ops_list_func+0x10/0x10
+[  595.027772]  synchronize_rcu_tasks_generic.part.24+0x3b/0x60
+[  595.028224]  ? __pfx_call_rcu_tasks+0x10/0x10
+[  595.028610]  ? __pfx_wakeme_after_rcu+0x10/0x10
+[  595.029243]  ? verify_cpu+0x10/0x100
+[  595.029626]  synchronize_rcu_tasks_generic+0x24/0x70
+[  595.030036]  synchronize_rcu_tasks+0x19/0x20
+[  595.030378]  ftrace_shutdown+0x1cc/0x410
+[  595.030824]  unregister_ftrace_function+0x35/0x230
+[  595.031248]  ? __sanitizer_cov_trace_switch+0x57/0xa0
+[  595.031740]  perf_ftrace_event_register+0x95/0xf0
+[  595.032171]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.032609]  perf_trace_destroy+0x3a/0xa0
+[  595.033133]  ? __pfx_tp_perf_event_destroy+0x10/0x10
+[  595.033570]  tp_perf_event_destroy+0x1e/0x30
+[  595.033984]  _free_event+0x101/0x810
+[  595.034413]  put_event+0x3c/0x50
+[  595.034784]  perf_event_release_kernel+0x2de/0x360
+[  595.035205]  ? perf_event_release_kernel+0x9/0x360
+[  595.035704]  ? __pfx_perf_release+0x10/0x10
+[  595.036121]  perf_release+0x22/0x30
+[  595.036487]  __fput+0x11f/0x450
+[  595.037079]  ____fput+0x1e/0x30
+[  595.037425]  task_work_run+0xb6/0x120
+[  595.037867]  do_exit+0x547/0x12b0
+[  595.038261]  ? write_comp_data+0x2f/0x90
+[  595.038737]  do_group_exit+0x5e/0xf0
+[  595.039159]  get_signal+0x1465/0x14a0
+[  595.039758]  arch_do_signal_or_restart+0x33/0x280
+[  595.040412]  exit_to_user_mode_prepare+0x13b/0x210
+[  595.040837]  syscall_exit_to_user_mode+0x2d/0x60
+[  595.041416]  do_syscall_64+0x4a/0x90
+[  595.041792]  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+[  595.042228] RIP: 0033:0x7f462d14b59d
+[  595.042579] RSP: 002b:00007ffe8f083658 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[  595.043206] RAX: 0000000000000003 RBX: 0000000000000000 RCX: 00007f462d14b59d
+[  595.043747] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000080
+[  595.044290] RBP: 00007ffe8f083670 R08: 0000000000000000 R09: 00007ffe8f083670
+[  595.044832] R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000004011c0
+[  595.045543] R13: 00007ffe8f083790 R14: 0000000000000000 R15: 0000000000000000
+[  595.046374]  </TASK>
+[  595.046607] 
+[  595.046607] Showing all locks held in the system:
+[  595.047086] 1 lock held by rcu_tasks_kthre/11:
+[  595.047464]  #0: ffffffff83d63450 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420
+[  595.048424] 1 lock held by rcu_tasks_rude_/12:
+[  595.048794]  #0: ffffffff83d631d0 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420
+[  595.049910] 1 lock held by rcu_tasks_trace/13:
+[  595.050286]  #0: ffffffff83d62f10 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420
+[  595.051258] 1 lock held by khungtaskd/29:
+[  595.051597]  #0: ffffffff83d63e60 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0
+[  595.052509] 2 locks held by repro_rcu/388:
+[  595.052995]  #0: ffffffff83e20668 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x21/0xa0
+[  595.053886]  #1: ffffffff83e1cd28 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x230
+[  595.054815] 
+[  595.055004] =============================================

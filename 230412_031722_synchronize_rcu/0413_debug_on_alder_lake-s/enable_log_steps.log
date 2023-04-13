@@ -1,0 +1,31 @@
+echo 1 > /proc/sys/kernel/ftrace_enabled
+echo function_graph > /sys/kernel/debug/tracing/current_tracer
+echo "hrtimer_*" > /sys/kernel/debug/tracing/set_ftrace_filter
+echo 1 > /sys/kernel/debug/tracing/tracing_on
+
+# cat  /sys/kernel/debug/tracing/set_ftrace_filter
+hrtimer_forward
+hrtimer_active
+hrtimer_reprogram
+hrtimer_update_next_event
+hrtimer_force_reprogram
+hrtimer_update_softirq_timer
+hrtimer_init_sleeper
+hrtimer_wakeup
+hrtimer_try_to_cancel
+hrtimer_cancel
+hrtimer_run_softirq
+hrtimer_init
+hrtimer_start_range_ns
+hrtimer_sleeper_start_expires
+hrtimer_get_next_event
+hrtimer_next_event_without
+hrtimer_interrupt
+hrtimer_run_queues
+hrtimer_nanosleep
+hrtimer_nanosleep_restart
+
+When generated "rcu_tasks_wait_gp":
+cat /sys/kernel/debug/tracing/trace > hrtimer_log_0413_1.txt
+After generated Call Trace for a while:
+cat /sys/kernel/debug/tracing/trace > hrtimer_log_0413_2.txt
