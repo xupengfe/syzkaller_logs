@@ -1,0 +1,98 @@
+EXT4-fs (loop4): encrypted files will use data=ordered instead of data journaling mode
+EXT4-fs (loop4): invalid inodes per group: 4
+I/O error, dev loop4, sector 4 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop4, logical block 1, async page read
+INFO: task rcu_tasks_kthre:11 blocked for more than 143 seconds.
+      Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:rcu_tasks_kthre state:D stack:0     pid:11    ppid:2      flags:0x00004000
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5304 [inline]
+ __schedule+0x40a/0xc90 kernel/sched/core.c:6622
+ schedule+0x5b/0xe0 kernel/sched/core.c:6698
+ schedule_timeout+0x50b/0x670 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __synchronize_srcu+0xcd/0x180 kernel/rcu/srcutree.c:1323
+ synchronize_srcu_expedited kernel/rcu/srcutree.c:1348 [inline]
+ synchronize_srcu+0xce/0x110 kernel/rcu/srcutree.c:1402
+ rcu_tasks_postscan+0x19/0x20 kernel/rcu/tasks.h:850
+ rcu_tasks_wait_gp+0x1ad/0x3e0 kernel/rcu/tasks.h:686
+ rcu_tasks_one_gp+0x36d/0x420 kernel/rcu/tasks.h:527
+ rcu_tasks_kthread+0x3a/0x50 kernel/rcu/tasks.h:555
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:308
+ </TASK>
+INFO: task syz-executor.6:9237 blocked for more than 143 seconds.
+      Not tainted 6.3.0-rc2-intel-next-38f821ff82e9+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.6  state:D stack:0     pid:9237  ppid:580    flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5304 [inline]
+ __schedule+0x40a/0xc90 kernel/sched/core.c:6622
+ schedule+0x5b/0xe0 kernel/sched/core.c:6698
+ schedule_timeout+0x50b/0x670 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ __wait_rcu_gp+0x136/0x160 kernel/rcu/update.c:442
+ synchronize_rcu_tasks_generic.part.24+0x3b/0x60 kernel/rcu/tasks.h:572
+ synchronize_rcu_tasks_generic+0x24/0x70 kernel/rcu/tasks.h:571
+ synchronize_rcu_tasks+0x19/0x20 kernel/rcu/tasks.h:970
+ ftrace_shutdown kernel/trace/ftrace.c:3200 [inline]
+ ftrace_shutdown+0x1cc/0x410 kernel/trace/ftrace.c:3106
+ unregister_ftrace_function+0x35/0x230 kernel/trace/ftrace.c:8367
+ perf_ftrace_function_unregister kernel/trace/trace_event_perf.c:494 [inline]
+ perf_ftrace_event_register+0x95/0xf0 kernel/trace/trace_event_perf.c:514
+ perf_trace_event_close kernel/trace/trace_event_perf.c:190 [inline]
+ perf_trace_destroy+0x3a/0xa0 kernel/trace/trace_event_perf.c:240
+ tp_perf_event_destroy+0x1e/0x30 kernel/events/core.c:10010
+ perf_try_init_event+0x25e/0x280 kernel/events/core.c:11587
+ perf_init_event kernel/events/core.c:11636 [inline]
+ perf_event_alloc kernel/events/core.c:11916 [inline]
+ perf_event_alloc+0xe25/0x1c00 kernel/events/core.c:11782
+ __do_sys_perf_event_open+0x3b6/0x1910 kernel/events/core.c:12423
+ __se_sys_perf_event_open kernel/events/core.c:12314 [inline]
+ __x64_sys_perf_event_open+0x2f/0x40 kernel/events/core.c:12314
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x4773bd
+RSP: 002b:00007f4625be8108 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 000000000059bf80 RCX: 00000000004773bd
+RDX: 0000000000000000 RSI: ffffffffffffffff RDI: 00000000200004c0
+RBP: 000000000059bf80 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffd1bae4d9f R14: 00007ffd1bae4f20 R15: 00007f4625be8280
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83f656d0 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83f65450 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83f65190 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by khungtaskd/30:
+ #0: ffffffff83f660e0 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6495
+3 locks held by syz-executor.6/9237:
+ #0: ffffffff864c0818 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc kernel/events/core.c:11914 [inline]
+ #0: ffffffff864c0818 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc+0x49e/0x1c00 kernel/events/core.c:11782
+ #1: ffffffff840228e8 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x21/0xa0 kernel/trace/trace_event_perf.c:239
+ #2: ffffffff8401efa8 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x230 kernel/trace/ftrace.c:8366
+2 locks held by syz-executor.6/9919:
+ #0: ffffffff864c0818 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc kernel/events/core.c:11914 [inline]
+ #0: ffffffff864c0818 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc+0x49e/0x1c00 kernel/events/core.c:11782
+ #1: ffffffff840228e8 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x2c/0x170 kernel/trace/trace_event_perf.c:221
+2 locks held by syz-executor.6/10446:
+ #0: ffffffff864c0818 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc kernel/events/core.c:11914 [inline]
+ #0: ffffffff864c0818 (&pmus_srcu){....}-{0:0}, at: perf_event_alloc+0x49e/0x1c00 kernel/events/core.c:11782
+ #1: ffffffff840228e8 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x2c/0x170 kernel/trace/trace_event_perf.c:221
+
+=============================================
+
