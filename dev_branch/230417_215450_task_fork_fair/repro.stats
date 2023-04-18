@@ -1,0 +1,591 @@
+Extracting prog: 39.808998048s
+Minimizing prog: 4m46.50645269s
+Simplifying prog options: 0s
+Extracting C: 21.788147427s
+Simplifying C: 2m5.681378665s
+
+
+192 programs, 4 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 164 programs
+single: executing 8 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2-fcntl$getown-syz_clone-get_robust_list-openat$procfs-read$FUSE-bpf$MAP_UPDATE_ELEM
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+fcntl$getown(r0, 0x9)
+r2 = syz_clone(0x18008000, 0x0, 0x0, 0x0, 0x0, 0x0)
+get_robust_list(r2, &(0x7f00000003c0)=0x0, &(0x7f0000000400))
+r3 = openat$procfs(0xffffffffffffff9c, &(0x7f0000002180)='/proc/diskstats\x00', 0x0, 0x0)
+read$FUSE(r3, &(0x7f0000000080)={0x2020}, 0x2020)
+bpf$MAP_UPDATE_ELEM(0x2, &(0x7f0000002240)={0xffffffffffffffff, &(0x7f0000002100)="79fa14454cfe410a39c754f9a68723eac0932a67a4637d10b275bc5bbf56c0a403bfc750cc9c238b06b03346f07b8729beab77db900eb79edf9f2b990da181e35b52e9bc6a36473a498b24a28ec126162c2f0ed066562e2022b9", &(0x7f00000021c0)=@tcp, 0x2}, 0x20)
+
+program crashed: possible deadlock in console_flush_all
+single: successfully extracted reproducer
+found reproducer with 12 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2-fcntl$getown-syz_clone-get_robust_list-openat$procfs-read$FUSE
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+fcntl$getown(r0, 0x9)
+r2 = syz_clone(0x18008000, 0x0, 0x0, 0x0, 0x0, 0x0)
+get_robust_list(r2, &(0x7f00000003c0)=0x0, &(0x7f0000000400))
+r3 = openat$procfs(0xffffffffffffff9c, &(0x7f0000002180)='/proc/diskstats\x00', 0x0, 0x0)
+read$FUSE(r3, &(0x7f0000000080)={0x2020}, 0x2020)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2-fcntl$getown-syz_clone-get_robust_list-openat$procfs
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+fcntl$getown(r0, 0x9)
+r2 = syz_clone(0x18008000, 0x0, 0x0, 0x0, 0x0, 0x0)
+get_robust_list(r2, &(0x7f00000003c0)=0x0, &(0x7f0000000400))
+openat$procfs(0xffffffffffffff9c, &(0x7f0000002180)='/proc/diskstats\x00', 0x0, 0x0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2-fcntl$getown-syz_clone-get_robust_list
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+fcntl$getown(r0, 0x9)
+r2 = syz_clone(0x18008000, 0x0, 0x0, 0x0, 0x0, 0x0)
+get_robust_list(r2, &(0x7f00000003c0)=0x0, &(0x7f0000000400))
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2-fcntl$getown-syz_clone
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+fcntl$getown(r0, 0x9)
+syz_clone(0x18008000, 0x0, 0x0, 0x0, 0x0, 0x0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2-fcntl$getown
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+fcntl$getown(r0, 0x9)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet-dup2
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+r0 = socket$packet(0x11, 0x3, 0x300)
+r1 = socket$packet(0x11, 0x3, 0x300)
+dup2(r1, r0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet-socket$packet
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+socket$packet(0x11, 0x3, 0x300)
+socket$packet(0x11, 0x3, 0x300)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open-socket$packet
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+socket$packet(0x11, 0x3, 0x300)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink-perf_event_open
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-syz_genetlink_get_family_id$devlink
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+syz_genetlink_get_family_id$devlink(&(0x7f00000020c0), 0xffffffffffffffff)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$AUTOFS_DEV_IOCTL_READY-perf_event_open
+detailed listing:
+executing program 0:
+ioctl$AUTOFS_DEV_IOCTL_READY(0xffffffffffffffff, 0xc0189376, &(0x7f0000002600)=ANY=[@ANYBLOB="010000000100000018000000616867d0909b2374d3fc6cf8ec28821c5905b79fa9b6f6654f32ff09f67b75ef6691785825cc354ee069da49d30804a903d753b857173d56ca1ecd9f9b2f717c576e2004b2fccb0f9b1e8d2b684e822eb771ccdd4fcacc5182bc4a9ece9dab7c1d653603eaa2bf490f47dfecb09c7440127fe1859a42b59c94d3418d166d171bd340190ee70b614c75f819309cee6d8f033b8ef0d0c2602489b4a016274648c6ce2fa34ce1247040f6221a402b180371418fcc2aa20e18ab1eaa62dbf641779b917a865ea52ab160cc7ef0add0dc489396edd72736ce3451573da72e9524f2d13da3eabf0b684110e8", @ANYRES32, @ANYRESHEX=0x0])
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000340)={0x2, 0x80, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, @perf_config_ext}, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+detailed listing:
+executing program 0:
+perf_event_open(0x0, 0x0, 0x0, 0xffffffffffffffff, 0x0)
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in console_flush_all
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:false NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:false NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in task_fork_fair
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true UseTmpDir:true HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program did not crash
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open
+program crashed: possible deadlock in task_fork_fair
+reproducing took 7m53.784985646s
+repro crashed as (corrupted=false):
+------------[ cut here ]------------
+======================================================
+WARNING: possible circular locking dependency detected
+6.3.0-rc7-31ab767fc607+ #1 Not tainted
+------------------------------------------------------
+migration/0/17 is trying to acquire lock:
+ffffffff83d60fd8 ((console_sem).lock){....}-{2:2}, at: down_trylock+0x18/0x40 kernel/locking/semaphore.c:139
+
+but task is already holding lock:
+ffff88807c535318 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2b/0x40 kernel/sched/core.c:539
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #2 (&rq->__lock){-.-.}-{2:2}:
+       _raw_spin_lock_nested+0x3c/0x60 kernel/locking/spinlock.c:378
+       raw_spin_rq_lock_nested+0x2b/0x40 kernel/sched/core.c:539
+       raw_spin_rq_lock kernel/sched/sched.h:1367 [inline]
+       rq_lock kernel/sched/sched.h:1654 [inline]
+       task_fork_fair+0x4c/0x180 kernel/sched/fair.c:12683
+       sched_cgroup_fork+0xfa/0x150 kernel/sched/core.c:4759
+       copy_process+0x1dff/0x2c60 kernel/fork.c:2392
+       kernel_clone+0x90/0xb30 kernel/fork.c:2690
+       user_mode_thread+0x77/0xa0 kernel/fork.c:2766
+       rest_init+0x31/0x270 init/main.c:702
+       arch_call_rest_init+0x17/0x50 init/main.c:899
+       start_kernel+0x674/0xa80 init/main.c:1153
+       x86_64_start_reservations+0x1c/0x40 arch/x86/kernel/head64.c:556
+       x86_64_start_kernel+0x96/0xb0 arch/x86/kernel/head64.c:537
+       secondary_startup_64_no_verify+0xe5/0xeb
+
+-> #1 (&p->pi_lock){-.-.}-{2:2}:
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x4d/0x70 kernel/locking/spinlock.c:162
+       try_to_wake_up+0x6e/0x660 kernel/sched/core.c:4167
+       wake_up_process+0x19/0x20 kernel/sched/core.c:4417
+       __up.isra.6+0x39/0x40 kernel/locking/semaphore.c:278
+       up+0x4e/0x60 kernel/locking/semaphore.c:191
+       __up_console_sem+0x87/0xb0 kernel/printk/printk.c:344
+       __console_unlock kernel/printk/printk.c:2694 [inline]
+       console_unlock+0x106/0x150 kernel/printk/printk.c:3018
+       con_font_set drivers/tty/vt/vt.c:4630 [inline]
+       con_font_op+0x604/0x730 drivers/tty/vt/vt.c:4674
+       vt_k_ioctl drivers/tty/vt/vt_ioctl.c:474 [inline]
+       vt_ioctl+0x8f7/0x1d20 drivers/tty/vt/vt_ioctl.c:752
+       tty_ioctl+0x2e9/0xd70 drivers/tty/tty_io.c:2777
+       vfs_ioctl fs/ioctl.c:51 [inline]
+       __do_sys_ioctl fs/ioctl.c:870 [inline]
+       __se_sys_ioctl fs/ioctl.c:856 [inline]
+       __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x72/0xdc
+
+-> #0 ((console_sem).lock){....}-{2:2}:
+       check_prev_add kernel/locking/lockdep.c:3098 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3217 [inline]
+       validate_chain kernel/locking/lockdep.c:3832 [inline]
+       __lock_acquire+0x12bb/0x1f70 kernel/locking/lockdep.c:5056
+       lock_acquire kernel/locking/lockdep.c:5669 [inline]
+       lock_acquire+0xd6/0x2b0 kernel/locking/lockdep.c:5634
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x4d/0x70 kernel/locking/spinlock.c:162
+       down_trylock+0x18/0x40 kernel/locking/semaphore.c:139
+       __down_trylock_console_sem+0x4e/0xf0 kernel/printk/printk.c:327
+       console_trylock+0x1e/0xb0 kernel/printk/printk.c:2627
+       console_trylock_spinning kernel/printk/printk.c:1936 [inline]
+       vprintk_emit+0x244/0x590 kernel/printk/printk.c:2315
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2327
+       vprintk+0xae/0x100 kernel/printk/printk_safe.c:50
+       _printk+0x68/0x90 kernel/printk/printk.c:2337
+       __report_bug lib/bug.c:195 [inline]
+       report_bug+0x1b4/0x350 lib/bug.c:219
+       handle_bug+0x48/0x80 arch/x86/kernel/traps.c:324
+       exc_invalid_op+0x1c/0x70 arch/x86/kernel/traps.c:345
+       asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:568
+       lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+       mm_cid_snapshot_time kernel/sched/sched.h:3468 [inline]
+       sched_mm_cid_migrate_to+0x358/0x450 kernel/sched/core.c:11661
+       activate_task+0x76/0xe0 kernel/sched/core.c:2089
+       attach_task+0x45/0x80 kernel/sched/fair.c:8748
+       attach_one_task kernel/sched/fair.c:8762 [inline]
+       active_load_balance_cpu_stop+0x3d8/0x540 kernel/sched/fair.c:11709
+       cpu_stopper_thread+0xa9/0x1b0 kernel/stop_machine.c:539
+       smpboot_thread_fn+0x2e0/0x3f0 kernel/smpboot.c:164
+       kthread+0x161/0x1a0 kernel/kthread.c:376
+       ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+
+other info that might help us debug this:
+
+Chain exists of:
+  (console_sem).lock --> &p->pi_lock --> &rq->__lock
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(&rq->__lock);
+                               lock(&p->pi_lock);
+                               lock(&rq->__lock);
+  lock((console_sem).lock);
+
+ *** DEADLOCK ***
+
+1 lock held by migration/0/17:
+ #0: ffff88807c535318 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2b/0x40 kernel/sched/core.c:539
+
+stack backtrace:
+CPU: 0 PID: 17 Comm: migration/0 Not tainted 6.3.0-rc7-31ab767fc607+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+Stopper: active_load_balance_cpu_stop+0x0/0x540 kernel/sched/fair.c:8446 <- load_balance+0xfd4/0x10d0
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xa9/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ print_circular_bug.isra.44+0x29f/0x3b0 kernel/locking/lockdep.c:2056
+ check_noncircular+0x102/0x120 kernel/locking/lockdep.c:2178
+ check_prev_add kernel/locking/lockdep.c:3098 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3217 [inline]
+ validate_chain kernel/locking/lockdep.c:3832 [inline]
+ __lock_acquire+0x12bb/0x1f70 kernel/locking/lockdep.c:5056
+ lock_acquire kernel/locking/lockdep.c:5669 [inline]
+ lock_acquire+0xd6/0x2b0 kernel/locking/lockdep.c:5634
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+ _raw_spin_lock_irqsave+0x4d/0x70 kernel/locking/spinlock.c:162
+ down_trylock+0x18/0x40 kernel/locking/semaphore.c:139
+ __down_trylock_console_sem+0x4e/0xf0 kernel/printk/printk.c:327
+ console_trylock+0x1e/0xb0 kernel/printk/printk.c:2627
+ console_trylock_spinning kernel/printk/printk.c:1936 [inline]
+ vprintk_emit+0x244/0x590 kernel/printk/printk.c:2315
+ vprintk_default+0x2f/0x40 kernel/printk/printk.c:2327
+ vprintk+0xae/0x100 kernel/printk/printk_safe.c:50
+ _printk+0x68/0x90 kernel/printk/printk.c:2337
+ __report_bug lib/bug.c:195 [inline]
+ report_bug+0x1b4/0x350 lib/bug.c:219
+ handle_bug+0x48/0x80 arch/x86/kernel/traps.c:324
+ exc_invalid_op+0x1c/0x70 arch/x86/kernel/traps.c:345
+ asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:568
+RIP: 0010:lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+Code: 90 90 90 90 90 8b 05 da d8 ee 02 85 c0 75 05 c3 cc cc cc cc 55 48 83 c7 18 be ff ff ff ff 48 89 e5 e8 2f f9 df 01 85 c0 75 02 <0f> 0b 5d c3 cc cc cc cc 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000009fd20 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: ffff88800da04700 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
+RBP: ffffc9000009fd20 R08: 000000000000000e R09: 0000000000000001
+R10: ffff8880016ed498 R11: 0000000000000000 R12: ffffe8ffffd37c18
+R13: ffff888007348880 R14: ffff88807c435300 R15: ffffe8ffffc37c18
+ mm_cid_snapshot_time kernel/sched/sched.h:3468 [inline]
+ sched_mm_cid_migrate_to+0x358/0x450 kernel/sched/core.c:11661
+ activate_task+0x76/0xe0 kernel/sched/core.c:2089
+ attach_task+0x45/0x80 kernel/sched/fair.c:8748
+ attach_one_task kernel/sched/fair.c:8762 [inline]
+ active_load_balance_cpu_stop+0x3d8/0x540 kernel/sched/fair.c:11709
+ cpu_stopper_thread+0xa9/0x1b0 kernel/stop_machine.c:539
+ smpboot_thread_fn+0x2e0/0x3f0 kernel/smpboot.c:164
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+ </TASK>
+WARNING: CPU: 0 PID: 17 at kernel/sched/sched.h:1358 lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+Modules linked in:
+CPU: 0 PID: 17 Comm: migration/0 Not tainted 6.3.0-rc7-31ab767fc607+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+Stopper: active_load_balance_cpu_stop+0x0/0x540 kernel/sched/fair.c:8446 <- load_balance+0xfd4/0x10d0
+RIP: 0010:lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+Code: 90 90 90 90 90 8b 05 da d8 ee 02 85 c0 75 05 c3 cc cc cc cc 55 48 83 c7 18 be ff ff ff ff 48 89 e5 e8 2f f9 df 01 85 c0 75 02 <0f> 0b 5d c3 cc cc cc cc 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000009fd20 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: ffff88800da04700 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
+RBP: ffffc9000009fd20 R08: 000000000000000e R09: 0000000000000001
+R10: ffff8880016ed498 R11: 0000000000000000 R12: ffffe8ffffd37c18
+R13: ffff888007348880 R14: ffff88807c435300 R15: ffffe8ffffc37c18
+FS:  0000000000000000(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000340 CR3: 0000000005952003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ mm_cid_snapshot_time kernel/sched/sched.h:3468 [inline]
+ sched_mm_cid_migrate_to+0x358/0x450 kernel/sched/core.c:11661
+ activate_task+0x76/0xe0 kernel/sched/core.c:2089
+ attach_task+0x45/0x80 kernel/sched/fair.c:8748
+ attach_one_task kernel/sched/fair.c:8762 [inline]
+ active_load_balance_cpu_stop+0x3d8/0x540 kernel/sched/fair.c:11709
+ cpu_stopper_thread+0xa9/0x1b0 kernel/stop_machine.c:539
+ smpboot_thread_fn+0x2e0/0x3f0 kernel/smpboot.c:164
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+ </TASK>
+irq event stamp: 212
+hardirqs last  enabled at (211): [<ffffffff82f9f83b>] __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (211): [<ffffffff82f9f83b>] _raw_spin_unlock_irq+0x2b/0x60 kernel/locking/spinlock.c:202
+hardirqs last disabled at (212): [<ffffffff8119214f>] raw_spin_rq_lock_irq kernel/sched/sched.h:1372 [inline]
+hardirqs last disabled at (212): [<ffffffff8119214f>] rq_lock_irq kernel/sched/sched.h:1646 [inline]
+hardirqs last disabled at (212): [<ffffffff8119214f>] active_load_balance_cpu_stop+0x32f/0x540 kernel/sched/fair.c:11648
+softirqs last  enabled at (0): [<ffffffff81113b43>] copy_process+0x12a3/0x2c60 kernel/fork.c:2206
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+
+final repro crashed as (corrupted=false):
+------------[ cut here ]------------
+======================================================
+WARNING: possible circular locking dependency detected
+6.3.0-rc7-31ab767fc607+ #1 Not tainted
+------------------------------------------------------
+migration/0/17 is trying to acquire lock:
+ffffffff83d60fd8 ((console_sem).lock){....}-{2:2}, at: down_trylock+0x18/0x40 kernel/locking/semaphore.c:139
+
+but task is already holding lock:
+ffff88807c535318 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2b/0x40 kernel/sched/core.c:539
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #2 (&rq->__lock){-.-.}-{2:2}:
+       _raw_spin_lock_nested+0x3c/0x60 kernel/locking/spinlock.c:378
+       raw_spin_rq_lock_nested+0x2b/0x40 kernel/sched/core.c:539
+       raw_spin_rq_lock kernel/sched/sched.h:1367 [inline]
+       rq_lock kernel/sched/sched.h:1654 [inline]
+       task_fork_fair+0x4c/0x180 kernel/sched/fair.c:12683
+       sched_cgroup_fork+0xfa/0x150 kernel/sched/core.c:4759
+       copy_process+0x1dff/0x2c60 kernel/fork.c:2392
+       kernel_clone+0x90/0xb30 kernel/fork.c:2690
+       user_mode_thread+0x77/0xa0 kernel/fork.c:2766
+       rest_init+0x31/0x270 init/main.c:702
+       arch_call_rest_init+0x17/0x50 init/main.c:899
+       start_kernel+0x674/0xa80 init/main.c:1153
+       x86_64_start_reservations+0x1c/0x40 arch/x86/kernel/head64.c:556
+       x86_64_start_kernel+0x96/0xb0 arch/x86/kernel/head64.c:537
+       secondary_startup_64_no_verify+0xe5/0xeb
+
+-> #1 (&p->pi_lock){-.-.}-{2:2}:
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x4d/0x70 kernel/locking/spinlock.c:162
+       try_to_wake_up+0x6e/0x660 kernel/sched/core.c:4167
+       wake_up_process+0x19/0x20 kernel/sched/core.c:4417
+       __up.isra.6+0x39/0x40 kernel/locking/semaphore.c:278
+       up+0x4e/0x60 kernel/locking/semaphore.c:191
+       __up_console_sem+0x87/0xb0 kernel/printk/printk.c:344
+       __console_unlock kernel/printk/printk.c:2694 [inline]
+       console_unlock+0x106/0x150 kernel/printk/printk.c:3018
+       con_font_set drivers/tty/vt/vt.c:4630 [inline]
+       con_font_op+0x604/0x730 drivers/tty/vt/vt.c:4674
+       vt_k_ioctl drivers/tty/vt/vt_ioctl.c:474 [inline]
+       vt_ioctl+0x8f7/0x1d20 drivers/tty/vt/vt_ioctl.c:752
+       tty_ioctl+0x2e9/0xd70 drivers/tty/tty_io.c:2777
+       vfs_ioctl fs/ioctl.c:51 [inline]
+       __do_sys_ioctl fs/ioctl.c:870 [inline]
+       __se_sys_ioctl fs/ioctl.c:856 [inline]
+       __x64_sys_ioctl+0x10e/0x160 fs/ioctl.c:856
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x72/0xdc
+
+-> #0 ((console_sem).lock){....}-{2:2}:
+       check_prev_add kernel/locking/lockdep.c:3098 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3217 [inline]
+       validate_chain kernel/locking/lockdep.c:3832 [inline]
+       __lock_acquire+0x12bb/0x1f70 kernel/locking/lockdep.c:5056
+       lock_acquire kernel/locking/lockdep.c:5669 [inline]
+       lock_acquire+0xd6/0x2b0 kernel/locking/lockdep.c:5634
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x4d/0x70 kernel/locking/spinlock.c:162
+       down_trylock+0x18/0x40 kernel/locking/semaphore.c:139
+       __down_trylock_console_sem+0x4e/0xf0 kernel/printk/printk.c:327
+       console_trylock+0x1e/0xb0 kernel/printk/printk.c:2627
+       console_trylock_spinning kernel/printk/printk.c:1936 [inline]
+       vprintk_emit+0x244/0x590 kernel/printk/printk.c:2315
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2327
+       vprintk+0xae/0x100 kernel/printk/printk_safe.c:50
+       _printk+0x68/0x90 kernel/printk/printk.c:2337
+       __report_bug lib/bug.c:195 [inline]
+       report_bug+0x1b4/0x350 lib/bug.c:219
+       handle_bug+0x48/0x80 arch/x86/kernel/traps.c:324
+       exc_invalid_op+0x1c/0x70 arch/x86/kernel/traps.c:345
+       asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:568
+       lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+       mm_cid_snapshot_time kernel/sched/sched.h:3468 [inline]
+       sched_mm_cid_migrate_to+0x358/0x450 kernel/sched/core.c:11661
+       activate_task+0x76/0xe0 kernel/sched/core.c:2089
+       attach_task+0x45/0x80 kernel/sched/fair.c:8748
+       attach_one_task kernel/sched/fair.c:8762 [inline]
+       active_load_balance_cpu_stop+0x3d8/0x540 kernel/sched/fair.c:11709
+       cpu_stopper_thread+0xa9/0x1b0 kernel/stop_machine.c:539
+       smpboot_thread_fn+0x2e0/0x3f0 kernel/smpboot.c:164
+       kthread+0x161/0x1a0 kernel/kthread.c:376
+       ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+
+other info that might help us debug this:
+
+Chain exists of:
+  (console_sem).lock --> &p->pi_lock --> &rq->__lock
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(&rq->__lock);
+                               lock(&p->pi_lock);
+                               lock(&rq->__lock);
+  lock((console_sem).lock);
+
+ *** DEADLOCK ***
+
+1 lock held by migration/0/17:
+ #0: ffff88807c535318 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2b/0x40 kernel/sched/core.c:539
+
+stack backtrace:
+CPU: 0 PID: 17 Comm: migration/0 Not tainted 6.3.0-rc7-31ab767fc607+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+Stopper: active_load_balance_cpu_stop+0x0/0x540 kernel/sched/fair.c:8446 <- load_balance+0xfd4/0x10d0
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xa9/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ print_circular_bug.isra.44+0x29f/0x3b0 kernel/locking/lockdep.c:2056
+ check_noncircular+0x102/0x120 kernel/locking/lockdep.c:2178
+ check_prev_add kernel/locking/lockdep.c:3098 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3217 [inline]
+ validate_chain kernel/locking/lockdep.c:3832 [inline]
+ __lock_acquire+0x12bb/0x1f70 kernel/locking/lockdep.c:5056
+ lock_acquire kernel/locking/lockdep.c:5669 [inline]
+ lock_acquire+0xd6/0x2b0 kernel/locking/lockdep.c:5634
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+ _raw_spin_lock_irqsave+0x4d/0x70 kernel/locking/spinlock.c:162
+ down_trylock+0x18/0x40 kernel/locking/semaphore.c:139
+ __down_trylock_console_sem+0x4e/0xf0 kernel/printk/printk.c:327
+ console_trylock+0x1e/0xb0 kernel/printk/printk.c:2627
+ console_trylock_spinning kernel/printk/printk.c:1936 [inline]
+ vprintk_emit+0x244/0x590 kernel/printk/printk.c:2315
+ vprintk_default+0x2f/0x40 kernel/printk/printk.c:2327
+ vprintk+0xae/0x100 kernel/printk/printk_safe.c:50
+ _printk+0x68/0x90 kernel/printk/printk.c:2337
+ __report_bug lib/bug.c:195 [inline]
+ report_bug+0x1b4/0x350 lib/bug.c:219
+ handle_bug+0x48/0x80 arch/x86/kernel/traps.c:324
+ exc_invalid_op+0x1c/0x70 arch/x86/kernel/traps.c:345
+ asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:568
+RIP: 0010:lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+Code: 90 90 90 90 90 8b 05 da d8 ee 02 85 c0 75 05 c3 cc cc cc cc 55 48 83 c7 18 be ff ff ff ff 48 89 e5 e8 2f f9 df 01 85 c0 75 02 <0f> 0b 5d c3 cc cc cc cc 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000009fd20 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: ffff88800da04700 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
+RBP: ffffc9000009fd20 R08: 000000000000000e R09: 0000000000000001
+R10: ffff8880016ed498 R11: 0000000000000000 R12: ffffe8ffffd37c18
+R13: ffff888007348880 R14: ffff88807c435300 R15: ffffe8ffffc37c18
+ mm_cid_snapshot_time kernel/sched/sched.h:3468 [inline]
+ sched_mm_cid_migrate_to+0x358/0x450 kernel/sched/core.c:11661
+ activate_task+0x76/0xe0 kernel/sched/core.c:2089
+ attach_task+0x45/0x80 kernel/sched/fair.c:8748
+ attach_one_task kernel/sched/fair.c:8762 [inline]
+ active_load_balance_cpu_stop+0x3d8/0x540 kernel/sched/fair.c:11709
+ cpu_stopper_thread+0xa9/0x1b0 kernel/stop_machine.c:539
+ smpboot_thread_fn+0x2e0/0x3f0 kernel/smpboot.c:164
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+ </TASK>
+WARNING: CPU: 0 PID: 17 at kernel/sched/sched.h:1358 lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+Modules linked in:
+CPU: 0 PID: 17 Comm: migration/0 Not tainted 6.3.0-rc7-31ab767fc607+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+Stopper: active_load_balance_cpu_stop+0x0/0x540 kernel/sched/fair.c:8446 <- load_balance+0xfd4/0x10d0
+RIP: 0010:lockdep_assert_rq_held+0x25/0x30 kernel/sched/sched.h:1358
+Code: 90 90 90 90 90 8b 05 da d8 ee 02 85 c0 75 05 c3 cc cc cc cc 55 48 83 c7 18 be ff ff ff ff 48 89 e5 e8 2f f9 df 01 85 c0 75 02 <0f> 0b 5d c3 cc cc cc cc 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000009fd20 EFLAGS: 00010046
+RAX: 0000000000000000 RBX: ffff88800da04700 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
+RBP: ffffc9000009fd20 R08: 000000000000000e R09: 0000000000000001
+R10: ffff8880016ed498 R11: 0000000000000000 R12: ffffe8ffffd37c18
+R13: ffff888007348880 R14: ffff88807c435300 R15: ffffe8ffffc37c18
+FS:  0000000000000000(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000340 CR3: 0000000005952003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ mm_cid_snapshot_time kernel/sched/sched.h:3468 [inline]
+ sched_mm_cid_migrate_to+0x358/0x450 kernel/sched/core.c:11661
+ activate_task+0x76/0xe0 kernel/sched/core.c:2089
+ attach_task+0x45/0x80 kernel/sched/fair.c:8748
+ attach_one_task kernel/sched/fair.c:8762 [inline]
+ active_load_balance_cpu_stop+0x3d8/0x540 kernel/sched/fair.c:11709
+ cpu_stopper_thread+0xa9/0x1b0 kernel/stop_machine.c:539
+ smpboot_thread_fn+0x2e0/0x3f0 kernel/smpboot.c:164
+ kthread+0x161/0x1a0 kernel/kthread.c:376
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:311
+ </TASK>
+irq event stamp: 212
+hardirqs last  enabled at (211): [<ffffffff82f9f83b>] __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+hardirqs last  enabled at (211): [<ffffffff82f9f83b>] _raw_spin_unlock_irq+0x2b/0x60 kernel/locking/spinlock.c:202
+hardirqs last disabled at (212): [<ffffffff8119214f>] raw_spin_rq_lock_irq kernel/sched/sched.h:1372 [inline]
+hardirqs last disabled at (212): [<ffffffff8119214f>] rq_lock_irq kernel/sched/sched.h:1646 [inline]
+hardirqs last disabled at (212): [<ffffffff8119214f>] active_load_balance_cpu_stop+0x32f/0x540 kernel/sched/fair.c:11648
+softirqs last  enabled at (0): [<ffffffff81113b43>] copy_process+0x12a3/0x2c60 kernel/fork.c:2206
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+

@@ -1,0 +1,27 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [31ab767fc607cfebcb636887b5168e4ae9e0db66] 0day head guard for 'devel-hourly-20230417-110241'
+git bisect bad 31ab767fc607cfebcb636887b5168e4ae9e0db66
+# status: waiting for good commit(s), bad commit known
+# good: [6a8f57ae2eb07ab39a6f0ccad60c760743051026] Linux 6.3-rc7
+git bisect good 6a8f57ae2eb07ab39a6f0ccad60c760743051026
+# good: [62698b912a6b09ebbcccc1c8e2d408cb9a79d06f] Merge 'internal-kernel/xstate.size.ptl' into devel-hourly-20230417-110241
+git bisect good 62698b912a6b09ebbcccc1c8e2d408cb9a79d06f
+# good: [857e5dc3d95adc3e887929a73bb36a80cd764432] manifest_in.json: set stuck at ref
+git bisect good 857e5dc3d95adc3e887929a73bb36a80cd764432
+# good: [120c5a895aa4ceab64a91b954f3af937f91bfabb] Merge 'internal-eywa/eywa' into devel-hourly-20230417-110241
+git bisect good 120c5a895aa4ceab64a91b954f3af937f91bfabb
+# good: [70b98b00e319622fe1ffa8380965ded1ae87f9c0] overlay.config: Remove 2 options
+git bisect good 70b98b00e319622fe1ffa8380965ded1ae87f9c0
+# good: [a4814a96399aaf1c6b5aa29030d5850062db469f] configs: Add TDX_GUEST to base configs
+git bisect good a4814a96399aaf1c6b5aa29030d5850062db469f
+# good: [2cea1b25d75e520da78745d6166f6a61b3a5213f] mfd: intel-m10-bmc: Move m10bmc_sys_read() away from header
+git bisect good 2cea1b25d75e520da78745d6166f6a61b3a5213f
+# good: [4d7bb61d8b54e458cb9c12fa39039b852cb551e6] Merge 'internal-linux-review/Ahmed-Zaki/ice-Fix-stats-after-PF-reset/20230414-083105' into devel-hourly-20230417-110241
+git bisect good 4d7bb61d8b54e458cb9c12fa39039b852cb551e6
+# bad: [20de70ac13601355d951bf1267c8158f530278c0] sched: Fix performance regression introduced by mm_cid
+git bisect bad 20de70ac13601355d951bf1267c8158f530278c0
+# good: [ef4415d45c0ab83b15ecc0aaff9cf863ee3df538] mm: Fix memory leak on mm_init error handling
+git bisect good ef4415d45c0ab83b15ecc0aaff9cf863ee3df538
+# first bad commit: [20de70ac13601355d951bf1267c8158f530278c0] sched: Fix performance regression introduced by mm_cid
+|0418_015841|Bisect successfully! 31ab767fc607cfebcb636887b5168e4ae9e0db66_20de70ac13601355d951bf1267c8158f530278c0_revert bzimage passed!|
