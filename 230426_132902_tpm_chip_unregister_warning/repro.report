@@ -1,0 +1,2039 @@
+cgroup: Unknown subsys name 'net'
+cgroup: Unknown subsys name 'rlimit'
+tpm tpm0: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4069 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4069 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4069 Comm: syz-executor132 Not tainted 6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055b1f50e6968 CR3: 000000001708c003 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 1537
+hardirqs last  enabled at (1545): [<ffffffff811f0cb1>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:345
+hardirqs last disabled at (1552): [<ffffffff811f0c96>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:343
+softirqs last  enabled at (1212): [<ffffffff82fda6a9>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (1212): [<ffffffff82fda6a9>] __do_softirq+0x2d9/0x3c3 kernel/softirq.c:600
+softirqs last disabled at (1201): [<ffffffff81132b14>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (1201): [<ffffffff81132b14>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (1201): [<ffffffff81132b14>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 14ec5067 P4D 14ec5067 PUD 14fa3067 PMD 0 
+Oops: 0002 [#1] PREEMPT SMP NOPTI
+CPU: 0 PID: 4069 Comm: syz-executor132 Tainted: G        W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000001708c003 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000001708c003 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4069] exited with irqs disabled
+tpm tpm1: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4078 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4078 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4078 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0000:ffffc9000205fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171f0000 RDI: 0000000000000002
+RBP: ffffc9000205fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000205fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a7ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fc7618d7010 CR3: 0000000001c30006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 1046
+hardirqs last  enabled at (1045): [<ffffffff82fd8e59>] __raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (1045): [<ffffffff82fd8e59>] _raw_spin_unlock_irqrestore+0x39/0x70 kernel/locking/spinlock.c:194
+hardirqs last disabled at (1046): [<ffffffff82fcd7e2>] __schedule+0x7c2/0xc30 kernel/sched/core.c:6535
+softirqs last  enabled at (994): [<ffffffff8107e3b4>] fpu_clone+0x114/0x620 arch/x86/kernel/fpu/core.c:636
+softirqs last disabled at (992): [<ffffffff8107e37b>] fpu_clone+0xdb/0x620 arch/x86/kernel/fpu/core.c:614
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 17009067 P4D 17009067 PUD 14f7c067 PMD 0 
+Oops: 0002 [#2] PREEMPT SMP NOPTI
+CPU: 0 PID: 4078 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0000:ffffc9000205fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171f0000 RDI: 0000000000000002
+RBP: ffffc9000205fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000205fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a7ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000001c30006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000001c30006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4078] exited with irqs disabled
+tpm tpm2: Operation Canceled
+tpm tpm4: Operation Canceled
+tpm tpm2: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 4131 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 1 PID: 4131 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 1 PID: 4131 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+tpm tpm2: Operation Canceled
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc900020cfda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff88801722a340 RDI: 0000000000000002
+RBP: ffffc900020cfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020cfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d31ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000004f7fe0 CR3: 000000000e04c004 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+------------[ cut here ]------------
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+WARNING: CPU: 0 PID: 4150 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4150 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+CPU: 0 PID: 4150 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+#PF: supervisor write access in kernel mode
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+#PF: error_code(0x0002) - not-present page
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+PGD 14e75067 P4D 14e75067 PUD 1408b067 PMD 0 
+RSP: 0018:ffffc9000212fda8 EFLAGS: 00010246
+
+
+Oops: 0002 [#3] PREEMPT SMP NOPTI
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+CPU: 1 PID: 4131 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+RDX: 0000000000000000 RSI: ffff888014362340 RDI: 0000000000000002
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RBP: ffffc9000212fdc8 R08: 0000000000000000 R09: 0000000000000000
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+R10: ffffc9000212fdc8 R11: 0000000000000000 R12: 0000000000000000
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+R13: ffff8880171e2368 R14: ffff888012d30ae0 R15: ffff888001894d98
+RSP: 0018:ffffc900020cfda8 EFLAGS: 00010246
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+RDX: 0000000000000000 RSI: ffff88801722a340 RDI: 0000000000000002
+CR2: 00000000004f7fe0 CR3: 0000000005670005 CR4: 0000000000770ef0
+RBP: ffffc900020cfdc8 R08: 0000000000000000 R09: 0000000000000000
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+R10: ffffc900020cfdc8 R11: 0000000000000000 R12: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+R13: ffff8880171e2368 R14: ffff888012d31ae0 R15: ffff888001894d98
+PKRU: 55555554
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+Call Trace:
+ <TASK>
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+CR2: 0000000000000000 CR3: 000000000e04c004 CR4: 0000000000770ee0
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+PKRU: 55555554
+ __fput+0x11f/0x450 fs/file_table.c:321
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ __fput+0x11f/0x450 fs/file_table.c:321
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+RIP: 0033:0x410f17
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ ORIG_RAX: 0000000000000003
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RIP: 0033:0x410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+ ORIG_RAX: 0000000000000003
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+ </TASK>
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+irq event stamp: 0
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+ </TASK>
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+Modules linked in:
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 17035067 P4D 17035067 PUD 14ef4067 PMD 0 
+Oops: 0002 [#4] PREEMPT SMP NOPTI
+CPU: 0 PID: 4150 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc9000212fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888014362340 RDI: 0000000000000002
+RBP: ffffc9000212fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000212fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d30ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000005670005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000000e04c004 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4131] exited with irqs disabled
+tpm tpm2: Operation Canceled
+pstore: backend (efi_pstore) writing error (-5)
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000005670005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4150] exited with irqs disabled
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 4154 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 1 PID: 4154 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 1 PID: 4154 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc900020cfda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880143bc680 RDI: 0000000000000002
+RBP: ffffc900020cfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020cfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4dae0 R15: ffff888001894d98
+tpm tpm6: Operation Canceled
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+------------[ cut here ]------------
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+WARNING: CPU: 0 PID: 4157 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4157 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+CR2: 00007f3151025ff0 CR3: 0000000017afa003 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+Modules linked in:
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+
+CPU: 0 PID: 4157 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+PKRU: 55555554
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+Call Trace:
+ <TASK>
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+RSP: 0018:ffffc9000206fda8 EFLAGS: 00010246
+
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+RDX: 0000000000000000 RSI: ffff8880172c4680 RDI: 0000000000000002
+ __fput+0x11f/0x450 fs/file_table.c:321
+RBP: ffffc9000206fdc8 R08: 0000000000000000 R09: 0000000000000000
+ ____fput+0x1e/0x30 fs/file_table.c:349
+R10: ffffc9000206fdc8 R11: 0000000000000000 R12: 0000000000000000
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+R13: ffff8880171e2368 R14: ffff8880142f6ae0 R15: ffff888001894d98
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+CR2: 00007f2afcd6e018 CR3: 0000000017b1e004 CR4: 0000000000770ef0
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+RIP: 0033:0x410f17
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+PKRU: 55555554
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+Call Trace:
+ <TASK>
+ ORIG_RAX: 0000000000000003
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+ __fput+0x11f/0x450 fs/file_table.c:321
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ </TASK>
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+irq event stamp: 0
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+---[ end trace 0000000000000000 ]---
+RIP: 0033:0x410f17
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+#PF: supervisor write access in kernel mode
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+#PF: error_code(0x0002) - not-present page
+ ORIG_RAX: 0000000000000003
+PGD 17ca7067 
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+P4D 17ca7067 
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+PUD 17caa067 
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+PMD 0 
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+
+Oops: 0002 [#5] PREEMPT SMP NOPTI
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+CPU: 1 PID: 4154 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+ </TASK>
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+irq event stamp: 0
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+RSP: 0018:ffffc900020cfda8 EFLAGS: 00010246
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+RDX: 0000000000000000 RSI: ffff8880143bc680 RDI: 0000000000000002
+---[ end trace 0000000000000000 ]---
+RBP: ffffc900020cfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020cfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4dae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017afa003 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 12e37067 P4D 12e37067 PUD 1797e067 PMD 0 
+Oops: 0002 [#6] PREEMPT SMP NOPTI
+CPU: 0 PID: 4157 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc9000206fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880172c4680 RDI: 0000000000000002
+RBP: ffffc9000206fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000206fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880142f6ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b1e004 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017afa003 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4154] exited with irqs disabled
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b1e004 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4157] exited with irqs disabled
+tpm tpm2: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4159 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4159 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4159 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000213fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888017272340 RDI: 0000000000000002
+RBP: ffffc9000213fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000213fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880142f0ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b0c005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 17c8f067 P4D 17c8f067 PUD 17c99067 PMD 0 
+Oops: 0002 [#7] PREEMPT SMP NOPTI
+CPU: 0 PID: 4159 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc9000213fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888017272340 RDI: 0000000000000002
+RBP: ffffc9000213fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000213fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880142f0ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b0c005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b0c005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4159] exited with irqs disabled
+tpm tpm7: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4167 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4167 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4167 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc900020cfda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888014360000 RDI: 0000000000000002
+RBP: ffffc900020cfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020cfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880142f2ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017096004 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 17c9f067 P4D 17c9f067 PUD 17c9c067 PMD 0 
+Oops: 0002 [#8] PREEMPT SMP NOPTI
+CPU: 0 PID: 4167 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020cfda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888014360000 RDI: 0000000000000002
+RBP: ffffc900020cfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020cfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880142f2ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017096004 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017096004 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4167] exited with irqs disabled
+tpm tpm8: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4175 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4175 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4175 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc90001fefda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880143ba340 RDI: 0000000000000002
+RBP: ffffc90001fefdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90001fefdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4cae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffcdb6d3678 CR3: 0000000005672006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 17960067 P4D 17960067 PUD 17908067 PMD 0 
+Oops: 0002 [#9] PREEMPT SMP NOPTI
+CPU: 0 PID: 4175 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc90001fefda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880143ba340 RDI: 0000000000000002
+RBP: ffffc90001fefdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90001fefdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4cae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000005672006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+tpm tpm9: Operation Canceled
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000005672006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4175] exited with irqs disabled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4181 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4181 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4181 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc900020bfda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888014c24680 RDI: 0000000000000002
+RBP: ffffc900020bfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020bfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4eae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000001c30002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 14d94067 P4D 14d94067 PUD 12e83067 PMD 0 
+Oops: 0002 [#10] PREEMPT SMP NOPTI
+CPU: 0 PID: 4181 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020bfda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888014c24680 RDI: 0000000000000002
+RBP: ffffc900020bfdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc900020bfdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4eae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000001c30002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000001c30002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4181] exited with irqs disabled
+tpm tpm10: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4184 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4184 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4184 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc90002167da8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880140dc680 RDI: 0000000000000002
+RBP: ffffc90002167dc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90002167dc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d48ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000004e8120 CR3: 000000000dbf6002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 170cd067 P4D 170cd067 PUD 14e80067 PMD 0 
+Oops: 0002 [#11] PREEMPT SMP NOPTI
+CPU: 0 PID: 4184 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc90002167da8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+tpm tpm11: Operation Canceled
+RDX: 0000000000000000 RSI: ffff8880140dc680 RDI: 0000000000000002
+RBP: ffffc90002167dc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90002167dc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d48ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000000dbf6002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000000dbf6002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4184] exited with irqs disabled
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 4189 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 1 PID: 4189 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 1 PID: 4189 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+tpm tpm13: Operation Canceled
+RSP: 0018:ffffc9000217fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880140da340 RDI: 0000000000000002
+RBP: ffffc9000217fdc8 R08: 0000000000000000 R09: 0000000000000000
+------------[ cut here ]------------
+R10: ffffc9000217fdc8 R11: 0000000000000000 R12: 0000000000000000
+WARNING: CPU: 0 PID: 4191 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4191 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+R13: ffff8880171e2368 R14: ffff888012d4bae0 R15: ffff888001894d98
+Modules linked in:
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CPU: 0 PID: 4191 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+CR2: 00007f2afcdb4000 CR3: 0000000017afa006 CR4: 0000000000770ee0
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+RSP: 0018:ffffc90001fefda8 EFLAGS: 00010246
+PKRU: 55555554
+Call Trace:
+ <TASK>
+
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+RDX: 0000000000000000 RSI: ffff888014364680 RDI: 0000000000000002
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+RBP: ffffc90001fefdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90001fefdc8 R11: 0000000000000000 R12: 0000000000000000
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+R13: ffff8880171e2368 R14: ffff888012d33ae0 R15: ffff888001894d98
+ __fput+0x11f/0x450 fs/file_table.c:321
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+ ____fput+0x1e/0x30 fs/file_table.c:349
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+CR2: 000055b1f50deba9 CR3: 0000000017b1e006 CR4: 0000000000770ef0
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+PKRU: 55555554
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+Call Trace:
+ <TASK>
+RIP: 0033:0x410f17
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+ ORIG_RAX: 0000000000000003
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+ __fput+0x11f/0x450 fs/file_table.c:321
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+ ____fput+0x1e/0x30 fs/file_table.c:349
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ </TASK>
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+irq event stamp: 0
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+RIP: 0033:0x410f17
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+ ORIG_RAX: 0000000000000003
+---[ end trace 0000000000000000 ]---
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+#PF: supervisor write access in kernel mode
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+#PF: error_code(0x0002) - not-present page
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+PGD 14e5e067 
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+P4D 14e5e067 
+ </TASK>
+PUD 1422b067 
+irq event stamp: 0
+PMD 0 
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+
+Oops: 0002 [#12] PREEMPT SMP NOPTI
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+CPU: 1 PID: 4189 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+---[ end trace 0000000000000000 ]---
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc9000217fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880140da340 RDI: 0000000000000002
+RBP: ffffc9000217fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000217fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4bae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017afa006 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 14e8a067 P4D 14e8a067 PUD 14d0c067 PMD 0 
+Oops: 0002 [#13] PREEMPT SMP NOPTI
+CPU: 0 PID: 4191 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc90001fefda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888014364680 RDI: 0000000000000002
+RBP: ffffc90001fefdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90001fefdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d33ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b1e006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017afa006 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4189] exited with irqs disabled
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b1e006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4191] exited with irqs disabled
+tpm tpm11: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 4196 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 1 PID: 4196 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 1 PID: 4196 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000209fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880172d2340 RDI: 0000000000000002
+RBP: ffffc9000209fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000209fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d32ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffcdb6d3678 CR3: 0000000017b1a001 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+tpm tpm14: Operation Canceled
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+------------[ cut here ]------------
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+WARNING: CPU: 0 PID: 4198 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4198 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+Modules linked in:
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+CPU: 0 PID: 4198 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+---[ end trace 0000000000000000 ]---
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+RSP: 0018:ffffc90002197da8 EFLAGS: 00010246
+PGD 1795f067 
+
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+P4D 1795f067 
+RDX: 0000000000000000 RSI: ffff8880171f0000 RDI: 0000000000000002
+PUD 17cb1067 
+RBP: ffffc90002197dc8 R08: 0000000000000000 R09: 0000000000000000
+PMD 0 
+R10: ffffc90002197dc8 R11: 0000000000000000 R12: 0000000000000000
+
+Oops: 0002 [#14] PREEMPT SMP NOPTI
+R13: ffff8880171e2368 R14: ffff8880143f3ae0 R15: ffff888001894d98
+CPU: 1 PID: 4196 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+CR2: 000055b1f50ddd38 CR3: 0000000017af6003 CR4: 0000000000770ef0
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+RSP: 0018:ffffc9000209fda8 EFLAGS: 00010246
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+PKRU: 55555554
+RDX: 0000000000000000 RSI: ffff8880172d2340 RDI: 0000000000000002
+RBP: ffffc9000209fdc8 R08: 0000000000000000 R09: 0000000000000000
+Call Trace:
+R10: ffffc9000209fdc8 R11: 0000000000000000 R12: 0000000000000000
+ <TASK>
+R13: ffff8880171e2368 R14: ffff888012d32ae0 R15: ffff888001894d98
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b1a001 CR4: 0000000000770ee0
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+ __fput+0x11f/0x450 fs/file_table.c:321
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+ ____fput+0x1e/0x30 fs/file_table.c:349
+PKRU: 55555554
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+Call Trace:
+ <TASK>
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+RIP: 0033:0x410f17
+ __fput+0x11f/0x450 fs/file_table.c:321
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+ ____fput+0x1e/0x30 fs/file_table.c:349
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ ORIG_RAX: 0000000000000003
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+RIP: 0033:0x410f17
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+ </TASK>
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+irq event stamp: 0
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+---[ end trace 0000000000000000 ]---
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 14fa3067 P4D 14fa3067 PUD 12e18067 PMD 0 
+Oops: 0002 [#15] PREEMPT SMP NOPTI
+CPU: 0 PID: 4198 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc90002197da8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171f0000 RDI: 0000000000000002
+RBP: ffffc90002197dc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc90002197dc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880143f3ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017af6003 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017b1a001 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4196] exited with irqs disabled
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 0000000017af6003 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4198] exited with irqs disabled
+tpm tpm15: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 4201 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 1 PID: 4201 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 1 PID: 4201 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000217fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888017254680 RDI: 0000000000000002
+RBP: ffffc9000217fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000217fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4aae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000000e04c006 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+softirqs last  enabled at (0): [<ffffffff8111fda8>] copy_process+0x1298/0x2c60 kernel/fork.c:2199
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+BUG: kernel NULL pointer dereference, address: 0000000000000000
+#PF: supervisor write access in kernel mode
+#PF: error_code(0x0002) - not-present page
+PGD 1412a067 P4D 1412a067 PUD 14f7d067 PMD 0 
+Oops: 0002 [#16] PREEMPT SMP NOPTI
+CPU: 1 PID: 4201 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc9000217fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff888017254680 RDI: 0000000000000002
+RBP: ffffc9000217fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000217fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d4aae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000000e04c006 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+Modules linked in:
+CR2: 0000000000000000
+---[ end trace 0000000000000000 ]---
+RIP: 0010:arch_set_bit arch/x86/include/asm/bitops.h:55 [inline]
+RIP: 0010:set_bit include/asm-generic/bitops/instrumented-atomic.h:29 [inline]
+RIP: 0010:kthread_stop+0xd9/0x360 kernel/kthread.c:705
+Code: 44 8b 63 2c 31 ff 41 81 e4 00 00 20 00 44 89 e6 e8 1c 08 17 00 45 85 e4 0f 84 81 02 00 00 e8 2e 06 17 00 4c 8b a3 40 0a 00 00 <f0> 41 80 0c 24 02 48 89 df e8 f9 f1 ff ff f0 80 4b 02 02 48 89 df
+RSP: 0018:ffffc900020afda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880171e4680 RDI: 0000000000000002
+RBP: ffffc900020afdc8 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff8880171a1ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000000 CR3: 000000000e04c006 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor132[4201] exited with irqs disabled
+tpm tpm16: Operation Canceled
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 4204 at kernel/kthread.c:75 to_kthread kernel/kthread.c:75 [inline]
+WARNING: CPU: 0 PID: 4204 at kernel/kthread.c:75 kthread_stop+0x353/0x360 kernel/kthread.c:704
+Modules linked in:
+CPU: 0 PID: 4204 Comm: syz-executor132 Tainted: G      D W           6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+RIP: 0010:to_kthread kernel/kthread.c:75 [inline]
+RIP: 0010:kthread_stop+0x353/0x360 kernel/kthread.c:704
+Code: 00 4c 89 ef e8 de 52 c1 00 e9 1f fe ff ff e8 c4 03 17 00 be 02 00 00 00 4c 89 ef e8 c7 52 c1 00 e9 5c fd ff ff e8 ad 03 17 00 <0f> 0b e9 73 fd ff ff 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc9000212fda8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff8880171e2340 RCX: ffffffff81173814
+RDX: 0000000000000000 RSI: ffff8880172c0000 RDI: 0000000000000002
+RBP: ffffc9000212fdc8 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffc9000212fdc8 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff8880171e2368 R14: ffff888012d49ae0 R15: ffff888001894d98
+FS:  0000000000e57480(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055b1f50f7ae8 CR3: 0000000017b14006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x410f17
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007ffcdb6d3690 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000004 RCX: 0000000000410f17
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 0000000000000004
+RBP: 0000000000000064 R08: 00007ffcdb6d3210 R09: 00007ffcdb6d3210
+R10: 00007ffcdb6d3720 R11: 0000000000000293 R12: 00000000004f0240
+R13: 00000000004f024c R14: 0000000000000032 R15: 20c49ba5e353f7cf
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8111fda4>] copy_process+0x1294/0x2c60 kernel/fork.c:2199
+----------------
+Code disassembly (best guess):
+   0:	44 8b 63 2c          	mov    0x2c(%rbx),%r12d
+   4:	31 ff                	xor    %edi,%edi
+   6:	41 81 e4 00 00 20 00 	and    $0x200000,%r12d
+   d:	44 89 e6             	mov    %r12d,%esi
+  10:	e8 1c 08 17 00       	call   0x170831
+  15:	45 85 e4             	test   %r12d,%r12d
+  18:	0f 84 81 02 00 00    	je     0x29f
+  1e:	e8 2e 06 17 00       	call   0x170651
+  23:	4c 8b a3 40 0a 00 00 	mov    0xa40(%rbx),%r12
+* 2a:	f0 41 80 0c 24 02    	lock orb $0x2,(%r12) <-- trapping instruction
+  30:	48 89 df             	mov    %rbx,%rdi
+  33:	e8 f9 f1 ff ff       	call   0xfffff231
+  38:	f0 80 4b 02 02       	lock orb $0x2,0x2(%rbx)
+  3d:	48 89 df             	mov    %rbx,%rdi
