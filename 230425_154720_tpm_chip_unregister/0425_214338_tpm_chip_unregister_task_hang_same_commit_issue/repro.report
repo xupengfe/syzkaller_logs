@@ -1,0 +1,57 @@
+tpm tpm0: Operation Canceled
+tpm tpm0: Operation Canceled
+tpm tpm0: Operation Canceled
+tpm tpm0: Operation Canceled
+tpm tpm0: Operation Canceled
+INFO: task syz-executor278:548 blocked for more than 147 seconds.
+      Not tainted 6.3.0-2023-04-24-intel-next-591f7c2026cb+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor278 state:D stack:0     pid:548   ppid:517    flags:0x00004002
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5315 [inline]
+ __schedule+0x40a/0xc30 kernel/sched/core.c:6636
+ schedule+0x5b/0xe0 kernel/sched/core.c:6712
+ schedule_timeout+0x4db/0x5b0 kernel/time/timer.c:2143
+ do_wait_for_common kernel/sched/completion.c:85 [inline]
+ __wait_for_common kernel/sched/completion.c:106 [inline]
+ wait_for_common kernel/sched/completion.c:117 [inline]
+ wait_for_completion+0xa6/0x180 kernel/sched/completion.c:138
+ kthread_stop+0xfe/0x360 kernel/kthread.c:709
+ hwrng_unregister+0x182/0x210 drivers/char/hw_random/core.c:618
+ tpm_chip_unregister+0x1cc/0x1f0 drivers/char/tpm/tpm-chip.c:697
+ vtpm_proxy_delete_device drivers/char/tpm/tpm_vtpm_proxy.c:603 [inline]
+ vtpm_proxy_fops_release+0x8f/0xa0 drivers/char/tpm/tpm_vtpm_proxy.c:239
+ __fput+0x11f/0x450 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0x547/0x12b0 kernel/exit.c:869
+ do_group_exit+0x5e/0xf0 kernel/exit.c:1019
+ __do_sys_exit_group kernel/exit.c:1030 [inline]
+ __se_sys_exit_group kernel/exit.c:1028 [inline]
+ __x64_sys_exit_group+0x25/0x30 kernel/exit.c:1028
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x44dc76
+RSP: 002b:00007ffc2954cee8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00000000004e43d0 RCX: 000000000044dc76
+RDX: 0000000000000000 RSI: 000000000000003c RDI: 0000000000000000
+RBP: 0000000000000000 R08: 00000000000000e7 R09: ffffffffffffffa8
+R10: 00007ffc2954c8d0 R11: 0000000000000246 R12: 00000000004e43d0
+R13: 0000000000000001 R14: 0000000000000000 R15: 0000000000000001
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/11:
+ #0: ffffffff83d65d90 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_rude_/12:
+ #0: ffffffff83d65b10 (rcu_tasks_rude.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by rcu_tasks_trace/13:
+ #0: ffffffff83d65850 (rcu_tasks_trace.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x31/0x420 kernel/rcu/tasks.h:510
+1 lock held by khungtaskd/29:
+ #0: ffffffff83d667a0 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x1b/0x1e0 kernel/locking/lockdep.c:6498
+
+=============================================
+

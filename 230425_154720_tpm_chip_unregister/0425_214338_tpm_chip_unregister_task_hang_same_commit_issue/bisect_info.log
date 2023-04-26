@@ -1,0 +1,31 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [591f7c2026cba9889839a16a1a3579c38ad6234f] Intel Next: Add release files for v6.3 2023-04-24
+git bisect bad 591f7c2026cba9889839a16a1a3579c38ad6234f
+# status: waiting for good commit(s), bad commit known
+# good: [457391b0380335d5e9a5babdec90ac53928b23b4] Linux 6.3
+git bisect good 457391b0380335d5e9a5babdec90ac53928b23b4
+# bad: [87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9] Intel Next: Merge commit 50dfe3288494b2afcd7358dcfbe922e24ec00765 from https://github.com/intel-sandbox/cbae1.linux.git kl_intel-next
+git bisect bad 87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9
+# good: [44851827db17c461550fa6e03f094f15b9cd923d] Merge branch 'master' into for-intel-next
+git bisect good 44851827db17c461550fa6e03f094f15b9cd923d
+# good: [9b74df4e2bbcd4b5b62c975fbaedceb250acde23] Intel Next: Merge commit 2c8737a3e419ce4e8d2fc81547e0ed8c75991af9 from https://github.com/intel-sandbox/otc_power_kernel intel_next_branding
+git bisect good 9b74df4e2bbcd4b5b62c975fbaedceb250acde23
+# good: [4c7d72a51a03717747cad06fb235589709f76ed4] Merge branch 'thermal-intel' into linux-next
+git bisect good 4c7d72a51a03717747cad06fb235589709f76ed4
+# bad: [11f325a5fafe3edb01c3c48515584b655415713f] Intel Next: Merge commit 981c0201bbdb32b625a7a33ed98831d65313665c from https://github.com/intel-innersource/drivers.security.cse.drivers.linux-mei-pk.git cse-6.3
+git bisect bad 11f325a5fafe3edb01c3c48515584b655415713f
+# bad: [f968e3c2493f52e24535142171b5658b671a4927] Intel Next: Merge commit bd8621ca1510e6e802df9855bdc35a04a3cfa932 from https://git.kernel.org/pub/scm/linux/kernel/git/jarkko/linux-tpmdd.git next
+git bisect bad f968e3c2493f52e24535142171b5658b671a4927
+# bad: [3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac] tpm: tpm_tis_spi: Mark ACPI and OF related data as maybe unused
+git bisect bad 3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac
+# good: [ed9be0e6c892a783800d77a41ca4c7255c6af8c5] tpm, tpm_tis: Do not skip reset of original interrupt vector
+git bisect good ed9be0e6c892a783800d77a41ca4c7255c6af8c5
+# good: [0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea] tpm, tpm_tis: Request threaded interrupt handler
+git bisect good 0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea
+# bad: [548eb516ec0f7a484a23a902835899341164b8ea] tpm, tpm_tis: startup chip before testing for interrupts
+git bisect bad 548eb516ec0f7a484a23a902835899341164b8ea
+# good: [955df4f87760b3bb2af253d3fbb12fb712b3ffa6] tpm, tpm_tis: Claim locality when interrupts are reenabled on resume
+git bisect good 955df4f87760b3bb2af253d3fbb12fb712b3ffa6
+# first bad commit: [548eb516ec0f7a484a23a902835899341164b8ea] tpm, tpm_tis: startup chip before testing for interrupts
+|0426_053542|Bisect successfully! 591f7c2026cba9889839a16a1a3579c38ad6234f_548eb516ec0f7a484a23a902835899341164b8ea_revert bzimage passed!|

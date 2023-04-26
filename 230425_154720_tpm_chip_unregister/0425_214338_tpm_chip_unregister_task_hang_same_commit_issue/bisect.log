@@ -1,0 +1,256 @@
+|0425_214338|CMD=cd /root/os.linux.intelnext.kernel|
+|0425_214338|git log 591f7c2026cba9889839a16a1a3579c38ad6234f check_result:commit 591f7c2026cba9889839a16a1a3579c38ad6234f|
+|0425_214338|git log 457391b0380335d5e9a5babdec90ac53928b23b4 check_result:commit 457391b0380335d5e9a5babdec90ac53928b23b4|
+|0425_214338|There was old bisect log:git bisect start
+# status: waiting for both good and bad commits
+# bad: [591f7c2026cba9889839a16a1a3579c38ad6234f] Intel Next: Add release files for v6.3 2023-04-24
+git bisect bad 591f7c2026cba9889839a16a1a3579c38ad6234f
+# status: waiting for good commit(s), bad commit known
+# good: [457391b0380335d5e9a5babdec90ac53928b23b4] Linux 6.3
+git bisect good 457391b0380335d5e9a5babdec90ac53928b23b4
+# bad: [87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9] Intel Next: Merge commit 50dfe3288494b2afcd7358dcfbe922e24ec00765 from https://github.com/intel-sandbox/cbae1.linux.git kl_intel-next
+git bisect bad 87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9
+# good: [44851827db17c461550fa6e03f094f15b9cd923d] Merge branch 'master' into for-intel-next
+git bisect good 44851827db17c461550fa6e03f094f15b9cd923d
+# good: [9b74df4e2bbcd4b5b62c975fbaedceb250acde23] Intel Next: Merge commit 2c8737a3e419ce4e8d2fc81547e0ed8c75991af9 from https://github.com/intel-sandbox/otc_power_kernel intel_next_branding
+git bisect good 9b74df4e2bbcd4b5b62c975fbaedceb250acde23
+# good: [4c7d72a51a03717747cad06fb235589709f76ed4] Merge branch 'thermal-intel' into linux-next
+git bisect good 4c7d72a51a03717747cad06fb235589709f76ed4
+# bad: [11f325a5fafe3edb01c3c48515584b655415713f] Intel Next: Merge commit 981c0201bbdb32b625a7a33ed98831d65313665c from https://github.com/intel-innersource/drivers.security.cse.drivers.linux-mei-pk.git cse-6.3
+git bisect bad 11f325a5fafe3edb01c3c48515584b655415713f
+# bad: [f968e3c2493f52e24535142171b5658b671a4927] Intel Next: Merge commit bd8621ca1510e6e802df9855bdc35a04a3cfa932 from https://git.kernel.org/pub/scm/linux/kernel/git/jarkko/linux-tpmdd.git next
+git bisect bad f968e3c2493f52e24535142171b5658b671a4927
+# bad: [3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac] tpm: tpm_tis_spi: Mark ACPI and OF related data as maybe unused
+git bisect bad 3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac
+# good: [ed9be0e6c892a783800d77a41ca4c7255c6af8c5] tpm, tpm_tis: Do not skip reset of original interrupt vector
+git bisect good ed9be0e6c892a783800d77a41ca4c7255c6af8c5
+# good: [0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea] tpm, tpm_tis: Request threaded interrupt handler
+git bisect good 0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea
+# bad: [548eb516ec0f7a484a23a902835899341164b8ea] tpm, tpm_tis: startup chip before testing for interrupts
+git bisect bad 548eb516ec0f7a484a23a902835899341164b8ea
+# good: [955df4f87760b3bb2af253d3fbb12fb712b3ffa6] tpm, tpm_tis: Claim locality when interrupts are reenabled on resume
+git bisect good 955df4f87760b3bb2af253d3fbb12fb712b3ffa6
+# first bad commit: [548eb516ec0f7a484a23a902835899341164b8ea] tpm, tpm_tis: startup chip before testing for interrupts, will clean it|
+|0425_214338|CMD=git bisect reset|
+|0425_214339|CMD=git checkout -f 591f7c2026cba9889839a16a1a3579c38ad6234f|
+|0425_214340|CMD=cd /root/os.linux.intelnext.kernel|
+|0425_214340||/var/www/html/bzimage/bzImage_591f7c2026cba9889839a16a1a3579c38ad6234f| exist, no need make|
+|0425_214340|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0425_214401|Run /var/www/html/bzimage/bzImage_591f7c2026cba9889839a16a1a3579c38ad6234f with image:/root/image/centos8_2.img in local port:10022|
+|0425_214426|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0425_214426|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0425_214428|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0425_214429|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0425_214904|/var/www/html/bzimage/bzImage_591f7c2026cba9889839a16a1a3579c38ad6234f contained tpm_chip_unregister:[  300.134097]  tpm_chip_unregister+0x1cc/0x1f0, FAIL|
+|0425_214904|Found time:300 in /var/www/html/bzimage/0425_214338_tpm_chip_unregister/591f7c2026cba9889839a16a1a3579c38ad6234f_dmesg.log|
+|0425_214904|Logic: |<=25: +25|25-60 +120|>60 +1800| Set TIME:2100|
+|0425_214904|-END- commit 591f7c2026cba9889839a16a1a3579c38ad6234f FAIL bad|
+|0425_214904|CMD=rm -rf /var/www/html//syzkaller/2023_04_25/fa9b978afe108b932d75d6b217d2d004786197eb|
+|0425_214904|CMD=mkdir -p /var/www/html//syzkaller/2023_04_25/fa9b978afe108b932d75d6b217d2d004786197eb|
+|0425_214904|CMD=cp -rf /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog /var/www/html//syzkaller/2023_04_25/fa9b978afe108b932d75d6b217d2d004786197eb/repro.c|
+|0425_214904|gcc -pthread /var/www/html//syzkaller/2023_04_25/fa9b978afe108b932d75d6b217d2d004786197eb/repro.c -o /var/www/html//syzkaller/2023_04_25/fa9b978afe108b932d75d6b217d2d004786197eb/repro|
+|0425_214905|CMD=cp -rf /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/description /var/www/html//syzkaller/2023_04_25/fa9b978afe108b932d75d6b217d2d004786197eb|
+|0425_214906|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0425_214338_tpm_chip_unregister/kconfig_origin:0|
+|0425_214906|CMD=cd /root/os.linux.intelnext.kernel|
+|0425_214906||/var/www/html/bzimage/bzImage_457391b0380335d5e9a5babdec90ac53928b23b4| exist, no need make|
+|0425_214906|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0425_214924|Run /var/www/html/bzimage/bzImage_457391b0380335d5e9a5babdec90ac53928b23b4 with image:/root/image/centos8_2.img in local port:10022|
+|0425_214949|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0425_214950|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0425_214951|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0425_214952|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0425_222453|/var/www/html/bzimage/bzImage_457391b0380335d5e9a5babdec90ac53928b23b4 didn't contain tpm_chip_unregister: in dmesg, pass|
+|0425_222453|Start commit 457391b0380335d5e9a5babdec90ac53928b23b4 PASS good|
+|0425_222453|CMD=git checkout -f 591f7c2026cba9889839a16a1a3579c38ad6234f|
+|0425_222453|CMD=git bisect start|
+|0425_222453|CMD=git bisect bad 591f7c2026cba9889839a16a1a3579c38ad6234f|
+|0425_222453|Bisect first start commit:457391b0380335d5e9a5babdec90ac53928b23b4|
+|0425_222453|git bisect good 457391b0380335d5e9a5babdec90ac53928b23b4|
+|0425_222454||/var/www/html/bzimage/bzImage_87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9| exist, no need make|
+|0425_222454|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0425_222522|Run /var/www/html/bzimage/bzImage_87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9 with image:/root/image/centos8_2.img in local port:10022|
+|0425_222547|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0425_222547|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0425_222548|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0425_222550|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0425_230050|/var/www/html/bzimage/bzImage_87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9 contained tpm_chip_unregister:[  300.123157]  tpm_chip_unregister+0x1cc/0x1f0
+[  447.576333]  tpm_chip_unregister+0x1cc/0x1f0
+[  595.032380]  tpm_chip_unregister+0x1cc/0x1f0
+[  742.488330]  tpm_chip_unregister+0x1cc/0x1f0
+[  889.944223]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1037.400314]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1184.856245]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1332.313898]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1479.768363]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1627.224331]  tpm_chip_unregister+0x1cc/0x1f0, FAIL|
+|0425_230050|git bisect bad 87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9|
+|0425_230051||/var/www/html/bzimage/bzImage_44851827db17c461550fa6e03f094f15b9cd923d| exist, no need make|
+|0425_230051|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0425_230109|Run /var/www/html/bzimage/bzImage_44851827db17c461550fa6e03f094f15b9cd923d with image:/root/image/centos8_2.img in local port:10022|
+|0425_230134|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0425_230134|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0425_230135|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0425_230137|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0425_233638|/var/www/html/bzimage/bzImage_44851827db17c461550fa6e03f094f15b9cd923d didn't contain tpm_chip_unregister: in dmesg, pass|
+|0425_233638|git bisect good 44851827db17c461550fa6e03f094f15b9cd923d|
+|0425_233638||/var/www/html/bzimage/bzImage_9b74df4e2bbcd4b5b62c975fbaedceb250acde23| exist, no need make|
+|0425_233638|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0425_233658|Run /var/www/html/bzimage/bzImage_9b74df4e2bbcd4b5b62c975fbaedceb250acde23 with image:/root/image/centos8_2.img in local port:10022|
+|0425_233723|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0425_233723|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0425_233724|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0425_233726|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_001227|/var/www/html/bzimage/bzImage_9b74df4e2bbcd4b5b62c975fbaedceb250acde23 didn't contain tpm_chip_unregister: in dmesg, pass|
+|0426_001227|git bisect good 9b74df4e2bbcd4b5b62c975fbaedceb250acde23|
+|0426_001227||/var/www/html/bzimage/bzImage_4c7d72a51a03717747cad06fb235589709f76ed4| exist, no need make|
+|0426_001227|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_001245|Run /var/www/html/bzimage/bzImage_4c7d72a51a03717747cad06fb235589709f76ed4 with image:/root/image/centos8_2.img in local port:10022|
+|0426_001310|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_001310|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_001312|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_001313|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_004814|/var/www/html/bzimage/bzImage_4c7d72a51a03717747cad06fb235589709f76ed4 didn't contain tpm_chip_unregister: in dmesg, pass|
+|0426_004814|git bisect good 4c7d72a51a03717747cad06fb235589709f76ed4|
+|0426_004815||/var/www/html/bzimage/bzImage_11f325a5fafe3edb01c3c48515584b655415713f| exist, no need make|
+|0426_004815|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_004834|Run /var/www/html/bzimage/bzImage_11f325a5fafe3edb01c3c48515584b655415713f with image:/root/image/centos8_2.img in local port:10022|
+|0426_004859|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_004859|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_004900|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_004902|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_012402|/var/www/html/bzimage/bzImage_11f325a5fafe3edb01c3c48515584b655415713f contained tpm_chip_unregister:[  300.118025]  tpm_chip_unregister+0x1cc/0x1f0
+[  447.576774]  tpm_chip_unregister+0x1cc/0x1f0
+[  595.029977]  tpm_chip_unregister+0x1cc/0x1f0
+[  742.488713]  tpm_chip_unregister+0x1cc/0x1f0
+[  889.944764]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1037.397919]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1184.853963]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1332.309958]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1479.765908]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1627.221945]  tpm_chip_unregister+0x1cc/0x1f0, FAIL|
+|0426_012402|git bisect bad 11f325a5fafe3edb01c3c48515584b655415713f|
+|0426_012403||/var/www/html/bzimage/bzImage_f968e3c2493f52e24535142171b5658b671a4927| exist, no need make|
+|0426_012403|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_012426|Run /var/www/html/bzimage/bzImage_f968e3c2493f52e24535142171b5658b671a4927 with image:/root/image/centos8_2.img in local port:10022|
+|0426_012451|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_012451|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_012452|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_012454|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_015954|/var/www/html/bzimage/bzImage_f968e3c2493f52e24535142171b5658b671a4927 contained tpm_chip_unregister:[  300.132519]  tpm_chip_unregister+0x1cc/0x1f0
+[  447.588638]  tpm_chip_unregister+0x1cc/0x1f0
+[  595.041542]  tpm_chip_unregister+0x1cc/0x1f0
+[  742.497267]  tpm_chip_unregister+0x1cc/0x1f0
+[  889.956757]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1037.413058]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1184.865765]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1332.333765]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1479.780873]  tpm_chip_unregister+0x1cc/0x1f0
+[ 1627.233420]  tpm_chip_unregister+0x1cc/0x1f0, FAIL|
+|0426_015954|git bisect bad f968e3c2493f52e24535142171b5658b671a4927|
+|0426_015955||/var/www/html/bzimage/bzImage_3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac| exist, no need make|
+|0426_015955|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_020103|Run /var/www/html/bzimage/bzImage_3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac with image:/root/image/centos8_2.img in local port:10022|
+|0426_020128|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_020128|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_020130|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_020131|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_023631|/var/www/html/bzimage/bzImage_3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac contained tpm_chip_unregister:[  300.125590]  tpm_chip_unregister+0x1aa/0x1d0
+[  447.581842]  tpm_chip_unregister+0x1aa/0x1d0
+[  595.037733]  tpm_chip_unregister+0x1aa/0x1d0
+[  742.493915]  tpm_chip_unregister+0x1aa/0x1d0
+[  889.948822]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1037.405973]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1184.861831]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1332.317486]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1479.774416]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1627.230550]  tpm_chip_unregister+0x1aa/0x1d0, FAIL|
+|0426_023631|git bisect bad 3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac|
+|0426_023632||/var/www/html/bzimage/bzImage_ed9be0e6c892a783800d77a41ca4c7255c6af8c5| exist, no need make|
+|0426_023632|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_023656|Run /var/www/html/bzimage/bzImage_ed9be0e6c892a783800d77a41ca4c7255c6af8c5 with image:/root/image/centos8_2.img in local port:10022|
+|0426_023721|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_023722|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_023723|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_023724|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_031225|/var/www/html/bzimage/bzImage_ed9be0e6c892a783800d77a41ca4c7255c6af8c5 didn't contain tpm_chip_unregister: in dmesg, pass|
+|0426_031225|git bisect good ed9be0e6c892a783800d77a41ca4c7255c6af8c5|
+|0426_031226||/var/www/html/bzimage/bzImage_0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea| exist, no need make|
+|0426_031226|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_031244|Run /var/www/html/bzimage/bzImage_0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea with image:/root/image/centos8_2.img in local port:10022|
+|0426_031309|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_031310|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_031311|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_031312|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_034813|/var/www/html/bzimage/bzImage_0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea didn't contain tpm_chip_unregister: in dmesg, pass|
+|0426_034813|git bisect good 0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea|
+|0426_034814||/var/www/html/bzimage/bzImage_548eb516ec0f7a484a23a902835899341164b8ea| exist, no need make|
+|0426_034814|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_034834|Run /var/www/html/bzimage/bzImage_548eb516ec0f7a484a23a902835899341164b8ea with image:/root/image/centos8_2.img in local port:10022|
+|0426_034859|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_034900|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_034901|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_034902|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_042403|/var/www/html/bzimage/bzImage_548eb516ec0f7a484a23a902835899341164b8ea contained tpm_chip_unregister:[  300.124857]  tpm_chip_unregister+0x1aa/0x1d0
+[  447.578198]  tpm_chip_unregister+0x1aa/0x1d0
+[  595.034175]  tpm_chip_unregister+0x1aa/0x1d0
+[  742.490060]  tpm_chip_unregister+0x1aa/0x1d0
+[  889.948204]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1037.404165]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1184.858193]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1332.316168]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1479.772929]  tpm_chip_unregister+0x1aa/0x1d0
+[ 1627.226164]  tpm_chip_unregister+0x1aa/0x1d0, FAIL|
+|0426_042403|git bisect bad 548eb516ec0f7a484a23a902835899341164b8ea|
+|0426_042403||/var/www/html/bzimage/bzImage_955df4f87760b3bb2af253d3fbb12fb712b3ffa6| exist, no need make|
+|0426_042403|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_042421|Run /var/www/html/bzimage/bzImage_955df4f87760b3bb2af253d3fbb12fb712b3ffa6 with image:/root/image/centos8_2.img in local port:10022|
+|0426_042446|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_042447|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_042448|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_042449|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_045950|/var/www/html/bzimage/bzImage_955df4f87760b3bb2af253d3fbb12fb712b3ffa6 didn't contain tpm_chip_unregister: in dmesg, pass|
+|0426_045950|git bisect good 955df4f87760b3bb2af253d3fbb12fb712b3ffa6|
+|0426_045950|Bisect PASS: find 548eb516ec0f7a484a23a902835899341164b8ea is the first bad commit|
+|0426_045950|CMD=git bisect log >> /var/www/html/bzimage/bi.log|
+|0426_045950|CMD=git bisect log >> /var/www/html/bzimage/0425_214338_tpm_chip_unregister/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [591f7c2026cba9889839a16a1a3579c38ad6234f] Intel Next: Add release files for v6.3 2023-04-24
+git bisect bad 591f7c2026cba9889839a16a1a3579c38ad6234f
+# status: waiting for good commit(s), bad commit known
+# good: [457391b0380335d5e9a5babdec90ac53928b23b4] Linux 6.3
+git bisect good 457391b0380335d5e9a5babdec90ac53928b23b4
+# bad: [87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9] Intel Next: Merge commit 50dfe3288494b2afcd7358dcfbe922e24ec00765 from https://github.com/intel-sandbox/cbae1.linux.git kl_intel-next
+git bisect bad 87d0dd3e9d36f5fc99dad33534d7d55a9f1682c9
+# good: [44851827db17c461550fa6e03f094f15b9cd923d] Merge branch 'master' into for-intel-next
+git bisect good 44851827db17c461550fa6e03f094f15b9cd923d
+# good: [9b74df4e2bbcd4b5b62c975fbaedceb250acde23] Intel Next: Merge commit 2c8737a3e419ce4e8d2fc81547e0ed8c75991af9 from https://github.com/intel-sandbox/otc_power_kernel intel_next_branding
+git bisect good 9b74df4e2bbcd4b5b62c975fbaedceb250acde23
+# good: [4c7d72a51a03717747cad06fb235589709f76ed4] Merge branch 'thermal-intel' into linux-next
+git bisect good 4c7d72a51a03717747cad06fb235589709f76ed4
+# bad: [11f325a5fafe3edb01c3c48515584b655415713f] Intel Next: Merge commit 981c0201bbdb32b625a7a33ed98831d65313665c from https://github.com/intel-innersource/drivers.security.cse.drivers.linux-mei-pk.git cse-6.3
+git bisect bad 11f325a5fafe3edb01c3c48515584b655415713f
+# bad: [f968e3c2493f52e24535142171b5658b671a4927] Intel Next: Merge commit bd8621ca1510e6e802df9855bdc35a04a3cfa932 from https://git.kernel.org/pub/scm/linux/kernel/git/jarkko/linux-tpmdd.git next
+git bisect bad f968e3c2493f52e24535142171b5658b671a4927
+# bad: [3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac] tpm: tpm_tis_spi: Mark ACPI and OF related data as maybe unused
+git bisect bad 3fb29a23fcdadc9d7b60d323bbc1d9896249f6ac
+# good: [ed9be0e6c892a783800d77a41ca4c7255c6af8c5] tpm, tpm_tis: Do not skip reset of original interrupt vector
+git bisect good ed9be0e6c892a783800d77a41ca4c7255c6af8c5
+# good: [0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea] tpm, tpm_tis: Request threaded interrupt handler
+git bisect good 0c7e66e5fd69bf21034c9a9b081d7de7c3eb2cea
+# bad: [548eb516ec0f7a484a23a902835899341164b8ea] tpm, tpm_tis: startup chip before testing for interrupts
+git bisect bad 548eb516ec0f7a484a23a902835899341164b8ea
+# good: [955df4f87760b3bb2af253d3fbb12fb712b3ffa6] tpm, tpm_tis: Claim locality when interrupts are reenabled on resume
+git bisect good 955df4f87760b3bb2af253d3fbb12fb712b3ffa6
+# first bad commit: [548eb516ec0f7a484a23a902835899341164b8ea] tpm, tpm_tis: startup chip before testing for interrupts
+|0426_045950|/var/www/html/bzimage/bzImage_591f7c2026cba9889839a16a1a3579c38ad6234f_548eb516ec0f7a484a23a902835899341164b8ea_revert exist, no need make|
+|0426_045950|1st base commit:457391b0380335d5e9a5babdec90ac53928b23b4!|
+|0426_045950|/root/image/centos8_3.img -> /root/image/centos8_2.img|
+|0426_050013|Run /var/www/html/bzimage/bzImage_591f7c2026cba9889839a16a1a3579c38ad6234f_548eb516ec0f7a484a23a902835899341164b8ea_revert with image:/root/image/centos8_2.img in local port:10022|
+|0426_050038|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0426_050039|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0426_050040|CMD=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/fa9b978afe108b932d75d6b217d2d004786197eb/repro.cprog root@localhost:/root/repro.c|
+|0426_050041|CMD=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0426_053542|/var/www/html/bzimage/bzImage_591f7c2026cba9889839a16a1a3579c38ad6234f_548eb516ec0f7a484a23a902835899341164b8ea_revert didn't contain tpm_chip_unregister: in dmesg, pass|
+|0426_053542|Bisect successfully! 591f7c2026cba9889839a16a1a3579c38ad6234f_548eb516ec0f7a484a23a902835899341164b8ea_revert bzimage passed!|
+|0426_053542|ISSUE:fa9b978afe108b932d75d6b217d2d004786197eb  EMAIL status after check:Email_not_sent|
