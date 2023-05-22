@@ -1,0 +1,104 @@
+XFS: attr2 mount option is deprecated.
+XFS: ikeep mount option is deprecated.
+XFS (loop4): Mounting V4 Filesystem d28317a9-9e04-4f2a-be27-e55b4c413ff6
+XFS (loop4): Ending clean mount
+XFS (loop4): Quotacheck needed: Please wait.
+BUG: kernel NULL pointer dereference, address: 0000000000000008
+#PF: supervisor read access in kernel mode
+#PF: error_code(0x0000) - not-present page
+PGD 0 P4D 0 
+Oops: 0000 [#1] PREEMPT SMP NOPTI
+CPU: 0 PID: 46291 Comm: kworker/u4:19 Not tainted 6.4.0-rc2-078bbc538d8e+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 0.0.0 02/06/2015
+Workqueue: xfs_iwalk-79907 xfs_pwork_work
+RIP: 0010:xfs_extent_free_diff_items+0x27/0x40 fs/xfs/xfs_extfree_item.c:404
+Code: 90 90 90 f3 0f 1e fa e8 67 83 5c ff 55 48 89 e5 41 54 49 89 f4 53 48 89 d3 e8 25 59 7d ff 49 8b 44 24 28 48 8b 53 28 5b 41 5c <8b> 40 08 5d 2b 42 08 c3 cc cc cc cc 66 66 2e 0f 1f 84 00 00 00 00
+RSP: 0000:ffffc90000dff8c0 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800158af50 RCX: ffffffff81d75bf1
+RDX: 0000000000000000 RSI: ffff888016b22400 RDI: 0000000000000002
+RBP: ffffc90000dff8c0 R08: ffffc90000dff8e0 R09: 0000000000000000
+R10: ffff888011bc86c0 R11: ffffffff83e42a60 R12: ffff88800158a268
+R13: ffff88800158abd0 R14: ffffffff81b08160 R15: ffffc90000dff908
+FS:  0000000000000000(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000008 CR3: 0000000016a5e006 CR4: 0000000000770ef0
+DR0: 0000000020000080 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ merge lib/list_sort.c:23 [inline]
+ list_sort+0xb8/0x3a0 lib/list_sort.c:225
+ xfs_extent_free_create_intent+0xb6/0xc0 fs/xfs/xfs_extfree_item.c:447
+ xfs_defer_create_intent fs/xfs/libxfs/xfs_defer.c:211 [inline]
+ xfs_defer_create_intents+0xc3/0x220 fs/xfs/libxfs/xfs_defer.c:240
+ xfs_defer_finish_noroll+0x9e/0xbc0 fs/xfs/libxfs/xfs_defer.c:544
+ __xfs_trans_commit+0x4be/0x630 fs/xfs/xfs_trans.c:970
+ xfs_trans_commit+0x20/0x30 fs/xfs/xfs_trans.c:1049
+ xfs_dquot_disk_alloc+0x45d/0x4e0 fs/xfs/xfs_dquot.c:384
+ xfs_qm_dqread+0x2f7/0x310 fs/xfs/xfs_dquot.c:665
+ xfs_qm_dqget+0xd5/0x300 fs/xfs/xfs_dquot.c:869
+ xfs_qm_quotacheck_dqadjust+0x5a/0x230 fs/xfs/xfs_qm.c:1085
+ xfs_qm_dqusage_adjust+0x249/0x300 fs/xfs/xfs_qm.c:1190
+ xfs_iwalk_ag_recs+0x1bd/0x2e0 fs/xfs/xfs_iwalk.c:220
+ xfs_iwalk_run_callbacks+0xc3/0x1c0 fs/xfs/xfs_iwalk.c:376
+ xfs_iwalk_ag+0x32e/0x3f0 fs/xfs/xfs_iwalk.c:482
+ xfs_iwalk_ag_work+0xbe/0xf0 fs/xfs/xfs_iwalk.c:624
+ xfs_pwork_work+0x2c/0xc0 fs/xfs/xfs_pwork.c:47
+ process_one_work+0x3b1/0x860 kernel/workqueue.c:2405
+ worker_thread+0x52/0x660 kernel/workqueue.c:2552
+ kthread+0x16d/0x1c0 kernel/kthread.c:379
+ ret_from_fork+0x29/0x50 arch/x86/entry/entry_64.S:308
+ </TASK>
+Modules linked in:
+CR2: 0000000000000008
+---[ end trace 0000000000000000 ]---
+RIP: 0010:xfs_extent_free_diff_items+0x27/0x40 fs/xfs/xfs_extfree_item.c:404
+Code: 90 90 90 f3 0f 1e fa e8 67 83 5c ff 55 48 89 e5 41 54 49 89 f4 53 48 89 d3 e8 25 59 7d ff 49 8b 44 24 28 48 8b 53 28 5b 41 5c <8b> 40 08 5d 2b 42 08 c3 cc cc cc cc 66 66 2e 0f 1f 84 00 00 00 00
+RSP: 0000:ffffc90000dff8c0 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800158af50 RCX: ffffffff81d75bf1
+RDX: 0000000000000000 RSI: ffff888016b22400 RDI: 0000000000000002
+RBP: ffffc90000dff8c0 R08: ffffc90000dff8e0 R09: 0000000000000000
+R10: ffff888011bc86c0 R11: ffffffff83e42a60 R12: ffff88800158a268
+R13: ffff88800158abd0 R14: ffffffff81b08160 R15: ffffc90000dff908
+FS:  0000000000000000(0000) GS:ffff88807c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000008 CR3: 0000000016a5e006 CR4: 0000000000770ef0
+DR0: 0000000020000080 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+note: kworker/u4:19[46291] exited with irqs disabled
+EXT4-fs warning (device sda): ext4_group_extend:1861: can't shrink FS - resize aborted
+----------------
+Code disassembly (best guess):
+   0:	90                   	nop
+   1:	90                   	nop
+   2:	90                   	nop
+   3:	f3 0f 1e fa          	endbr64
+   7:	e8 67 83 5c ff       	call   0xff5c8373
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	41 54                	push   %r12
+  12:	49 89 f4             	mov    %rsi,%r12
+  15:	53                   	push   %rbx
+  16:	48 89 d3             	mov    %rdx,%rbx
+  19:	e8 25 59 7d ff       	call   0xff7d5943
+  1e:	49 8b 44 24 28       	mov    0x28(%r12),%rax
+  23:	48 8b 53 28          	mov    0x28(%rbx),%rdx
+  27:	5b                   	pop    %rbx
+  28:	41 5c                	pop    %r12
+* 2a:	8b 40 08             	mov    0x8(%rax),%eax <-- trapping instruction
+  2d:	5d                   	pop    %rbp
+  2e:	2b 42 08             	sub    0x8(%rdx),%eax
+  31:	c3                   	ret
+  32:	cc                   	int3
+  33:	cc                   	int3
+  34:	cc                   	int3
+  35:	cc                   	int3
+  36:	66                   	data16
+  37:	66                   	data16
+  38:	2e                   	cs
+  39:	0f                   	.byte 0xf
+  3a:	1f                   	(bad)
+  3b:	84 00                	test   %al,(%rax)
+  3d:	00 00                	add    %al,(%rax)
