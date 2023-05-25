@@ -1,0 +1,96 @@
+XFS (loop5): Mounting V5 Filesystem d408de26-55fb-48ab-a8ab-aacedb20f9dd
+XFS (loop5): Ending clean mount
+XFS (loop6): Unmounting Filesystem d408de26-55fb-48ab-a8ab-aacedb20f9dd
+XFS (loop5): Unmounting Filesystem d408de26-55fb-48ab-a8ab-aacedb20f9dd
+watchdog: BUG: soft lockup - CPU#1 stuck for 26s! [syz-executor.7:548]
+Modules linked in:
+irq event stamp: 15121662
+hardirqs last  enabled at (15121661): [<ffffffff82fb280e>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:436
+hardirqs last disabled at (15121662): [<ffffffff82fb06d3>] sysvec_apic_timer_interrupt+0x13/0xe0 arch/x86/kernel/apic/apic.c:1106
+softirqs last  enabled at (15108414): [<ffffffff82fd4a69>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (15108414): [<ffffffff82fd4a69>] __do_softirq+0x2d9/0x3c3 kernel/softirq.c:600
+softirqs last disabled at (15108357): [<ffffffff81128864>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (15108357): [<ffffffff81128864>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (15108357): [<ffffffff81128864>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+CPU: 1 PID: 548 Comm: syz-executor.7 Not tainted 6.4.0-rc3-dc92be2af705+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:check_kcov_mode+0x0/0x40 kernel/kcov.c:165
+Code: 5d 41 5e 41 5f 5d c3 cc cc cc cc 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 <55> 65 8b 05 80 76 d5 7e 89 c2 48 89 e5 81 e2 00 01 00 00 a9 00 01
+RSP: 0018:ffffc90005e5fb68 EFLAGS: 00000246
+RAX: 0000000000000001 RBX: ffff88801673a400 RCX: 0000000000000000
+RDX: ffffc90005e5fc18 RSI: ffff88801673a400 RDI: 0000000000000002
+RBP: ffffc90005e5fb80 R08: 0000000000000000 R09: 0000000000000019
+R10: 0000000000000001 R11: ffffffff83d64780 R12: ffffffff82f8aace
+R13: 0000000000000040 R14: 0000000000000000 R15: ffff88803fc7f488
+FS:  0000000001a1a480(0000) GS:ffff88807dd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2a1208a028 CR3: 000000000d5fe002 CR4: 0000000000770ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ radix_tree_next_chunk+0x3de/0x4e0 lib/radix-tree.c:1236
+ radix_tree_gang_lookup_tag+0x143/0x1c0 lib/radix-tree.c:1312
+ xfs_perag_grab_tag+0x9e/0x460 fs/xfs/libxfs/xfs_ag.c:143
+ xfs_icwalk+0x31/0xf0 fs/xfs/xfs_icache.c:1771
+ xfs_reclaim_inodes+0xc6/0x140 fs/xfs/xfs_icache.c:992
+ xfs_unmount_flush_inodes+0x63/0x80 fs/xfs/xfs_mount.c:594
+ xfs_unmountfs+0x69/0x1f0 fs/xfs/xfs_mount.c:1071
+ xfs_fs_put_super+0x5a/0x120 fs/xfs/xfs_super.c:1129
+ generic_shutdown_super+0xac/0x240 fs/super.c:500
+ kill_block_super+0x46/0x90 fs/super.c:1407
+ deactivate_locked_super+0x52/0xb0 fs/super.c:331
+ deactivate_super fs/super.c:362 [inline]
+ deactivate_super+0xb3/0xd0 fs/super.c:358
+ cleanup_mnt+0x15e/0x1e0 fs/namespace.c:1177
+ __cleanup_mnt+0x1f/0x30 fs/namespace.c:1184
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47887b
+Code: ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa 31 f6 e9 05 00 00 00 0f 1f 44 00 00 f3 0f 1e fa b8 a6 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffecb4b93c8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a6
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 000000000047887b
+RDX: 0000000000000000 RSI: 000000000000000a RDI: 00007ffecb4b9470
+RBP: 0000000000000577 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000001a1b6f3 R11: 0000000000000246 R12: 00007ffecb4ba500
+R13: 0000000001a1b620 R14: 0000000000000000 R15: 0000000000186f9f
+ </TASK>
+Sending NMI from CPU 1 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 PID: 0 Comm: swapper/0 Not tainted 6.4.0-rc3-dc92be2af705+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:pv_native_safe_halt+0x13/0x20 arch/x86/kernel/paravirt.c:223
+Code: 00 00 00 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 55 48 89 e5 eb 07 0f 00 2d f1 f6 25 00 fb f4 <5d> c3 cc cc cc cc 0f 1f 80 00 00 00 00 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffffff83c03e00 EFLAGS: 00000206
+RAX: 0000000000cbf0d7 RBX: 0000000000000000 RCX: ffffffff8126f01a
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+RBP: ffffffff83c03e00 R08: 0000000000000001 R09: 0000000000000001
+R10: 0000000000000001 R11: 0000000000000000 R12: ffffffff8406a120
+R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff83c129c0
+FS:  0000000000000000(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000218f658 CR3: 000000000a6f2005 CR4: 0000000000770ef0
+DR0: ffffffffff600000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ arch_safe_halt arch/x86/include/asm/paravirt.h:173 [inline]
+ default_idle+0xd/0x20 arch/x86/kernel/process.c:729
+ arch_cpu_idle+0xd/0x20 arch/x86/kernel/process.c:766
+ default_idle_call+0x7e/0xb0 kernel/sched/idle.c:97
+ cpuidle_idle_call kernel/sched/idle.c:170 [inline]
+ do_idle+0x1e3/0x280 kernel/sched/idle.c:282
+ cpu_startup_entry+0x21/0x30 kernel/sched/idle.c:379
+ rest_init+0x16e/0x270 init/main.c:736
+ arch_call_rest_init+0x17/0x50 init/main.c:835
+ start_kernel+0x715/0x970 init/main.c:1089
+ x86_64_start_reservations+0x1c/0x30 arch/x86/kernel/head64.c:556
+ x86_64_start_kernel+0x96/0xa0 arch/x86/kernel/head64.c:537
+ secondary_startup_64_no_verify+0x10b/0x10b
+ </TASK>

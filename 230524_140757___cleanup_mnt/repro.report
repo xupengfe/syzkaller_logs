@@ -1,0 +1,56 @@
+00000070: 00 00 00 00 00 00 00 00 0a 09 09 01 0e 00 00 14  ................
+XFS (loop0): Corruption of in-memory data (0x8) detected at _xfs_buf_ioapply+0x5d8/0x5f0 fs/xfs/xfs_buf.c:1551 (fs/xfs/xfs_buf.c:1552).  Shutting down filesystem.
+XFS (loop0): Please unmount the filesystem and rectify the problem(s)
+watchdog: BUG: soft lockup - CPU#0 stuck for 26s! [syz-executor171:526]
+Modules linked in:
+irq event stamp: 46558
+hardirqs last  enabled at (46557): [<ffffffff82fb280e>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:436
+hardirqs last disabled at (46558): [<ffffffff82fb06d3>] sysvec_apic_timer_interrupt+0x13/0xe0 arch/x86/kernel/apic/apic.c:1106
+softirqs last  enabled at (33630): [<ffffffff82fd4a69>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (33630): [<ffffffff82fd4a69>] __do_softirq+0x2d9/0x3c3 kernel/softirq.c:600
+softirqs last disabled at (33041): [<ffffffff81128864>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (33041): [<ffffffff81128864>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (33041): [<ffffffff81128864>] irq_exit_rcu+0xc4/0x100 kernel/softirq.c:662
+CPU: 0 PID: 526 Comm: syz-executor171 Not tainted 6.4.0-rc3-dc92be2af705+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:radix_tree_tagged+0x28/0x30 lib/radix-tree.c:1458
+Code: 90 90 f3 0f 1e fa 55 48 89 e5 41 54 49 89 fc 53 89 f3 e8 ab 4c 35 fe 8d 4b 1b b8 01 00 00 00 5b d3 e0 41 23 44 24 40 41 5c 5d <c3> cc cc cc cc 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffffc90000fcfcf0 EFLAGS: 00000206
+RAX: 0000000008000000 RBX: 0000000008000000 RCX: 000000000000001b
+RDX: 0000000000000000 RSI: ffff88800a454800 RDI: 0000000000000002
+RBP: ffffc90000fcfd38 R08: 0000000000000000 R09: 0000000000000019
+R10: 0000000000000001 R11: ffffffff83d64780 R12: ffff8880144dd000
+R13: ffff8880144dd6a8 R14: 0000000000000001 R15: ffff88800df86cc0
+FS:  0000000001d093c0(0000) GS:ffff88807dc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f8f05b1c000 CR3: 00000000146ae003 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ xfs_unmount_flush_inodes+0x63/0x80 fs/xfs/xfs_mount.c:594
+ xfs_unmountfs+0x69/0x1f0 fs/xfs/xfs_mount.c:1071
+ xfs_fs_put_super+0x5a/0x120 fs/xfs/xfs_super.c:1129
+ generic_shutdown_super+0xac/0x240 fs/super.c:500
+ kill_block_super+0x46/0x90 fs/super.c:1407
+ deactivate_locked_super+0x52/0xb0 fs/super.c:331
+ deactivate_super fs/super.c:362 [inline]
+ deactivate_super+0xb3/0xd0 fs/super.c:358
+ cleanup_mnt+0x15e/0x1e0 fs/namespace.c:1177
+ __cleanup_mnt+0x1f/0x30 fs/namespace.c:1184
+ task_work_run+0xb6/0x120 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x456b9b
+Code: ff d0 48 89 c7 b8 3c 00 00 00 0f 05 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 90 f3 0f 1e fa b8 a6 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffe7812c498 EFLAGS: 00000202 ORIG_RAX: 00000000000000a6
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000456b9b
+RDX: 0000000000000000 RSI: 000000000000000a RDI: 00007ffe7812c540
+RBP: 00007ffe7812d590 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000001d0a5f3 R11: 0000000000000202 R12: 0000000001d0a560
+R13: 0000000000000000 R14: 0000000000095fd5 R15: 0000000000000000
+ </TASK>
