@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [9561de3a55bed6bdd44a12820ba81ec416e705a7] Linux 6.4-rc5
+git bisect bad 9561de3a55bed6bdd44a12820ba81ec416e705a7
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [a8988507e577a89ccaf66b48ea645bcf6e861270] Merge tag 'fsnotify_for_v5.18-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs
+git bisect good a8988507e577a89ccaf66b48ea645bcf6e861270
+# good: [dca45efbe3c870a4ad2107fe625109b3765c0fea] Merge tag 'sound-fix-6.1-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good dca45efbe3c870a4ad2107fe625109b3765c0fea
+# good: [8f4c92f0024ff2a30f002e85f87e531d49dc023c] Merge branch 'libbpf: allow users to set kprobe/uprobe attach mode'
+git bisect good 8f4c92f0024ff2a30f002e85f87e531d49dc023c
+# good: [c034203b6a9dae6751ef4371c18cb77983e30c28] nfsd: fix double fget() bug in __write_ports_addfd()
+git bisect good c034203b6a9dae6751ef4371c18cb77983e30c28
+# good: [1c15ca4e4efaddb78f83eed31eeee34c522c3ae2] Merge tag 'sound-6.4-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good 1c15ca4e4efaddb78f83eed31eeee34c522c3ae2
+# good: [7acc1372113083fa281ba426021801e2402caca1] Merge tag 'cxl-for-6.4' of git://git.kernel.org/pub/scm/linux/kernel/git/cxl/cxl
+git bisect good 7acc1372113083fa281ba426021801e2402caca1
+# good: [17784de648be93b4eef0ef8fe28a16ff04feecc7] Merge tag 'core-debugobjects-2023-05-06' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 17784de648be93b4eef0ef8fe28a16ff04feecc7
+# good: [5565ec4ef4f0d676fc8518556e239ac6945b5186] Merge tag 'scsi-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+git bisect good 5565ec4ef4f0d676fc8518556e239ac6945b5186
+# good: [18713e8a689377386f639d9317f958244825bd7b] Merge tag 'arm-fixes-6.4-1' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect good 18713e8a689377386f639d9317f958244825bd7b
+# bad: [714069daa5d345483578e2ff77fb6f06f4dcba6a] Merge tag 'net-6.4-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad 714069daa5d345483578e2ff77fb6f06f4dcba6a
+# bad: [884fe9da1b7ccbea31b118f902fbc78f58366b4a] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/rdma/rdma
+git bisect bad 884fe9da1b7ccbea31b118f902fbc78f58366b4a
+# good: [e338142b39cf40155054f95daa28d210d2ee1b2d] Merge tag 'phy-fixes-6.4' of git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy
+git bisect good e338142b39cf40155054f95daa28d210d2ee1b2d
+# good: [afead42fdfcae714fb6ac41a5c323629cdb6f9ee] Merge tag 'perf-tools-fixes-for-v6.4-2-2023-05-30' of git://git.kernel.org/pub/scm/linux/kernel/git/acme/linux
+git bisect good afead42fdfcae714fb6ac41a5c323629cdb6f9ee
+# good: [c8f304d75f6c6cc679a73f89591f9a915da38f09] RDMA/irdma: Prevent QP use after free
+git bisect good c8f304d75f6c6cc679a73f89591f9a915da38f09
+# bad: [eb1f822c76beeaa76ab8b6737ab9dc9f9798408c] ext4: enable the lazy init thread when remounting read/write
+git bisect bad eb1f822c76beeaa76ab8b6737ab9dc9f9798408c
+# good: [2bc7e7c1a3bc9bd0cbf0f71006f6fe7ef24a00c2] ext4: disallow ea_inodes with extended attributes
+git bisect good 2bc7e7c1a3bc9bd0cbf0f71006f6fe7ef24a00c2
+# bad: [1077b2d53ef53629c14106aecf633bebd286c04c] ext4: fix fsync for non-directories
+git bisect bad 1077b2d53ef53629c14106aecf633bebd286c04c
+# bad: [aff3bea95388299eec63440389b4545c8041b357] ext4: add lockdep annotations for i_data_sem for ea_inode's
+git bisect bad aff3bea95388299eec63440389b4545c8041b357
+# first bad commit: [aff3bea95388299eec63440389b4545c8041b357] ext4: add lockdep annotations for i_data_sem for ea_inode's
+|0612_000312|Bisect successfully! 9561de3a55bed6bdd44a12820ba81ec416e705a7_aff3bea95388299eec63440389b4545c8041b357_revert bzimage passed!|

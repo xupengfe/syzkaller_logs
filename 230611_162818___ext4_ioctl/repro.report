@@ -1,0 +1,662 @@
+ext4 filesystem being mounted at /syzkaller.xV9VQn/20/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+------------[ cut here ]------------
+Looking for class "&ei->i_data_sem" with key __key.95970, but found a different class "&ei->i_data_sem" with the same key
+WARNING: CPU: 1 PID: 572 at kernel/locking/lockdep.c:941 look_up_lock_class.isra.34+0xb8/0x140 kernel/locking/lockdep.c:938
+Modules linked in:
+CPU: 1 PID: 572 Comm: syz-executor196 Not tainted 6.4.0-rc5-2023-06-05-intel-next-865a8445ac1a+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:look_up_lock_class.isra.34+0xb8/0x140 kernel/locking/lockdep.c:938
+Code: 38 49 8b 55 00 48 81 fa 20 83 0b 89 74 2b 80 3d 1a 0b 0f 02 00 75 22 48 c7 c7 00 9e 8b 85 c6 05 0a 0b 0f 02 01 e8 88 7b e2 fb <0f> 0b eb 0b e8 af c2 7f fd 85 c0 75 56 31 db 48 83 c4 08 48 89 d8
+RSP: 0018:ffff888017d4f780 EFLAGS: 00010086
+RAX: 0000000000000000 RBX: ffffffff8980bb20 RCX: ffffffff81248170
+RDX: 0000000000000000 RSI: ffff88801041a500 RDI: 0000000000000002
+RBP: ffff888017d4f7a8 R08: ffffed100d9662ca R09: ffffed100d9662ca
+R10: ffff88806cb3164b R11: ffffed100d9662c9 R12: ffffffff8a179841
+R13: ffff888021055208 R14: ffff888021055220 R15: 0000000000000000
+FS:  00000000022213c0(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000200023b9 CR3: 00000000118d6000 CR4: 0000000000f50ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ register_lock_class+0xca/0x11e0 kernel/locking/lockdep.c:1290
+ __lock_acquire+0x104/0x55d0 kernel/locking/lockdep.c:4965
+ lock_acquire kernel/locking/lockdep.c:5708 [inline]
+ lock_acquire+0x1bc/0x4c0 kernel/locking/lockdep.c:5673
+ down_write_nested+0x9a/0x1f0 kernel/locking/rwsem.c:1689
+ ext4_double_down_write_data_sem+0x79/0x90 fs/ext4/move_extent.c:58
+ swap_inode_boot_loader fs/ext4/ioctl.c:423 [inline]
+ __ext4_ioctl+0x2ebd/0x49e0 fs/ext4/ioctl.c:1418
+ ext4_ioctl+0x2e/0x40 fs/ext4/ioctl.c:1608
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1a3/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x4556fd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffd976be4c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007ffd976be540 RCX: 00000000004556fd
+RDX: 0000000000000000 RSI: 0000000000006611 RDI: 0000000000000004
+RBP: 0000000000000000 R08: 000000000040efb0 R09: 000000000040efb0
+R10: 000000000040efb0 R11: 0000000000000246 R12: 00007ffd976be500
+R13: 0000000000000004 R14: 0000000002221368 R15: 0000000000000003
+ </TASK>
+irq event stamp: 4313
+hardirqs last  enabled at (4313): [<ffffffff814f5791>] seqcount_lockdep_reader_access include/linux/seqlock.h:104 [inline]
+hardirqs last  enabled at (4313): [<ffffffff814f5791>] ktime_get_coarse_real_ts64+0x181/0x1b0 kernel/time/timekeeping.c:2261
+hardirqs last disabled at (4312): [<ffffffff814f575b>] seqcount_lockdep_reader_access include/linux/seqlock.h:101 [inline]
+hardirqs last disabled at (4312): [<ffffffff814f575b>] ktime_get_coarse_real_ts64+0x14b/0x1b0 kernel/time/timekeeping.c:2261
+softirqs last  enabled at (3182): [<ffffffff8545f125>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (3182): [<ffffffff8545f125>] __do_softirq+0x4f5/0x77c kernel/softirq.c:600
+softirqs last disabled at (3095): [<ffffffff81265c85>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (3095): [<ffffffff81265c85>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (3095): [<ffffffff81265c85>] irq_exit_rcu+0xe5/0x130 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/21/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/22/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/23/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/24/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/25/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/26/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/27/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/28/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/29/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/30/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller.xV9VQn/31/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/32/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/33/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/34/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/35/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/36/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/38/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/40/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/41/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/43/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/44/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/45/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/46/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/47/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/48/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/49/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/50/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/51/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/52/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/53/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/54/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/55/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/56/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/57/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/58/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/60/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/61/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/62/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/63/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/64/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/65/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/66/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/67/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/68/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/69/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/70/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/71/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/72/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/73/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/74/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/75/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/76/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/77/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/78/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/79/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/80/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/81/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/82/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/83/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/84/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/85/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/86/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/87/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/88/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/89/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/90/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/91/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/92/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/93/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+ext4 filesystem being mounted at /syzkaller.xV9VQn/94/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/95/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/96/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/97/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/98/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/99/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/100/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/101/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/102/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/103/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/104/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/105/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/106/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/107/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/108/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/110/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/111/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/112/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/114/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/115/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/116/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/117/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/118/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/120/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/121/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/122/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/123/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/124/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/125/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/126/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/127/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/128/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/129/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/130/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/131/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/132/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/133/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/134/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/135/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/136/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/137/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/138/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/139/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/140/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/141/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/142/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/143/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/144/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/145/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/146/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+Buffer I/O error on dev loop0, logical block 0, async page read
+ext4 filesystem being mounted at /syzkaller.xV9VQn/147/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/148/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+Buffer I/O error on dev loop0, logical block 0, async page read
+ext4 filesystem being mounted at /syzkaller.xV9VQn/149/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/150/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/151/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/155/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/156/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/157/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/158/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/159/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/160/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/161/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/162/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/163/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/164/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/165/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/166/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/167/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/168/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/169/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/170/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+Buffer I/O error on dev loop0, logical block 0, async page read
+ext4 filesystem being mounted at /syzkaller.xV9VQn/171/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/172/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/173/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/174/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/175/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/176/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/177/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/178/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/179/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/180/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/181/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/182/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/183/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/184/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/185/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/186/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/187/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/188/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/189/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/190/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/191/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/192/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/193/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/194/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/195/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/196/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/197/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/198/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/200/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/201/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/203/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+blk_print_req_error: 6 callbacks suppressed
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/204/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/205/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/206/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/207/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/208/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/209/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/210/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/211/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/212/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/213/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/214/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/215/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/216/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/217/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/218/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/219/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/221/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/222/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/223/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/224/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/225/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/226/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/227/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/228/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+ext4 filesystem being mounted at /syzkaller.xV9VQn/229/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/230/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/231/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/232/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/233/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/234/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/235/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/236/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/237/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/238/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/239/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/240/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/241/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/242/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/243/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/244/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/245/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/246/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/247/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/248/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/249/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/250/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/251/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/252/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/253/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/254/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/255/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/256/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/257/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/258/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/259/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/260/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/261/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/262/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/263/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/264/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/265/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/266/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/267/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/268/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/269/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/270/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/271/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/272/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/274/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/275/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/276/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/277/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/278/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/279/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/280/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/281/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/282/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/283/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/284/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/285/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/286/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/287/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+ext4 filesystem being mounted at /syzkaller.xV9VQn/288/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/289/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/290/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/291/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/292/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/293/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/294/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/295/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/296/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/297/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/298/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/299/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/300/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/301/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/302/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/303/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/304/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/305/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/306/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/307/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/308/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/309/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/310/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/311/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/312/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/313/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/315/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+loop0: detected capacity change from 0 to 512
+ext4 filesystem being mounted at /syzkaller.xV9VQn/316/file0 supports timestamps until 2038-01-19 (0x7fffffff)
