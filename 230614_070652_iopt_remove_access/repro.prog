@@ -1,0 +1,8 @@
+# {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false UseTmpDir:false HandleSegv:false Repro:false Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}
+r0 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000140), 0x2000, 0x0)
+r1 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000140), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r1, 0x3b81, &(0x7f0000000080)={0xc, 0x0, <r2=>0x0}) (rerun: 32)
+r3 = openat$iommufd(0xffffffffffffff9c, &(0x7f0000000140), 0x0, 0x0)
+ioctl$IOMMU_IOAS_ALLOC(r3, 0x3b81, &(0x7f0000000080)={0xc}) (rerun: 64)
+ioctl$IOMMU_TEST_OP_CREATE_ACCESS(r3, 0x3ba0, &(0x7f0000000100)={0x38, 0x5, r2, 0x0, <r4=>0xffffffffffffffff}) (rerun: 64)
+ioctl$IOMMU_TEST_OP_ACCESS_PAGES(r0, 0x3ba0, &(0x7f0000000000)={0x38, 0xb, r4, 0x0, 0x1})

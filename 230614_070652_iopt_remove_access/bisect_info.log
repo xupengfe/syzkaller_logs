@@ -1,0 +1,28 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [5ca8bbe2b78298f3634d90145385d7d9b03188a8] 0day head guard for 'devel-hourly-20230612-101034'
+git bisect bad 5ca8bbe2b78298f3634d90145385d7d9b03188a8
+# status: waiting for good commit(s), bad commit known
+# good: [858fd168a95c5b9669aac8db6c14a9aeab446375] Linux 6.4-rc6
+git bisect good 858fd168a95c5b9669aac8db6c14a9aeab446375
+# bad: [8f682f7d817887ecd0e0e740a509b6976b435164] Merge 'internal-rzhang1/for-intel-next' into devel-hourly-20230612-101034
+git bisect bad 8f682f7d817887ecd0e0e740a509b6976b435164
+# good: [07242fb581fb62caefb39f474458f949c5c079c0] Merge 'internal-linux-review/Jesse-Brandeburg/MAINTAINERS-add-entry-for-auxiliary-bus/20230602-085404' into devel-hourly-20230612-101034
+git bisect good 07242fb581fb62caefb39f474458f949c5c079c0
+# good: [e47ef4952101df81dd4b8775c7bf22c09e53c68a] Merge 'internal-virtualization-hypervisors-server-vmm-kvm-0day/lam_v9_0day' into devel-hourly-20230612-101034
+git bisect good e47ef4952101df81dd4b8775c7bf22c09e53c68a
+# bad: [a9ed9f1dfd92a5b64c05dd31747f2099acffae0e] iommu/arm-smmu-v3: Implement arm_smmu_get_msi_mapping_domain
+git bisect bad a9ed9f1dfd92a5b64c05dd31747f2099acffae0e
+# good: [dc4caabd59bc37aeb9cd601681dcfdf97485e45f] Merge remote-tracking branch 'luxis/wip/vfio_device_cdev_v11' into v6.4-rc1
+git bisect good dc4caabd59bc37aeb9cd601681dcfdf97485e45f
+# bad: [41941d057890633c2a85a184fd8e602fc4aa6049] iommufd/selftests: Add coverage for IOMMU_DEVICE_SET/UNSET_DATA
+git bisect bad 41941d057890633c2a85a184fd8e602fc4aa6049
+# bad: [23a8f69dcf17b4598f35a6c19b429c8c093f74b9] iommufd/hw_pagetable: Use domain_alloc_user op for domain allocation
+git bisect bad 23a8f69dcf17b4598f35a6c19b429c8c093f74b9
+# bad: [461291f20279e080c19c64c3cf664cfca907b620] iommu: Move dev_iommu_ops() to private header
+git bisect bad 461291f20279e080c19c64c3cf664cfca907b620
+# bad: [e93964b04d5b0f45344931fcae0e8696dd649988] iommufd/selftest: Add IOMMU_TEST_OP_ACCESS_REPLACE_IOAS coverage
+git bisect bad e93964b04d5b0f45344931fcae0e8696dd649988
+# good: [86a2a1476dc02a0179a3f6d700910fdbf6a9c078] iommufd: Add iommufd_access_replace() API
+git bisect good 86a2a1476dc02a0179a3f6d700910fdbf6a9c078
+# first bad commit: [e93964b04d5b0f45344931fcae0e8696dd649988] iommufd/selftest: Add IOMMU_TEST_OP_ACCESS_REPLACE_IOAS coverage

@@ -1,0 +1,442 @@
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 54386 at drivers/iommu/iommufd/io_pagetable.c:1158 iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Modules linked in:
+CPU: 0 PID: 54386 Comm: syz-executor.2 Not tainted 6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Code: 45 85 e4 75 29 e8 4b 2d 0b fe 4c 89 ef e8 33 eb e8 fd 48 89 df e8 2b eb e8 fd 5b 41 5c 41 5d 5d c3 cc cc cc cc e8 2b 2d 0b fe <0f> 0b eb b9 e8 22 2d 0b fe 0f 0b eb ce e8 b9 1d 67 fe eb 90 0f 1f
+RSP: 0018:ffff888022c87bb8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800b7498a8 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff888047e3a500 RDI: 0000000000000002
+RBP: ffff888022c87bd0 R08: ffffed10016e9333 R09: ffffed10016e9333
+R10: ffff88800b749993 R11: ffffed10016e9332 R12: ffff88801018c000
+R13: ffff88800b7499e8 R14: ffffffff835430e0 R15: ffff888022c87e68
+FS:  00007f2f47700700(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000001c88658 CR3: 000000004dff4000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __iommufd_access_detach+0x1c2/0x2b0 drivers/iommu/iommufd/device.c:971
+ iommufd_access_change_pt+0x149/0x270 drivers/iommu/iommufd/device.c:1006
+ iommufd_access_replace+0xb4/0x120 drivers/iommu/iommufd/device.c:1042
+ iommufd_test_access_replace_ioas drivers/iommu/iommufd/selftest.c:1025 [inline]
+ iommufd_test+0x103d/0x3f00 drivers/iommu/iommufd/selftest.c:1252
+ iommufd_fops_ioctl+0x37d/0x510 drivers/iommu/iommufd/main.c:378
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1a3/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f2f47700108 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 000000000059bf80 RCX: 000000000047742d
+RDX: 0000000020000000 RSI: 0000000000003ba0 RDI: 0000000000000003
+RBP: 000000000059bf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff89da2d7f R14: 00007fff89da2f00 R15: 00007f2f47700280
+ </TASK>
+irq event stamp: 3843
+hardirqs last  enabled at (3851): [<ffffffff81400f11>] __up_console_sem+0x91/0xb0 kernel/printk/printk.c:347
+hardirqs last disabled at (3858): [<ffffffff81400ef6>] __up_console_sem+0x76/0xb0 kernel/printk/printk.c:345
+softirqs last  enabled at (3384): [<ffffffff853e82b5>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (3384): [<ffffffff853e82b5>] __do_softirq+0x4f5/0x77c kernel/softirq.c:600
+softirqs last disabled at (3345): [<ffffffff81253215>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (3345): [<ffffffff81253215>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (3345): [<ffffffff81253215>] irq_exit_rcu+0xe5/0x130 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+==================================================================
+BUG: KASAN: slab-use-after-free in iopt_calculate_iova_alignment+0x3d4/0x410 drivers/iommu/iommufd/io_pagetable.c:919
+Read of size 8 at addr ffff88801018c160 by task syz-executor.2/54414
+
+CPU: 1 PID: 54414 Comm: syz-executor.2 Tainted: G        W          6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xa9/0x110 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:351 [inline]
+ print_report+0xd1/0x620 mm/kasan/report.c:462
+ kasan_report+0x9e/0xd0 mm/kasan/report.c:572
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ iopt_calculate_iova_alignment+0x3d4/0x410 drivers/iommu/iommufd/io_pagetable.c:919
+ iopt_remove_access+0x7f/0xd0 drivers/iommu/iommufd/io_pagetable.c:1159
+ iommufd_access_destroy_object+0x65/0x170 drivers/iommu/iommufd/device.c:875
+ iommufd_object_destroy_user+0x18e/0x220 drivers/iommu/iommufd/main.c:163
+ iommufd_access_destroy+0x43/0x70 drivers/iommu/iommufd/device.c:938
+ iommufd_test_staccess_release+0x8d/0xd0 drivers/iommu/iommufd/selftest.c:918
+ __fput+0x26d/0xa40 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0x1a4/0x2d0 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xaf3/0x2f60 kernel/exit.c:874
+ do_group_exit+0xe0/0x2b0 kernel/exit.c:1024
+ get_signal+0x26da/0x2720 kernel/signal.c:2876
+ arch_do_signal_or_restart+0x82/0x750 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+Code: Unable to access opcode bytes at 0x477403.
+RSP: 002b:00007f2f476be198 EFLAGS: 00000246 ORIG_RAX: 00000000000000ca
+RAX: fffffffffffffe00 RBX: 000000000059c120 RCX: 000000000047742d
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 000000000059c128
+RBP: 000000000059c128 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 000000000059c12c
+R13: 00007fff89da2d7f R14: 00007fff89da2f00 R15: 00007f2f476be280
+ </TASK>
+
+Allocated by task 54387:
+ kasan_save_stack+0x2a/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x29/0x40 mm/kasan/common.c:52
+ kasan_save_alloc_info+0x22/0x30 mm/kasan/generic.c:510
+ ____kasan_kmalloc mm/kasan/common.c:374 [inline]
+ __kasan_kmalloc+0x86/0xa0 mm/kasan/common.c:383
+ kasan_kmalloc include/linux/kasan.h:196 [inline]
+ __do_kmalloc_node mm/slab_common.c:966 [inline]
+ __kmalloc+0x66/0x170 mm/slab_common.c:979
+ kmalloc include/linux/slab.h:563 [inline]
+ kzalloc include/linux/slab.h:680 [inline]
+ _iommufd_object_alloc+0x34/0x1a0 drivers/iommu/iommufd/main.c:43
+ iommufd_access_create+0x39/0x2d0 drivers/iommu/iommufd/device.c:905
+ iommufd_test_create_access drivers/iommu/iommufd/selftest.c:983 [inline]
+ iommufd_test+0x181b/0x3f00 drivers/iommu/iommufd/selftest.c:1249
+ iommufd_fops_ioctl+0x37d/0x510 drivers/iommu/iommufd/main.c:378
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1a3/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+
+Freed by task 54414:
+ kasan_save_stack+0x2a/0x50 mm/kasan/common.c:45
+ kasan_set_track+0x29/0x40 mm/kasan/common.c:52
+ kasan_save_free_info+0x32/0x50 mm/kasan/generic.c:521
+ ____kasan_slab_free mm/kasan/common.c:236 [inline]
+ ____kasan_slab_free mm/kasan/common.c:200 [inline]
+ __kasan_slab_free+0x10b/0x1a0 mm/kasan/common.c:244
+ kasan_slab_free include/linux/kasan.h:162 [inline]
+ slab_free_hook mm/slub.c:1781 [inline]
+ slab_free_freelist_hook mm/slub.c:1807 [inline]
+ slab_free mm/slub.c:3786 [inline]
+ __kmem_cache_free+0x1e8/0x430 mm/slub.c:3799
+ kfree+0x93/0x140 mm/slab_common.c:1015
+ iommufd_object_destroy_user+0x199/0x220 drivers/iommu/iommufd/main.c:164
+ iommufd_access_destroy+0x43/0x70 drivers/iommu/iommufd/device.c:938
+ iommufd_test_staccess_release+0x8d/0xd0 drivers/iommu/iommufd/selftest.c:918
+ __fput+0x26d/0xa40 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0x1a4/0x2d0 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xaf3/0x2f60 kernel/exit.c:874
+ do_group_exit+0xe0/0x2b0 kernel/exit.c:1024
+ get_signal+0x26da/0x2720 kernel/signal.c:2876
+ arch_do_signal_or_restart+0x82/0x750 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+
+The buggy address belongs to the object at ffff88801018c000
+ which belongs to the cache kmalloc-cg-512 of size 512
+The buggy address is located 352 bytes inside of
+ freed 512-byte region [ffff88801018c000, ffff88801018c200)
+
+The buggy address belongs to the physical page:
+page:000000008df05886 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x1018c
+head:000000008df05886 order:2 entire_mapcount:0 nr_pages_mapped:0 pincount:0
+memcg:ffff8880111de001
+anon flags: 0xfffffc0010200(slab|head|node=0|zone=1|lastcpupid=0x1fffff)
+page_type: 0xffffffff()
+raw: 000fffffc0010200 ffff88800a44f140 0000000000000000 dead000000000001
+raw: 0000000000000000 0000000000100010 00000001ffffffff ffff8880111de001
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff88801018c000: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff88801018c080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>ffff88801018c100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                                                       ^
+ ffff88801018c180: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff88801018c200: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+==================================================================
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 54414 at drivers/iommu/iommufd/io_pagetable.c:1158 iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Modules linked in:
+CPU: 1 PID: 54414 Comm: syz-executor.2 Tainted: G    B   W          6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Code: 45 85 e4 75 29 e8 4b 2d 0b fe 4c 89 ef e8 33 eb e8 fd 48 89 df e8 2b eb e8 fd 5b 41 5c 41 5d 5d c3 cc cc cc cc e8 2b 2d 0b fe <0f> 0b eb b9 e8 22 2d 0b fe 0f 0b eb ce e8 b9 1d 67 fe eb 90 0f 1f
+RSP: 0018:ffff888015faf998 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800b7498a8 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff888037c98000 RDI: 0000000000000002
+RBP: ffff888015faf9b0 R08: ffffed10016e9333 R09: ffffed10016e9333
+R10: ffff88800b749993 R11: ffffed10016e9332 R12: ffff88800b33a800
+R13: ffff88800b7499e8 R14: ffff888011686200 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fff11acac98 CR3: 0000000046f54000 CR4: 0000000000750ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommufd_access_destroy_object+0x65/0x170 drivers/iommu/iommufd/device.c:875
+ iommufd_object_destroy_user+0x18e/0x220 drivers/iommu/iommufd/main.c:163
+ iommufd_access_destroy+0x43/0x70 drivers/iommu/iommufd/device.c:938
+ iommufd_test_staccess_release+0x8d/0xd0 drivers/iommu/iommufd/selftest.c:918
+ __fput+0x26d/0xa40 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0x1a4/0x2d0 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xaf3/0x2f60 kernel/exit.c:874
+ do_group_exit+0xe0/0x2b0 kernel/exit.c:1024
+ get_signal+0x26da/0x2720 kernel/signal.c:2876
+ arch_do_signal_or_restart+0x82/0x750 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+Code: Unable to access opcode bytes at 0x477403.
+RSP: 002b:00007f2f476be198 EFLAGS: 00000246 ORIG_RAX: 00000000000000ca
+RAX: fffffffffffffe00 RBX: 000000000059c120 RCX: 000000000047742d
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 000000000059c128
+RBP: 000000000059c128 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 000000000059c12c
+R13: 00007fff89da2d7f R14: 00007fff89da2f00 R15: 00007f2f476be280
+ </TASK>
+irq event stamp: 1245
+hardirqs last  enabled at (1245): [<ffffffff853a4b3e>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:436
+hardirqs last disabled at (1244): [<ffffffff853e83df>] __do_softirq+0x61f/0x77c kernel/softirq.c:587
+softirqs last  enabled at (428): [<ffffffff853e82b5>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (428): [<ffffffff853e82b5>] __do_softirq+0x4f5/0x77c kernel/softirq.c:600
+softirqs last disabled at (41): [<ffffffff81253215>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (41): [<ffffffff81253215>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (41): [<ffffffff81253215>] irq_exit_rcu+0xe5/0x130 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 54414 at drivers/iommu/iommufd/io_pagetable.c:663 iopt_destroy_table+0x15f/0x1b0 drivers/iommu/iommufd/io_pagetable.c:663
+Modules linked in:
+CPU: 1 PID: 54414 Comm: syz-executor.2 Tainted: G    B   W          6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:iopt_destroy_table+0x15f/0x1b0 drivers/iommu/iommufd/io_pagetable.c:663
+Code: 5b 41 5c 41 5d 41 5e 5d c3 cc cc cc cc e8 c9 53 0b fe 0f 0b e9 51 ff ff ff e8 bd 53 0b fe 0f 0b e9 76 ff ff ff e8 b1 53 0b fe <0f> 0b eb 9e e8 a8 53 0b fe 0f 0b e8 a1 53 0b fe 5b 41 5c 41 5d 41
+RSP: 0018:ffff888015faf940 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff888037c98000 RDI: 0000000000000002
+RBP: ffff888015faf960 R08: ffffed10016e933e R09: ffffed10016e933e
+R10: ffff88800b7499ef R11: ffffed10016e933d R12: ffff88800b749a90
+R13: ffff88800b7498a8 R14: ffffffffffffffff R15: ffff888015fafa28
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000013bc658 CR3: 000000000b92a000 CR4: 0000000000750ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommufd_ioas_destroy+0x53/0x70 drivers/iommu/iommufd/ioas.c:19
+ iommufd_fops_release+0x1f7/0x370 drivers/iommu/iommufd/main.c:231
+ __fput+0x26d/0xa40 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0x1a4/0x2d0 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xaf3/0x2f60 kernel/exit.c:874
+ do_group_exit+0xe0/0x2b0 kernel/exit.c:1024
+ get_signal+0x26da/0x2720 kernel/signal.c:2876
+ arch_do_signal_or_restart+0x82/0x750 arch/x86/kernel/signal.c:307
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+Code: Unable to access opcode bytes at 0x477403.
+RSP: 002b:00007f2f476be198 EFLAGS: 00000246 ORIG_RAX: 00000000000000ca
+RAX: fffffffffffffe00 RBX: 000000000059c120 RCX: 000000000047742d
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 000000000059c128
+RBP: 000000000059c128 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 000000000059c12c
+R13: 00007fff89da2d7f R14: 00007fff89da2f00 R15: 00007f2f476be280
+ </TASK>
+irq event stamp: 1245
+hardirqs last  enabled at (1245): [<ffffffff853a4b3e>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:436
+hardirqs last disabled at (1244): [<ffffffff853e83df>] __do_softirq+0x61f/0x77c kernel/softirq.c:587
+softirqs last  enabled at (428): [<ffffffff853e82b5>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (428): [<ffffffff853e82b5>] __do_softirq+0x4f5/0x77c kernel/softirq.c:600
+softirqs last disabled at (41): [<ffffffff81253215>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (41): [<ffffffff81253215>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (41): [<ffffffff81253215>] irq_exit_rcu+0xe5/0x130 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+__nla_validate_parse: 1 callbacks suppressed
+netlink: 12 bytes leftover after parsing attributes in process `syz-executor.5'.
+netlink: 12 bytes leftover after parsing attributes in process `syz-executor.5'.
+netlink: 12 bytes leftover after parsing attributes in process `syz-executor.5'.
+9pnet_virtio: no channels available for device syz
+9pnet_virtio: no channels available for device syz
+9pnet_virtio: no channels available for device 
+9pnet_virtio: no channels available for device syz
+9pnet_virtio: no channels available for device 
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 55303 at drivers/iommu/iommufd/io_pagetable.c:1158 iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Modules linked in:
+CPU: 1 PID: 55303 Comm: syz-executor.2 Tainted: G    B   W          6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Code: 45 85 e4 75 29 e8 4b 2d 0b fe 4c 89 ef e8 33 eb e8 fd 48 89 df e8 2b eb e8 fd 5b 41 5c 41 5d 5d c3 cc cc cc cc e8 2b 2d 0b fe <0f> 0b eb b9 e8 22 2d 0b fe 0f 0b eb ce e8 b9 1d 67 fe eb 90 0f 1f
+RSP: 0018:ffff88804787fbb8 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800b74f0a8 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff888039dd4a00 RDI: 0000000000000002
+RBP: ffff88804787fbd0 R08: ffffed10016e9e33 R09: ffffed10016e9e33
+R10: ffff88800b74f193 R11: ffffed10016e9e32 R12: ffff88804def7400
+R13: ffff88800b74f1e8 R14: ffffffff835430e0 R15: ffff88804787fe68
+FS:  00007f2f47700700(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2f476dfda0 CR3: 0000000014b00000 CR4: 0000000000750ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __iommufd_access_detach+0x1c2/0x2b0 drivers/iommu/iommufd/device.c:971
+ iommufd_access_change_pt+0x149/0x270 drivers/iommu/iommufd/device.c:1006
+ iommufd_access_replace+0xb4/0x120 drivers/iommu/iommufd/device.c:1042
+ iommufd_test_access_replace_ioas drivers/iommu/iommufd/selftest.c:1025 [inline]
+ iommufd_test+0x103d/0x3f00 drivers/iommu/iommufd/selftest.c:1252
+ iommufd_fops_ioctl+0x37d/0x510 drivers/iommu/iommufd/main.c:378
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1a3/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x47742d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f2f47700108 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 000000000059bf80 RCX: 000000000047742d
+RDX: 0000000020000000 RSI: 0000000000003ba0 RDI: 0000000000000003
+RBP: 000000000059bf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fff89da2d7f R14: 00007fff89da2f00 R15: 00007f2f47700280
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8122d29a>] copy_process+0x256a/0x7650 kernel/fork.c:2448
+softirqs last  enabled at (0): [<ffffffff8122d2e2>] copy_process+0x25b2/0x7650 kernel/fork.c:2452
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 55302 at drivers/iommu/iommufd/io_pagetable.c:1158 iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Modules linked in:
+CPU: 0 PID: 55302 Comm: syz-executor.2 Tainted: G    B   W          6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:iopt_remove_access+0xb5/0xd0 drivers/iommu/iommufd/io_pagetable.c:1157
+Code: 45 85 e4 75 29 e8 4b 2d 0b fe 4c 89 ef e8 33 eb e8 fd 48 89 df e8 2b eb e8 fd 5b 41 5c 41 5d 5d c3 cc cc cc cc e8 2b 2d 0b fe <0f> 0b eb b9 e8 22 2d 0b fe 0f 0b eb ce e8 b9 1d 67 fe eb 90 0f 1f
+RSP: 0018:ffff88804c6a7ce0 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: ffff88800b74f0a8 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff888049fc8000 RDI: 0000000000000002
+RBP: ffff88804c6a7cf8 R08: ffffed10016e9e33 R09: ffffed10016e9e33
+R10: ffff88800b74f193 R11: ffffed10016e9e32 R12: ffff88804def5800
+R13: ffff88800b74f1e8 R14: ffff888028784b00 R15: 0000000000000000
+FS:  00000000020e5480(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000c00cf1f000 CR3: 0000000014b00000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommufd_access_destroy_object+0x65/0x170 drivers/iommu/iommufd/device.c:875
+ iommufd_object_destroy_user+0x18e/0x220 drivers/iommu/iommufd/main.c:163
+ iommufd_access_destroy+0x43/0x70 drivers/iommu/iommufd/device.c:938
+ iommufd_test_staccess_release+0x8d/0xd0 drivers/iommu/iommufd/selftest.c:918
+ __fput+0x26d/0xa40 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0x1a4/0x2d0 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x41fcf7
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007fff89da2de0 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000007 RCX: 000000000041fcf7
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000007
+RBP: 000000000059d98c R08: 00007f2f48301000 R09: 00000000000000e2
+R10: 00007fff89da2ef0 R11: 0000000000000293 R12: 0000000000086ac9
+R13: 0000000000086afb R14: 000000000059bf8c R15: 0000000000000000
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8122d29a>] copy_process+0x256a/0x7650 kernel/fork.c:2448
+softirqs last  enabled at (0): [<ffffffff8122d2e2>] copy_process+0x25b2/0x7650 kernel/fork.c:2452
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 55302 at drivers/iommu/iommufd/io_pagetable.c:663 iopt_destroy_table+0x15f/0x1b0 drivers/iommu/iommufd/io_pagetable.c:663
+Modules linked in:
+CPU: 1 PID: 55302 Comm: syz-executor.2 Tainted: G    B   W          6.4.0-rc6-5ca8bbe2b782+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:iopt_destroy_table+0x15f/0x1b0 drivers/iommu/iommufd/io_pagetable.c:663
+Code: 5b 41 5c 41 5d 41 5e 5d c3 cc cc cc cc e8 c9 53 0b fe 0f 0b e9 51 ff ff ff e8 bd 53 0b fe 0f 0b e9 76 ff ff ff e8 b1 53 0b fe <0f> 0b eb 9e e8 a8 53 0b fe 0f 0b e8 a1 53 0b fe 5b 41 5c 41 5d 41
+RSP: 0018:ffff88804c6a7c88 EFLAGS: 00010246
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffff888049fc8000 RDI: 0000000000000002
+RBP: ffff88804c6a7ca8 R08: ffffed10016e9e3e R09: ffffed10016e9e3e
+R10: ffff88800b74f1ef R11: ffffed10016e9e3d R12: ffff88800b74f290
+R13: ffff88800b74f0a8 R14: ffffffffffffffff R15: ffff88804c6a7d70
+FS:  00000000020e5480(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020039000 CR3: 0000000014b00000 CR4: 0000000000750ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommufd_ioas_destroy+0x53/0x70 drivers/iommu/iommufd/ioas.c:19
+ iommufd_fops_release+0x1f7/0x370 drivers/iommu/iommufd/main.c:231
+ __fput+0x26d/0xa40 fs/file_table.c:321
+ ____fput+0x1e/0x30 fs/file_table.c:349
+ task_work_run+0x1a4/0x2d0 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x200/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x41fcf7
+Code: 12 b8 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 3b c3 66 90 53 89 fb 48 83 ec 10 e8 c4 51 ff ff 89 df 89 c2 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 2b 89 d7 89 44 24 0c e8 06 52 ff ff 8b 44 24
+RSP: 002b:00007fff89da2de0 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: 0000000000000000 RBX: 0000000000000008 RCX: 000000000041fcf7
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000008
+RBP: 000000000059d98c R08: 00007f2f48301000 R09: 00000000000000e2
+R10: 00007fff89da2ef0 R11: 0000000000000293 R12: 0000000000086ac9
+R13: 0000000000086afb R14: 000000000059bf8c R15: 0000000000000000
+ </TASK>
+irq event stamp: 0
+hardirqs last  enabled at (0): [<0000000000000000>] 0x0
+hardirqs last disabled at (0): [<ffffffff8122d29a>] copy_process+0x256a/0x7650 kernel/fork.c:2448
+softirqs last  enabled at (0): [<ffffffff8122d2e2>] copy_process+0x25b2/0x7650 kernel/fork.c:2452
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+---[ end trace 0000000000000000 ]---
