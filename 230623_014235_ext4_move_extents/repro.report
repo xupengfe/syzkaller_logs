@@ -1,0 +1,294 @@
+loop0: detected capacity change from 0 to 2048
+------------[ cut here ]------------
+Looking for class "&ei->i_data_sem" with key __key.96056, but found a different class "&ei->i_data_sem" with the same key
+WARNING: CPU: 0 PID: 1459 at kernel/locking/lockdep.c:941 look_up_lock_class.isra.34+0xb8/0x140 kernel/locking/lockdep.c:938
+Modules linked in:
+CPU: 0 PID: 1459 Comm: syz-executor117 Not tainted 6.4.0-rc7-2023-06-19-intel-next-769974cc7748+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:look_up_lock_class.isra.34+0xb8/0x140 kernel/locking/lockdep.c:938
+Code: 38 49 8b 55 00 48 81 fa 20 c3 0b 89 74 2b 80 3d 0c 8a 0e 02 00 75 22 48 c7 c7 a0 aa 8b 85 c6 05 fc 89 0e 02 01 e8 38 0e e2 fb <0f> 0b eb 0b e8 bf 65 7f fd 85 c0 75 56 31 db 48 83 c4 08 48 89 d8
+RSP: 0018:ffff888023307430 EFLAGS: 00010082
+RAX: 0000000000000000 RBX: ffffffff898131e0 RCX: ffffffff8124b480
+RDX: 0000000000000000 RSI: ffff88800fdd0000 RDI: 0000000000000002
+RBP: ffff888023307458 R08: ffffed100d9462d2 R09: ffffed100d9462d2
+R10: ffff88806ca3168b R11: ffffed100d9462d1 R12: ffffffff8a17d841
+R13: ffff888029ed9668 R14: ffff888029ed9680 R15: 0000000000000000
+FS:  00000000017f8480(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020004700 CR3: 0000000013de4000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ register_lock_class+0xca/0x11e0 kernel/locking/lockdep.c:1290
+ __lock_acquire+0x104/0x55d0 kernel/locking/lockdep.c:4965
+ lock_acquire kernel/locking/lockdep.c:5708 [inline]
+ lock_acquire+0x1bc/0x4c0 kernel/locking/lockdep.c:5673
+ down_write_nested+0x9a/0x1f0 kernel/locking/rwsem.c:1689
+ ext4_double_down_write_data_sem fs/ext4/move_extent.c:55 [inline]
+ ext4_double_down_write_data_sem+0x4d/0x90 fs/ext4/move_extent.c:51
+ ext4_move_extents+0x410/0x31e0 fs/ext4/move_extent.c:621
+ __ext4_ioctl+0x3de8/0x49e0 fs/ext4/ioctl.c:1352
+ ext4_ioctl+0x2e/0x40 fs/ext4/ioctl.c:1608
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1a3/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3b/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
+RIP: 0033:0x4562bd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffd76f10bf8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00000000004562bd
+RDX: 0000000020000000 RSI: 00000000c028660f RDI: 0000000000000005
+RBP: 000000000001bb83 R08: 00000000000000f1 R09: 00000000000000f1
+R10: 00000000000000f1 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 00000000000000f1 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+irq event stamp: 6089
+hardirqs last  enabled at (6089): [<ffffffff814f86f1>] seqcount_lockdep_reader_access include/linux/seqlock.h:104 [inline]
+hardirqs last  enabled at (6089): [<ffffffff814f86f1>] ktime_get_coarse_real_ts64+0x181/0x1b0 kernel/time/timekeeping.c:2261
+hardirqs last disabled at (6088): [<ffffffff814f86bb>] seqcount_lockdep_reader_access include/linux/seqlock.h:101 [inline]
+hardirqs last disabled at (6088): [<ffffffff814f86bb>] ktime_get_coarse_real_ts64+0x14b/0x1b0 kernel/time/timekeeping.c:2261
+softirqs last  enabled at (3292): [<ffffffff85469225>] softirq_handle_end kernel/softirq.c:414 [inline]
+softirqs last  enabled at (3292): [<ffffffff85469225>] __do_softirq+0x4f5/0x77c kernel/softirq.c:600
+softirqs last disabled at (3279): [<ffffffff81268fe5>] invoke_softirq kernel/softirq.c:445 [inline]
+softirqs last disabled at (3279): [<ffffffff81268fe5>] __irq_exit_rcu kernel/softirq.c:650 [inline]
+softirqs last disabled at (3279): [<ffffffff81268fe5>] irq_exit_rcu+0xe5/0x130 kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+Buffer I/O error on dev loop0, logical block 0, async page read
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+Buffer I/O error on dev loop0, logical block 0, async page read
+Buffer I/O error on dev loop0, logical block 0, async page read
+Buffer I/O error on dev loop0, logical block 0, async page read
+Buffer I/O error on dev loop0, logical block 0, async page read
+Buffer I/O error on dev loop0, logical block 0, async page read
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+blk_print_req_error: 8 callbacks suppressed
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 2
+Buffer I/O error on dev loop0, logical block 0, async page read
+loop0: detected capacity change from 0 to 2048
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x80700 phys_seg 1 prio class 2
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
