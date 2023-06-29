@@ -1,0 +1,43 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [6995e2de6891c724bfeb2db33d7b87775f913ad1] Linux 6.4
+git bisect bad 6995e2de6891c724bfeb2db33d7b87775f913ad1
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [7001052160d172f6de06adeffde24dde9935ece8] Merge tag 'x86_core_for_5.18_rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 7001052160d172f6de06adeffde24dde9935ece8
+# good: [05b4ebd2c7cbb3671c376754b37b4963dd08a3a2] Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+git bisect good 05b4ebd2c7cbb3671c376754b37b4963dd08a3a2
+# good: [70756b49be4ea8bf36a664322df6e7e89895fa60] Merge tag 'docs-6.3' of git://git.lwn.net/linux
+git bisect good 70756b49be4ea8bf36a664322df6e7e89895fa60
+# good: [c8cc58e289ed3b5bc50258f52776cf3dfa3bad66] Merge tag 'drm-next-2023-04-24' of git://anongit.freedesktop.org/drm/drm
+git bisect good c8cc58e289ed3b5bc50258f52776cf3dfa3bad66
+# good: [556eb8b79190151506187bf0b16dda423c34d9a8] Merge tag 'driver-core-6.4-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/driver-core
+git bisect good 556eb8b79190151506187bf0b16dda423c34d9a8
+# good: [54bdf8a39931cf8fe2c74432e715353d9a1c1107] Merge tag 'phy-for-6.4' of git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy
+git bisect good 54bdf8a39931cf8fe2c74432e715353d9a1c1107
+# good: [4927cb98f0eeaa5dbeac882e8372f4b16dc62624] Merge tag 'powerpc-6.4-2' of git://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux
+git bisect good 4927cb98f0eeaa5dbeac882e8372f4b16dc62624
+# bad: [986c34b495810b38f365bb71665b77de60f15b2c] Merge tag 'drm-msm-fixes-2023-06-08' of https://gitlab.freedesktop.org/drm/msm into drm-fixes
+git bisect bad 986c34b495810b38f365bb71665b77de60f15b2c
+# good: [7a6c8e512fa072cfe8ad7a3b26666b6f26435870] Merge tag 'v6.4-p3' of git://git.kernel.org/pub/scm/linux/kernel/git/herbert/crypto-2.6
+git bisect good 7a6c8e512fa072cfe8ad7a3b26666b6f26435870
+# bad: [1419c3ba31446feecb728f49820ff2730d6deaed] Merge tag 'selinux-pr-20230601' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/selinux
+git bisect bad 1419c3ba31446feecb728f49820ff2730d6deaed
+# bad: [f9010dbdce911ee1f1af1398a24b1f9f992e0080] fork, vhost: Use CLONE_THREAD to fix freezer/ps regression
+git bisect bad f9010dbdce911ee1f1af1398a24b1f9f992e0080
+# bad: [fd2186d1c708fa0ec64291da5aa6b26fb44197c3] Merge tag 'ext4_for_linus_stable' of git://git.kernel.org/pub/scm/linux/kernel/git/tytso/ext4
+git bisect bad fd2186d1c708fa0ec64291da5aa6b26fb44197c3
+# good: [1683c329b6a2ee54989811089854a8ac2d5b5fc1] Merge tag 'regmap-fix-v6.4-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/broonie/regmap
+git bisect good 1683c329b6a2ee54989811089854a8ac2d5b5fc1
+# good: [afead42fdfcae714fb6ac41a5c323629cdb6f9ee] Merge tag 'perf-tools-fixes-for-v6.4-2-2023-05-30' of git://git.kernel.org/pub/scm/linux/kernel/git/acme/linux
+git bisect good afead42fdfcae714fb6ac41a5c323629cdb6f9ee
+# bad: [1077b2d53ef53629c14106aecf633bebd286c04c] ext4: fix fsync for non-directories
+git bisect bad 1077b2d53ef53629c14106aecf633bebd286c04c
+# good: [b928dfdcb27d8fa59917b794cfba53052a2f050f] ext4: set lockdep subclass for the ea_inode in ext4_xattr_inode_cache_find()
+git bisect good b928dfdcb27d8fa59917b794cfba53052a2f050f
+# good: [aff3bea95388299eec63440389b4545c8041b357] ext4: add lockdep annotations for i_data_sem for ea_inode's
+git bisect good aff3bea95388299eec63440389b4545c8041b357
+# first bad commit: [1077b2d53ef53629c14106aecf633bebd286c04c] ext4: fix fsync for non-directories
+|0628_230903|FAIL|Bisect failed! 6995e2de6891c724bfeb2db33d7b87775f913ad1_1077b2d53ef53629c14106aecf633bebd286c04c_revert bzimage failed!|
