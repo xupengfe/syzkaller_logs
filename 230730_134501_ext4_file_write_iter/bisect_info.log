@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [6eaae198076080886b9e7d57f4ae06fa782f90ef] Linux 6.5-rc3
+git bisect bad 6eaae198076080886b9e7d57f4ae06fa782f90ef
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [d353e1a3bafd468941d42f6aa59bbd8ac42959b6] Merge tag 'wireless-next-2022-05-19' of git://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+git bisect good d353e1a3bafd468941d42f6aa59bbd8ac42959b6
+# good: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect good 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# good: [00266b365d2b5a7ab4c9fa300784607d5770f8bc] Merge branch 'dsa-skb_mac_header'
+git bisect good 00266b365d2b5a7ab4c9fa300784607d5770f8bc
+# good: [f91e32dea63930ef9dfd3382d757865d9455cfb1] Merge branch 'regmap-TSE-PCS'
+git bisect good f91e32dea63930ef9dfd3382d757865d9455cfb1
+# good: [1b722407a13b7f8658d2e26917791f32805980a2] Merge tag 'drm-next-2023-06-29' of git://anongit.freedesktop.org/drm/drm
+git bisect good 1b722407a13b7f8658d2e26917791f32805980a2
+# bad: [ed77ac92a17c5138c5b5d792ab226c3188217053] Merge tag 'parisc-for-6.5-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/deller/parisc-linux
+git bisect bad ed77ac92a17c5138c5b5d792ab226c3188217053
+# bad: [d35ac6ac0e80e55bcea79af18d935f19a3e8554c] Merge tag 'iommu-updates-v6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/joro/iommu
+git bisect bad d35ac6ac0e80e55bcea79af18d935f19a3e8554c
+# good: [af3c684721cf69ff662c53a58f02261fa2f8efbe] Merge tag 'ti-k3-dt-for-v6.5' of https://git.kernel.org/pub/scm/linux/kernel/git/ti/linux into soc/dt
+git bisect good af3c684721cf69ff662c53a58f02261fa2f8efbe
+# bad: [6c1561fb900524c5bceb924071b3e9b8a67ff3da] Merge tag 'soc-dt-6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+git bisect bad 6c1561fb900524c5bceb924071b3e9b8a67ff3da
+# good: [a4bd03e7cb78ff743d811a09273b40d31e861def] Merge tag 'arm-dts-mv-for-6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux into soc/dt
+git bisect good a4bd03e7cb78ff743d811a09273b40d31e861def
+# bad: [18c9901d7435b20b13357907bac2c0e3b0fd4cd6] Merge tag 'fsnotify_for_v6.5-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs
+git bisect bad 18c9901d7435b20b13357907bac2c0e3b0fd4cd6
+# bad: [2ef6c32a914b85217b44a0a2418e830e520b085e] ext4: avoid updating the superblock on a r/o mount if not needed
+git bisect bad 2ef6c32a914b85217b44a0a2418e830e520b085e
+# good: [f52f3d2b9fbab73c776f4d3386393e9bbc83b87d] ext4: Give symbolic names to mballoc criterias
+git bisect good f52f3d2b9fbab73c776f4d3386393e9bbc83b87d
+# bad: [310ee0902b8d9d0a13a5a13e94688a5863fa29c2] ext4: allow concurrent unaligned dio overwrites
+git bisect bad 310ee0902b8d9d0a13a5a13e94688a5863fa29c2
+# good: [4a2d98447b37bcb68a7f06a1078edcb4f7e6ce7e] ext4: using nofail preallocation in ext4_es_insert_delayed_block()
+git bisect good 4a2d98447b37bcb68a7f06a1078edcb4f7e6ce7e
+# good: [8782b020ccbef6c4b62f00c86423f4d37ec60932] ext4: make ext4_es_insert_delayed_block() return void
+git bisect good 8782b020ccbef6c4b62f00c86423f4d37ec60932
+# good: [ab8627e104696b8c1c6953ad5255def5b0821e06] ext4: make ext4_zeroout_es() return void
+git bisect good ab8627e104696b8c1c6953ad5255def5b0821e06
+# good: [4c0cfebdf3c34c9cd2c55844f549fa46b1da3164] ext4: clean up mballoc criteria comments
+git bisect good 4c0cfebdf3c34c9cd2c55844f549fa46b1da3164
+# first bad commit: [310ee0902b8d9d0a13a5a13e94688a5863fa29c2] ext4: allow concurrent unaligned dio overwrites
+|0731_044729|Bisect successfully! 6eaae198076080886b9e7d57f4ae06fa782f90ef_310ee0902b8d9d0a13a5a13e94688a5863fa29c2_revert bzimage passed!|

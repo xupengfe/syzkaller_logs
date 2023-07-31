@@ -1,0 +1,90 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM...
+c[?7l[2J[    0.000000] Linux version 6.4.0-d35ac6ac0e80+ (root@p-rplp02) (gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-19), GNU ld version 2.36.1-2.el8) #1 SMP PREEMPT_DYNAMIC Sun Jul 30 10:01:58 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    1.023308] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[   12.630004] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.4.0-d35ac6ac0e80+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   41.913287] ------------[ cut here ]------------
+[   41.914196] WARNING: CPU: 0 PID: 729 at fs/ext4/file.c:611 ext4_file_write_iter+0x135a/0x17f0
+[   41.915610] Modules linked in:
+[   41.916190] CPU: 0 PID: 729 Comm: repro Not tainted 6.4.0-d35ac6ac0e80+ #1
+[   41.918066] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   41.919744] RIP: 0010:ext4_file_write_iter+0x135a/0x17f0
+[   41.920645] Code: 02 84 c0 74 08 3c 03 0f 8e 32 04 00 00 41 8b 5f 20 31 ff 83 e3 08 89 de e8 b3 f3 65 ff 85 db 0f 85 07 fd ff ff e8 c6 f1 65 ff <0f> 0b e9 fb fc ff ff e8 ba f1 65 ff 48 8b 8d 18 ff ff ff 4c 89 f2
+[   41.923449] RSP: 0018:ffff8880121bfc00 EFLAGS: 00010246
+[   41.924318] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff81f8465d
+[   41.925532] RDX: 0000000000000000 RSI: ffff88800f9e8000 RDI: 0000000000000002
+[   41.926633] RBP: ffff8880121bfd08 R08: 0000000000000001 R09: fffffbfff12f6fdd
+[   41.927698] R10: 0000000000000001 R11: ffffffff897b7ee7 R12: 0000000000000001
+[   41.928802] R13: 0000000000000000 R14: fffffffffffffff5 R15: ffff8880121bfdd0
+[   41.929964] FS:  00007efc8085a640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+[   41.931202] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   41.932083] CR2: 00007efc807fbee8 CR3: 0000000013808000 CR4: 0000000000750ef0
+[   41.933281] PKRU: 55555554
+[   41.933755] Call Trace:
+[   41.934173]  <TASK>
+[   41.934576]  ? show_regs+0x66/0x70
+[   41.935183]  ? __warn+0xef/0x340
+[   41.935752]  ? ext4_file_write_iter+0x135a/0x17f0
+[   41.936505]  ? report_bug+0x360/0x570
+[   41.937359]  ? handle_bug+0x48/0x80
+[   41.937989]  ? exc_invalid_op+0x1c/0x50
+[   41.938638]  ? asm_exc_invalid_op+0x1f/0x30
+[   41.939383]  ? ext4_file_write_iter+0x134d/0x17f0
+[   41.940134]  ? ext4_file_write_iter+0x135a/0x17f0
+[   41.940949]  ? __pfx_ext4_file_write_iter+0x10/0x10
+[   41.941832]  ? write_comp_data+0x2f/0x90
+[   41.942487]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[   41.943258]  vfs_write+0xa3c/0xe90
+[   41.943891]  ? __pfx_vfs_write+0x10/0x10
+[   41.944512]  ? __fget_files+0x267/0x440
+[   41.945372]  ? write_comp_data+0x2f/0x90
+[   41.946016]  ksys_write+0x13a/0x270
+[   41.946593]  ? __pfx_ksys_write+0x10/0x10
+[   41.947271]  __x64_sys_write+0x7c/0xc0
+[   41.947906]  ? syscall_enter_from_user_mode+0x51/0x60
+[   41.948771]  do_syscall_64+0x3b/0x90
+[   41.949477]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   41.950258] RIP: 0033:0x7efc8063ee5d
+[   41.950861] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+[   41.953574] RSP: 002b:00007efc80859dd8 EFLAGS: 00000283 ORIG_RAX: 0000000000000001
+[   41.954688] RAX: ffffffffffffffda RBX: 00007efc8085a640 RCX: 00007efc8063ee5d
+[   41.955733] RDX: 00000000fffffdef RSI: 0000000020000000 RDI: 0000000000000005
+[   41.956827] RBP: 00007efc80859e20 R08: 0000000000000000 R09: 0000000000000000
+[   41.957983] R10: 0000000000000000 R11: 0000000000000283 R12: 00007efc8085a640
+[   41.959099] R13: 0000000000000000 R14: 00007efc8069f560 R15: 0000000000000000
+[   41.960166]  </TASK>
+[   41.960619] irq event stamp: 2907
+[   41.961271] hardirqs last  enabled at (2917): [<ffffffff813fe4c1>] __up_console_sem+0x91/0xb0
+[   41.962565] hardirqs last disabled at (2924): [<ffffffff813fe4a6>] __up_console_sem+0x76/0xb0
+[   41.963809] softirqs last  enabled at (2764): [<ffffffff85428685>] __do_softirq+0x4f5/0x77c
+[   41.965260] softirqs last disabled at (2759): [<ffffffff81251781>] irq_exit_rcu+0xc1/0x110
+[   41.966511] ---[ end trace 0000000000000000 ]---
