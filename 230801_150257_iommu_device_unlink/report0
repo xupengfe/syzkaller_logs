@@ -1,0 +1,346 @@
+XFS (loop1): Mounting V5 Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop1): Ending clean mount
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+iommufd_mock iommufd_mock0: Removing from iommu group 0
+general protection fault, probably for non-canonical address 0xdffffc0000000006: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000030-0x0000000000000037]
+CPU: 0 PID: 4375 Comm: syz-executor.1 Not tainted 6.5.0-rc4-a3fe9a2e1692+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff88801600fc68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88804dff7000 RCX: ffffc90003d47000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff88801600fc80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 0000000000000001 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff888011441860 R15: ffffffff87070ae0
+FS:  00007fbdeb975640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000047fd10 CR3: 000000004c9ce000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommu_device_unlink+0x85/0xd0 drivers/iommu/iommu-sysfs.c:126
+ iommu_deinit_device+0x11f/0x4c0 drivers/iommu/iommu.c:415
+ __iommu_group_remove_device+0x26b/0x300 drivers/iommu/iommu.c:587
+ iommu_group_remove_device+0x8a/0xb0 drivers/iommu/iommu.c:1186
+ mock_dev_destroy drivers/iommu/iommufd/selftest.c:396 [inline]
+ iommufd_selftest_destroy+0xfb/0x1b0 drivers/iommu/iommufd/selftest.c:935
+ iommufd_destroy+0x11e/0x180 drivers/iommu/iommufd/main.c:202
+ iommufd_fops_ioctl+0x377/0x510 drivers/iommu/iommufd/main.c:377
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3c/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7fbdeb63ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007fbdeb974cc8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007fbdeb63ee5d
+RDX: 0000000020000040 RSI: 0000000000003b80 RDI: 0000000000000004
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007fbdeb69f560 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff88801600fc68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88804dff7000 RCX: ffffc90003d47000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff88801600fc80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 0000000000000001 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff888011441860 R15: ffffffff87070ae0
+FS:  00007fbdeb975640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000047fd10 CR3: 000000004c9ce000 CR4: 0000000000750ef0
+PKRU: 55555554
+XFS (loop1): Unmounting Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+loop4: detected capacity change from 0 to 1024
+loop4: detected capacity change from 0 to 8192
+ loop4: p1 p2 p3
+ loop4: p1 p2 p3
+loop4: detected capacity change from 0 to 8192
+ loop4: p1 p2 p3
+ loop4: p1 p2 p3
+iommufd_mock iommufd_mock1: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Removing from iommu group 1
+general protection fault, probably for non-canonical address 0xdffffc0000000006: 0000 [#2] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000030-0x0000000000000037]
+CPU: 0 PID: 4612 Comm: syz-executor.1 Tainted: G      D            6.5.0-rc4-a3fe9a2e1692+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff888015e37c68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88804dff3000 RCX: 0000000000000000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff888015e37c80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 5f6466756d6d6f69 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff88800bcd53c0 R15: ffffffff87070ae0
+FS:  00007fbdeb933640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000047fd10 CR3: 000000004cfe2000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommu_device_unlink+0x85/0xd0 drivers/iommu/iommu-sysfs.c:126
+ iommu_deinit_device+0x11f/0x4c0 drivers/iommu/iommu.c:415
+ __iommu_group_remove_device+0x26b/0x300 drivers/iommu/iommu.c:587
+ iommu_group_remove_device+0x8a/0xb0 drivers/iommu/iommu.c:1186
+ mock_dev_destroy drivers/iommu/iommufd/selftest.c:396 [inline]
+ iommufd_selftest_destroy+0xfb/0x1b0 drivers/iommu/iommufd/selftest.c:935
+ iommufd_destroy+0x11e/0x180 drivers/iommu/iommufd/main.c:202
+ iommufd_fops_ioctl+0x377/0x510 drivers/iommu/iommufd/main.c:377
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3c/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7fbdeb63ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007fbdeb932cc8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004bc120 RCX: 00007fbdeb63ee5d
+RDX: 0000000020000040 RSI: 0000000000003b80 RDI: 0000000000000004
+RBP: 00000000004bc120 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007fbdeb69f560 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff88801600fc68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88804dff7000 RCX: ffffc90003d47000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff88801600fc80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 0000000000000001 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff888011441860 R15: ffffffff87070ae0
+FS:  00007fbdeb933640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000047fd10 CR3: 000000004cfe2000 CR4: 0000000000750ef0
+PKRU: 55555554
+loop3: detected capacity change from 0 to 131072
+XFS (loop3): Mounting V5 Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop3): Ending clean mount
+iommufd_mock iommufd_mock2: Adding to iommu group 2
+iommufd_mock iommufd_mock2: Removing from iommu group 2
+general protection fault, probably for non-canonical address 0xdffffc0000000006: 0000 [#3] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000030-0x0000000000000037]
+CPU: 0 PID: 4556 Comm: syz-executor.3 Tainted: G      D            6.5.0-rc4-a3fe9a2e1692+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff888046bdfc68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff888015597000 RCX: ffffc90007161000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff888046bdfc80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 5f6466756d6d6f69 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff888010f01ca0 R15: ffffffff87070ae0
+FS:  00007f7a66716640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000047fd10 CR3: 000000004b6c2000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommu_device_unlink+0x85/0xd0 drivers/iommu/iommu-sysfs.c:126
+ iommu_deinit_device+0x11f/0x4c0 drivers/iommu/iommu.c:415
+ __iommu_group_remove_device+0x26b/0x300 drivers/iommu/iommu.c:587
+ iommu_group_remove_device+0x8a/0xb0 drivers/iommu/iommu.c:1186
+ mock_dev_destroy drivers/iommu/iommufd/selftest.c:396 [inline]
+ iommufd_selftest_destroy+0xfb/0x1b0 drivers/iommu/iommufd/selftest.c:935
+ iommufd_destroy+0x11e/0x180 drivers/iommu/iommufd/main.c:202
+ iommufd_fops_ioctl+0x377/0x510 drivers/iommu/iommufd/main.c:377
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+ __se_sys_ioctl fs/ioctl.c:856 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:856
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3c/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7f7a6643ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007f7a66715cc8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007f7a6643ee5d
+RDX: 0000000020000040 RSI: 0000000000003b80 RDI: 0000000000000004
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007f7a6649f560 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff88801600fc68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88804dff7000 RCX: ffffc90003d47000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff88801600fc80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 0000000000000001 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff888011441860 R15: ffffffff87070ae0
+FS:  00007f7a66716640(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000000047fd10 CR3: 000000004b6c2000 CR4: 0000000000750ef0
+PKRU: 55555554
+loop1: detected capacity change from 0 to 131072
+xfs: Unknown parameter '8'
+XFS (loop3): Unmounting Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+blktrace: Concurrent blktraces are not allowed on sg0
+blktrace: Concurrent blktraces are not allowed on sg0
+iommufd_mock iommufd_mock3: Adding to iommu group 3
+iommufd_mock iommufd_mock3: Removing from iommu group 3
+general protection fault, probably for non-canonical address 0xdffffc0000000006: 0000 [#4] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000030-0x0000000000000037]
+CPU: 1 PID: 4667 Comm: syz-executor.1 Tainted: G      D            6.5.0-rc4-a3fe9a2e1692+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff888010677828 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88801377e000 RCX: 0000000000000000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff888010677840 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 5f6466756d6d6f69 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff8880115ab620 R15: ffffffff87070ae0
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fbdeb910ff8 CR3: 0000000010de4000 CR4: 0000000000750ee0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ iommu_device_unlink+0x85/0xd0 drivers/iommu/iommu-sysfs.c:126
+ iommu_deinit_device+0x11f/0x4c0 drivers/iommu/iommu.c:415
+ __iommu_group_remove_device+0x26b/0x300 drivers/iommu/iommu.c:587
+ iommu_group_remove_device+0x8a/0xb0 drivers/iommu/iommu.c:1186
+ mock_dev_destroy drivers/iommu/iommufd/selftest.c:396 [inline]
+ iommufd_selftest_destroy+0xfb/0x1b0 drivers/iommu/iommufd/selftest.c:935
+ iommufd_fops_release+0x1df/0x300 drivers/iommu/iommufd/main.c:254
+ __fput+0x424/0xaf0 fs/file_table.c:384
+ ____fput+0x1f/0x30 fs/file_table.c:412
+ task_work_run+0x19d/0x2b0 kernel/task_work.c:179
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xac9/0x2790 kernel/exit.c:874
+ do_group_exit+0xe5/0x2c0 kernel/exit.c:1024
+ get_signal+0x2768/0x27a0 kernel/signal.c:2881
+ arch_do_signal_or_restart+0x89/0x600 arch/x86/kernel/signal.c:308
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x11f/0x1d0 kernel/entry/common.c:204
+ irqentry_exit_to_user_mode+0xd/0x30 kernel/entry/common.c:310
+ irqentry_exit+0x6f/0xa0 kernel/entry/common.c:413
+ exc_page_fault+0xdd/0x1d0 arch/x86/mm/fault.c:1545
+ asm_exc_page_fault+0x2b/0x30 arch/x86/include/asm/idtentry.h:570
+RIP: 0033:0x40663e
+Code: Unable to access opcode bytes at 0x406614.
+RSP: 002b:00007fbdeb974160 EFLAGS: 00010206
+RAX: 00000000002b0001 RBX: 00007fbdeb9741c0 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 00007fbde2600000 RDI: 00000000002b0000
+RBP: 00007fbdeb9741d0 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000000 R11: 00007fbdeb9741d0 R12: 0000000000000000
+R13: 0000000000000102 R14: 00007fbdeb974260 R15: 0000000000000001
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:sysfs_remove_link_from_group+0x37/0x90 fs/sysfs/group.c:413
+Code: 41 56 49 89 d6 41 55 49 89 f5 41 54 49 89 fc e8 4f 1a 6c ff 49 8d 7c 24 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 75 42 49 8b 7c 24 30 31 d2 4c 89 ee e8 54 e2 fe ff 49
+RSP: 0018:ffff88801600fc68 EFLAGS: 00010206
+RAX: dffffc0000000000 RBX: ffff88804dff7000 RCX: ffffc90003d47000
+RDX: 0000000000000006 RSI: ffffffff81f39941 RDI: 0000000000000030
+RBP: ffff88801600fc80 R08: 0000000000000001 R09: ffffed100155b61b
+R10: ffff88800aadb0df R11: 0000000000000001 R12: 0000000000000000
+R13: ffffffff85cc0180 R14: ffff888011441860 R15: ffffffff87070ae0
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fbdeb910ff8 CR3: 0000000010de4000 CR4: 0000000000750ee0
+PKRU: 55555554
+Fixing recursive fault but reboot is needed!
+BUG: using smp_processor_id() in preemptible [00000000] code: syz-executor.1/4667
+caller is debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+CPU: 1 PID: 4667 Comm: syz-executor.1 Tainted: G      D            6.5.0-rc4-a3fe9a2e1692+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe1/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ check_preemption_disabled+0x16a/0x180 lib/smp_processor_id.c:49
+ debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+ __schedule+0x9a/0x3010 kernel/sched/core.c:6609
+ do_task_dead+0xde/0x110 kernel/sched/core.c:6737
+ make_task_dead+0x37f/0x3c0 kernel/exit.c:983
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1548
+RIP: 0033:0x40663e
+Code: Unable to access opcode bytes at 0x406614.
+RSP: 002b:00007fbdeb974160 EFLAGS: 00010206
+RAX: 00000000002b0001 RBX: 00007fbdeb9741c0 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 00007fbde2600000 RDI: 00000000002b0000
+RBP: 00007fbdeb9741d0 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000000 R11: 00007fbdeb9741d0 R12: 0000000000000000
+R13: 0000000000000102 R14: 00007fbdeb974260 R15: 0000000000000001
+ </TASK>
+BUG: scheduling while atomic: syz-executor.1/4667/0x00000000
+INFO: lockdep is turned off.
+Modules linked in:
+Preemption disabled at:
+[<ffffffff8131b6f7>] do_task_dead+0x27/0x110 kernel/sched/core.c:6732
+CPU: 1 PID: 4667 Comm: syz-executor.1 Tainted: G      D            6.5.0-rc4-a3fe9a2e1692+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe1/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ __schedule_bug+0x13f/0x190 kernel/sched/core.c:5944
+ schedule_debug kernel/sched/core.c:5971 [inline]
+ __schedule+0x2217/0x3010 kernel/sched/core.c:6613
+ do_task_dead+0xde/0x110 kernel/sched/core.c:6737
+ make_task_dead+0x37f/0x3c0 kernel/exit.c:983
+ rewind_stack_and_make_dead+0x17/0x20 arch/x86/entry/entry_64.S:1548
+RIP: 0033:0x40663e
+Code: Unable to access opcode bytes at 0x406614.
+RSP: 002b:00007fbdeb974160 EFLAGS: 00010206
+RAX: 00000000002b0001 RBX: 00007fbdeb9741c0 RCX: 0000000000000001
+RDX: 0000000000000000 RSI: 00007fbde2600000 RDI: 00000000002b0000
+RBP: 00007fbdeb9741d0 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000000 R11: 00007fbdeb9741d0 R12: 0000000000000000
+R13: 0000000000000102 R14: 00007fbdeb974260 R15: 0000000000000001
+ </TASK>
+fuse: Bad value for 'user_id'
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 8192
+ loop4: p1 p2 p3
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+ext4 filesystem being mounted at /syzkaller-testdir1261746220/syzkaller.ZyysLm/9/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop6: detected capacity change from 0 to 32768
+Dev loop6 Sun disklabel: Csum bad, label corrupted
+Dev loop6 Sun disklabel: Csum bad, label corrupted
+loop2: detected capacity change from 0 to 131072
+XFS: ikeep mount option is deprecated.
+XFS (loop2): Mounting V5 Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop2): Ending clean mount
+XFS (loop2): Quotacheck needed: Please wait.
+XFS (loop2): Quotacheck: Done.
+XFS (loop2): Unmounting Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+----------------
+Code disassembly (best guess):
+   0:	41 56                	push   %r14
+   2:	49 89 d6             	mov    %rdx,%r14
+   5:	41 55                	push   %r13
+   7:	49 89 f5             	mov    %rsi,%r13
+   a:	41 54                	push   %r12
+   c:	49 89 fc             	mov    %rdi,%r12
+   f:	e8 4f 1a 6c ff       	callq  0xff6c1a63
+  14:	49 8d 7c 24 30       	lea    0x30(%r12),%rdi
+  19:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  20:	fc ff df
+  23:	48 89 fa             	mov    %rdi,%rdx
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+* 2a:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2e:	75 42                	jne    0x72
+  30:	49 8b 7c 24 30       	mov    0x30(%r12),%rdi
+  35:	31 d2                	xor    %edx,%edx
+  37:	4c 89 ee             	mov    %r13,%rsi
+  3a:	e8 54 e2 fe ff       	callq  0xfffee293
+  3f:	49                   	rex.WB

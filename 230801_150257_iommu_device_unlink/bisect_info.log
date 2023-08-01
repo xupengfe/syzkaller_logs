@@ -1,0 +1,30 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [a3fe9a2e1692a413d887a6a0f1184c26481d6a2b] 0day head guard for 'devel-hourly-20230731-110752'
+git bisect bad a3fe9a2e1692a413d887a6a0f1184c26481d6a2b
+# status: waiting for good commit(s), bad commit known
+# good: [5d0c230f1de8c7515b6567d9afba1f196fb4e2f4] Linux 6.5-rc4
+git bisect good 5d0c230f1de8c7515b6567d9afba1f196fb4e2f4
+# bad: [e69ef96a325695b4834c1789298212e9bd895266] Merge 'internal-ijarvine/resctrl/l2_cat-test' into devel-hourly-20230731-110752
+git bisect bad e69ef96a325695b4834c1789298212e9bd895266
+# bad: [bda16c1613e744eb09fb78fcc74d1ed8d41e1201] Merge 'internal-linux-review/Jiaqing-Zhao/can-ems_pci-remove-PCI_SUBVENDOR_ID_ASIX-definition/20230718-232659' into devel-hourly-20230731-110752
+git bisect bad bda16c1613e744eb09fb78fcc74d1ed8d41e1201
+# good: [d0fc0ef083bc51d8d0211a2e1498d450220c1bc3] Merge patch series "can: kvaser_pciefd: Add support for new Kvaser PCI Express devices"
+git bisect good d0fc0ef083bc51d8d0211a2e1498d450220c1bc3
+# bad: [06a49fc6ce443f4b3c5e9d8c2a3e971932f6cc63] Merge 'internal-blu2-usb/iommu-prepare-for-user-iopf-v2-fix_1' into devel-hourly-20230731-110752
+git bisect bad 06a49fc6ce443f4b3c5e9d8c2a3e971932f6cc63
+# bad: [018194f757270674c9b3315cf79235b8e9bf4f8c] iommu: Add helper to set iopf handler for domain
+git bisect bad 018194f757270674c9b3315cf79235b8e9bf4f8c
+# bad: [a5003e75a1714857c01317d04982eef81331fe2f] Merge branches 'iommu/fixes', 'arm/rockchip', 'x86/amd' and 'core' into next
+git bisect bad a5003e75a1714857c01317d04982eef81331fe2f
+# bad: [791c2b17fb4023f21c3cbf5f268af01d9b8cb7cc] iommu: Optimise PCI SAC address trick
+git bisect bad 791c2b17fb4023f21c3cbf5f268af01d9b8cb7cc
+# good: [aa0958570f24f562422afa41fefd1b3a1fe0f6d0] iommu: Add iommu_init/deinit_device() paired functions
+git bisect good aa0958570f24f562422afa41fefd1b3a1fe0f6d0
+# bad: [cfb6ee65f7603a0605fa8f5fe5b0782f0731c81c] iommu: Always destroy the iommu_group during iommu_release_device()
+git bisect bad cfb6ee65f7603a0605fa8f5fe5b0782f0731c81c
+# bad: [9a108996b5b39c8b7b4911bd4fe7f9ad87bc0f72] iommu: Do not export iommu_device_link/unlink()
+git bisect bad 9a108996b5b39c8b7b4911bd4fe7f9ad87bc0f72
+# bad: [14891af3799e8cd24dee14f78c31fa663cfb5ba9] iommu: Move the iommu driver sysfs setup into iommu_init/deinit_device()
+git bisect bad 14891af3799e8cd24dee14f78c31fa663cfb5ba9
+# first bad commit: [14891af3799e8cd24dee14f78c31fa663cfb5ba9] iommu: Move the iommu driver sysfs setup into iommu_init/deinit_device()
