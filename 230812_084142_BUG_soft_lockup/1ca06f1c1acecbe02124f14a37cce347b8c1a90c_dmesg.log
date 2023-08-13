@@ -1,0 +1,109 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2J[0m.[    0.000000] Linux version 6.1.0-1ca06f1c1ace+ (root@p-rpls01) (gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-18), GNU ld version 2.36.1-2.el8) #1 SMP PREEMPT_DYNAMIC Mon Mar 13 23:21:07 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[9]:  832, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x207, context size is 840 bytes, using 'compacted' format.
+[    0.000000] signal: max sigframe size: 3632
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    0.481325] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[    7.118762] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.1.0-1ca06f1c1ace+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   22.822284] cgroup: Unknown subsys name 'net'
+[   22.931373] cgroup: Unknown subsys name 'rlimit'
+[   80.744813] watchdog: BUG: soft lockup - CPU#1 stuck for 23s! [swapper/1:0]
+[   80.747593] Kernel panic - not syncing: softlockup: hung tasks
+[   80.748466] CPU: 1 PID: 0 Comm: swapper/1 Tainted: G             L     6.1.0-1ca06f1c1ace+ #1
+[   80.749715] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   80.751373] Call Trace:
+[   80.751764]  <IRQ>
+[   80.752089]  dump_stack_lvl+0xa7/0xdb
+[   80.752677]  dump_stack+0x19/0x1f
+[   80.753207]  panic+0x1cc/0x483
+[   80.753725]  ? watchdog_timer_fn+0x322/0x380
+[   80.754397]  watchdog_timer_fn.cold.11+0x11/0x20
+[   80.755113]  ? softlockup_fn+0x40/0x40
+[   80.755702]  __hrtimer_run_queues+0x2ed/0x7c0
+[   80.756386]  hrtimer_interrupt+0x134/0x2c0
+[   80.757026]  __sysvec_apic_timer_interrupt+0x9c/0x270
+[   80.757797]  sysvec_apic_timer_interrupt+0x57/0xe0
+[   80.758534]  asm_sysvec_apic_timer_interrupt+0x1f/0x30
+[   80.759313] RIP: 0010:native_safe_halt+0x13/0x20
+[   80.760033] Code: 4f fe 84 db 0f 85 5f ff ff ff e9 0c ff ff ff 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 55 48 89 e5 eb 07 0f 00 2d b1 0c 47 00 fb f4 <5d> c3 cc cc cc cc 0f 1f 80 00 00 00 00 f3 0f 1e fa 55 48 89 e5 eb
+[   80.762703] RSP: 0018:ffffc900000e0d40 EFLAGS: 00000206
+[   80.763491] RAX: 0000000000083a72 RBX: 0000000000000003 RCX: 0000000000000002
+[   80.764535] RDX: 0000000000000000 RSI: 0000000000000102 RDI: 0000000000000000
+[   80.765573] RBP: ffffc900000e0d40 R08: 0000000000000001 R09: 0000000000000001
+[   80.766617] R10: 0000000000000001 R11: 0000000000000001 R12: ffffffff83e0dda0
+[   80.767668] R13: 0000000000000000 R14: 0000000000000001 R15: 0000000000000100
+[   80.768743]  kvm_wait+0x79/0x90
+[   80.769243]  __pv_queued_spin_lock_slowpath+0x46c/0x4a0
+[   80.770032]  ? __clocksource_register_scale+0x230/0x230
+[   80.770831]  do_raw_spin_lock+0xbe/0xd0
+[   80.771450]  _raw_spin_lock+0x3e/0x50
+[   80.772047]  ? clocksource_watchdog+0x2b/0x740
+[   80.772757]  clocksource_watchdog+0x2b/0x740
+[   80.773442]  ? __this_cpu_preempt_check+0x20/0x30
+[   80.774188]  ? lock_is_held_type+0xe6/0x140
+[   80.774859]  ? write_comp_data+0x2f/0x90
+[   80.775488]  ? __clocksource_register_scale+0x230/0x230
+[   80.776306]  ? __clocksource_register_scale+0x230/0x230
+[   80.777125]  call_timer_fn+0xce/0x480
+[   80.777716]  ? __clocksource_register_scale+0x230/0x230
+[   80.778541]  run_timer_softirq+0xa3d/0xa70
+[   80.779192]  ? lock_is_held_type+0xe6/0x140
+[   80.779878]  __do_softirq+0xc9/0x490
+[   80.780464]  irq_exit_rcu+0xd2/0x100
+[   80.781036]  sysvec_apic_timer_interrupt+0xb0/0xe0
+[   80.781789]  </IRQ>
+[   80.782134]  <TASK>
+[   80.782482]  asm_sysvec_apic_timer_interrupt+0x1f/0x30
+[   80.783282] RIP: 0010:native_safe_halt+0x13/0x20
+[   80.784022] Code: 4f fe 84 db 0f 85 5f ff ff ff e9 0c ff ff ff 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 55 48 89 e5 eb 07 0f 00 2d b1 0c 47 00 fb f4 <5d> c3 cc cc cc cc 0f 1f 80 00 00 00 00 f3 0f 1e fa 55 48 89 e5 eb
+[   80.786780] RSP: 0018:ffffc900000a3e98 EFLAGS: 00000202
+[   80.787595] RAX: ffffffff82d9f020 RBX: 0000000000000000 RCX: 0000000000000000
+[   80.788679] RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+[   80.789755] RBP: ffffc900000a3e98 R08: 0000000000000001 R09: 0000000000000001
+[   80.790835] R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000001
+[   80.791915] R13: ffffffffffffffff R14: 0000000000000000 R15: ffff888005fcc700
+[   80.793007]  ? __cpuidle_text_start+0x8/0x8
+[   80.793687]  default_idle+0x12/0x20
+[   80.794221]  arch_cpu_idle+0x16/0x20
+[   80.794806]  default_idle_call+0x70/0xb0
+[   80.795449]  do_idle+0x21a/0x2b0
+[   80.795986]  cpu_startup_entry+0x21/0x30
+[   80.796613]  start_secondary+0x119/0x140
+[   80.797243]  secondary_startup_64_no_verify+0xe5/0xeb
+[   80.798058]  </TASK>
+[   80.798912] Kernel Offset: disabled
+[   80.799490] ---[ end Kernel panic - not syncing: softlockup: hung tasks ]---

@@ -1,0 +1,81 @@
+cgroup: Unknown subsys name 'net'
+cgroup: Unknown subsys name 'rlimit'
+watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [syz-executor583:1192]
+Kernel panic - not syncing: softlockup: hung tasks
+CPU: 0 PID: 1192 Comm: syz-executor583 Tainted: G             L      6.5.0-rc5-2023-08-07-intel-next-c5b7dd275769+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <IRQ>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xa9/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ panic+0x670/0x6e0 kernel/panic.c:341
+ watchdog_timer_fn+0x4c9/0x5c0 kernel/watchdog.c:532
+ __run_hrtimer kernel/time/hrtimer.c:1688 [inline]
+ __hrtimer_run_queues+0x61a/0xba0 kernel/time/hrtimer.c:1752
+ hrtimer_interrupt+0x326/0x7b0 kernel/time/hrtimer.c:1814
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1098 [inline]
+ __sysvec_apic_timer_interrupt+0x14f/0x3f0 arch/x86/kernel/apic/apic.c:1115
+ sysvec_apic_timer_interrupt+0x48/0xd0 arch/x86/kernel/apic/apic.c:1109
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:645
+RIP: 0010:call_timer_fn+0x21e/0x570 kernel/time/timer.c:1705
+Code: 00 f3 0f 1e fa e8 82 9a 11 00 4c 89 e7 48 c7 c6 15 94 4e 81 e8 a3 80 f0 ff 89 df 65 44 8b 25 91 bb b5 7e 41 81 e4 ff ff ff 7f <44> 89 e6 e8 4a 9b 11 00 44 39 e3 74 5a e8 50 9a 11 00 44 0f b6 25
+RSP: 0018:ffff88806ca09d70 EFLAGS: 00000202
+RAX: 0000000000000000 RBX: 0000000000000101 RCX: 1ffff110017de663
+RDX: 0000000000000000 RSI: 0000000000000101 RDI: 0000000000000101
+RBP: ffff88806ca09e28 R08: 0000000000000001 R09: fffffbfff0ef1e05
+R10: ffff88800bef3320 R11: ffffffff8778f027 R12: 0000000000000101
+R13: 0000000000000001 R14: 1ffff1100d9413b0 R15: ffffffff81503620
+ expire_timers kernel/time/timer.c:1751 [inline]
+ __run_timers kernel/time/timer.c:2022 [inline]
+ __run_timers kernel/time/timer.c:1995 [inline]
+ run_timer_softirq+0x714/0x14d0 kernel/time/timer.c:2035
+ __do_softirq+0x1b7/0x77c kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0xc1/0x110 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0xa1/0xd0 arch/x86/kernel/apic/apic.c:1109
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:645
+RIP: 0010:get_current arch/x86/include/asm/current.h:41 [inline]
+RIP: 0010:finish_task_switch+0x16c/0x710 kernel/sched/core.c:5259
+Code: 00 00 00 31 f6 49 8d 7c 24 18 e8 3f 3f 0d 00 4c 89 e7 e8 47 fa ff ff 4c 89 e7 e8 5f 1e 17 04 e8 ba bb 3a 00 fb 0f 1f 44 00 00 <65> 48 8b 1c 25 c0 4f 04 00 48 8d bb c8 1d 00 00 48 b8 00 00 00 00
+RSP: 0018:ffff8880216cf370 EFLAGS: 00000206
+RAX: 000000000012952b RBX: ffff88800bef2500 RCX: 1ffffffff0ce3b64
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+RBP: ffff8880216cf3b8 R08: 0000000000000001 R09: 0000000000000001
+R10: fffffbfff0ef1e04 R11: ffffffff8778f027 R12: ffff88806ca45a00
+R13: ffff88800b4d8000 R14: ffff888023ba1bc0 R15: 0000607f93230458
+ context_switch kernel/sched/core.c:5390 [inline]
+ __schedule+0xa2b/0x2750 kernel/sched/core.c:6719
+ preempt_schedule_common+0x1f/0xe0 kernel/sched/core.c:6888
+ __cond_resched+0x25/0x30 kernel/sched/core.c:8574
+ might_resched include/linux/kernel.h:111 [inline]
+ might_alloc include/linux/sched/mm.h:306 [inline]
+ slab_pre_alloc_hook mm/slab.h:709 [inline]
+ slab_alloc_node mm/slub.c:3452 [inline]
+ __kmem_cache_alloc_node+0x233/0x240 mm/slub.c:3509
+ kmalloc_trace+0x2e/0xd0 mm/slab_common.c:1076
+ kmalloc include/linux/slab.h:582 [inline]
+ fill_note_info fs/binfmt_elf.c:1865 [inline]
+ elf_core_dump+0x150/0x37a0 fs/binfmt_elf.c:2056
+ do_coredump+0x2e01/0x3f60 fs/coredump.c:764
+ get_signal+0x1edc/0x2720 kernel/signal.c:2867
+ arch_do_signal_or_restart+0x82/0x750 arch/x86/kernel/signal.c:309
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x13b/0x210 kernel/entry/common.c:204
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
+ syscall_exit_to_user_mode+0x2d/0x60 kernel/entry/common.c:297
+ do_syscall_64+0x4a/0x90 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x45470d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffe47b92c48 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: 0000000000000003 RBX: 0000000000000003 RCX: 000000000045470d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000280
+RBP: 0000000000000003 R08: 0000000000000000 R09: 00000000004b72cb
+R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000000 R14: 0000000000400500 R15: 0000000000000000
+ </TASK>
+Kernel Offset: disabled

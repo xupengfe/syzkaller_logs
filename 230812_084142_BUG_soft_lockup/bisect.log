@@ -1,0 +1,327 @@
+|0812_084142|cmd=cd /root/os.linux.intelnext.kernel|
+|0812_084142|git log 52a93d39b17dc7eb98b6aa3edb93943248e03b2f check_result:commit 52a93d39b17dc7eb98b6aa3edb93943248e03b2f|
+|0812_084142|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0812_084142|cmd=git checkout -f 52a93d39b17dc7eb98b6aa3edb93943248e03b2f|
+|0812_084142|cmd=cd /root/os.linux.intelnext.kernel|
+|0812_084142||/var/www/html/bzimage/bzImage_52a93d39b17dc7eb98b6aa3edb93943248e03b2f| exist, no need make|
+|0812_084142|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_084153|Run /var/www/html/bzimage/bzImage_52a93d39b17dc7eb98b6aa3edb93943248e03b2f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_084216|It takes 23 seconds to find login:test login: |
+|0812_084216|Boot 1 time: takes 23 seconds to boot up.|
+|0812_084216|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_084218|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_084219|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_084221|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_084311|/var/www/html/bzimage/bzImage_52a93d39b17dc7eb98b6aa3edb93943248e03b2f contained RIP:[   73.591252] RIP: 0010:is_bpf_text_address+0x139/0x1c0
+[   73.656889] RIP: 0010:generic_exec_single+0x278/0x540
+[   73.688035] RIP: 0033:0x7f904803ee5d, FAIL|
+|0812_084311|Found time:73 in /var/www/html/bzimage/0812_084142_RIP/52a93d39b17dc7eb98b6aa3edb93943248e03b2f_dmesg.log|
+|0812_084311|Logic: |<=25: +25|25-100 +180|>100 +1800| Set TIME:253|
+|0812_084311|-END- commit 52a93d39b17dc7eb98b6aa3edb93943248e03b2f FAIL bad|
+|0812_084311|issue_folder alreayd exist:/var/www/html//syzkaller/2023_08_12/9d521333ca910fa938fb14a0a82f40458bb615dc|
+|0812_084311|cmd=cp -rf /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog /var/www/html//syzkaller/2023_08_12/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.c|
+|0812_084311|gcc -pthread /var/www/html//syzkaller/2023_08_12/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.c -o /var/www/html//syzkaller/2023_08_12/9d521333ca910fa938fb14a0a82f40458bb615dc/repro|
+|0812_084311|cmd=cp -rf /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/description /var/www/html//syzkaller/2023_08_12/9d521333ca910fa938fb14a0a82f40458bb615dc|
+|0812_084311|FAIL|cp /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/machineInfo0 /var/www/html/bzimage/0812_084142_RIP/machineInfo0 failed!|
+|0812_084312|FAIL|cp /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/report0 /var/www/html/bzimage/0812_084142_RIP/report0 failed!|
+|0812_084312|FAIL|cp /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/log0 /var/www/html/bzimage/0812_084142_RIP/log0 failed!|
+|0812_084313|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0812_084142_RIP/kconfig_origin:0|
+|0812_084313|cmd=cd /root/os.linux.intelnext.kernel|
+|0812_084313||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0812_084313|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_084324|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_084338|It takes 14 seconds to find login:test login: |
+|0812_084338|Boot 1 time: takes 14 seconds to boot up.|
+|0812_084338|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_084339|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_084340|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_084342|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_084755|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain RIP: in dmesg, pass|
+|0812_084755|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0812_084755|cmd=git checkout -f 52a93d39b17dc7eb98b6aa3edb93943248e03b2f|
+|0812_084755|cmd=git bisect start|
+|0812_084755|cmd=git bisect bad 52a93d39b17dc7eb98b6aa3edb93943248e03b2f|
+|0812_084755|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0812_084755|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0812_084850||/var/www/html/bzimage/bzImage_1ef0736c0711e2633a59b540931406de626f2836| exist, no need make|
+|0812_084850|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_084902|Run /var/www/html/bzimage/bzImage_1ef0736c0711e2633a59b540931406de626f2836 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_084926|It takes 24 seconds to find login:test login: |
+|0812_084926|Boot 1 time: takes 24 seconds to boot up.|
+|0812_084926|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_084927|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_084929|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_084930|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_085344|/var/www/html/bzimage/bzImage_1ef0736c0711e2633a59b540931406de626f2836 didn't contain RIP: in dmesg, pass|
+|0812_085344|git bisect good 1ef0736c0711e2633a59b540931406de626f2836|
+|0812_085426||/var/www/html/bzimage/bzImage_1ca06f1c1acecbe02124f14a37cce347b8c1a90c| exist, no need make|
+|0812_085426|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_085438|Run /var/www/html/bzimage/bzImage_1ca06f1c1acecbe02124f14a37cce347b8c1a90c with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_085456|It takes 18 seconds to find login:test login: |
+|0812_085456|Boot 1 time: takes 18 seconds to boot up.|
+|0812_085456|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_085458|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_085459|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_085500|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_085914|/var/www/html/bzimage/bzImage_1ca06f1c1acecbe02124f14a37cce347b8c1a90c contained RIP:[   80.759313] RIP: 0010:native_safe_halt+0x13/0x20
+[   80.783282] RIP: 0010:native_safe_halt+0x13/0x20, FAIL|
+|0812_085914|git bisect bad 1ca06f1c1acecbe02124f14a37cce347b8c1a90c|
+|0812_085921||/var/www/html/bzimage/bzImage_4d1044fcb996e8de9b9ab392f4a767890e45202d| exist, no need make|
+|0812_085921|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_085931|Run /var/www/html/bzimage/bzImage_4d1044fcb996e8de9b9ab392f4a767890e45202d with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_085954|It takes 22 seconds to find login:test login: |
+|0812_085954|Boot 1 time: takes 22 seconds to boot up.|
+|0812_085954|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_085955|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_085957|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_085958|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_090412|/var/www/html/bzimage/bzImage_4d1044fcb996e8de9b9ab392f4a767890e45202d didn't contain RIP: in dmesg, pass|
+|0812_090412|git bisect good 4d1044fcb996e8de9b9ab392f4a767890e45202d|
+|0812_090417||/var/www/html/bzimage/bzImage_0e470763d84dcad27284067647dfb4b1a94dfce0| exist, no need make|
+|0812_090417|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_090428|Run /var/www/html/bzimage/bzImage_0e470763d84dcad27284067647dfb4b1a94dfce0 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_090444|It takes 16 seconds to find login:test login: |
+|0812_090444|Boot 1 time: takes 16 seconds to boot up.|
+|0812_090444|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_090445|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_090447|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_090448|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_090901|/var/www/html/bzimage/bzImage_0e470763d84dcad27284067647dfb4b1a94dfce0 didn't contain RIP: in dmesg, pass|
+|0812_090901|git bisect good 0e470763d84dcad27284067647dfb4b1a94dfce0|
+|0812_090903||/var/www/html/bzimage/bzImage_66efff515a6500d4b4976fbab3bee8b92a1137fb| exist, no need make|
+|0812_090903|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_090911|Run /var/www/html/bzimage/bzImage_66efff515a6500d4b4976fbab3bee8b92a1137fb with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_090924|It takes 13 seconds to find login:test login: |
+|0812_090924|Boot 1 time: takes 13 seconds to boot up.|
+|0812_090924|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_090925|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_090926|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_090928|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_091341|/var/www/html/bzimage/bzImage_66efff515a6500d4b4976fbab3bee8b92a1137fb didn't contain RIP: in dmesg, pass|
+|0812_091341|git bisect good 66efff515a6500d4b4976fbab3bee8b92a1137fb|
+|0812_091342||/var/www/html/bzimage/bzImage_a7cacfb0688e3988660e90fad7017cc9a18ab390| exist, no need make|
+|0812_091342|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_091352|Run /var/www/html/bzimage/bzImage_a7cacfb0688e3988660e90fad7017cc9a18ab390 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_091407|It takes 15 seconds to find login:test login: |
+|0812_091407|Boot 1 time: takes 15 seconds to boot up.|
+|0812_091407|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_091408|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_091409|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_091411|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_091824|/var/www/html/bzimage/bzImage_a7cacfb0688e3988660e90fad7017cc9a18ab390 didn't contain RIP: in dmesg, pass|
+|0812_091824|git bisect good a7cacfb0688e3988660e90fad7017cc9a18ab390|
+|0812_091825||/var/www/html/bzimage/bzImage_102f9d3d455870844c47b82322c2dfc0a35eb745| exist, no need make|
+|0812_091825|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_091831|Run /var/www/html/bzimage/bzImage_102f9d3d455870844c47b82322c2dfc0a35eb745 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_091845|It takes 14 seconds to find login:test login: |
+|0812_091845|Boot 1 time: takes 14 seconds to boot up.|
+|0812_091845|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_091846|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_091847|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_091849|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_092302|/var/www/html/bzimage/bzImage_102f9d3d455870844c47b82322c2dfc0a35eb745 didn't contain RIP: in dmesg, pass|
+|0812_092302|git bisect good 102f9d3d455870844c47b82322c2dfc0a35eb745|
+|0812_092303||/var/www/html/bzimage/bzImage_361c89a0da59c04b1d3d33568965fe426b0f18de| does not exist, will make it|
+|0812_100512|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_100521|Run /var/www/html/bzimage/bzImage_361c89a0da59c04b1d3d33568965fe426b0f18de with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_100541|It takes 20 seconds to find login:test login: |
+|0812_100541|Boot 1 time: takes 20 seconds to boot up.|
+|0812_100541|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_100542|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_100544|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_100545|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_100958|/var/www/html/bzimage/bzImage_361c89a0da59c04b1d3d33568965fe426b0f18de contained RIP:[  193.917185] RIP: 0010:free_swap_cache+0x33/0x270
+[  193.937650] RIP: 0010:finish_task_switch+0x16c/0x720
+[  193.992330] RIP: 0033:0x7f52eaa3ee5d, FAIL|
+|0812_100958|git bisect bad 361c89a0da59c04b1d3d33568965fe426b0f18de|
+|0812_101000||/var/www/html/bzimage/bzImage_d7b41196927ba2a2b5badad1a85f9087eb90b076| does not exist, will make it|
+|0812_105331|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_105344|Run /var/www/html/bzimage/bzImage_d7b41196927ba2a2b5badad1a85f9087eb90b076 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_105411|It takes 27 seconds to find login:test login: |
+|0812_105411|Boot 1 time: takes 27 seconds to boot up.|
+|0812_105411|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_105413|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_105415|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_105417|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_105830|/var/www/html/bzimage/bzImage_d7b41196927ba2a2b5badad1a85f9087eb90b076 contained RIP:[  275.392783] RIP: 0010:refill_stock+0x20d/0x3b0
+[  275.419888] RIP: 0010:generic_exec_single+0x1d9/0x2c0
+[  275.452536] RIP: 0033:0x7fbb0623ee5d, FAIL|
+|0812_105830|git bisect bad d7b41196927ba2a2b5badad1a85f9087eb90b076|
+|0812_105831||/var/www/html/bzimage/bzImage_55927c98a2c88019e23353a87f44032107ca2854| does not exist, will make it|
+|0812_114049|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_114100|Run /var/www/html/bzimage/bzImage_55927c98a2c88019e23353a87f44032107ca2854 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_114119|It takes 19 seconds to find login:test login: |
+|0812_114119|Boot 1 time: takes 19 seconds to boot up.|
+|0812_114119|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_114120|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_114122|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_114123|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_114537|/var/www/html/bzimage/bzImage_55927c98a2c88019e23353a87f44032107ca2854 didn't contain RIP: in dmesg, pass|
+|0812_114537|git bisect good 55927c98a2c88019e23353a87f44032107ca2854|
+|0812_114537||/var/www/html/bzimage/bzImage_1ad2c1354bfa097e974d2edaa7491b6f2d43f481| does not exist, will make it|
+|0812_122556|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_122605|Run /var/www/html/bzimage/bzImage_1ad2c1354bfa097e974d2edaa7491b6f2d43f481 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_122626|It takes 21 seconds to find login:test login: |
+|0812_122626|Boot 1 time: takes 21 seconds to boot up.|
+|0812_122626|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_122628|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_122629|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_122631|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_123044|/var/www/html/bzimage/bzImage_1ad2c1354bfa097e974d2edaa7491b6f2d43f481 didn't contain RIP: in dmesg, pass|
+|0812_123044|git bisect good 1ad2c1354bfa097e974d2edaa7491b6f2d43f481|
+|0812_123044||/var/www/html/bzimage/bzImage_51e8415e39a962db2a753940fca18e9710c24902| does not exist, will make it|
+|0812_131311|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_131323|Run /var/www/html/bzimage/bzImage_51e8415e39a962db2a753940fca18e9710c24902 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_131349|It takes 25 seconds to find login:test login: |
+|0812_131349|Boot 1 time: takes 25 seconds to boot up.|
+|0812_131349|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_131350|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_131352|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_131354|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_131807|/var/www/html/bzimage/bzImage_51e8415e39a962db2a753940fca18e9710c24902 didn't contain RIP: in dmesg, pass|
+|0812_131807|git bisect good 51e8415e39a962db2a753940fca18e9710c24902|
+|0812_131807||/var/www/html/bzimage/bzImage_f042b08b833de3be810f8769d88ca44aeefd7eba| does not exist, will make it|
+|0812_140529|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_140542|Run /var/www/html/bzimage/bzImage_f042b08b833de3be810f8769d88ca44aeefd7eba with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_140609|It takes 27 seconds to find login:test login: |
+|0812_140609|Boot 1 time: takes 27 seconds to boot up.|
+|0812_140609|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_140611|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_140613|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_140614|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_141028|/var/www/html/bzimage/bzImage_f042b08b833de3be810f8769d88ca44aeefd7eba contained RIP:[  195.245085] RIP: 0010:__schedule+0x98e/0x2150
+[  195.310745] RIP: 0033:0x7f28a083ee5d, FAIL|
+|0812_141028|git bisect bad f042b08b833de3be810f8769d88ca44aeefd7eba|
+|0812_141028||/var/www/html/bzimage/bzImage_37e6d30e89d699449082b22845f515fe47648087| does not exist, will make it|
+|0812_145317|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_145331|Run /var/www/html/bzimage/bzImage_37e6d30e89d699449082b22845f515fe47648087 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_145358|It takes 27 seconds to find login:test login: |
+|0812_145358|Boot 1 time: takes 27 seconds to boot up.|
+|0812_145358|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_145400|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_145402|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_145403|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_145817|/var/www/html/bzimage/bzImage_37e6d30e89d699449082b22845f515fe47648087 didn't contain RIP: in dmesg, pass|
+|0812_145817|git bisect good 37e6d30e89d699449082b22845f515fe47648087|
+|0812_145817||/var/www/html/bzimage/bzImage_0ed554fd769a19ea8464bb83e9ac201002ef74ad| does not exist, will make it|
+|0812_153856|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_153907|Run /var/www/html/bzimage/bzImage_0ed554fd769a19ea8464bb83e9ac201002ef74ad with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_153925|It takes 18 seconds to find login:test login: |
+|0812_153925|Boot 1 time: takes 18 seconds to boot up.|
+|0812_153925|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_153927|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_153928|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_153930|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_154343|/var/www/html/bzimage/bzImage_0ed554fd769a19ea8464bb83e9ac201002ef74ad didn't contain RIP: in dmesg, pass|
+|0812_154343|git bisect good 0ed554fd769a19ea8464bb83e9ac201002ef74ad|
+|0812_154343||/var/www/html/bzimage/bzImage_0625b6b8233aac5232190be394ebacfa7e29b1bc| does not exist, will make it|
+|0812_162521|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_162530|Run /var/www/html/bzimage/bzImage_0625b6b8233aac5232190be394ebacfa7e29b1bc with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_162549|It takes 19 seconds to find login:test login: |
+|0812_162549|Boot 1 time: takes 19 seconds to boot up.|
+|0812_162549|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_162550|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_162552|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_162553|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_163007|/var/www/html/bzimage/bzImage_0625b6b8233aac5232190be394ebacfa7e29b1bc didn't contain RIP: in dmesg, pass|
+|0812_163007|git bisect good 0625b6b8233aac5232190be394ebacfa7e29b1bc|
+|0812_163007||/var/www/html/bzimage/bzImage_d21ce554e1fc9c02d1a7f61156f794648bddb98f| does not exist, will make it|
+|0812_170148|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_170158|Run /var/www/html/bzimage/bzImage_d21ce554e1fc9c02d1a7f61156f794648bddb98f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_170219|It takes 21 seconds to find login:test login: |
+|0812_170219|Boot 1 time: takes 21 seconds to boot up.|
+|0812_170219|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_170220|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_170221|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_170223|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_170636|/var/www/html/bzimage/bzImage_d21ce554e1fc9c02d1a7f61156f794648bddb98f didn't contain RIP: in dmesg, pass|
+|0812_170636|git bisect good d21ce554e1fc9c02d1a7f61156f794648bddb98f|
+|0812_170636||/var/www/html/bzimage/bzImage_65884e940e7fd25c480a7263aee568f86edfb6cd| does not exist, will make it|
+|0812_174101|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_174113|Run /var/www/html/bzimage/bzImage_65884e940e7fd25c480a7263aee568f86edfb6cd with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_174137|It takes 24 seconds to find login:test login: |
+|0812_174137|Boot 1 time: takes 24 seconds to boot up.|
+|0812_174137|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_174138|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_174140|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_174141|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_174554|/var/www/html/bzimage/bzImage_65884e940e7fd25c480a7263aee568f86edfb6cd didn't contain RIP: in dmesg, pass|
+|0812_174554|git bisect good 65884e940e7fd25c480a7263aee568f86edfb6cd|
+|0812_174555|Bisect PASS: find bad commit: f042b08b833de3be810f8769d88ca44aeefd7eba is the first bad commit
+commit f042b08b833de3be810f8769d88ca44aeefd7eba
+Author: Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+Date:   Fri Sep 9 14:39:51 2022 +0100
+
+    media: sun6i-mipi-csi2: Require both pads to be connected for streaming
+    
+    The bridge needs both its pads connected to be able to stream data.
+    Enforcing this is useful to produce an error when no sensor is
+    connected.
+    
+    Fixes: af54b4f4c17f ("media: sunxi: Add support for the A31 MIPI CSI-2 controller")
+    Signed-off-by: Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+    Signed-off-by: Hans Verkuil <hverkuil-cisco@xs4all.nl>
+    Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+
+ drivers/media/platform/sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)|
+|0812_174555|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|0812_174555|cmd=git bisect log >> /var/www/html/bzimage/0812_084142_RIP/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [52a93d39b17dc7eb98b6aa3edb93943248e03b2f] Linux 6.5-rc5
+git bisect bad 52a93d39b17dc7eb98b6aa3edb93943248e03b2f
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [1ef0736c0711e2633a59b540931406de626f2836] Merge https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect good 1ef0736c0711e2633a59b540931406de626f2836
+# bad: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect bad 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# good: [4d1044fcb996e8de9b9ab392f4a767890e45202d] Merge tag 'riscv-for-linus-5.20-mw0' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+git bisect good 4d1044fcb996e8de9b9ab392f4a767890e45202d
+# good: [0e470763d84dcad27284067647dfb4b1a94dfce0] Merge tag 'efi-next-for-v6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/efi/efi
+git bisect good 0e470763d84dcad27284067647dfb4b1a94dfce0
+# good: [66efff515a6500d4b4976fbab3bee8b92a1137fb] Merge tag 'amd-drm-next-6.2-2022-12-07' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+git bisect good 66efff515a6500d4b4976fbab3bee8b92a1137fb
+# good: [a7cacfb0688e3988660e90fad7017cc9a18ab390] Merge tag 'docs-6.2' of git://git.lwn.net/linux
+git bisect good a7cacfb0688e3988660e90fad7017cc9a18ab390
+# good: [102f9d3d455870844c47b82322c2dfc0a35eb745] Merge tag 'sound-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good 102f9d3d455870844c47b82322c2dfc0a35eb745
+# bad: [361c89a0da59c04b1d3d33568965fe426b0f18de] Merge tag 'pinctrl-v6.2-1' of git://git.kernel.org/pub/scm/linux/kernel/git/linusw/linux-pinctrl
+git bisect bad 361c89a0da59c04b1d3d33568965fe426b0f18de
+# bad: [d7b41196927ba2a2b5badad1a85f9087eb90b076] media: ov5640: set correct default link frequency
+git bisect bad d7b41196927ba2a2b5badad1a85f9087eb90b076
+# good: [55927c98a2c88019e23353a87f44032107ca2854] media: atmel: atmel-isc: move to staging
+git bisect good 55927c98a2c88019e23353a87f44032107ca2854
+# good: [1ad2c1354bfa097e974d2edaa7491b6f2d43f481] media: atomisp: Remove atomisp_ospm_dphy_down() call from probe error path
+git bisect good 1ad2c1354bfa097e974d2edaa7491b6f2d43f481
+# good: [51e8415e39a962db2a753940fca18e9710c24902] media: platform: Add Renesas RZ/G2L MIPI CSI-2 receiver driver
+git bisect good 51e8415e39a962db2a753940fca18e9710c24902
+# bad: [f042b08b833de3be810f8769d88ca44aeefd7eba] media: sun6i-mipi-csi2: Require both pads to be connected for streaming
+git bisect bad f042b08b833de3be810f8769d88ca44aeefd7eba
+# good: [37e6d30e89d699449082b22845f515fe47648087] media: mantis: Kconfig: add depends on DVB_CORE for MANTIS_CORE
+git bisect good 37e6d30e89d699449082b22845f515fe47648087
+# good: [0ed554fd769a19ea8464bb83e9ac201002ef74ad] media: dvb-usb: az6027: fix null-ptr-deref in az6027_i2c_xfer()
+git bisect good 0ed554fd769a19ea8464bb83e9ac201002ef74ad
+# good: [0625b6b8233aac5232190be394ebacfa7e29b1bc] media: v4l: Use memset_after() helper
+git bisect good 0625b6b8233aac5232190be394ebacfa7e29b1bc
+# good: [d21ce554e1fc9c02d1a7f61156f794648bddb98f] media: amphion: tell and handle contiguous and non contiguous format
+git bisect good d21ce554e1fc9c02d1a7f61156f794648bddb98f
+# good: [65884e940e7fd25c480a7263aee568f86edfb6cd] media: amphion: encoder add support for contiguous planes
+git bisect good 65884e940e7fd25c480a7263aee568f86edfb6cd
+# first bad commit: [f042b08b833de3be810f8769d88ca44aeefd7eba] media: sun6i-mipi-csi2: Require both pads to be connected for streaming
+|0812_174555|/root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 52a93d39b17dc7eb98b6aa3edb93943248e03b2f -b f042b08b833de3be810f8769d88ca44aeefd7eba -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_52a93d39b17dc7eb98b6aa3edb93943248e03b2f_f042b08b833de3be810f8769d88ca44aeefd7eba_revert|
+|0812_183040|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0812_183040|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0812_183054|Run /var/www/html/bzimage/bzImage_52a93d39b17dc7eb98b6aa3edb93943248e03b2f_f042b08b833de3be810f8769d88ca44aeefd7eba_revert with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0812_183118|It takes 24 seconds to find login:test login: |
+|0812_183118|Boot 1 time: takes 24 seconds to boot up.|
+|0812_183118|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0812_183119|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0812_183121|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/9d521333ca910fa938fb14a0a82f40458bb615dc/repro.cprog root@localhost:/root/repro.c|
+|0812_183122|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'ls /root/repro.sh'|
+|0812_183536|/var/www/html/bzimage/bzImage_52a93d39b17dc7eb98b6aa3edb93943248e03b2f_f042b08b833de3be810f8769d88ca44aeefd7eba_revert didn't contain RIP: in dmesg, pass|
+|0812_183536|Bisect successfully! 52a93d39b17dc7eb98b6aa3edb93943248e03b2f_f042b08b833de3be810f8769d88ca44aeefd7eba_revert bzimage passed!|
+|0812_183536|cmd=cd /root/os.linux.intelnext.kernel|
+|0812_183536|ISSUE:9d521333ca910fa938fb14a0a82f40458bb615dc  EMAIL status after check:Email_not_sent|

@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [52a93d39b17dc7eb98b6aa3edb93943248e03b2f] Linux 6.5-rc5
+git bisect bad 52a93d39b17dc7eb98b6aa3edb93943248e03b2f
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [1ef0736c0711e2633a59b540931406de626f2836] Merge https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect good 1ef0736c0711e2633a59b540931406de626f2836
+# bad: [1ca06f1c1acecbe02124f14a37cce347b8c1a90c] Merge tag 'xtensa-20221213' of https://github.com/jcmvbkbc/linux-xtensa
+git bisect bad 1ca06f1c1acecbe02124f14a37cce347b8c1a90c
+# good: [4d1044fcb996e8de9b9ab392f4a767890e45202d] Merge tag 'riscv-for-linus-5.20-mw0' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+git bisect good 4d1044fcb996e8de9b9ab392f4a767890e45202d
+# good: [0e470763d84dcad27284067647dfb4b1a94dfce0] Merge tag 'efi-next-for-v6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/efi/efi
+git bisect good 0e470763d84dcad27284067647dfb4b1a94dfce0
+# good: [66efff515a6500d4b4976fbab3bee8b92a1137fb] Merge tag 'amd-drm-next-6.2-2022-12-07' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+git bisect good 66efff515a6500d4b4976fbab3bee8b92a1137fb
+# good: [a7cacfb0688e3988660e90fad7017cc9a18ab390] Merge tag 'docs-6.2' of git://git.lwn.net/linux
+git bisect good a7cacfb0688e3988660e90fad7017cc9a18ab390
+# good: [102f9d3d455870844c47b82322c2dfc0a35eb745] Merge tag 'sound-6.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound
+git bisect good 102f9d3d455870844c47b82322c2dfc0a35eb745
+# bad: [361c89a0da59c04b1d3d33568965fe426b0f18de] Merge tag 'pinctrl-v6.2-1' of git://git.kernel.org/pub/scm/linux/kernel/git/linusw/linux-pinctrl
+git bisect bad 361c89a0da59c04b1d3d33568965fe426b0f18de
+# bad: [d7b41196927ba2a2b5badad1a85f9087eb90b076] media: ov5640: set correct default link frequency
+git bisect bad d7b41196927ba2a2b5badad1a85f9087eb90b076
+# good: [55927c98a2c88019e23353a87f44032107ca2854] media: atmel: atmel-isc: move to staging
+git bisect good 55927c98a2c88019e23353a87f44032107ca2854
+# good: [1ad2c1354bfa097e974d2edaa7491b6f2d43f481] media: atomisp: Remove atomisp_ospm_dphy_down() call from probe error path
+git bisect good 1ad2c1354bfa097e974d2edaa7491b6f2d43f481
+# good: [51e8415e39a962db2a753940fca18e9710c24902] media: platform: Add Renesas RZ/G2L MIPI CSI-2 receiver driver
+git bisect good 51e8415e39a962db2a753940fca18e9710c24902
+# bad: [f042b08b833de3be810f8769d88ca44aeefd7eba] media: sun6i-mipi-csi2: Require both pads to be connected for streaming
+git bisect bad f042b08b833de3be810f8769d88ca44aeefd7eba
+# good: [37e6d30e89d699449082b22845f515fe47648087] media: mantis: Kconfig: add depends on DVB_CORE for MANTIS_CORE
+git bisect good 37e6d30e89d699449082b22845f515fe47648087
+# good: [0ed554fd769a19ea8464bb83e9ac201002ef74ad] media: dvb-usb: az6027: fix null-ptr-deref in az6027_i2c_xfer()
+git bisect good 0ed554fd769a19ea8464bb83e9ac201002ef74ad
+# good: [0625b6b8233aac5232190be394ebacfa7e29b1bc] media: v4l: Use memset_after() helper
+git bisect good 0625b6b8233aac5232190be394ebacfa7e29b1bc
+# good: [d21ce554e1fc9c02d1a7f61156f794648bddb98f] media: amphion: tell and handle contiguous and non contiguous format
+git bisect good d21ce554e1fc9c02d1a7f61156f794648bddb98f
+# good: [65884e940e7fd25c480a7263aee568f86edfb6cd] media: amphion: encoder add support for contiguous planes
+git bisect good 65884e940e7fd25c480a7263aee568f86edfb6cd
+# first bad commit: [f042b08b833de3be810f8769d88ca44aeefd7eba] media: sun6i-mipi-csi2: Require both pads to be connected for streaming
+|0812_183536|Bisect successfully! 52a93d39b17dc7eb98b6aa3edb93943248e03b2f_f042b08b833de3be810f8769d88ca44aeefd7eba_revert bzimage passed!|

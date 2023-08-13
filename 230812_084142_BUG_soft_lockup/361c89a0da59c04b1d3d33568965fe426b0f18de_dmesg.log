@@ -1,0 +1,161 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM...
+c[?7l[2J[    0.000000] Linux version 6.1.0-361c89a0da59+ (root@p-rpls01) (gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-19), GNU ld version 2.36.1-2.el8) #1 SMP PREEMPT_DYNAMIC Sat Aug 12 10:04:45 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[9]:  832, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x207, context size is 840 bytes, using 'compacted' format.
+[    0.000000] signal: max sigframe size: 3632
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    1.620159] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[    8.356600] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.1.0-361c89a0da59+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   25.005431] cgroup: Unknown subsys name 'net'
+[   25.110911] cgroup: Unknown subsys name 'rlimit'
+[  193.895784] watchdog: BUG: soft lockup - CPU#0 stuck for 26s! [repro:1646]
+[  193.899703] Kernel panic - not syncing: softlockup: hung tasks
+[  193.900746] CPU: 0 PID: 1646 Comm: repro Tainted: G             L     6.1.0-361c89a0da59+ #1
+[  193.902224] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[  193.904190] Call Trace:
+[  193.904644]  <IRQ>
+[  193.905038]  dump_stack_lvl+0xa7/0xdb
+[  193.905729]  dump_stack+0x19/0x1f
+[  193.906350]  panic+0x285/0x5f2
+[  193.906952]  ? panic_print_sys_info.part.2+0x11f/0x11f
+[  193.907879]  ? watchdog_timer_fn+0x480/0x570
+[  193.908675]  watchdog_timer_fn.cold.11+0x16/0x25
+[  193.909525]  ? lockup_detector_update_enable+0xa0/0xa0
+[  193.910451]  __hrtimer_run_queues+0x61a/0xe20
+[  193.911263]  ? enqueue_hrtimer+0x350/0x350
+[  193.912016]  ? ktime_get_update_offsets_now+0x25b/0x340
+[  193.912974]  ? write_comp_data+0x2f/0x90
+[  193.913696]  hrtimer_interrupt+0x326/0x7a0
+[  193.914457]  __sysvec_apic_timer_interrupt+0x14f/0x4f0
+[  193.915391]  sysvec_apic_timer_interrupt+0x48/0xd0
+[  193.916258]  asm_sysvec_apic_timer_interrupt+0x1f/0x30
+[  193.917185] RIP: 0010:free_swap_cache+0x33/0x270
+[  193.918023] Code: 55 48 89 e5 41 55 41 54 53 48 89 fb e8 66 c7 b2 ff 48 8d 7b 08 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 80 3c 02 00 <0f> 85 01 02 00 00 4c 8b 6b 08 31 ff 4d 89 ec 41 83 e4 01 4c 89 e6
+[  193.921209] RSP: 0018:ffff88805b209df0 EFLAGS: 00000246
+[  193.922136] RAX: dffffc0000000000 RBX: ffffea00004cf780 RCX: ffffffff819df50e
+[  193.923386] RDX: 1ffffd4000099ef1 RSI: ffff888025afc900 RDI: ffffea00004cf788
+[  193.924636] RBP: ffff88805b209e08 R08: 0000000000000001 R09: 0000000000000001
+[  193.925893] R10: ffff88805b24b883 R11: ffffed100b649710 R12: 0000000000000005
+[  193.927142] R13: 0000000000000004 R14: ffff8880161f9010 R15: dffffc0000000000
+[  193.928405]  ? tlb_remove_table_rcu+0xbe/0x110
+[  193.929232]  free_page_and_swap_cache+0x22/0x260
+[  193.930075]  tlb_remove_table_rcu+0xa0/0x110
+[  193.930859]  rcu_core+0x7d6/0x1860
+[  193.931499]  ? rcu_report_dead+0x470/0x470
+[  193.932246]  ? rcu_read_lock_bh_held+0xc0/0xc0
+[  193.933067]  rcu_core_si+0x12/0x20
+[  193.933695]  __do_softirq+0x1bd/0x83c
+[  193.934380]  irq_exit_rcu+0x100/0x140
+[  193.935053]  sysvec_apic_timer_interrupt+0xa1/0xd0
+[  193.935918]  </IRQ>
+[  193.936320]  <TASK>
+[  193.936720]  asm_sysvec_apic_timer_interrupt+0x1f/0x30
+[  193.937650] RIP: 0010:finish_task_switch+0x16c/0x720
+[  193.938540] Code: 00 00 00 31 f6 49 8d 7c 24 18 e8 0f fa 0b 00 4c 89 e7 e8 07 fe ff ff 4c 89 e7 e8 2f 1e ce 03 e8 7a 8d 36 00 fb 0f 1f 44 00 00 <65> 48 8b 1c 25 80 0d 03 00 48 8d bb 48 1d 00 00 48 b8 00 00 00 00
+[  193.941745] RSP: 0018:ffff8880151d7718 EFLAGS: 00000206
+[  193.942670] RAX: 00000000000a1821 RBX: ffff888025afc900 RCX: 0000000000000000
+[  193.943917] RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+[  193.945182] RBP: ffff8880151d7760 R08: 0000000000000001 R09: 0000000000000001
+[  193.946426] R10: ffff88805b2447c3 R11: ffffed100b6488f8 R12: ffff88805b2447c0
+[  193.947680] R13: ffff888014420000 R14: ffff888011d26cc0 R15: ffff888011d26cc0
+[  193.948956]  ? finish_task_switch+0x166/0x720
+[  193.949743]  ? finish_task_switch+0x127/0x720
+[  193.950533]  ? __switch_to+0x4bc/0xe70
+[  193.951216]  ? __switch_to_asm+0x3e/0x60
+[  193.951939]  __schedule+0xa29/0x21c0
+[  193.952613]  ? __sched_text_start+0x8/0x8
+[  193.953350]  ? __this_cpu_preempt_check+0x20/0x30
+[  193.954208]  ? lock_is_held_type+0xe6/0x140
+[  193.954974]  ? __cond_resched+0x25/0x30
+[  193.955678]  preempt_schedule_common+0x1f/0xf0
+[  193.956491]  __cond_resched+0x25/0x30
+[  193.957170]  kmem_cache_alloc+0x295/0x330
+[  193.957903]  ? prepare_creds+0x39/0x710
+[  193.958612]  prepare_creds+0x39/0x710
+[  193.959294]  do_coredump+0x304/0x3c50
+[  193.959976]  ? kasan_save_stack+0x40/0x50
+[  193.960712]  ? kasan_save_stack+0x2a/0x50
+[  193.961452]  ? kasan_save_free_info+0x32/0x50
+[  193.962251]  ? __kasan_slab_free+0x10b/0x1a0
+[  193.963026]  ? slab_free_freelist_hook+0xba/0x1a0
+[  193.963876]  ? kmem_cache_free+0x1dc/0x440
+[  193.964631]  ? dump_emit+0xe0/0xe0
+[  193.965266]  ? entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  193.966202]  ? merge_sched_in+0x13d0/0x13d0
+[  193.966965]  ? kvm_clock_read+0x18/0x40
+[  193.967673]  ? __kasan_check_read+0x15/0x20
+[  193.968432]  ? hlock_class+0x52/0x130
+[  193.969123]  ? __lock_acquire+0x18a1/0x55d0
+[  193.969887]  ? lock_is_held_type+0xe6/0x140
+[  193.970648]  ? rcu_lockdep_current_cpu_online+0x4b/0x160
+[  193.971601]  ? __this_cpu_preempt_check+0x20/0x30
+[  193.972463]  ? lock_is_held_type+0xe6/0x140
+[  193.973233]  ? rcu_lockdep_current_cpu_online+0x4b/0x160
+[  193.974192]  ? write_comp_data+0x2f/0x90
+[  193.974909]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[  193.975762]  ? proc_coredump_connector+0x4fd/0x950
+[  193.976624]  ? lock_downgrade+0x740/0x740
+[  193.977369]  ? proc_comm_connector+0x680/0x680
+[  193.978171]  ? rcu_lockdep_current_cpu_online+0x4b/0x160
+[  193.979115]  ? _raw_spin_unlock_irq+0x2b/0x60
+[  193.979912]  ? get_signal+0x1efa/0x26c0
+[  193.980621]  ? __this_cpu_preempt_check+0x20/0x30
+[  193.981478]  ? lockdep_hardirqs_on+0x8a/0x110
+[  193.982271]  ? _raw_spin_unlock_irq+0x2b/0x60
+[  193.983073]  ? write_comp_data+0x2f/0x90
+[  193.983796]  get_signal+0x1ff1/0x26c0
+[  193.984471]  ? lockdep_hardirqs_on+0x8a/0x110
+[  193.985286]  ? exit_signals+0x9a0/0x9a0
+[  193.985987]  ? __schedule+0xa29/0x21c0
+[  193.986682]  arch_do_signal_or_restart+0x82/0x710
+[  193.987532]  ? get_sigframe_size+0x20/0x20
+[  193.988293]  ? __kasan_check_read+0x15/0x20
+[  193.989061]  exit_to_user_mode_prepare+0x13b/0x210
+[  193.989926]  syscall_exit_to_user_mode+0x2d/0x60
+[  193.990762]  do_syscall_64+0x4a/0x90
+[  193.991417]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[  193.992330] RIP: 0033:0x7f52eaa3ee5d
+[  193.992992] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+[  193.996178] RSP: 002b:00007ffc139b4728 EFLAGS: 00000206 ORIG_RAX: 000000000000012a
+[  193.997512] RAX: 0000000000000003 RBX: 0000000000000000 RCX: 00007f52eaa3ee5d
+[  193.998757] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000280
+[  194.000003] RBP: 00007ffc139b4730 R08: 0000000000000000 R09: 00007ffc139b4780
+[  194.001267] R10: 00000000ffffffff R11: 0000000000000206 R12: 00007ffc139b48c8
+[  194.002511] R13: 0000000000407f0f R14: 000000000040adf8 R15: 00007f52ead69000
+[  194.003778]  </TASK>
+[  194.004875] Kernel Offset: disabled
+[  194.005560] ---[ end Kernel panic - not syncing: softlockup: hung tasks ]---
