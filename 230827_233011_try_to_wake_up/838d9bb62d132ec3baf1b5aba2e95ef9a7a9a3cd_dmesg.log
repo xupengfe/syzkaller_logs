@@ -1,0 +1,236 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2J[    0.000000] Linux version 6.0.0-rc2-838d9bb62d13+ (root@p-rpls03) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.35.2-42.el9) #1 SMP PREEMPT_DYNAMIC Tue Jul 25 06:54:02 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[9]:  832, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x207, context size is 840 bytes, using 'compacted' format.
+[    0.000000] signal: max sigframe size: 3632
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    0.173517] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[    4.538260] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.0.0-rc2-838d9bb62d13+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   19.016633] 
+[   19.016637] ======================================================
+[   19.016638] WARNING: possible circular locking dependency detected
+[   19.016641] 6.0.0-rc2-838d9bb62d13+ #1 Tainted: G        W         
+[   19.016646] ------------------------------------------------------
+[   19.016647] repro/1557 is trying to acquire lock:
+[   19.016651] ffff88800e233190 (&p->pi_lock){-.-.}-{2:2}, at: try_to_wake_up+0xbd/0x1650
+[   19.016670] 
+[   19.016670] but task is already holding lock:
+[   19.016671] ffffffff86443b38 ((console_sem).lock){-.-.}-{2:2}, at: up+0x21/0xc0
+[   19.016685] 
+[   19.016685] which lock already depends on the new lock.
+[   19.016685] 
+[   19.016687] 
+[   19.016687] the existing dependency chain (in reverse order) is:
+[   19.016688] 
+[   19.016688] -> #3 ((console_sem).lock){-.-.}-{2:2}:
+[   19.016696]        _raw_spin_lock_irqsave+0x52/0x80
+[   19.016705]        down_trylock+0x1c/0x80
+[   19.016711]        __down_trylock_console_sem+0x4f/0xe0
+[   19.016719]        vprintk_emit+0x27c/0x6d0
+[   19.016724]        vprintk_default+0x2f/0x40
+[   19.016730]        vprintk+0xde/0x180
+[   19.016735]        _printk+0xc3/0xfa
+[   19.016741]        report_bug.cold+0x71/0xae
+[   19.016748]        handle_bug+0x46/0x80
+[   19.016754]        exc_invalid_op+0x1d/0x50
+[   19.016760]        asm_exc_invalid_op+0x1f/0x30
+[   19.016767]        event_filter_match+0x4a7/0x700
+[   19.016774]        merge_sched_in+0x11c/0x1100
+[   19.016780]        visit_groups_merge.constprop.0.isra.0+0x5a4/0x1240
+[   19.016788]        ctx_sched_in+0x2fe/0x7b0
+[   19.016794]        perf_event_sched_in+0x86/0xa0
+[   19.016800]        ctx_resched+0x1db/0x3a0
+[   19.016806]        __perf_install_in_context+0x297/0xab0
+[   19.016813]        remote_function+0x136/0x1b0
+[   19.016819]        __flush_smp_call_function_queue+0x1f3/0x5d0
+[   19.016827]        generic_smp_call_function_single_interrupt+0x1c/0x30
+[   19.016835]        __sysvec_call_function_single+0x9f/0x3b0
+[   19.016842]        sysvec_call_function_single+0xa0/0xc0
+[   19.016848]        asm_sysvec_call_function_single+0x1f/0x30
+[   19.016855]        native_safe_halt+0xf/0x20
+[   19.016861]        arch_cpu_idle+0x16/0x20
+[   19.016868]        default_idle_call+0x9e/0xf0
+[   19.016874]        do_idle+0x47e/0x5d0
+[   19.016879]        cpu_startup_entry+0x24/0x30
+[   19.016885]        rest_init+0x17f/0x280
+[   19.016891]        arch_call_rest_init+0x1c/0x34
+[   19.016898]        start_kernel+0x4fe/0x524
+[   19.016903]        x86_64_start_reservations+0x28/0x2e
+[   19.016910]        x86_64_start_kernel+0x9b/0xa5
+[   19.016916]        secondary_startup_64_no_verify+0xe5/0xeb
+[   19.016923] 
+[   19.016923] -> #2 (&cpuctx_lock){-.-.}-{2:2}:
+[   19.016933]        _raw_spin_lock+0x38/0x50
+[   19.016940]        perf_cgroup_switch+0x213/0x620
+[   19.016947]        __perf_event_task_sched_out+0x273/0x1a50
+[   19.016956]        __schedule+0x1200/0x2910
+[   19.016961]        schedule_idle+0x65/0xa0
+[   19.016967]        do_idle+0x33a/0x5d0
+[   19.016973]        cpu_startup_entry+0x24/0x30
+[   19.016979]        rest_init+0x17f/0x280
+[   19.016985]        arch_call_rest_init+0x1c/0x34
+[   19.016992]        start_kernel+0x4fe/0x524
+[   19.016999]        x86_64_start_reservations+0x28/0x2e
+[   19.017006]        x86_64_start_kernel+0x9b/0xa5
+[   19.017012]        secondary_startup_64_no_verify+0xe5/0xeb
+[   19.017020] 
+[   19.017020] -> #1 (&rq->__lock){-.-.}-{2:2}:
+[   19.017028]        _raw_spin_lock_nested+0x3e/0x60
+[   19.017036]        raw_spin_rq_lock_nested+0x2c/0x40
+[   19.017044]        task_fork_fair+0x6c/0x490
+[   19.017052]        sched_cgroup_fork+0x3a9/0x5e0
+[   19.017058]        copy_process+0x43a4/0x6c70
+[   19.017065]        kernel_clone+0xfd/0xaf0
+[   19.017072]        user_mode_thread+0xc5/0x100
+[   19.017079]        rest_init+0x32/0x280
+[   19.017085]        arch_call_rest_init+0x1c/0x34
+[   19.017092]        start_kernel+0x4fe/0x524
+[   19.017099]        x86_64_start_reservations+0x28/0x2e
+[   19.017106]        x86_64_start_kernel+0x9b/0xa5
+[   19.017112]        secondary_startup_64_no_verify+0xe5/0xeb
+[   19.017120] 
+[   19.017120] -> #0 (&p->pi_lock){-.-.}-{2:2}:
+[   19.017128]        __lock_acquire+0x29ec/0x5410
+[   19.017136]        lock_acquire+0x1c7/0x570
+[   19.017144]        _raw_spin_lock_irqsave+0x52/0x80
+[   19.017152]        try_to_wake_up+0xbd/0x1650
+[   19.017158]        wake_up_process+0x19/0x20
+[   19.017164]        __up.isra.0+0xec/0x130
+[   19.017169]        up+0x90/0xc0
+[   19.017176]        __up_console_sem+0x8b/0xb0
+[   19.017184]        console_unlock+0x4d5/0x5f0
+[   19.017189]        vcs_open+0x90/0xe0
+[   19.017196]        chrdev_open+0x2a8/0x780
+[   19.017203]        do_dentry_open+0x499/0x1210
+[   19.017210]        vfs_open+0xa9/0xe0
+[   19.017217]        path_openat+0x1e18/0x2ae0
+[   19.017222]        do_filp_open+0x1ce/0x420
+[   19.017228]        do_sys_openat2+0x181/0x540
+[   19.017235]        __x64_sys_openat+0x17a/0x240
+[   19.017243]        do_syscall_64+0x3c/0x90
+[   19.017250]        entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   19.017259] 
+[   19.017259] other info that might help us debug this:
+[   19.017259] 
+[   19.017260] Chain exists of:
+[   19.017260]   &p->pi_lock --> &cpuctx_lock --> (console_sem).lock
+[   19.017260] 
+[   19.017269]  Possible unsafe locking scenario:
+[   19.017269] 
+[   19.017271]        CPU0                    CPU1
+[   19.017272]        ----                    ----
+[   19.017273]   lock((console_sem).lock);
+[   19.017277]                                lock(&cpuctx_lock);
+[   19.017281]                                lock((console_sem).lock);
+[   19.017284]   lock(&p->pi_lock);
+[   19.017288] 
+[   19.017288]  *** DEADLOCK ***
+[   19.017288] 
+[   19.017289] 1 lock held by repro/1557:
+[   19.017293]  #0: ffffffff86443b38 ((console_sem).lock){-.-.}-{2:2}, at: up+0x21/0xc0
+[   19.017308] 
+[   19.017308] stack backtrace:
+[   19.017310] CPU: 1 PID: 1557 Comm: repro Tainted: G        W          6.0.0-rc2-838d9bb62d13+ #1
+[   19.017318] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   19.017323] Call Trace:
+[   19.017325]  <TASK>
+[   19.017328]  dump_stack_lvl+0xa7/0xdb
+[   19.017336]  dump_stack+0x19/0x1f
+[   19.017343]  print_circular_bug.cold+0x15b/0x16a
+[   19.017353]  check_noncircular+0x26c/0x320
+[   19.017362]  ? lock_chain_count+0x30/0x30
+[   19.017371]  ? print_circular_bug+0x210/0x210
+[   19.017380]  ? desc_read+0x35d/0x440
+[   19.017389]  ? call_rcu_zapped+0xb0/0xb0
+[   19.017398]  ? __sanitizer_cov_trace_const_cmp8+0x1c/0x30
+[   19.017410]  __lock_acquire+0x29ec/0x5410
+[   19.017424]  ? lockdep_hardirqs_on_prepare+0x420/0x420
+[   19.017435]  ? __this_cpu_preempt_check+0x21/0x30
+[   19.017443]  ? lock_is_held_type+0xf0/0x150
+[   19.017452]  lock_acquire+0x1c7/0x570
+[   19.017460]  ? try_to_wake_up+0xbd/0x1650
+[   19.017468]  ? lock_release+0x870/0x870
+[   19.017478]  ? lockdep_hardirqs_on_prepare+0x420/0x420
+[   19.017489]  ? __this_cpu_preempt_check+0x21/0x30
+[   19.017497]  ? lock_is_held_type+0xf0/0x150
+[   19.017507]  _raw_spin_lock_irqsave+0x52/0x80
+[   19.017515]  ? try_to_wake_up+0xbd/0x1650
+[   19.017522]  try_to_wake_up+0xbd/0x1650
+[   19.017531]  ? migrate_swap_stop+0x7c0/0x7c0
+[   19.017538]  ? rwlock_bug.part.0+0x90/0x90
+[   19.017548]  wake_up_process+0x19/0x20
+[   19.017555]  __up.isra.0+0xec/0x130
+[   19.017562]  up+0x90/0xc0
+[   19.017573]  ? vcs_open+0x90/0xe0
+[   19.017585]  __up_console_sem+0x8b/0xb0
+[   19.017600]  console_unlock+0x4d5/0x5f0
+[   19.017613]  ? console_emit_next_record.constprop.0+0x8c0/0x8c0
+[   19.017627]  ? vcs_release+0x70/0x70
+[   19.017634]  vcs_open+0x90/0xe0
+[   19.017641]  chrdev_open+0x2a8/0x780
+[   19.017649]  ? cdev_device_add+0x240/0x240
+[   19.017656]  ? fsnotify_perm.part.0+0x265/0x5f0
+[   19.017664]  ? do_raw_spin_unlock+0x15d/0x210
+[   19.017674]  do_dentry_open+0x499/0x1210
+[   19.017682]  ? cdev_device_add+0x240/0x240
+[   19.017692]  vfs_open+0xa9/0xe0
+[   19.017700]  path_openat+0x1e18/0x2ae0
+[   19.017711]  ? path_lookupat+0x770/0x770
+[   19.017721]  do_filp_open+0x1ce/0x420
+[   19.017729]  ? may_open_dev+0x110/0x110
+[   19.017736]  ? lock_release+0x3ed/0x870
+[   19.017750]  ? do_raw_spin_unlock+0x15d/0x210
+[   19.017764]  do_sys_openat2+0x181/0x540
+[   19.017772]  ? seqcount_lockdep_reader_access.constprop.0+0xb4/0xd0
+[   19.017782]  ? ktime_get_coarse_real_ts64+0x4d/0xf0
+[   19.017792]  ? build_open_flags+0x6d0/0x6d0
+[   19.017800]  ? lockdep_hardirqs_on+0x8a/0x110
+[   19.017808]  ? trace_hardirqs_on+0x41/0x120
+[   19.017818]  ? seqcount_lockdep_reader_access.constprop.0+0xc0/0xd0
+[   19.017830]  __x64_sys_openat+0x17a/0x240
+[   19.017839]  ? __ia32_compat_sys_open+0x1f0/0x1f0
+[   19.017849]  ? syscall_trace_enter.constprop.0+0x17e/0x240
+[   19.017861]  do_syscall_64+0x3c/0x90
+[   19.017869]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   19.017879] RIP: 0033:0x7efe80d3e84b
+[   19.017885] Code: 25 00 00 41 00 3d 00 00 41 00 74 4b 64 8b 04 25 18 00 00 00 85 c0 75 67 44 89 e2 48 89 ee bf 9c ff ff ff b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 0f 87 91 00 00 00 48 8b 54 24 28 64 48 2b 14 25
+[   19.017892] RSP: 002b:00007ffec189b790 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
+[   19.017899] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007efe80d3e84b
+[   19.017904] RDX: 0000000000002402 RSI: 00007ffec189b830 RDI: 00000000ffffff9c
+[   19.017908] RBP: 00007ffec189b830 R08: 000000000000000f R09: 0023617363762f76
+[   19.017913] R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000002402
+[   19.017917] R13: 0000000000401df2 R14: 0000000000403e08 R15: 00007efe80eb1000
+[   19.017928]  </TASK>
