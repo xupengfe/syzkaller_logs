@@ -1,0 +1,122 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2J[    0.000000] Linux version 6.6.0-rc1-0bb80ecc33a8 (root@p-tglh01.sh.intel.com) (gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-19), GNU ld version 2.36.1-2.el8) #1 SMP PREEMPT_DYNAMIC Tue Sep 12 12:05:48 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    0.234293] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[    8.069410] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.6.0-rc1-0bb80ecc33a8 on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   24.157409] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN NOPTI
+[   24.158244] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   24.158778] CPU: 0 PID: 721 Comm: repro Not tainted 6.6.0-rc1-0bb80ecc33a8 #1
+[   24.159284] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   24.160075] RIP: 0010:bpf_prog_offload_verifier_prep+0xb6/0x190
+[   24.160510] Code: 00 fc ff df 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 ae 00 00 00 48 b8 00 00 00 00 00 fc ff df 4c 8b 6b 10 4c 89 ea 48 c1 ea 03 <80> 3c 02 00 0f 85 a3 00 00 00 48 b8 00 00 00 00 00 fc ff df 4d 8b
+[   24.161793] RSP: 0018:ffff8880103275e8 EFLAGS: 00010246
+[   24.162164] RAX: dffffc0000000000 RBX: ffff88801a707800 RCX: 0000000000000000
+[   24.162661] RDX: 0000000000000000 RSI: ffff8880146b8000 RDI: ffff88801a707810
+[   24.163158] RBP: ffff888010327600 R08: fffffbfff0db8716 R09: fffffbfff0db8716
+[   24.163656] R10: fffffbfff0db8715 R11: ffffffff86dc38af R12: ffffc900008f8000
+[   24.164153] R13: 0000000000000000 R14: ffffc900008f8004 R15: ffffc900008f8038
+[   24.164651] FS:  00007fce2a150740(0000) GS:ffff88806cc00000(0000) knlGS:0000000000000000
+[   24.165212] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   24.165619] CR2: 0000000020000440 CR3: 00000000223ec005 CR4: 0000000000770ef0
+[   24.166118] PKRU: 55555554
+[   24.166317] Call Trace:
+[   24.166497]  <TASK>
+[   24.166656]  ? show_regs+0xa2/0xb0
+[   24.166920]  ? __die_body+0x28/0x80
+[   24.167191]  ? die_addr+0x5f/0xb0
+[   24.167447]  ? exc_general_protection+0x190/0x340
+[   24.167805]  ? asm_exc_general_protection+0x2b/0x30
+[   24.168171]  ? bpf_prog_offload_verifier_prep+0xb6/0x190
+[   24.168573]  ? bpf_prog_offload_verifier_prep+0x82/0x190
+[   24.168983]  bpf_check+0x55ab/0xb270
+[   24.169283]  ? __pfx_bpf_check+0x10/0x10
+[   24.169586]  ? __pfx___lock_acquire+0x10/0x10
+[   24.169920]  ? __this_cpu_preempt_check+0x20/0x30
+[   24.170271]  ? lock_release+0x3f8/0x770
+[   24.170557]  ? bpf_prog_load+0x1630/0x2370
+[   24.170859]  ? __pfx_lock_release+0x10/0x10
+[   24.171174]  ? __pfx_lock_acquire+0x10/0x10
+[   24.171490]  ? ktime_get_with_offset+0x24a/0x290
+[   24.171836]  ? bpf_prog_load+0x1630/0x2370
+[   24.172143]  ? write_comp_data+0x2f/0x90
+[   24.172444]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[   24.172804]  bpf_prog_load+0x1732/0x2370
+[   24.173100]  ? bpf_prog_load+0x1732/0x2370
+[   24.173411]  ? __pfx_bpf_prog_load+0x10/0x10
+[   24.173738]  ? lock_release+0x3f8/0x770
+[   24.174028]  ? __this_cpu_preempt_check+0x20/0x30
+[   24.174380]  ? __might_fault+0x102/0x1b0
+[   24.174683]  ? __pfx_lock_release+0x10/0x10
+[   24.174998]  ? __pfx_lock_acquire+0x10/0x10
+[   24.175319]  ? write_comp_data+0x2f/0x90
+[   24.175614]  ? write_comp_data+0x2f/0x90
+[   24.175913]  __sys_bpf+0x18e7/0x66a0
+[   24.176185]  ? __kasan_check_read+0x15/0x20
+[   24.176502]  ? __pfx___sys_bpf+0x10/0x10
+[   24.176804]  ? write_comp_data+0x2f/0x90
+[   24.177108]  ? __pfx___lock_acquire+0x10/0x10
+[   24.177429]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[   24.177780]  ? __this_cpu_preempt_check+0x20/0x30
+[   24.178132]  ? lock_release+0x3f8/0x770
+[   24.178423]  ? __audit_syscall_entry+0x3d5/0x540
+[   24.178773]  ? __pfx_lock_release+0x10/0x10
+[   24.179089]  ? __pfx_lock_acquire+0x10/0x10
+[   24.179405]  ? ktime_get_coarse_real_ts64+0x181/0x1b0
+[   24.179778]  ? __audit_syscall_entry+0x3d5/0x540
+[   24.180126]  ? __this_cpu_preempt_check+0x20/0x30
+[   24.180476]  ? write_comp_data+0x2f/0x90
+[   24.180776]  __x64_sys_bpf+0x7e/0xc0
+[   24.180982]  ? syscall_enter_from_user_mode+0x51/0x60
+[   24.181277]  do_syscall_64+0x3b/0x90
+[   24.181499]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+[   24.181796] RIP: 0033:0x7fce29e3ee5d
+[   24.182014] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+[   24.183052] RSP: 002b:00007fffb9a02958 EFLAGS: 00000202 ORIG_RAX: 0000000000000141
+[   24.183485] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fce29e3ee5d
+[   24.183892] RDX: 0000000000000090 RSI: 0000000020000380 RDI: 0000000000000005
+[   24.184298] RBP: 00007fffb9a02970 R08: 00007fffb9a02970 R09: 00007fffb9a02970
+[   24.184709] R10: 00007fffb9a02970 R11: 0000000000000202 R12: 00007fffb9a02ae8
+[   24.185121] R13: 0000000000402bf3 R14: 0000000000404e08 R15: 00007fce2a195000
+[   24.185537]  </TASK>
+[   24.185670] Modules linked in:
+[   24.185884] ---[ end trace 0000000000000000 ]---
+[   24.186155] RIP: 0010:bpf_prog_offload_verifier_prep+0xb6/0x190
+[   24.186507] Code: 00 fc ff df 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 ae 00 00 00 48 b8 00 00 00 00 00 fc ff df 4c 8b 6b 10 4c 89 ea 48 c1 ea 03 <80> 3c 02 00 0f 85 a3 00 00 00 48 b8 00 00 00 00 00 fc ff df 4d 8b
+[   24.188245] RSP: 0018:ffff8880103275e8 EFLAGS: 00010246
+[   24.188553] RAX: dffffc0000000000 RBX: ffff88801a707800 RCX: 0000000000000000
+[   24.188965] RDX: 0000000000000000 RSI: ffff8880146b8000 RDI: ffff88801a707810
+[   24.189373] RBP: ffff888010327600 R08: fffffbfff0db8716 R09: fffffbfff0db8716
+[   24.189779] R10: fffffbfff0db8715 R11: ffffffff86dc38af R12: ffffc900008f8000
+[   24.190188] R13: 0000000000000000 R14: ffffc900008f8004 R15: ffffc900008f8038
+[   24.190596] FS:  00007fce2a150740(0000) GS:ffff88806cc00000(0000) knlGS:0000000000000000
+[   24.191079] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   24.191417] CR2: 0000000020000440 CR3: 00000000223ec005 CR4: 0000000000770ef0
+[   24.191829] PKRU: 55555554

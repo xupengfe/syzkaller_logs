@@ -1,0 +1,134 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2J[    0.000000] Linux version 6.2.0-rc2-caf713c338bd+ (root@p-tglh01.sh.intel.com) (gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-19), GNU ld version 2.36.1-2.el8) #1 SMP PREEMPT_DYNAMIC Thu Sep 14 20:29:56 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x020: 'AVX-512 opmask'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x040: 'AVX-512 Hi256'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x080: 'AVX-512 ZMM_Hi256'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[5]:  832, xstate_sizes[5]:   64
+[    0.000000] x86/fpu: xstate_offset[6]:  896, xstate_sizes[6]:  512
+[    0.000000] x86/fpu: xstate_offset[7]: 1408, xstate_sizes[7]: 1024
+[    0.000000] x86/fpu: xstate_offset[9]: 2432, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x2e7, context size is 2440 bytes, using 'compacted' format.
+[    0.000000] signal: max sigframe size: 3632
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    0.574655] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[    7.141436] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.2.0-rc2-caf713c338bd+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   25.521869] general protection fault, probably for non-canonical address 0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN NOPTI
+[   25.522618] KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
+[   25.523098] CPU: 0 PID: 718 Comm: repro Not tainted 6.2.0-rc2-caf713c338bd+ #1
+[   25.523576] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   25.524275] RIP: 0010:bpf_prog_offload_verifier_prep+0xb6/0x190
+[   25.524698] Code: 00 fc ff df 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 ae 00 00 00 48 b8 00 00 00 00 00 fc ff df 4c 8b 6b 10 4c 89 ea 48 c1 ea 03 <80> 3c 02 00 0f 85 a3 00 00 00 48 b8 00 00 00 00 00 fc ff df 4d 8b
+[   25.525868] RSP: 0018:ffff88800f3ef638 EFLAGS: 00010246
+[   25.526211] RAX: dffffc0000000000 RBX: ffff8880170fee00 RCX: ffffffff852f024a
+[   25.526665] RDX: 0000000000000000 RSI: ffff888011308000 RDI: ffff8880170fee10
+[   25.527120] RBP: ffff88800f3ef650 R08: fffffbfff0d36456 R09: fffffbfff0d36456
+[   25.527584] R10: ffffffff869b22af R11: fffffbfff0d36455 R12: ffffc9000097c000
+[   25.528024] R13: 0000000000000000 R14: ffffc9000097c004 R15: ffffc9000097c038
+[   25.528473] FS:  00007fe6368a8740(0000) GS:ffff88806cc00000(0000) knlGS:0000000000000000
+[   25.528984] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   25.529350] CR2: 0000000020000440 CR3: 000000000ecde005 CR4: 0000000000770ef0
+[   25.529803] PKRU: 55555554
+[   25.529985] Call Trace:
+[   25.530150]  <TASK>
+[   25.530293]  bpf_check+0x511a/0xb0f0
+[   25.530538]  ? lock_is_held_type+0xe6/0x140
+[   25.530845]  ? __pfx_bpf_check+0x10/0x10
+[   25.531110]  ? lock_is_held_type+0xe6/0x140
+[   25.531390]  ? rcu_lockdep_current_cpu_online+0x4b/0x160
+[   25.531751]  ? rcu_read_lock_sched_held+0xa9/0xd0
+[   25.532060]  ? __pfx_rcu_read_lock_sched_held+0x10/0x10
+[   25.532406]  ? __this_cpu_preempt_check+0x20/0x30
+[   25.532726]  ? lock_release+0x3f8/0x7d0
+[   25.532990]  ? bpf_prog_load+0xfaf/0x2240
+[   25.533258]  ? __pfx_lock_release+0x10/0x10
+[   25.533539]  ? ktime_get_with_offset+0x24a/0x290
+[   25.533845]  ? bpf_prog_load+0xfaf/0x2240
+[   25.534114]  ? __sanitizer_cov_trace_pc+0x25/0x60
+[   25.534436]  bpf_prog_load+0x10a6/0x2240
+[   25.534693]  ? bpf_prog_load+0x10a6/0x2240
+[   25.534967]  ? __pfx_bpf_prog_load+0x10/0x10
+[   25.535250]  ? rcu_read_lock_sched_held+0xa9/0xd0
+[   25.535574]  ? __this_cpu_preempt_check+0x20/0x30
+[   25.535882]  ? lock_release+0x3f8/0x7d0
+[   25.536138]  ? __this_cpu_preempt_check+0x20/0x30
+[   25.536453]  ? __might_fault+0xf6/0x1b0
+[   25.536723]  ? __pfx_lock_release+0x10/0x10
+[   25.537002]  ? __pfx_lock_acquire+0x10/0x10
+[   25.537285]  ? write_comp_data+0x2f/0x90
+[   25.537558]  __sys_bpf+0x1e2b/0x6170
+[   25.537796]  ? write_comp_data+0x2f/0x90
+[   25.538066]  ? __pfx___sys_bpf+0x10/0x10
+[   25.538324]  ? __lock_acquire+0x18a1/0x55d0
+[   25.538604]  ? __this_cpu_preempt_check+0x20/0x30
+[   25.538921]  ? lock_is_held_type+0xe6/0x140
+[   25.539202]  ? rcu_lockdep_current_cpu_online+0x4b/0x160
+[   25.539561]  ? rcu_read_lock_sched_held+0xa9/0xd0
+[   25.539867]  ? __pfx_rcu_read_lock_sched_held+0x10/0x10
+[   25.540209]  ? __this_cpu_preempt_check+0x20/0x30
+[   25.540530]  ? lock_release+0x3f8/0x7d0
+[   25.540791]  ? __audit_syscall_entry+0x3df/0x550
+[   25.541093]  ? __pfx_lock_release+0x10/0x10
+[   25.541373]  ? ktime_get_coarse_real_ts64+0x181/0x1b0
+[   25.541711]  ? __audit_syscall_entry+0x3df/0x550
+[   25.542017]  ? __this_cpu_preempt_check+0x20/0x30
+[   25.542332]  ? write_comp_data+0x2f/0x90
+[   25.542614]  __x64_sys_bpf+0x7e/0xc0
+[   25.542853]  ? syscall_enter_from_user_mode+0x51/0x60
+[   25.543192]  do_syscall_64+0x3b/0x90
+[   25.543442]  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+[   25.543780] RIP: 0033:0x7fe63663ee5d
+[   25.544014] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+[   25.545154] RSP: 002b:00007ffced3ca828 EFLAGS: 00000202 ORIG_RAX: 0000000000000141
+[   25.545630] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fe63663ee5d
+[   25.546078] RDX: 0000000000000090 RSI: 0000000020000380 RDI: 0000000000000005
+[   25.546522] RBP: 00007ffced3ca840 R08: 00007ffced3ca840 R09: 00007ffced3ca840
+[   25.546972] R10: 00007ffced3ca840 R11: 0000000000000202 R12: 00007ffced3ca9b8
+[   25.547418] R13: 0000000000402bf3 R14: 0000000000404e08 R15: 00007fe6368ed000
+[   25.547899]  </TASK>
+[   25.548108] Modules linked in:
+[   25.548392] ---[ end trace 0000000000000000 ]---
+[   25.548698] RIP: 0010:bpf_prog_offload_verifier_prep+0xb6/0x190
+[   25.549092] Code: 00 fc ff df 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 ae 00 00 00 48 b8 00 00 00 00 00 fc ff df 4c 8b 6b 10 4c 89 ea 48 c1 ea 03 <80> 3c 02 00 0f 85 a3 00 00 00 48 b8 00 00 00 00 00 fc ff df 4d 8b
+[   25.550244] RSP: 0018:ffff88800f3ef638 EFLAGS: 00010246
+[   25.550604] RAX: dffffc0000000000 RBX: ffff8880170fee00 RCX: ffffffff852f024a
+[   25.551061] RDX: 0000000000000000 RSI: ffff888011308000 RDI: ffff8880170fee10
+[   25.551513] RBP: ffff88800f3ef650 R08: fffffbfff0d36456 R09: fffffbfff0d36456
+[   25.551962] R10: ffffffff869b22af R11: fffffbfff0d36455 R12: ffffc9000097c000
+[   25.552410] R13: 0000000000000000 R14: ffffc9000097c004 R15: ffffc9000097c038
+[   25.552866] FS:  00007fe6368a8740(0000) GS:ffff88806cc00000(0000) knlGS:0000000000000000
+[   25.553375] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   25.553742] CR2: 0000000020000440 CR3: 000000000ecde005 CR4: 0000000000770ef0
+[   25.554194] PKRU: 55555554
