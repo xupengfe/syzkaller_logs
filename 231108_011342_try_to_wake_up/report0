@@ -1,0 +1,429 @@
+======================================================
+WARNING: possible circular locking dependency detected
+6.6.0-79807addc25e+ #1 Not tainted
+------------------------------------------------------
+syz-executor.1/6079 is trying to acquire lock:
+ffff88804c763268 (&p->pi_lock){-.-.}-{2:2}, at: class_raw_spinlock_irqsave_constructor include/linux/spinlock.h:518 [inline]
+ffff88804c763268 (&p->pi_lock){-.-.}-{2:2}, at: try_to_wake_up+0xc4/0x1870 kernel/sched/core.c:4226
+
+but task is already holding lock:
+ffffffff86c4d5f8 ((console_sem).lock){-...}-{2:2}, at: up+0x21/0xc0 kernel/locking/semaphore.c:187
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #3 ((console_sem).lock){-...}-{2:2}:
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+       down_trylock+0x1c/0x80 kernel/locking/semaphore.c:139
+       __down_trylock_console_sem+0x4f/0xe0 kernel/printk/printk.c:329
+       console_trylock kernel/printk/printk.c:2679 [inline]
+       console_trylock+0x7f/0x150 kernel/printk/printk.c:2674
+       console_trylock_spinning kernel/printk/printk.c:1927 [inline]
+       vprintk_emit+0x278/0x6b0 kernel/printk/printk.c:2306
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2322
+       vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+       _printk+0xc4/0x100 kernel/printk/printk.c:2332
+       ex_handler_msr+0x456/0x560 arch/x86/mm/extable.c:177
+       fixup_exception+0x8f7/0xce0 arch/x86/mm/extable.c:283
+       gp_try_fixup_and_notify.constprop.0+0x30/0x1b0 arch/x86/kernel/traps.c:616
+       __exc_general_protection arch/x86/kernel/traps.c:676 [inline]
+       exc_general_protection+0x139/0x340 arch/x86/kernel/traps.c:642
+       asm_exc_general_protection+0x2b/0x30 arch/x86/include/asm/idtentry.h:564
+       __wrmsr arch/x86/include/asm/msr.h:94 [inline]
+       native_write_msr+0x22/0x60 arch/x86/include/asm/msr.h:145
+       paravirt_write_msr arch/x86/include/asm/paravirt.h:196 [inline]
+       wrmsrl arch/x86/include/asm/paravirt.h:229 [inline]
+       __intel_pmu_enable_all.constprop.0+0x144/0x390 arch/x86/events/intel/core.c:2250
+       intel_pmu_enable_all+0x1e/0x30 arch/x86/events/intel/core.c:2267
+       x86_pmu_enable+0x574/0xe50 arch/x86/events/core.c:1356
+       perf_pmu_enable kernel/events/core.c:1154 [inline]
+       perf_pmu_enable kernel/events/core.c:1150 [inline]
+       perf_ctx_enable kernel/events/core.c:706 [inline]
+       ctx_resched+0x33b/0x4f0 kernel/events/core.c:2713
+       __perf_install_in_context+0x244/0x970 kernel/events/core.c:2782
+       remote_function kernel/events/core.c:92 [inline]
+       remote_function+0x136/0x1b0 kernel/events/core.c:72
+       csd_do_func kernel/smp.c:133 [inline]
+       generic_exec_single+0x202/0x560 kernel/smp.c:404
+       smp_call_function_single+0x196/0x470 kernel/smp.c:647
+       cpu_function_call kernel/events/core.c:153 [inline]
+       perf_install_in_context+0x4f4/0x5a0 kernel/events/core.c:2842
+       perf_event_create_kernel_counter kernel/events/core.c:12847 [inline]
+       perf_event_create_kernel_counter+0x4e3/0x680 kernel/events/core.c:12772
+       hardlockup_detector_event_create+0xd1/0x1d0 kernel/watchdog_perf.c:123
+       watchdog_hardlockup_probe+0x34/0xa0 kernel/watchdog_perf.c:252
+       lockup_detector_init+0x72/0x100 kernel/watchdog.c:1015
+       kernel_init_freeable+0x93e/0x1120 init/main.c:1538
+       kernel_init+0x28/0x2e0 init/main.c:1437
+       ret_from_fork+0x56/0x90 arch/x86/kernel/process.c:147
+       ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+
+-> #2 (&cpuctx_lock){-...}-{2:2}:
+       __raw_spin_lock include/linux/spinlock_api_smp.h:133 [inline]
+       _raw_spin_lock+0x38/0x50 kernel/locking/spinlock.c:154
+       perf_ctx_lock kernel/events/core.c:161 [inline]
+       perf_cgroup_switch+0x1af/0x360 kernel/events/core.c:865
+       __perf_event_task_sched_out+0x12d/0x1720 kernel/events/core.c:3658
+       perf_event_task_sched_out include/linux/perf_event.h:1484 [inline]
+       prepare_task_switch kernel/sched/core.c:5180 [inline]
+       context_switch kernel/sched/core.c:5323 [inline]
+       __schedule+0x140e/0x3030 kernel/sched/core.c:6688
+       preempt_schedule_common+0x4a/0xd0 kernel/sched/core.c:6865
+       __cond_resched+0x24/0x30 kernel/sched/core.c:8544
+       _cond_resched include/linux/sched.h:2102 [inline]
+       generic_map_update_batch+0x4a7/0x670 kernel/bpf/syscall.c:1758
+       bpf_map_do_batch+0x4c9/0x5e0 kernel/bpf/syscall.c:4918
+       __sys_bpf+0x792/0x5470 kernel/bpf/syscall.c:5447
+       __do_sys_bpf kernel/bpf/syscall.c:5487 [inline]
+       __se_sys_bpf kernel/bpf/syscall.c:5485 [inline]
+       __x64_sys_bpf+0x7d/0xc0 kernel/bpf/syscall.c:5485
+       do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+       do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+       entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+-> #1 (&rq->__lock){-.-.}-{2:2}:
+       _raw_spin_lock_nested+0x3e/0x60 kernel/locking/spinlock.c:378
+       raw_spin_rq_lock_nested+0x2c/0x40 kernel/sched/core.c:558
+       raw_spin_rq_lock kernel/sched/sched.h:1349 [inline]
+       rq_lock kernel/sched/sched.h:1663 [inline]
+       task_fork_fair+0x69/0x1e0 kernel/sched/fair.c:12477
+       sched_cgroup_fork+0x437/0x6c0 kernel/sched/core.c:4812
+       copy_process+0x44de/0x7130 kernel/fork.c:2614
+       kernel_clone+0xfd/0x890 kernel/fork.c:2914
+       user_mode_thread+0xc5/0x100 kernel/fork.c:2992
+       rest_init+0x32/0x2c0 init/main.c:691
+       arch_call_rest_init+0x1c/0x50 init/main.c:823
+       start_kernel+0x3dd/0x510 init/main.c:1068
+       x86_64_start_reservations+0x1c/0x30 arch/x86/kernel/head64.c:555
+       x86_64_start_kernel+0xa0/0xb0 arch/x86/kernel/head64.c:536
+       secondary_startup_64_no_verify+0x17d/0x18b
+
+-> #0 (&p->pi_lock){-.-.}-{2:2}:
+       check_prev_add kernel/locking/lockdep.c:3134 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+       validate_chain kernel/locking/lockdep.c:3868 [inline]
+       __lock_acquire+0x2fe2/0x5c70 kernel/locking/lockdep.c:5136
+       lock_acquire kernel/locking/lockdep.c:5753 [inline]
+       lock_acquire+0x1c9/0x530 kernel/locking/lockdep.c:5718
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+       class_raw_spinlock_irqsave_constructor include/linux/spinlock.h:518 [inline]
+       try_to_wake_up+0xc4/0x1870 kernel/sched/core.c:4226
+       wake_up_process+0x19/0x20 kernel/sched/core.c:4474
+       __up.isra.0+0xec/0x130 kernel/locking/semaphore.c:278
+       up+0x90/0xc0 kernel/locking/semaphore.c:191
+       __up_console_sem kernel/printk/printk.c:346 [inline]
+       __console_unlock kernel/printk/printk.c:2726 [inline]
+       console_unlock+0x2cb/0x310 kernel/printk/printk.c:3045
+       con_font_get drivers/tty/vt/vt.c:4561 [inline]
+       con_font_op+0x22c/0x1080 drivers/tty/vt/vt.c:4673
+       vt_k_ioctl drivers/tty/vt/vt_ioctl.c:474 [inline]
+       vt_ioctl+0x63b/0x2e30 drivers/tty/vt/vt_ioctl.c:752
+       tty_ioctl+0x7e7/0x1750 drivers/tty/tty_io.c:2780
+       vfs_ioctl fs/ioctl.c:51 [inline]
+       __do_sys_ioctl fs/ioctl.c:871 [inline]
+       __se_sys_ioctl fs/ioctl.c:857 [inline]
+       __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:857
+       do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+       do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+       entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+other info that might help us debug this:
+
+Chain exists of:
+  &p->pi_lock --> &cpuctx_lock --> (console_sem).lock
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock((console_sem).lock);
+                               lock(&cpuctx_lock);
+                               lock((console_sem).lock);
+  lock(&p->pi_lock);
+
+ *** DEADLOCK ***
+
+1 lock held by syz-executor.1/6079:
+ #0: ffffffff86c4d5f8 ((console_sem).lock){-...}-{2:2}, at: up+0x21/0xc0 kernel/locking/semaphore.c:187
+
+stack backtrace:
+CPU: 1 PID: 6079 Comm: syz-executor.1 Not tainted 6.6.0-79807addc25e+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xaa/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ print_circular_bug+0x47e/0x750 kernel/locking/lockdep.c:2060
+ check_noncircular+0x2f7/0x3e0 kernel/locking/lockdep.c:2187
+ check_prev_add kernel/locking/lockdep.c:3134 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+ validate_chain kernel/locking/lockdep.c:3868 [inline]
+ __lock_acquire+0x2fe2/0x5c70 kernel/locking/lockdep.c:5136
+ lock_acquire kernel/locking/lockdep.c:5753 [inline]
+ lock_acquire+0x1c9/0x530 kernel/locking/lockdep.c:5718
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+ _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+ class_raw_spinlock_irqsave_constructor include/linux/spinlock.h:518 [inline]
+ try_to_wake_up+0xc4/0x1870 kernel/sched/core.c:4226
+ wake_up_process+0x19/0x20 kernel/sched/core.c:4474
+ __up.isra.0+0xec/0x130 kernel/locking/semaphore.c:278
+ up+0x90/0xc0 kernel/locking/semaphore.c:191
+ __up_console_sem kernel/printk/printk.c:346 [inline]
+ __console_unlock kernel/printk/printk.c:2726 [inline]
+ console_unlock+0x2cb/0x310 kernel/printk/printk.c:3045
+ con_font_get drivers/tty/vt/vt.c:4561 [inline]
+ con_font_op+0x22c/0x1080 drivers/tty/vt/vt.c:4673
+ vt_k_ioctl drivers/tty/vt/vt_ioctl.c:474 [inline]
+ vt_ioctl+0x63b/0x2e30 drivers/tty/vt/vt_ioctl.c:752
+ tty_ioctl+0x7e7/0x1750 drivers/tty/tty_io.c:2780
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:871 [inline]
+ __se_sys_ioctl fs/ioctl.c:857 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:857
+ do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7f778763ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007f7787834cc8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007f778763ee5d
+RDX: 0000000020000040 RSI: 0000000000004b72 RDI: 0000000000000003
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007f778769f560 R15: 0000000000000000
+ </TASK>
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop3): Ending clean mount
+XFS (loop3): Quotacheck needed: Please wait.
+XFS (loop3): Quotacheck: Done.
+loop7: detected capacity change from 0 to 65536
+xfs: Unknown parameter ' ÔC<%†ï¤©ØŠ£ße\WèÏ!æ;´+l'
+loop4: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.6'.
+XFS (loop3): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.6'.
+loop4: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 65536
+XFS (loop3): Mounting V5 Filesystem 9b7348e5-2fa0-41a5-9526-c53a678b01f3
+XFS (loop3): Ending clean mount
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop4: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.6'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.6'.
+XFS (loop3): Unmounting Filesystem 9b7348e5-2fa0-41a5-9526-c53a678b01f3
+loop4: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop3): Ending clean mount
+XFS (loop3): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop4: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop4: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop5: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.1'.
+loop5: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop3: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+__nla_validate_parse: 1 callbacks suppressed
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.5'.
+loop4: detected capacity change from 0 to 4096
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.5'.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor.5'.
+loop4: detected capacity change from 0 to 4096
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop0: detected capacity change from 0 to 32768
+XFS (loop0): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop0): Ending clean mount
+XFS (loop0): Quotacheck needed: Please wait.
+XFS (loop0): Quotacheck: Done.
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop0): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop4: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop0: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop0: detected capacity change from 0 to 4096
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop0: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop0: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop7: detected capacity change from 0 to 32768
+loop4: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 4096
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop4: detected capacity change from 0 to 4096
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop0: detected capacity change from 0 to 4096
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 32768
+XFS (loop5): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 4096
+XFS (loop5): Ending clean mount
+XFS (loop5): Quotacheck needed: Please wait.
+loop6: detected capacity change from 0 to 32768
+XFS (loop5): Quotacheck: Done.
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Quotacheck: Done.
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop5): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 32768
+XFS (loop7): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 4096
+loop4: detected capacity change from 0 to 4096
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop7): Ending clean mount
+XFS (loop7): Quotacheck needed: Please wait.
+XFS (loop7): Quotacheck: Done.
+XFS (loop7): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.

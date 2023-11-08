@@ -1,0 +1,215 @@
+======================================================
+WARNING: possible circular locking dependency detected
+6.6.0-79807addc25e+ #1 Not tainted
+------------------------------------------------------
+syz-executor300/722 is trying to acquire lock:
+ffff88800d5e3268 (&p->pi_lock){-.-.}-{2:2}, at: class_raw_spinlock_irqsave_constructor include/linux/spinlock.h:518 [inline]
+ffff88800d5e3268 (&p->pi_lock){-.-.}-{2:2}, at: try_to_wake_up+0xc4/0x1870 kernel/sched/core.c:4226
+
+but task is already holding lock:
+ffffffff86c4d5f8 ((console_sem).lock){-...}-{2:2}, at: up+0x21/0xc0 kernel/locking/semaphore.c:187
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #3 ((console_sem).lock){-...}-{2:2}:
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+       down_trylock+0x1c/0x80 kernel/locking/semaphore.c:139
+       __down_trylock_console_sem+0x4f/0xe0 kernel/printk/printk.c:329
+       console_trylock kernel/printk/printk.c:2679 [inline]
+       console_trylock+0x7f/0x150 kernel/printk/printk.c:2674
+       console_trylock_spinning kernel/printk/printk.c:1927 [inline]
+       vprintk_emit+0x278/0x6b0 kernel/printk/printk.c:2306
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2322
+       vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+       _printk+0xc4/0x100 kernel/printk/printk.c:2332
+       ex_handler_msr+0x456/0x560 arch/x86/mm/extable.c:177
+       fixup_exception+0x8f7/0xce0 arch/x86/mm/extable.c:283
+       gp_try_fixup_and_notify.constprop.0+0x30/0x1b0 arch/x86/kernel/traps.c:616
+       __exc_general_protection arch/x86/kernel/traps.c:676 [inline]
+       exc_general_protection+0x139/0x340 arch/x86/kernel/traps.c:642
+       asm_exc_general_protection+0x2b/0x30 arch/x86/include/asm/idtentry.h:564
+       __wrmsr arch/x86/include/asm/msr.h:94 [inline]
+       native_write_msr+0x22/0x60 arch/x86/include/asm/msr.h:145
+       paravirt_write_msr arch/x86/include/asm/paravirt.h:196 [inline]
+       wrmsrl arch/x86/include/asm/paravirt.h:229 [inline]
+       __intel_pmu_enable_all.constprop.0+0x144/0x390 arch/x86/events/intel/core.c:2250
+       intel_pmu_enable_all+0x1e/0x30 arch/x86/events/intel/core.c:2267
+       x86_pmu_enable+0x574/0xe50 arch/x86/events/core.c:1356
+       perf_pmu_enable kernel/events/core.c:1154 [inline]
+       perf_pmu_enable kernel/events/core.c:1150 [inline]
+       perf_ctx_enable kernel/events/core.c:706 [inline]
+       ctx_resched+0x33b/0x4f0 kernel/events/core.c:2713
+       __perf_install_in_context+0x244/0x970 kernel/events/core.c:2782
+       remote_function kernel/events/core.c:92 [inline]
+       remote_function+0x136/0x1b0 kernel/events/core.c:72
+       csd_do_func kernel/smp.c:133 [inline]
+       generic_exec_single+0x202/0x560 kernel/smp.c:404
+       smp_call_function_single+0x196/0x470 kernel/smp.c:647
+       cpu_function_call kernel/events/core.c:153 [inline]
+       perf_install_in_context+0x4f4/0x5a0 kernel/events/core.c:2842
+       perf_event_create_kernel_counter kernel/events/core.c:12847 [inline]
+       perf_event_create_kernel_counter+0x4e3/0x680 kernel/events/core.c:12772
+       hardlockup_detector_event_create+0xd1/0x1d0 kernel/watchdog_perf.c:123
+       watchdog_hardlockup_probe+0x34/0xa0 kernel/watchdog_perf.c:252
+       lockup_detector_init+0x72/0x100 kernel/watchdog.c:1015
+       kernel_init_freeable+0x93e/0x1120 init/main.c:1538
+       kernel_init+0x28/0x2e0 init/main.c:1437
+       ret_from_fork+0x56/0x90 arch/x86/kernel/process.c:147
+       ret_from_fork_asm+0x1b/0x30 arch/x86/entry/entry_64.S:242
+
+-> #2 (&cpuctx_lock){-.-.}-{2:2}:
+       __raw_spin_lock include/linux/spinlock_api_smp.h:133 [inline]
+       _raw_spin_lock+0x38/0x50 kernel/locking/spinlock.c:154
+       perf_ctx_lock kernel/events/core.c:161 [inline]
+       perf_cgroup_switch+0x1af/0x360 kernel/events/core.c:865
+       __perf_event_task_sched_out+0x12d/0x1720 kernel/events/core.c:3658
+       perf_event_task_sched_out include/linux/perf_event.h:1484 [inline]
+       prepare_task_switch kernel/sched/core.c:5180 [inline]
+       context_switch kernel/sched/core.c:5323 [inline]
+       __schedule+0x140e/0x3030 kernel/sched/core.c:6688
+       schedule_idle+0x65/0x90 kernel/sched/core.c:6804
+       do_idle+0x29b/0x460 kernel/sched/idle.c:310
+       cpu_startup_entry+0x5c/0x70 kernel/sched/idle.c:380
+       rest_init+0x181/0x2c0 init/main.c:726
+       arch_call_rest_init+0x1c/0x50 init/main.c:823
+       start_kernel+0x3dd/0x510 init/main.c:1068
+       x86_64_start_reservations+0x1c/0x30 arch/x86/kernel/head64.c:555
+       x86_64_start_kernel+0xa0/0xb0 arch/x86/kernel/head64.c:536
+       secondary_startup_64_no_verify+0x17d/0x18b
+
+-> #1 (&rq->__lock){-.-.}-{2:2}:
+       _raw_spin_lock_nested+0x3e/0x60 kernel/locking/spinlock.c:378
+       raw_spin_rq_lock_nested+0x2c/0x40 kernel/sched/core.c:558
+       raw_spin_rq_lock kernel/sched/sched.h:1349 [inline]
+       rq_lock kernel/sched/sched.h:1663 [inline]
+       task_fork_fair+0x69/0x1e0 kernel/sched/fair.c:12477
+       sched_cgroup_fork+0x437/0x6c0 kernel/sched/core.c:4812
+       copy_process+0x44de/0x7130 kernel/fork.c:2614
+       kernel_clone+0xfd/0x890 kernel/fork.c:2914
+       user_mode_thread+0xc5/0x100 kernel/fork.c:2992
+       rest_init+0x32/0x2c0 init/main.c:691
+       arch_call_rest_init+0x1c/0x50 init/main.c:823
+       start_kernel+0x3dd/0x510 init/main.c:1068
+       x86_64_start_reservations+0x1c/0x30 arch/x86/kernel/head64.c:555
+       x86_64_start_kernel+0xa0/0xb0 arch/x86/kernel/head64.c:536
+       secondary_startup_64_no_verify+0x17d/0x18b
+
+-> #0 (&p->pi_lock){-.-.}-{2:2}:
+       check_prev_add kernel/locking/lockdep.c:3134 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+       validate_chain kernel/locking/lockdep.c:3868 [inline]
+       __lock_acquire+0x2fe2/0x5c70 kernel/locking/lockdep.c:5136
+       lock_acquire kernel/locking/lockdep.c:5753 [inline]
+       lock_acquire+0x1c9/0x530 kernel/locking/lockdep.c:5718
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+       class_raw_spinlock_irqsave_constructor include/linux/spinlock.h:518 [inline]
+       try_to_wake_up+0xc4/0x1870 kernel/sched/core.c:4226
+       wake_up_process+0x19/0x20 kernel/sched/core.c:4474
+       __up.isra.0+0xec/0x130 kernel/locking/semaphore.c:278
+       up+0x90/0xc0 kernel/locking/semaphore.c:191
+       __up_console_sem kernel/printk/printk.c:346 [inline]
+       __console_unlock kernel/printk/printk.c:2726 [inline]
+       console_unlock+0x2cb/0x310 kernel/printk/printk.c:3045
+       con_install+0x176/0x640 drivers/tty/vt/vt.c:3367
+       tty_driver_install_tty drivers/tty/tty_io.c:1306 [inline]
+       tty_init_dev.part.0+0xa8/0x6b0 drivers/tty/tty_io.c:1418
+       tty_init_dev include/linux/err.h:61 [inline]
+       tty_open_by_driver drivers/tty/tty_io.c:2084 [inline]
+       tty_open+0xc86/0x1500 drivers/tty/tty_io.c:2131
+       chrdev_open+0x2a7/0x770 fs/char_dev.c:414
+       do_dentry_open+0x6ca/0x1710 fs/open.c:948
+       vfs_open+0xba/0xf0 fs/open.c:1082
+       do_open fs/namei.c:3622 [inline]
+       path_openat+0x2052/0x2990 fs/namei.c:3779
+       do_filp_open+0x1ce/0x420 fs/namei.c:3809
+       do_sys_openat2+0x185/0x1f0 fs/open.c:1440
+       do_sys_open fs/open.c:1455 [inline]
+       __do_sys_openat fs/open.c:1471 [inline]
+       __se_sys_openat fs/open.c:1466 [inline]
+       __x64_sys_openat+0x17a/0x240 fs/open.c:1466
+       do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+       do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+       entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+other info that might help us debug this:
+
+Chain exists of:
+  &p->pi_lock --> &cpuctx_lock --> (console_sem).lock
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock((console_sem).lock);
+                               lock(&cpuctx_lock);
+                               lock((console_sem).lock);
+  lock(&p->pi_lock);
+
+ *** DEADLOCK ***
+
+3 locks held by syz-executor300/722:
+ #0: ffffffff87229208 (tty_mutex){+.+.}-{3:3}, at: tty_open_by_driver drivers/tty/tty_io.c:2048 [inline]
+ #0: ffffffff87229208 (tty_mutex){+.+.}-{3:3}, at: tty_open+0x5a4/0x1500 drivers/tty/tty_io.c:2131
+ #1: ffff88801274e1c0 (&tty->legacy_mutex){+.+.}-{3:3}, at: tty_lock+0x88/0xc0 drivers/tty/tty_mutex.c:18
+ #2: ffffffff86c4d5f8 ((console_sem).lock){-...}-{2:2}, at: up+0x21/0xc0 kernel/locking/semaphore.c:187
+
+stack backtrace:
+CPU: 0 PID: 722 Comm: syz-executor300 Not tainted 6.6.0-79807addc25e+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xaa/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ print_circular_bug+0x47e/0x750 kernel/locking/lockdep.c:2060
+ check_noncircular+0x2f7/0x3e0 kernel/locking/lockdep.c:2187
+ check_prev_add kernel/locking/lockdep.c:3134 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+ validate_chain kernel/locking/lockdep.c:3868 [inline]
+ __lock_acquire+0x2fe2/0x5c70 kernel/locking/lockdep.c:5136
+ lock_acquire kernel/locking/lockdep.c:5753 [inline]
+ lock_acquire+0x1c9/0x530 kernel/locking/lockdep.c:5718
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+ _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+ class_raw_spinlock_irqsave_constructor include/linux/spinlock.h:518 [inline]
+ try_to_wake_up+0xc4/0x1870 kernel/sched/core.c:4226
+ wake_up_process+0x19/0x20 kernel/sched/core.c:4474
+ __up.isra.0+0xec/0x130 kernel/locking/semaphore.c:278
+ up+0x90/0xc0 kernel/locking/semaphore.c:191
+ __up_console_sem kernel/printk/printk.c:346 [inline]
+ __console_unlock kernel/printk/printk.c:2726 [inline]
+ console_unlock+0x2cb/0x310 kernel/printk/printk.c:3045
+ con_install+0x176/0x640 drivers/tty/vt/vt.c:3367
+ tty_driver_install_tty drivers/tty/tty_io.c:1306 [inline]
+ tty_init_dev.part.0+0xa8/0x6b0 drivers/tty/tty_io.c:1418
+ tty_init_dev include/linux/err.h:61 [inline]
+ tty_open_by_driver drivers/tty/tty_io.c:2084 [inline]
+ tty_open+0xc86/0x1500 drivers/tty/tty_io.c:2131
+ chrdev_open+0x2a7/0x770 fs/char_dev.c:414
+ do_dentry_open+0x6ca/0x1710 fs/open.c:948
+ vfs_open+0xba/0xf0 fs/open.c:1082
+ do_open fs/namei.c:3622 [inline]
+ path_openat+0x2052/0x2990 fs/namei.c:3779
+ do_filp_open+0x1ce/0x420 fs/namei.c:3809
+ do_sys_openat2+0x185/0x1f0 fs/open.c:1440
+ do_sys_open fs/open.c:1455 [inline]
+ __do_sys_openat fs/open.c:1471 [inline]
+ __se_sys_openat fs/open.c:1466 [inline]
+ __x64_sys_openat+0x17a/0x240 fs/open.c:1466
+ do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7fe37ab3e84b
+Code: 25 00 00 41 00 3d 00 00 41 00 74 4b 64 8b 04 25 18 00 00 00 85 c0 75 67 44 89 e2 48 89 ee bf 9c ff ff ff b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 0f 87 91 00 00 00 48 8b 54 24 28 64 48 2b 14 25
+RSP: 002b:00007ffc1deb9cc0 EFLAGS: 00000246 ORIG_RAX: 0000000000000101
+RAX: ffffffffffffffda RBX: 00000000000f4240 RCX: 00007fe37ab3e84b
+RDX: 0000000000000002 RSI: 00007ffc1deb9d50 RDI: 00000000ffffff9c
+RBP: 00007ffc1deb9d50 R08: 0000000000000000 R09: 00007ffc1deb9ad6
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000002
+R13: 0000000000401180 R14: 0000000000403e08 R15: 00007fe37adb8000
+ </TASK>
