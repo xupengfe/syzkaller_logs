@@ -1,0 +1,254 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2J[0m.[    0.000000] Linux version 6.7.0-rc3-2cc14f52aeb7+ (root@p-adls01) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.35.2-42.el9) #1 SMP PREEMPT_DYNAMIC Mon Nov 27 15:51:20 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: legacy bootconsole [earlyser0] enabled
+[    0.327961] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[    5.872918] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 6.7.0-rc3-2cc14f52aeb7+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   19.093125] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k 
+[   19.177915] hrtimer: interrupt took 32198 ns
+[  316.705302] EXT4-fs (sda): error count since last fsck: 8
+[  316.706021] EXT4-fs (sda): initial error at time 1699515630: ext4_mb_release_inode_pa:5364
+[  316.706810] EXT4-fs (sda): last error at time 1699515808: mb_free_blocks:1917: block 1286144
+[ 1537.313213] INFO: task repro:960 blocked for more than 143 seconds.
+[ 1537.313584]       Not tainted 6.7.0-rc3-2cc14f52aeb7+ #1
+[ 1537.313871] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[ 1537.314256] task:repro           state:D stack:0     pid:960   tgid:960   ppid:743    flags:0x00000006
+[ 1537.314730] Call Trace:
+[ 1537.314878]  <TASK>
+[ 1537.315037]  __schedule+0xb68/0x3030
+[ 1537.315324]  ? __pfx___schedule+0x10/0x10
+[ 1537.315546]  ? lock_release+0x417/0x7e0
+[ 1537.315792]  ? __pfx_lock_release+0x10/0x10
+[ 1537.316061]  ? preempt_count_add+0x9/0x180
+[ 1537.316334]  schedule+0xf8/0x310
+[ 1537.316544]  schedule_preempt_disabled+0x1c/0x30
+[ 1537.316800]  __mutex_lock+0xd8a/0x1a40
+[ 1537.317111]  ? perf_trace_init+0x5c/0x310
+[ 1537.317344]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.317650]  ? __pfx___mutex_lock+0x10/0x10
+[ 1537.317880]  ? ftrace_call+0x5/0x44
+[ 1537.318087]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.318348]  ? perf_try_init_event+0x13d/0x5b0
+[ 1537.318646]  ? __mutex_lock+0x5/0x1a40
+[ 1537.318894]  mutex_lock_nested+0x1f/0x30
+[ 1537.319108]  ? mutex_lock_nested+0x1f/0x30
+[ 1537.319338]  perf_trace_init+0x5c/0x310
+[ 1537.319583]  perf_tp_event_init+0xaf/0x130
+[ 1537.319818]  perf_try_init_event+0x13d/0x5b0
+[ 1537.320084]  perf_event_alloc.part.0+0xf8f/0x3b10
+[ 1537.320401]  ? perf_event_alloc.part.0+0xe73/0x3b10
+[ 1537.320693]  __do_sys_perf_event_open+0x51a/0x2c60
+[ 1537.320956]  ? lock_release+0x417/0x7e0
+[ 1537.321259]  ? __pfx___do_sys_perf_event_open+0x10/0x10
+[ 1537.321646]  ? __audit_syscall_entry+0x39e/0x500
+[ 1537.321907]  ? __pfx___x64_sys_perf_event_open+0x10/0x10
+[ 1537.322181]  ? ktime_get_coarse_real_ts64+0xb5/0xf0
+[ 1537.322479]  __x64_sys_perf_event_open+0xc7/0x150
+[ 1537.322733]  ? __x64_sys_perf_event_open+0x9/0x150
+[ 1537.322990]  ? do_syscall_64+0x42/0xf0
+[ 1537.323204]  do_syscall_64+0x42/0xf0
+[ 1537.323414]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+[ 1537.323680] RIP: 0033:0x7efdcb23ee5d
+[ 1537.323881] RSP: 002b:00007fffa75a2f38 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[ 1537.324264] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007efdcb23ee5d
+[ 1537.324613] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000580
+[ 1537.324961] RBP: 00007fffa75a3140 R08: 0000000000000000 R09: 0000000000000003
+[ 1537.325341] R10: 00000000ffffffff R11: 0000000000000246 R12: 00007fffa75a32d8
+[ 1537.325689] R13: 000000000040672d R14: 0000000000408e08 R15: 00007efdcb460000
+[ 1537.326136]  </TASK>
+[ 1537.326266] INFO: task repro:961 blocked for more than 143 seconds.
+[ 1537.326576]       Not tainted 6.7.0-rc3-2cc14f52aeb7+ #1
+[ 1537.326842] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[ 1537.327217] task:repro           state:D stack:0     pid:961   tgid:961   ppid:742    flags:0x00004006
+[ 1537.327680] Call Trace:
+[ 1537.327822]  <TASK>
+[ 1537.327976]  __schedule+0xb68/0x3030
+[ 1537.328231]  ? __pfx___schedule+0x10/0x10
+[ 1537.328446]  ? lock_release+0x417/0x7e0
+[ 1537.328685]  ? __pfx_lock_release+0x10/0x10
+[ 1537.328949]  ? preempt_count_add+0x9/0x180
+[ 1537.329245]  schedule+0xf8/0x310
+[ 1537.329452]  schedule_preempt_disabled+0x1c/0x30
+[ 1537.329702]  __mutex_lock+0xd8a/0x1a40
+[ 1537.329932]  ? perf_trace_init+0x5c/0x310
+[ 1537.330156]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.330455]  ? __pfx___mutex_lock+0x10/0x10
+[ 1537.330684]  ? ftrace_call+0x5/0x44
+[ 1537.330889]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.331150]  ? perf_try_init_event+0x13d/0x5b0
+[ 1537.331450]  ? __mutex_lock+0x5/0x1a40
+[ 1537.331698]  mutex_lock_nested+0x1f/0x30
+[ 1537.331912]  ? mutex_lock_nested+0x1f/0x30
+[ 1537.332138]  perf_trace_init+0x5c/0x310
+[ 1537.332384]  perf_tp_event_init+0xaf/0x130
+[ 1537.332617]  perf_try_init_event+0x13d/0x5b0
+[ 1537.332883]  perf_event_alloc.part.0+0xf8f/0x3b10
+[ 1537.333231]  ? perf_event_alloc.part.0+0xe73/0x3b10
+[ 1537.333523]  __do_sys_perf_event_open+0x51a/0x2c60
+[ 1537.333785]  ? lock_release+0x417/0x7e0
+[ 1537.334056]  ? __pfx___do_sys_perf_event_open+0x10/0x10
+[ 1537.334444]  ? __audit_syscall_entry+0x39e/0x500
+[ 1537.334703]  ? __pfx___x64_sys_perf_event_open+0x10/0x10
+[ 1537.334979]  ? ktime_get_coarse_real_ts64+0xb5/0xf0
+[ 1537.335278]  __x64_sys_perf_event_open+0xc7/0x150
+[ 1537.335533]  ? __x64_sys_perf_event_open+0x9/0x150
+[ 1537.335791]  ? do_syscall_64+0x42/0xf0
+[ 1537.336005]  do_syscall_64+0x42/0xf0
+[ 1537.336213]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+[ 1537.336477] RIP: 0033:0x7efdcb23ee5d
+[ 1537.336677] RSP: 002b:00007fffa75a2f38 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[ 1537.337091] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007efdcb23ee5d
+[ 1537.337439] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000580
+[ 1537.337788] RBP: 00007fffa75a3140 R08: 0000000000000000 R09: 0000000000000003
+[ 1537.338136] R10: 00000000ffffffff R11: 0000000000000246 R12: 00007fffa75a32d8
+[ 1537.338484] R13: 000000000040672d R14: 0000000000408e08 R15: 00007efdcb460000
+[ 1537.338932]  </TASK>
+[ 1537.339062] INFO: task repro:962 blocked for more than 143 seconds.
+[ 1537.339377]       Not tainted 6.7.0-rc3-2cc14f52aeb7+ #1
+[ 1537.339644] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[ 1537.340019] task:repro           state:D stack:0     pid:962   tgid:962   ppid:734    flags:0x00000006
+[ 1537.340481] Call Trace:
+[ 1537.340622]  <TASK>
+[ 1537.340777]  __schedule+0xb68/0x3030
+[ 1537.341063]  ? __pfx___schedule+0x10/0x10
+[ 1537.341280]  ? lock_release+0x417/0x7e0
+[ 1537.341519]  ? __pfx_lock_release+0x10/0x10
+[ 1537.341783]  ? preempt_count_add+0x9/0x180
+[ 1537.342048]  schedule+0xf8/0x310
+[ 1537.342256]  schedule_preempt_disabled+0x1c/0x30
+[ 1537.342507]  __mutex_lock+0xd8a/0x1a40
+[ 1537.342738]  ? perf_trace_init+0x5c/0x310
+[ 1537.342962]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.343264]  ? __pfx___mutex_lock+0x10/0x10
+[ 1537.343494]  ? ftrace_call+0x5/0x44
+[ 1537.343699]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.343961]  ? perf_try_init_event+0x13d/0x5b0
+[ 1537.344258]  ? __mutex_lock+0x5/0x1a40
+[ 1537.344507]  mutex_lock_nested+0x1f/0x30
+[ 1537.344722]  ? mutex_lock_nested+0x1f/0x30
+[ 1537.344948]  perf_trace_init+0x5c/0x310
+[ 1537.345236]  perf_tp_event_init+0xaf/0x130
+[ 1537.345470]  perf_try_init_event+0x13d/0x5b0
+[ 1537.345736]  perf_event_alloc.part.0+0xf8f/0x3b10
+[ 1537.346054]  ? perf_event_alloc.part.0+0xe73/0x3b10
+[ 1537.346346]  __do_sys_perf_event_open+0x51a/0x2c60
+[ 1537.346609]  ? lock_release+0x417/0x7e0
+[ 1537.346881]  ? __pfx___do_sys_perf_event_open+0x10/0x10
+[ 1537.347280]  ? __audit_syscall_entry+0x39e/0x500
+[ 1537.347543]  ? __pfx___x64_sys_perf_event_open+0x10/0x10
+[ 1537.347818]  ? ktime_get_coarse_real_ts64+0xb5/0xf0
+[ 1537.348116]  __x64_sys_perf_event_open+0xc7/0x150
+[ 1537.348371]  ? __x64_sys_perf_event_open+0x9/0x150
+[ 1537.348629]  ? do_syscall_64+0x42/0xf0
+[ 1537.348843]  do_syscall_64+0x42/0xf0
+[ 1537.349082]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+[ 1537.349346] RIP: 0033:0x7efdcb23ee5d
+[ 1537.349546] RSP: 002b:00007fffa75a2f38 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[ 1537.349928] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007efdcb23ee5d
+[ 1537.350277] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000580
+[ 1537.350625] RBP: 00007fffa75a3140 R08: 0000000000000000 R09: 0000000000000003
+[ 1537.350974] R10: 00000000ffffffff R11: 0000000000000246 R12: 00007fffa75a32d8
+[ 1537.351325] R13: 000000000040672d R14: 0000000000408e08 R15: 00007efdcb460000
+[ 1537.351773]  </TASK>
+[ 1537.351903] INFO: task repro:963 blocked for more than 143 seconds.
+[ 1537.352212]       Not tainted 6.7.0-rc3-2cc14f52aeb7+ #1
+[ 1537.352478] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+[ 1537.352853] task:repro           state:D stack:0     pid:963   tgid:963   ppid:741    flags:0x00004006
+[ 1537.353349] Call Trace:
+[ 1537.353492]  <TASK>
+[ 1537.353646]  __schedule+0xb68/0x3030
+[ 1537.353900]  ? __pfx___schedule+0x10/0x10
+[ 1537.354115]  ? lock_release+0x417/0x7e0
+[ 1537.354355]  ? __pfx_lock_release+0x10/0x10
+[ 1537.354618]  ? preempt_count_add+0x9/0x180
+[ 1537.354884]  schedule+0xf8/0x310
+[ 1537.355090]  schedule_preempt_disabled+0x1c/0x30
+[ 1537.355343]  __mutex_lock+0xd8a/0x1a40
+[ 1537.355574]  ? perf_trace_init+0x5c/0x310
+[ 1537.355798]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.356096]  ? __pfx___mutex_lock+0x10/0x10
+[ 1537.356326]  ? ftrace_call+0x5/0x44
+[ 1537.356531]  ? arch_ftrace_ops_list_func+0x1ad/0x550
+[ 1537.356792]  ? perf_try_init_event+0x13d/0x5b0
+[ 1537.357116]  ? __mutex_lock+0x5/0x1a40
+[ 1537.357365]  mutex_lock_nested+0x1f/0x30
+[ 1537.357580]  ? mutex_lock_nested+0x1f/0x30
+[ 1537.357805]  perf_trace_init+0x5c/0x310
+[ 1537.358051]  perf_tp_event_init+0xaf/0x130
+[ 1537.358285]  perf_try_init_event+0x13d/0x5b0
+[ 1537.358551]  perf_event_alloc.part.0+0xf8f/0x3b10
+[ 1537.358870]  ? perf_event_alloc.part.0+0xe73/0x3b10
+[ 1537.359162]  __do_sys_perf_event_open+0x51a/0x2c60
+[ 1537.359428]  ? lock_release+0x417/0x7e0
+[ 1537.359700]  ? __pfx___do_sys_perf_event_open+0x10/0x10
+[ 1537.360089]  ? __audit_syscall_entry+0x39e/0x500
+[ 1537.360348]  ? __pfx___x64_sys_perf_event_open+0x10/0x10
+[ 1537.360624]  ? ktime_get_coarse_real_ts64+0xb5/0xf0
+[ 1537.360921]  __x64_sys_perf_event_open+0xc7/0x150
+[ 1537.361207]  ? __x64_sys_perf_event_open+0x9/0x150
+[ 1537.361466]  ? do_syscall_64+0x42/0xf0
+[ 1537.361680]  do_syscall_64+0x42/0xf0
+[ 1537.361888]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+[ 1537.362152] RIP: 0033:0x7efdcb23ee5d
+[ 1537.362352] RSP: 002b:00007fffa75a2f38 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[ 1537.362734] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007efdcb23ee5d
+[ 1537.363083] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000580
+[ 1537.363434] RBP: 00007fffa75a3140 R08: 0000000000000000 R09: 0000000000000003
+[ 1537.363782] R10: 00000000ffffffff R11: 0000000000000246 R12: 00007fffa75a32d8
+[ 1537.364130] R13: 000000000040672d R14: 0000000000408e08 R15: 00007efdcb460000
+[ 1537.364577]  </TASK>
+[ 1537.364708] 
+[ 1537.364708] Showing all locks held in the system:
+[ 1537.365016] 1 lock held by khungtaskd/31:
+[ 1537.365259]  #0: ffffffff86c5b6e0 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x71/0x370
+[ 1537.365780] 1 lock held by repro/958:
+[ 1537.365976]  #0: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x2c/0x1d0
+[ 1537.366470] 5 locks held by repro/959:
+[ 1537.366670] 2 locks held by repro/960:
+[ 1537.366868]  #0: ffffffff8926f830 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc.part.0+0xd1d/0x3b10
+[ 1537.367383]  #1: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310
+[ 1537.367863] 2 locks held by repro/961:
+[ 1537.368066]  #0: ffffffff8926f830 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc.part.0+0xd1d/0x3b10
+[ 1537.368578]  #1: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310
+[ 1537.369091] 2 locks held by repro/962:
+[ 1537.369290]  #0: ffffffff8926f830 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc.part.0+0xd1d/0x3b10
+[ 1537.369802]  #1: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310
+[ 1537.370283] 2 locks held by repro/963:
+[ 1537.370481]  #0: ffffffff8926f830 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc.part.0+0xd1d/0x3b10
+[ 1537.370993]  #1: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310
+[ 1537.371478] 2 locks held by repro/964:
+[ 1537.371677]  #0: ffffffff8926f830 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc.part.0+0xd1d/0x3b10
+[ 1537.372188]  #1: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310
+[ 1537.372669] 2 locks held by repro/965:
+[ 1537.372867]  #0: ffffffff8926f830 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc.part.0+0xd1d/0x3b10
+[ 1537.373424]  #1: ffffffff86d7ff08 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310
+[ 1537.373904] 
+[ 1537.374003] =============================================
+[ 1537.374003] 

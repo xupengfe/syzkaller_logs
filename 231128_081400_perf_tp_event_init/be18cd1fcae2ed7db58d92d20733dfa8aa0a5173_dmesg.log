@@ -1,0 +1,186 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+7FF91000+7FEF1000 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM...
+c[?7l[2J[    0.000000] Linux version 5.12.0-be18cd1fcae2+ (root@p-adls01) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.35.2-42.el9) #1 SMP Tue Nov 28 14:10:35 CST 2023
+[    0.000000] Command line: console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0 quiet plymouth.enable=0
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[9]:  832, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x207, context size is 840 bytes, using 'compacted' format.
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    4.284271] systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mLoad Kernel Modules[0m.
+
+CentOS Stream 9
+Kernel 5.12.0-be18cd1fcae2+ on an x86_64
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+test login: [   15.590354] Adding 124996k swap on ./swap-file.  Priority:0 extents:1 across:124996k FS
+[   15.662878] hrtimer: interrupt took 31684 ns
+[   40.674252] watchdog: BUG: soft lockup - CPU#1 stuck for 22s! [repro:784]
+[   40.674836] Modules linked in:
+[   40.675107] irq event stamp: 1450494
+[   40.675402] hardirqs last  enabled at (1450493): [<ffffffff84a85bb5>] irqentry_exit+0x35/0x80
+[   40.676086] hardirqs last disabled at (1450494): [<ffffffff84a84390>] sysvec_apic_timer_interrupt+0x10/0x90
+[   40.676845] softirqs last  enabled at (136536): [<ffffffff81205335>] irq_exit_rcu+0x135/0x1c0
+[   40.677520] softirqs last disabled at (135805): [<ffffffff81205335>] irq_exit_rcu+0x135/0x1c0
+[   40.678190] CPU: 1 PID: 784 Comm: repro Not tainted 5.12.0-be18cd1fcae2+ #1
+[   40.678738] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   40.679625] RIP: 0010:__text_poke+0x751/0x960
+[   40.679989] Code: bf 03 00 00 00 48 89 de e8 bc 4b 0c 00 66 90 e9 79 fc ff ff e8 50 1d 00 00 e9 2b fd ff ff e8 56 2f 50 00 fb 66 0f 1f 44 00 00 <e9> 79 fd ff ff 4d 85 ed 75 4d 4c 89 fb 4c 8b ad 58 ff ff ff 48 f7
+[   40.681413] RSP: 0018:ffff88801e9bf7d8 EFLAGS: 00000206
+[   40.681840] RAX: 0000000000161f35 RBX: 0000000000000000 RCX: 1ffffffff0ee8022
+[   40.682400] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff810c4bea
+[   40.682960] RBP: ffff88801e9bf8a8 R08: 0000000000000001 R09: ffffffff877393b7
+[   40.683521] R10: fffffbfff0ee7276 R11: 0000000000000001 R12: ffffffff832dad21
+[   40.684079] R13: 0000000000000007 R14: 0000000000000004 R15: ffff888019bf5400
+[   40.684638] FS:  00007fe67419b800(0000) GS:ffff88805e300000(0000) knlGS:0000000000000000
+[   40.685272] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   40.685727] CR2: 0000000000000001 CR3: 000000001dac8000 CR4: 0000000000750ee0
+[   40.686287] PKRU: 55555554
+[   40.686517] Call Trace:
+[   40.686773]  ? optimize_nops+0x360/0x360
+[   40.687108]  ? intel_crtc_init+0x1/0xc60
+[   40.687443]  ? __text_poke+0x5/0x960
+[   40.687747]  ? lock_is_held_type+0xe5/0x110
+[   40.688105]  ? intel_crtc_init+0x1/0xc60
+[   40.688447]  text_poke+0x5a/0x90
+[   40.688737]  text_poke_bp_batch+0x2e4/0x5a0
+[   40.689110]  ? intel_crtc_init+0x1/0xc60
+[   40.689443]  ? alternatives_enable_smp+0xe0/0xe0
+[   40.689833]  ? 0xffffffffa02980cc
+[   40.690150]  ? text_poke_bp_batch+0x5/0x5a0
+[   40.690515]  ? intel_atomic_commit+0xf70/0xf70
+[   40.690898]  text_poke_queue+0xe7/0x170
+[   40.691249]  ftrace_replace_code+0x18e/0x290
+[   40.691636]  ftrace_modify_all_code+0x1ac/0x270
+[   40.692032]  arch_ftrace_update_code+0x9/0x10
+[   40.692395]  ftrace_run_update_code+0x30/0xb0
+[   40.692767]  ftrace_startup+0x257/0x430
+[   40.693123]  register_ftrace_function+0x65/0x110
+[   40.693518]  perf_ftrace_event_register+0x15f/0x250
+[   40.693935]  perf_trace_event_init+0x18d/0x9e0
+[   40.694323]  ? perf_trace_init+0xc3/0x250
+[   40.694682]  perf_trace_init+0x189/0x250
+[   40.695037]  perf_tp_event_init+0xa6/0x120
+[   40.695396]  perf_try_init_event+0x13b/0x5a0
+[   40.695778]  perf_event_alloc.part.0+0xf4a/0x3ac0
+[   40.696162]  ? lock_release+0x205/0x850
+[   40.696583]  __do_sys_perf_event_open+0x533/0x2ff0
+[   40.697050]  ? perf_event_set_output+0x4d0/0x4d0
+[   40.697431]  ? trace_hardirqs_on+0x6a/0x190
+[   40.697859]  ? lock_is_held_type+0x55/0x110
+[   40.698259]  __x64_sys_perf_event_open+0xbe/0x140
+[   40.698653]  ? syscall_enter_from_user_mode+0x4c/0x60
+[   40.699076]  do_syscall_64+0x40/0x80
+[   40.699387]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   40.699801] RIP: 0033:0x7fe6741dce5d
+[   40.700103] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+[   40.701525] RSP: 002b:00007ffe77801f78 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[   40.702129] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fe6741dce5d
+[   40.702688] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000580
+[   40.703251] RBP: 00007ffe77802180 R08: 0000000000000000 R09: 0000000000000003
+[   40.703811] R10: 00000000ffffffff R11: 0000000000000246 R12: 00007ffe77802318
+[   40.704372] R13: 000000000040672d R14: 0000000000408e08 R15: 00007fe6743e9000
+[   40.705024] Sending NMI from CPU 1 to CPUs 0:
+[   40.705527] NMI backtrace for cpu 0 skipped: idling at native_safe_halt+0xe/0x10
+[   40.706379] Kernel panic - not syncing: softlockup: hung tasks
+[   40.706845] CPU: 1 PID: 784 Comm: repro Tainted: G             L    5.12.0-be18cd1fcae2+ #1
+[   40.707499] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+[   40.708383] Call Trace:
+[   40.708594]  <IRQ>
+[   40.708776]  dump_stack+0x116/0x176
+[   40.709099]  panic+0x2d9/0x738
+[   40.709373]  ? __warn_printk+0xf8/0xf8
+[   40.709707]  ? printk_safe_flush+0xf4/0x140
+[   40.710074]  ? watchdog_timer_fn.cold+0xfc/0x142
+[   40.710461]  ? watchdog_timer_fn.cold+0xfc/0x142
+[   40.710880]  watchdog_timer_fn.cold+0x10d/0x142
+[   40.711258]  ? lockup_detector_update_enable+0xa0/0xa0
+[   40.711698]  __hrtimer_run_queues+0x1ec/0xc00
+[   40.712136]  ? hrtimer_sleeper_start_expires+0x90/0x90
+[   40.712568]  ? __hrtimer_run_queues+0x5/0xc00
+[   40.712966]  hrtimer_interrupt+0x314/0x9d0
+[   40.713403]  __sysvec_apic_timer_interrupt+0x104/0x410
+[   40.713833]  sysvec_apic_timer_interrupt+0x74/0x90
+[   40.714230]  </IRQ>
+[   40.714427]  asm_sysvec_apic_timer_interrupt+0x12/0x20
+[   40.714843] RIP: 0010:__text_poke+0x751/0x960
+[   40.715203] Code: bf 03 00 00 00 48 89 de e8 bc 4b 0c 00 66 90 e9 79 fc ff ff e8 50 1d 00 00 e9 2b fd ff ff e8 56 2f 50 00 fb 66 0f 1f 44 00 00 <e9> 79 fd ff ff 4d 85 ed 75 4d 4c 89 fb 4c 8b ad 58 ff ff ff 48 f7
+[   40.716626] RSP: 0018:ffff88801e9bf7d8 EFLAGS: 00000206
+[   40.717054] RAX: 0000000000161f35 RBX: 0000000000000000 RCX: 1ffffffff0ee8022
+[   40.717613] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff810c4bea
+[   40.718173] RBP: ffff88801e9bf8a8 R08: 0000000000000001 R09: ffffffff877393b7
+[   40.718733] R10: fffffbfff0ee7276 R11: 0000000000000001 R12: ffffffff832dad21
+[   40.719297] R13: 0000000000000007 R14: 0000000000000004 R15: ffff888019bf5400
+[   40.719869]  ? intel_crtc_init+0x1/0xc60
+[   40.720238]  ? __text_poke+0x74a/0x960
+[   40.720572]  ? __text_poke+0x74a/0x960
+[   40.720931]  ? optimize_nops+0x360/0x360
+[   40.721264]  ? intel_crtc_init+0x1/0xc60
+[   40.721594]  ? __text_poke+0x5/0x960
+[   40.721897]  ? lock_is_held_type+0xe5/0x110
+[   40.722257]  ? intel_crtc_init+0x1/0xc60
+[   40.722601]  text_poke+0x5a/0x90
+[   40.722892]  text_poke_bp_batch+0x2e4/0x5a0
+[   40.723266]  ? intel_crtc_init+0x1/0xc60
+[   40.723601]  ? alternatives_enable_smp+0xe0/0xe0
+[   40.723991]  ? 0xffffffffa02980cc
+[   40.724306]  ? text_poke_bp_batch+0x5/0x5a0
+[   40.724671]  ? intel_atomic_commit+0xf70/0xf70
+[   40.725055]  text_poke_queue+0xe7/0x170
+[   40.725404]  ftrace_replace_code+0x18e/0x290
+[   40.725789]  ftrace_modify_all_code+0x1ac/0x270
+[   40.726182]  arch_ftrace_update_code+0x9/0x10
+[   40.726546]  ftrace_run_update_code+0x30/0xb0
+[   40.726920]  ftrace_startup+0x257/0x430
+[   40.727282]  register_ftrace_function+0x65/0x110
+[   40.727677]  perf_ftrace_event_register+0x15f/0x250
+[   40.728091]  perf_trace_event_init+0x18d/0x9e0
+[   40.728479]  ? perf_trace_init+0xc3/0x250
+[   40.728838]  perf_trace_init+0x189/0x250
+[   40.729195]  perf_tp_event_init+0xa6/0x120
+[   40.729547]  perf_try_init_event+0x13b/0x5a0
+[   40.729931]  perf_event_alloc.part.0+0xf4a/0x3ac0
+[   40.730316]  ? lock_release+0x205/0x850
+[   40.730735]  __do_sys_perf_event_open+0x533/0x2ff0
+[   40.731205]  ? perf_event_set_output+0x4d0/0x4d0
+[   40.731586]  ? trace_hardirqs_on+0x6a/0x190
+[   40.732011]  ? lock_is_held_type+0x55/0x110
+[   40.732415]  __x64_sys_perf_event_open+0xbe/0x140
+[   40.732808]  ? syscall_enter_from_user_mode+0x4c/0x60
+[   40.733231]  do_syscall_64+0x40/0x80
+[   40.733540]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[   40.733952] RIP: 0033:0x7fe6741dce5d
+[   40.734254] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+[   40.735682] RSP: 002b:00007ffe77801f78 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+[   40.736284] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fe6741dce5d
+[   40.736844] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000580
+[   40.737402] RBP: 00007ffe77802180 R08: 0000000000000000 R09: 0000000000000003
+[   40.737961] R10: 00000000ffffffff R11: 0000000000000246 R12: 00007ffe77802318
+[   40.738522] R13: 000000000040672d R14: 0000000000408e08 R15: 00007fe6743e9000
+[   40.739593] Kernel Offset: disabled
+[   40.739920] ---[ end Kernel panic - not syncing: softlockup: hung tasks ]---
