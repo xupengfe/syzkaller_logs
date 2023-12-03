@@ -1,0 +1,34 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [d59eb177c84f9572a6b51024c0b2611c3b5a27c5] ip6_mc_msfilter(): pass the address list separately
+git bisect bad d59eb177c84f9572a6b51024c0b2611c3b5a27c5
+# status: waiting for good commit(s), bad commit known
+# good: [dc026a73c7221b4d9d146ed0bde69ff578ebe8dc] io-wq: shuffle io_worker_handle_work() code
+git bisect good dc026a73c7221b4d9d146ed0bde69ff578ebe8dc
+# skip: [397a97946798890b9bdaa6122fcfad7147690670] Merge tag 'linux-kselftest-5.7-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/shuah/linux-kselftest
+git bisect skip 397a97946798890b9bdaa6122fcfad7147690670
+# bad: [49835c15a55225e9b3ff9cc9317135b334ea2d49] Merge tag 'pm-5.7-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad 49835c15a55225e9b3ff9cc9317135b334ea2d49
+# good: [1592614838cb52f4313ceff64894e2ca78591498] Merge tag 'for-5.7/drivers-2020-03-29' of git://git.kernel.dk/linux-block
+git bisect good 1592614838cb52f4313ceff64894e2ca78591498
+# bad: [db34c5ffee649e2c4c870d1031a996398a187cf5] Merge tag 'usb-5.7-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb
+git bisect bad db34c5ffee649e2c4c870d1031a996398a187cf5
+# good: [063d1942247668eb0bb800aef5afbbef337344be] Merge tag 'media/v5.7-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 063d1942247668eb0bb800aef5afbbef337344be
+# bad: [a8ab3e76297ea85d92f4ee0833bd469816a13ccf] Merge tag 'usb-for-v5.7' of git://git.kernel.org/pub/scm/linux/kernel/git/balbi/usb into usb-next
+git bisect bad a8ab3e76297ea85d92f4ee0833bd469816a13ccf
+# good: [d1c6a769cdf466053ae211789f2b0671c8a72331] usb: typec: mux: Allow the mux handles to be requested with fwnode
+git bisect good d1c6a769cdf466053ae211789f2b0671c8a72331
+# bad: [eeead847487f726fa177d0f4060c4f0816ad9cd9] usb: gadget: amd5536udc: fix spelling mistake "reserverd" -> "reserved"
+git bisect bad eeead847487f726fa177d0f4060c4f0816ad9cd9
+# good: [3d157c28d2289edf0439e8308e8de3a06acaaf0e] doc: dt: bindings: usb: dwc3: Update entries for disabling SS instances in park mode
+git bisect good 3d157c28d2289edf0439e8308e8de3a06acaaf0e
+# good: [0227cc84c44417a29c8102e41db8ec2c11ebc6b2] usb: dwc3: core: don't do suspend for device mode if already suspended
+git bisect good 0227cc84c44417a29c8102e41db8ec2c11ebc6b2
+# bad: [95b18f28979e12539cc02f6ec4e2c776e8551f39] dt-bindings: usb: dwc2: add compatible property for rk3328 usb
+git bisect bad 95b18f28979e12539cc02f6ec4e2c776e8551f39
+# good: [1a0808cb9e417170ed6ab97254cf319dc3e3c310] usb: dwc2: Implement set_selfpowered()
+git bisect good 1a0808cb9e417170ed6ab97254cf319dc3e3c310
+# bad: [f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10] usb: gadget: add raw-gadget interface
+git bisect bad f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10
+# first bad commit: [f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10] usb: gadget: add raw-gadget interface

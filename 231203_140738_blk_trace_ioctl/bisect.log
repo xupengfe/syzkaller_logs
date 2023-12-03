@@ -1,0 +1,364 @@
+|1203_140749|cmd=cd /home/code/os.linux.intelnext.kernel|
+|1203_140749|git log d59eb177c84f9572a6b51024c0b2611c3b5a27c5 check_result:commit d59eb177c84f9572a6b51024c0b2611c3b5a27c5|
+|1203_140749|git log dc026a73c7221b4d9d146ed0bde69ff578ebe8dc check_result:commit dc026a73c7221b4d9d146ed0bde69ff578ebe8dc|
+|1203_140750|cmd=git checkout -f d59eb177c84f9572a6b51024c0b2611c3b5a27c5|
+|1203_140750|cmd=cd /home/code/os.linux.intelnext.kernel|
+|1203_140750|ISSUE_FOLDER alreayd exist:/var/www/html//syzkaller/2023_12_03/image|
+|1203_140750|cmd=cp -rf /root/image/kconfig_syzkaller /var/www/html/bzimage/1203_140738_blk_trace_ioctl/kconfig_origin|
+|1203_140750|cmd=cp -rf /home/code/vm_bisect/repro.sh /var/www/html//syzkaller/2023_12_03/image|
+|1203_140750|/root/image/repro is not .c or .cprog file|
+|1203_140750|FAIL|/root/syzkaller/workdir/crashes/image/description does not exist!|
+|1203_140750||/var/www/html/bzimage/bzImage_d59eb177c84f9572a6b51024c0b2611c3b5a27c5| exist, no need make|
+|1203_140750|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_140751|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_d59eb177c84f9572a6b51024c0b2611c3b5a27c5, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/d59eb177c84f9572a6b51024c0b2611c3b5a27c5_dmesg.log, port:10024, 1 time|
+|1203_140808|It takes 17 seconds to find login:syzkaller login: |
+|1203_140808|Boot 1 time: takes 17 seconds to boot up.|
+|1203_140808|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_140816|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_140816|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_140817|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_140817|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_140817|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_140827|/var/www/html/bzimage/bzImage_d59eb177c84f9572a6b51024c0b2611c3b5a27c5 contained blk_trace_ioctl:[   29.858251][ T6112]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_140827|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_140828|Found time:29 in /var/www/html/bzimage/1203_140738_blk_trace_ioctl/d59eb177c84f9572a6b51024c0b2611c3b5a27c5_dmesg.log|
+|1203_140828|Logic: |<=25: +25|25-100 +180|>100 +1800| Set TIME:209|
+|1203_140828|-END- commit d59eb177c84f9572a6b51024c0b2611c3b5a27c5 FAIL bad|
+|1203_140828|cmd=cd /home/code/os.linux.intelnext.kernel|
+|1203_140828||/var/www/html/bzimage/bzImage_dc026a73c7221b4d9d146ed0bde69ff578ebe8dc| exist, no need make|
+|1203_140828|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_140829|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_dc026a73c7221b4d9d146ed0bde69ff578ebe8dc, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/dc026a73c7221b4d9d146ed0bde69ff578ebe8dc_dmesg.log, port:10024, 1 time|
+|1203_140846|It takes 17 seconds to find login:syzkaller login: |
+|1203_140846|Boot 1 time: takes 17 seconds to boot up.|
+|1203_140846|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_140854|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_140854|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_140855|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_140855|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_140855|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_141224|/var/www/html/bzimage/bzImage_dc026a73c7221b4d9d146ed0bde69ff578ebe8dc didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_141224|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_141225|Start commit dc026a73c7221b4d9d146ed0bde69ff578ebe8dc PASS good|
+|1203_141225|cmd=git checkout -f d59eb177c84f9572a6b51024c0b2611c3b5a27c5|
+|1203_141225|cmd=git bisect start|
+|1203_141225|cmd=git bisect bad d59eb177c84f9572a6b51024c0b2611c3b5a27c5|
+|1203_141225|Bisect first start commit:dc026a73c7221b4d9d146ed0bde69ff578ebe8dc|
+|1203_141225|git bisect good dc026a73c7221b4d9d146ed0bde69ff578ebe8dc|
+|1203_141227||/var/www/html/bzimage/bzImage_397a97946798890b9bdaa6122fcfad7147690670| does not exist, will make it|
+|1203_141227|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 397a97946798890b9bdaa6122fcfad7147690670 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_141708|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_141709|git bisect skip 397a97946798890b9bdaa6122fcfad7147690670|
+|1203_141710||/var/www/html/bzimage/bzImage_49835c15a55225e9b3ff9cc9317135b334ea2d49| does not exist, will make it|
+|1203_141710|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 49835c15a55225e9b3ff9cc9317135b334ea2d49 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_142624|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_142648|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_49835c15a55225e9b3ff9cc9317135b334ea2d49, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/49835c15a55225e9b3ff9cc9317135b334ea2d49_dmesg.log, port:10024, 1 time|
+|1203_142705|It takes 17 seconds to find login:syzkaller login: |
+|1203_142705|Boot 1 time: takes 17 seconds to boot up.|
+|1203_142705|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_142713|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_142713|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_142713|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_142714|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_142714|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_143043|/var/www/html/bzimage/bzImage_49835c15a55225e9b3ff9cc9317135b334ea2d49 contained blk_trace_ioctl:[   31.443609][ T6043]  blk_trace_ioctl+0x161/0x2a0
+[   41.837442][ T6092]  blk_trace_ioctl+0x161/0x2a0
+[   53.410260][ T6129]  blk_trace_ioctl+0x161/0x2a0
+[   64.214979][ T6162]  blk_trace_ioctl+0x161/0x2a0
+[   77.804056][ T6222]  blk_trace_ioctl+0x161/0x2a0
+[   89.788789][ T6256]  blk_trace_ioctl+0x161/0x2a0
+[  101.559510][ T6301]  blk_trace_ioctl+0x161/0x2a0
+[  114.939265][ T6354]  blk_trace_ioctl+0x161/0x2a0
+[  128.279525][ T6405]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_143043|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_143044|git bisect bad 49835c15a55225e9b3ff9cc9317135b334ea2d49|
+|1203_143044||/var/www/html/bzimage/bzImage_1592614838cb52f4313ceff64894e2ca78591498| does not exist, will make it|
+|1203_143044|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 1592614838cb52f4313ceff64894e2ca78591498 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_143940|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_144004|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_1592614838cb52f4313ceff64894e2ca78591498, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/1592614838cb52f4313ceff64894e2ca78591498_dmesg.log, port:10024, 1 time|
+|1203_144022|It takes 18 seconds to find login:syzkaller login: |
+|1203_144022|Boot 1 time: takes 18 seconds to boot up.|
+|1203_144022|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_144031|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_144031|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_144032|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_144032|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_144032|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_144401|/var/www/html/bzimage/bzImage_1592614838cb52f4313ceff64894e2ca78591498 didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_144401|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_144402|git bisect good 1592614838cb52f4313ceff64894e2ca78591498|
+|1203_144402||/var/www/html/bzimage/bzImage_db34c5ffee649e2c4c870d1031a996398a187cf5| does not exist, will make it|
+|1203_144402|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m db34c5ffee649e2c4c870d1031a996398a187cf5 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_145251|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_145253|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_db34c5ffee649e2c4c870d1031a996398a187cf5, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/db34c5ffee649e2c4c870d1031a996398a187cf5_dmesg.log, port:10024, 1 time|
+|1203_145311|It takes 18 seconds to find login:syzkaller login: |
+|1203_145311|Boot 1 time: takes 18 seconds to boot up.|
+|1203_145311|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_145318|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_145318|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_145319|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_145319|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_145319|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_145648|/var/www/html/bzimage/bzImage_db34c5ffee649e2c4c870d1031a996398a187cf5 contained blk_trace_ioctl:[   30.923691][ T6045]  blk_trace_ioctl+0x161/0x2a0
+[   42.377901][ T6082]  blk_trace_ioctl+0x161/0x2a0
+[   54.789428][ T6120]  blk_trace_ioctl+0x161/0x2a0
+[   64.913361][ T6151]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_145648|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_145649|git bisect bad db34c5ffee649e2c4c870d1031a996398a187cf5|
+|1203_145649||/var/www/html/bzimage/bzImage_063d1942247668eb0bb800aef5afbbef337344be| does not exist, will make it|
+|1203_145649|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 063d1942247668eb0bb800aef5afbbef337344be -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_150241|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_150307|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_063d1942247668eb0bb800aef5afbbef337344be, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/063d1942247668eb0bb800aef5afbbef337344be_dmesg.log, port:10024, 1 time|
+|1203_150324|It takes 17 seconds to find login:syzkaller login: |
+|1203_150324|Boot 1 time: takes 17 seconds to boot up.|
+|1203_150324|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_150332|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_150332|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_150333|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_150333|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_150333|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_150702|/var/www/html/bzimage/bzImage_063d1942247668eb0bb800aef5afbbef337344be didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_150702|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_150703|git bisect good 063d1942247668eb0bb800aef5afbbef337344be|
+|1203_150704||/var/www/html/bzimage/bzImage_a8ab3e76297ea85d92f4ee0833bd469816a13ccf| does not exist, will make it|
+|1203_150704|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m a8ab3e76297ea85d92f4ee0833bd469816a13ccf -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_151557|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_151600|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_a8ab3e76297ea85d92f4ee0833bd469816a13ccf, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/a8ab3e76297ea85d92f4ee0833bd469816a13ccf_dmesg.log, port:10024, 1 time|
+|1203_151618|It takes 18 seconds to find login:syzkaller login: |
+|1203_151618|Boot 1 time: takes 18 seconds to boot up.|
+|1203_151618|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_151626|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_151626|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_151627|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_151627|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_151627|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_151956|/var/www/html/bzimage/bzImage_a8ab3e76297ea85d92f4ee0833bd469816a13ccf contained blk_trace_ioctl:[   32.507724][ T6040]  blk_trace_ioctl+0x161/0x2a0
+[   44.663179][ T6074]  blk_trace_ioctl+0x161/0x2a0
+[   56.300837][ T6125]  blk_trace_ioctl+0x161/0x2a0
+[   64.273217][ T6144]  blk_trace_ioctl+0x161/0x2a0
+[   67.560742][ T6162]  blk_trace_ioctl+0x161/0x2a0
+[   77.806818][ T6201]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_151956|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_151957|git bisect bad a8ab3e76297ea85d92f4ee0833bd469816a13ccf|
+|1203_151957||/var/www/html/bzimage/bzImage_d1c6a769cdf466053ae211789f2b0671c8a72331| does not exist, will make it|
+|1203_151957|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m d1c6a769cdf466053ae211789f2b0671c8a72331 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_152856|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_152912|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_d1c6a769cdf466053ae211789f2b0671c8a72331, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/d1c6a769cdf466053ae211789f2b0671c8a72331_dmesg.log, port:10024, 1 time|
+|1203_152930|It takes 18 seconds to find login:syzkaller login: |
+|1203_152930|Boot 1 time: takes 18 seconds to boot up.|
+|1203_152930|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_152938|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_152938|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_152939|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_152939|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_152939|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_153308|/var/www/html/bzimage/bzImage_d1c6a769cdf466053ae211789f2b0671c8a72331 didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_153308|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_153309|git bisect good d1c6a769cdf466053ae211789f2b0671c8a72331|
+|1203_153309||/var/www/html/bzimage/bzImage_eeead847487f726fa177d0f4060c4f0816ad9cd9| does not exist, will make it|
+|1203_153309|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m eeead847487f726fa177d0f4060c4f0816ad9cd9 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_154136|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_154202|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_eeead847487f726fa177d0f4060c4f0816ad9cd9, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/eeead847487f726fa177d0f4060c4f0816ad9cd9_dmesg.log, port:10024, 1 time|
+|1203_154219|It takes 17 seconds to find login:syzkaller login: |
+|1203_154219|Boot 1 time: takes 17 seconds to boot up.|
+|1203_154219|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_154227|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_154227|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_154228|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_154228|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_154228|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_154557|/var/www/html/bzimage/bzImage_eeead847487f726fa177d0f4060c4f0816ad9cd9 contained blk_trace_ioctl:[   30.727524][ T6038]  blk_trace_ioctl+0x161/0x2a0
+[   41.306775][ T6080]  blk_trace_ioctl+0x161/0x2a0
+[   51.930289][ T6119]  blk_trace_ioctl+0x161/0x2a0
+[   63.359713][ T6151]  blk_trace_ioctl+0x161/0x2a0
+[   74.549490][ T6192]  blk_trace_ioctl+0x161/0x2a0
+[   88.718879][ T6247]  blk_trace_ioctl+0x161/0x2a0
+[   98.833166][ T6286]  blk_trace_ioctl+0x161/0x2a0
+[  109.361744][ T6327]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_154557|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_154558|git bisect bad eeead847487f726fa177d0f4060c4f0816ad9cd9|
+|1203_154558||/var/www/html/bzimage/bzImage_3d157c28d2289edf0439e8308e8de3a06acaaf0e| does not exist, will make it|
+|1203_154558|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 3d157c28d2289edf0439e8308e8de3a06acaaf0e -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_155148|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_155212|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_3d157c28d2289edf0439e8308e8de3a06acaaf0e, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/3d157c28d2289edf0439e8308e8de3a06acaaf0e_dmesg.log, port:10024, 1 time|
+|1203_155229|It takes 17 seconds to find login:syzkaller login: |
+|1203_155229|Boot 1 time: takes 17 seconds to boot up.|
+|1203_155229|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_155237|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_155237|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_155238|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_155238|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_155238|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_155607|/var/www/html/bzimage/bzImage_3d157c28d2289edf0439e8308e8de3a06acaaf0e didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_155607|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_155608|git bisect good 3d157c28d2289edf0439e8308e8de3a06acaaf0e|
+|1203_155608||/var/www/html/bzimage/bzImage_0227cc84c44417a29c8102e41db8ec2c11ebc6b2| does not exist, will make it|
+|1203_155608|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 0227cc84c44417a29c8102e41db8ec2c11ebc6b2 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_160200|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_160210|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_0227cc84c44417a29c8102e41db8ec2c11ebc6b2, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/0227cc84c44417a29c8102e41db8ec2c11ebc6b2_dmesg.log, port:10024, 1 time|
+|1203_160227|It takes 17 seconds to find login:syzkaller login: |
+|1203_160227|Boot 1 time: takes 17 seconds to boot up.|
+|1203_160227|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_160234|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_160234|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_160235|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_160235|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_160235|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_160604|/var/www/html/bzimage/bzImage_0227cc84c44417a29c8102e41db8ec2c11ebc6b2 didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_160604|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_160605|git bisect good 0227cc84c44417a29c8102e41db8ec2c11ebc6b2|
+|1203_160605||/var/www/html/bzimage/bzImage_95b18f28979e12539cc02f6ec4e2c776e8551f39| does not exist, will make it|
+|1203_160605|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 95b18f28979e12539cc02f6ec4e2c776e8551f39 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_161124|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_161154|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_95b18f28979e12539cc02f6ec4e2c776e8551f39, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/95b18f28979e12539cc02f6ec4e2c776e8551f39_dmesg.log, port:10024, 1 time|
+|1203_161212|It takes 18 seconds to find login:syzkaller login: |
+|1203_161212|Boot 1 time: takes 18 seconds to boot up.|
+|1203_161212|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_161220|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_161220|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_161220|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_161220|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_161220|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_161549|/var/www/html/bzimage/bzImage_95b18f28979e12539cc02f6ec4e2c776e8551f39 contained blk_trace_ioctl:[   30.284787][ T6032]  blk_trace_ioctl+0x161/0x2a0
+[   43.023854][ T6086]  blk_trace_ioctl+0x161/0x2a0
+[   54.721083][ T6118]  blk_trace_ioctl+0x161/0x2a0
+[   65.855895][ T6160]  blk_trace_ioctl+0x161/0x2a0
+[   77.048027][ T6195]  blk_trace_ioctl+0x161/0x2a0
+[   81.718266][ T6216]  blk_trace_ioctl+0x161/0x2a0
+[   87.275712][ T6234]  blk_trace_ioctl+0x161/0x2a0
+[   87.646065][ T6234]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_161549|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_161551|git bisect bad 95b18f28979e12539cc02f6ec4e2c776e8551f39|
+|1203_161551||/var/www/html/bzimage/bzImage_1a0808cb9e417170ed6ab97254cf319dc3e3c310| does not exist, will make it|
+|1203_161551|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m 1a0808cb9e417170ed6ab97254cf319dc3e3c310 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_162210|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_162215|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_1a0808cb9e417170ed6ab97254cf319dc3e3c310, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/1a0808cb9e417170ed6ab97254cf319dc3e3c310_dmesg.log, port:10024, 1 time|
+|1203_162233|It takes 18 seconds to find login:syzkaller login: |
+|1203_162233|Boot 1 time: takes 18 seconds to boot up.|
+|1203_162233|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_162242|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_162242|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_162242|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_162242|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_162242|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_162611|/var/www/html/bzimage/bzImage_1a0808cb9e417170ed6ab97254cf319dc3e3c310 didn't contain blk_trace_ioctl: in dmesg, pass|
+|1203_162612|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_162613|git bisect good 1a0808cb9e417170ed6ab97254cf319dc3e3c310|
+|1203_162613||/var/www/html/bzimage/bzImage_f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10| does not exist, will make it|
+|1203_162613|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10 -d /var/www/html/bzimage -o /tmp/kernel -c /root/image/kconfig_syzkaller > /home/code/vm_bisect/nohup.log|
+|1203_163203|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_163222|BOOT_VM:/root/image/start4.sh | /var/www/html/bzimage/bzImage_f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10, /var/www/html/bzimage/1203_140738_blk_trace_ioctl/f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10_dmesg.log, port:10024, 1 time|
+|1203_163241|It takes 19 seconds to find login:syzkaller login: |
+|1203_163241|Boot 1 time: takes 19 seconds to boot up.|
+|1203_163241|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /home/code/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|1203_163249|Not C file, ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10024 localhost 'rm -rf /root/repro.c' ret:0|
+|1203_163249|cmd=scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/1203_140738_blk_trace_ioctl/repro root@localhost:/root/repro|
+|1203_163250|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|1203_163250|ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|1203_163250|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|1203_163619|/var/www/html/bzimage/bzImage_f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10 contained blk_trace_ioctl:[   33.213271][ T6033]  blk_trace_ioctl+0x161/0x2a0
+[   43.600346][ T6068]  blk_trace_ioctl+0x161/0x2a0
+[   48.933756][ T6087]  blk_trace_ioctl+0x161/0x2a0
+[   51.594892][ T6088]  blk_trace_ioctl+0x161/0x2a0
+[   56.256905][ T6104]  blk_trace_ioctl+0x161/0x2a0
+[   67.653299][ T6156]  blk_trace_ioctl+0x161/0x2a0
+[   77.729675][ T6184]  blk_trace_ioctl+0x161/0x2a0
+[   89.643030][ T6217]  blk_trace_ioctl+0x161/0x2a0
+[   96.307395][ T6238]  blk_trace_ioctl+0x161/0x2a0
+[   98.512648][ T6245]  blk_trace_ioctl+0x161/0x2a0
+[  101.032388][ T6252]  blk_trace_ioctl+0x161/0x2a0
+[  112.866241][ T6283]  blk_trace_ioctl+0x161/0x2a0
+[  115.166846][ T6291]  blk_trace_ioctl+0x161/0x2a0
+[  117.339253][ T6298]  blk_trace_ioctl+0x161/0x2a0, FAIL|
+|1203_163619|/root/image/disk-8c9660f6.raw_bak -> /root/image/disk-8c9660f6.raw|
+|1203_163620|git bisect bad f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10|
+|1203_163620|Bisect PASS: find bad commit: f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10 is the first bad commit
+commit f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10
+Author: Andrey Konovalov <andreyknvl@google.com>
+Date:   Mon Feb 24 17:13:03 2020 +0100
+
+    usb: gadget: add raw-gadget interface
+    
+    USB Raw Gadget is a kernel module that provides a userspace interface for
+    the USB Gadget subsystem. Essentially it allows to emulate USB devices
+    from userspace. Enabled with CONFIG_USB_RAW_GADGET. Raw Gadget is
+    currently a strictly debugging feature and shouldn't be used in
+    production.
+    
+    Raw Gadget is similar to GadgetFS, but provides a more low-level and
+    direct access to the USB Gadget layer for the userspace. The key
+    differences are:
+    
+    1. Every USB request is passed to the userspace to get a response, while
+       GadgetFS responds to some USB requests internally based on the provided
+       descriptors. However note, that the UDC driver might respond to some
+       requests on its own and never forward them to the Gadget layer.
+    
+    2. GadgetFS performs some sanity checks on the provided USB descriptors,
+       while Raw Gadget allows you to provide arbitrary data as responses to
+       USB requests.
+    
+    3. Raw Gadget provides a way to select a UDC device/driver to bind to,
+       while GadgetFS currently binds to the first available UDC.
+    
+    4. Raw Gadget uses predictable endpoint names (handles) across different
+       UDCs (as long as UDCs have enough endpoints of each required transfer
+       type).
+    
+    5. Raw Gadget has ioctl-based interface instead of a filesystem-based one.
+    
+    Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+    Signed-off-by: Andrey Konovalov <andreyknvl@google.com>
+    Signed-off-by: Felipe Balbi <balbi@kernel.org>
+
+ Documentation/usb/index.rst            |    1 +
+ Documentation/usb/raw-gadget.rst       |   61 ++
+ drivers/usb/gadget/legacy/Kconfig      |   11 +
+ drivers/usb/gadget/legacy/Makefile     |    1 +
+ drivers/usb/gadget/legacy/raw_gadget.c | 1078 ++++++++++++++++++++++++++++++++
+ include/uapi/linux/usb/raw_gadget.h    |  167 +++++
+ 6 files changed, 1319 insertions(+)
+ create mode 100644 Documentation/usb/raw-gadget.rst
+ create mode 100644 drivers/usb/gadget/legacy/raw_gadget.c
+ create mode 100644 include/uapi/linux/usb/raw_gadget.h|
+|1203_163620|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|1203_163620|cmd=git bisect log >> /var/www/html/bzimage/1203_140738_blk_trace_ioctl/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [d59eb177c84f9572a6b51024c0b2611c3b5a27c5] ip6_mc_msfilter(): pass the address list separately
+git bisect bad d59eb177c84f9572a6b51024c0b2611c3b5a27c5
+# status: waiting for good commit(s), bad commit known
+# good: [dc026a73c7221b4d9d146ed0bde69ff578ebe8dc] io-wq: shuffle io_worker_handle_work() code
+git bisect good dc026a73c7221b4d9d146ed0bde69ff578ebe8dc
+# skip: [397a97946798890b9bdaa6122fcfad7147690670] Merge tag 'linux-kselftest-5.7-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/shuah/linux-kselftest
+git bisect skip 397a97946798890b9bdaa6122fcfad7147690670
+# bad: [49835c15a55225e9b3ff9cc9317135b334ea2d49] Merge tag 'pm-5.7-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad 49835c15a55225e9b3ff9cc9317135b334ea2d49
+# good: [1592614838cb52f4313ceff64894e2ca78591498] Merge tag 'for-5.7/drivers-2020-03-29' of git://git.kernel.dk/linux-block
+git bisect good 1592614838cb52f4313ceff64894e2ca78591498
+# bad: [db34c5ffee649e2c4c870d1031a996398a187cf5] Merge tag 'usb-5.7-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb
+git bisect bad db34c5ffee649e2c4c870d1031a996398a187cf5
+# good: [063d1942247668eb0bb800aef5afbbef337344be] Merge tag 'media/v5.7-1' of git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-media
+git bisect good 063d1942247668eb0bb800aef5afbbef337344be
+# bad: [a8ab3e76297ea85d92f4ee0833bd469816a13ccf] Merge tag 'usb-for-v5.7' of git://git.kernel.org/pub/scm/linux/kernel/git/balbi/usb into usb-next
+git bisect bad a8ab3e76297ea85d92f4ee0833bd469816a13ccf
+# good: [d1c6a769cdf466053ae211789f2b0671c8a72331] usb: typec: mux: Allow the mux handles to be requested with fwnode
+git bisect good d1c6a769cdf466053ae211789f2b0671c8a72331
+# bad: [eeead847487f726fa177d0f4060c4f0816ad9cd9] usb: gadget: amd5536udc: fix spelling mistake "reserverd" -> "reserved"
+git bisect bad eeead847487f726fa177d0f4060c4f0816ad9cd9
+# good: [3d157c28d2289edf0439e8308e8de3a06acaaf0e] doc: dt: bindings: usb: dwc3: Update entries for disabling SS instances in park mode
+git bisect good 3d157c28d2289edf0439e8308e8de3a06acaaf0e
+# good: [0227cc84c44417a29c8102e41db8ec2c11ebc6b2] usb: dwc3: core: don't do suspend for device mode if already suspended
+git bisect good 0227cc84c44417a29c8102e41db8ec2c11ebc6b2
+# bad: [95b18f28979e12539cc02f6ec4e2c776e8551f39] dt-bindings: usb: dwc2: add compatible property for rk3328 usb
+git bisect bad 95b18f28979e12539cc02f6ec4e2c776e8551f39
+# good: [1a0808cb9e417170ed6ab97254cf319dc3e3c310] usb: dwc2: Implement set_selfpowered()
+git bisect good 1a0808cb9e417170ed6ab97254cf319dc3e3c310
+# bad: [f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10] usb: gadget: add raw-gadget interface
+git bisect bad f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10
+# first bad commit: [f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10] usb: gadget: add raw-gadget interface
+|1203_163620|nohup /home/code/vm_bisect/make_bz.sh -k /home/code/os.linux.intelnext.kernel -m d59eb177c84f9572a6b51024c0b2611c3b5a27c5 -b f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10 -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_d59eb177c84f9572a6b51024c0b2611c3b5a27c5_f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10_revert -c /root/image/kconfig_syzkaller  > /home/code/vm_bisect/nohup.log|
+|1203_163721|1st base commit:dc026a73c7221b4d9d146ed0bde69ff578ebe8dc!|
+|1203_163721|FAIL|bzImage:/var/www/html/bzimage/bzImage_d59eb177c84f9572a6b51024c0b2611c3b5a27c5_f2c2e717642c66f7fe7e5dd69b2e8ff5849f4d10_revert does not exist:|
+|1203_163721|1st base commit:dc026a73c7221b4d9d146ed0bde69ff578ebe8dc!|
+|1203_163721|KERNEL_SRC:/home/code/os.linux.intelnext.kernel is not same as /opt/ker_src:!|
+|1203_163721|ISSUE:image  EMAIL status after check:Email_not_sent|
