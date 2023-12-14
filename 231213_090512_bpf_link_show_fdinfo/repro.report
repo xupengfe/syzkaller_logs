@@ -1,0 +1,631 @@
+syz-executor188[725]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+==================================================================
+BUG: KASAN: global-out-of-bounds in bpf_link_show_fdinfo+0x30b/0x330 kernel/bpf/syscall.c:2912
+Read of size 8 at addr ffffffff8593dc60 by task systemd-coredum/727
+
+CPU: 1 PID: 727 Comm: systemd-coredum Not tainted 6.7.0-rc4-4d2ac42adb24+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xaa/0x110 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:364 [inline]
+ print_report+0xcf/0x620 mm/kasan/report.c:475
+ kasan_report+0xcd/0x110 mm/kasan/report.c:588
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ bpf_link_show_fdinfo+0x30b/0x330 kernel/bpf/syscall.c:2912
+ seq_show+0x581/0x890 fs/proc/fd.c:70
+ seq_read_iter+0x51a/0x1300 fs/seq_file.c:230
+ seq_read+0x171/0x210 fs/seq_file.c:162
+ vfs_read+0x202/0x930 fs/read_write.c:468
+ ksys_read+0x14f/0x290 fs/read_write.c:613
+ __do_sys_read fs/read_write.c:623 [inline]
+ __se_sys_read fs/read_write.c:621 [inline]
+ __x64_sys_read+0x7b/0xc0 fs/read_write.c:621
+ do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7fd7f093eaf2
+Code: c0 e9 b2 fe ff ff 50 48 8d 3d ca 0c 08 00 e8 35 eb 01 00 0f 1f 44 00 00 f3 0f 1e fa 64 8b 04 25 18 00 00 00 85 c0 75 10 0f 05 <48> 3d 00 f0 ff ff 77 56 c3 0f 1f 44 00 00 48 83 ec 28 48 89 54 24
+RSP: 002b:00007ffd61c5eb78 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
+RAX: ffffffffffffffda RBX: 000055fb5e1392d0 RCX: 00007fd7f093eaf2
+RDX: 0000000000000400 RSI: 000055fb5e139530 RDI: 0000000000000006
+RBP: 00007fd7f09f75e0 R08: 0000000000000006 R09: 00007fd7f09b14e0
+R10: 0000000000001000 R11: 0000000000000246 R12: 00007fd7f06349c8
+R13: 0000000000000d68 R14: 00007fd7f09f69e0 R15: 0000000000000d68
+ </TASK>
+
+The buggy address belongs to the variable:
+ bpf_link_type_strs+0x60/0x80
+
+The buggy address belongs to the physical page:
+page:000000009e44924a refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x593d
+flags: 0xfffffc0004000(reserved|node=0|zone=1|lastcpupid=0x1fffff)
+page_type: 0xffffffff()
+raw: 000fffffc0004000 ffffea0000164f48 ffffea0000164f48 0000000000000000
+raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffffffff8593db00: 04 f9 f9 f9 f9 f9 f9 f9 05 f9 f9 f9 f9 f9 f9 f9
+ ffffffff8593db80: 00 05 f9 f9 f9 f9 f9 f9 00 03 f9 f9 f9 f9 f9 f9
+>ffffffff8593dc00: 00 00 00 00 00 00 00 00 00 00 f9 f9 f9 f9 f9 f9
+                                                       ^
+ ffffffff8593dc80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffff8593dd00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+syz-executor188[729]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[732]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[735]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[739]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[742]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[746]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[751]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[754]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 780(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 782(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 785(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 787(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 789(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 791(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 794(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 797(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 799(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 801(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 804(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 806(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 810(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 812(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 814(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 817(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 819(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 822(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 824(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 826(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 828(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 830(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 832(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 834(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 836(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 838(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 840(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 842(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 844(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 846(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 848(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 850(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 852(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 854(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 856(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 858(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 860(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 862(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 864(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 866(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 868(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 870(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 872(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 874(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 878(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 880(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 882(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 884(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 886(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 888(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 890(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 892(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 894(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 896(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 898(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 900(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 902(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 904(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 906(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 908(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 910(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 912(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 914(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 916(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 918(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 920(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 922(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 924(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 926(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 928(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 930(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 932(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 934(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 936(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 938(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 940(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 942(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 944(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 946(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 948(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 950(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 952(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 954(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 956(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 958(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 960(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 962(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 964(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 966(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 968(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 970(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 972(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 974(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 976(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 978(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 980(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 982(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 984(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 986(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 988(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 990(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 992(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 994(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 996(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 998(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1000(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1002(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1004(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1006(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1008(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1010(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1012(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1014(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1016(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1018(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1020(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1022(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1024(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1026(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1028(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1030(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1032(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1034(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1036(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1038(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1040(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1042(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1044(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1046(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1048(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1050(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1052(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1064(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1069(syz-executor188) over core_pipe_limit
+Skipping core dump
+show_signal_msg: 142 callbacks suppressed
+syz-executor188[1071]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1071(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1074]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1074(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1076]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1076(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1078]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1078(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1080]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1080(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1082]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1082(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1084]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1084(syz-executor188) over core_pipe_limit
+Skipping core dump
+syz-executor188[1086]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[1089]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+syz-executor188[1095]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 0 (core 0, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.
+Pid 1108(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1113(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1116(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1123(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1125(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1135(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1138(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1140(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1145(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1148(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1150(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1152(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1154(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1156(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1158(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1160(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1162(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1170(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1172(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1175(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1177(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1179(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1181(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1183(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1194(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1199(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1202(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1204(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1207(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1209(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1220(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1222(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1227(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1229(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1240(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1242(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1244(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1246(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1248(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1250(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1252(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1256(syz-executor188) over core_pipe_limit
+Pid 1254(syz-executor188) over core_pipe_limit
+Skipping core dump
+Skipping core dump
+Pid 1258(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1260(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1262(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1264(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1266(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1268(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1270(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1272(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1274(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1276(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1278(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1280(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1282(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1287(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1295(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1298(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1301(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1303(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1305(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1310(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1315(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1318(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1320(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1322(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1324(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1326(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1328(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1330(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1332(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1334(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1336(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1338(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1340(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1342(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1346(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1348(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1350(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1352(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1354(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1356(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1358(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1360(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1362(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1364(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1366(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1368(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1370(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1372(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1374(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1376(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1378(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1380(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1382(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1384(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1386(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1388(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1390(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1392(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1394(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1396(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1398(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1400(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1402(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1404(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1406(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1411(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1413(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1421(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1423(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1425(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1427(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1430(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1432(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1434(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1436(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1438(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1440(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1442(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1444(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1446(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1448(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1450(syz-executor188) over core_pipe_limit
+Skipping core dump
+Pid 1452(syz-executor188) over core_pipe_limit
+Skipping core dump
+show_signal_msg: 140 callbacks suppressed
+syz-executor188[1454]: segfault at 0 ip 0000000000000000 sp 0000000020000288 error 14 in syz-executor1889033280[400000+1000] likely on CPU 1 (core 1, socket 0)
+Code: Unable to access opcode bytes at 0xffffffffffffffd6.

@@ -1,0 +1,1557 @@
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+==================================================================
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+BUG: KASAN: global-out-of-bounds in bpf_link_show_fdinfo+0x30b/0x330 kernel/bpf/syscall.c:2912
+Read of size 8 at addr ffffffff8593dc60 by task systemd-coredum/243642
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+
+CPU: 0 PID: 243642 Comm: systemd-coredum Not tainted 6.7.0-rc4-4d2ac42adb24+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xaa/0x110 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:364 [inline]
+ print_report+0xcf/0x620 mm/kasan/report.c:475
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+ kasan_report+0xcd/0x110 mm/kasan/report.c:588
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ bpf_link_show_fdinfo+0x30b/0x330 kernel/bpf/syscall.c:2912
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+ seq_show+0x581/0x890 fs/proc/fd.c:70
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+ seq_read_iter+0x51a/0x1300 fs/seq_file.c:230
+ seq_read+0x171/0x210 fs/seq_file.c:162
+ vfs_read+0x202/0x930 fs/read_write.c:468
+fscrypt: key with description 'fscrypt:0000111122223333' has invalid payload
+ ksys_read+0x14f/0x290 fs/read_write.c:613
+ __do_sys_read fs/read_write.c:623 [inline]
+ __se_sys_read fs/read_write.c:621 [inline]
+ __x64_sys_read+0x7b/0xc0 fs/read_write.c:621
+ do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7ffb9413eaf2
+Code: c0 e9 b2 fe ff ff 50 48 8d 3d ca 0c 08 00 e8 35 eb 01 00 0f 1f 44 00 00 f3 0f 1e fa 64 8b 04 25 18 00 00 00 85 c0 75 10 0f 05 <48> 3d 00 f0 ff ff 77 56 c3 0f 1f 44 00 00 48 83 ec 28 48 89 54 24
+RSP: 002b:00007ffd73288798 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
+RAX: ffffffffffffffda RBX: 00005644e994f2d0 RCX: 00007ffb9413eaf2
+RDX: 0000000000000400 RSI: 00005644e994f530 RDI: 0000000000000006
+RBP: 00007ffb941f75e0 R08: 0000000000000006 R09: 00007ffb941b14e0
+R10: 0000000000001000 R11: 0000000000000246 R12: 00007ffb937729c8
+R13: 0000000000000d68 R14: 00007ffb941f69e0 R15: 0000000000000d68
+ </TASK>
+
+The buggy address belongs to the variable:
+ bpf_link_type_strs+0x60/0x80
+
+The buggy address belongs to the physical page:
+page:000000000c3b48f8 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x593d
+flags: 0xfffffc0004000(reserved|node=0|zone=1|lastcpupid=0x1fffff)
+page_type: 0xffffffff()
+raw: 000fffffc0004000 ffffea0000164f48 ffffea0000164f48 0000000000000000
+raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffffffff8593db00: 04 f9 f9 f9 f9 f9 f9 f9 05 f9 f9 f9 f9 f9 f9 f9
+ ffffffff8593db80: 00 05 f9 f9 f9 f9 f9 f9 00 03 f9 f9 f9 f9 f9 f9
+>ffffffff8593dc00: 00 00 00 00 00 00 00 00 00 00 f9 f9 f9 f9 f9 f9
+                                                       ^
+ ffffffff8593dc80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffff8593dd00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): unmounting filesystem 76b65be2-f6da-4727-8c75-0525a5b65a09.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop1: detected capacity change from 0 to 128
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop1): mounted filesystem 76b65be2-f6da-4727-8c75-0525a5b65a09 r/w without journal. Quota mode: none.
+ext4 filesystem being mounted at /syzkaller-testdir3544435070/syzkaller.TaBTGH/11034/mnt supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): unmounting filesystem 76b65be2-f6da-4727-8c75-0525a5b65a09.
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop6: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop6): mount failed
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop6: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop0): mount failed
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop6: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop0): mount failed
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop6: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop0): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop6): mount failed
+loop1: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop1): mount failed
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop0: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop6): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop6: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop1: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): mount failed
+loop5: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+ext4: Unknown parameter 'usquota'
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop0): mount failed
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop1: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop1): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usquota'
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+ext4: Unknown parameter 'ubatch_tQme'
+loop1: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop1): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'ubatch_tQme'
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+loop2: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+ext4: Unknown parameter 'ubatch_tQme'
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop1): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop4: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop1): mount failed
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+loop7: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+ext4: Unknown parameter 'min_@atch_time'
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop4: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+EXT4-fs (loop1): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'min_@atch_time'
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+ext4: Unknown parameter 'min_@atch_time'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'min_@atch_time'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: writeback.
+loop6: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop6): mount failed
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop5): mount failed
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop6: detected capacity change from 0 to 512
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop1: detected capacity change from 0 to 512
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+__quota_error: 49 callbacks suppressed
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+loop4: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+Quota error (device loop0): v2_read_file_info: Block with free entry too big (6 >= 6).
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+Quota error (device loop6): v2_read_file_info: Block with free entry too big (6 >= 6).
+EXT4-fs (loop0): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+Quota error (device loop6): v2_read_file_info: Block with free entry too big (6 >= 6).
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop6): mount failed
+loop1: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usrquotatch_time'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usrquotatch_time'
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+Quota error (device loop0): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop0): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop0): mount failed
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'usrquotatch_time'
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop6: detected capacity change from 0 to 512
+Quota error (device loop6): v2_read_file_info: Block with free entry too big (6 >= 6).
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop0): mount failed
+loop5: detected capacity change from 0 to 512
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop5): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop5): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+ext4: Unknown parameter 'pcr'
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop6: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+ext4: Unknown parameter 'pcr'
+EXT4-fs (loop4): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+ext4: Unknown parameter 'pcr'
+loop5: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs: Invalid want_extra_isize 115
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+EXT4-fs (loop0): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs: Invalid want_extra_isize 115
+ext4: Unknown parameter 'pcr'
+loop5: detected capacity change from 0 to 512
+EXT4-fs: Invalid want_extra_isize 115
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop5: detected capacity change from 0 to 512
+EXT4-fs: Invalid want_extra_isize 115
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs: Invalid want_extra_isize 115
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop0: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop0): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+ext4: Unknown parameter 'pcr'
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop7: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'min_Vatch_time'
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'min_Vatch_time'
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'min_Vatch_time'
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): mount failed
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop5: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+loop4: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+loop1: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop5): mount failed
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop1): mount failed
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'myn_batch_time'
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'er'
+netlink: 48 bytes leftover after parsing attributes in process `syz-executor.5'.
+loop1: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'myn_batch_time'
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+netlink: 48 bytes leftover after parsing attributes in process `syz-executor.5'.
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+netlink: 48 bytes leftover after parsing attributes in process `syz-executor.5'.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop1): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+ext4: Unknown parameter 'myn_batch_time'
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+netlink: 48 bytes leftover after parsing attributes in process `syz-executor.5'.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+ext4: Unknown parameter 'myn_batch_time'
+loop5: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop5): can't mount with data=, fs mounted w/o journal
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+netlink: 48 bytes leftover after parsing attributes in process `syz-executor.0'.
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop5): can't mount with data=, fs mounted w/o journal
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+EXT4-fs (loop5): can't mount with data=, fs mounted w/o journal
+loop2: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop0): failed to initialize system zone (-117)
+EXT4-fs (loop0): mount failed
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+systemd-journald[144]: Data hash table of /run/log/journal/938775788448454bb5b34822d5730c41/system.journal has a fill level at 75.0 (5488 of 7317 items, 4214784 file size, 768 bytes per hash table item), suggesting rotation.
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+systemd-journald[144]: /run/log/journal/938775788448454bb5b34822d5730c41/system.journal: Journal header limits reached or header out-of-date, rotating.
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+__quota_error: 20 callbacks suppressed
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs warning (device loop5): ext4_multi_mount_protect:397: Unable to create kmmpd thread for loop5.
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): too many log groups per flexible block group
+EXT4-fs (loop1): failed to initialize mballoc (-12)
+EXT4-fs (loop1): mount failed
+loop7: detected capacity change from 0 to 512
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop7: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'fscontext'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop1: detected capacity change from 0 to 512
+ext4: Unknown parameter 'pcr'
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+ext4: Unknown parameter 'fscontext'
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+loop2: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'fscontext'
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop2: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop2): revision level too high, forcing read-only mode
+loop1: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+loop7: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop2): invalid first ino: 10
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+loop5: detected capacity change from 0 to 512
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop1: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+EXT4-fs warning (device loop2): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop2): mount failed
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'urquota'
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+loop2: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+ext4: Unknown parameter 'urquota'
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+EXT4-fs warning (device loop2): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+EXT4-fs (loop2): mount failed
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop0): revision level too high, forcing read-only mode
+loop5: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+ext4: Unknown parameter 'urquota'
+loop1: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop7): mount failed
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs warning (device loop2): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+EXT4-fs (loop2): mount failed
+EXT4-fs (loop7): mount failed
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop1: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop1): failed to initialize system zone (-117)
+EXT4-fs (loop1): mount failed
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+EXT4-fs (loop5): mount failed
+loop2: detected capacity change from 0 to 512
+loop4: detected capacity change from 0 to 512
+loop7: detected capacity change from 0 to 512
+EXT4-fs warning (device loop2): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop2): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+EXT4-fs (loop7): too many log groups per flexible block group
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop5: detected capacity change from 0 to 512
+loop6: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+loop1: detected capacity change from 0 to 512
+Quota error (device loop5): v2_read_file_info: Free block number too big (0 >= 0).
+EXT4-fs warning (device loop5): ext4_enable_quotas:7103: Failed to enable quota tracking (type=0, err=-117, ino=3). Please run e2fsck to fix.
+Quota error (device loop6): v2_read_file_info: Block with free entry too big (6 >= 6).
+EXT4-fs (loop5): mount failed
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop6): mount failed
+EXT4-fs (loop1): revision level too high, forcing read-only mode
+EXT4-fs (loop0): too many log groups per flexible block group
+EXT4-fs (loop0): failed to initialize mballoc (-12)
+EXT4-fs (loop0): mount failed
+loop2: detected capacity change from 0 to 512
+loop1: detected capacity change from 0 to 512
+loop5: detected capacity change from 0 to 512
+EXT4-fs warning (device loop2): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs warning (device loop1): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-22, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop2): mount failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs (loop1): mount failed
+loop6: detected capacity change from 0 to 512
+loop0: detected capacity change from 0 to 512
+EXT4-fs (loop7): too many log groups per flexible block group
+loop4: detected capacity change from 0 to 512
+EXT4-fs (loop7): failed to initialize mballoc (-12)
+loop5: detected capacity change from 0 to 512
+EXT4-fs (loop7): mount failed
+EXT4-fs (loop4): failed to initialize system zone (-117)
+EXT4-fs (loop4): mount failed
+Quota error (device loop6): v2_read_file_info: Block with free entry too big (6 >= 6).
+EXT4-fs warning (device loop6): ext4_enable_quotas:7103: Failed to enable quota tracking (type=1, err=-117, ino=4). Please run e2fsck to fix.
+EXT4-fs (loop6): mount failed
