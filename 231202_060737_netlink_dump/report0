@@ -1,0 +1,144 @@
+======================================================
+WARNING: possible circular locking dependency detected
+6.7.0-rc3-40adac887fd0+ #1 Not tainted
+------------------------------------------------------
+syz-executor.1/346758 is trying to acquire lock:
+ffff88802963f680 (nlk_cb_mutex-GENERIC){+.+.}-{3:3}, at: netlink_dump+0xd7/0xcb0 net/netlink/af_netlink.c:2213
+
+but task is already holding lock:
+ffffffff87617a88 (dpll_lock){+.+.}-{3:3}, at: dpll_lock_dumpit+0x20/0x30 drivers/dpll/dpll_netlink.c:1389
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #1 (dpll_lock){+.+.}-{3:3}:
+       __mutex_lock_common kernel/locking/mutex.c:603 [inline]
+       __mutex_lock+0x154/0x1a40 kernel/locking/mutex.c:747
+       mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+       dpll_lock_dumpit+0x20/0x30 drivers/dpll/dpll_netlink.c:1389
+       genl_start+0x624/0x980 net/netlink/genetlink.c:862
+       __netlink_dump_start+0x60f/0x9e0 net/netlink/af_netlink.c:2361
+       genl_family_rcv_msg_dumpit+0x1f2/0x2f0 net/netlink/genetlink.c:933
+       genl_family_rcv_msg net/netlink/genetlink.c:1049 [inline]
+       genl_rcv_msg+0x48e/0x850 net/netlink/genetlink.c:1067
+       netlink_rcv_skb+0x187/0x470 net/netlink/af_netlink.c:2545
+       genl_rcv+0x32/0x50 net/netlink/genetlink.c:1076
+       netlink_unicast_kernel net/netlink/af_netlink.c:1342 [inline]
+       netlink_unicast+0x5bb/0x8a0 net/netlink/af_netlink.c:1368
+       netlink_sendmsg+0x9e7/0xf60 net/netlink/af_netlink.c:1910
+       sock_sendmsg_nosec net/socket.c:730 [inline]
+       __sock_sendmsg net/socket.c:745 [inline]
+       ____sys_sendmsg+0xac0/0xc90 net/socket.c:2584
+       ___sys_sendmsg+0x122/0x1c0 net/socket.c:2638
+       __sys_sendmsg+0x11f/0x200 net/socket.c:2667
+       __do_sys_sendmsg net/socket.c:2676 [inline]
+       __se_sys_sendmsg net/socket.c:2674 [inline]
+       __x64_sys_sendmsg+0x80/0xc0 net/socket.c:2674
+       do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+       do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+       entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+-> #0 (nlk_cb_mutex-GENERIC){+.+.}-{3:3}:
+       check_prev_add kernel/locking/lockdep.c:3134 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+       validate_chain kernel/locking/lockdep.c:3869 [inline]
+       __lock_acquire+0x2fd1/0x5cc0 kernel/locking/lockdep.c:5137
+       lock_acquire kernel/locking/lockdep.c:5754 [inline]
+       lock_acquire+0x1c9/0x530 kernel/locking/lockdep.c:5719
+       __mutex_lock_common kernel/locking/mutex.c:603 [inline]
+       __mutex_lock+0x154/0x1a40 kernel/locking/mutex.c:747
+       mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+       netlink_dump+0xd7/0xcb0 net/netlink/af_netlink.c:2213
+       __netlink_dump_start+0x704/0x9e0 net/netlink/af_netlink.c:2372
+       genl_family_rcv_msg_dumpit+0x1f2/0x2f0 net/netlink/genetlink.c:933
+       genl_family_rcv_msg net/netlink/genetlink.c:1049 [inline]
+       genl_rcv_msg+0x48e/0x850 net/netlink/genetlink.c:1067
+       netlink_rcv_skb+0x187/0x470 net/netlink/af_netlink.c:2545
+       genl_rcv+0x32/0x50 net/netlink/genetlink.c:1076
+       netlink_unicast_kernel net/netlink/af_netlink.c:1342 [inline]
+       netlink_unicast+0x5bb/0x8a0 net/netlink/af_netlink.c:1368
+       netlink_sendmsg+0x9e7/0xf60 net/netlink/af_netlink.c:1910
+       sock_sendmsg_nosec net/socket.c:730 [inline]
+       __sock_sendmsg net/socket.c:745 [inline]
+       ____sys_sendmsg+0xac0/0xc90 net/socket.c:2584
+       ___sys_sendmsg+0x122/0x1c0 net/socket.c:2638
+       __sys_sendmsg+0x11f/0x200 net/socket.c:2667
+       __do_sys_sendmsg net/socket.c:2676 [inline]
+       __se_sys_sendmsg net/socket.c:2674 [inline]
+       __x64_sys_sendmsg+0x80/0xc0 net/socket.c:2674
+       do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+       do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+       entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+other info that might help us debug this:
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(dpll_lock);
+                               lock(nlk_cb_mutex-GENERIC);
+                               lock(dpll_lock);
+  lock(nlk_cb_mutex-GENERIC);
+
+ *** DEADLOCK ***
+
+2 locks held by syz-executor.1/346758:
+ #0: ffffffff876723d0 (cb_lock){++++}-{3:3}, at: genl_rcv+0x23/0x50 net/netlink/genetlink.c:1075
+ #1: ffffffff87617a88 (dpll_lock){+.+.}-{3:3}, at: dpll_lock_dumpit+0x20/0x30 drivers/dpll/dpll_netlink.c:1389
+
+stack backtrace:
+CPU: 1 PID: 346758 Comm: syz-executor.1 Not tainted 6.7.0-rc3-40adac887fd0+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xaa/0x110 lib/dump_stack.c:106
+ dump_stack+0x19/0x20 lib/dump_stack.c:113
+ print_circular_bug+0x47e/0x750 kernel/locking/lockdep.c:2060
+ check_noncircular+0x2f7/0x3e0 kernel/locking/lockdep.c:2187
+ check_prev_add kernel/locking/lockdep.c:3134 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+ validate_chain kernel/locking/lockdep.c:3869 [inline]
+ __lock_acquire+0x2fd1/0x5cc0 kernel/locking/lockdep.c:5137
+ lock_acquire kernel/locking/lockdep.c:5754 [inline]
+ lock_acquire+0x1c9/0x530 kernel/locking/lockdep.c:5719
+ __mutex_lock_common kernel/locking/mutex.c:603 [inline]
+ __mutex_lock+0x154/0x1a40 kernel/locking/mutex.c:747
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:799
+ netlink_dump+0xd7/0xcb0 net/netlink/af_netlink.c:2213
+ __netlink_dump_start+0x704/0x9e0 net/netlink/af_netlink.c:2372
+ genl_family_rcv_msg_dumpit+0x1f2/0x2f0 net/netlink/genetlink.c:933
+ genl_family_rcv_msg net/netlink/genetlink.c:1049 [inline]
+ genl_rcv_msg+0x48e/0x850 net/netlink/genetlink.c:1067
+ netlink_rcv_skb+0x187/0x470 net/netlink/af_netlink.c:2545
+ genl_rcv+0x32/0x50 net/netlink/genetlink.c:1076
+ netlink_unicast_kernel net/netlink/af_netlink.c:1342 [inline]
+ netlink_unicast+0x5bb/0x8a0 net/netlink/af_netlink.c:1368
+ netlink_sendmsg+0x9e7/0xf60 net/netlink/af_netlink.c:1910
+ sock_sendmsg_nosec net/socket.c:730 [inline]
+ __sock_sendmsg net/socket.c:745 [inline]
+ ____sys_sendmsg+0xac0/0xc90 net/socket.c:2584
+ ___sys_sendmsg+0x122/0x1c0 net/socket.c:2638
+ __sys_sendmsg+0x11f/0x200 net/socket.c:2667
+ __do_sys_sendmsg net/socket.c:2676 [inline]
+ __se_sys_sendmsg net/socket.c:2674 [inline]
+ __x64_sys_sendmsg+0x80/0xc0 net/socket.c:2674
+ do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:82
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7fb7f923ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007fb7f94c4cc8 EFLAGS: 00000246 ORIG_RAX: 000000000000002e
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007fb7f923ee5d
+RDX: 0000000000000000 RSI: 0000000020000ac0 RDI: 0000000000000003
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007fb7f929f560 R15: 0000000000000000
+ </TASK>
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.2'.
+netlink: 16 bytes leftover after parsing attributes in process `syz-executor.3'.
