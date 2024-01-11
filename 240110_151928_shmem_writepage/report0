@@ -1,0 +1,349 @@
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 344020 at mm/shmem.c:1442 shmem_writepage+0x28d/0x10f0 mm/shmem.c:1442
+Modules linked in:
+CPU: 1 PID: 344020 Comm: syz-executor.7 Not tainted 6.6.0-rc1-374c82dedf36+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:shmem_writepage+0x28d/0x10f0 mm/shmem.c:1442
+Code: 31 ff 0f b6 80 c5 00 00 00 89 c6 88 85 28 ff ff ff e8 a7 19 be ff 0f b6 85 28 ff ff ff 84 c0 0f 84 7a 01 00 00 e8 e3 1e be ff <0f> 0b e8 dc 1e be ff 4c 89 e7 e8 d4 64 fa ff 4c 89 f2 48 b8 00 00
+RSP: 0018:ffff888047bcf038 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffffea0000c39b00 RCX: 0000000000000000
+RDX: ffff888041a48000 RSI: ffffffff81a2a15d RDI: ffffffff81a2a0e6
+RBP: ffff888047bcf138 R08: 0000000000000007 R09: 0000000000000000
+R10: 0000000000002000 R11: 0000000000000001 R12: ffffea0000c39b00
+R13: ffff8880178f8eb0 R14: ffff888047bcf1b4 R15: 0000000000000008
+FS:  00007f59d508c640(0000) GS:ffff88806cd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b33922000 CR3: 0000000041c52005 CR4: 0000000000770ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ pageout+0x3aa/0x900 mm/vmscan.c:1355
+ shrink_folio_list+0x122b/0x3530 mm/vmscan.c:2015
+ reclaim_folio_list+0xd9/0x2f0 mm/vmscan.c:2801
+ reclaim_pages+0x39c/0x5b0 mm/vmscan.c:2837
+ madvise_cold_or_pageout_pte_range+0x166a/0x2270 mm/madvise.c:533
+ walk_pmd_range mm/pagewalk.c:143 [inline]
+ walk_pud_range mm/pagewalk.c:221 [inline]
+ walk_p4d_range mm/pagewalk.c:256 [inline]
+ walk_pgd_range+0x11ad/0x22a0 mm/pagewalk.c:293
+ __walk_page_range+0x637/0x760 mm/pagewalk.c:395
+ walk_page_range+0x3a0/0x830 mm/pagewalk.c:521
+ madvise_pageout_page_range mm/madvise.c:592 [inline]
+ madvise_pageout+0x37d/0x8f0 mm/madvise.c:619
+ madvise_vma_behavior mm/madvise.c:1041 [inline]
+ madvise_walk_vmas mm/madvise.c:1270 [inline]
+ do_madvise.part.0+0xbb2/0x2e60 mm/madvise.c:1450
+ do_madvise mm/madvise.c:1463 [inline]
+ __do_sys_madvise mm/madvise.c:1463 [inline]
+ __se_sys_madvise mm/madvise.c:1461 [inline]
+ __x64_sys_madvise+0x13a/0x180 mm/madvise.c:1461
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x3c/0x90 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x6e/0xd8
+RIP: 0033:0x7f59d4e3ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007f59d508bcc8 EFLAGS: 00000246 ORIG_RAX: 000000000000001c
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007f59d4e3ee5d
+RDX: 0000000000000015 RSI: 0000000000004000 RDI: 0000000020ffb000
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007f59d4e9f560 R15: 0000000000000000
+ </TASK>
+irq event stamp: 1635
+hardirqs last  enabled at (1643): [<ffffffff81422a05>] __up_console_sem kernel/printk/printk.c:347 [inline]
+hardirqs last  enabled at (1643): [<ffffffff81422a05>] __console_unlock kernel/printk/printk.c:2718 [inline]
+hardirqs last  enabled at (1643): [<ffffffff81422a05>] console_unlock+0x2d5/0x310 kernel/printk/printk.c:3037
+hardirqs last disabled at (1650): [<ffffffff814229ea>] __up_console_sem kernel/printk/printk.c:345 [inline]
+hardirqs last disabled at (1650): [<ffffffff814229ea>] __console_unlock kernel/printk/printk.c:2718 [inline]
+hardirqs last disabled at (1650): [<ffffffff814229ea>] console_unlock+0x2ba/0x310 kernel/printk/printk.c:3037
+softirqs last  enabled at (1534): [<ffffffff81263cb8>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last  enabled at (1534): [<ffffffff81263cb8>] __irq_exit_rcu+0xa8/0x110 kernel/softirq.c:632
+softirqs last disabled at (1667): [<ffffffff81263cb8>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last disabled at (1667): [<ffffffff81263cb8>] __irq_exit_rcu+0xa8/0x110 kernel/softirq.c:632
+---[ end trace 0000000000000000 ]---
+Injecting memory failure for pfn 0x866b at process virtual address 0x20feb000
+Memory failure: 0x866b: already hardware poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Injecting memory failure for pfn 0x866b at process virtual address 0x20feb000
+Memory failure: 0x866b: already hardware poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Injecting memory failure for pfn 0x866b at process virtual address 0x20feb000
+Memory failure: 0x866b: already hardware poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x6297a at process virtual address 0x20ffc000
+Soft offlining pfn 0x417e2 at process virtual address 0x20ffd000
+Soft offlining pfn 0x32b23 at process virtual address 0x20ffe000
+Soft offlining pfn 0x2d0cf at process virtual address 0x20ffb000
+Soft offlining pfn 0x533ed at process virtual address 0x20ffc000
+Soft offlining pfn 0x34729 at process virtual address 0x20ffd000
+Soft offlining pfn 0x65854 at process virtual address 0x20ffe000
+Soft offlining pfn 0x342a2 at process virtual address 0x20ffb000
+Soft offlining pfn 0x2d9c3 at process virtual address 0x20ffc000
+Soft offlining pfn 0x52aab at process virtual address 0x20ffd000
+Soft offlining pfn 0x2664e at process virtual address 0x20ffe000
+Soft offlining pfn 0x62827 at process virtual address 0x20ffb000
+Soft offlining pfn 0x30aec at process virtual address 0x20ffc000
+Soft offlining pfn 0x33831 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2e1c5 at process virtual address 0x20ffe000
+Soft offlining pfn 0x62e3c at process virtual address 0x20ffb000
+Soft offlining pfn 0x6a8a2 at process virtual address 0x20ffc000
+Soft offlining pfn 0x5ea84 at process virtual address 0x20ffd000
+Soft offlining pfn 0x64533 at process virtual address 0x20ffe000
+Soft offlining pfn 0x32959 at process virtual address 0x20ffb000
+Soft offlining pfn 0x67457 at process virtual address 0x20ffc000
+Soft offlining pfn 0x53192 at process virtual address 0x20ffd000
+Soft offlining pfn 0x55584 at process virtual address 0x20ffe000
+Soft offlining pfn 0x6344f at process virtual address 0x20ffb000
+Soft offlining pfn 0x2e638 at process virtual address 0x20ffc000
+Soft offlining pfn 0x29237 at process virtual address 0x20ffd000
+Soft offlining pfn 0x6281a at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x32fef at process virtual address 0x20ffc000
+Soft offlining pfn 0x53b14 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2d47a at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x2ef08 at process virtual address 0x20ffc000
+Soft offlining pfn 0x183fa at process virtual address 0x20ffd000
+Soft offlining pfn 0x6981e at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x3457d at process virtual address 0x20ffc000
+Soft offlining pfn 0x63d6a at process virtual address 0x20ffd000
+Soft offlining pfn 0x61c9b at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x34617 at process virtual address 0x20ffc000
+Soft offlining pfn 0x53005 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2eb9b at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x5324a at process virtual address 0x20ffc000
+Soft offlining pfn 0x2d81d at process virtual address 0x20ffd000
+Soft offlining pfn 0x3090b at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x34b23 at process virtual address 0x20ffc000
+Soft offlining pfn 0x24d92 at process virtual address 0x20ffd000
+Soft offlining pfn 0x6a8e6 at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x51cc3 at process virtual address 0x20ffc000
+Soft offlining pfn 0x642a3 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2c5d4 at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x512b5 at process virtual address 0x20ffc000
+Soft offlining pfn 0x43705 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2fee5 at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x68890 at process virtual address 0x20ffc000
+Soft offlining pfn 0x24144 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2d4d2 at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x60b41 at process virtual address 0x20ffc000
+Soft offlining pfn 0x4e735 at process virtual address 0x20ffd000
+Soft offlining pfn 0x296c2 at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x32836 at process virtual address 0x20ffc000
+Soft offlining pfn 0x52284 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2dff5 at process virtual address 0x20ffe000
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffc000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffd000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffe000
+soft_offline_page: 0x866b page already poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x31e2c at process virtual address 0x20ffc000
+Soft offlining pfn 0x64fb5 at process virtual address 0x20ffd000
+Soft offlining pfn 0x545a4 at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x345be at process virtual address 0x20ffb000
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x31eb4 at process virtual address 0x20ffc000
+Soft offlining pfn 0x62490 at process virtual address 0x20ffd000
+Soft offlining pfn 0x158db at process virtual address 0x20ffe000
+Soft offlining pfn 0x51367 at process virtual address 0x20ffb000
+Soft offlining pfn 0x2f7ee at process virtual address 0x20ffc000
+Soft offlining pfn 0x6629f at process virtual address 0x20ffd000
+Soft offlining pfn 0x524ad at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x61f29 at process virtual address 0x20ffb000
+Soft offlining pfn 0x2567a at process virtual address 0x20ffc000
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x534e2 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2f79d at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock3: Adding to iommu group 2
+iommufd_mock iommufd_mock4: Adding to iommu group 3
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock3: Adding to iommu group 2
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x3555b at process virtual address 0x20ffb000
+Soft offlining pfn 0x652b1 at process virtual address 0x20ffc000
+Soft offlining pfn 0x34b8b at process virtual address 0x20ffd000
+Soft offlining pfn 0x33ff0 at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x377fc at process virtual address 0x20ffb000
+Soft offlining pfn 0x4d684 at process virtual address 0x20ffc000
+Soft offlining pfn 0x3e14a at process virtual address 0x20ffd000
+Soft offlining pfn 0x512f3 at process virtual address 0x20ffe000
+Soft offlining pfn 0x35fa7 at process virtual address 0x20fff000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x2f7bb at process virtual address 0x20ffb000
+Soft offlining pfn 0x64a1c at process virtual address 0x20ffc000
+Soft offlining pfn 0x359ea at process virtual address 0x20ffd000
+Soft offlining pfn 0x2c726 at process virtual address 0x20ffe000
+Soft offlining pfn 0x2ee7a at process virtual address 0x20fff000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x2dcd4 at process virtual address 0x20ffb000
+Soft offlining pfn 0x3281d at process virtual address 0x20ffc000
+Soft offlining pfn 0x519f3 at process virtual address 0x20ffd000
+Soft offlining pfn 0x4d539 at process virtual address 0x20ffe000
+Soft offlining pfn 0x2d028 at process virtual address 0x20fff000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x31501 at process virtual address 0x20ffb000
+Soft offlining pfn 0x4c575 at process virtual address 0x20ffc000
+Soft offlining pfn 0x2f7da at process virtual address 0x20ffd000
+Soft offlining pfn 0x6348d at process virtual address 0x20ffe000
+Soft offlining pfn 0x31390 at process virtual address 0x20fff000
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x2ead9 at process virtual address 0x20ffb000
+Soft offlining pfn 0x32f31 at process virtual address 0x20ffc000
+Soft offlining pfn 0x521bb at process virtual address 0x20ffd000
+Soft offlining pfn 0x514c3 at process virtual address 0x20ffe000
+Soft offlining pfn 0x37d3c at process virtual address 0x20fff000
+Soft offlining pfn 0x6a92d at process virtual address 0x20ffb000
+Soft offlining pfn 0x33964 at process virtual address 0x20ffc000
+Soft offlining pfn 0x6b9a3 at process virtual address 0x20ffd000
+Soft offlining pfn 0x6425b at process virtual address 0x20ffe000
+Soft offlining pfn 0x52f41 at process virtual address 0x20fff000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x2f914 at process virtual address 0x20ffc000
+Soft offlining pfn 0x308b8 at process virtual address 0x20ffd000
+Soft offlining pfn 0x2e593 at process virtual address 0x20ffb000
+Soft offlining pfn 0x37638 at process virtual address 0x20ffc000
+Soft offlining pfn 0x4e3cf at process virtual address 0x20ffe000
+Soft offlining pfn 0x5308c at process virtual address 0x20ffd000
+Soft offlining pfn 0x33c3e at process virtual address 0x20fff000
+Soft offlining pfn 0x2ed9d at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x34d1f at process virtual address 0x20fff000
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x4d5db at process virtual address 0x20ffc000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x349fb at process virtual address 0x20ffd000
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x35e72 at process virtual address 0x20ffe000
+Soft offlining pfn 0x338ae at process virtual address 0x20fff000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x2e771 at process virtual address 0x20ffc000
+soft_offline: 0x2e771: invalidated
+Soft offlining pfn 0x4fd0c at process virtual address 0x20ffd000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x320af at process virtual address 0x20ffe000
+Soft offlining pfn 0x2f65f at process virtual address 0x20fff000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Injecting memory failure for pfn 0x2d68e at process virtual address 0x20ffb000
+Memory failure: 0x2d68e: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x35812 at process virtual address 0x20ffc000
+Memory failure: 0x35812: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x30d57 at process virtual address 0x20ffd000
+Memory failure: 0x30d57: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x370f4 at process virtual address 0x20ffe000
+Memory failure: 0x370f4: recovery action for dirty LRU page: Recovered
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffc000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffd000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffe000
+soft_offline_page: 0x866b page already poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffc000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffd000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffe000
+soft_offline_page: 0x866b page already poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock2: Adding to iommu group 1
+Soft offlining pfn 0x866b at process virtual address 0x20ffb000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffc000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffd000
+soft_offline_page: 0x866b page already poisoned
+Soft offlining pfn 0x866b at process virtual address 0x20ffe000
+soft_offline_page: 0x866b page already poisoned
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x3070c at process virtual address 0x20ffb000
+Soft offlining pfn 0x37af0 at process virtual address 0x20ffc000
+Soft offlining pfn 0x382ac at process virtual address 0x20ffd000
+Soft offlining pfn 0x67698 at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x53d50 at process virtual address 0x20ffb000
+Soft offlining pfn 0x3670d at process virtual address 0x20ffc000
+Soft offlining pfn 0x64c59 at process virtual address 0x20ffd000
+Soft offlining pfn 0x5565b at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x2e0e0 at process virtual address 0x20ffb000
+Soft offlining pfn 0x2fb3d at process virtual address 0x20ffc000
+Soft offlining pfn 0x301ce at process virtual address 0x20ffd000
+Soft offlining pfn 0x34ea3 at process virtual address 0x20ffe000
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+iommufd_mock iommufd_mock1: Adding to iommu group 0
+Soft offlining pfn 0x6229b at process virtual address 0x20ffb000
+Soft offlining pfn 0x5479f at process virtual address 0x20ffc000
+Soft offlining pfn 0x2dbd4 at process virtual address 0x20ffd000
+Soft offlining pfn 0x3e142 at process virtual address 0x20ffe000
+Soft offlining pfn 0x4a352 at process virtual address 0x20ffb000
+Soft offlining pfn 0x34c57 at process virtual address 0x20ffc000
+Soft offlining pfn 0x4c0fd at process virtual address 0x20ffd000
+Soft offlining pfn 0x2fd2b at process virtual address 0x20ffe000
