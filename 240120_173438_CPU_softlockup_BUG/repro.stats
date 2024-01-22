@@ -1,0 +1,408 @@
+Extracting prog: 37m31.681873656s
+Minimizing prog: 13m55.781122108s
+Simplifying prog options: 0s
+Extracting C: 1m15.251516689s
+Simplifying C: 22m51.500073694s
+
+
+210 programs, 3 VMs, timeouts [6m0s]
+extracting reproducer from 210 programs
+single: executing 8 programs separately with timeout 6m0s
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_emit_ethernet-syz_emit_ethernet
+detailed listing:
+executing program 0:
+syz_emit_ethernet(0x4a, &(0x7f00000000c0)={@local, @local, @void, {@ipv6={0x86dd, @tcp={0x0, 0x6, "81472e", 0x14, 0x6, 0x0, @loopback, @mcast2, {[], {{0x0, 0x0, 0x41424344, 0x41424344, 0x0, 0x0, 0x5}}}}}}}, 0x0)
+syz_emit_ethernet(0x4a, &(0x7f00000000c0)={@local, @local, @void, {@ipv6={0x86dd, @tcp={0x0, 0x6, "81472e", 0x14, 0x6, 0x0, @loopback, @mcast2, {[], {{0x0, 0x0, 0x41424344, 0x41424344, 0x0, 0x0, 0x5}}}}}}}, 0x0) (async)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): inotify_init1-inotify_add_watch-flock-syz_mount_image$squashfs
+detailed listing:
+executing program 0:
+r0 = inotify_init1(0x0)
+inotify_add_watch(r0, &(0x7f0000000000)='./file0\x00', 0x6000734) (async, rerun: 32)
+flock(r0, 0x4) (async, rerun: 32)
+syz_mount_image$squashfs(&(0x7f00000001c0), &(0x7f0000000200)='./file0\x00', 0x20000000, &(0x7f0000000240), 0x1, 0x19d, &(0x7f0000000280)="$eJzs0bFrE2EYx/Hv896bNBFqjYpDBQ1YPBOqyV3VwSk4RciBg4tg0NDGppiI6WWwpWIcpCDV/8GpjiroKArO4iC4eC7dpBmKg4jIyV3eCP4Nvh+4e+75wd1zPG8n7IdTwO+9jUVqpBz28xFBA8dlnCmV3B/w2vTfTD0wLlw0/Zapz0ydDdfWb7W63fZq8UKRwj8B8D3N/kbhC44oRkIN+by3sdiSGwFxjZ5aCig0KD/GadIvPWFWT3P4Og6xu8UlRV/cBsxUBr07lXBt/fRKr7XcXm7f9v2F89Wz1eo5v3JzpduuvkJKj0TxKx4LyJfukWny8IPex7wgpY6KHCmPyDbvA6dOzI+IZ3aJEd66I6a+6E5RXeEkuWtDoM4h4SlOwFyDvEKTDqojl9VL8fQn/SOjyA0d50ye7tLmVSU/s9s12c2Jt0PG9fDLHgvJajjIOzYj5iLqEdsRO19hSLKiyV51MpLnpjvKMchytzUYrHpZeC9ugJ9cBZhOP6fS/yrAG/OOTA7ZPFiWZVmWZVmWZVn/gz8BAAD//zDeaOg=")
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-openat$sysfs-ioctl$PERF_EVENT_IOC_MODIFY_ATTRIBUTES-syz_open_dev$vcsu-sendto$inet_nvme_icreq_pdu-inotify_init1-close-perf_event_open-syz_open_dev$ttys-bpf$BPF_PROG_RAW_TRACEPOINT_LOAD-perf_event_open-socketpair-bpf$OBJ_GET_PROG-ioctl$BTRFS_IOC_GET_SUBVOL_INFO-ioctl$BTRFS_IOC_WAIT_SYNC-ioctl$BTRFS_IOC_WAIT_SYNC-ioctl$BTRFS_IOC_WAIT_SYNC-ioctl$BTRFS_IOC_SNAP_CREATE_V2-ioctl$BTRFS_IOC_WAIT_SYNC
+detailed listing:
+executing program 0:
+perf_event_open(&(0x7f0000000000)={0x2, 0x80, 0x6d, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0) (async)
+r0 = openat$sysfs(0xffffffffffffff9c, &(0x7f0000000080)='/sys/module/ata_piix', 0x10082, 0x100)
+ioctl$PERF_EVENT_IOC_MODIFY_ATTRIBUTES(r0, 0x4008240b, &(0x7f00000000c0)={0x1, 0x80, 0x6, 0x4, 0x26, 0x81, 0x0, 0x6, 0x74024, 0x4, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x1, 0x0, 0x1, 0x0, 0x1, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0x1, 0x0, 0xffffffff, 0x0, @perf_config_ext={0x3, 0x8}, 0x9, 0x1, 0x5, 0x7, 0x7fffffffffffffff, 0x233c, 0x8, 0x0, 0x8, 0x0, 0x9}) (async)
+r1 = syz_open_dev$vcsu(&(0x7f0000000140), 0xf8a, 0x20000)
+sendto$inet_nvme_icreq_pdu(r1, &(0x7f0000000180)={{0x0, 0x4, 0x80, 0xc0}, 0x0, 0x0, 0x1, 0x3}, 0x80, 0x0, 0x0, 0x0) (async)
+r2 = inotify_init1(0x0)
+close(r2)
+perf_event_open(&(0x7f0000000240)={0x5, 0x80, 0x81, 0xfd, 0xff, 0x9, 0x0, 0x5, 0x10000, 0x1, 0x1, 0x1, 0x1, 0x1, 0x0, 0x0, 0x1, 0x1, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x0, 0x3, 0x0, 0x1, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x0, 0x0, 0x1, 0x0, 0x1, 0x1, 0x1, 0x0, 0x1, 0x1, 0x0, 0x0, 0x7, 0x0, @perf_bp={&(0x7f0000000200), 0x8}, 0x11148, 0x1, 0x1, 0x1, 0xa6, 0x1, 0x3, 0x0, 0x80}, 0x0, 0x2, r1, 0x4) (async)
+r3 = syz_open_dev$ttys(0xc, 0x2, 0x0)
+r4 = bpf$BPF_PROG_RAW_TRACEPOINT_LOAD(0x5, &(0x7f0000000380)={0x11, 0x4, &(0x7f0000000000)=ANY=[@ANYBLOB="1800000000000000000000000000eeff4d0000000000000095"], &(0x7f0000000040)='syzkaller\x00'}, 0x90) (async)
+r5 = perf_event_open(&(0x7f0000000000)={0x2, 0x80, 0x59, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, 0x0, 0x0, 0xffffffffffffffff, 0x0) (async)
+socketpair(0x0, 0x2, 0x0, &(0x7f0000000140)={0xffffffffffffffff, <r6=>0xffffffffffffffff}) (async)
+r7 = bpf$OBJ_GET_PROG(0x7, &(0x7f0000000100), 0x10)
+ioctl$BTRFS_IOC_GET_SUBVOL_INFO(r7, 0x81f8943c, &(0x7f0000001780)={0x0, ""/256, 0x0, 0x0, 0x0, 0x0, ""/16, ""/16, ""/16, <r8=>0x0})
+ioctl$BTRFS_IOC_WAIT_SYNC(0xffffffffffffffff, 0x40089416, &(0x7f0000000000)=r8)
+ioctl$BTRFS_IOC_WAIT_SYNC(r6, 0x40089416, &(0x7f0000000040)=r8)
+ioctl$BTRFS_IOC_WAIT_SYNC(r5, 0x40089416, &(0x7f0000001040)=r8) (async)
+ioctl$BTRFS_IOC_SNAP_CREATE_V2(0xffffffffffffffff, 0x50009417, &(0x7f0000000440)={{r4}, r8, 0x1a, @inherit={0x50, &(0x7f0000000100)=ANY=[@ANYBLOB="01000000000000000100000000000000000000000000000009000000000000000100000000000000000000800000000081000000000000000100000000000080ffffffff000009000000000000000000"]}, @name="becb03554b577a9961bef8de14a84b63e826778d7d0908a08b3f098a537a76e67f774a8fb0a7c0ad33326a2e001eba1ad1956afc24bd4c8fee1272011a528351835f0e6d6ddc647b615b722eaee68fcf3abac56fa3dc0c14f62bb37cfcb06844a2388416afa19ff7333c72ed5fc03a94fbc15711ca388371314c7f03feed61c87bd9b55aed83e307e4221ab807ec22cba41e296af9f98365ddac0b174b37bdcf053b16001b8e6156a83a0a4474c39c8d2c059a472e7692d83ce6feec2d5ffad6aee9b157261c86b53377273d1022ff7d30c123b1b3b2a2c5778687112e1131b36f3e4aea4585dbed704099cfc75562b1722b8c95e2aa2e090fe18873be2515cbbaac9b4dc3c21b59db000a5abad8f4eb658d6c41dd61dfbbe3474d1ea0485731ff74a95a3a6ac9167afa1d1121c649538c60c402b2ec8e9b03c46abd59c6b97c3d3f9b2324ee7e3adde91437d5a8164f869996113b50e118d017482d665046305f5e228d342dc88b0959bdd45928f6871ccb0245f5134a7631ce3d8b9f31ec9b82f50c618323b40ee17f0d756c2ea5cb37b9d468d3ddc8541bdb30bd4f5e1fe7366e7ca5f05f78e87238d2e6682894182e678e026db295c89266b9a9c160e456c7c65e709f2fe175f900ee05ebff9c33b88a3999822aca7ec1f0826a5001f004c37351db6ea3ef5b2cddce17bdb15a34b89e216c69922513f466c29e2a42e5970cd8386e8f92a95a91f9aa9c562da4bfea9a8e381802e6b482432977f1fc04fdc0042d36c9575ebf7c20be150ff17bf90c0d85e5a793dd276840d20b6d462e5d3c2e979517f1a9a707e3f070ff8b5fdf56123716c9074639d0a1892a51489fd51b8aefe169b6e942d6c8f65cd6b1b42e57d6eb9f963dcd54cb13e4114fd00f75ff665bb3ecb5c17da89bfd3eaa5a4cbe30edf1301fd0b2a221548028c7f07f282a4526424437582aaf8e0adea4de2e5aa1fcde2081fc746e1425b4ce96d16d3751b37e3ea40da9c9050553196afcf4e0181fd829a822a013c27904edf24cc7180d6ee5271c6632aea0dca9895772cc9523ecde4ad5f209cd0838f5194e7a805f6fcf9e3dfbcae9cd4dfeaa3662c6d0129da71f66e5226ae5418fe6d7fc500352a89bf1b4549fb7192ca980399af17a35bfe4b5e0e96b1dd6460331ec2640a4ea3857f7ca6a83814d6801109a60d0f8a188c8c3793f46fab9888f56af961556198cf15ffad9e5602239dbfc43034534046287cbcc434872cc8a24e696a42ee2b4a2003025096053484fe92405d798239bd6c3680ea07a51c4421259570463d689fdcc10161f9d0a908c358c56d0de4005c1c1576292264f2842f7bc702feb0f8db8c389124d4a887ec8d2fa0ef78d58890354f87351ee83da984390f34b579777d524815b4d5d308292cfee701b9718fed2e2d6b804e5ba4e8ad09af8e877590303a092ceaa4ddb7b05da1f5d42e292afc6fed10cef91937b3407a86c97461d97d8fc17be96c79863e62f94d2d69984bcdde23474df1f1d790aae14d03b8af63ea910c02484d8c749b4141aee9e81755d8859c3605d8f9675b42a9f3add46680479c037530be8a08cb3332cacdc3ad541b41b2a78fcbf9ae3656352ee400843f5088fbe9524a207eeec4939f6871f28efc128e5d8b9e788bb8922f4924c05f65fc96d5980ff4a2258a7338359e264432c9c35e2d91e65d6db321660dd9f6fb35b8fb1a2c0197b6926f138539222e4196663a3631f4f1a9e5391ade349de060357f05e07e429136b2c7595813a4d9715c864c755a02b000052d713f7b6619bbf4343f9241af05d1069dd94af3ed716d1fbffe2c013ca1fbcf0a1baa9b62faf1ae362453c751a985a9880872113688b2635b7b025c0e137da5bddea1c861e9db1912ac30a51da12cebe56b4376b4308201a2a875b95178da5cf82a92d68681ee0e52d2796bf2b475de4745e610100ad5805ac99271d7675cee11b990b28fde08c7edca5d07f17b4d9c68ce69decdfba3e02d9be70a70042794df11e3660372c0a6046b8f3505b3a34f1bd99bc556245a67e288de798c6fa03abe8fde2196f397dcf1efb2fbbbe7f8710b72e5a6423d47416e25b7de5098b48f34bd8cef7c10599bc6794c96d80a363ee3cb6b3bbe201a2da1b596ca75f7ad7ae3ecfed869e2321139475de743d36908d87646ac794a1a180049b5cb641408652619905df29e6a38abf88f40d5d529d84c29bc8a14387391d385bb88e649d72f2db117a6c6aff03fc5a380b731e11ba6c2acb5b381d379c8374007b0f369461598ff1ac1fe39c0b24babc5505e2f309abaaa107704bfbcea7e4fe338650bfc291ec1dcbf8481d453001c358bde40ed9b511b06be1c1829d6a61101ab09e352ee374a1b7d877d6f8e71399e3f480c88c2d620b0cd4e1ad8a92ba0a1950e0f2b0e81b5dd39a9bca4a203f5fe0f2816786b7de14aabf54447a32eb48732c7b5862ed73091d9a6c67ca7da6a0f0a2881179343d85ce5617e9f45ae54d6c8254085fec103149ffc1d8616b4874da6cf281d37ee1c228cfeae24fbd48764efcda1412c3a3e741093748fc3132a75b7532aa66778bb42c27c3434d072d22a84428fca62f31a6e4a6a847df2a7c3f40e1a1d0c9e8885d4bc70480c768c3b0d837731e6391802281bcd3dc7ae07d981b6c6c47fe3eed3e2f8436b4980a067ad020249fe3aa655457371f65df31ec20744d1eab5743190d3033846e53fce1278439f4be69b69f2e368a7f7214c82d6b61f4c26cf48497ac0dfae098f0236e6e2ffa8226970ed78f7474f3c292b7b951c945983dd625477d5ed447f4d0f6b9667c57685049a150e93ca79fe1c357d7bbc78be1551fefd310f6fc55ab6aa33b1748f1e4015f6b5373e50683214a3a13d89dc7bd89f91c86cd86ac45685789f82f0da166f52cbb7cc3db970968b16db978320d7c6224c9f2fd4b65deab5edf8cb08d65007a9eb14f59aced2c5c00b49bf69028e78beae2e5e462c7a84a21fb84e8e79f5c787e08b775e4eaeb25935cdda224166d04abebf5eae9165e755d7f7bd94f5cacf2995fd7f31e596bd93f5793fb872d73c223a6462ef69bbf5883178ca5afd9eb919e3354947a9b33886bae34ed9aa24bae2a9482fa6654c11bf688c8a97b988924c5837644cbf096ecbcaae0c37412ed8bd242afdf00bf6fc16976b6edd71a045acfc3421276a7f28c25d2ba1124616542055b51bccbfd2a3d4b2467f26b65c10f3893918ae96ed24e927d3d1f0cc9b9702ec1765f47c7b30db404452d297dba6d721579596722778f8896e8d9218f08ecac0bd0268230dc849a9db62ca4ae66de4f98d20f98b8cca82805807d52157679afdb361eb0c4d621b7e6010779e4314778fa132fe4239f09b669705e55d92130f75fcae045cecc3be3dbd32b9eff2a7fc74fd337f4215e5ba68f26d74e8107136a2414031be19db8e06c7a3b3fb02a19f1554d2bd59ee29f83ff56cc8751a9b5792691a05c7e1bfbf02e5e0d240ec1af40abb604b73a313cfc7320e415e7e08762b3c2a6c801a52ff6c224b0e399b1d136389706161f254ff255972a3bf6c55c9de8d07346fb15468806fa3e4b181fcff8a58988464a703e05798fc9e62ed2b594d03f9e84c906c37200ec6c1a8eef517f0651ebd43a8946c46e560e72c1bb9192b993d82eaf17478542fd65308adf528efdf50cce22119fdb72587db8860385ce22a9c90ced63364c641cc86f3716d6e4024e1c2433e5215ccabe9fcf366d2b63fec89adb298cf692af997dffbbcf4eeb7422a6784f377ea99c5406391b614f49b94d1e9dd2cdbc3a333fb43c4efba5c5b97ec0f1473e9e6c7c630a64273c14fcd73aaff27de9049a07e83e6ce3ca27bd319c758a47a4ae57cdd0832392126d9a3695a01a15af8fbc774d6f41c2da79e73aa7e0ff33dbe4868abeacde565cd4777c668da1d578a8667ffa470326876390f17d4a0e798381f4bdf394e196c64a647b9ff0dc086667c6ce220a62705298380a150b8e1bb6c26d52c4617e071ac1942ee551aa44fcf3bc7a5b2d29771c8a54d5cc097f213c3c193f5421c696cce5aee0b9c00af85f5dc34364c3e379953c195fad9238df3cf6b48a83289129a845975b6195e4d8409925a1f8e81c89a4df40dc582fbc52b9158d7b88bb0c08a77c59bc9aa5d654d3d21b5fc9f8b4a0fab0e81bc9e5d76a7bf6c1bab192c9b3c8ab80fcd82f84c769f5846e83ddee966eb40f10061fd391879f6e0a653d188d13c1868712e1445682878a2bf96f824e12d9bc6d6e89c17870561fe34e9bf148d5459efb3ec2c19decbc5100c6fd5d08704d2ac5a83c2c8474fba8bd4c8298acdb018a2191d9c8297573af52ca18a2a34507f51a7f572b0e4563dbe7b238f242f8b54bfab0dd0d344aac859203a8fa2fd950fa2b35fc71d093ef4854a59724eed4b973244812049567c543137e9f3ae666c58a3768000b7a3665d6530c4bf2b52e2a0d58fe325c3ea2aef6a0f69db6817b274be94636d06d1e04077caf6aaad81a3799d3b586ded39a3e578ae1b945ec5b36794ec869c8e8f4af4574dc817fb825c8d391e5d5d33ba1c75bde8220cae089adadce19fd626ae9c5c0430d53145bc1d2b2d7aae24960881a4f078864f8e7dcff35a92e8a317cd52b23de31328ae39d5b93098c0b5b8f34ab895e978beaeded9bfe1dbc2f0a003b5939b40a2a25991d6c2464759aba15880f0290fbb86562d4993326971c206cd7cd4080d6edaab510e03d8abb996ddb9d01da2857f4facdbcdfeff2dab011e918d137433ee2ff560451cc60b8d7d1e979f96e439ba8beab5264abf06e568c88165c8237a860360030ca402a28450972e2fd33f95e6ebb444e663522648d4d12010f01bb0175a5d0430f55303af17acc60db7f63a9d8e2c7636e0d65dd34a81a10b47dacaca75011d10916330fd3622746b7f2a938c0fa15f53f2881241db40f315651de061449722521090f64fdd5a3040e66b82c2addb83b01af0a06673502751595d8c2956da06436bbd04f05df044ef08aedd7e6d2859486775cef6476d685f6653af1603fb2986e97d74d41f773f5c0c7bc92f8c0944d2c7c2b83492c41b5f61967ce144679235a214508dc72a3f462f839f0583bbd8fcd4eab137d11de31bce429c3483dd0125ada2eb49c4dfda569d1fd419beb6fa42f16749ce45b46e521b6bac5335599acdc863dc9378001fbc6ae4c4f4b037b0825e5bf8154544ed5bde4e63150b1b3f99961e50071c198bf86a10463fca57f213d3a8b2cacc20dbba93024facec7b680d6935578e2ca0fdf53c8fc4be68db6d75c417f341a4e998d1d0afff52a76293f029826b3815c56be28f6487cbd95c59a700a5045356bf4a80b8b1623d602f7f0d4d56491e53bd040cda077910881c8d7de84843a17eed3b49364676e569ef84d68175c31c39f179ee0d5e85bbb40c860463db0d4b0abe038b603d510a6548267ff03270ecda9b55b04fda2ccc6fc237959044fd0395848ce1841296c7b3cd91822d6dab66f0c4689bb1b7cb5ad352b6b1178975dbf9c8956de1edb28673509dcc9938b0f57fae355e8b2b2732b962a33e0021e59eaa458cf3c47843afa01145c45b0a159ee2ff150afe53bdb2b1e6d93e98c3c96125bd969f6cae0e76353aad0ee9ef362fe963b072aedcbcdb879191b2cc702ac046ae16b628a715c81e7be81178669"}) (async)
+ioctl$BTRFS_IOC_WAIT_SYNC(r3, 0x40089416, &(0x7f00000002c0)=r8)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_genetlink_get_family_id$nl80211-creat-socket$nl_generic-syz_genetlink_get_family_id$nl80211-ioctl$sock_SIOCGIFINDEX_80211-sendmsg$NL80211_CMD_SET_INTERFACE-sendmsg$NL80211_CMD_JOIN_MESH-sendmsg$NL80211_CMD_SET_PMK-sendmsg$NL80211_CMD_CONNECT-syz_mount_image$ext4
+detailed listing:
+executing program 0:
+r0 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000100), 0xffffffffffffffff)
+r1 = creat(&(0x7f0000000080)='./file1\x00', 0x0)
+r2 = socket$nl_generic(0x10, 0x3, 0x10)
+r3 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000040), 0xffffffffffffffff)
+ioctl$sock_SIOCGIFINDEX_80211(r2, 0x8933, &(0x7f0000000080)={'wlan0\x00', <r4=>0x0})
+sendmsg$NL80211_CMD_SET_INTERFACE(r2, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000100)={&(0x7f0000000340)={0x30, r3, 0x5, 0x0, 0x0, {{}, {@val={0x8, 0x3, r4}, @val={0xc, 0x99, {0x1a, 0x25}}}}, [@NL80211_ATTR_IFTYPE={0x8, 0x5, 0x7}]}, 0x30}}, 0x24000800)
+sendmsg$NL80211_CMD_JOIN_MESH(r2, &(0x7f0000000180)={0x0, 0x0, &(0x7f00000001c0)={&(0x7f0000000200)={0x30, r3, 0x5, 0x0, 0x0, {{}, {@val={0x8, 0x3, r4}, @void}}, [@NL80211_ATTR_MESH_ID={0xa}, @chandef_params=[@NL80211_ATTR_WIPHY_FREQ={0x8}]]}, 0x30}}, 0x0)
+sendmsg$NL80211_CMD_SET_PMK(r1, &(0x7f0000000740)={&(0x7f0000000600)={0x10, 0x0, 0x0, 0x1000080}, 0xc, &(0x7f0000000700)={&(0x7f0000000640)={0xb4, 0x0, 0x20, 0x70bd2c, 0x25dfdbfd, {{}, {@val={0x8, 0x3, r4}, @val={0xc, 0x99, {0x1, 0x15}}}}, [@NL80211_ATTR_MAC={0xa}, @NL80211_ATTR_PMK={0x14, 0xfe, "9b3875362fc45fa53cfec12b983919c1"}, @NL80211_ATTR_MAC={0xa, 0x6, @broadcast}, @NL80211_ATTR_MAC={0xa}, @NL80211_ATTR_PMK={0x14, 0xfe, "53dacabdf0b2bbdc1518ce549b9f38d8"}, @NL80211_ATTR_PMK={0x14, 0xfe, "f344051ec86ec2fdb0a90b0abae53860"}, @NL80211_ATTR_PMKR0_NAME={0x14, 0x102, "36f6d7043cdced3f9c27ac2f5ec90193"}, @NL80211_ATTR_MAC={0xa, 0x6, @device_b}, @NL80211_ATTR_MAC={0xa, 0x6, @device_b}]}, 0xb4}, 0x1, 0x0, 0x0, 0x8800}, 0x0)
+sendmsg$NL80211_CMD_CONNECT(0xffffffffffffffff, &(0x7f0000000200)={&(0x7f0000000000), 0xc, &(0x7f00000001c0)={&(0x7f0000000140)={0x48, r0, 0x2, 0x70bd2b, 0x25dfdbfe, {{}, {@val={0x8, 0x3, r4}, @val={0xc, 0x99, {0x78e0bc53, 0x13}}}}, [@NL80211_ATTR_PBSS={0x4}, @NL80211_ATTR_WANT_1X_4WAY_HS={0x4}, @NL80211_ATTR_SSID={0xa, 0x34, @default_ibss_ssid}, @NL80211_ATTR_WANT_1X_4WAY_HS={0x4}, @NL80211_ATTR_PRIVACY={0x4}, @NL80211_ATTR_DISABLE_HT={0x4}]}, 0x48}, 0x1, 0x0, 0x0, 0x800}, 0x20000000)
+syz_mount_image$ext4(&(0x7f0000000040)='ext4\x00', &(0x7f0000000500)='./file0\x00', 0x802, &(0x7f0000000080)={[{@nomblk_io_submit}, {@delalloc}, {@nomblk_io_submit}, {@barrier}, {@norecovery}, {@init_itable}, {@quota}]}, 0x1, 0x4d0, &(0x7f0000000a40)="$eJzs3c9rG1ceAPDvyHbWSZy1s7uw2d3DhiS7zrJY/pE4JLuHpvTQQwmU5g8Iri0bY9kylpzGxtCEQnvooZdACj313lspueYfCLSX/iD3Qgtpm7iHFFpUJI1do1hO2sqe1vp84HnmzUjz/T4kjebpjWcC6FjHI+JiRHRFxH8ioj9dnktLXG+U2uMePlibXH+wNplEtXr56ySSdNnGtpJ0ejh9WgxEvPR8xMvJ43HLK6tzE8ViYSmtD1fmF4fLK6tDs/MTM4WZwsKZs+fGz18YGxkdb1tbl098cPvuzUtvvPfc0MhHr393t5ZW38eDjZVb2tFOjab3RO+WZd0RsbQbwTLQlbanJ+tEAAB4KrVj/D9FxIn68X9/dNWP5gAAAID9pPpMX3yfRFQBAACAfSsXEX2R5PLpuQB9kcvl841zeP8Sh3LFUrny3+nS8sJUbV3EQPTkpmeLhZH0XOGB6Elq9dHG6b6b9bGm+pmIOBoRN/sP1uv5yVJxKusfPwAAAKBDHG7q/3/b3+j/AwAAAPvMQNYJAAAAALtO/x8AAAD2v8f6/73Z5AEAAADsihcvXaqV6np6/+upqyvLc6WrQ1OF8lx+fnkyP1laWszPlEoz9Wv2zbfaTrWrMS2WSotnY2H52nClUK4Ml1dWr8yXlhcqV+r39b5ScJ9oAAAA2HtH/3nnsyQirv/vYL3UHEjX6avD/pbLOgEgM11ZJwBkpjvrBIDM6OMDyRPWt/yPoA/bnwsAALA7Bv9m/B86lfF/6FzG/6FzGf+HzqWPDxj/BwCA/a+vXpJcPh0L7ItcLp+POFK/LUBPMj1bLIxExB8j4tP+nj/U6qNZJw0AAAAAAAAAAAAAAAAAAAAAAAAAvzPVahJVAAAAYF+LyH2ZpPf/Guw/1df8+8CB5FF/fRoRr7xz+da1iUplabS2/JvN5ZW30+VjWfyCAQAAADTb6Kdv9OMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoJ0ePlib3Ch7Gff+sxEx0Ii/npbGmu7orU97oyciDq0n0b3leUlEdLUh/vUbEXFsu/YntbRiIM2iOX4uIg5mHP9wG+JDJ7tT2/9c3O7zl4vj9en2n7/utPxaG/u/9cf2f7nN/V9Xi/3fkS31izvE+OT9r863jH8j4u/d28VPNuMnLeKffMo2/mP0rXut1lXfjRiM7eNvjTVcmV8cLq+sDs3OT8wUZgoLZ86eGz9/YWxkdHx4erZYGGn83TbGC/9/bWGn9h9qEX/gCe0/1WKbze+L+3/94Ys/7xD/9MntX/9jO8SvvSf+leZR+y74dzqt1QebYqy9eevITu2fivpX7M9+/U+32miTe7c/f/SUDwUA9kB5ZXVuolgsLJnZaaZ2fLRHsW7tXbtejd3Z8vH0zfUbeOHM/NKZjHdMAABA2/100J91JgAAAAAAAAAAAAAAAAAAANC59uJyYo1I1XZcrh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYNf8GAAA//84CNBA")
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$dir-openat$vcs-syz_genetlink_get_family_id$ethtool-mkdirat-inotify_init1-inotify_add_watch-ioctl$BTRFS_IOC_GET_DEV_STATS-fcntl$setlease-pipe2$9p-mount$9p_fd-socket$inet6_tcp-ioctl$ifreq_SIOCGIFINDEX_team-bpf$BPF_GET_MAP_INFO-syz_clone-perf_event_open-syz_open_procfs-getpgrp-syz_clone-perf_event_open-syz_open_procfs-syz_clone-perf_event_open-syz_open_procfs-openat$vcs-syz_genetlink_get_family_id$ethtool-syz_clone3-ioctl$ifreq_SIOCGIFINDEX_vcan-sendmsg$ETHTOOL_MSG_RINGS_GET-ioctl$F2FS_IOC_SET_PIN_FILE-fcntl$setlease
+detailed listing:
+executing program 0:
+r0 = openat$dir(0xffffffffffffff9c, &(0x7f0000000040)='./file0\x00', 0x4040, 0x0)
+r1 = openat$vcs(0xffffffffffffff9c, &(0x7f0000000040), 0x20200, 0x0)
+r2 = syz_genetlink_get_family_id$ethtool(&(0x7f0000000000), r1)
+mkdirat(r1, &(0x7f0000000000)='./file0\x00', 0x2)
+r3 = inotify_init1(0x0)
+inotify_add_watch(r3, &(0x7f0000000000)='./file0\x00', 0x6000734)
+ioctl$BTRFS_IOC_GET_DEV_STATS(r3, 0xc4089434, &(0x7f00000005c0)={0x0, 0x1, 0x0, [0x3, 0x8, 0xffffffff, 0x2, 0x8], [0x8000, 0x7, 0x2, 0x40, 0x2, 0x1, 0xcb, 0x0, 0x9, 0x401, 0x80000001, 0x1000, 0x9, 0xfffffffffffffff8, 0x7, 0x2, 0x3, 0x8, 0xfffffffffffffffa, 0x5a2aa863, 0x7, 0xaec, 0x8000, 0x1, 0x7fff, 0x40a23be4, 0xff, 0x100000000, 0x1, 0x9, 0x8, 0x2, 0x8, 0x1, 0x2, 0x9, 0xdb, 0x76, 0x1, 0x7fff, 0xa9cf, 0x85, 0x1ff, 0x7, 0x100000000, 0xb0, 0x4, 0x9, 0x3, 0x800, 0x0, 0x5, 0x3, 0xedd, 0x101, 0x6, 0x100, 0xffffffffffffff81, 0x81, 0x3, 0x100000000, 0x20, 0x3, 0x0, 0x0, 0x1, 0xdbd4, 0x7fffffff, 0x6, 0x200, 0x6, 0x9, 0x5, 0x7, 0x8000, 0x0, 0xffff, 0x9, 0x1ff, 0x7, 0x80000001, 0x8000000000000000, 0x3, 0x0, 0x8, 0x4, 0x6, 0xffffffffffffffc1, 0x8000000000000001, 0x8, 0x7f, 0xd59, 0x0, 0x8000, 0x67, 0x65, 0x8, 0x4, 0xff, 0x2, 0x2, 0x812, 0x400, 0x60, 0x8, 0xbcc, 0x59d, 0xb9c, 0x8001, 0x8, 0x8, 0x7fffffffffffffff, 0x10000, 0x1, 0x3, 0x4, 0x7, 0x8, 0x6, 0x3, 0x2]})
+fcntl$setlease(r0, 0x400, 0x2)
+pipe2$9p(&(0x7f0000000580)={<r4=>0xffffffffffffffff, <r5=>0xffffffffffffffff}, 0x0)
+mount$9p_fd(0x0, &(0x7f00000000c0)='./file0\x00', &(0x7f0000000100), 0x0, &(0x7f00000001c0)=ANY=[@ANYBLOB='trans=fd,rfdno=', @ANYRESHEX=r4, @ANYBLOB=',wfdno5', @ANYRESHEX=r5, @ANYBLOB=',acc\x00@s=user,\x00'])
+r6 = socket$inet6_tcp(0xa, 0x1, 0x0)
+ioctl$ifreq_SIOCGIFINDEX_team(r1, 0x8933, &(0x7f0000000180)={'team0\x00', <r7=>0x0})
+bpf$BPF_GET_MAP_INFO(0xf, &(0x7f00000002c0)={r1, 0x58, &(0x7f0000000240)={0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ""/16, <r8=>0x0}}, 0x10)
+r9 = syz_clone(0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+perf_event_open(&(0x7f0000000180)={0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, r9, 0x0, 0xffffffffffffffff, 0x0)
+syz_open_procfs(r9, &(0x7f0000000000)='net/sctp\x00')
+r10 = getpgrp(0x0)
+r11 = syz_clone(0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+perf_event_open(&(0x7f0000000180)={0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, r11, 0x0, 0xffffffffffffffff, 0x0)
+syz_open_procfs(r11, &(0x7f0000000000)='net/sctp\x00')
+r12 = syz_clone(0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+perf_event_open(&(0x7f0000000180)={0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_bp={0x0}}, r12, 0x0, 0xffffffffffffffff, 0x0)
+syz_open_procfs(r12, &(0x7f0000000000)='net/sctp\x00')
+r13 = openat$vcs(0xffffffffffffff9c, &(0x7f0000000040), 0x20200, 0x0)
+syz_genetlink_get_family_id$ethtool(&(0x7f0000000000), r13)
+syz_clone3(&(0x7f0000000c00)={0x0, &(0x7f0000000a00), &(0x7f0000000a40), &(0x7f0000000a80), {0x2b}, &(0x7f0000000ac0)=""/125, 0x7d, &(0x7f0000000b40)=""/75, &(0x7f0000000bc0)=[0xffffffffffffffff, 0xffffffffffffffff, r9, r10, r11, r12, 0xffffffffffffffff], 0x7, {r13}}, 0x58)
+ioctl$ifreq_SIOCGIFINDEX_vcan(r6, 0x8933, &(0x7f0000000300)={'vxcan0\x00', <r14=>0x0})
+sendmsg$ETHTOOL_MSG_RINGS_GET(r1, &(0x7f0000000540)={&(0x7f0000000140)={0x10, 0x0, 0x0, 0x2}, 0xc, &(0x7f0000000500)={&(0x7f0000000340)=ANY=[@ANYBLOB="94010000", @ANYRES16=r2, @ANYBLOB="00012dbd7000fedbdf250f0000004400018008000100", @ANYRES32=0x0, @ANYBLOB="080003000200000014000200766574683000000000000000000000000800030002000000140002006970766c616e310000000000000000006400018008000100", @ANYRES32=r7, @ANYBLOB="1400020067656e657665300000000000000000001400020069703665727370616e300000000000001400020076657468315f766972745f77696669001400020076657468305f746f5f687372000000000800030002000000840001800800030002000000140002006261746164765f736c6176655f300000140002006970766c616e3100000000000000000008000100", @ANYRES32=0x0, @ANYBLOB="0800030002000000140002006d6163767461703000000000000000000800030000000000080003000300000014000200626f6e645f736c6176655f310000000008000300030000002400018008000100", @ANYRES32=r8, @ANYBLOB="080003000200000008000100", @ANYRES32=0x0, @ANYBLOB="0800030001000000300001800800030002000000140002006e72300000000000000000000000000008000100", @ANYRES32=r14, @ANYBLOB="ca7f0000", @ANYRES32=0x0, @ANYBLOB], 0x194}, 0x1, 0x0, 0x0, 0x48850}, 0x94)
+ioctl$F2FS_IOC_SET_PIN_FILE(r6, 0x4004f50d, &(0x7f0000000080)=0x1)
+fcntl$setlease(r0, 0x400, 0x0)
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_mount_image$squashfs
+detailed listing:
+executing program 0:
+syz_mount_image$squashfs(&(0x7f0000000040), &(0x7f0000000200)='./file0\x00', 0x20008000, &(0x7f0000000000)=ANY=[@ANYBLOB="2c736f7561736866736e7194f3002c00"], 0x3, 0x1a2, &(0x7f0000000280)="$eJzs0TFrE2Ecx/Hv/7kniRWqRsWhggYsnBeqyV3VwSk4RciBg4tD0JDGppio6WWwpcUsUpDoG3DRqY4q6CgKzqIguHgu3aQZioM4SOSuj8HXUJ4P3P24H9z973medtSLcsCfnbUmFVIOB/iEoIGTstsp9TnNN+b5x25wyOQl0w9NPjc5E62s3mp0Oi24WCD/X7FcAH6m3aSKXnJMMRIqyNedtWZDboSMK3TVQki+RvERTp2e95gZPc3R6ziM3SGXFT1xa3Cw1O/eLUUrq2eWuo3F1mLrdhDMXyifK5fPB6WbS51W+TXiPRTFU9bxQnIhU946mToPPur9zAnitVXsSHFEtn4fOH1q7olS3jZjhHfuiNw33S6oq2Z9UOWI8AwnZLbGlEKTDqoiV9Qr8fUX/SujCgwc52zzTmdh45qS39nNimzvE3+LjOsTFH3mk63hMO/ZiJmNqcZsxmx9hwHJFg2FdKIeJPcXZvpxTkCWe41+f9nPwgdxQ4LkysN0+jmlk//Kw1vzjvw75MkKLMuyLMuyLMuyrL3vbwAAAP//iaVgqA==")
+
+program did not crash
+testing program (duration=6m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup-fsetxattr$security_capability-perf_event_open$cgroup-fsetxattr$security_capability
+detailed listing:
+executing program 0:
+r0 = perf_event_open$cgroup(&(0x7f0000000080)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_config_ext}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+fsetxattr$security_capability(r0, &(0x7f0000000000), &(0x7f0000000040)=@v2={0x2000000, [{0x101, 0x6}, {0x2, 0xffff7c1a}]}, 0x14, 0x3)
+perf_event_open$cgroup(&(0x7f0000000080)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_config_ext}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0) (async)
+fsetxattr$security_capability(r0, &(0x7f0000000000), &(0x7f0000000040)=@v2={0x2000000, [{0x101, 0x6}, {0x2, 0xffff7c1a}]}, 0x14, 0x3) (async)
+
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/events/core.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in call_timer_fn
+single: successfully extracted reproducer
+found reproducer with 4 syscalls
+minimizing guilty program
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup-fsetxattr$security_capability-perf_event_open$cgroup
+detailed listing:
+executing program 0:
+r0 = perf_event_open$cgroup(&(0x7f0000000080)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_config_ext}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+fsetxattr$security_capability(r0, &(0x7f0000000000), &(0x7f0000000040)=@v2={0x2000000, [{0x101, 0x6}, {0x2, 0xffff7c1a}]}, 0x14, 0x3)
+perf_event_open$cgroup(&(0x7f0000000080)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_config_ext}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0) (async)
+
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/bpf/core.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in rcu_core_si
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup-fsetxattr$security_capability
+detailed listing:
+executing program 0:
+r0 = perf_event_open$cgroup(&(0x7f0000000080)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_config_ext}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+fsetxattr$security_capability(r0, &(0x7f0000000000), &(0x7f0000000040)=@v2={0x2000000, [{0x101, 0x6}, {0x2, 0xffff7c1a}]}, 0x14, 0x3)
+
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "drivers/scsi/scsi_lib.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in blk_done_softirq
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+detailed listing:
+executing program 0:
+perf_event_open$cgroup(&(0x7f0000000080)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, @perf_config_ext}, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/time/clocksource.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in clocksource_watchdog
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): 
+detailed listing:
+executing program 0:
+
+program did not crash
+testing program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+detailed listing:
+executing program 0:
+perf_event_open$cgroup(0x0, 0xffffffffffffffff, 0x0, 0xffffffffffffffff, 0x0)
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=9m0s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/events/core.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in rcu_core_si
+simplifying C reproducer
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/events/core.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in rcu_core_si
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+program did not crash
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/events/core.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in __do_softirq
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "arch/x86/kernel/paravirt.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in sys_perf_event_open
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/events/core.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in __do_softirq
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "arch/x86/kernel/paravirt.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in corrupted
+reproducing took 1h15m34.214599675s
+repro crashed as (corrupted=true):
+watchdog: BUG: soft lockup - CPU#0 stuck for 23s! [syz-executor183:100713]
+Modules linked in:
+irq event stamp: 6275243
+hardirqs last  enabled at (6275242): [<ffffffff85548eee>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:435
+hardirqs last disabled at (6275243): [<ffffffff85546fd3>] sysvec_apic_timer_interrupt+0x13/0xd0 arch/x86/kernel/apic/apic.c:1076
+softirqs last  enabled at (4286234): [<ffffffff8558b2b0>] softirq_handle_end kernel/softirq.c:399 [inline]
+softirqs last  enabled at (4286234): [<ffffffff8558b2b0>] __do_softirq+0x4f0/0x791 kernel/softirq.c:582
+watchdog: BUG: soft lockup - CPU#1 stuck for 23s! [syz-executor183:100715]
+softirqs last disabled at (4286237): [<ffffffff8127ad21>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last disabled at (4286237): [<ffffffff8127ad21>] __irq_exit_rcu kernel/softirq.c:632 [inline]
+softirqs last disabled at (4286237): [<ffffffff8127ad21>] irq_exit_rcu+0xc1/0x110 kernel/softirq.c:644
+Modules linked in:
+CPU: 0 PID: 100713 Comm: syz-executor183 Not tainted 6.7.0-rc8-2024-01-02-intel-next-93300de2d422+ #1
+irq event stamp: 25514
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+hardirqs last  enabled at (25513): [<ffffffff811d8620>] kvm_wait arch/x86/kernel/kvm.c:1066 [inline]
+hardirqs last  enabled at (25513): [<ffffffff811d8620>] kvm_wait+0x140/0x180 arch/x86/kernel/kvm.c:1048
+RIP: 0010:preempt_count arch/x86/include/asm/preempt.h:27 [inline]
+RIP: 0010:__do_softirq+0x245/0x791 kernel/softirq.c:548
+hardirqs last disabled at (25514): [<ffffffff85546fd3>] sysvec_apic_timer_interrupt+0x13/0xd0 arch/x86/kernel/apic/apic.c:1076
+Code: ff 41 0f bc c7 89 c1 83 c1 01 89 4d d4 0f 84 bd 01 00 00 48 98 48 c7 c7 20 bb 89 85 48 8d 1c c3 49 89 dc 49 81 ec c0 a0 a0 86 <65> 8b 05 bc a3 ab 7a 49 c1 fc 03 25 ff ff ff 7f 89 45 d0 45 89 e5
+softirqs last  enabled at (25502): [<ffffffff8558b2b0>] softirq_handle_end kernel/softirq.c:399 [inline]
+softirqs last  enabled at (25502): [<ffffffff8558b2b0>] __do_softirq+0x4f0/0x791 kernel/softirq.c:582
+RSP: 0018:ffff88806cc09f78 EFLAGS: 00000202
+softirqs last disabled at (25497): [<ffffffff8127ad21>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last disabled at (25497): [<ffffffff8127ad21>] __irq_exit_rcu kernel/softirq.c:632 [inline]
+softirqs last disabled at (25497): [<ffffffff8127ad21>] irq_exit_rcu+0xc1/0x110 kernel/softirq.c:644
+RAX: 0000000000000005 RBX: ffffffff86a0a0f8 RCX: 0000000000000006
+CPU: 1 PID: 100715 Comm: syz-executor183 Not tainted 6.7.0-rc8-2024-01-02-intel-next-93300de2d422+ #1
+RDX: 0000000000000000 RSI: 0000000000000103 RDI: ffffffff8589bb20
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RBP: ffff88806cc09fd0 R08: fffffbfff0ef6b0d R09: 0000000000000102
+RIP: 0010:pv_native_safe_halt+0x22/0x30 arch/x86/kernel/paravirt.c:170
+R10: fffffbfff0ef6b0c R11: ffffffff877b5867 R12: 0000000000000038
+Code: 90 90 90 90 90 90 90 90 f3 0f 1e fa 55 48 89 e5 0f 1f 44 00 00 eb 0c 0f 1f 44 00 00 0f 00 2d c5 55 32 00 0f 1f 44 00 00 fb f4 <5d> c3 cc cc cc cc 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90
+R13: 0000000000000001 R14: ffffffff877b5860 R15: 0000000000000020
+RSP: 0018:ffff8880275a7a70 EFLAGS: 00000206
+FS:  00000000019053c0(0000) GS:ffff88806cc00000(0000) knlGS:0000000000000000
+RAX: 00000000000063a9 RBX: 0000000000000003 RCX: 1ffffffff11d08ca
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+CR2: 0000000020000088 CR3: 000000001fe7a000 CR4: 0000000000750ef0
+RBP: ffff8880275a7a70 R08: 0000000000000001 R09: fffffbfff11c8ebb
+PKRU: 55555554
+R10: 0000000000000001 R11: ffffffff88e475d7 R12: ffff88806cc3fec8
+Call Trace:
+ <IRQ>
+R13: 0000000000000003 R14: 0000000000000001 R15: 0000000000000000
+FS:  00000000019053c0(0000) GS:ffff88806cd00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000088 CR3: 00000000132ce000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0xc1/0x110 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0xa1/0xd0 arch/x86/kernel/apic/apic.c:1076
+ </IRQ>
+ </IRQ>
+ <TASK>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:649
+RIP: 0010:check_preemption_disabled+0x8/0x180 lib/smp_processor_id.c:13
+Code: 00 e8 3c fc ff ff 5b 5d c3 cc cc cc cc 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 55 48 89 e5 41 57 41 56 <49> 89 f6 41 55 49 89 fd 41 54 53 0f 1f 44 00 00 65 44 8b 25 5c bc
+ arch_safe_halt arch/x86/include/asm/paravirt.h:186 [inline]
+ kvm_wait arch/x86/kernel/kvm.c:1066 [inline]
+ kvm_wait+0x145/0x180 arch/x86/kernel/kvm.c:1048
+RSP: 0018:ffff88801309fae0 EFLAGS: 00000282
+ pv_wait arch/x86/include/asm/paravirt.h:600 [inline]
+ pv_wait_head_or_lock kernel/locking/qspinlock_paravirt.h:470 [inline]
+ __pv_queued_spin_lock_slowpath+0xb3a/0xdc0 kernel/locking/qspinlock.c:511
+
+RAX: 0000000000000001 RBX: 1ffff11002613f6a RCX: ffffffff81408812
+RDX: 0000000000000000 RSI: ffffffff85b5f920 RDI: ffffffff85b5f960
+ pv_queued_spin_lock_slowpath arch/x86/include/asm/paravirt.h:588 [inline]
+ queued_spin_lock_slowpath arch/x86/include/asm/qspinlock.h:51 [inline]
+ queued_spin_lock include/asm-generic/qspinlock.h:114 [inline]
+ do_raw_spin_lock+0x1e9/0x2a0 kernel/locking/spinlock_debug.c:115
+RBP: ffff88801309faf0 R08: fffffbfff0ef6b0d R09: fffffbfff0ef6b0d
+R10: fffffbfff0ef6b0c R11: ffffffff877b5867 R12: ffff88801309fbf0
+R13: ffff88806cc3fee0 R14: 0000000000000000 R15: ffff88801309fd40
+ __raw_spin_lock include/linux/spinlock_api_smp.h:134 [inline]
+ _raw_spin_lock+0x3e/0x50 kernel/locking/spinlock.c:154
+ debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+ rcu_dynticks_curr_cpu_in_eqs include/linux/context_tracking.h:122 [inline]
+ rcu_is_watching+0x19/0xb0 kernel/rcu/tree.c:700
+ __mutex_unlock_slowpath+0x1b4/0x680 kernel/locking/mutex.c:932
+ trace_lock_release include/trace/events/lock.h:69 [inline]
+ lock_release+0x532/0x770 kernel/locking/lockdep.c:5765
+ mutex_unlock+0x16/0x20 kernel/locking/mutex.c:543
+ __raw_spin_unlock include/linux/spinlock_api_smp.h:141 [inline]
+ _raw_spin_unlock+0x1e/0x50 kernel/locking/spinlock.c:186
+ __do_sys_perf_event_open+0x1aa0/0x2c40 kernel/events/core.c:12754
+ __mutex_unlock_slowpath+0x253/0x680 kernel/locking/mutex.c:949
+ __se_sys_perf_event_open kernel/events/core.c:12403 [inline]
+ __x64_sys_perf_event_open+0xc7/0x160 kernel/events/core.c:12403
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x44fe7d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+ mutex_unlock+0x16/0x20 kernel/locking/mutex.c:543
+RSP: 002b:00007ffeab7c2828 EFLAGS: 00000246
+ __do_sys_perf_event_open+0x1aa0/0x2c40 kernel/events/core.c:12754
+ ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 000000000044fe7d
+RDX: 0000000000000000 RSI: 00000000ffffffff RDI: 0000000020000080
+ __se_sys_perf_event_open kernel/events/core.c:12403 [inline]
+ __x64_sys_perf_event_open+0xc7/0x160 kernel/events/core.c:12403
+RBP: 000000000007bea8 R08: 0000000000000000 R09: 0000000000411a10
+R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000ffffffff
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:83
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+ </TASK>
+RIP: 0033:0x44fe7d
+
+report is corrupted, running repro again
+testing compiled C program (duration=9m0s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:false Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open$cgroup
+failed to symbolize report: failed to run ["scripts/get_maintainer.pl" "--git-min-percent=15" "-f" "kernel/time/clocksource.c"]: exit status 2
+Can't locate open.pm in @INC (you may need to install the open module) (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5) at scripts/get_maintainer.pl line 23.
+BEGIN failed--compilation aborted at scripts/get_maintainer.pl line 23.
+
+program crashed: BUG: soft lockup in clocksource_watchdog
+final repro crashed as (corrupted=false):
+hrtimer: interrupt took 10821 ns
+watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [syz-executor222:34693]
+Modules linked in:
+irq event stamp: 8720227
+hardirqs last  enabled at (8720226): [<ffffffff85548eee>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:435
+hardirqs last disabled at (8720227): [<ffffffff85546fd3>] sysvec_apic_timer_interrupt+0x13/0xd0 arch/x86/kernel/apic/apic.c:1076
+softirqs last  enabled at (1096): [<ffffffff8558b2b0>] softirq_handle_end kernel/softirq.c:399 [inline]
+softirqs last  enabled at (1096): [<ffffffff8558b2b0>] __do_softirq+0x4f0/0x791 kernel/softirq.c:582
+softirqs last disabled at (8589): [<ffffffff8127ad21>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last disabled at (8589): [<ffffffff8127ad21>] __irq_exit_rcu kernel/softirq.c:632 [inline]
+softirqs last disabled at (8589): [<ffffffff8127ad21>] irq_exit_rcu+0xc1/0x110 kernel/softirq.c:644
+CPU: 0 PID: 34693 Comm: syz-executor222 Not tainted 6.7.0-rc8-2024-01-02-intel-next-93300de2d422+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:152 [inline]
+RIP: 0010:_raw_spin_unlock_irqrestore+0x3f/0x70 kernel/locking/spinlock.c:194
+Code: 75 08 48 89 fb 48 83 c7 18 e8 fd 09 e8 fb 48 89 df e8 95 82 e8 fb 41 f7 c4 00 02 00 00 74 0b e8 a7 3e 16 fc fb 0f 1f 44 00 00 <bf> 01 00 00 00 e8 67 59 da fb 65 8b 05 38 d6 ab 7a 85 c0 74 09 5b
+RSP: 0018:ffff88806cc09bf8 EFLAGS: 00000206
+RAX: 00000000000c951e RBX: ffff88806cd328c0 RCX: 1ffffffff11c90be
+RDX: 0000000000000000 RSI: 0000000000000103 RDI: 0000000000000000
+RBP: ffff88806cc09c08 R08: 0000000000000001 R09: fffffbfff11c8ea9
+R10: 0000000000000001 R11: ffffffff88e47547 R12: 0000000000000246
+R13: 1ffff1100d981387 R14: 0000000100010e0a R15: ffff88806cc09c98
+FS:  00000000012843c0(0000) GS:ffff88806cc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020000088 CR3: 000000001a2d8000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ add_timer_on+0x377/0x4b0 kernel/time/timer.c:1296
+ clocksource_watchdog+0xaf8/0x1010 kernel/time/clocksource.c:554
+ call_timer_fn+0x1a1/0x580 kernel/time/timer.c:1700
+ expire_timers kernel/time/timer.c:1751 [inline]
+ __run_timers kernel/time/timer.c:2022 [inline]
+ __run_timers kernel/time/timer.c:1995 [inline]
+ run_timer_softirq+0x714/0x14d0 kernel/time/timer.c:2035
+ __do_softirq+0x1b7/0x791 kernel/softirq.c:553
+ invoke_softirq kernel/softirq.c:427 [inline]
+ __irq_exit_rcu kernel/softirq.c:632 [inline]
+ irq_exit_rcu+0xc1/0x110 kernel/softirq.c:644
+ sysvec_apic_timer_interrupt+0xa1/0xd0 arch/x86/kernel/apic/apic.c:1076
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:649
+RIP: 0010:arch_local_irq_enable arch/x86/include/asm/paravirt.h:702 [inline]
+RIP: 0010:arch_local_irq_restore arch/x86/include/asm/irqflags.h:147 [inline]
+RIP: 0010:generic_exec_single kernel/smp.c:406 [inline]
+RIP: 0010:generic_exec_single+0x278/0x540 kernel/smp.c:390
+Code: e8 8d eb 0b 00 4c 89 e6 31 ff 31 db e8 a1 ed 0b 00 4d 85 e4 0f 84 3e fe ff ff e8 73 eb 0b 00 e8 be 6d 18 00 fb 0f 1f 44 00 00 <e9> 29 fe ff ff e8 5e eb 0b 00 65 8b 1d 53 05 ae 7e 89 db be 08 00
+RSP: 0018:ffff88800f72fba8 EFLAGS: 00000206
+RAX: 00000000000006f9 RBX: 0000000000000000 RCX: 1ffffffff11c9772
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+RBP: ffff88800f72fbd0 R08: 0000000000000001 R09: fffffbfff11c8eaa
+R10: 0000000000000001 R11: ffffffff88e4754f R12: 0000000000000200
+R13: ffffffff81946090 R14: ffff88800f72fcf0 R15: ffff88800f72fc28
+ smp_call_function_single+0x193/0x460 kernel/smp.c:647
+ cpu_function_call kernel/events/core.c:153 [inline]
+ perf_install_in_context+0x4fe/0x5b0 kernel/events/core.c:2867
+ __do_sys_perf_event_open+0x1a8c/0x2c40 kernel/events/core.c:12751
+ __se_sys_perf_event_open kernel/events/core.c:12403 [inline]
+ __x64_sys_perf_event_open+0xc7/0x160 kernel/events/core.c:12403
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x42/0xf0 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x44fe6d
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffdea78a8f8 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 000000000044fe6d
+RDX: 0000000000000000 RSI: 00000000ffffffff RDI: 0000000020000080
+RBP: 000000000008c4e4 R08: 0000000000000000 R09: 0000000000411a00
+R10: 00000000ffffffff R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000000 R14: 00000000004004e8 R15: 0000000000000000
+ </TASK>
+
