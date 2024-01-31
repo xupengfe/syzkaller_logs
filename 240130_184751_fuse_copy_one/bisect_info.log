@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [41bccc98fb7931d63d03f326a746ac4d429c1dd3] Linux 6.8-rc2
+git bisect bad 41bccc98fb7931d63d03f326a746ac4d429c1dd3
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [36001a2fa6cc63d58664a2a99b90a864f9eb587a] Merge tag 'clk-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
+git bisect good 36001a2fa6cc63d58664a2a99b90a864f9eb587a
+# good: [e81507acdc19d91df4121f409871f3e4e055f6c2] Merge tag 'clk-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
+git bisect good e81507acdc19d91df4121f409871f3e4e055f6c2
+# bad: [e9cbc89067cce78211c8629c78e931c0fe64e29d] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad e9cbc89067cce78211c8629c78e931c0fe64e29d
+# bad: [94e0d43e51ff8577ad273032bb1cacfd68e9297b] Merge tag 'acpi-6.5-rc1-3' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad 94e0d43e51ff8577ad273032bb1cacfd68e9297b
+# bad: [3a8a670eeeaa40d87bd38a587438952741980c18] Merge tag 'net-next-6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect bad 3a8a670eeeaa40d87bd38a587438952741980c18
+# good: [6f68fc395f49fb43f6ae801c340953ee4f793e98] Merge tag 'linux-can-fixes-for-6.4-20230622' of git://git.kernel.org/pub/scm/linux/kernel/git/mkl/linux-can
+git bisect good 6f68fc395f49fb43f6ae801c340953ee4f793e98
+# bad: [6e17c6de3ddf3073741d9c91a796ee696914d8a0] Merge tag 'mm-stable-2023-06-24-19-15' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect bad 6e17c6de3ddf3073741d9c91a796ee696914d8a0
+# good: [2605e80d3438c77190f55b821c6575048c68268e] Merge tag 'arm64-upstream' of git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux
+git bisect good 2605e80d3438c77190f55b821c6575048c68268e
+# good: [72dc6db7e3b692f46f3386b8dd5101d3f431adef] Merge tag 'wq-for-6.5-cleanup-ordered' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/wq
+git bisect good 72dc6db7e3b692f46f3386b8dd5101d3f431adef
+# bad: [179d3e4f3bfa5947821c1b1bc6aa49a4797b7f21] mm/madvise: clean up force_shm_swapin_readahead()
+git bisect bad 179d3e4f3bfa5947821c1b1bc6aa49a4797b7f21
+# bad: [523716770e63e229dbb6307d663f03d990dfefc5] maple_tree: rework mtree_alloc_{range,rrange}()
+git bisect bad 523716770e63e229dbb6307d663f03d990dfefc5
+# bad: [89f499f35c11af61ba7075ddc23209d10805a25a] maple_tree: add format option to mt_dump()
+git bisect bad 89f499f35c11af61ba7075ddc23209d10805a25a
+# good: [7bab8dfb12d63e6aea325362b0a52916a5503fe6] mm: pagemap: restrict pagewalk to the requested range
+git bisect good 7bab8dfb12d63e6aea325362b0a52916a5503fe6
+# bad: [07f44ac3c90c50a201307d3fe4dda120ee8394f5] mm: page_alloc: move pm_* function into power
+git bisect bad 07f44ac3c90c50a201307d3fe4dda120ee8394f5
+# bad: [5e7d5da2f41c1d762cd1dbdd97758be6c414ea29] mm: page_alloc: move init_on_alloc/free() into mm_init.c
+git bisect bad 5e7d5da2f41c1d762cd1dbdd97758be6c414ea29
+# good: [90ed667c03fe553a41d79057740ed5df951eead0] Revert "Revert "mm/compaction: fix set skip in fast_find_migrateblock""
+git bisect good 90ed667c03fe553a41d79057740ed5df951eead0
+# bad: [f24f66eef5c03e07120edddde3608477f10b3980] mm/zsmalloc: get rid of PAGE_MASK
+git bisect bad f24f66eef5c03e07120edddde3608477f10b3980
+# bad: [b758fe6df50daf68fef089d8f3c1cd49fc794ed2] mm/secretmem: make it on by default
+git bisect bad b758fe6df50daf68fef089d8f3c1cd49fc794ed2
+# first bad commit: [b758fe6df50daf68fef089d8f3c1cd49fc794ed2] mm/secretmem: make it on by default
+|0131_052442|Bisect successfully! 41bccc98fb7931d63d03f326a746ac4d429c1dd3_b758fe6df50daf68fef089d8f3c1cd49fc794ed2_revert bzimage passed!|

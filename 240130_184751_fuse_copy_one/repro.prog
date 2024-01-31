@@ -1,0 +1,9 @@
+# {Threaded:false Repeat:true RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:true Repro:false Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}
+mkdirat(0xffffffffffffff9c, &(0x7f0000002040)='./file0\x00', 0x0)
+r0 = openat$fuse(0xffffffffffffff9c, &(0x7f0000002080), 0x2, 0x0)
+mount$fuse(0x0, &(0x7f00000020c0)='./file0\x00', &(0x7f0000002100), 0x0, &(0x7f0000000140)=ANY=[@ANYBLOB='fd=', @ANYRESHEX=r0, @ANYBLOB=',rootmode=00000000000000000040000,user_id=', @ANYRESDEC=0x0, @ANYBLOB=',group_id=', @ANYRESDEC=0x0])
+r1 = memfd_secret(0x0)
+ftruncate(r1, 0x4)
+mmap$binder(&(0x7f0000000000/0x3000)=nil, 0x3000, 0x1, 0x11, r1, 0x0)
+lremovexattr(&(0x7f0000000000)='./file0\x00', 0x0)
+write$FUSE_INIT(r0, &(0x7f0000000040)={0x50, 0x0, 0x0, {0x7, 0x27, 0x3f, 0x20000, 0x9, 0x7ff, 0x80, 0x9}}, 0x50)
