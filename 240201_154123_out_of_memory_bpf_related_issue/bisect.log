@@ -1,0 +1,598 @@
+|0201_154123|cmd=cd /root/internal-devel_bak|
+|0201_154123|git log 41bccc98fb7931d63d03f326a746ac4d429c1dd3 check_result:commit 41bccc98fb7931d63d03f326a746ac4d429c1dd3|
+|0201_154123|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0201_154123|cmd=git checkout -f 41bccc98fb7931d63d03f326a746ac4d429c1dd3|
+|0201_154124|sshpass is already installed|
+|0201_154124|cmd=cd /root/internal-devel_bak|
+|0201_154124|ISSUE_FOLDER alreayd exist:/var/www/html//syzkaller/2024_02_01/0131_003857_untrack_pfn|
+|0201_154124|cmd=cp -rf /root/vm_bisect/config-5.18rc4i_kvm /var/www/html/bzimage/0201_154123_Call_Trace/kconfig_origin|
+|0201_154124|cmd=cp -rf /root/vm_bisect/repro.sh /var/www/html/bzimage/0201_154123_Call_Trace|
+|0201_154124|/var/www/html/bzimage/0131_003857_untrack_pfn/repro.c is .c or .cprog file|
+|0201_154124|cmd=cp -rf /var/www/html/bzimage/0131_003857_untrack_pfn/repro.c /var/www/html//syzkaller/2024_02_01/0131_003857_untrack_pfn/repro.c|
+|0201_154124|gcc -pthread /var/www/html//syzkaller/2024_02_01/0131_003857_untrack_pfn/repro.c -o /var/www/html//syzkaller/2024_02_01/0131_003857_untrack_pfn/repro|
+|0201_154124||/var/www/html/bzimage/bzImage_41bccc98fb7931d63d03f326a746ac4d429c1dd3| exist, no need make|
+|0201_154124|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_41bccc98fb7931d63d03f326a746ac4d429c1dd3, /var/www/html/bzimage/0201_154123_Call_Trace/41bccc98fb7931d63d03f326a746ac4d429c1dd3_dmesg.log, port:10024, 1 time|
+|0201_154145|It takes 21 seconds to find login:test login: |
+|0201_154145|Boot 1 time: takes 21 seconds to boot up.|
+|0201_154145|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_154148|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_154149|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_154150|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_154150|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_154200|/var/www/html/bzimage/bzImage_41bccc98fb7931d63d03f326a746ac4d429c1dd3 contained Call Trace:[   31.420524] Call Trace:
+[   32.227544] Call Trace:
+[   33.475701] Call Trace:, FAIL|
+|0201_154200|Found time:31 in /var/www/html/bzimage/0201_154123_Call_Trace/41bccc98fb7931d63d03f326a746ac4d429c1dd3_dmesg.log|
+|0201_154200|Logic: |<=50: +50|50-100 +180|>100 +1800| Set TIME:211|
+|0201_154200|-END- commit 41bccc98fb7931d63d03f326a746ac4d429c1dd3 FAIL bad|
+|0201_154200|cmd=cd /root/internal-devel_bak|
+|0201_154200||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0201_154200|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b, /var/www/html/bzimage/0201_154123_Call_Trace/f40ddce88593482919761f74910f42f4b84c004b_dmesg.log, port:10024, 1 time|
+|0201_154216|It takes 16 seconds to find login:test login: |
+|0201_154216|Boot 1 time: takes 16 seconds to boot up.|
+|0201_154216|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_154218|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_154218|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_154219|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_154219|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_154550|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain Call Trace: in dmesg, pass|
+|0201_154550|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0201_154550|cmd=git checkout -f 41bccc98fb7931d63d03f326a746ac4d429c1dd3|
+|0201_154550|cmd=git bisect start|
+|0201_154550|cmd=git bisect bad 41bccc98fb7931d63d03f326a746ac4d429c1dd3|
+|0201_154550|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0201_154550|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0201_154653||/var/www/html/bzimage/bzImage_36001a2fa6cc63d58664a2a99b90a864f9eb587a| exist, no need make|
+|0201_154653|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_36001a2fa6cc63d58664a2a99b90a864f9eb587a, /var/www/html/bzimage/0201_154123_Call_Trace/36001a2fa6cc63d58664a2a99b90a864f9eb587a_dmesg.log, port:10024, 1 time|
+|0201_154717|It takes 24 seconds to find login:test login: |
+|0201_154717|Boot 1 time: takes 24 seconds to boot up.|
+|0201_154717|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_154719|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_154720|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_154721|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_154721|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_155052|/var/www/html/bzimage/bzImage_36001a2fa6cc63d58664a2a99b90a864f9eb587a contained Call Trace:[   50.417290] Call Trace:
+[   54.338666] Call Trace:
+[   58.144814] Call Trace:
+[   59.657877] Call Trace:
+[   60.541364] Call Trace:
+[   62.763739] Call Trace:
+[   67.731049] Call Trace:
+[   73.693060] Call Trace:
+[   79.462725] Call Trace:
+[   80.880411] Call Trace:
+[   83.850631] Call Trace:
+[   87.021627] Call Trace:
+[   88.006363] Call Trace:
+[   88.470791] Call Trace:
+[   89.848878] Call Trace:
+[   92.475796] Call Trace:
+[   93.757748] Call Trace:
+[   97.565157] Call Trace:
+[  101.921371] Call Trace:
+[  104.867160] Call Trace:
+[  106.418072] Call Trace:
+[  112.198517] Call Trace:
+[  112.945845] Call Trace:
+[  116.517577] Call Trace:
+[  117.061654] Call Trace:
+[  119.231939] Call Trace:
+[  124.834681] Call Trace:
+[  131.883908] Call Trace:
+[  134.277236] Call Trace:
+[  137.611738] Call Trace:
+[  141.097725] Call Trace:
+[  143.642094] Call Trace:
+[  144.784469] Call Trace:
+[  145.305543] Call Trace:
+[  147.083226] Call Trace:
+[  148.155116] Call Trace:
+[  149.241691] Call Trace:
+[  151.457552] Call Trace:
+[  155.756930] Call Trace:
+[  157.398911] Call Trace:
+[  158.685252] Call Trace:
+[  160.720185] Call Trace:
+[  161.098436] Call Trace:
+[  162.363975] Call Trace:
+[  166.125856] Call Trace:
+[  166.865525] Call Trace:
+[  168.086141] Call Trace:
+[  169.523972] Call Trace:
+[  170.537918] Call Trace:
+[  174.398789] Call Trace:
+[  176.939344] Call Trace:
+[  178.286010] Call Trace:
+[  180.478913] Call Trace:
+[  181.269251] Call Trace:
+[  185.201043] Call Trace:
+[  190.958158] Call Trace:
+[  192.244303] Call Trace:
+[  193.011062] Call Trace:
+[  193.455223] Call Trace:
+[  197.014010] Call Trace:
+[  199.622430] Call Trace:
+[  200.812125] Call Trace:
+[  205.483795] Call Trace:
+[  208.123198] Call Trace:
+[  210.830770] Call Trace:
+[  211.841756] Call Trace:
+[  212.485809] Call Trace:
+[  215.719310] Call Trace:
+[  216.330577] Call Trace:
+[  217.361082] Call Trace:
+[  220.506574] Call Trace:
+[  221.781795] Call Trace:
+[  225.537065] Call Trace:
+[  226.668984] Call Trace:
+[  231.085215] Call Trace:, FAIL|
+|0201_155052|git bisect bad 36001a2fa6cc63d58664a2a99b90a864f9eb587a|
+|0201_155123||/var/www/html/bzimage/bzImage_61988e0a624400fe79f124914ecc4b19a8803f7f| does not exist, will make it|
+|0201_155123|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 61988e0a624400fe79f124914ecc4b19a8803f7f -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_161915|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_61988e0a624400fe79f124914ecc4b19a8803f7f, /var/www/html/bzimage/0201_154123_Call_Trace/61988e0a624400fe79f124914ecc4b19a8803f7f_dmesg.log, port:10024, 1 time|
+|0201_161943|It takes 28 seconds to find login:test login: |
+|0201_161943|Boot 1 time: takes 28 seconds to boot up.|
+|0201_161943|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_161945|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_161946|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_161947|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_161947|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_162318|/var/www/html/bzimage/bzImage_61988e0a624400fe79f124914ecc4b19a8803f7f contained Call Trace:[   33.121957] Call Trace:
+[   33.644365] Call Trace:
+[   33.978265] Call Trace:
+[   34.361700] Call Trace:
+[   34.705065] Call Trace:
+[   35.063686] Call Trace:
+[   35.430360] Call Trace:
+[   35.837024] Call Trace:
+[   36.218951] Call Trace:
+[   36.626144] Call Trace:
+[   38.126611] Call Trace:
+[   38.415363] Call Trace:
+[   38.490062] Call Trace:
+[   39.879158] Call Trace:
+[   40.187792] Call Trace:
+[   40.490349] Call Trace:
+[   40.936837] Call Trace:
+[   41.267138] Call Trace:
+[   41.575994] Call Trace:
+[   42.292995] Call Trace:
+[   43.194516] Call Trace:
+[   44.114564] Call Trace:
+[   44.471008] Call Trace:
+[   44.838915] Call Trace:, FAIL|
+|0201_162318|git bisect bad 61988e0a624400fe79f124914ecc4b19a8803f7f|
+|0201_162328||/var/www/html/bzimage/bzImage_070258effa3b9603ac0cd6a40297b00a01ea5fd8| does not exist, will make it|
+|0201_162328|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 070258effa3b9603ac0cd6a40297b00a01ea5fd8 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_165126|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_070258effa3b9603ac0cd6a40297b00a01ea5fd8, /var/www/html/bzimage/0201_154123_Call_Trace/070258effa3b9603ac0cd6a40297b00a01ea5fd8_dmesg.log, port:10024, 1 time|
+|0201_165147|It takes 21 seconds to find login:test login: |
+|0201_165147|Boot 1 time: takes 21 seconds to boot up.|
+|0201_165147|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_165149|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_165150|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_165151|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_165151|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_165522|/var/www/html/bzimage/bzImage_070258effa3b9603ac0cd6a40297b00a01ea5fd8 didn't contain Call Trace: in dmesg, pass|
+|0201_165522|git bisect good 070258effa3b9603ac0cd6a40297b00a01ea5fd8|
+|0201_165530||/var/www/html/bzimage/bzImage_86ac54e79fe09b34c52691a780a6e31d12fa57f4| does not exist, will make it|
+|0201_165530|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 86ac54e79fe09b34c52691a780a6e31d12fa57f4 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_172340|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_86ac54e79fe09b34c52691a780a6e31d12fa57f4, /var/www/html/bzimage/0201_154123_Call_Trace/86ac54e79fe09b34c52691a780a6e31d12fa57f4_dmesg.log, port:10024, 1 time|
+|0201_172400|It takes 20 seconds to find login:test login: |
+|0201_172400|Boot 1 time: takes 20 seconds to boot up.|
+|0201_172400|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_172402|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_172403|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_172404|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_172404|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_172735|/var/www/html/bzimage/bzImage_86ac54e79fe09b34c52691a780a6e31d12fa57f4 didn't contain Call Trace: in dmesg, pass|
+|0201_172735|git bisect good 86ac54e79fe09b34c52691a780a6e31d12fa57f4|
+|0201_172740||/var/www/html/bzimage/bzImage_923990f6431e6f07dbe99780dd8c4472596aa213| does not exist, will make it|
+|0201_172740|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 923990f6431e6f07dbe99780dd8c4472596aa213 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_175508|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_923990f6431e6f07dbe99780dd8c4472596aa213, /var/www/html/bzimage/0201_154123_Call_Trace/923990f6431e6f07dbe99780dd8c4472596aa213_dmesg.log, port:10024, 1 time|
+|0201_175527|It takes 19 seconds to find login:test login: |
+|0201_175527|Boot 1 time: takes 19 seconds to boot up.|
+|0201_175527|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_175529|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_175530|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_175530|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_175530|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_175901|/var/www/html/bzimage/bzImage_923990f6431e6f07dbe99780dd8c4472596aa213 didn't contain Call Trace: in dmesg, pass|
+|0201_175901|git bisect good 923990f6431e6f07dbe99780dd8c4472596aa213|
+|0201_175906||/var/www/html/bzimage/bzImage_43aa0a195f06101bcb5d8d711bba0dd24b33a1a0| does not exist, will make it|
+|0201_175906|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 43aa0a195f06101bcb5d8d711bba0dd24b33a1a0 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_182602|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_43aa0a195f06101bcb5d8d711bba0dd24b33a1a0, /var/www/html/bzimage/0201_154123_Call_Trace/43aa0a195f06101bcb5d8d711bba0dd24b33a1a0_dmesg.log, port:10024, 1 time|
+|0201_182622|It takes 20 seconds to find login:test login: |
+|0201_182622|Boot 1 time: takes 20 seconds to boot up.|
+|0201_182622|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_182624|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_182625|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_182626|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_182626|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_182957|/var/www/html/bzimage/bzImage_43aa0a195f06101bcb5d8d711bba0dd24b33a1a0 didn't contain Call Trace: in dmesg, pass|
+|0201_182957|git bisect good 43aa0a195f06101bcb5d8d711bba0dd24b33a1a0|
+|0201_183000||/var/www/html/bzimage/bzImage_52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578| does not exist, will make it|
+|0201_183000|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_185651|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578, /var/www/html/bzimage/0201_154123_Call_Trace/52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578_dmesg.log, port:10024, 1 time|
+|0201_185713|It takes 22 seconds to find login:test login: |
+|0201_185713|Boot 1 time: takes 22 seconds to boot up.|
+|0201_185713|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_185715|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_185716|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_185717|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_185717|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_190048|/var/www/html/bzimage/bzImage_52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578 didn't contain Call Trace: in dmesg, pass|
+|0201_190048|git bisect good 52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578|
+|0201_190052||/var/www/html/bzimage/bzImage_d54f486035fd89f14845a7f34a97a3f5da4e70f2| does not exist, will make it|
+|0201_190052|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m d54f486035fd89f14845a7f34a97a3f5da4e70f2 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_192817|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_d54f486035fd89f14845a7f34a97a3f5da4e70f2, /var/www/html/bzimage/0201_154123_Call_Trace/d54f486035fd89f14845a7f34a97a3f5da4e70f2_dmesg.log, port:10024, 1 time|
+|0201_192838|It takes 21 seconds to find login:test login: |
+|0201_192838|Boot 1 time: takes 21 seconds to boot up.|
+|0201_192838|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_192840|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_192841|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_192842|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_192842|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_193213|/var/www/html/bzimage/bzImage_d54f486035fd89f14845a7f34a97a3f5da4e70f2 didn't contain Call Trace: in dmesg, pass|
+|0201_193213|git bisect good d54f486035fd89f14845a7f34a97a3f5da4e70f2|
+|0201_193215||/var/www/html/bzimage/bzImage_44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24| does not exist, will make it|
+|0201_193215|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_195922|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24, /var/www/html/bzimage/0201_154123_Call_Trace/44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24_dmesg.log, port:10024, 1 time|
+|0201_195943|It takes 21 seconds to find login:test login: |
+|0201_195943|Boot 1 time: takes 21 seconds to boot up.|
+|0201_195943|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_195946|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_195946|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_195947|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_195947|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_200318|/var/www/html/bzimage/bzImage_44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24 contained Call Trace:[   26.274065] Call Trace:
+[   26.645502] Call Trace:
+[   26.991603] Call Trace:
+[   27.321379] Call Trace:
+[   28.029664] Call Trace:
+[   28.412549] Call Trace:
+[   28.855422] Call Trace:
+[   29.204103] Call Trace:
+[   29.614854] Call Trace:
+[   30.039134] Call Trace:
+[   31.357496] Call Trace:
+[   31.634731] Call Trace:
+[   31.984330] Call Trace:
+[   32.056862] Call Trace:
+[   33.687436] Call Trace:
+[   33.981393] Call Trace:
+[   34.299798] Call Trace:
+[   34.661854] Call Trace:
+[   35.038995] Call Trace:, FAIL|
+|0201_200318|git bisect bad 44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24|
+|0201_200321||/var/www/html/bzimage/bzImage_bfc484fe6abba4b89ec9330e0e68778e2a9856b2| does not exist, will make it|
+|0201_200321|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m bfc484fe6abba4b89ec9330e0e68778e2a9856b2 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_203107|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_bfc484fe6abba4b89ec9330e0e68778e2a9856b2, /var/www/html/bzimage/0201_154123_Call_Trace/bfc484fe6abba4b89ec9330e0e68778e2a9856b2_dmesg.log, port:10024, 1 time|
+|0201_203126|It takes 19 seconds to find login:test login: |
+|0201_203126|Boot 1 time: takes 19 seconds to boot up.|
+|0201_203126|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_203128|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_203129|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_203129|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_203129|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_203500|/var/www/html/bzimage/bzImage_bfc484fe6abba4b89ec9330e0e68778e2a9856b2 didn't contain Call Trace: in dmesg, pass|
+|0201_203500|git bisect good bfc484fe6abba4b89ec9330e0e68778e2a9856b2|
+|0201_203504||/var/www/html/bzimage/bzImage_e21d585cb3db65a207cd338c74b9886090ef1ceb| does not exist, will make it|
+|0201_203504|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m e21d585cb3db65a207cd338c74b9886090ef1ceb -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_210338|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_e21d585cb3db65a207cd338c74b9886090ef1ceb, /var/www/html/bzimage/0201_154123_Call_Trace/e21d585cb3db65a207cd338c74b9886090ef1ceb_dmesg.log, port:10024, 1 time|
+|0201_210357|It takes 19 seconds to find login:test login: |
+|0201_210357|Boot 1 time: takes 19 seconds to boot up.|
+|0201_210357|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_210359|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_210400|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_210400|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_210400|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_210731|/var/www/html/bzimage/bzImage_e21d585cb3db65a207cd338c74b9886090ef1ceb didn't contain Call Trace: in dmesg, pass|
+|0201_210731|git bisect good e21d585cb3db65a207cd338c74b9886090ef1ceb|
+|0201_210734||/var/www/html/bzimage/bzImage_b7b98f868987cd3e86c9bd9a6db048614933d7a0| does not exist, will make it|
+|0201_210734|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m b7b98f868987cd3e86c9bd9a6db048614933d7a0 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_213457|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_b7b98f868987cd3e86c9bd9a6db048614933d7a0, /var/www/html/bzimage/0201_154123_Call_Trace/b7b98f868987cd3e86c9bd9a6db048614933d7a0_dmesg.log, port:10024, 1 time|
+|0201_213520|It takes 23 seconds to find login:test login: |
+|0201_213520|Boot 1 time: takes 23 seconds to boot up.|
+|0201_213520|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_213522|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_213523|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_213524|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_213524|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_213855|/var/www/html/bzimage/bzImage_b7b98f868987cd3e86c9bd9a6db048614933d7a0 contained Call Trace:[   28.180092] Call Trace:
+[   28.512956] Call Trace:
+[   28.873685] Call Trace:
+[   29.206323] Call Trace:
+[   29.530207] Call Trace:
+[   29.916928] Call Trace:
+[   30.315966] Call Trace:
+[   30.700004] Call Trace:
+[   30.832339] Call Trace:
+[   32.148725] Call Trace:
+[   32.648218] Call Trace:
+[   33.197416] Call Trace:
+[   33.530698] Call Trace:
+[   33.860684] Call Trace:
+[   34.207430] Call Trace:
+[   35.435332] Call Trace:
+[   35.777095] Call Trace:
+[   36.654214] Call Trace:
+[   37.319201] Call Trace:
+[   37.630048] Call Trace:
+[   38.029602] Call Trace:
+[   38.935169] Call Trace:
+[   39.251361] Call Trace:
+[   39.635859] Call Trace:
+[   40.692066] Call Trace:
+[   41.410549] Call Trace:
+[   42.068518] Call Trace:
+[   42.724160] Call Trace:
+[   43.322961] Call Trace:
+[   43.642966] Call Trace:
+[   44.008912] Call Trace:
+[   44.367759] Call Trace:
+[   44.763218] Call Trace:
+[   45.022567] Call Trace:
+[   45.195136] Call Trace:
+[   45.545576] Call Trace:
+[   45.916842] Call Trace:
+[   46.225173] Call Trace:
+[   46.636462] Call Trace:
+[   46.976844] Call Trace:
+[   47.599845] Call Trace:
+[   48.920345] Call Trace:
+[   49.170226] Call Trace:, FAIL|
+|0201_213855|git bisect bad b7b98f868987cd3e86c9bd9a6db048614933d7a0|
+|0201_213858||/var/www/html/bzimage/bzImage_549a63238603103fa33cecd49487cf6c0f52e503| does not exist, will make it|
+|0201_213858|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 549a63238603103fa33cecd49487cf6c0f52e503 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_220707|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_549a63238603103fa33cecd49487cf6c0f52e503, /var/www/html/bzimage/0201_154123_Call_Trace/549a63238603103fa33cecd49487cf6c0f52e503_dmesg.log, port:10024, 1 time|
+|0201_220730|It takes 23 seconds to find login:test login: |
+|0201_220730|Boot 1 time: takes 23 seconds to boot up.|
+|0201_220730|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_220732|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_220733|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_220733|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_220733|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_221104|/var/www/html/bzimage/bzImage_549a63238603103fa33cecd49487cf6c0f52e503 contained Call Trace:[   28.747871] Call Trace:
+[   29.103268] Call Trace:
+[   29.452239] Call Trace:
+[   29.787312] Call Trace:
+[   30.158753] Call Trace:
+[   30.521400] Call Trace:
+[   30.966566] Call Trace:
+[   31.355519] Call Trace:
+[   31.761497] Call Trace:
+[   32.141703] Call Trace:
+[   33.632013] Call Trace:
+[   33.769249] Call Trace:
+[   34.099625] Call Trace:
+[   34.525919] Call Trace:
+[   35.172194] Call Trace:
+[   35.515115] Call Trace:
+[   35.876287] Call Trace:
+[   36.284218] Call Trace:
+[   36.695812] Call Trace:
+[   37.002291] Call Trace:
+[   37.522662] Call Trace:
+[   39.209404] Call Trace:
+[   39.481692] Call Trace:, FAIL|
+|0201_221104|git bisect bad 549a63238603103fa33cecd49487cf6c0f52e503|
+|0201_221106||/var/www/html/bzimage/bzImage_f9d532fc5d6c2577687221869f6e7433eb177ec7| does not exist, will make it|
+|0201_221106|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m f9d532fc5d6c2577687221869f6e7433eb177ec7 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_223901|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_f9d532fc5d6c2577687221869f6e7433eb177ec7, /var/www/html/bzimage/0201_154123_Call_Trace/f9d532fc5d6c2577687221869f6e7433eb177ec7_dmesg.log, port:10024, 1 time|
+|0201_223921|It takes 20 seconds to find login:test login: |
+|0201_223921|Boot 1 time: takes 20 seconds to boot up.|
+|0201_223921|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_223923|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_223924|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_223925|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_223925|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_224256|/var/www/html/bzimage/bzImage_f9d532fc5d6c2577687221869f6e7433eb177ec7 didn't contain Call Trace: in dmesg, pass|
+|0201_224256|git bisect good f9d532fc5d6c2577687221869f6e7433eb177ec7|
+|0201_224257||/var/www/html/bzimage/bzImage_47512102cde2d252d7b984d9675cfd3420b48ad9| does not exist, will make it|
+|0201_224257|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 47512102cde2d252d7b984d9675cfd3420b48ad9 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_231010|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_47512102cde2d252d7b984d9675cfd3420b48ad9, /var/www/html/bzimage/0201_154123_Call_Trace/47512102cde2d252d7b984d9675cfd3420b48ad9_dmesg.log, port:10024, 1 time|
+|0201_231029|It takes 19 seconds to find login:test login: |
+|0201_231029|Boot 1 time: takes 19 seconds to boot up.|
+|0201_231029|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_231031|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_231032|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_231033|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_231033|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_231404|/var/www/html/bzimage/bzImage_47512102cde2d252d7b984d9675cfd3420b48ad9 contained Call Trace:[   23.764038] Call Trace:
+[   24.060941] Call Trace:
+[   24.417131] Call Trace:
+[   24.829699] Call Trace:
+[   25.190752] Call Trace:
+[   25.567813] Call Trace:
+[   25.880019] Call Trace:
+[   26.227424] Call Trace:
+[   26.526350] Call Trace:
+[   27.153575] Call Trace:
+[   28.773277] Call Trace:
+[   29.181094] Call Trace:
+[   29.577012] Call Trace:
+[   29.886543] Call Trace:
+[   30.210727] Call Trace:
+[   31.001065] Call Trace:
+[   31.325618] Call Trace:
+[   31.730754] Call Trace:
+[   32.039833] Call Trace:
+[   32.357306] Call Trace:
+[   33.007153] Call Trace:
+[   33.236491] Call Trace:, FAIL|
+|0201_231404|git bisect bad 47512102cde2d252d7b984d9675cfd3420b48ad9|
+|0201_231404||/var/www/html/bzimage/bzImage_03e6a7a94001b9582ef6549e5709f3d684217b28| does not exist, will make it|
+|0201_231404|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 03e6a7a94001b9582ef6549e5709f3d684217b28 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0201_234123|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_03e6a7a94001b9582ef6549e5709f3d684217b28, /var/www/html/bzimage/0201_154123_Call_Trace/03e6a7a94001b9582ef6549e5709f3d684217b28_dmesg.log, port:10024, 1 time|
+|0201_234145|It takes 22 seconds to find login:test login: |
+|0201_234145|Boot 1 time: takes 22 seconds to boot up.|
+|0201_234145|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0201_234147|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0201_234148|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0201_234149|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0201_234149|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0201_234520|/var/www/html/bzimage/bzImage_03e6a7a94001b9582ef6549e5709f3d684217b28 didn't contain Call Trace: in dmesg, pass|
+|0201_234520|git bisect good 03e6a7a94001b9582ef6549e5709f3d684217b28|
+|0201_234521||/var/www/html/bzimage/bzImage_b066abba3ef16a4a085d237e95da0de3f0b87713| does not exist, will make it|
+|0201_234521|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m b066abba3ef16a4a085d237e95da0de3f0b87713 -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0202_001210|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_b066abba3ef16a4a085d237e95da0de3f0b87713, /var/www/html/bzimage/0201_154123_Call_Trace/b066abba3ef16a4a085d237e95da0de3f0b87713_dmesg.log, port:10024, 1 time|
+|0202_001231|It takes 21 seconds to find login:test login: |
+|0202_001231|Boot 1 time: takes 21 seconds to boot up.|
+|0202_001231|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0202_001234|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0202_001235|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0202_001235|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0202_001235|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0202_001606|/var/www/html/bzimage/bzImage_b066abba3ef16a4a085d237e95da0de3f0b87713 didn't contain Call Trace: in dmesg, pass|
+|0202_001606|git bisect good b066abba3ef16a4a085d237e95da0de3f0b87713|
+|0202_001607||/var/www/html/bzimage/bzImage_9330986c03006ab1d33d243b7cfe598a7a3c1baa| does not exist, will make it|
+|0202_001607|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 9330986c03006ab1d33d243b7cfe598a7a3c1baa -d /var/www/html/bzimage -o /tmp/kernel -c /root/vm_bisect/config-5.18rc4i_kvm > /root/vm_bisect/nohup.log|
+|0202_004355|BOOT_VM:/root/vm_bisect/boot_vm.sh | /var/www/html/bzimage/bzImage_9330986c03006ab1d33d243b7cfe598a7a3c1baa, /var/www/html/bzimage/0201_154123_Call_Trace/9330986c03006ab1d33d243b7cfe598a7a3c1baa_dmesg.log, port:10024, 1 time|
+|0202_004415|It takes 20 seconds to find login:test login: |
+|0202_004415|Boot 1 time: takes 20 seconds to boot up.|
+|0202_004415|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /root/vm_bisect/repro.sh root@localhost:/root/repro.sh|
+|0202_004417|cmd=sshpass -e scp -o 'StrictHostKeyChecking no' -P 10024 /var/www/html/bzimage/0201_154123_Call_Trace/repro.c root@localhost:/root/repro.c|
+|0202_004418|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost 'chmod 755 /root/repro.sh'|
+|0202_004418|sshpass -e ssh -o ConnectTimeout=5 -o 'StrictHostKeyChecking no' -p 10024 localhost '/root/repro.sh'|
+|0202_004418|Repro in vm 1 times ok, VM_ERR_NUM:0 is 0|
+|0202_004749|/var/www/html/bzimage/bzImage_9330986c03006ab1d33d243b7cfe598a7a3c1baa contained Call Trace:[   25.064150] Call Trace:
+[   25.831452] Call Trace:
+[   26.018268] Call Trace:
+[   26.535335] Call Trace:
+[   26.833649] Call Trace:
+[   27.234839] Call Trace:
+[   27.730416] Call Trace:
+[   28.042394] Call Trace:
+[   28.315710] Call Trace:
+[   28.849373] Call Trace:
+[   29.932660] Call Trace:
+[   30.094397] Call Trace:
+[   30.362841] Call Trace:
+[   31.371585] Call Trace:
+[   31.602386] Call Trace:
+[   31.851981] Call Trace:
+[   32.123033] Call Trace:
+[   32.389605] Call Trace:
+[   32.637501] Call Trace:
+[   32.918328] Call Trace:
+[   33.206566] Call Trace:
+[   33.693100] Call Trace:
+[   33.932070] Call Trace:, FAIL|
+|0202_004749|git bisect bad 9330986c03006ab1d33d243b7cfe598a7a3c1baa|
+|0202_004750|Bisect PASS: find bad commit: 9330986c03006ab1d33d243b7cfe598a7a3c1baa is the first bad commit
+commit 9330986c03006ab1d33d243b7cfe598a7a3c1baa
+Author: Joanne Koong <joannekoong@fb.com>
+Date:   Wed Oct 27 16:45:00 2021 -0700
+
+    bpf: Add bloom filter map implementation
+    
+    This patch adds the kernel-side changes for the implementation of
+    a bpf bloom filter map.
+    
+    The bloom filter map supports peek (determining whether an element
+    is present in the map) and push (adding an element to the map)
+    operations.These operations are exposed to userspace applications
+    through the already existing syscalls in the following way:
+    
+    BPF_MAP_LOOKUP_ELEM -> peek
+    BPF_MAP_UPDATE_ELEM -> push
+    
+    The bloom filter map does not have keys, only values. In light of
+    this, the bloom filter map's API matches that of queue stack maps:
+    user applications use BPF_MAP_LOOKUP_ELEM/BPF_MAP_UPDATE_ELEM
+    which correspond internally to bpf_map_peek_elem/bpf_map_push_elem,
+    and bpf programs must use the bpf_map_peek_elem and bpf_map_push_elem
+    APIs to query or add an element to the bloom filter map. When the
+    bloom filter map is created, it must be created with a key_size of 0.
+    
+    For updates, the user will pass in the element to add to the map
+    as the value, with a NULL key. For lookups, the user will pass in the
+    element to query in the map as the value, with a NULL key. In the
+    verifier layer, this requires us to modify the argument type of
+    a bloom filter's BPF_FUNC_map_peek_elem call to ARG_PTR_TO_MAP_VALUE;
+    as well, in the syscall layer, we need to copy over the user value
+    so that in bpf_map_peek_elem, we know which specific value to query.
+    
+    A few things to please take note of:
+     * If there are any concurrent lookups + updates, the user is
+    responsible for synchronizing this to ensure no false negative lookups
+    occur.
+     * The number of hashes to use for the bloom filter is configurable from
+    userspace. If no number is specified, the default used will be 5 hash
+    functions. The benchmarks later in this patchset can help compare the
+    performance of using different number of hashes on different entry
+    sizes. In general, using more hashes decreases both the false positive
+    rate and the speed of a lookup.
+     * Deleting an element in the bloom filter map is not supported.
+     * The bloom filter map may be used as an inner map.
+     * The "max_entries" size that is specified at map creation time is used
+    to approximate a reasonable bitmap size for the bloom filter, and is not
+    otherwise strictly enforced. If the user wishes to insert more entries
+    into the bloom filter than "max_entries", they may do so but they should
+    be aware that this may lead to a higher false positive rate.
+    
+    Signed-off-by: Joanne Koong <joannekoong@fb.com>
+    Signed-off-by: Alexei Starovoitov <ast@kernel.org>
+    Acked-by: Andrii Nakryiko <andrii@kernel.org>
+    Link: https://lore.kernel.org/bpf/20211027234504.30744-2-joannekoong@fb.com
+
+ include/linux/bpf.h            |   1 +
+ include/linux/bpf_types.h      |   1 +
+ include/uapi/linux/bpf.h       |   9 ++
+ kernel/bpf/Makefile            |   2 +-
+ kernel/bpf/bloom_filter.c      | 195 +++++++++++++++++++++++++++++++++++++++++
+ kernel/bpf/syscall.c           |  24 ++++-
+ kernel/bpf/verifier.c          |  19 +++-
+ tools/include/uapi/linux/bpf.h |   9 ++
+ 8 files changed, 253 insertions(+), 7 deletions(-)
+ create mode 100644 kernel/bpf/bloom_filter.c|
+|0202_004750|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|0202_004750|cmd=git bisect log >> /var/www/html/bzimage/0201_154123_Call_Trace/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [41bccc98fb7931d63d03f326a746ac4d429c1dd3] Linux 6.8-rc2
+git bisect bad 41bccc98fb7931d63d03f326a746ac4d429c1dd3
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# bad: [36001a2fa6cc63d58664a2a99b90a864f9eb587a] Merge tag 'clk-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
+git bisect bad 36001a2fa6cc63d58664a2a99b90a864f9eb587a
+# bad: [61988e0a624400fe79f124914ecc4b19a8803f7f] Merge branch 'thermal-int340x'
+git bisect bad 61988e0a624400fe79f124914ecc4b19a8803f7f
+# good: [070258effa3b9603ac0cd6a40297b00a01ea5fd8] Merge branch 'marvell-mdio-ACPI'
+git bisect good 070258effa3b9603ac0cd6a40297b00a01ea5fd8
+# good: [86ac54e79fe09b34c52691a780a6e31d12fa57f4] Merge branch 'for-5.15' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/wq
+git bisect good 86ac54e79fe09b34c52691a780a6e31d12fa57f4
+# good: [923990f6431e6f07dbe99780dd8c4472596aa213] Merge branch 'ptp-ocp-timecard-v13-fw'
+git bisect good 923990f6431e6f07dbe99780dd8c4472596aa213
+# good: [43aa0a195f06101bcb5d8d711bba0dd24b33a1a0] Merge tag 'objtool-core-2021-10-31' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 43aa0a195f06101bcb5d8d711bba0dd24b33a1a0
+# good: [52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578] Merge branch 'make-neighbor-eviction-controllable-by-userspace'
+git bisect good 52fa3ee0cce60a04739f4a5ca1c9d5c2a8ee1578
+# good: [d54f486035fd89f14845a7f34a97a3f5da4e70f2] Merge tag 'hwmon-for-v5.16' of git://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging
+git bisect good d54f486035fd89f14845a7f34a97a3f5da4e70f2
+# bad: [44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24] Merge tag 'hyperv-next-signed-20211102' of git://git.kernel.org/pub/scm/linux/kernel/git/hyperv/linux
+git bisect bad 44261f8e287d1b02a2e4bfbd7399fb8d37d1ee24
+# good: [bfc484fe6abba4b89ec9330e0e68778e2a9856b2] Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/kernel/git/herbert/crypto-2.6
+git bisect good bfc484fe6abba4b89ec9330e0e68778e2a9856b2
+# good: [e21d585cb3db65a207cd338c74b9886090ef1ceb] libbpf: Deprecate multi-instance bpf_program APIs
+git bisect good e21d585cb3db65a207cd338c74b9886090ef1ceb
+# bad: [b7b98f868987cd3e86c9bd9a6db048614933d7a0] Merge https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect bad b7b98f868987cd3e86c9bd9a6db048614933d7a0
+# bad: [549a63238603103fa33cecd49487cf6c0f52e503] libbpf: Ensure that BPF syscall fds are never 0, 1, or 2
+git bisect bad 549a63238603103fa33cecd49487cf6c0f52e503
+# good: [f9d532fc5d6c2577687221869f6e7433eb177ec7] Merge branch 'bpf: use 32bit safe version of u64_stats'
+git bisect good f9d532fc5d6c2577687221869f6e7433eb177ec7
+# bad: [47512102cde2d252d7b984d9675cfd3420b48ad9] libbpf: Add "map_extra" as a per-map-type extra flag
+git bisect bad 47512102cde2d252d7b984d9675cfd3420b48ad9
+# good: [03e6a7a94001b9582ef6549e5709f3d684217b28] Merge branch 'selftests/bpf: parallel mode improvement'
+git bisect good 03e6a7a94001b9582ef6549e5709f3d684217b28
+# good: [b066abba3ef16a4a085d237e95da0de3f0b87713] bpf, tests: Add module parameter test_suite to test_bpf module
+git bisect good b066abba3ef16a4a085d237e95da0de3f0b87713
+# bad: [9330986c03006ab1d33d243b7cfe598a7a3c1baa] bpf: Add bloom filter map implementation
+git bisect bad 9330986c03006ab1d33d243b7cfe598a7a3c1baa
+# first bad commit: [9330986c03006ab1d33d243b7cfe598a7a3c1baa] bpf: Add bloom filter map implementation
+|0202_004750|nohup /root/vm_bisect/make_bz.sh -k /root/internal-devel_bak -m 41bccc98fb7931d63d03f326a746ac4d429c1dd3 -b 9330986c03006ab1d33d243b7cfe598a7a3c1baa -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_41bccc98fb7931d63d03f326a746ac4d429c1dd3_9330986c03006ab1d33d243b7cfe598a7a3c1baa_revert -c /root/vm_bisect/config-5.18rc4i_kvm  > /root/vm_bisect/nohup.log|
+|0202_004851|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0202_004851|FAIL|bzImage:/var/www/html/bzimage/bzImage_41bccc98fb7931d63d03f326a746ac4d429c1dd3_9330986c03006ab1d33d243b7cfe598a7a3c1baa_revert does not exist:|
+|0202_004851|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
