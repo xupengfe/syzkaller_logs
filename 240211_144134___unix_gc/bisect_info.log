@@ -1,0 +1,30 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [3561c4956a5c9e7f995ae47d4ef703eb9c6a93cd] 0day head guard for 'devel-hourly-20240205-094544'
+git bisect bad 3561c4956a5c9e7f995ae47d4ef703eb9c6a93cd
+# status: waiting for good commit(s), bad commit known
+# good: [54be6c6c5ae8e0d93a6c4641cb7528eb0b6ba478] Linux 6.8-rc3
+git bisect good 54be6c6c5ae8e0d93a6c4641cb7528eb0b6ba478
+# good: [8b6362d96fc103eced08699ca49dd9cbc90a6f76] rr-cache: Resolve hybrid conflicts
+git bisect good 8b6362d96fc103eced08699ca49dd9cbc90a6f76
+# bad: [919d25b0b5242b0be14a9bd7bd005fd41e10ad30] Merge 'internal-linux-review/Michal-Swiatkowski/ice-devlink-PF-MSI-X-max-and-min-parameter/20240202-224427' into devel-hourly-20240205-094544
+git bisect bad 919d25b0b5242b0be14a9bd7bd005fd41e10ad30
+# good: [0c657f860e675e051553c579669804d21da52364] net: dsa: microchip: ksz8: move BMCR specific code to separate function
+git bisect good 0c657f860e675e051553c579669804d21da52364
+# bad: [1701940b1a02addc8fe445538442112e84270b02] Merge branch 'tools-net-ynl-add-features-for-tc-family'
+git bisect bad 1701940b1a02addc8fe445538442112e84270b02
+# good: [fd5a6a71313e27c4f601526081b69d4e76f03dea] net: stmmac: est: Per Tx-queue error count for HLBF
+git bisect good fd5a6a71313e27c4f601526081b69d4e76f03dea
+# good: [84fc2408cfc676eeb7ce2f0f0776ee815f7db689] Merge tag 'nf-next-24-01-29' of https://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf-next Florian Westphal says:
+git bisect good 84fc2408cfc676eeb7ce2f0f0776ee815f7db689
+# bad: [11498715f266a3fb4caabba9dd575636cbcaa8f1] af_unix: Remove io_uring code for GC.
+git bisect bad 11498715f266a3fb4caabba9dd575636cbcaa8f1
+# good: [6fb760972c49490b03f3db2ad64cf30bdd28c54a] net: phy: qcom: create and move functions to shared library
+git bisect good 6fb760972c49490b03f3db2ad64cf30bdd28c54a
+# good: [e5a77529971caba88130fe38f26c083fda03bb78] Merge branch 'net-phy-split-at803x'
+git bisect good e5a77529971caba88130fe38f26c083fda03bb78
+# good: [2dc23b6f852bc7816d7ab421979d95223e894be3] net: bridge: Use KMEM_CACHE instead of kmem_cache_create
+git bisect good 2dc23b6f852bc7816d7ab421979d95223e894be3
+# good: [d0f6dc26346863e1f4a23117f5468614e54df064] af_unix: Replace BUG_ON() with WARN_ON_ONCE().
+git bisect good d0f6dc26346863e1f4a23117f5468614e54df064
+# first bad commit: [11498715f266a3fb4caabba9dd575636cbcaa8f1] af_unix: Remove io_uring code for GC.
