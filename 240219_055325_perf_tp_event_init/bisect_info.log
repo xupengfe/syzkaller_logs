@@ -1,0 +1,47 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [841c35169323cd833294798e58b9bf63fa4fa1de] Linux 6.8-rc4
+git bisect bad 841c35169323cd833294798e58b9bf63fa4fa1de
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [328141e51e6fc79d21168bfd4e356dddc2ec7491] Merge tag 'mmc-v5.20' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc
+git bisect good 328141e51e6fc79d21168bfd4e356dddc2ec7491
+# good: [3f2a1903af06672f416efd506f029066b9243cbd] Merge tag 'rtc-6.4' of git://git.kernel.org/pub/scm/linux/kernel/git/abelloni/linux
+git bisect good 3f2a1903af06672f416efd506f029066b9243cbd
+# bad: [a477e3a76be740a1be844635d572c83f4c10002c] Merge tag 'char-misc-6.6-rc6' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect bad a477e3a76be740a1be844635d572c83f4c10002c
+# bad: [d2afa89f6690616b9fb55f3f74e6d2927589e43a] Merge tag 'for-netdev' of https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect bad d2afa89f6690616b9fb55f3f74e6d2927589e43a
+# bad: [ff7ddcf0db48a7d9ae536eb0875428117be1d1f1] Merge tag 'clk-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
+git bisect bad ff7ddcf0db48a7d9ae536eb0875428117be1d1f1
+# good: [55d7c91406b4b486ea8c50e2fb31f1e1a0ef5143] Merge branch 'mlxsw-cleanups'
+git bisect good 55d7c91406b4b486ea8c50e2fb31f1e1a0ef5143
+# good: [4baa098a147d76a9ad1a6867fa14286db52085b6] Merge tag 'x86_misc_for_v6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good 4baa098a147d76a9ad1a6867fa14286db52085b6
+# bad: [1364b4068a421d99fb4da8b570e54525096b1cef] Merge tag 'mtd/for-6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux
+git bisect bad 1364b4068a421d99fb4da8b570e54525096b1cef
+# good: [acc72d59c7509540c27c49625cb4b5a8db1f1a84] mm/hugetlb: remove hugetlb_set_page_subpool()
+git bisect good acc72d59c7509540c27c49625cb4b5a8db1f1a84
+# bad: [8ad78685ffa6e3836b5b32197bffb03ee3389bec] Merge tag 'pstore-v6.5-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/kees/linux
+git bisect bad 8ad78685ffa6e3836b5b32197bffb03ee3389bec
+# bad: [6f612579be9d0ff527ca2e517e10bfaf08cc1860] Merge tag 'objtool-core-2023-06-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad 6f612579be9d0ff527ca2e517e10bfaf08cc1860
+# good: [ed3b7923a816ded62dccef377c9ee346c7d3b1b4] Merge tag 'sched-core-2023-06-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect good ed3b7923a816ded62dccef377c9ee346c7d3b1b4
+# bad: [a193cc7506fde23185a7c0d99474a03a8ec5ee4c] Merge tag 'perf-core-2023-06-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+git bisect bad a193cc7506fde23185a7c0d99474a03a8ec5ee4c
+# good: [358c449afa662b1120d43738d2b0400ed2cc97df] locking/atomic: sparc: add preprocessor symbols
+git bisect good 358c449afa662b1120d43738d2b0400ed2cc97df
+# good: [8aaf297a0dd66d4fac215af24ece8dea091079bc] docs: scripts: kernel-doc: accept bitwise negation like ~@var
+git bisect good 8aaf297a0dd66d4fac215af24ece8dea091079bc
+# bad: [228020b490eda9133c9cb6f59a5ee1278d8c463f] perf: Re-instate the linear PMU search
+git bisect bad 228020b490eda9133c9cb6f59a5ee1278d8c463f
+# bad: [9551fbb64d094cc105964716224adeb7765df8fd] perf/core: Remove pmu linear searching code
+git bisect bad 9551fbb64d094cc105964716224adeb7765df8fd
+# bad: [2fad201fe38ff9a692acedb1990ece2c52a29f95] perf/ibs: Fix interface via core pmu events
+git bisect bad 2fad201fe38ff9a692acedb1990ece2c52a29f95
+# bad: [0d6d062ca27ec7ef547712d34dcfcfb952bcef53] perf/core: Rework forwarding of {task|cpu}-clock events
+git bisect bad 0d6d062ca27ec7ef547712d34dcfcfb952bcef53
+# first bad commit: [0d6d062ca27ec7ef547712d34dcfcfb952bcef53] perf/core: Rework forwarding of {task|cpu}-clock events
+|0220_134414|Bisect successfully! 841c35169323cd833294798e58b9bf63fa4fa1de_0d6d062ca27ec7ef547712d34dcfcfb952bcef53_revert bzimage passed!|

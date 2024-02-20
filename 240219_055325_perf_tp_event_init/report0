@@ -1,0 +1,72 @@
+tasks_rcu_exit_srcu_stall: rcu_tasks grace period number 2481 (since boot) gp_state: RTGS_POST_SCAN_TASKLIST is 30673 jiffies old.
+Please check any exiting tasks stuck between calls to exit_tasks_rcu_start() and exit_tasks_rcu_finish()
+INFO: task syz-executor.5:140952 blocked for more than 143 seconds.
+      Not tainted 6.8.0-rc4-4e6c5b0f4ced+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.5  state:D stack:0     pid:140952 tgid:140951 ppid:140497 flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5400 [inline]
+ __schedule+0xa7d/0x2810 kernel/sched/core.c:6727
+ __schedule_loop kernel/sched/core.c:6802 [inline]
+ schedule+0xd0/0x290 kernel/sched/core.c:6817
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6874
+ __mutex_lock_common kernel/locking/mutex.c:684 [inline]
+ __mutex_lock+0xf63/0x1b50 kernel/locking/mutex.c:752
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:804
+ perf_trace_init+0x5c/0x310 kernel/trace/trace_event_perf.c:221
+ perf_tp_event_init+0xaf/0x130 kernel/events/core.c:10106
+ perf_try_init_event+0x13f/0x5a0 kernel/events/core.c:11672
+ perf_init_event kernel/events/core.c:11742 [inline]
+ perf_event_alloc kernel/events/core.c:12022 [inline]
+ perf_event_alloc+0x1069/0x3e40 kernel/events/core.c:11888
+ __do_sys_perf_event_open+0x48e/0x2c40 kernel/events/core.c:12529
+ __se_sys_perf_event_open kernel/events/core.c:12420 [inline]
+ __x64_sys_perf_event_open+0xc7/0x160 kernel/events/core.c:12420
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x74/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x47f34d
+RSP: 002b:00007f01d05ef108 EFLAGS: 00000246 ORIG_RAX: 000000000000012a
+RAX: ffffffffffffffda RBX: 00000000005abf80 RCX: 000000000047f34d
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000020000100
+RBP: 00000000005abf80 R08: 0000000000000000 R09: 0000000000000000
+R10: ffffffffffffffff R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffefa52890f R14: 00007ffefa528a90 R15: 00007f01d05ef280
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by rcu_tasks_kthre/13:
+ #0: ffffffff86c635b0 (rcu_tasks.tasks_gp_mutex){+.+.}-{3:3}, at: rcu_tasks_one_gp+0x749/0xf00 kernel/rcu/tasks.h:581
+1 lock held by khungtaskd/32:
+ #0: ffffffff86c64180 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:298 [inline]
+ #0: ffffffff86c64180 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:750 [inline]
+ #0: ffffffff86c64180 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x74/0x320 kernel/locking/lockdep.c:6614
+2 locks held by kworker/u4:3/120325:
+ #0: ffff88800a089938 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:2608 [inline]
+ #0: ffff88800a089938 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_scheduled_works+0x9f9/0x15b0 kernel/workqueue.c:2706
+ #1: ffff888018357da0 ((work_completion)(&sub_info->work)){+.+.}-{0:0}, at: process_one_work kernel/workqueue.c:2609 [inline]
+ #1: ffff888018357da0 ((work_completion)(&sub_info->work)){+.+.}-{0:0}, at: process_scheduled_works+0xa47/0x15b0 kernel/workqueue.c:2706
+2 locks held by syz-executor.5/140448:
+ #0: ffffffff86d88e68 (event_mutex){+.+.}-{3:3}, at: perf_trace_destroy+0x2c/0x1d0 kernel/trace/trace_event_perf.c:239
+ #1: ffffffff86d70c48 (ftrace_lock){+.+.}-{3:3}, at: unregister_ftrace_function+0x2b/0x3c0 kernel/trace/ftrace.c:8082
+2 locks held by syz-executor.5/140952:
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:116 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:215 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: perf_init_event kernel/events/core.c:11702 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc kernel/events/core.c:12022 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc+0xe0b/0x3e40 kernel/events/core.c:11888
+ #1: ffffffff86d88e68 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310 kernel/trace/trace_event_perf.c:221
+2 locks held by syz-executor.5/141877:
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: srcu_lock_acquire include/linux/srcu.h:116 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: srcu_read_lock include/linux/srcu.h:215 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: perf_init_event kernel/events/core.c:11702 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc kernel/events/core.c:12022 [inline]
+ #0: ffffffff8928db70 (&pmus_srcu){.+.+}-{0:0}, at: perf_event_alloc+0xe0b/0x3e40 kernel/events/core.c:11888
+ #1: ffffffff86d88e68 (event_mutex){+.+.}-{3:3}, at: perf_trace_init+0x5c/0x310 kernel/trace/trace_event_perf.c:221
+1 lock held by modprobe/142210:
+
+=============================================
+
+tasks_rcu_exit_srcu_stall: rcu_tasks grace period number 2481 (since boot) gp_state: RTGS_POST_SCAN_TASKLIST is 33233 jiffies old.
+Please check any exiting tasks stuck between calls to exit_tasks_rcu_start() and exit_tasks_rcu_finish()
