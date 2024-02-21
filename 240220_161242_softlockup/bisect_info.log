@@ -1,0 +1,47 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [841c35169323cd833294798e58b9bf63fa4fa1de] Linux 6.8-rc4
+git bisect bad 841c35169323cd833294798e58b9bf63fa4fa1de
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [328141e51e6fc79d21168bfd4e356dddc2ec7491] Merge tag 'mmc-v5.20' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc
+git bisect good 328141e51e6fc79d21168bfd4e356dddc2ec7491
+# good: [3f2a1903af06672f416efd506f029066b9243cbd] Merge tag 'rtc-6.4' of git://git.kernel.org/pub/scm/linux/kernel/git/abelloni/linux
+git bisect good 3f2a1903af06672f416efd506f029066b9243cbd
+# good: [a477e3a76be740a1be844635d572c83f4c10002c] Merge tag 'char-misc-6.6-rc6' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good a477e3a76be740a1be844635d572c83f4c10002c
+# good: [ac347a0655dbc7d885e217c89dddd16e2800bd58] Merge tag 'arm64-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux
+git bisect good ac347a0655dbc7d885e217c89dddd16e2800bd58
+# good: [4c72e2b8c42e57f65d8fbfb01329e79d2b450653] Merge tag 'for-6.8/io_uring-2024-01-08' of git://git.kernel.dk/linux
+git bisect good 4c72e2b8c42e57f65d8fbfb01329e79d2b450653
+# good: [5aa1c96e8ef347430e7a7c898f290425d1b568ef] Merge branch 'master' into mm-hotfixes-stable
+git bisect good 5aa1c96e8ef347430e7a7c898f290425d1b568ef
+# good: [ed8d84530ab0a3b7b370e8b28f12179314dcfcc3] Merge tag 'i2c-for-6.8-rc1-rebased' of git://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux
+git bisect good ed8d84530ab0a3b7b370e8b28f12179314dcfcc3
+# good: [ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7] Merge tag 'net-6.8-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7
+# bad: [63e4b9d693e0f8c28359c7ea81e1ee510864c37b] Merge tag 'nf-24-02-08' of git://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf
+git bisect bad 63e4b9d693e0f8c28359c7ea81e1ee510864c37b
+# good: [53ed2ac8fc1de6658aadae5714627ac99b9dddb0] soc: apple: mailbox: error pointers are negative integers
+git bisect good 53ed2ac8fc1de6658aadae5714627ac99b9dddb0
+# good: [4e192be1a225b7b1c4e315a44754312347628859] Merge tag 'batadv-net-pullrequest-20240201' of git://git.open-mesh.org/linux-merge
+git bisect good 4e192be1a225b7b1c4e315a44754312347628859
+# good: [d75df752647728c6d65e594e5e4493448bea6cda] selftests: net: fix setup_ns usage in rtnetlink.sh
+git bisect good d75df752647728c6d65e594e5e4493448bea6cda
+# good: [0647903efbc84b772325b4d24d9487e24d6d1e03] wifi: mt76: mt7996: fix fortify warning
+git bisect good 0647903efbc84b772325b4d24d9487e24d6d1e03
+# bad: [58086721b7781c3e35b19c9b78c8f5a791070ba3] devlink: avoid potential loop in devlink_rel_nested_in_notify_work()
+git bisect bad 58086721b7781c3e35b19c9b78c8f5a791070ba3
+# good: [0f4d6f011bca0df2051532b41b596366aa272019] nfp: enable NETDEV_XDP_ACT_REDIRECT feature flag
+git bisect good 0f4d6f011bca0df2051532b41b596366aa272019
+# good: [645eb54331edb0dc0297c7e37162a3846bf99300] Merge branch 'rxrpc-fixes'
+git bisect good 645eb54331edb0dc0297c7e37162a3846bf99300
+# good: [b083d24fcf57580cc0b45dd7b0b4f84d8c4624f4] selftests/net: Amend per-netns counter checks
+git bisect good b083d24fcf57580cc0b45dd7b0b4f84d8c4624f4
+# bad: [1279f9d9dec2d7462823a18c29ad61359e0a007d] af_unix: Call kfree_skb() for dead unix_(sk)->oob_skb in GC.
+git bisect bad 1279f9d9dec2d7462823a18c29ad61359e0a007d
+# good: [1ce2654d87e2fb91fea83b288bd9b2641045e42a] net: stmmac: xgmac: fix a typo of register name in DPP safety handling
+git bisect good 1ce2654d87e2fb91fea83b288bd9b2641045e42a
+# first bad commit: [1279f9d9dec2d7462823a18c29ad61359e0a007d] af_unix: Call kfree_skb() for dead unix_(sk)->oob_skb in GC.
+|0220_211928|Bisect successfully! 841c35169323cd833294798e58b9bf63fa4fa1de_1279f9d9dec2d7462823a18c29ad61359e0a007d_revert bzimage passed!|

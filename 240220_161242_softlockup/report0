@@ -1,0 +1,61 @@
+watchdog: BUG: soft lockup - CPU#1 stuck for 22s! [syz-executor.2:167385]
+Modules linked in:
+irq event stamp: 22504
+hardirqs last  enabled at (22503): [<ffffffff855dff2e>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:351
+hardirqs last disabled at (22504): [<ffffffff855dded4>] sysvec_apic_timer_interrupt+0x14/0xc0 arch/x86/kernel/apic/apic.c:1076
+softirqs last  enabled at (22496): [<ffffffff8127fcc8>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last  enabled at (22496): [<ffffffff8127fcc8>] __irq_exit_rcu+0xa8/0x110 kernel/softirq.c:632
+softirqs last disabled at (22491): [<ffffffff8127fcc8>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last disabled at (22491): [<ffffffff8127fcc8>] __irq_exit_rcu+0xa8/0x110 kernel/softirq.c:632
+CPU: 1 PID: 167385 Comm: syz-executor.2 Not tainted 6.8.0-rc4-2024-02-12-intel-next-e92619743fcb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:unix_gc+0x4c8/0xfd0 net/unix/garbage.c:318
+Code: 07 00 00 00 00 00 00 e8 56 1f a4 ff e8 81 ed 4d fc 4c 8d b3 30 06 00 00 4c 89 f0 48 c1 e8 03 42 80 3c 28 00 0f 85 dc 09 00 00 <48> 8b 83 30 06 00 00 49 89 dc 48 2d 30 06 00 00 49 81 fe 80 eb 8b
+RSP: 0018:ffff8880126d7be0 EFLAGS: 00000246
+RAX: 1ffff1100257ffc6 RBX: ffff888012bff800 RCX: 1ffffffff12150ed
+RDX: ffff88801170a540 RSI: ffffffff8515e27f RDI: ffff888012bfff70
+RBP: ffff8880126d7d28 R08: 0000000000000001 R09: fffffbfff120f86e
+R10: ffffffff8907c377 R11: 0000000000000001 R12: ffff888012bff800
+R13: dffffc0000000000 R14: ffff888012bffe30 R15: ffff8880126d7c60
+FS:  00007f9242851800(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007facd853b1d0 CR3: 000000001c3fe000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ </IRQ>
+ <TASK>
+ unix_release_sock+0xb8c/0xe80 net/unix/af_unix.c:683
+ unix_release+0x9c/0x100 net/unix/af_unix.c:1064
+ __sock_release+0xb6/0x280 net/socket.c:659
+ sock_close+0x27/0x40 net/socket.c:1421
+ __fput+0x284/0xb70 fs/file_table.c:376
+ __fput_sync+0x58/0x70 fs/file_table.c:461
+ __do_sys_close fs/open.c:1554 [inline]
+ __se_sys_close fs/open.c:1539 [inline]
+ __x64_sys_close+0x94/0x120 fs/open.c:1539
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x73/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7f924273f26b
+Code: 03 00 00 00 0f 05 48 3d 00 f0 ff ff 77 41 c3 48 83 ec 18 89 7c 24 0c e8 c3 c9 f5 ff 8b 7c 24 0c 41 89 c0 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 35 44 89 c7 89 44 24 0c e8 21 ca f5 ff 8b 44
+RSP: 002b:00007ffc7a309440 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
+RAX: ffffffffffffffda RBX: 0000000000000004 RCX: 00007f924273f26b
+RDX: 0000000000000002 RSI: 0000000000000002 RDI: 0000000000000003
+RBP: 00000000004bd980 R08: 0000000000000000 R09: 000000000000080e
+R10: 0000000081110812 R11: 0000000000000293 R12: 0000000000096af0
+R13: 00007f9242200630 R14: 00007f9242200638 R15: 00007f9242200630
+ </TASK>
+Sending NMI from CPU 1 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 PID: 165 Comm: systemd-udevd Not tainted 6.8.0-rc4-2024-02-12-intel-next-e92619743fcb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0033:0x5598402abfe1
+Code: 0f 85 fb 04 00 00 48 39 c2 0f 84 aa 03 00 00 4c 8b 69 10 4c 8b 9d 78 ff ff ff 45 31 c0 4d 85 ed 0f 84 93 08 00 00 49 8b 75 28 <49> 8b bd 80 00 00 00 48 39 d6 0f 82 4f 05 00 00 4c 89 9d 78 ff ff
+RSP: 002b:00007ffe78f789a0 EFLAGS: 00000202
+RAX: 000000000000b701 RBX: 0000559840fcb330 RCX: 0000559840a34df0
+RDX: 000000000000af01 RSI: 000000000000a123 RDI: 0000559840bda0e0
+RBP: 00007ffe78f78a40 R08: 0000559840ce1e40 R09: 0000000000000000
+R10: 00007ffe78ff2080 R11: 0000559840fcab20 R12: 0000000000000001
+R13: 0000559840bda0e0 R14: ffffffffffffffff R15: 00005598402daad7
+FS:  00007feb770c1540 GS:  0000000000000000

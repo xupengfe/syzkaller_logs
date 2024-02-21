@@ -1,0 +1,55 @@
+watchdog: BUG: soft lockup - CPU#0 stuck for 26s! [gdbus:349]
+Modules linked in:
+irq event stamp: 25162
+hardirqs last  enabled at (25161): [<ffffffff855dff2e>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:351
+hardirqs last disabled at (25162): [<ffffffff855dded4>] sysvec_apic_timer_interrupt+0x14/0xc0 arch/x86/kernel/apic/apic.c:1076
+softirqs last  enabled at (25140): [<ffffffff8127fcc8>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last  enabled at (25140): [<ffffffff8127fcc8>] __irq_exit_rcu+0xa8/0x110 kernel/softirq.c:632
+softirqs last disabled at (25135): [<ffffffff8127fcc8>] invoke_softirq kernel/softirq.c:427 [inline]
+softirqs last disabled at (25135): [<ffffffff8127fcc8>] __irq_exit_rcu+0xa8/0x110 kernel/softirq.c:632
+CPU: 0 PID: 349 Comm: gdbus Not tainted 6.8.0-rc4-2024-02-12-intel-next-e92619743fcb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__sanitizer_cov_trace_pc+0x38/0x70 kernel/kcov.c:207
+Code: 65 8b 05 73 89 a0 7e 48 89 e5 48 8b 75 08 a9 00 01 ff 00 74 0f f6 c4 01 74 35 8b 82 e4 1d 00 00 85 c0 74 2b 8b 82 c0 1d 00 00 <83> f8 02 75 20 48 8b 8a c8 1d 00 00 8b 92 c4 1d 00 00 48 8b 01 48
+RSP: 0018:ffff88800b48f7b0 EFLAGS: 00000246
+RAX: 0000000000000000 RBX: ffff888013018000 RCX: 1ffffffff12150bb
+RDX: ffff888011ab8000 RSI: ffffffff8515e235 RDI: ffff888013018770
+RBP: ffff88800b48f7b0 R08: 0000000000000001 R09: fffffbfff120f86e
+R10: ffffffff8907c377 R11: 0000000000000001 R12: ffff888013018000
+R13: dffffc0000000000 R14: ffff888013018630 R15: ffff88800b48f840
+FS:  0000000000000000(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fffcc5fd648 CR3: 0000000006c82000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ </IRQ>
+ <TASK>
+ unix_gc+0x465/0xfd0 net/unix/garbage.c:319
+ unix_release_sock+0xb8c/0xe80 net/unix/af_unix.c:683
+ unix_release+0x9c/0x100 net/unix/af_unix.c:1064
+ __sock_release+0xb6/0x280 net/socket.c:659
+ sock_close+0x27/0x40 net/socket.c:1421
+ __fput+0x284/0xb70 fs/file_table.c:376
+ ____fput+0x1f/0x30 fs/file_table.c:404
+ task_work_run+0x19d/0x2b0 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xb51/0x28c0 kernel/exit.c:871
+ do_group_exit+0xe5/0x2c0 kernel/exit.c:1020
+ get_signal+0x2715/0x27d0 kernel/signal.c:2893
+ arch_do_signal_or_restart+0x8e/0x7e0 arch/x86/kernel/signal.c:311
+ exit_to_user_mode_loop kernel/entry/common.c:105 [inline]
+ exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:201 [inline]
+ syscall_exit_to_user_mode+0x129/0x190 kernel/entry/common.c:212
+ do_syscall_64+0x82/0x150 arch/x86/entry/common.c:89
+ entry_SYSCALL_64_after_hwframe+0x6e/0x76
+RIP: 0033:0x7fe8f8b4296f
+Code: Unable to access opcode bytes at 0x7fe8f8b42945.
+RSP: 002b:00007fe8d7dff9c0 EFLAGS: 00000293 ORIG_RAX: 0000000000000007
+RAX: fffffffffffffdfc RBX: 00007fe8f8f73071 RCX: 00007fe8f8b4296f
+RDX: 00000000ffffffff RSI: 0000000000000002 RDI: 00007fe8a801f3f0
+RBP: 00007fe8a801f3f0 R08: 0000000000000000 R09: 00007fe8d7dff850
+R10: 00007ffec9196080 R11: 0000000000000293 R12: 0000000000000002
+R13: 0000000000000002 R14: 00007fe8d7dffa30 R15: 00007fe8a801c4c0
+ </TASK>
