@@ -1,0 +1,41 @@
+sg_write: data in/out 2130706396/78 bytes for SCSI command 0x0-- guessing data in;
+   program syz-executor282 not setting count and/or reply_len properly
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 31 at drivers/scsi/sg.c:2236 sg_remove_sfp_usercontext+0x45d/0x5b0 drivers/scsi/sg.c:2236
+Modules linked in:
+CPU: 1 PID: 31 Comm: kworker/1:1 Not tainted 6.9.0-rc2-b1b42ec49cf0+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Workqueue: events sg_remove_sfp_usercontext
+RIP: 0010:sg_remove_sfp_usercontext+0x45d/0x5b0 drivers/scsi/sg.c:2236
+Code: 86 48 8b 30 e8 c4 45 fc ff e9 1f fe ff ff e8 7a 70 4e fd be 03 00 00 00 4c 89 e7 e8 1d 25 c2 fe e9 38 ff ff ff e8 63 70 4e fd <0f> 0b e9 cc fe ff ff e8 57 70 4e fd 48 8b 45 c8 48 8d 90 4d 01 00
+RSP: 0018:ffff88800af27c50 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000002 RCX: ffffffff84157ad7
+RDX: ffff88800aa80000 RSI: ffffffff84157c0d RDI: 0000000000000005
+RBP: ffff88800af27cb8 R08: 0000000000000000 R09: ffffed10019001af
+R10: 0000000000000002 R11: 0000000000000001 R12: ffff88800c800d78
+R13: 0000000000008000 R14: 0000000000000000 R15: ffff888012190140
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f266c918a30 CR3: 0000000006c7e000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ process_one_work+0x8d8/0x1a60 kernel/workqueue.c:3254
+ process_scheduled_works kernel/workqueue.c:3335 [inline]
+ worker_thread+0x68d/0xef0 kernel/workqueue.c:3416
+ kthread+0x35a/0x470 kernel/kthread.c:388
+ ret_from_fork+0x56/0x90 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:243
+ </TASK>
+irq event stamp: 24215
+hardirqs last  enabled at (24223): [<ffffffff8143ed64>] __up_console_sem kernel/printk/printk.c:341 [inline]
+hardirqs last  enabled at (24223): [<ffffffff8143ed64>] __console_unlock kernel/printk/printk.c:2731 [inline]
+hardirqs last  enabled at (24223): [<ffffffff8143ed64>] console_unlock+0x224/0x240 kernel/printk/printk.c:3050
+hardirqs last disabled at (24230): [<ffffffff8143ed49>] __up_console_sem kernel/printk/printk.c:339 [inline]
+hardirqs last disabled at (24230): [<ffffffff8143ed49>] __console_unlock kernel/printk/printk.c:2731 [inline]
+hardirqs last disabled at (24230): [<ffffffff8143ed49>] console_unlock+0x209/0x240 kernel/printk/printk.c:3050
+softirqs last  enabled at (24272): [<ffffffff812728c7>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (24272): [<ffffffff812728c7>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+softirqs last disabled at (24283): [<ffffffff812728c7>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (24283): [<ffffffff812728c7>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+---[ end trace 0000000000000000 ]---

@@ -1,0 +1,117 @@
+loop6: detected capacity change from 0 to 8
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 9 at drivers/scsi/sg.c:2236 sg_remove_sfp_usercontext+0x45d/0x5b0 drivers/scsi/sg.c:2236
+Modules linked in:
+CPU: 0 PID: 9 Comm: kworker/0:1 Not tainted 6.9.0-rc2-b1b42ec49cf0+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Workqueue: events sg_remove_sfp_usercontext
+RIP: 0010:sg_remove_sfp_usercontext+0x45d/0x5b0 drivers/scsi/sg.c:2236
+Code: 86 48 8b 30 e8 c4 45 fc ff e9 1f fe ff ff e8 7a 70 4e fd be 03 00 00 00 4c 89 e7 e8 1d 25 c2 fe e9 38 ff ff ff e8 63 70 4e fd <0f> 0b e9 cc fe ff ff e8 57 70 4e fd 48 8b 45 c8 48 8d 90 4d 01 00
+RSP: 0018:ffff88800a89fc50 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000003 RCX: ffffffff84157ad7
+RDX: ffff88800a880000 RSI: ffffffff84157c0d RDI: 0000000000000005
+RBP: ffff88800a89fcb8 R08: 0000000000000000 R09: ffffed1001cf43af
+R10: 0000000000000003 R11: 0000000000000001 R12: ffff88800e7a1d78
+R13: 0000000000008000 R14: 0000000000000000 R15: ffff888010558140
+FS:  0000000000000000(0000) GS:ffff88806ca00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2ca2a000 CR3: 00000000259ee000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ process_one_work+0x8d8/0x1a60 kernel/workqueue.c:3254
+ process_scheduled_works kernel/workqueue.c:3335 [inline]
+ worker_thread+0x68d/0xef0 kernel/workqueue.c:3416
+ kthread+0x35a/0x470 kernel/kthread.c:388
+ ret_from_fork+0x56/0x90 arch/x86/kernel/process.c:147
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:243
+ </TASK>
+irq event stamp: 34535
+hardirqs last  enabled at (34543): [<ffffffff8143ed64>] __up_console_sem kernel/printk/printk.c:341 [inline]
+hardirqs last  enabled at (34543): [<ffffffff8143ed64>] __console_unlock kernel/printk/printk.c:2731 [inline]
+hardirqs last  enabled at (34543): [<ffffffff8143ed64>] console_unlock+0x224/0x240 kernel/printk/printk.c:3050
+hardirqs last disabled at (34552): [<ffffffff8143ed49>] __up_console_sem kernel/printk/printk.c:339 [inline]
+hardirqs last disabled at (34552): [<ffffffff8143ed49>] __console_unlock kernel/printk/printk.c:2731 [inline]
+hardirqs last disabled at (34552): [<ffffffff8143ed49>] console_unlock+0x209/0x240 kernel/printk/printk.c:3050
+softirqs last  enabled at (34318): [<ffffffff812728c7>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (34318): [<ffffffff812728c7>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+softirqs last disabled at (34313): [<ffffffff812728c7>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (34313): [<ffffffff812728c7>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+---[ end trace 0000000000000000 ]---
+clocksource: Long readout interval, skipping watchdog check: cs_nsec: 1319747542 wd_nsec: 1319746119
+loop4: detected capacity change from 0 to 8
+loop5: detected capacity change from 0 to 131072
+loop3: detected capacity change from 0 to 131072
+XFS (loop5): Mounting V5 Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop3): Mounting V5 Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop3): Ending clean mount
+XFS (loop5): Ending clean mount
+XFS (loop3): Unmounting Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop5): Unmounting Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+loop6: detected capacity change from 0 to 8
+loop2: detected capacity change from 0 to 131072
+Injecting memory failure for pfn 0x5a3e9 at process virtual address 0x20be9000
+Memory failure: 0x5a3e9: recovery action for dirty LRU page: Recovered
+XFS (loop2): Mounting V5 Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+XFS (loop2): Ending clean mount
+XFS (loop2): Unmounting Filesystem b93a8937-ccd4-41a2-86c7-66a1570a2846
+Injecting memory failure for pfn 0x51fe9 at process virtual address 0x20be9000
+Memory failure: 0x51fe9: recovery action for dirty LRU page: Recovered
+netlink: 20 bytes leftover after parsing attributes in process `syz-executor.3'.
+Injecting memory failure for pfn 0x5bfe9 at process virtual address 0x20be9000
+Memory failure: 0x5bfe9: recovery action for dirty LRU page: Recovered
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+netlink: 20 bytes leftover after parsing attributes in process `syz-executor.3'.
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+loop2: detected capacity change from 0 to 2048
+9pnet_fd: Insufficient options for proto=fd
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+FAT-fs (loop2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+netlink: 20 bytes leftover after parsing attributes in process `syz-executor.3'.
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+loop0: detected capacity change from 0 to 1024
+=======================================================
+WARNING: The mand mount option has been deprecated and
+         and is ignored by this kernel. Remove the mand
+         option from the mount to silence this warning.
+=======================================================
+EXT4-fs (loop0): Test dummy encryption mode enabled
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+loop5: detected capacity change from 0 to 1024
+EXT4-fs (loop5): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop3: detected capacity change from 0 to 1024
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+EXT4-fs (loop3): Test dummy encryption mode enabled
+EXT4-fs (loop3): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.3'.
+loop4: detected capacity change from 0 to 1024
+EXT4-fs (loop4): Test dummy encryption mode enabled
+EXT4-fs (loop5): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+trace_kprobe: Could not probe notrace function sme_encrypt_kernel
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.3'.
+9pnet_fd: Insufficient options for proto=fd
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.3'.
+loop6: detected capacity change from 0 to 1024
+EXT4-fs (loop6): Test dummy encryption mode enabled
+EXT4-fs (loop6): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop7: detected capacity change from 0 to 2048
+FAT-fs (loop7): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+loop5: detected capacity change from 0 to 1024
+EXT4-fs (loop5): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop4: detected capacity change from 0 to 1024
+EXT4-fs (loop4): Test dummy encryption mode enabled
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.3'.
+EXT4-fs (loop6): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Soft offlining pfn 0x8902 at process virtual address 0x20000000
+Memory failure: 0x8902: unhandlable page.
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop5): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Soft offlining pfn 0x8902 at process virtual address 0x20000000
+Memory failure: 0x8902: unhandlable page.

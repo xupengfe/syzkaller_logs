@@ -1,0 +1,43 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [39cd87c4eb2b893354f3b850f916353f2658ae6f] Linux 6.9-rc2
+git bisect bad 39cd87c4eb2b893354f3b850f916353f2658ae6f
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [4dfa5f05fffac3a8fa4f9a68a671b5b7e6d3b411] Merge tag 'linux-can-next-for-6.1-20220923' of git://git.kernel.org/pub/scm/linux/kernel/git/mkl/linux-can-next
+git bisect good 4dfa5f05fffac3a8fa4f9a68a671b5b7e6d3b411
+# good: [b775d6c5859affe00527cbe74263de05cfe6b9f9] Merge tag 'mips_6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/mips/linux
+git bisect good b775d6c5859affe00527cbe74263de05cfe6b9f9
+# good: [31e5f934ff962820995c82a6953176a1c7d18ff5] Merge tag 'trace-v6.7' of git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace
+git bisect good 31e5f934ff962820995c82a6953176a1c7d18ff5
+# good: [8c94ccc7cd691472461448f98e2372c75849406c] Merge tag 'usb-6.8-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb
+git bisect good 8c94ccc7cd691472461448f98e2372c75849406c
+# good: [9187210eee7d87eea37b45ea93454a88681894a4] Merge tag 'net-next-6.9' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect good 9187210eee7d87eea37b45ea93454a88681894a4
+# good: [1bbeaf83dd7b5e3628b98bec66ff8fe2646e14aa] Merge tag 'perf-tools-for-v6.9-2024-03-13' of git://git.kernel.org/pub/scm/linux/kernel/git/perf/perf-tools
+git bisect good 1bbeaf83dd7b5e3628b98bec66ff8fe2646e14aa
+# good: [9843231c97267d72be38a0409f5097987bc2cfa4] x86/boot/64: Move 5-level paging global variable assignments back
+git bisect good 9843231c97267d72be38a0409f5097987bc2cfa4
+# good: [bb41fe35dce709ea8f91d313c558ee6c68f705ef] Merge tag 'char-misc-6.9-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good bb41fe35dce709ea8f91d313c558ee6c68f705ef
+# good: [19dba097071ec4fd6486b9f0d52d12a3c5743d44] Merge tag 'io_uring-6.9-20240322' of git://git.kernel.dk/linux
+git bisect good 19dba097071ec4fd6486b9f0d52d12a3c5743d44
+# good: [50108c352db70405b3d71d8099d0b3adc3b3352c] Merge tag 'net-6.9-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 50108c352db70405b3d71d8099d0b3adc3b3352c
+# good: [486291a0e6246364936df1ecd64c90affef4b9c5] Merge tag 'drm-fixes-2024-03-30' of https://gitlab.freedesktop.org/drm/kernel
+git bisect good 486291a0e6246364936df1ecd64c90affef4b9c5
+# bad: [c214ed2a4dda35b308b0b28eed804d7ae66401f9] scsi: bnx2fc: Remove spin_lock_bh while releasing resources after upload
+git bisect bad c214ed2a4dda35b308b0b28eed804d7ae66401f9
+# good: [48c0b76923c40cd19794741fb0fb7003b3ab314d] Merge patch series "qla2xxx misc. bug fixes"
+git bisect good 48c0b76923c40cd19794741fb0fb7003b3ab314d
+# good: [115d137aa918d879e3cca9605bbf59e0482aa734] scsi: lpfc: Define lpfc_dmabuf type for ctx_buf ptr
+git bisect good 115d137aa918d879e3cca9605bbf59e0482aa734
+# good: [f02fe780f28db435671fcc7c0214556e253b5a46] Merge branch '6.9/scsi-queue' into 6.9/scsi-fixes
+git bisect good f02fe780f28db435671fcc7c0214556e253b5a46
+# bad: [0c76106cb97548810214def8ee22700bbbb90543] scsi: sd: Fix TCG OPAL unlock on system resume
+git bisect bad 0c76106cb97548810214def8ee22700bbbb90543
+# bad: [27f58c04a8f438078583041468ec60597841284d] scsi: sg: Avoid sg device teardown race
+git bisect bad 27f58c04a8f438078583041468ec60597841284d
+# first bad commit: [27f58c04a8f438078583041468ec60597841284d] scsi: sg: Avoid sg device teardown race
+|0402_035305|Bisect successfully! 39cd87c4eb2b893354f3b850f916353f2658ae6f_27f58c04a8f438078583041468ec60597841284d_revert bzimage passed!|
