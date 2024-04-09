@@ -1,0 +1,121 @@
+==================================================================
+BUG: KASAN: slab-use-after-free in __bpf_trace_run kernel/trace/bpf_trace.c:2382 [inline]
+BUG: KASAN: slab-use-after-free in bpf_trace_run4+0x547/0x5e0 kernel/trace/bpf_trace.c:2439
+Read of size 8 at addr ffff8880195ed018 by task updatedb/287
+
+CPU: 1 PID: 287 Comm: updatedb Not tainted 6.9.0-rc2-5d8569db0cb9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe9/0x150 lib/dump_stack.c:114
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xd0/0x610 mm/kasan/report.c:488
+ kasan_report+0x9f/0xe0 mm/kasan/report.c:601
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ __bpf_trace_run kernel/trace/bpf_trace.c:2382 [inline]
+ bpf_trace_run4+0x547/0x5e0 kernel/trace/bpf_trace.c:2439
+ __bpf_trace_sched_switch+0x14/0x20 include/trace/events/sched.h:222
+ __traceiter_sched_switch+0x7a/0xd0 include/trace/events/sched.h:222
+ trace_sched_switch include/trace/events/sched.h:222 [inline]
+ __schedule+0xc6d/0x2840 kernel/sched/core.c:6743
+ preempt_schedule_common+0x1f/0xe0 kernel/sched/core.c:6925
+ __cond_resched+0x25/0x30 kernel/sched/core.c:8590
+ might_resched include/linux/kernel.h:73 [inline]
+ wait_on_buffer include/linux/buffer_head.h:387 [inline]
+ ext4_read_bh+0x15f/0x2c0 fs/ext4/super.c:201
+ ext4_read_bh_lock fs/ext4/super.c:214 [inline]
+ ext4_read_bh_lock+0x84/0xe0 fs/ext4/super.c:207
+ ext4_bread+0xe9/0x1b0 fs/ext4/inode.c:895
+ __ext4_read_dirblock fs/ext4/namei.c:144 [inline]
+ __ext4_read_dirblock+0xbd/0xd20 fs/ext4/namei.c:124
+ htree_dirblock_to_tree+0x1df/0xe10 fs/ext4/namei.c:1082
+ ext4_htree_fill_tree+0x38a/0xad0 fs/ext4/namei.c:1219
+ ext4_dx_readdir fs/ext4/dir.c:597 [inline]
+ ext4_readdir+0x1cd8/0x3160 fs/ext4/dir.c:142
+ iterate_dir+0x2a8/0xa10 fs/readdir.c:110
+ __do_sys_getdents64 fs/readdir.c:409 [inline]
+ __se_sys_getdents64 fs/readdir.c:394 [inline]
+ __x64_sys_getdents64+0x145/0x2e0 fs/readdir.c:394
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x73/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x71/0x79
+RIP: 0033:0x7f074c314577
+Code: 80 f8 ff 4c 89 e0 5b 5d 41 5c c3 0f 1f 84 00 00 00 00 00 f3 0f 1e fa b8 ff ff ff 7f 48 39 c2 48 0f 47 d0 b8 d9 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 01 c3 48 8b 15 79 58 0e 00 f7 d8 64 89 02 48
+RSP: 002b:00007fff3a857558 EFLAGS: 00000293 ORIG_RAX: 00000000000000d9
+RAX: ffffffffffffffda RBX: 0000559c2c539fb0 RCX: 00007f074c314577
+RDX: 0000000000008000 RSI: 0000559c2c539fb0 RDI: 000000000000000c
+RBP: 0000559c2c539f84 R08: 0000000000000003 R09: 0000000000000000
+R10: 0000000002000000 R11: 0000000000000293 R12: ffffffffffffff80
+R13: 0000000000000000 R14: 0000559c2c539f80 R15: 00000000648985e9
+ </TASK>
+
+Allocated by task 725:
+ kasan_save_stack+0x2a/0x50 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x3b/0x50 mm/kasan/generic.c:565
+ poison_kmalloc_redzone mm/kasan/common.c:370 [inline]
+ __kasan_kmalloc+0x86/0xa0 mm/kasan/common.c:387
+ kasan_kmalloc include/linux/kasan.h:211 [inline]
+ kmalloc_trace+0x1c5/0x3d0 mm/slub.c:3997
+ kmalloc include/linux/slab.h:628 [inline]
+ kzalloc include/linux/slab.h:749 [inline]
+ bpf_raw_tp_link_attach+0x28e/0x5a0 kernel/bpf/syscall.c:3816
+ bpf_raw_tracepoint_open kernel/bpf/syscall.c:3863 [inline]
+ __sys_bpf+0x452/0x5550 kernel/bpf/syscall.c:5673
+ __do_sys_bpf kernel/bpf/syscall.c:5738 [inline]
+ __se_sys_bpf kernel/bpf/syscall.c:5736 [inline]
+ __x64_sys_bpf+0x7e/0xc0 kernel/bpf/syscall.c:5736
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x73/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x71/0x79
+
+Freed by task 725:
+ kasan_save_stack+0x2a/0x50 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_free_info+0x3e/0x60 mm/kasan/generic.c:579
+ poison_slab_object mm/kasan/common.c:240 [inline]
+ poison_slab_object mm/kasan/common.c:211 [inline]
+ __kasan_slab_free+0x107/0x190 mm/kasan/common.c:256
+ kasan_slab_free include/linux/kasan.h:184 [inline]
+ slab_free_hook mm/slub.c:2106 [inline]
+ slab_free mm/slub.c:4280 [inline]
+ kfree+0xf3/0x320 mm/slub.c:4390
+ bpf_raw_tp_link_dealloc+0x1e/0x30 kernel/bpf/syscall.c:3654
+ bpf_link_free+0x145/0x1b0 kernel/bpf/syscall.c:3037
+ bpf_link_put_direct+0x45/0x60 kernel/bpf/syscall.c:3064
+ bpf_link_release+0x40/0x50 kernel/bpf/syscall.c:3071
+ __fput+0x273/0xb70 fs/file_table.c:422
+ ____fput+0x1e/0x30 fs/file_table.c:450
+ task_work_run+0x1a3/0x2d0 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xad3/0x31b0 kernel/exit.c:878
+ do_group_exit+0xdf/0x2b0 kernel/exit.c:1027
+ __do_sys_exit_group kernel/exit.c:1038 [inline]
+ __se_sys_exit_group kernel/exit.c:1036 [inline]
+ __x64_sys_exit_group+0x47/0x50 kernel/exit.c:1036
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x73/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x71/0x79
+
+The buggy address belongs to the object at ffff8880195ed000
+ which belongs to the cache kmalloc-128 of size 128
+The buggy address is located 24 bytes inside of
+ freed 128-byte region [ffff8880195ed000, ffff8880195ed080)
+
+The buggy address belongs to the physical page:
+page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x195ed
+anon flags: 0xfffffe0000800(slab|node=0|zone=1|lastcpupid=0x3fffff)
+page_type: 0xffffffff()
+raw: 000fffffe0000800 ffff88800a0418c0 0000000000000000 dead000000000001
+raw: 0000000000000000 0000000000100010 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff8880195ecf00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff8880195ecf80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffff8880195ed000: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                            ^
+ ffff8880195ed080: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff8880195ed100: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+==================================================================

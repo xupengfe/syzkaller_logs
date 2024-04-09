@@ -1,0 +1,163 @@
+==================================================================
+BUG: KASAN: slab-use-after-free in __bpf_trace_run kernel/trace/bpf_trace.c:2382 [inline]
+BUG: KASAN: slab-use-after-free in bpf_trace_run4+0x547/0x5e0 kernel/trace/bpf_trace.c:2439
+Read of size 8 at addr ffff88800c88c118 by task syz-executor.4/4784
+
+CPU: 1 PID: 4784 Comm: syz-executor.4 Not tainted 6.9.0-rc2-5d8569db0cb9+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xe9/0x150 lib/dump_stack.c:114
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xd0/0x610 mm/kasan/report.c:488
+ kasan_report+0x9f/0xe0 mm/kasan/report.c:601
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ __bpf_trace_run kernel/trace/bpf_trace.c:2382 [inline]
+ bpf_trace_run4+0x547/0x5e0 kernel/trace/bpf_trace.c:2439
+ __bpf_trace_sched_switch+0x14/0x20 include/trace/events/sched.h:222
+ __traceiter_sched_switch+0x7a/0xd0 include/trace/events/sched.h:222
+ trace_sched_switch include/trace/events/sched.h:222 [inline]
+ __schedule+0xc6d/0x2840 kernel/sched/core.c:6743
+ __schedule_loop kernel/sched/core.c:6823 [inline]
+ schedule+0xcf/0x290 kernel/sched/core.c:6838
+ futex_wait_queue+0x108/0x200 kernel/futex/waitwake.c:370
+ __futex_wait+0x29f/0x3f0 kernel/futex/waitwake.c:669
+ futex_wait+0xf0/0x1a0 kernel/futex/waitwake.c:697
+ do_futex+0x2e6/0x390 kernel/futex/syscalls.c:102
+ __do_sys_futex kernel/futex/syscalls.c:179 [inline]
+ __se_sys_futex kernel/futex/syscalls.c:160 [inline]
+ __x64_sys_futex+0x1c4/0x4e0 kernel/futex/syscalls.c:160
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x73/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x71/0x79
+RIP: 0033:0x47f3cd
+Code: db 48 89 d8 5b 5d 41 5c 41 5d 41 5e c3 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffdc15f6a48 EFLAGS: 00000246 ORIG_RAX: 00000000000000ca
+RAX: ffffffffffffffda RBX: 0000000000000032 RCX: 000000000047f3cd
+RDX: 0000000000000000 RSI: 0000000000000080 RDI: 00000000005ac12c
+RBP: 00000000005ac120 R08: 00000000000000c2 R09: 00000000000000c2
+R10: 00007ffdc15f6b40 R11: 0000000000000246 R12: 00000000000335f4
+R13: 0000000000033626 R14: 00000000005ac12c R15: 0000000000000002
+ </TASK>
+
+Allocated by task 4801:
+ kasan_save_stack+0x2a/0x50 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x3b/0x50 mm/kasan/generic.c:565
+ poison_kmalloc_redzone mm/kasan/common.c:370 [inline]
+ __kasan_kmalloc+0x86/0xa0 mm/kasan/common.c:387
+ kasan_kmalloc include/linux/kasan.h:211 [inline]
+ kmalloc_trace+0x1c5/0x3d0 mm/slub.c:3997
+ kmalloc include/linux/slab.h:628 [inline]
+ kzalloc include/linux/slab.h:749 [inline]
+ bpf_raw_tp_link_attach+0x28e/0x5a0 kernel/bpf/syscall.c:3816
+ bpf_raw_tracepoint_open kernel/bpf/syscall.c:3863 [inline]
+ __sys_bpf+0x452/0x5550 kernel/bpf/syscall.c:5673
+ __do_sys_bpf kernel/bpf/syscall.c:5738 [inline]
+ __se_sys_bpf kernel/bpf/syscall.c:5736 [inline]
+ __x64_sys_bpf+0x7e/0xc0 kernel/bpf/syscall.c:5736
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x73/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x71/0x79
+
+Freed by task 4802:
+ kasan_save_stack+0x2a/0x50 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_free_info+0x3e/0x60 mm/kasan/generic.c:579
+ poison_slab_object mm/kasan/common.c:240 [inline]
+ poison_slab_object mm/kasan/common.c:211 [inline]
+ __kasan_slab_free+0x107/0x190 mm/kasan/common.c:256
+ kasan_slab_free include/linux/kasan.h:184 [inline]
+ slab_free_hook mm/slub.c:2106 [inline]
+ slab_free mm/slub.c:4280 [inline]
+ kfree+0xf3/0x320 mm/slub.c:4390
+ bpf_raw_tp_link_dealloc+0x1e/0x30 kernel/bpf/syscall.c:3654
+ bpf_link_free+0x145/0x1b0 kernel/bpf/syscall.c:3037
+ bpf_link_put_direct+0x45/0x60 kernel/bpf/syscall.c:3064
+ bpf_link_release+0x40/0x50 kernel/bpf/syscall.c:3071
+ __fput+0x273/0xb70 fs/file_table.c:422
+ ____fput+0x1e/0x30 fs/file_table.c:450
+ task_work_run+0x1a3/0x2d0 kernel/task_work.c:180
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xad3/0x31b0 kernel/exit.c:878
+ do_group_exit+0xdf/0x2b0 kernel/exit.c:1027
+ get_signal+0x2613/0x2650 kernel/signal.c:2911
+ arch_do_signal_or_restart+0x87/0x920 arch/x86/kernel/signal.c:310
+ exit_to_user_mode_loop kernel/entry/common.c:111 [inline]
+ exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
+ syscall_exit_to_user_mode+0x16b/0x250 kernel/entry/common.c:218
+ do_syscall_64+0x82/0x150 arch/x86/entry/common.c:89
+ entry_SYSCALL_64_after_hwframe+0x71/0x79
+
+The buggy address belongs to the object at ffff88800c88c100
+ which belongs to the cache kmalloc-128 of size 128
+The buggy address is located 24 bytes inside of
+ freed 128-byte region [ffff88800c88c100, ffff88800c88c180)
+
+The buggy address belongs to the physical page:
+page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0xc88c
+flags: 0xfffffe0000800(slab|node=0|zone=1|lastcpupid=0x3fffff)
+page_type: 0xffffffff()
+raw: 000fffffe0000800 ffff88800a0418c0 dead000000000100 dead000000000122
+raw: 0000000000000000 0000000000100010 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff88800c88c000: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff88800c88c080: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+>ffff88800c88c100: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                            ^
+ ffff88800c88c180: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff88800c88c200: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+==================================================================
+loop0: detected capacity change from 0 to 65536
+XFS (loop0): Mounting V5 Filesystem 96fa0d02-eac2-4cc4-980a-feab0601d24f
+XFS (loop0): Ending clean mount
+loop6: detected capacity change from 0 to 65536
+XFS (loop0): Unmounting Filesystem 96fa0d02-eac2-4cc4-980a-feab0601d24f
+XFS (loop6): Mounting V5 Filesystem 96fa0d02-eac2-4cc4-980a-feab0601d24f
+loop2: detected capacity change from 0 to 8192
+FAT-fs (loop2): Unrecognized mount option "./file0" or missing value
+XFS (loop6): Ending clean mount
+loop4: detected capacity change from 0 to 8192
+FAT-fs (loop4): Unrecognized mount option "./file0" or missing value
+loop0: detected capacity change from 0 to 8192
+FAT-fs (loop0): Unrecognized mount option "./file0" or missing value
+loop2: detected capacity change from 0 to 2048
+loop5: detected capacity change from 0 to 65536
+xfs: Unknown parameter 'ÿ'
+XFS (loop6): Unmounting Filesystem 96fa0d02-eac2-4cc4-980a-feab0601d24f
+loop4: detected capacity change from 0 to 2048
+loop0: detected capacity change from 0 to 2048
+loop2: detected capacity change from 0 to 8192
+FAT-fs (loop2): Unrecognized mount option "./file0" or missing value
+I/O error, dev loop0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+Buffer I/O error on dev loop0, logical block 0, async page read
+ldm_validate_partition_table(): Disk read failed.
+Dev loop0: unable to read RDB block 0
+ loop0: unable to read partition table
+loop0: partition table beyond EOD, truncated
+loop2: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 2048
+loop6: detected capacity change from 0 to 8192
+FAT-fs (loop6): Unrecognized mount option "./file0" or missing value
+loop2: detected capacity change from 0 to 8192
+FAT-fs (loop2): Unrecognized mount option "./file0" or missing value
+loop4: detected capacity change from 0 to 8192
+FAT-fs (loop4): Unrecognized mount option "./file0" or missing value
+loop0: detected capacity change from 0 to 8192
+FAT-fs (loop0): Unrecognized mount option "./file0" or missing value
+loop1: detected capacity change from 0 to 8192
+FAT-fs (loop1): Unrecognized mount option "./file0" or missing value
+loop6: detected capacity change from 0 to 2048
+loop4: detected capacity change from 0 to 2048
+loop2: detected capacity change from 0 to 2048
+loop1: detected capacity change from 0 to 2048
+I/O error, dev loop1, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+Buffer I/O error on dev loop1, logical block 0, async page read
+ldm_validate_partition_table(): Disk read failed.
+Dev loop1: unable to read RDB block 0
+ loop1: unable to read partition table
+loop1: partition table beyond EOD, truncated

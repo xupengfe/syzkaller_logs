@@ -1,0 +1,34 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [5d8569db0cb982d3c630482c285578e98a75fc90] 0day head guard for 'devel-hourly-20240403-121040'
+git bisect bad 5d8569db0cb982d3c630482c285578e98a75fc90
+# status: waiting for good commit(s), bad commit known
+# good: [39cd87c4eb2b893354f3b850f916353f2658ae6f] Linux 6.9-rc2
+git bisect good 39cd87c4eb2b893354f3b850f916353f2658ae6f
+# good: [52376177fe9873c24419475e70aa49f8a0e00a29] ASoC: SOF: pcm: Remove non existent CONFIG_SND_SOC_SOF_COMPRESS reference
+git bisect good 52376177fe9873c24419475e70aa49f8a0e00a29
+# good: [53ced656c576ede35968e6e4b9a3d495df02e231] Merge branch 'sound/upstream-20230302' into merge/sound-upstream-20230302
+git bisect good 53ced656c576ede35968e6e4b9a3d495df02e231
+# good: [0f2ba4da4721b0944acec5eec1bdf2acada59270] ASoC: Intel: sof_rt5682: remove unnecessary idisp HDMI quirk
+git bisect good 0f2ba4da4721b0944acec5eec1bdf2acada59270
+# bad: [762e9c32f0bd33c658642a8cd99a9a59036c65e5] Merge 'internal-agluck/snc_a_new_hope' into devel-hourly-20240403-121040
+git bisect bad 762e9c32f0bd33c658642a8cd99a9a59036c65e5
+# bad: [2881604cdcb3feebed8ccb9eb5e30a03bc73566f] i40e: Remove flags field from i40e_veb
+git bisect bad 2881604cdcb3feebed8ccb9eb5e30a03bc73566f
+# bad: [f631ef39d81956a2ee69d25039781ceae1162f62] net: sched: cls_api: add skip_sw counter
+git bisect bad f631ef39d81956a2ee69d25039781ceae1162f62
+# bad: [5e47fbe5cefe5d25d1fa4481c1b9fbe602b4a69f] Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad 5e47fbe5cefe5d25d1fa4481c1b9fbe602b4a69f
+# bad: [be24a895149b6df4c474848e3928c237ad10fdc4] bpftool: Enable libbpf logs when loading pid_iter in debug mode
+git bisect bad be24a895149b6df4c474848e3928c237ad10fdc4
+# good: [c733239f8f530872a1f80d8c45dcafbaff368737] bpf: Check return from set_memory_rox()
+git bisect good c733239f8f530872a1f80d8c45dcafbaff368737
+# good: [437ffcb0bf97361e5c4062043309832f4724d1a8] Merge branch 'current_pid_tgid-for-all-prog-types'
+git bisect good 437ffcb0bf97361e5c4062043309832f4724d1a8
+# bad: [68ca5d4eebb8c4de246ee5f634eee26bc689562d] bpf: support BPF cookie in raw tracepoint (raw_tp, tp_btf) programs
+git bisect bad 68ca5d4eebb8c4de246ee5f634eee26bc689562d
+# good: [6b9c2950c912780ce113079c9c52041b1e2a611a] bpf: flatten bpf_probe_register call chain
+git bisect good 6b9c2950c912780ce113079c9c52041b1e2a611a
+# bad: [d4dfc5700e867b22ab94f960f9a9972696a637d5] bpf: pass whole link instead of prog when triggering raw tracepoint
+git bisect bad d4dfc5700e867b22ab94f960f9a9972696a637d5
+# first bad commit: [d4dfc5700e867b22ab94f960f9a9972696a637d5] bpf: pass whole link instead of prog when triggering raw tracepoint
