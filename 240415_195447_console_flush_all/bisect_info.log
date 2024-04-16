@@ -1,0 +1,34 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [df0b4fecf9eb384062e52e3b572ee8c431afc63b] 0day head guard for 'devel-hourly-20240415-120710'
+git bisect bad df0b4fecf9eb384062e52e3b572ee8c431afc63b
+# status: waiting for good commit(s), bad commit known
+# good: [0bbac3facb5d6cc0171c45c9873a2dc96bea9680] Linux 6.9-rc4
+git bisect good 0bbac3facb5d6cc0171c45c9873a2dc96bea9680
+# good: [e2781d7f4758c68944a218ff04cfa65399887e73] ASoC: SOF: Intel: hda: expose get_chip_info()
+git bisect good e2781d7f4758c68944a218ff04cfa65399887e73
+# good: [c7840a93414c647d88c066f52de9c83371a90304] Merge pull request #4304 from ujfalusi/merge/sound-upstream-20230414
+git bisect good c7840a93414c647d88c066f52de9c83371a90304
+# good: [bc78011a003c09b2f11e985f207df7fbea2aebbb] fixup! ASoC: SOF: Intel: add initial support for PTL-H
+git bisect good bc78011a003c09b2f11e985f207df7fbea2aebbb
+# bad: [f04aab854f6f6ede377360c99b71c17058df354e] Merge 'internal-drivers-audio/topic/ptl_pss' into devel-hourly-20240415-120710
+git bisect bad f04aab854f6f6ede377360c99b71c17058df354e
+# good: [8826d3b258d452a229430c76f8d41b0ffbab9614] Merge pull request #4903 from plbossart/merge/sound-upstream-20240404
+git bisect good 8826d3b258d452a229430c76f8d41b0ffbab9614
+# bad: [66d7c8fb49329ca120d9bd2b869e041a16272e66] Merge 'internal-drivers-qat-qatkernel-hw-enabling/pr_qat_5.1_lin_dev_QAT51_6172_arb' into devel-hourly-20240415-120710
+git bisect bad 66d7c8fb49329ca120d9bd2b869e041a16272e66
+# bad: [9f6583d23770beda010697c32c31dc2735cae990] serial: 8250_pnp: Simplify "line" related code
+git bisect bad 9f6583d23770beda010697c32c31dc2735cae990
+# bad: [32f6ec282fb0ddb45da1a19145ef9eeef088968d] serial: 8250_of: Add clock_notifier
+git bisect bad 32f6ec282fb0ddb45da1a19145ef9eeef088968d
+# bad: [f03e8c1060f86c23eb49bafee99d9fcbd1c1bd77] printk: Save console options for add_preferred_console_match()
+git bisect bad f03e8c1060f86c23eb49bafee99d9fcbd1c1bd77
+# good: [2ab682d221551d5eb9606dad1efa01e184de7b00] kfifo: fix typos in kernel-doc
+git bisect good 2ab682d221551d5eb9606dad1efa01e184de7b00
+# bad: [1788cf6a91d9fa9aa61fc2917afe192c23d67f6a] tty: serial: switch from circ_buf to kfifo
+git bisect bad 1788cf6a91d9fa9aa61fc2917afe192c23d67f6a
+# good: [9054605ab8468936a514298211d9e9bb68bf24bd] tty: 8250_omap: use dmaengine_prep_slave_sg()
+git bisect good 9054605ab8468936a514298211d9e9bb68bf24bd
+# good: [f8fef2fa419febbfed2d04f0518111565df2673d] tty: msm_serial: use dmaengine_prep_slave_sg()
+git bisect good f8fef2fa419febbfed2d04f0518111565df2673d
+# first bad commit: [1788cf6a91d9fa9aa61fc2917afe192c23d67f6a] tty: serial: switch from circ_buf to kfifo

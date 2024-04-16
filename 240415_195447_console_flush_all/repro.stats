@@ -1,0 +1,686 @@
+Extracting prog: 1m16.066478371s
+Minimizing prog: 6m22.320480664s
+Simplifying prog options: 0s
+Extracting C: 24.499451369s
+Simplifying C: 1m30.067754129s
+
+
+375 programs, 3 VMs, timeouts [15s 1m40s 6m0s]
+extracting reproducer from 320 programs
+single: executing 8 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): syz_open_dev$tty1-openat$hpet-ioctl$TIOCGSERIAL-ioctl$KDSKBSENT
+detailed listing:
+executing program 0:
+r0 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r1 = openat$hpet(0xffffffffffffff9c, &(0x7f0000000240), 0x101000, 0x0)
+ioctl$TIOCGSERIAL(r1, 0x541e, &(0x7f00000002c0)={0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, &(0x7f0000000280)=""/22})
+ioctl$KDSKBSENT(r0, 0x4b47, &(0x7f0000000000)={0x0, "e1130e3855894f67c019756e270f80e2dc261cc3311e7cc3a97ef49caf4c4184aa0ee9996faa94b226be778cedbb0b48c8a720eb87cfc2cd71e2669409752542e051c3fbadad3ee4694ac9d4cf48943cc97ef77ffd8577078cb3749ea4a92121fba616bc4a36bf325b5ed9820d8352bb282f0b03101c35ebf1cc16549e453d2f8441b6e87d6eb6399ebb0ab16c86bcf1cf8d3b6a59fd865cfee86f8e733459bb8f4fb813522ec762a5b45d84bbc05d0927f4de49625985179d619f59782f65437185db203437ba4fe77e1dc28be5ac1a4469eaa0900f82ca9289b1711273c3d2aa1cf5bac84ea93f739fc789ff5970c720909c43b10e92cef161883c3afe35d587b766ddcc309f7e418d91af0a50e729a5a66eb74fd490af7ee6590126cd44fe4dfd5355f1af599912d69cc306603889e4c545bec6777727c92115508ce2153cbcce75db0e36b5670a2951c764cbe081fdeee83817e328e3aacf2220655e290987d8369d7f4504df3c75a2e03817f974c4fdec707e7144db42844244449cab846fea07c8be411d4a95afae270a7a157e69b73f892f828a4cad9baa29766a7f2cc8be9ad7d93234002ca010dd4eb16981b823e140e71f4b9268ebe19a90708c47ec6c0952439f3482784ea09cf1bda1ff15d6b0201f791b97cf0a4dea9ed23f05654f5ec729aa8763b3f52fa6359e77204a7fcba9bb8475e21eebd2822dee0ab9"})
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): perf_event_open-mmap-syz_mount_image$ext4
+detailed listing:
+executing program 0:
+r0 = perf_event_open(&(0x7f0000001280)={0x1, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xfffffffe, 0x0, @perf_bp={0x0}}, 0x0, 0xffffffffffffffff, 0xffffffffffffffff, 0x0)
+mmap(&(0x7f0000ffd000/0x3000)=nil, 0x3000, 0x0, 0x11, r0, 0x0)
+syz_mount_image$ext4(&(0x7f0000000580)='ext4\x00', &(0x7f0000000000)='./file0\x00', 0x42, &(0x7f00000003c0)=ANY=[@ANYBLOB="59f53b0988728695e2b3d26155da4c93ddc2d9059ff9308fffa8d3c1fcf9a78db1804bfa9fa5e6060434ee2d9c8abf35e065737ae0c21d46b240b049472ea67d8226613db87464d3db03af07e4b3eddd8dc3940884656f20986ca8f34b3a63bfc8189d", @ANYRESHEX=0x0, @ANYBLOB="2c626172726965722c746573745f64756d6d795f656e636f6d6d69743d30783030352c626172726965722c00740c11bf58cdc0eee10431327e50338fea043ae2efc98d3887f4b758feaf061ffa2adadc7c5ce32c10478badbca832822d000000fffffffffffffffe00"/115], 0x1, 0x5b5, &(0x7f0000001300)="$eJzs3c1rHOUfAPDvTF7aNP39koqgtYILBVtQ0yatKCLYYr158KXiSTAm21K6bUMSwdZKW6hHb/oHCN68iMciUl9AvHoT/AOkWKTm4m1ldmfSbbtJtu1mRzufD0zyzDwzeZ7J5ptn5tnnmQ2gsmrZlzRiZ0QsJBETHXnDkWfW2vv9deP83MqN83NJNJtv/plEkm8r9k/y7+P5wVsj4pfvk3ho6M5yl86eOznbaNQX8/V9y6cW9i2dPffMiVOzx+vH66dnpp+bfvbggZmD+/t2rj9OHRm+fOzlXV/NfbHjwjdfXkniUGzP8zrPo19qUVv9ndyUtn43z/e7sJIM5X8nnS9xMlxihbgrxes3EhGPxEQMxc0XbyI+fr3UygGbqplENIGKSsQ/VFRxHZDd/xZLuVckwKBcP9zuACj69lZW43+43TcYW1t9A9tWkujs1kkioh89c1kZC08mE9kSm9QPB3R38VJEPNqt/U9asTnZ6sXP4j+9Jf7TiHgt/55tf+Mey6/dti7+YXDuJ/7f7Yj/9+6xfPEPAAAAAAAA/XP1cEQ83e39v3R1/E90Gf8zHhGH+lD+xu//pdf6UAzQxfXDES9GxMod4//SYpfJoXztf8WA4RON+v6I+H9E7I2RLcdONOrT3X540p79Wtv188ha5XeO/8uWrPxiLGBej2vDW249Zn52efZ+zxuIuH4p4rHhbvGfrLb/SZf2P/t/sNBjGc0jL/2wVt7G8Q9slubnEXu6tv/ttnskT63zfI59Wfuff+1axofvXPl6rfLFP5Qna/+3rRP/2fV/0npez3dvRTTqi0t3X8ZHf/x2H/Hf/fp/NDnaeuTMaL7tg9nl5cXpiNHk1Tu3z9x6/OjdnwI8EIp4KOIli/+9u7vf/693/T8WERd7LPPot69cXitP+w/lyeJ/vqf2P39e3z0kdr/92d9rld9b+3+w1abvzbfo/4P19RqgZdcTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP6L0ojYHkk6laU/yT/zfypiPCIejm1p48zS8lPHzrx/ej7bL2IyRtLik34n2utJ8fn/kx3rM7etH4iIHRHx6dBYa31q7kxjvuyTBwAAAAAAAAAAAAAAAAAAgH+J8c75/610mk5NtfN+Hyq7dsCmGy67AkBpxD9Ul/iH6hL/UF3iH6pL/EN1iX+oLvEP1SX+obrEPwAAAAAAPFB2PHH11yQiLr4w1loyo3neSKk1AzZbWnYFgNJs8IifZFD1AAbP0B+oLvf4QOtC//Gf1szfuv6RAAAAAAAAAAAAAMAA7Nlp/j9Ulfn/UF0bzP8HHmA9zf+vbX49gMFzjw9sNIvf/H8AAAAAAAAAAAAAKN/S2XMnZxuN+qLEoBLFgOlejxqL8utcRqLZbF7wJ1paotz/SwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwE3/BAAA//+QTvlb")
+
+program did not crash
+testing program (duration=15s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI-syz_open_dev$tty1-userfaultfd-pwritev-ioctl$TIOCGPTLCK-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER-ioctl$BTRFS_IOC_BALANCE_CTL
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+r2 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+r3 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r4 = userfaultfd(0x0)
+pwritev(r4, &(0x7f0000000500)=[{&(0x7f00000001c0)="4129314a0575aa8e63be68f10fdf65cad31ffdb8f8ee93c08cc00db284548781aec0115612c25005d96ee9f0cd38b86f344d1fc853012f689fde6a3d118daa44515713791a3d7b9ad06642064c7f8eab8c7de4ab7130b3104bd72978df3d575c7d9917483c05546cc1ec74450a90aa1b5bedd3cfee2fb10315e612ccba477db5b8b066223e83c0f067e56a48284d2d637bf6732fb5cbbc941738f0f0fe62720194912cd0a2a71a2665b21cc7b388c342151d52936d2f0c9ff84e80a21848d2b98fc750adc119902adc007c41364cc28f08c1985a802273c039242253b4af93040a581ed32e4b85280a5540258b281e923d129522e0f17a3e18df5642ba7066", 0xff}, {&(0x7f00000002c0)="d08df651e61cfde9b00f0be23ed621e8070926e21e4e13a411f2feb8e1112b3b7b3fcbd8e576f173387615f8611bddfff44d49d5beecfa8fe1a15072868bd9949308b3499cae6a37a502f4dadec5cc4f9d397aa5e22a631da62455f9c024d82892041364b3625d9419cbb4c5bd06dc56f7c00845b8a8d03321a743f3b2d73b206a7b7ae03042d3924d6ef525c16b189bebff2b72c53d689ad5cb050a5492f3aef60f8c54189e9ce68d047c085577657909", 0xb1}, {&(0x7f0000000380)="cf1eb774c9dab492a18f5c1f07549bf5fcda5e50cea37fccca6dd766bb0fe0b6ca51f4061cda45c21c73be13f4c60fb2c14e3b688b7d3e970ae81e7ec3ce1a1c2ce10b1b9e48863bb274c1f510156c5d84946049b6422efe44ffdb993425ef16122e5d385ac0ae55e1138fd40df934f6622b7eadb43c63d86761d53637c8f6c353acde34e6607c18b0", 0x89}, {&(0x7f0000000440)="1348634d7a441188d4dd841d678657e4d6c56512e8816395e85f6743d91feffd99a3ae243445e9cc0eb503bac39444d5e18bf3a6253f236b479e1f3c476bc6eead0a83584a9117ba23eedffb62e7255be8be7daa49d0203ecf5efba06913c22b14053ca60d95a3aba1224b93b5e010d75a683f3f656476c55f6d41d464d3107cc1469b67f5910b2cbad46b5fadfc7d30eff5834df811c1711c89ebfd", 0x9c}], 0x4, 0xffffff09, 0x4)
+ioctl$TIOCGPTLCK(r3, 0x80045439, &(0x7f00000000c0))
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xc, &(0x7f0000000180)={0x9, &(0x7f0000000100)=[{0x2, 0x7, 0x4, 0x7}, {0x5, 0xd, 0x2, 0x1}, {0x7f, 0x20, 0x2, 0x900000}, {0x7f, 0x1, 0x4, 0x2}, {0x50, 0x1, 0x3, 0xfffffff8}, {0xe9e, 0x81, 0x40, 0x7}, {0x3ff, 0x5c, 0x2, 0x3}, {0x5, 0x27, 0x7f, 0x4000057}, {0xfe, 0x8, 0xee, 0x96f}]})
+ioctl$BTRFS_IOC_BALANCE_CTL(r2, 0x40049421, 0x0)
+
+program crashed: possible deadlock in console_flush_all
+single: successfully extracted reproducer
+found reproducer with 13 syscalls
+minimizing guilty program
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI-syz_open_dev$tty1-userfaultfd-pwritev-ioctl$TIOCGPTLCK-seccomp$SECCOMP_SET_MODE_FILTER_LISTENER
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+r2 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r3 = userfaultfd(0x0)
+pwritev(r3, &(0x7f0000000500)=[{&(0x7f00000001c0)="4129314a0575aa8e63be68f10fdf65cad31ffdb8f8ee93c08cc00db284548781aec0115612c25005d96ee9f0cd38b86f344d1fc853012f689fde6a3d118daa44515713791a3d7b9ad06642064c7f8eab8c7de4ab7130b3104bd72978df3d575c7d9917483c05546cc1ec74450a90aa1b5bedd3cfee2fb10315e612ccba477db5b8b066223e83c0f067e56a48284d2d637bf6732fb5cbbc941738f0f0fe62720194912cd0a2a71a2665b21cc7b388c342151d52936d2f0c9ff84e80a21848d2b98fc750adc119902adc007c41364cc28f08c1985a802273c039242253b4af93040a581ed32e4b85280a5540258b281e923d129522e0f17a3e18df5642ba7066", 0xff}, {&(0x7f00000002c0)="d08df651e61cfde9b00f0be23ed621e8070926e21e4e13a411f2feb8e1112b3b7b3fcbd8e576f173387615f8611bddfff44d49d5beecfa8fe1a15072868bd9949308b3499cae6a37a502f4dadec5cc4f9d397aa5e22a631da62455f9c024d82892041364b3625d9419cbb4c5bd06dc56f7c00845b8a8d03321a743f3b2d73b206a7b7ae03042d3924d6ef525c16b189bebff2b72c53d689ad5cb050a5492f3aef60f8c54189e9ce68d047c085577657909", 0xb1}, {&(0x7f0000000380)="cf1eb774c9dab492a18f5c1f07549bf5fcda5e50cea37fccca6dd766bb0fe0b6ca51f4061cda45c21c73be13f4c60fb2c14e3b688b7d3e970ae81e7ec3ce1a1c2ce10b1b9e48863bb274c1f510156c5d84946049b6422efe44ffdb993425ef16122e5d385ac0ae55e1138fd40df934f6622b7eadb43c63d86761d53637c8f6c353acde34e6607c18b0", 0x89}, {&(0x7f0000000440)="1348634d7a441188d4dd841d678657e4d6c56512e8816395e85f6743d91feffd99a3ae243445e9cc0eb503bac39444d5e18bf3a6253f236b479e1f3c476bc6eead0a83584a9117ba23eedffb62e7255be8be7daa49d0203ecf5efba06913c22b14053ca60d95a3aba1224b93b5e010d75a683f3f656476c55f6d41d464d3107cc1469b67f5910b2cbad46b5fadfc7d30eff5834df811c1711c89ebfd", 0x9c}], 0x4, 0xffffff09, 0x4)
+ioctl$TIOCGPTLCK(r2, 0x80045439, &(0x7f00000000c0))
+seccomp$SECCOMP_SET_MODE_FILTER_LISTENER(0x1, 0xc, &(0x7f0000000180)={0x9, &(0x7f0000000100)=[{0x2, 0x7, 0x4, 0x7}, {0x5, 0xd, 0x2, 0x1}, {0x7f, 0x20, 0x2, 0x900000}, {0x7f, 0x1, 0x4, 0x2}, {0x50, 0x1, 0x3, 0xfffffff8}, {0xe9e, 0x81, 0x40, 0x7}, {0x3ff, 0x5c, 0x2, 0x3}, {0x5, 0x27, 0x7f, 0x4000057}, {0xfe, 0x8, 0xee, 0x96f}]})
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI-syz_open_dev$tty1-userfaultfd-pwritev-ioctl$TIOCGPTLCK
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+r2 = syz_open_dev$tty1(0xc, 0x4, 0x1)
+r3 = userfaultfd(0x0)
+pwritev(r3, &(0x7f0000000500)=[{&(0x7f00000001c0)="4129314a0575aa8e63be68f10fdf65cad31ffdb8f8ee93c08cc00db284548781aec0115612c25005d96ee9f0cd38b86f344d1fc853012f689fde6a3d118daa44515713791a3d7b9ad06642064c7f8eab8c7de4ab7130b3104bd72978df3d575c7d9917483c05546cc1ec74450a90aa1b5bedd3cfee2fb10315e612ccba477db5b8b066223e83c0f067e56a48284d2d637bf6732fb5cbbc941738f0f0fe62720194912cd0a2a71a2665b21cc7b388c342151d52936d2f0c9ff84e80a21848d2b98fc750adc119902adc007c41364cc28f08c1985a802273c039242253b4af93040a581ed32e4b85280a5540258b281e923d129522e0f17a3e18df5642ba7066", 0xff}, {&(0x7f00000002c0)="d08df651e61cfde9b00f0be23ed621e8070926e21e4e13a411f2feb8e1112b3b7b3fcbd8e576f173387615f8611bddfff44d49d5beecfa8fe1a15072868bd9949308b3499cae6a37a502f4dadec5cc4f9d397aa5e22a631da62455f9c024d82892041364b3625d9419cbb4c5bd06dc56f7c00845b8a8d03321a743f3b2d73b206a7b7ae03042d3924d6ef525c16b189bebff2b72c53d689ad5cb050a5492f3aef60f8c54189e9ce68d047c085577657909", 0xb1}, {&(0x7f0000000380)="cf1eb774c9dab492a18f5c1f07549bf5fcda5e50cea37fccca6dd766bb0fe0b6ca51f4061cda45c21c73be13f4c60fb2c14e3b688b7d3e970ae81e7ec3ce1a1c2ce10b1b9e48863bb274c1f510156c5d84946049b6422efe44ffdb993425ef16122e5d385ac0ae55e1138fd40df934f6622b7eadb43c63d86761d53637c8f6c353acde34e6607c18b0", 0x89}, {&(0x7f0000000440)="1348634d7a441188d4dd841d678657e4d6c56512e8816395e85f6743d91feffd99a3ae243445e9cc0eb503bac39444d5e18bf3a6253f236b479e1f3c476bc6eead0a83584a9117ba23eedffb62e7255be8be7daa49d0203ecf5efba06913c22b14053ca60d95a3aba1224b93b5e010d75a683f3f656476c55f6d41d464d3107cc1469b67f5910b2cbad46b5fadfc7d30eff5834df811c1711c89ebfd", 0x9c}], 0x4, 0xffffff09, 0x4)
+ioctl$TIOCGPTLCK(r2, 0x80045439, &(0x7f00000000c0))
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI-syz_open_dev$tty1-userfaultfd-pwritev
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+syz_open_dev$tty1(0xc, 0x4, 0x1)
+r2 = userfaultfd(0x0)
+pwritev(r2, &(0x7f0000000500)=[{&(0x7f00000001c0)="4129314a0575aa8e63be68f10fdf65cad31ffdb8f8ee93c08cc00db284548781aec0115612c25005d96ee9f0cd38b86f344d1fc853012f689fde6a3d118daa44515713791a3d7b9ad06642064c7f8eab8c7de4ab7130b3104bd72978df3d575c7d9917483c05546cc1ec74450a90aa1b5bedd3cfee2fb10315e612ccba477db5b8b066223e83c0f067e56a48284d2d637bf6732fb5cbbc941738f0f0fe62720194912cd0a2a71a2665b21cc7b388c342151d52936d2f0c9ff84e80a21848d2b98fc750adc119902adc007c41364cc28f08c1985a802273c039242253b4af93040a581ed32e4b85280a5540258b281e923d129522e0f17a3e18df5642ba7066", 0xff}, {&(0x7f00000002c0)="d08df651e61cfde9b00f0be23ed621e8070926e21e4e13a411f2feb8e1112b3b7b3fcbd8e576f173387615f8611bddfff44d49d5beecfa8fe1a15072868bd9949308b3499cae6a37a502f4dadec5cc4f9d397aa5e22a631da62455f9c024d82892041364b3625d9419cbb4c5bd06dc56f7c00845b8a8d03321a743f3b2d73b206a7b7ae03042d3924d6ef525c16b189bebff2b72c53d689ad5cb050a5492f3aef60f8c54189e9ce68d047c085577657909", 0xb1}, {&(0x7f0000000380)="cf1eb774c9dab492a18f5c1f07549bf5fcda5e50cea37fccca6dd766bb0fe0b6ca51f4061cda45c21c73be13f4c60fb2c14e3b688b7d3e970ae81e7ec3ce1a1c2ce10b1b9e48863bb274c1f510156c5d84946049b6422efe44ffdb993425ef16122e5d385ac0ae55e1138fd40df934f6622b7eadb43c63d86761d53637c8f6c353acde34e6607c18b0", 0x89}, {&(0x7f0000000440)="1348634d7a441188d4dd841d678657e4d6c56512e8816395e85f6743d91feffd99a3ae243445e9cc0eb503bac39444d5e18bf3a6253f236b479e1f3c476bc6eead0a83584a9117ba23eedffb62e7255be8be7daa49d0203ecf5efba06913c22b14053ca60d95a3aba1224b93b5e010d75a683f3f656476c55f6d41d464d3107cc1469b67f5910b2cbad46b5fadfc7d30eff5834df811c1711c89ebfd", 0x9c}], 0x4, 0xffffff09, 0x4)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI-syz_open_dev$tty1-userfaultfd
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+syz_open_dev$tty1(0xc, 0x4, 0x1)
+userfaultfd(0x0)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI-syz_open_dev$tty1
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+syz_open_dev$tty1(0xc, 0x4, 0x1)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCCBRK
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCCBRK(r0, 0x5428)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-openat$ttyS3-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000080), 0x402040, 0x0)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCPKT-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCPKT(r1, 0x5420, &(0x7f0000000540)=0xf6)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+r1 = openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL(r1, 0x89f3, &(0x7f00000017c0)={'ip6_vti0\x00', &(0x7f0000001740)={'syztnl2\x00', 0x0, 0x0, 0x0, 0x1, 0x0, 0xc, @private1={0xfc, 0x1, '\x00', 0x1}, @mcast1, 0x0, 0x7, 0x0, 0x2}})
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-openat-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+openat(0xffffffffffffff9c, &(0x7f00000000c0)='./file1\x00', 0x14f542, 0x0)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program crashed: possible deadlock in console_flush_all
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+ioctl$TIOCSTI(0xffffffffffffffff, 0x5412, &(0x7f0000000000)=0xa3)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, 0x0, 0x149000, 0x0)
+ioctl$TIOCSTI(r0, 0x5412, &(0x7f0000000000)=0xa3)
+
+program did not crash
+testing program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+detailed listing:
+executing program 0:
+r0 = openat$ttyS3(0xffffffffffffff9c, &(0x7f0000000040), 0x149000, 0x0)
+ioctl$TIOCSTI(r0, 0x5412, 0x0)
+
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=22.5s, {Threaded:true Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+simplifying C reproducer
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:true RepeatTimes:0 Procs:8 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox:none SandboxArg:0 Leak:false NetInjection:true NetDevices:true NetReset:false Cgroups:false BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:true UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:true HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:true Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:true Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+testing compiled C program (duration=22.5s, {Threaded:false Repeat:false RepeatTimes:0 Procs:1 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Repro:true Trace:false LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}): openat$ttyS3-ioctl$TIOCSTI
+program crashed: possible deadlock in console_flush_all
+reproducing took 9m32.954176481s
+repro crashed as (corrupted=false):
+------------[ cut here ]------------
+======================================================
+WARNING: possible circular locking dependency detected
+6.9.0-rc4-df0b4fecf9eb+ #1 Not tainted
+------------------------------------------------------
+syz-executor344/702 is trying to acquire lock:
+ffffffff86d6da80 (console_owner){....}-{0:0}, at: console_lock_spinning_enable kernel/printk/printk.c:1870 [inline]
+ffffffff86d6da80 (console_owner){....}-{0:0}, at: console_emit_next_record kernel/printk/printk.c:2922 [inline]
+ffffffff86d6da80 (console_owner){....}-{0:0}, at: console_flush_all+0x51a/0xc40 kernel/printk/printk.c:2994
+
+but task is already holding lock:
+ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_port_lock_irqsave include/linux/serial_core.h:618 [inline]
+ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_put_char+0x118/0x510 drivers/tty/serial/serial_core.c:560
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #1 (&port_lock_key){-.-.}-{2:2}:
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+       uart_port_lock_irqsave include/linux/serial_core.h:618 [inline]
+       serial8250_console_write+0xad4/0x10a0 drivers/tty/serial/8250/8250_port.c:3352
+       univ8250_console_write+0x6f/0x90 drivers/tty/serial/8250/8250_core.c:606
+       console_emit_next_record kernel/printk/printk.c:2928 [inline]
+       console_flush_all+0x55c/0xc40 kernel/printk/printk.c:2994
+       console_unlock+0xb6/0x240 kernel/printk/printk.c:3063
+       vprintk_emit kernel/printk/printk.c:2345 [inline]
+       vprintk_emit+0x2d0/0x680 kernel/printk/printk.c:2300
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+       vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+       _printk+0xc4/0x100 kernel/printk/printk.c:2370
+       register_console+0xcb4/0x13e0 kernel/printk/printk.c:3596
+       univ8250_console_init+0x41/0x60 drivers/tty/serial/8250/8250_core.c:723
+       console_init+0xae/0x5a0 kernel/printk/printk.c:3742
+       start_kernel+0x275/0x510 init/main.c:1027
+       x86_64_start_reservations+0x1c/0x30 arch/x86/kernel/head64.c:507
+       x86_64_start_kernel+0xa0/0xb0 arch/x86/kernel/head64.c:488
+       common_startup_64+0x13e/0x141
+
+-> #0 (console_owner){....}-{0:0}:
+       check_prev_add kernel/locking/lockdep.c:3134 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+       validate_chain kernel/locking/lockdep.c:3869 [inline]
+       __lock_acquire+0x2fc1/0x5ca0 kernel/locking/lockdep.c:5137
+       lock_acquire kernel/locking/lockdep.c:5754 [inline]
+       lock_acquire+0x1c8/0x550 kernel/locking/lockdep.c:5719
+       console_lock_spinning_enable kernel/printk/printk.c:1870 [inline]
+       console_emit_next_record kernel/printk/printk.c:2922 [inline]
+       console_flush_all+0x52f/0xc40 kernel/printk/printk.c:2994
+       console_unlock+0xb6/0x240 kernel/printk/printk.c:3063
+       vprintk_emit kernel/printk/printk.c:2345 [inline]
+       vprintk_emit+0x2d0/0x680 kernel/printk/printk.c:2300
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+       vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+       _printk+0xc4/0x100 kernel/printk/printk.c:2370
+       __report_bug lib/bug.c:195 [inline]
+       report_bug+0x26a/0x4b0 lib/bug.c:219
+       handle_bug+0xa2/0x130 arch/x86/kernel/traps.c:248
+       exc_invalid_op+0x3c/0x80 arch/x86/kernel/traps.c:269
+       asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:621
+       uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+       tty_put_char+0xce/0x170 drivers/tty/tty_io.c:3167
+       do_output_char+0x164/0x890 drivers/tty/n_tty.c:469
+       __process_echoes+0x225/0xb30 drivers/tty/n_tty.c:717
+       flush_echoes drivers/tty/n_tty.c:807 [inline]
+       __receive_buf drivers/tty/n_tty.c:1632 [inline]
+       n_tty_receive_buf_common+0x4cb/0x16c0 drivers/tty/n_tty.c:1729
+       n_tty_receive_buf+0x3a/0x50 drivers/tty/n_tty.c:1769
+       tiocsti drivers/tty/tty_io.c:2299 [inline]
+       tty_ioctl+0x529/0x1740 drivers/tty/tty_io.c:2717
+       vfs_ioctl fs/ioctl.c:51 [inline]
+       __do_sys_ioctl fs/ioctl.c:904 [inline]
+       __se_sys_ioctl fs/ioctl.c:890 [inline]
+       __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:890
+       x64_sys_call+0x120d/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:17
+       do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+       do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+other info that might help us debug this:
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(&port_lock_key);
+                               lock(console_owner);
+                               lock(&port_lock_key);
+  lock(console_owner);
+
+ *** DEADLOCK ***
+
+7 locks held by syz-executor344/702:
+ #0: ffff8880126980a0 (&tty->ldisc_sem){++++}-{0:0}, at: ldsem_down_read+0x3f/0x50 drivers/tty/tty_ldsem.c:340
+ #1: ffff88800df00ca0 (&buf->lock){+.+.}-{3:3}, at: tty_buffer_lock_exclusive+0x39/0x50 drivers/tty/tty_buffer.c:58
+ #2: ffff8880126982e8 (&tty->termios_rwsem){++++}-{3:3}, at: n_tty_receive_buf_common+0x97/0x16c0 drivers/tty/n_tty.c:1692
+ #3: ffffc90000c06380 (&ldata->output_lock){+.+.}-{3:3}, at: flush_echoes drivers/tty/n_tty.c:805 [inline]
+ #3: ffffc90000c06380 (&ldata->output_lock){+.+.}-{3:3}, at: __receive_buf drivers/tty/n_tty.c:1632 [inline]
+ #3: ffffc90000c06380 (&ldata->output_lock){+.+.}-{3:3}, at: n_tty_receive_buf_common+0x495/0x16c0 drivers/tty/n_tty.c:1729
+ #4: ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_port_lock_irqsave include/linux/serial_core.h:618 [inline]
+ #4: ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_put_char+0x118/0x510 drivers/tty/serial/serial_core.c:560
+ #5: ffffffff86e4e0e0 (console_lock){+.+.}-{0:0}, at: vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: rcu_try_lock_acquire include/linux/rcupdate.h:334 [inline]
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: srcu_read_lock_nmisafe include/linux/srcu.h:232 [inline]
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: console_srcu_read_lock kernel/printk/printk.c:286 [inline]
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: console_flush_all+0x14d/0xc40 kernel/printk/printk.c:2986
+
+stack backtrace:
+CPU: 1 PID: 702 Comm: syz-executor344 Not tainted 6.9.0-rc4-df0b4fecf9eb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:114
+ dump_stack+0x19/0x20 lib/dump_stack.c:123
+ print_circular_bug+0x477/0x740 kernel/locking/lockdep.c:2060
+ check_noncircular+0x2f4/0x3e0 kernel/locking/lockdep.c:2187
+ check_prev_add kernel/locking/lockdep.c:3134 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+ validate_chain kernel/locking/lockdep.c:3869 [inline]
+ __lock_acquire+0x2fc1/0x5ca0 kernel/locking/lockdep.c:5137
+ lock_acquire kernel/locking/lockdep.c:5754 [inline]
+ lock_acquire+0x1c8/0x550 kernel/locking/lockdep.c:5719
+ console_lock_spinning_enable kernel/printk/printk.c:1870 [inline]
+ console_emit_next_record kernel/printk/printk.c:2922 [inline]
+ console_flush_all+0x52f/0xc40 kernel/printk/printk.c:2994
+ console_unlock+0xb6/0x240 kernel/printk/printk.c:3063
+ vprintk_emit kernel/printk/printk.c:2345 [inline]
+ vprintk_emit+0x2d0/0x680 kernel/printk/printk.c:2300
+ vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+ vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+ _printk+0xc4/0x100 kernel/printk/printk.c:2370
+ __report_bug lib/bug.c:195 [inline]
+ report_bug+0x26a/0x4b0 lib/bug.c:219
+ handle_bug+0xa2/0x130 arch/x86/kernel/traps.c:248
+ exc_invalid_op+0x3c/0x80 arch/x86/kernel/traps.c:269
+ asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:621
+RIP: 0010:uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+Code: 49 8b bc 24 08 01 00 00 31 c9 ba 01 00 00 00 be 03 00 00 00 48 81 c7 a0 03 00 00 e8 ce 78 e4 fd e9 63 ff ff ff e8 44 b8 0b fe <0f> 0b e8 3d b8 0b fe 4d 8d ac 24 08 01 00 00 4c 89 f6 4c 89 e7 e8
+RSP: 0018:ffff88801782fa40 EFLAGS: 00010093
+RAX: 0000000000000000 RBX: ffff88800df00be8 RCX: ffffffff81420511
+RDX: ffff88800ebda500 RSI: ffffffff83590dec RDI: ffff88800df00f48
+RBP: ffff88801782fa80 R08: 0000000000000001 R09: ffffed1002f05f34
+R10: 0000000000000003 R11: 0000000000000001 R12: ffffffff89aa52a0
+R13: ffff88800df00f84 R14: 0000000000000293 R15: ffffffff83590a40
+ tty_put_char+0xce/0x170 drivers/tty/tty_io.c:3167
+ do_output_char+0x164/0x890 drivers/tty/n_tty.c:469
+ __process_echoes+0x225/0xb30 drivers/tty/n_tty.c:717
+ flush_echoes drivers/tty/n_tty.c:807 [inline]
+ __receive_buf drivers/tty/n_tty.c:1632 [inline]
+ n_tty_receive_buf_common+0x4cb/0x16c0 drivers/tty/n_tty.c:1729
+ n_tty_receive_buf+0x3a/0x50 drivers/tty/n_tty.c:1769
+ tiocsti drivers/tty/tty_io.c:2299 [inline]
+ tty_ioctl+0x529/0x1740 drivers/tty/tty_io.c:2717
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl fs/ioctl.c:890 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:890
+ x64_sys_call+0x120d/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:17
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f899ec3ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffea5c91ce8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f899ec3ee5d
+RDX: 0000000020000000 RSI: 0000000000005412 RDI: 0000000000000003
+RBP: 0000000000000001 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffea5c91e08
+R13: 0000000000401050 R14: 0000000000403e08 R15: 00007f899ee58000
+ </TASK>
+WARNING: CPU: 1 PID: 702 at drivers/tty/serial/serial_core.c:561 uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+Modules linked in:
+CPU: 1 PID: 702 Comm: syz-executor344 Not tainted 6.9.0-rc4-df0b4fecf9eb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+Code: 49 8b bc 24 08 01 00 00 31 c9 ba 01 00 00 00 be 03 00 00 00 48 81 c7 a0 03 00 00 e8 ce 78 e4 fd e9 63 ff ff ff e8 44 b8 0b fe <0f> 0b e8 3d b8 0b fe 4d 8d ac 24 08 01 00 00 4c 89 f6 4c 89 e7 e8
+RSP: 0018:ffff88801782fa40 EFLAGS: 00010093
+RAX: 0000000000000000 RBX: ffff88800df00be8 RCX: ffffffff81420511
+RDX: ffff88800ebda500 RSI: ffffffff83590dec RDI: ffff88800df00f48
+RBP: ffff88801782fa80 R08: 0000000000000001 R09: ffffed1002f05f34
+R10: 0000000000000003 R11: 0000000000000001 R12: ffffffff89aa52a0
+R13: ffff88800df00f84 R14: 0000000000000293 R15: ffffffff83590a40
+FS:  00007f899ee11600(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000002000004a CR3: 000000001ef90000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ tty_put_char+0xce/0x170 drivers/tty/tty_io.c:3167
+ do_output_char+0x164/0x890 drivers/tty/n_tty.c:469
+ __process_echoes+0x225/0xb30 drivers/tty/n_tty.c:717
+ flush_echoes drivers/tty/n_tty.c:807 [inline]
+ __receive_buf drivers/tty/n_tty.c:1632 [inline]
+ n_tty_receive_buf_common+0x4cb/0x16c0 drivers/tty/n_tty.c:1729
+ n_tty_receive_buf+0x3a/0x50 drivers/tty/n_tty.c:1769
+ tiocsti drivers/tty/tty_io.c:2299 [inline]
+ tty_ioctl+0x529/0x1740 drivers/tty/tty_io.c:2717
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl fs/ioctl.c:890 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:890
+ x64_sys_call+0x120d/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:17
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f899ec3ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffea5c91ce8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f899ec3ee5d
+RDX: 0000000020000000 RSI: 0000000000005412 RDI: 0000000000000003
+RBP: 0000000000000001 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffea5c91e08
+R13: 0000000000401050 R14: 0000000000403e08 R15: 00007f899ee58000
+ </TASK>
+irq event stamp: 36382
+hardirqs last  enabled at (36381): [<ffffffff856c5e05>] __raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (36381): [<ffffffff856c5e05>] _raw_spin_unlock_irqrestore+0x35/0x70 kernel/locking/spinlock.c:194
+hardirqs last disabled at (36382): [<ffffffff856c5ab0>] __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:108 [inline]
+hardirqs last disabled at (36382): [<ffffffff856c5ab0>] _raw_spin_lock_irqsave+0x70/0x80 kernel/locking/spinlock.c:162
+softirqs last  enabled at (35126): [<ffffffff8127fe07>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (35126): [<ffffffff8127fe07>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+softirqs last disabled at (34975): [<ffffffff8127fe07>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (34975): [<ffffffff8127fe07>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+---[ end trace 0000000000000000 ]---
+
+final repro crashed as (corrupted=false):
+------------[ cut here ]------------
+======================================================
+WARNING: possible circular locking dependency detected
+6.9.0-rc4-df0b4fecf9eb+ #1 Not tainted
+------------------------------------------------------
+syz-executor344/702 is trying to acquire lock:
+ffffffff86d6da80 (console_owner){....}-{0:0}, at: console_lock_spinning_enable kernel/printk/printk.c:1870 [inline]
+ffffffff86d6da80 (console_owner){....}-{0:0}, at: console_emit_next_record kernel/printk/printk.c:2922 [inline]
+ffffffff86d6da80 (console_owner){....}-{0:0}, at: console_flush_all+0x51a/0xc40 kernel/printk/printk.c:2994
+
+but task is already holding lock:
+ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_port_lock_irqsave include/linux/serial_core.h:618 [inline]
+ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_put_char+0x118/0x510 drivers/tty/serial/serial_core.c:560
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #1 (&port_lock_key){-.-.}-{2:2}:
+       __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+       _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+       uart_port_lock_irqsave include/linux/serial_core.h:618 [inline]
+       serial8250_console_write+0xad4/0x10a0 drivers/tty/serial/8250/8250_port.c:3352
+       univ8250_console_write+0x6f/0x90 drivers/tty/serial/8250/8250_core.c:606
+       console_emit_next_record kernel/printk/printk.c:2928 [inline]
+       console_flush_all+0x55c/0xc40 kernel/printk/printk.c:2994
+       console_unlock+0xb6/0x240 kernel/printk/printk.c:3063
+       vprintk_emit kernel/printk/printk.c:2345 [inline]
+       vprintk_emit+0x2d0/0x680 kernel/printk/printk.c:2300
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+       vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+       _printk+0xc4/0x100 kernel/printk/printk.c:2370
+       register_console+0xcb4/0x13e0 kernel/printk/printk.c:3596
+       univ8250_console_init+0x41/0x60 drivers/tty/serial/8250/8250_core.c:723
+       console_init+0xae/0x5a0 kernel/printk/printk.c:3742
+       start_kernel+0x275/0x510 init/main.c:1027
+       x86_64_start_reservations+0x1c/0x30 arch/x86/kernel/head64.c:507
+       x86_64_start_kernel+0xa0/0xb0 arch/x86/kernel/head64.c:488
+       common_startup_64+0x13e/0x141
+
+-> #0 (console_owner){....}-{0:0}:
+       check_prev_add kernel/locking/lockdep.c:3134 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+       validate_chain kernel/locking/lockdep.c:3869 [inline]
+       __lock_acquire+0x2fc1/0x5ca0 kernel/locking/lockdep.c:5137
+       lock_acquire kernel/locking/lockdep.c:5754 [inline]
+       lock_acquire+0x1c8/0x550 kernel/locking/lockdep.c:5719
+       console_lock_spinning_enable kernel/printk/printk.c:1870 [inline]
+       console_emit_next_record kernel/printk/printk.c:2922 [inline]
+       console_flush_all+0x52f/0xc40 kernel/printk/printk.c:2994
+       console_unlock+0xb6/0x240 kernel/printk/printk.c:3063
+       vprintk_emit kernel/printk/printk.c:2345 [inline]
+       vprintk_emit+0x2d0/0x680 kernel/printk/printk.c:2300
+       vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+       vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+       _printk+0xc4/0x100 kernel/printk/printk.c:2370
+       __report_bug lib/bug.c:195 [inline]
+       report_bug+0x26a/0x4b0 lib/bug.c:219
+       handle_bug+0xa2/0x130 arch/x86/kernel/traps.c:248
+       exc_invalid_op+0x3c/0x80 arch/x86/kernel/traps.c:269
+       asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:621
+       uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+       tty_put_char+0xce/0x170 drivers/tty/tty_io.c:3167
+       do_output_char+0x164/0x890 drivers/tty/n_tty.c:469
+       __process_echoes+0x225/0xb30 drivers/tty/n_tty.c:717
+       flush_echoes drivers/tty/n_tty.c:807 [inline]
+       __receive_buf drivers/tty/n_tty.c:1632 [inline]
+       n_tty_receive_buf_common+0x4cb/0x16c0 drivers/tty/n_tty.c:1729
+       n_tty_receive_buf+0x3a/0x50 drivers/tty/n_tty.c:1769
+       tiocsti drivers/tty/tty_io.c:2299 [inline]
+       tty_ioctl+0x529/0x1740 drivers/tty/tty_io.c:2717
+       vfs_ioctl fs/ioctl.c:51 [inline]
+       __do_sys_ioctl fs/ioctl.c:904 [inline]
+       __se_sys_ioctl fs/ioctl.c:890 [inline]
+       __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:890
+       x64_sys_call+0x120d/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:17
+       do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+       do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+other info that might help us debug this:
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(&port_lock_key);
+                               lock(console_owner);
+                               lock(&port_lock_key);
+  lock(console_owner);
+
+ *** DEADLOCK ***
+
+7 locks held by syz-executor344/702:
+ #0: ffff8880126980a0 (&tty->ldisc_sem){++++}-{0:0}, at: ldsem_down_read+0x3f/0x50 drivers/tty/tty_ldsem.c:340
+ #1: ffff88800df00ca0 (&buf->lock){+.+.}-{3:3}, at: tty_buffer_lock_exclusive+0x39/0x50 drivers/tty/tty_buffer.c:58
+ #2: ffff8880126982e8 (&tty->termios_rwsem){++++}-{3:3}, at: n_tty_receive_buf_common+0x97/0x16c0 drivers/tty/n_tty.c:1692
+ #3: ffffc90000c06380 (&ldata->output_lock){+.+.}-{3:3}, at: flush_echoes drivers/tty/n_tty.c:805 [inline]
+ #3: ffffc90000c06380 (&ldata->output_lock){+.+.}-{3:3}, at: __receive_buf drivers/tty/n_tty.c:1632 [inline]
+ #3: ffffc90000c06380 (&ldata->output_lock){+.+.}-{3:3}, at: n_tty_receive_buf_common+0x495/0x16c0 drivers/tty/n_tty.c:1729
+ #4: ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_port_lock_irqsave include/linux/serial_core.h:618 [inline]
+ #4: ffffffff89aa52b8 (&port_lock_key){-.-.}-{2:2}, at: uart_put_char+0x118/0x510 drivers/tty/serial/serial_core.c:560
+ #5: ffffffff86e4e0e0 (console_lock){+.+.}-{0:0}, at: vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: rcu_try_lock_acquire include/linux/rcupdate.h:334 [inline]
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: srcu_read_lock_nmisafe include/linux/srcu.h:232 [inline]
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: console_srcu_read_lock kernel/printk/printk.c:286 [inline]
+ #6: ffffffff86e4e150 (console_srcu){....}-{0:0}, at: console_flush_all+0x14d/0xc40 kernel/printk/printk.c:2986
+
+stack backtrace:
+CPU: 1 PID: 702 Comm: syz-executor344 Not tainted 6.9.0-rc4-df0b4fecf9eb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:114
+ dump_stack+0x19/0x20 lib/dump_stack.c:123
+ print_circular_bug+0x477/0x740 kernel/locking/lockdep.c:2060
+ check_noncircular+0x2f4/0x3e0 kernel/locking/lockdep.c:2187
+ check_prev_add kernel/locking/lockdep.c:3134 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3253 [inline]
+ validate_chain kernel/locking/lockdep.c:3869 [inline]
+ __lock_acquire+0x2fc1/0x5ca0 kernel/locking/lockdep.c:5137
+ lock_acquire kernel/locking/lockdep.c:5754 [inline]
+ lock_acquire+0x1c8/0x550 kernel/locking/lockdep.c:5719
+ console_lock_spinning_enable kernel/printk/printk.c:1870 [inline]
+ console_emit_next_record kernel/printk/printk.c:2922 [inline]
+ console_flush_all+0x52f/0xc40 kernel/printk/printk.c:2994
+ console_unlock+0xb6/0x240 kernel/printk/printk.c:3063
+ vprintk_emit kernel/printk/printk.c:2345 [inline]
+ vprintk_emit+0x2d0/0x680 kernel/printk/printk.c:2300
+ vprintk_default+0x2f/0x40 kernel/printk/printk.c:2360
+ vprintk+0xd0/0x170 kernel/printk/printk_safe.c:45
+ _printk+0xc4/0x100 kernel/printk/printk.c:2370
+ __report_bug lib/bug.c:195 [inline]
+ report_bug+0x26a/0x4b0 lib/bug.c:219
+ handle_bug+0xa2/0x130 arch/x86/kernel/traps.c:248
+ exc_invalid_op+0x3c/0x80 arch/x86/kernel/traps.c:269
+ asm_exc_invalid_op+0x1f/0x30 arch/x86/include/asm/idtentry.h:621
+RIP: 0010:uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+Code: 49 8b bc 24 08 01 00 00 31 c9 ba 01 00 00 00 be 03 00 00 00 48 81 c7 a0 03 00 00 e8 ce 78 e4 fd e9 63 ff ff ff e8 44 b8 0b fe <0f> 0b e8 3d b8 0b fe 4d 8d ac 24 08 01 00 00 4c 89 f6 4c 89 e7 e8
+RSP: 0018:ffff88801782fa40 EFLAGS: 00010093
+RAX: 0000000000000000 RBX: ffff88800df00be8 RCX: ffffffff81420511
+RDX: ffff88800ebda500 RSI: ffffffff83590dec RDI: ffff88800df00f48
+RBP: ffff88801782fa80 R08: 0000000000000001 R09: ffffed1002f05f34
+R10: 0000000000000003 R11: 0000000000000001 R12: ffffffff89aa52a0
+R13: ffff88800df00f84 R14: 0000000000000293 R15: ffffffff83590a40
+ tty_put_char+0xce/0x170 drivers/tty/tty_io.c:3167
+ do_output_char+0x164/0x890 drivers/tty/n_tty.c:469
+ __process_echoes+0x225/0xb30 drivers/tty/n_tty.c:717
+ flush_echoes drivers/tty/n_tty.c:807 [inline]
+ __receive_buf drivers/tty/n_tty.c:1632 [inline]
+ n_tty_receive_buf_common+0x4cb/0x16c0 drivers/tty/n_tty.c:1729
+ n_tty_receive_buf+0x3a/0x50 drivers/tty/n_tty.c:1769
+ tiocsti drivers/tty/tty_io.c:2299 [inline]
+ tty_ioctl+0x529/0x1740 drivers/tty/tty_io.c:2717
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl fs/ioctl.c:890 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:890
+ x64_sys_call+0x120d/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:17
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f899ec3ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffea5c91ce8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f899ec3ee5d
+RDX: 0000000020000000 RSI: 0000000000005412 RDI: 0000000000000003
+RBP: 0000000000000001 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffea5c91e08
+R13: 0000000000401050 R14: 0000000000403e08 R15: 00007f899ee58000
+ </TASK>
+WARNING: CPU: 1 PID: 702 at drivers/tty/serial/serial_core.c:561 uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+Modules linked in:
+CPU: 1 PID: 702 Comm: syz-executor344 Not tainted 6.9.0-rc4-df0b4fecf9eb+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:uart_put_char+0x3ac/0x510 drivers/tty/serial/serial_core.c:561
+Code: 49 8b bc 24 08 01 00 00 31 c9 ba 01 00 00 00 be 03 00 00 00 48 81 c7 a0 03 00 00 e8 ce 78 e4 fd e9 63 ff ff ff e8 44 b8 0b fe <0f> 0b e8 3d b8 0b fe 4d 8d ac 24 08 01 00 00 4c 89 f6 4c 89 e7 e8
+RSP: 0018:ffff88801782fa40 EFLAGS: 00010093
+RAX: 0000000000000000 RBX: ffff88800df00be8 RCX: ffffffff81420511
+RDX: ffff88800ebda500 RSI: ffffffff83590dec RDI: ffff88800df00f48
+RBP: ffff88801782fa80 R08: 0000000000000001 R09: ffffed1002f05f34
+R10: 0000000000000003 R11: 0000000000000001 R12: ffffffff89aa52a0
+R13: ffff88800df00f84 R14: 0000000000000293 R15: ffffffff83590a40
+FS:  00007f899ee11600(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000002000004a CR3: 000000001ef90000 CR4: 0000000000750ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ tty_put_char+0xce/0x170 drivers/tty/tty_io.c:3167
+ do_output_char+0x164/0x890 drivers/tty/n_tty.c:469
+ __process_echoes+0x225/0xb30 drivers/tty/n_tty.c:717
+ flush_echoes drivers/tty/n_tty.c:807 [inline]
+ __receive_buf drivers/tty/n_tty.c:1632 [inline]
+ n_tty_receive_buf_common+0x4cb/0x16c0 drivers/tty/n_tty.c:1729
+ n_tty_receive_buf+0x3a/0x50 drivers/tty/n_tty.c:1769
+ tiocsti drivers/tty/tty_io.c:2299 [inline]
+ tty_ioctl+0x529/0x1740 drivers/tty/tty_io.c:2717
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:904 [inline]
+ __se_sys_ioctl fs/ioctl.c:890 [inline]
+ __x64_sys_ioctl+0x1b9/0x230 fs/ioctl.c:890
+ x64_sys_call+0x120d/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:17
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f899ec3ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffea5c91ce8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f899ec3ee5d
+RDX: 0000000020000000 RSI: 0000000000005412 RDI: 0000000000000003
+RBP: 0000000000000001 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffea5c91e08
+R13: 0000000000401050 R14: 0000000000403e08 R15: 00007f899ee58000
+ </TASK>
+irq event stamp: 36382
+hardirqs last  enabled at (36381): [<ffffffff856c5e05>] __raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (36381): [<ffffffff856c5e05>] _raw_spin_unlock_irqrestore+0x35/0x70 kernel/locking/spinlock.c:194
+hardirqs last disabled at (36382): [<ffffffff856c5ab0>] __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:108 [inline]
+hardirqs last disabled at (36382): [<ffffffff856c5ab0>] _raw_spin_lock_irqsave+0x70/0x80 kernel/locking/spinlock.c:162
+softirqs last  enabled at (35126): [<ffffffff8127fe07>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (35126): [<ffffffff8127fe07>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+softirqs last disabled at (34975): [<ffffffff8127fe07>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (34975): [<ffffffff8127fe07>] __irq_exit_rcu+0xa7/0x110 kernel/softirq.c:633
+---[ end trace 0000000000000000 ]---
+
