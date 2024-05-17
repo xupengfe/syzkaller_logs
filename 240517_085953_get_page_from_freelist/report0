@@ -1,0 +1,130 @@
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 125144 at mm/page_alloc.c:2902 get_page_from_freelist+0x1d0c/0x48e0 mm/page_alloc.c:3198
+Modules linked in:
+CPU: 1 PID: 125144 Comm: syz-executor.0 Not tainted 6.9.0-3986de8f233d+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:rmqueue mm/page_alloc.c:2902 [inline]
+RIP: 0010:get_page_from_freelist+0x1d0c/0x48e0 mm/page_alloc.c:3314
+Code: 8b b5 84 fe ff ff e8 63 f6 a4 ff 84 c0 0f 85 de e4 ff ff 48 8b 85 40 ff ff ff 48 83 c0 1c 48 89 85 98 fe ff ff e9 1f f7 ff ff <0f> 0b e9 c3 e8 ff ff 48 8b 95 c8 fe ff ff be 0a 00 00 00 4c 89 f7
+RSP: 0018:ffff88805ab275f0 EFLAGS: 00010202
+RAX: ffff88807ffb5580 RBX: ffff88807ffb7380 RCX: 1ffff1100fff6ab8
+RDX: 0000000000000001 RSI: 0000000000000002 RDI: ffff88807ffb5830
+RBP: ffff88805ab277e8 R08: 0000000000000840 R09: ffffed100fff6b93
+R10: ffff88807ffb5c9f R11: 0000000000000000 R12: 0000000000000002
+R13: 0000000000005d95 R14: ffff88807ffb5580 R15: dffffc0000000000
+FS:  00007fb95a144640(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000c3419b CR3: 0000000030944004 CR4: 0000000000770ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __alloc_pages_direct_reclaim mm/page_alloc.c:3801 [inline]
+ __alloc_pages_slowpath.constprop.0+0x8b9/0x2160 mm/page_alloc.c:4202
+ __alloc_pages+0x48f/0x580 mm/page_alloc.c:4588
+ __alloc_pages_node include/linux/gfp.h:238 [inline]
+ alloc_pages_node include/linux/gfp.h:261 [inline]
+ alloc_slab_page mm/slub.c:2180 [inline]
+ allocate_slab+0x465/0x4e0 mm/slub.c:2351
+ new_slab mm/slub.c:2396 [inline]
+ ___slab_alloc+0x7d2/0x1270 mm/slub.c:3530
+ __slab_alloc.constprop.0+0x5b/0x90 mm/slub.c:3615
+ __slab_alloc_node mm/slub.c:3668 [inline]
+ slab_alloc_node mm/slub.c:3841 [inline]
+ kmalloc_trace+0x3b0/0x3f0 mm/slub.c:3998
+ kmalloc include/linux/slab.h:628 [inline]
+ kzalloc include/linux/slab.h:749 [inline]
+ xfs_init_fs_context+0x4f/0x540 fs/xfs/xfs_super.c:1988
+ alloc_fs_context+0x578/0xa00 fs/fs_context.c:318
+ fs_context_for_mount+0x2e/0x40 fs/fs_context.c:332
+ do_new_mount fs/namespace.c:3331 [inline]
+ path_mount+0xc1f/0x2000 fs/namespace.c:3679
+ do_mount fs/namespace.c:3692 [inline]
+ __do_sys_mount fs/namespace.c:3898 [inline]
+ __se_sys_mount fs/namespace.c:3875 [inline]
+ __x64_sys_mount+0x2c2/0x350 fs/namespace.c:3875
+ x64_sys_call+0x207a/0x20c0 arch/x86/include/generated/asm/syscalls_64.h:166
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6f/0x150 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fb959e3f7be
+Code: 48 8b 0d 65 a6 1b 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 32 a6 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007fb95a143af8 EFLAGS: 00000206 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 000000000000c704 RCX: 00007fb959e3f7be
+RDX: 000000002000c740 RSI: 0000000020000280 RDI: 00007fb95a143b40
+RBP: 00007fb95a143b80 R08: 00007fb95a143b80 R09: 0000000000008040
+R10: 0000000000008040 R11: 0000000000000206 R12: 000000002000c740
+R13: 0000000020000280 R14: 00007fb95a143b40 R15: 0000000020000000
+ </TASK>
+irq event stamp: 148511
+hardirqs last  enabled at (148519): [<ffffffff8144fca4>] __up_console_sem kernel/printk/printk.c:341 [inline]
+hardirqs last  enabled at (148519): [<ffffffff8144fca4>] __console_unlock kernel/printk/printk.c:2731 [inline]
+hardirqs last  enabled at (148519): [<ffffffff8144fca4>] console_unlock+0x224/0x240 kernel/printk/printk.c:3050
+hardirqs last disabled at (148528): [<ffffffff8144fc89>] __up_console_sem kernel/printk/printk.c:339 [inline]
+hardirqs last disabled at (148528): [<ffffffff8144fc89>] __console_unlock kernel/printk/printk.c:2731 [inline]
+hardirqs last disabled at (148528): [<ffffffff8144fc89>] console_unlock+0x209/0x240 kernel/printk/printk.c:3050
+softirqs last  enabled at (148178): [<ffffffff81283119>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (148178): [<ffffffff81283119>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (148178): [<ffffffff81283119>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (148173): [<ffffffff81283119>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (148173): [<ffffffff81283119>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (148173): [<ffffffff81283119>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+---[ end trace 0000000000000000 ]---
+XFS (loop0): cannot change alignment: superblock does not support data alignment
+loop5: detected capacity change from 0 to 4096
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop5): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop5): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 8
+XFS (loop4): Ending clean mount
+kexec: Could not allocate control_code_buffer
+XFS (loop4): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 128
+loop6: detected capacity change from 0 to 4096
+Injecting memory failure for pfn 0x54036 at process virtual address 0x20000000
+EXT4-fs (loop6): bad block size 8192
+Memory failure: 0x54036: recovery action for dirty LRU page: Recovered
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 20000140
+loop0: detected capacity change from 0 to 4096
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200004c1
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 20000500
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 20000540
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 20000ce0
+MCE: Killing syz-executor.5:125307 due to hardware memory corruption fault at 20000cc2
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 20000040
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000c0
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000c4
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000c8
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000cc
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000d0
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000d8
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000e0
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 200000e4
+MCE: Killing syz-executor.5:125306 due to hardware memory corruption fault at 20000100
+loop2: detected capacity change from 0 to 32768
+XFS (loop2): DAX unsupported by block device. Turning off DAX.
+XFS (loop2): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop2): Ending clean mount
+XFS (loop2): Quotacheck needed: Please wait.
+loop0: detected capacity change from 0 to 4096
+ext4: Unknown parameter 'nouser_xattr'
+XFS (loop2): Quotacheck: Done.
+XFS (loop2): Unmounting Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop6: detected capacity change from 0 to 32768
+XFS (loop6): DAX unsupported by block device. Turning off DAX.
+XFS (loop6): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+loop0: detected capacity change from 0 to 4096
+XFS (loop6): Ending clean mount
+XFS (loop6): Quotacheck needed: Please wait.
+XFS (loop6): Quotacheck: Done.
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+loop4: detected capacity change from 0 to 32768
+XFS (loop4): DAX unsupported by block device. Turning off DAX.
+XFS (loop4): Mounting V5 Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop6): Unmounting Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+XFS (loop4): Ending clean mount
+XFS (loop4): Quotacheck needed: Please wait.
+loop5: detected capacity change from 0 to 32768
+xfs: Unknown parameter 'seclabel'
+XFS (loop4): Quotacheck: Done.
+XFS (loop4): Unmounting Filesystem 9f1cad42-11bd-4e12-8f0b-f07876b81d9a
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.

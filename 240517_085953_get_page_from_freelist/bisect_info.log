@@ -1,0 +1,45 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6] Linux 6.9
+git bisect bad a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [a08d97a1935bee66b099b21feddad19c1fd90d0e] Merge https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect good a08d97a1935bee66b099b21feddad19c1fd90d0e
+# good: [d2a6fd45c5c4a5c5fdfe6c57f74f630e61d8d9a0] Merge tag 'probes-v6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace
+git bisect good d2a6fd45c5c4a5c5fdfe6c57f74f630e61d8d9a0
+# good: [e70703890b2586bc3567365d391c260d23fb7a94] Merge tag 'topic/nvidia-gsp-2023-11-03' of git://anongit.freedesktop.org/drm/drm
+git bisect good e70703890b2586bc3567365d391c260d23fb7a94
+# bad: [84fc2408cfc676eeb7ce2f0f0776ee815f7db689] Merge tag 'nf-next-24-01-29' of https://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf-next Florian Westphal says:
+git bisect bad 84fc2408cfc676eeb7ce2f0f0776ee815f7db689
+# bad: [925781a471d8156011e8f8c1baf61bbe020dac55] Merge tag 'nf-24-01-18' of git://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf
+git bisect bad 925781a471d8156011e8f8c1baf61bbe020dac55
+# good: [3cf1d6a5fbf3f724d12b01635319924239d42c00] Merge tag 'm68k-for-v6.8-tag1' of git://git.kernel.org/pub/scm/linux/kernel/git/geert/linux-m68k
+git bisect good 3cf1d6a5fbf3f724d12b01635319924239d42c00
+# bad: [999a36b52b1b11b2ca0590756e4f8cf21f2d9182] Merge tag 'bcachefs-2024-01-10' of https://evilpiepirate.org/git/bcachefs
+git bisect bad 999a36b52b1b11b2ca0590756e4f8cf21f2d9182
+# bad: [bd012f3a5b02849d9acc85e2b8b71293ce072263] Merge tag 'acpi-6.8-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad bd012f3a5b02849d9acc85e2b8b71293ce072263
+# good: [fb46e22a9e3863e08aef8815df9f17d0f4b9aede] Merge tag 'mm-stable-2024-01-08-15-31' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good fb46e22a9e3863e08aef8815df9f17d0f4b9aede
+# bad: [83130ff423d61b018e1018cfa9ca5c1511b5f33b] Merge tag 'regmap-v6.8' of git://git.kernel.org/pub/scm/linux/kernel/git/broonie/regmap
+git bisect bad 83130ff423d61b018e1018cfa9ca5c1511b5f33b
+# good: [ec3a8dd38199ac201a83f81394b1d6caf02643f6] freevxfs: bmap: fix kernel-doc warnings
+git bisect good ec3a8dd38199ac201a83f81394b1d6caf02643f6
+# bad: [9f9310bf87348e36a98ffa09c4e285908c14f592] Merge tag 'selinux-pr-20240105' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/selinux
+git bisect bad 9f9310bf87348e36a98ffa09c4e285908c14f592
+# bad: [ee6bdb3f4bf046ff7878c6103b8c88bb4ccfb11d] watchdog/hardlockup: use printk_cpu_sync_get_irqsave() to serialize reporting
+git bisect bad ee6bdb3f4bf046ff7878c6103b8c88bb4ccfb11d
+# bad: [dd8e05c5dd04210bb6073c594fa9be12c6473ae9] scripts/checkstack.pl: remove ia64 support
+git bisect bad dd8e05c5dd04210bb6073c594fa9be12c6473ae9
+# good: [8474f82ade6f361169d85177b22279dcbe813219] x86/kexec: simplify the logic of mem_region_callback()
+git bisect good 8474f82ade6f361169d85177b22279dcbe813219
+# bad: [18d565ea95fe553f442c5bbc5050415bab3c3fa4] kexec_file: fix incorrect temp_start value in locate_mem_hole_top_down()
+git bisect bad 18d565ea95fe553f442c5bbc5050415bab3c3fa4
+# good: [5c28913ed04b29efb75c4ddd6a13469952351858] MAINTAINERS: remove Ohad Ben-Cohen from hwspinlock subsystem
+git bisect good 5c28913ed04b29efb75c4ddd6a13469952351858
+# bad: [816d334afa85c836080b41bb6238aea845615ad9] kexec: modify the meaning of the end parameter in kimage_is_destination_range()
+git bisect bad 816d334afa85c836080b41bb6238aea845615ad9
+# first bad commit: [816d334afa85c836080b41bb6238aea845615ad9] kexec: modify the meaning of the end parameter in kimage_is_destination_range()
+|0517_133319|Bisect successfully! a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6_816d334afa85c836080b41bb6238aea845615ad9_revert bzimage passed!|
