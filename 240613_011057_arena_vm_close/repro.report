@@ -1,0 +1,252 @@
+==================================================================
+BUG: KASAN: slab-use-after-free in __list_del_entry include/linux/list.h:218 [inline]
+BUG: KASAN: slab-use-after-free in list_del include/linux/list.h:229 [inline]
+BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0 kernel/bpf/arena.c:238
+Read of size 8 at addr ffff88800d0ad808 by task syz-executor172/724
+
+CPU: 1 PID: 724 Comm: syz-executor172 Not tainted 6.10.0-rc3-next-20240611-a957267fa7e9 #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:91 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:117
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xce/0x610 mm/kasan/report.c:488
+ kasan_report+0xcc/0x110 mm/kasan/report.c:601
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ __list_del_entry include/linux/list.h:218 [inline]
+ list_del include/linux/list.h:229 [inline]
+ arena_vm_close+0x1b1/0x1d0 kernel/bpf/arena.c:238
+ remove_vma+0x95/0x190 mm/mmap.c:182
+ exit_mmap+0x4bf/0xb00 mm/mmap.c:3406
+ __mmput+0xde/0x3a0 kernel/fork.c:1341
+ mmput+0x74/0x90 kernel/fork.c:1363
+ exit_mm kernel/exit.c:565 [inline]
+ do_exit+0x9fb/0x2a50 kernel/exit.c:861
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1023
+ __do_sys_exit_group kernel/exit.c:1034 [inline]
+ __se_sys_exit_group kernel/exit.c:1032 [inline]
+ __x64_sys_exit_group+0x4d/0x60 kernel/exit.c:1032
+ x64_sys_call+0x1b50/0x2130 arch/x86/include/generated/asm/syscalls_64.h:232
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f7a07518a4d
+Code: Unable to access opcode bytes at 0x7f7a07518a23.
+RSP: 002b:00007fffcb210bf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f7a075f69e0 RCX: 00007f7a07518a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fffcb210aa0 R11: 0000000000000246 R12: 00007f7a075f69e0
+R13: 00007f7a075fbf00 R14: 0000000000000001 R15: 00007f7a075fbee8
+ </TASK>
+
+Allocated by task 724:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x3c/0x50 mm/kasan/generic.c:565
+ poison_kmalloc_redzone mm/kasan/common.c:370 [inline]
+ __kasan_kmalloc+0x88/0xa0 mm/kasan/common.c:387
+ kasan_kmalloc include/linux/kasan.h:211 [inline]
+ __kmalloc_cache_noprof+0x1b9/0x3c0 mm/slub.c:4171
+ kmalloc_noprof include/linux/slab.h:660 [inline]
+ remember_vma kernel/bpf/arena.c:221 [inline]
+ arena_map_mmap+0x232/0x7a0 kernel/bpf/arena.c:352
+ bpf_map_mmap+0x4b5/0x9a0 kernel/bpf/syscall.c:965
+ call_mmap include/linux/fs.h:2123 [inline]
+ mmap_region+0x5f7/0x2740 mm/mmap.c:2927
+ do_mmap+0xd6a/0x11a0 mm/mmap.c:1438
+ vm_mmap_pgoff+0x1ea/0x390 mm/util.c:573
+ ksys_mmap_pgoff+0x3e8/0x530 mm/mmap.c:1484
+ __do_sys_mmap arch/x86/kernel/sys_x86_64.c:86 [inline]
+ __se_sys_mmap arch/x86/kernel/sys_x86_64.c:79 [inline]
+ __x64_sys_mmap+0x139/0x1d0 arch/x86/kernel/sys_x86_64.c:79
+ x64_sys_call+0x1961/0x2130 arch/x86/include/generated/asm/syscalls_64.h:10
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+Freed by task 724:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_free_info+0x3f/0x60 mm/kasan/generic.c:579
+ poison_slab_object mm/kasan/common.c:240 [inline]
+ poison_slab_object mm/kasan/common.c:211 [inline]
+ __kasan_slab_free+0x115/0x1a0 mm/kasan/common.c:256
+ kasan_slab_free include/linux/kasan.h:184 [inline]
+ slab_free_hook mm/slub.c:2214 [inline]
+ slab_free mm/slub.c:4455 [inline]
+ kfree+0xfe/0x330 mm/slub.c:4576
+ arena_vm_close+0x15e/0x1d0 kernel/bpf/arena.c:240
+ remove_vma+0x95/0x190 mm/mmap.c:182
+ remove_mt mm/mmap.c:2385 [inline]
+ do_vmi_align_munmap+0xc02/0x11f0 mm/mmap.c:2728
+ do_vmi_munmap+0x22c/0x420 mm/mmap.c:2800
+ __do_sys_mremap+0x7db/0x1830 mm/mremap.c:1109
+ __se_sys_mremap mm/mremap.c:993 [inline]
+ __x64_sys_mremap+0xc7/0x150 mm/mremap.c:993
+ x64_sys_call+0x1c9a/0x2130 arch/x86/include/generated/asm/syscalls_64.h:26
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+The buggy address belongs to the object at ffff88800d0ad800
+ which belongs to the cache kmalloc-32 of size 32
+The buggy address is located 8 bytes inside of
+ freed 32-byte region [ffff88800d0ad800, ffff88800d0ad820)
+
+The buggy address belongs to the physical page:
+page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0xd0ad
+flags: 0xfffffc0000000(node=0|zone=1|lastcpupid=0x1fffff)
+page_type: 0xfdffffff(slab)
+raw: 000fffffc0000000 ffff88800a041780 dead000000000100 dead000000000122
+raw: 0000000000000000 0000000080400040 00000001fdffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff88800d0ad700: 00 00 01 fc fc fc fc fc fa fb fb fb fc fc fc fc
+ ffff88800d0ad780: 00 00 05 fc fc fc fc fc 00 00 03 fc fc fc fc fc
+>ffff88800d0ad800: fa fb fb fb fc fc fc fc 00 00 01 fc fc fc fc fc
+                      ^
+ ffff88800d0ad880: fa fb fb fb fc fc fc fc 00 00 01 fc fc fc fc fc
+ ffff88800d0ad900: fa fb fb fb fc fc fc fc 00 00 01 fc fc fc fc fc
+==================================================================
+Oops: general protection fault, probably for non-canonical address 0xe0837c1fa000005b: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: maybe wild-memory-access in range [0x041c00fd000002d8-0x041c00fd000002df]
+CPU: 1 PID: 724 Comm: syz-executor172 Tainted: G    B              6.10.0-rc3-next-20240611-a957267fa7e9 #1
+Tainted: [B]=BAD_PAGE
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__list_del include/linux/list.h:195 [inline]
+RIP: 0010:__list_del_entry include/linux/list.h:218 [inline]
+RIP: 0010:list_del include/linux/list.h:229 [inline]
+RIP: 0010:arena_vm_close+0x10b/0x1d0 kernel/bpf/arena.c:238
+Code: 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 b1 00 00 00 49 8d 7f 08 4d 8b 74 24 10 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 0f 85 83 00 00 00 4c 89 f2 4d 89 77 08 48 b8 00 00 00
+RSP: 0018:ffff888020bdfb78 EFLAGS: 00010203
+RAX: dffffc0000000000 RBX: ffff88800c5c61e0 RCX: ffffffff81959707
+RDX: 0083801fa000005b RSI: 0000000000000008 RDI: 041c00fd000002dc
+RBP: ffff888020bdfba0 R08: 0000000000000000 R09: fffffbfff1139d38
+R10: 0000000000000000 R11: 6e696c6261736944 R12: ffff88800d0ad800
+R13: ffff888012a8ca38 R14: dead000000000122 R15: 041c00fd000002d4
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f7a075fca50 CR3: 0000000006c7e001 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ remove_vma+0x95/0x190 mm/mmap.c:182
+ exit_mmap+0x4bf/0xb00 mm/mmap.c:3406
+ __mmput+0xde/0x3a0 kernel/fork.c:1341
+ mmput+0x74/0x90 kernel/fork.c:1363
+ exit_mm kernel/exit.c:565 [inline]
+ do_exit+0x9fb/0x2a50 kernel/exit.c:861
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1023
+ __do_sys_exit_group kernel/exit.c:1034 [inline]
+ __se_sys_exit_group kernel/exit.c:1032 [inline]
+ __x64_sys_exit_group+0x4d/0x60 kernel/exit.c:1032
+ x64_sys_call+0x1b50/0x2130 arch/x86/include/generated/asm/syscalls_64.h:232
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f7a07518a4d
+Code: Unable to access opcode bytes at 0x7f7a07518a23.
+RSP: 002b:00007fffcb210bf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f7a075f69e0 RCX: 00007f7a07518a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fffcb210aa0 R11: 0000000000000246 R12: 00007f7a075f69e0
+R13: 00007f7a075fbf00 R14: 0000000000000001 R15: 00007f7a075fbee8
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:__list_del include/linux/list.h:195 [inline]
+RIP: 0010:__list_del_entry include/linux/list.h:218 [inline]
+RIP: 0010:list_del include/linux/list.h:229 [inline]
+RIP: 0010:arena_vm_close+0x10b/0x1d0 kernel/bpf/arena.c:238
+Code: 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 b1 00 00 00 49 8d 7f 08 4d 8b 74 24 10 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 0f 85 83 00 00 00 4c 89 f2 4d 89 77 08 48 b8 00 00 00
+RSP: 0018:ffff888020bdfb78 EFLAGS: 00010203
+RAX: dffffc0000000000 RBX: ffff88800c5c61e0 RCX: ffffffff81959707
+RDX: 0083801fa000005b RSI: 0000000000000008 RDI: 041c00fd000002dc
+RBP: ffff888020bdfba0 R08: 0000000000000000 R09: fffffbfff1139d38
+R10: 0000000000000000 R11: 6e696c6261736944 R12: ffff88800d0ad800
+R13: ffff888012a8ca38 R14: dead000000000122 R15: 041c00fd000002d4
+FS:  0000000000000000(0000) GS:ffff88806cb00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f7a075fca50 CR3: 0000000006c7e001 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Fixing recursive fault but reboot is needed!
+BUG: using smp_processor_id() in preemptible [00000000] code: syz-executor172/724
+caller is debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+CPU: 1 PID: 724 Comm: syz-executor172 Tainted: G    B D            6.10.0-rc3-next-20240611-a957267fa7e9 #1
+Tainted: [B]=BAD_PAGE, [D]=DIE
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:91 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:117
+ dump_stack+0x19/0x20 lib/dump_stack.c:126
+ check_preemption_disabled+0x168/0x180 lib/smp_processor_id.c:49
+ debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+ __schedule+0x9a/0x2eb0 kernel/sched/core.c:6408
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6545
+ make_task_dead+0x384/0x3c0 kernel/exit.c:982
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1492
+RIP: 0033:0x7f7a07518a4d
+Code: Unable to access opcode bytes at 0x7f7a07518a23.
+RSP: 002b:00007fffcb210bf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f7a075f69e0 RCX: 00007f7a07518a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fffcb210aa0 R11: 0000000000000246 R12: 00007f7a075f69e0
+R13: 00007f7a075fbf00 R14: 0000000000000001 R15: 00007f7a075fbee8
+ </TASK>
+BUG: scheduling while atomic: syz-executor172/724/0x00000000
+INFO: lockdep is turned off.
+Modules linked in:
+Preemption disabled at:
+[<ffffffff81345c78>] do_task_dead+0x28/0x110 kernel/sched/core.c:6540
+CPU: 1 PID: 724 Comm: syz-executor172 Tainted: G    B D            6.10.0-rc3-next-20240611-a957267fa7e9 #1
+Tainted: [B]=BAD_PAGE, [D]=DIE
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:91 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:117
+ dump_stack+0x19/0x20 lib/dump_stack.c:126
+ __schedule_bug+0x12d/0x180 kernel/sched/core.c:5735
+ schedule_debug kernel/sched/core.c:5762 [inline]
+ __schedule+0x210c/0x2eb0 kernel/sched/core.c:6412
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6545
+ make_task_dead+0x384/0x3c0 kernel/exit.c:982
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1492
+RIP: 0033:0x7f7a07518a4d
+Code: Unable to access opcode bytes at 0x7f7a07518a23.
+RSP: 002b:00007fffcb210bf8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f7a075f69e0 RCX: 00007f7a07518a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fffcb210aa0 R11: 0000000000000246 R12: 00007f7a075f69e0
+R13: 00007f7a075fbf00 R14: 0000000000000001 R15: 00007f7a075fbee8
+ </TASK>
+----------------
+Code disassembly (best guess):
+   0:	89 fa                	mov    %edi,%edx
+   2:	48 c1 ea 03          	shr    $0x3,%rdx
+   6:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1)
+   a:	0f 85 b1 00 00 00    	jne    0xc1
+  10:	49 8d 7f 08          	lea    0x8(%r15),%rdi
+  14:	4d 8b 74 24 10       	mov    0x10(%r12),%r14
+  19:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  20:	fc ff df
+  23:	48 89 fa             	mov    %rdi,%rdx
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+* 2a:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2e:	0f 85 83 00 00 00    	jne    0xb7
+  34:	4c 89 f2             	mov    %r14,%rdx
+  37:	4d 89 77 08          	mov    %r14,0x8(%r15)
+  3b:	48                   	rex.W
+  3c:	b8                   	.byte 0xb8
+  3d:	00 00                	add    %al,(%rax)

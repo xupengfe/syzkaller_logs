@@ -1,0 +1,501 @@
+|0613_011057|cmd=cd /root/linux-next|
+|0613_011057|git log 83a7eefedc9b56fe7bfeff13b6c7356688ffa670 check_result:commit 83a7eefedc9b56fe7bfeff13b6c7356688ffa670|
+|0613_011058|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0613_011058|cmd=git checkout -f 83a7eefedc9b56fe7bfeff13b6c7356688ffa670|
+|0613_011106|cmd=cd /root/linux-next|
+|0613_011106||/var/www/html/bzimage/bzImage_83a7eefedc9b56fe7bfeff13b6c7356688ffa670| exist, no need make|
+|0613_011106|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_011116|Run /var/www/html/bzimage/bzImage_83a7eefedc9b56fe7bfeff13b6c7356688ffa670 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_011136|It takes 20 seconds to find login:test login: |
+|0613_011136|Boot 1 time: takes 20 seconds to boot up.|
+|0613_011136|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_011137|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_011139|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_011140|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_011141|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_011151|/var/www/html/bzimage/bzImage_83a7eefedc9b56fe7bfeff13b6c7356688ffa670 contained arena_vm_close:[   25.143738] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   25.148267]  ? arena_vm_close+0x1b1/0x1d0
+[   25.149168]  ? arena_vm_close+0x1b1/0x1d0
+[   25.149904]  ? arena_vm_close+0x1b1/0x1d0
+[   25.150616]  arena_vm_close+0x1b1/0x1d0
+[   25.150922]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.166157]  arena_vm_close+0x15e/0x1d0
+[   25.180089] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   25.188674]  ? arena_vm_close+0x1a7/0x1d0
+[   25.188977]  ? arena_vm_close+0x10b/0x1d0
+[   25.189274]  ? arena_vm_close+0x1a7/0x1d0
+[   25.189570]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.199921] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_011151|Found time:25 in /var/www/html/bzimage/0613_011057_arena_vm_close/83a7eefedc9b56fe7bfeff13b6c7356688ffa670_dmesg.log|
+|0613_011151|Logic: |<=25: +25|25-100 +180|>100 +1800| Set TIME:50|
+|0613_011151|-END- commit 83a7eefedc9b56fe7bfeff13b6c7356688ffa670 FAIL bad|
+|0613_011151|issue_folder alreayd exist:/var/www/html//syzkaller/2024_06_13/c5b94d7bb0c45f13d514f5166845c9f2dce17a27|
+|0613_011151|cmd=cp -rf /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog /var/www/html//syzkaller/2024_06_13/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.c|
+|0613_011151|gcc -pthread /var/www/html//syzkaller/2024_06_13/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.c -o /var/www/html//syzkaller/2024_06_13/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro|
+|0613_011151|cmd=cp -rf /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/description /var/www/html//syzkaller/2024_06_13/c5b94d7bb0c45f13d514f5166845c9f2dce17a27|
+|0613_011153|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0613_011057_arena_vm_close/kconfig_origin:0|
+|0613_011153|cmd=cd /root/linux-next|
+|0613_011153||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0613_011153|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_011207|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_011224|It takes 17 seconds to find login:test login: |
+|0613_011224|Boot 1 time: takes 17 seconds to boot up.|
+|0613_011224|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_011226|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_011227|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_011228|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_011229|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_011319|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain arena_vm_close: in dmesg, pass|
+|0613_011319|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0613_011319|cmd=git checkout -f 83a7eefedc9b56fe7bfeff13b6c7356688ffa670|
+|0613_011320|cmd=git bisect start|
+|0613_011320|cmd=git bisect bad 83a7eefedc9b56fe7bfeff13b6c7356688ffa670|
+|0613_011320|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0613_011320|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0613_011416||/var/www/html/bzimage/bzImage_a09476668e3016ea4a7b0a7ebd02f44e0546c12c| exist, no need make|
+|0613_011416|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_011425|Run /var/www/html/bzimage/bzImage_a09476668e3016ea4a7b0a7ebd02f44e0546c12c with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_011442|It takes 17 seconds to find login:test login: |
+|0613_011442|Boot 1 time: takes 17 seconds to boot up.|
+|0613_011442|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_011443|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_011444|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_011446|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_011446|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_011536|/var/www/html/bzimage/bzImage_a09476668e3016ea4a7b0a7ebd02f44e0546c12c didn't contain arena_vm_close: in dmesg, pass|
+|0613_011536|git bisect good a09476668e3016ea4a7b0a7ebd02f44e0546c12c|
+|0613_011559||/var/www/html/bzimage/bzImage_35494b0d61e44b517178aa1c6f5a69168b086940| exist, no need make|
+|0613_011559|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_011610|Run /var/www/html/bzimage/bzImage_35494b0d61e44b517178aa1c6f5a69168b086940 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_011628|It takes 18 seconds to find login:test login: |
+|0613_011628|Boot 1 time: takes 18 seconds to boot up.|
+|0613_011628|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_011629|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_011631|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_011633|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_011633|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_011723|/var/www/html/bzimage/bzImage_35494b0d61e44b517178aa1c6f5a69168b086940 didn't contain arena_vm_close: in dmesg, pass|
+|0613_011723|git bisect good 35494b0d61e44b517178aa1c6f5a69168b086940|
+|0613_011734||/var/www/html/bzimage/bzImage_ba5afb9a84df2e6b26a1b6389b98849cd16ea757| exist, no need make|
+|0613_011734|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_011745|Run /var/www/html/bzimage/bzImage_ba5afb9a84df2e6b26a1b6389b98849cd16ea757 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_011801|It takes 16 seconds to find login:test login: |
+|0613_011801|Boot 1 time: takes 16 seconds to boot up.|
+|0613_011802|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_011802|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_011804|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_011805|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_011806|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_011856|/var/www/html/bzimage/bzImage_ba5afb9a84df2e6b26a1b6389b98849cd16ea757 didn't contain arena_vm_close: in dmesg, pass|
+|0613_011856|git bisect good ba5afb9a84df2e6b26a1b6389b98849cd16ea757|
+|0613_011901||/var/www/html/bzimage/bzImage_902861e34c401696ed9ad17a54c8790e7e8e3069| exist, no need make|
+|0613_011901|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_011915|Run /var/www/html/bzimage/bzImage_902861e34c401696ed9ad17a54c8790e7e8e3069 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_011934|It takes 19 seconds to find login:test login: |
+|0613_011934|Boot 1 time: takes 19 seconds to boot up.|
+|0613_011935|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_011936|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_011937|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_011939|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_011939|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012029|/var/www/html/bzimage/bzImage_902861e34c401696ed9ad17a54c8790e7e8e3069 contained arena_vm_close:[   23.846349] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   23.851130]  ? arena_vm_close+0x1b1/0x1d0
+[   23.851995]  ? arena_vm_close+0x1b1/0x1d0
+[   23.852702]  ? arena_vm_close+0x1b1/0x1d0
+[   23.853389]  arena_vm_close+0x1b1/0x1d0
+[   23.853688]  ? __pfx_arena_vm_close+0x10/0x10
+[   23.868975]  arena_vm_close+0x15e/0x1d0
+[   23.882521] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   23.890536]  ? arena_vm_close+0x1a7/0x1d0
+[   23.890835]  ? arena_vm_close+0x10b/0x1d0
+[   23.891146]  ? arena_vm_close+0x1a7/0x1d0
+[   23.891451]  ? __pfx_arena_vm_close+0x10/0x10
+[   23.901907] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_012029|git bisect bad 902861e34c401696ed9ad17a54c8790e7e8e3069|
+|0613_012039||/var/www/html/bzimage/bzImage_85badb2c008a460f8b4cf064e1dce7c0752bec1c| exist, no need make|
+|0613_012039|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012049|Run /var/www/html/bzimage/bzImage_85badb2c008a460f8b4cf064e1dce7c0752bec1c with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_012107|It takes 18 seconds to find login:test login: |
+|0613_012107|Boot 1 time: takes 18 seconds to boot up.|
+|0613_012107|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_012108|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_012109|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_012111|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_012111|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012201|/var/www/html/bzimage/bzImage_85badb2c008a460f8b4cf064e1dce7c0752bec1c didn't contain arena_vm_close: in dmesg, pass|
+|0613_012201|git bisect good 85badb2c008a460f8b4cf064e1dce7c0752bec1c|
+|0613_012207||/var/www/html/bzimage/bzImage_9187210eee7d87eea37b45ea93454a88681894a4| exist, no need make|
+|0613_012207|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012218|Run /var/www/html/bzimage/bzImage_9187210eee7d87eea37b45ea93454a88681894a4 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_012238|It takes 20 seconds to find login:test login: |
+|0613_012238|Boot 1 time: takes 20 seconds to boot up.|
+|0613_012238|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_012239|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_012241|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_012242|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_012243|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012333|/var/www/html/bzimage/bzImage_9187210eee7d87eea37b45ea93454a88681894a4 contained arena_vm_close:[   25.106271] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   25.110219]  ? arena_vm_close+0x1b1/0x1d0
+[   25.110974]  ? arena_vm_close+0x1b1/0x1d0
+[   25.111531]  ? arena_vm_close+0x1b1/0x1d0
+[   25.112056]  arena_vm_close+0x1b1/0x1d0
+[   25.112284]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.125730]  arena_vm_close+0x15e/0x1d0
+[   25.137579] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   25.144695]  ? arena_vm_close+0x1a7/0x1d0
+[   25.144936]  ? arena_vm_close+0x10b/0x1d0
+[   25.145179]  ? arena_vm_close+0x1a7/0x1d0
+[   25.145419]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.154617] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_012333|git bisect bad 9187210eee7d87eea37b45ea93454a88681894a4|
+|0613_012338||/var/www/html/bzimage/bzImage_508f34f2381eb84b2335abb970b940aefef50a19| exist, no need make|
+|0613_012338|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012350|Run /var/www/html/bzimage/bzImage_508f34f2381eb84b2335abb970b940aefef50a19 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_012410|It takes 20 seconds to find login:test login: |
+|0613_012410|Boot 1 time: takes 20 seconds to boot up.|
+|0613_012410|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_012412|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_012413|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_012415|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_012415|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012505|/var/www/html/bzimage/bzImage_508f34f2381eb84b2335abb970b940aefef50a19 didn't contain arena_vm_close: in dmesg, pass|
+|0613_012505|git bisect good 508f34f2381eb84b2335abb970b940aefef50a19|
+|0613_012506||/var/www/html/bzimage/bzImage_a01c9fe32378636ae65bec8047b5de3fdb2ba5c8| exist, no need make|
+|0613_012506|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012519|Run /var/www/html/bzimage/bzImage_a01c9fe32378636ae65bec8047b5de3fdb2ba5c8 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_012538|It takes 19 seconds to find login:test login: |
+|0613_012538|Boot 1 time: takes 19 seconds to boot up.|
+|0613_012538|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_012540|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_012541|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_012543|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_012543|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012633|/var/www/html/bzimage/bzImage_a01c9fe32378636ae65bec8047b5de3fdb2ba5c8 didn't contain arena_vm_close: in dmesg, pass|
+|0613_012633|git bisect good a01c9fe32378636ae65bec8047b5de3fdb2ba5c8|
+|0613_012636||/var/www/html/bzimage/bzImage_7a6d793e9ca8bc0c1d2f0aa0a02ec380d1124c74| exist, no need make|
+|0613_012636|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012647|Run /var/www/html/bzimage/bzImage_7a6d793e9ca8bc0c1d2f0aa0a02ec380d1124c74 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_012708|It takes 21 seconds to find login:test login: |
+|0613_012708|Boot 1 time: takes 21 seconds to boot up.|
+|0613_012708|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_012710|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_012711|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_012713|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_012713|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012803|/var/www/html/bzimage/bzImage_7a6d793e9ca8bc0c1d2f0aa0a02ec380d1124c74 didn't contain arena_vm_close: in dmesg, pass|
+|0613_012803|git bisect good 7a6d793e9ca8bc0c1d2f0aa0a02ec380d1124c74|
+|0613_012809||/var/www/html/bzimage/bzImage_2f901582f032bed47907a20f77fb44b3532b4762| exist, no need make|
+|0613_012809|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012819|Run /var/www/html/bzimage/bzImage_2f901582f032bed47907a20f77fb44b3532b4762 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_012837|It takes 18 seconds to find login:test login: |
+|0613_012837|Boot 1 time: takes 18 seconds to boot up.|
+|0613_012837|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_012838|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_012840|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_012841|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_012841|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_012931|/var/www/html/bzimage/bzImage_2f901582f032bed47907a20f77fb44b3532b4762 didn't contain arena_vm_close: in dmesg, pass|
+|0613_012931|git bisect good 2f901582f032bed47907a20f77fb44b3532b4762|
+|0613_012932||/var/www/html/bzimage/bzImage_5f20e6ab1f65aaaaae248e6946d5cb6d039e7de8| exist, no need make|
+|0613_012932|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_012945|Run /var/www/html/bzimage/bzImage_5f20e6ab1f65aaaaae248e6946d5cb6d039e7de8 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013004|It takes 19 seconds to find login:test login: |
+|0613_013004|Boot 1 time: takes 19 seconds to boot up.|
+|0613_013004|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013006|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013007|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013009|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013009|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013059|/var/www/html/bzimage/bzImage_5f20e6ab1f65aaaaae248e6946d5cb6d039e7de8 contained arena_vm_close:[   24.123009] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   24.128488]  ? arena_vm_close+0x1b1/0x1d0
+[   24.129618]  ? arena_vm_close+0x1b1/0x1d0
+[   24.130570]  ? arena_vm_close+0x1b1/0x1d0
+[   24.131629]  arena_vm_close+0x1b1/0x1d0
+[   24.132099]  ? __pfx_arena_vm_close+0x10/0x10
+[   24.151492]  arena_vm_close+0x15e/0x1d0
+[   24.165622] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   24.174004]  ? arena_vm_close+0x1a7/0x1d0
+[   24.174291]  ? arena_vm_close+0x10b/0x1d0
+[   24.174575]  ? arena_vm_close+0x1a7/0x1d0
+[   24.174861]  ? __pfx_arena_vm_close+0x10/0x10
+[   24.185613] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_013059|git bisect bad 5f20e6ab1f65aaaaae248e6946d5cb6d039e7de8|
+|0613_013100||/var/www/html/bzimage/bzImage_fcac05daa7efcf96f8042bd06abd4da384ac3cd3| exist, no need make|
+|0613_013101|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013114|Run /var/www/html/bzimage/bzImage_fcac05daa7efcf96f8042bd06abd4da384ac3cd3 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013131|It takes 17 seconds to find login:test login: |
+|0613_013131|Boot 1 time: takes 17 seconds to boot up.|
+|0613_013131|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013132|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013134|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013135|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013136|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013226|/var/www/html/bzimage/bzImage_fcac05daa7efcf96f8042bd06abd4da384ac3cd3 didn't contain arena_vm_close: in dmesg, pass|
+|0613_013226|git bisect good fcac05daa7efcf96f8042bd06abd4da384ac3cd3|
+|0613_013230||/var/www/html/bzimage/bzImage_1576b07961971d4eeb0e269c7133e9a6d430daf8| exist, no need make|
+|0613_013230|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013240|Run /var/www/html/bzimage/bzImage_1576b07961971d4eeb0e269c7133e9a6d430daf8 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013258|It takes 18 seconds to find login:test login: |
+|0613_013258|Boot 1 time: takes 18 seconds to boot up.|
+|0613_013258|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013259|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013301|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013302|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013303|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013353|/var/www/html/bzimage/bzImage_1576b07961971d4eeb0e269c7133e9a6d430daf8 didn't contain arena_vm_close: in dmesg, pass|
+|0613_013353|git bisect good 1576b07961971d4eeb0e269c7133e9a6d430daf8|
+|0613_013354||/var/www/html/bzimage/bzImage_2e7ba4f8fd1fa879b37db0b738c23ba2af8292ee| exist, no need make|
+|0613_013354|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013404|Run /var/www/html/bzimage/bzImage_2e7ba4f8fd1fa879b37db0b738c23ba2af8292ee with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013423|It takes 18 seconds to find login:test login: |
+|0613_013423|Boot 1 time: takes 18 seconds to boot up.|
+|0613_013423|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013424|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013425|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013427|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013428|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013518|/var/www/html/bzimage/bzImage_2e7ba4f8fd1fa879b37db0b738c23ba2af8292ee contained arena_vm_close:[   23.182358] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   23.185658]  ? arena_vm_close+0x1b1/0x1d0
+[   23.186350]  ? arena_vm_close+0x1b1/0x1d0
+[   23.186914]  ? arena_vm_close+0x1b1/0x1d0
+[   23.187571]  arena_vm_close+0x1b1/0x1d0
+[   23.187857]  ? __pfx_arena_vm_close+0x10/0x10
+[   23.205080]  arena_vm_close+0x15e/0x1d0
+[   23.220478] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   23.229347]  ? arena_vm_close+0x1a7/0x1d0
+[   23.229645]  ? arena_vm_close+0x10b/0x1d0
+[   23.229944]  ? arena_vm_close+0x1a7/0x1d0
+[   23.230246]  ? __pfx_arena_vm_close+0x10/0x10
+[   23.241495] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_013518|git bisect bad 2e7ba4f8fd1fa879b37db0b738c23ba2af8292ee|
+|0613_013518||/var/www/html/bzimage/bzImage_365c2b32792e692bad6e3761ad19ac3f8f52c0fe| exist, no need make|
+|0613_013518|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013528|Run /var/www/html/bzimage/bzImage_365c2b32792e692bad6e3761ad19ac3f8f52c0fe with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013549|It takes 21 seconds to find login:test login: |
+|0613_013549|Boot 1 time: takes 21 seconds to boot up.|
+|0613_013549|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013551|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013552|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013554|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013554|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013644|/var/www/html/bzimage/bzImage_365c2b32792e692bad6e3761ad19ac3f8f52c0fe didn't contain arena_vm_close: in dmesg, pass|
+|0613_013644|git bisect good 365c2b32792e692bad6e3761ad19ac3f8f52c0fe|
+|0613_013645||/var/www/html/bzimage/bzImage_6082b6c328b5486da2b356eae94b8b83c98b5565| exist, no need make|
+|0613_013645|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013654|Run /var/www/html/bzimage/bzImage_6082b6c328b5486da2b356eae94b8b83c98b5565 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013711|It takes 17 seconds to find login:test login: |
+|0613_013711|Boot 1 time: takes 17 seconds to boot up.|
+|0613_013711|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013712|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013714|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013715|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013716|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013806|/var/www/html/bzimage/bzImage_6082b6c328b5486da2b356eae94b8b83c98b5565 contained arena_vm_close:[   21.750811] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   21.755278]  ? arena_vm_close+0x1b1/0x1d0
+[   21.756153]  ? arena_vm_close+0x1b1/0x1d0
+[   21.756854]  ? arena_vm_close+0x1b1/0x1d0
+[   21.757628]  arena_vm_close+0x1b1/0x1d0
+[   21.757916]  ? __pfx_arena_vm_close+0x10/0x10
+[   21.771151]  arena_vm_close+0x15e/0x1d0
+[   21.782277] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   21.789175]  ? arena_vm_close+0x1a7/0x1d0
+[   21.789403]  ? arena_vm_close+0x10b/0x1d0
+[   21.789630]  ? arena_vm_close+0x1a7/0x1d0
+[   21.789856]  ? __pfx_arena_vm_close+0x10/0x10
+[   21.798765] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_013806|git bisect bad 6082b6c328b5486da2b356eae94b8b83c98b5565|
+|0613_013809||/var/www/html/bzimage/bzImage_667a86ad9b71d934c444eec193cf3508016f35c5| exist, no need make|
+|0613_013810|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013821|Run /var/www/html/bzimage/bzImage_667a86ad9b71d934c444eec193cf3508016f35c5 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_013841|It takes 20 seconds to find login:test login: |
+|0613_013841|Boot 1 time: takes 20 seconds to boot up.|
+|0613_013841|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_013843|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_013844|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_013846|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_013846|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_013936|/var/www/html/bzimage/bzImage_667a86ad9b71d934c444eec193cf3508016f35c5 contained arena_vm_close:[   25.452860] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   25.455958]  ? arena_vm_close+0x1b1/0x1d0
+[   25.456595]  ? arena_vm_close+0x1b1/0x1d0
+[   25.457119]  ? arena_vm_close+0x1b1/0x1d0
+[   25.457738]  arena_vm_close+0x1b1/0x1d0
+[   25.457997]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.473570]  arena_vm_close+0x15e/0x1d0
+[   25.488267] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   25.496555]  ? arena_vm_close+0x1a7/0x1d0
+[   25.496826]  ? arena_vm_close+0x10b/0x1d0
+[   25.497105]  ? arena_vm_close+0x1a7/0x1d0
+[   25.497376]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.507599] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_013937|git bisect bad 667a86ad9b71d934c444eec193cf3508016f35c5|
+|0613_013937||/var/www/html/bzimage/bzImage_317460317a02a1af512697e6e964298dedd8a163| exist, no need make|
+|0613_013937|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0613_013951|Run /var/www/html/bzimage/bzImage_317460317a02a1af512697e6e964298dedd8a163 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0613_014011|It takes 20 seconds to find login:test login: |
+|0613_014011|Boot 1 time: takes 20 seconds to boot up.|
+|0613_014011|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0613_014013|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0613_014014|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/c5b94d7bb0c45f13d514f5166845c9f2dce17a27/repro.cprog root@localhost:/root/repro.c|
+|0613_014016|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0613_014016|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0613_014106|/var/www/html/bzimage/bzImage_317460317a02a1af512697e6e964298dedd8a163 contained arena_vm_close:[   25.401229] BUG: KASAN: slab-use-after-free in arena_vm_close+0x1b1/0x1d0
+[   25.405045]  ? arena_vm_close+0x1b1/0x1d0
+[   25.405775]  ? arena_vm_close+0x1b1/0x1d0
+[   25.406384]  ? arena_vm_close+0x1b1/0x1d0
+[   25.407077]  arena_vm_close+0x1b1/0x1d0
+[   25.407382]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.425163]  arena_vm_close+0x15e/0x1d0
+[   25.441347] RIP: 0010:arena_vm_close+0x10b/0x1d0
+[   25.451211]  ? arena_vm_close+0x1a7/0x1d0
+[   25.451532]  ? arena_vm_close+0x10b/0x1d0
+[   25.451848]  ? arena_vm_close+0x1a7/0x1d0
+[   25.452164]  ? __pfx_arena_vm_close+0x10/0x10
+[   25.463972] RIP: 0010:arena_vm_close+0x10b/0x1d0, FAIL|
+|0613_014106|git bisect bad 317460317a02a1af512697e6e964298dedd8a163|
+|0613_014106|Bisect PASS: find bad commit: 317460317a02a1af512697e6e964298dedd8a163 is the first bad commit
+commit 317460317a02a1af512697e6e964298dedd8a163
+Author: Alexei Starovoitov <ast@kernel.org>
+Date:   Thu Mar 7 17:07:59 2024 -0800
+
+    bpf: Introduce bpf_arena.
+    
+    Introduce bpf_arena, which is a sparse shared memory region between the bpf
+    program and user space.
+    
+    Use cases:
+    1. User space mmap-s bpf_arena and uses it as a traditional mmap-ed
+       anonymous region, like memcached or any key/value storage. The bpf
+       program implements an in-kernel accelerator. XDP prog can search for
+       a key in bpf_arena and return a value without going to user space.
+    2. The bpf program builds arbitrary data structures in bpf_arena (hash
+       tables, rb-trees, sparse arrays), while user space consumes it.
+    3. bpf_arena is a "heap" of memory from the bpf program's point of view.
+       The user space may mmap it, but bpf program will not convert pointers
+       to user base at run-time to improve bpf program speed.
+    
+    Initially, the kernel vm_area and user vma are not populated. User space
+    can fault in pages within the range. While servicing a page fault,
+    bpf_arena logic will insert a new page into the kernel and user vmas. The
+    bpf program can allocate pages from that region via
+    bpf_arena_alloc_pages(). This kernel function will insert pages into the
+    kernel vm_area. The subsequent fault-in from user space will populate that
+    page into the user vma. The BPF_F_SEGV_ON_FAULT flag at arena creation time
+    can be used to prevent fault-in from user space. In such a case, if a page
+    is not allocated by the bpf program and not present in the kernel vm_area,
+    the user process will segfault. This is useful for use cases 2 and 3 above.
+    
+    bpf_arena_alloc_pages() is similar to user space mmap(). It allocates pages
+    either at a specific address within the arena or allocates a range with the
+    maple tree. bpf_arena_free_pages() is analogous to munmap(), which frees
+    pages and removes the range from the kernel vm_area and from user process
+    vmas.
+    
+    bpf_arena can be used as a bpf program "heap" of up to 4GB. The speed of
+    bpf program is more important than ease of sharing with user space. This is
+    use case 3. In such a case, the BPF_F_NO_USER_CONV flag is recommended.
+    It will tell the verifier to treat the rX = bpf_arena_cast_user(rY)
+    instruction as a 32-bit move wX = wY, which will improve bpf prog
+    performance. Otherwise, bpf_arena_cast_user is translated by JIT to
+    conditionally add the upper 32 bits of user vm_start (if the pointer is not
+    NULL) to arena pointers before they are stored into memory. This way, user
+    space sees them as valid 64-bit pointers.
+    
+    Diff https://github.com/llvm/llvm-project/pull/84410 enables LLVM BPF
+    backend generate the bpf_addr_space_cast() instruction to cast pointers
+    between address_space(1) which is reserved for bpf_arena pointers and
+    default address space zero. All arena pointers in a bpf program written in
+    C language are tagged as __attribute__((address_space(1))). Hence, clang
+    provides helpful diagnostics when pointers cross address space. Libbpf and
+    the kernel support only address_space == 1. All other address space
+    identifiers are reserved.
+    
+    rX = bpf_addr_space_cast(rY, /* dst_as */ 1, /* src_as */ 0) tells the
+    verifier that rX->type = PTR_TO_ARENA. Any further operations on
+    PTR_TO_ARENA register have to be in the 32-bit domain. The verifier will
+    mark load/store through PTR_TO_ARENA with PROBE_MEM32. JIT will generate
+    them as kern_vm_start + 32bit_addr memory accesses. The behavior is similar
+    to copy_from_kernel_nofault() except that no address checks are necessary.
+    The address is guaranteed to be in the 4GB range. If the page is not
+    present, the destination register is zeroed on read, and the operation is
+    ignored on write.
+    
+    rX = bpf_addr_space_cast(rY, 0, 1) tells the verifier that rX->type =
+    unknown scalar. If arena->map_flags has BPF_F_NO_USER_CONV set, then the
+    verifier converts such cast instructions to mov32. Otherwise, JIT will emit
+    native code equivalent to:
+    rX = (u32)rY;
+    if (rY)
+      rX |= clear_lo32_bits(arena->user_vm_start); /* replace hi32 bits in rX */
+    
+    After such conversion, the pointer becomes a valid user pointer within
+    bpf_arena range. The user process can access data structures created in
+    bpf_arena without any additional computations. For example, a linked list
+    built by a bpf program can be walked natively by user space.
+    
+    Signed-off-by: Alexei Starovoitov <ast@kernel.org>
+    Signed-off-by: Andrii Nakryiko <andrii@kernel.org>
+    Reviewed-by: Barret Rhoden <brho@google.com>
+    Link: https://lore.kernel.org/bpf/20240308010812.89848-2-alexei.starovoitov@gmail.com
+
+ include/linux/bpf.h            |   7 +-
+ include/linux/bpf_types.h      |   1 +
+ include/uapi/linux/bpf.h       |  10 +
+ kernel/bpf/Makefile            |   3 +
+ kernel/bpf/arena.c             | 558 +++++++++++++++++++++++++++++++++++++++++
+ kernel/bpf/core.c              |  11 +
+ kernel/bpf/syscall.c           |  36 +++
+ kernel/bpf/verifier.c          |   1 +
+ tools/include/uapi/linux/bpf.h |  10 +
+ 9 files changed, 635 insertions(+), 2 deletions(-)
+ create mode 100644 kernel/bpf/arena.c|
+|0613_014106|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|0613_014106|cmd=git bisect log >> /var/www/html/bzimage/0613_011057_arena_vm_close/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [83a7eefedc9b56fe7bfeff13b6c7356688ffa670] Linux 6.10-rc3
+git bisect bad 83a7eefedc9b56fe7bfeff13b6c7356688ffa670
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [a09476668e3016ea4a7b0a7ebd02f44e0546c12c] Merge tag 'char-misc-6.1-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect good a09476668e3016ea4a7b0a7ebd02f44e0546c12c
+# good: [35494b0d61e44b517178aa1c6f5a69168b086940] Merge branch 'there-are-some-bugfix-for-the-hns3-ethernet-driver'
+git bisect good 35494b0d61e44b517178aa1c6f5a69168b086940
+# good: [ba5afb9a84df2e6b26a1b6389b98849cd16ea757] fs: rework listmount() implementation
+git bisect good ba5afb9a84df2e6b26a1b6389b98849cd16ea757
+# bad: [902861e34c401696ed9ad17a54c8790e7e8e3069] Merge tag 'mm-stable-2024-03-13-20-04' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect bad 902861e34c401696ed9ad17a54c8790e7e8e3069
+# good: [85badb2c008a460f8b4cf064e1dce7c0752bec1c] Merge branch 'bnxt_en-ntuple-filter-improvements'
+git bisect good 85badb2c008a460f8b4cf064e1dce7c0752bec1c
+# bad: [9187210eee7d87eea37b45ea93454a88681894a4] Merge tag 'net-next-6.9' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+git bisect bad 9187210eee7d87eea37b45ea93454a88681894a4
+# good: [508f34f2381eb84b2335abb970b940aefef50a19] Merge tag 'm68k-for-v6.9-tag1' of git://git.kernel.org/pub/scm/linux/kernel/git/geert/linux-m68k
+git bisect good 508f34f2381eb84b2335abb970b940aefef50a19
+# good: [a01c9fe32378636ae65bec8047b5de3fdb2ba5c8] Merge tag 'nfsd-6.9' of git://git.kernel.org/pub/scm/linux/kernel/git/cel/linux
+git bisect good a01c9fe32378636ae65bec8047b5de3fdb2ba5c8
+# good: [7a6d793e9ca8bc0c1d2f0aa0a02ec380d1124c74] Bluetooth: hci_h5: Add ability to allocate memory for private data
+git bisect good 7a6d793e9ca8bc0c1d2f0aa0a02ec380d1124c74
+# good: [2f901582f032bed47907a20f77fb44b3532b4762] Merge tag 'for-net-next-2024-03-08' of git://git.kernel.org/pub/scm/linux/kernel/git/bluetooth/bluetooth-next
+git bisect good 2f901582f032bed47907a20f77fb44b3532b4762
+# bad: [5f20e6ab1f65aaaaae248e6946d5cb6d039e7de8] Merge tag 'for-netdev' of https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next
+git bisect bad 5f20e6ab1f65aaaaae248e6946d5cb6d039e7de8
+# good: [fcac05daa7efcf96f8042bd06abd4da384ac3cd3] net: ipv6: exthdrs: get rid of ipv6_skb_net()
+git bisect good fcac05daa7efcf96f8042bd06abd4da384ac3cd3
+# good: [1576b07961971d4eeb0e269c7133e9a6d430daf8] bpftool: rename is_internal_mmapable_map into is_mmapable_map
+git bisect good 1576b07961971d4eeb0e269c7133e9a6d430daf8
+# bad: [2e7ba4f8fd1fa879b37db0b738c23ba2af8292ee] libbpf: Recognize __arena global variables.
+git bisect bad 2e7ba4f8fd1fa879b37db0b738c23ba2af8292ee
+# good: [365c2b32792e692bad6e3761ad19ac3f8f52c0fe] selftests/bpf: Add fexit and kretprobe triggering benchmarks
+git bisect good 365c2b32792e692bad6e3761ad19ac3f8f52c0fe
+# bad: [6082b6c328b5486da2b356eae94b8b83c98b5565] bpf: Recognize addr_space_cast instruction in the verifier.
+git bisect bad 6082b6c328b5486da2b356eae94b8b83c98b5565
+# bad: [667a86ad9b71d934c444eec193cf3508016f35c5] bpf: Disasm support for addr_space_cast instruction.
+git bisect bad 667a86ad9b71d934c444eec193cf3508016f35c5
+# bad: [317460317a02a1af512697e6e964298dedd8a163] bpf: Introduce bpf_arena.
+git bisect bad 317460317a02a1af512697e6e964298dedd8a163
+# first bad commit: [317460317a02a1af512697e6e964298dedd8a163] bpf: Introduce bpf_arena.
+|0613_014106|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 83a7eefedc9b56fe7bfeff13b6c7356688ffa670 -b 317460317a02a1af512697e6e964298dedd8a163 -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_83a7eefedc9b56fe7bfeff13b6c7356688ffa670_317460317a02a1af512697e6e964298dedd8a163_revert|
+|0613_014152|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0613_014152|FAIL|bzImage:/var/www/html/bzimage/bzImage_83a7eefedc9b56fe7bfeff13b6c7356688ffa670_317460317a02a1af512697e6e964298dedd8a163_revert does not exist:|
+|0613_014152|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0613_014152|ISSUE:c5b94d7bb0c45f13d514f5166845c9f2dce17a27  EMAIL status after check:Email_not_sent|
