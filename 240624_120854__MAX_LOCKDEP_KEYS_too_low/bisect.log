@@ -1,0 +1,347 @@
+|0624_120854|cmd=cd /root/internal-devel|
+|0624_120854|git log f2661062f16b2de5d7b6a5c42a9a5c96326b8454 check_result:commit f2661062f16b2de5d7b6a5c42a9a5c96326b8454|
+|0624_120854|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0624_120854|cmd=git checkout -f f2661062f16b2de5d7b6a5c42a9a5c96326b8454|
+|0624_120855|cmd=cd /root/internal-devel|
+|0624_120855||/var/www/html/bzimage/bzImage_f2661062f16b2de5d7b6a5c42a9a5c96326b8454| exist, no need make|
+|0624_120855|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_120855|Run /var/www/html/bzimage/bzImage_f2661062f16b2de5d7b6a5c42a9a5c96326b8454 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_120913|It takes 18 seconds to find login:test login: |
+|0624_120913|Boot 1 time: takes 18 seconds to boot up.|
+|0624_120913|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_120915|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_120917|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_120919|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_120919|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_121134|/var/www/html/bzimage/bzImage_f2661062f16b2de5d7b6a5c42a9a5c96326b8454 contained  MAX_LOCKDEP_KEYS too low!:[  157.974013] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_121134|Found time:157 in /var/www/html/bzimage/0624_120854__MAX_LOCKDEP_KEYS_too_low/f2661062f16b2de5d7b6a5c42a9a5c96326b8454_dmesg.log|
+|0624_121134|Logic: |<=25: +25|25-100 +180|>100 +1800| Set TIME:1957|
+|0624_121134|-END- commit f2661062f16b2de5d7b6a5c42a9a5c96326b8454 FAIL bad|
+|0624_121134|issue_folder alreayd exist:/var/www/html//syzkaller/2024_06_24/6e89ce80a10c14d6e832ef9b558bcd045825e05b|
+|0624_121134|cmd=cp -rf /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog /var/www/html//syzkaller/2024_06_24/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.c|
+|0624_121134|gcc -pthread /var/www/html//syzkaller/2024_06_24/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.c -o /var/www/html//syzkaller/2024_06_24/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro|
+|0624_121135|cmd=cp -rf /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/description /var/www/html//syzkaller/2024_06_24/6e89ce80a10c14d6e832ef9b558bcd045825e05b|
+|0624_121135|FAIL|cp /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/machineInfo0 /var/www/html/bzimage/0624_120854__MAX_LOCKDEP_KEYS_too_low/machineInfo0 failed!|
+|0624_121135|FAIL|cp /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/report0 /var/www/html/bzimage/0624_120854__MAX_LOCKDEP_KEYS_too_low/report0 failed!|
+|0624_121135|FAIL|cp /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/log0 /var/www/html/bzimage/0624_120854__MAX_LOCKDEP_KEYS_too_low/log0 failed!|
+|0624_121137|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0624_120854__MAX_LOCKDEP_KEYS_too_low/kconfig_origin:0|
+|0624_121137|cmd=cd /root/internal-devel|
+|0624_121137||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0624_121137|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_121137|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_121150|It takes 13 seconds to find login:test login: |
+|0624_121150|Boot 1 time: takes 13 seconds to boot up.|
+|0624_121150|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_121151|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_121152|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_121153|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_121154|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_124431|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_124431|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0624_124431|cmd=git checkout -f f2661062f16b2de5d7b6a5c42a9a5c96326b8454|
+|0624_124431|cmd=git bisect start|
+|0624_124431|cmd=git bisect bad f2661062f16b2de5d7b6a5c42a9a5c96326b8454|
+|0624_124432|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0624_124432|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0624_124545||/var/www/html/bzimage/bzImage_3002b7a31894cfa0e57080f7e0961b5fee788aa3| exist, no need make|
+|0624_124545|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_124545|Run /var/www/html/bzimage/bzImage_3002b7a31894cfa0e57080f7e0961b5fee788aa3 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_124600|It takes 15 seconds to find login:test login: |
+|0624_124600|Boot 1 time: takes 15 seconds to boot up.|
+|0624_124600|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_124601|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_124602|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_124604|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_124604|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_131841|/var/www/html/bzimage/bzImage_3002b7a31894cfa0e57080f7e0961b5fee788aa3 didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_131841|git bisect good 3002b7a31894cfa0e57080f7e0961b5fee788aa3|
+|0624_131904||/var/www/html/bzimage/bzImage_b96a3e9142fdf346b05b20e867b4f0dfca119e96| exist, no need make|
+|0624_131904|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_131904|Run /var/www/html/bzimage/bzImage_b96a3e9142fdf346b05b20e867b4f0dfca119e96 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_131918|It takes 14 seconds to find login:test login: |
+|0624_131918|Boot 1 time: takes 14 seconds to boot up.|
+|0624_131918|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_131919|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_131921|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_131923|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_131923|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_135200|/var/www/html/bzimage/bzImage_b96a3e9142fdf346b05b20e867b4f0dfca119e96 didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_135200|git bisect good b96a3e9142fdf346b05b20e867b4f0dfca119e96|
+|0624_135209||/var/www/html/bzimage/bzImage_cf65598d5909acf5e7b7dc9e21786e386356bc81| exist, no need make|
+|0624_135209|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_135209|Run /var/www/html/bzimage/bzImage_cf65598d5909acf5e7b7dc9e21786e386356bc81 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_135223|It takes 14 seconds to find login:test login: |
+|0624_135223|Boot 1 time: takes 14 seconds to boot up.|
+|0624_135223|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_135224|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_135226|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_135227|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_135228|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_142505|/var/www/html/bzimage/bzImage_cf65598d5909acf5e7b7dc9e21786e386356bc81 didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_142505|git bisect good cf65598d5909acf5e7b7dc9e21786e386356bc81|
+|0624_142509|nohup /root/bzimage_bisect/make_bz.sh -k /root/internal-devel -m 946593d1555921720fa674432e998a1b5931ddac -d /var/www/html/bzimage -o /tmp/kernel|
+|0624_145603|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_145603|Run /var/www/html/bzimage/bzImage_946593d1555921720fa674432e998a1b5931ddac with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_145622|It takes 19 seconds to find login:test login: |
+|0624_145622|Boot 1 time: takes 19 seconds to boot up.|
+|0624_145622|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_145624|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_145626|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_145628|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_145628|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_152906|/var/www/html/bzimage/bzImage_946593d1555921720fa674432e998a1b5931ddac contained  MAX_LOCKDEP_KEYS too low!:[  191.647831] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_152906|git bisect bad 946593d1555921720fa674432e998a1b5931ddac|
+|0624_152910||/var/www/html/bzimage/bzImage_75c2946db360e625f1447a37f47dbbb38b1dd478| exist, no need make|
+|0624_152910|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_152911|Run /var/www/html/bzimage/bzImage_75c2946db360e625f1447a37f47dbbb38b1dd478 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_152928|It takes 17 seconds to find login:test login: |
+|0624_152928|Boot 1 time: takes 17 seconds to boot up.|
+|0624_152928|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_152930|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_152931|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_152933|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_152934|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_160214|/var/www/html/bzimage/bzImage_75c2946db360e625f1447a37f47dbbb38b1dd478 contained  MAX_LOCKDEP_KEYS too low!:[  158.992786] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_160214|git bisect bad 75c2946db360e625f1447a37f47dbbb38b1dd478|
+|0624_160215||/var/www/html/bzimage/bzImage_ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7| exist, no need make|
+|0624_160215|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_160215|Run /var/www/html/bzimage/bzImage_ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_160233|It takes 17 seconds to find login:test login: |
+|0624_160233|Boot 1 time: takes 17 seconds to boot up.|
+|0624_160233|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_160235|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_160236|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_160238|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_160239|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_163518|/var/www/html/bzimage/bzImage_ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7 contained  MAX_LOCKDEP_KEYS too low!:[  174.754864] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_163518|git bisect bad ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7|
+|0624_163519||/var/www/html/bzimage/bzImage_296455ade1fdcf5f8f8c033201633b60946c589a| exist, no need make|
+|0624_163519|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_163519|Run /var/www/html/bzimage/bzImage_296455ade1fdcf5f8f8c033201633b60946c589a with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_163536|It takes 17 seconds to find login:test login: |
+|0624_163536|Boot 1 time: takes 17 seconds to boot up.|
+|0624_163536|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_163538|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_163540|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_163542|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_163542|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_170822|/var/www/html/bzimage/bzImage_296455ade1fdcf5f8f8c033201633b60946c589a contained  MAX_LOCKDEP_KEYS too low!:[  173.783095] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_170822|git bisect bad 296455ade1fdcf5f8f8c033201633b60946c589a|
+|0624_170823||/var/www/html/bzimage/bzImage_42bff4d0f9b9c8b669c5cef25c5116f41eb45c6b| exist, no need make|
+|0624_170823|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_170823|Run /var/www/html/bzimage/bzImage_42bff4d0f9b9c8b669c5cef25c5116f41eb45c6b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_170837|It takes 14 seconds to find login:test login: |
+|0624_170837|Boot 1 time: takes 14 seconds to boot up.|
+|0624_170837|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_170838|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_170840|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_170841|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_170842|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_174122|/var/www/html/bzimage/bzImage_42bff4d0f9b9c8b669c5cef25c5116f41eb45c6b didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_174122|git bisect good 42bff4d0f9b9c8b669c5cef25c5116f41eb45c6b|
+|0624_174122||/var/www/html/bzimage/bzImage_5d197e97fb106c09d3d013be341e5961fd70ec8a| exist, no need make|
+|0624_174122|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_174122|Run /var/www/html/bzimage/bzImage_5d197e97fb106c09d3d013be341e5961fd70ec8a with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_174138|It takes 16 seconds to find login:test login: |
+|0624_174138|Boot 1 time: takes 16 seconds to boot up.|
+|0624_174138|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_174140|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_174142|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_174144|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_174144|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_181425|/var/www/html/bzimage/bzImage_5d197e97fb106c09d3d013be341e5961fd70ec8a contained  MAX_LOCKDEP_KEYS too low!:[  168.335057] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_181425|git bisect bad 5d197e97fb106c09d3d013be341e5961fd70ec8a|
+|0624_181425||/var/www/html/bzimage/bzImage_1b1934dbbdcf9aa2d507932ff488cec47999cf3f| exist, no need make|
+|0624_181425|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_181425|Run /var/www/html/bzimage/bzImage_1b1934dbbdcf9aa2d507932ff488cec47999cf3f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_181443|It takes 18 seconds to find login:test login: |
+|0624_181443|Boot 1 time: takes 18 seconds to boot up.|
+|0624_181443|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_181445|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_181447|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_181449|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_181449|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_184730|/var/www/html/bzimage/bzImage_1b1934dbbdcf9aa2d507932ff488cec47999cf3f contained  MAX_LOCKDEP_KEYS too low!:[  176.175249] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_184730|git bisect bad 1b1934dbbdcf9aa2d507932ff488cec47999cf3f|
+|0624_184730||/var/www/html/bzimage/bzImage_0c6bc37255927cf2e2cfdd9dc9bd1eced9c166de| exist, no need make|
+|0624_184730|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_184730|Run /var/www/html/bzimage/bzImage_0c6bc37255927cf2e2cfdd9dc9bd1eced9c166de with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_184748|It takes 17 seconds to find login:test login: |
+|0624_184748|Boot 1 time: takes 17 seconds to boot up.|
+|0624_184748|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_184749|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_184751|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_184753|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_184754|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_192033|/var/www/html/bzimage/bzImage_0c6bc37255927cf2e2cfdd9dc9bd1eced9c166de contained  MAX_LOCKDEP_KEYS too low!:[  169.943746] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_192033|git bisect bad 0c6bc37255927cf2e2cfdd9dc9bd1eced9c166de|
+|0624_192033||/var/www/html/bzimage/bzImage_23a80d462c67406303df852d58b745b8618acc4a| exist, no need make|
+|0624_192033|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_192033|Run /var/www/html/bzimage/bzImage_23a80d462c67406303df852d58b745b8618acc4a with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_192048|It takes 15 seconds to find login:test login: |
+|0624_192048|Boot 1 time: takes 15 seconds to boot up.|
+|0624_192048|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_192050|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_192051|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_192052|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_192053|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_195333|/var/www/html/bzimage/bzImage_23a80d462c67406303df852d58b745b8618acc4a didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_195333|git bisect good 23a80d462c67406303df852d58b745b8618acc4a|
+|0624_195333||/var/www/html/bzimage/bzImage_7f5e47f785140c2d7948bee6fc387f939f68dbb8| exist, no need make|
+|0624_195333|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_195333|Run /var/www/html/bzimage/bzImage_7f5e47f785140c2d7948bee6fc387f939f68dbb8 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_195350|It takes 17 seconds to find login:test login: |
+|0624_195350|Boot 1 time: takes 17 seconds to boot up.|
+|0624_195350|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_195352|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_195354|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_195356|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_195356|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_202637|/var/www/html/bzimage/bzImage_7f5e47f785140c2d7948bee6fc387f939f68dbb8 contained  MAX_LOCKDEP_KEYS too low!:[  179.610446] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_202637|git bisect bad 7f5e47f785140c2d7948bee6fc387f939f68dbb8|
+|0624_202639||/var/www/html/bzimage/bzImage_11684134140bb708b6e6de969a060535630b1b53| exist, no need make|
+|0624_202639|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_202639|Run /var/www/html/bzimage/bzImage_11684134140bb708b6e6de969a060535630b1b53 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_202656|It takes 17 seconds to find login:test login: |
+|0624_202656|Boot 1 time: takes 17 seconds to boot up.|
+|0624_202656|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_202657|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_202659|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_202701|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_202701|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_205941|/var/www/html/bzimage/bzImage_11684134140bb708b6e6de969a060535630b1b53 contained  MAX_LOCKDEP_KEYS too low!:[  180.765771] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_205941|git bisect bad 11684134140bb708b6e6de969a060535630b1b53|
+|0624_205941||/var/www/html/bzimage/bzImage_4cccb6221cae6d020270606b9e52b1678fc8b71a| exist, no need make|
+|0624_205941|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_205941|Run /var/www/html/bzimage/bzImage_4cccb6221cae6d020270606b9e52b1678fc8b71a with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_210000|It takes 18 seconds to find login:test login: |
+|0624_210000|Boot 1 time: takes 18 seconds to boot up.|
+|0624_210000|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_210001|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_210003|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_210005|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_210006|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_213245|/var/www/html/bzimage/bzImage_4cccb6221cae6d020270606b9e52b1678fc8b71a contained  MAX_LOCKDEP_KEYS too low!:[  177.099840] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_213246|git bisect bad 4cccb6221cae6d020270606b9e52b1678fc8b71a|
+|0624_213246||/var/www/html/bzimage/bzImage_aaa2c9a97c22af5bf011f6dd8e0538219b45af88| exist, no need make|
+|0624_213246|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_213246|Run /var/www/html/bzimage/bzImage_aaa2c9a97c22af5bf011f6dd8e0538219b45af88 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_213300|It takes 14 seconds to find login:test login: |
+|0624_213300|Boot 1 time: takes 14 seconds to boot up.|
+|0624_213300|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_213301|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_213302|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_213304|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_213305|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_220545|/var/www/html/bzimage/bzImage_aaa2c9a97c22af5bf011f6dd8e0538219b45af88 didn't contain  MAX_LOCKDEP_KEYS too low!: in dmesg, pass|
+|0624_220545|git bisect good aaa2c9a97c22af5bf011f6dd8e0538219b45af88|
+|0624_220545||/var/www/html/bzimage/bzImage_efbd6398353315b7018e6943e41fee9ec35e875f| exist, no need make|
+|0624_220545|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_220545|Run /var/www/html/bzimage/bzImage_efbd6398353315b7018e6943e41fee9ec35e875f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_220602|It takes 17 seconds to find login:test login: |
+|0624_220602|Boot 1 time: takes 17 seconds to boot up.|
+|0624_220602|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_220604|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_220606|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_220607|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_220608|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_223848|/var/www/html/bzimage/bzImage_efbd6398353315b7018e6943e41fee9ec35e875f contained  MAX_LOCKDEP_KEYS too low!:[  172.905624] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_223848|git bisect bad efbd6398353315b7018e6943e41fee9ec35e875f|
+|0624_223848||/var/www/html/bzimage/bzImage_cc478e0b6bdffd20561e1a07941a65f6c8962cab| exist, no need make|
+|0624_223848|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0624_223848|Run /var/www/html/bzimage/bzImage_cc478e0b6bdffd20561e1a07941a65f6c8962cab with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0624_223906|It takes 17 seconds to find login:test login: |
+|0624_223906|Boot 1 time: takes 17 seconds to boot up.|
+|0624_223906|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0624_223908|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0624_223909|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/6e89ce80a10c14d6e832ef9b558bcd045825e05b/repro.cprog root@localhost:/root/repro.c|
+|0624_223911|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0624_223912|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0624_231151|/var/www/html/bzimage/bzImage_cc478e0b6bdffd20561e1a07941a65f6c8962cab contained  MAX_LOCKDEP_KEYS too low!:[  179.706044] BUG: MAX_LOCKDEP_KEYS too low!, FAIL|
+|0624_231152|git bisect bad cc478e0b6bdffd20561e1a07941a65f6c8962cab|
+|0624_231152|Bisect PASS: find bad commit: cc478e0b6bdffd20561e1a07941a65f6c8962cab is the first bad commit
+commit cc478e0b6bdffd20561e1a07941a65f6c8962cab
+Author: Andrey Konovalov <andreyknvl@gmail.com>
+Date:   Tue Jan 9 23:12:34 2024 +0100
+
+    kasan: avoid resetting aux_lock
+    
+    With commit 63b85ac56a64 ("kasan: stop leaking stack trace handles"),
+    KASAN zeroes out alloc meta when an object is freed.  The zeroed out data
+    purposefully includes alloc and auxiliary stack traces but also
+    accidentally includes aux_lock.
+    
+    As aux_lock is only initialized for each object slot during slab creation,
+    when the freed slot is reallocated, saving auxiliary stack traces for the
+    new object leads to lockdep reports when taking the zeroed out aux_lock.
+    
+    Arguably, we could reinitialize aux_lock when the object is reallocated,
+    but a simpler solution is to avoid zeroing out aux_lock when an object
+    gets freed.
+    
+    Link: https://lkml.kernel.org/r/20240109221234.90929-1-andrey.konovalov@linux.dev
+    Fixes: 63b85ac56a64 ("kasan: stop leaking stack trace handles")
+    Signed-off-by: Andrey Konovalov <andreyknvl@gmail.com>
+    Reported-by: Paul E. McKenney <paulmck@kernel.org>
+    Closes: https://lore.kernel.org/linux-next/5cc0f83c-e1d6-45c5-be89-9b86746fe731@paulmck-laptop/
+    Reviewed-by: Marco Elver <elver@google.com>
+    Tested-by: Paul E. McKenney <paulmck@kernel.org>
+    Cc: Alexander Potapenko <glider@google.com>
+    Cc: Andrey Ryabinin <ryabinin.a.a@gmail.com>
+    Cc: Dmitry Vyukov <dvyukov@google.com>
+    Cc: Liam R. Howlett <Liam.Howlett@oracle.com>
+    Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+
+ mm/kasan/generic.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)|
+|0624_231152|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|0624_231152|cmd=git bisect log >> /var/www/html/bzimage/0624_120854__MAX_LOCKDEP_KEYS_too_low/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [f2661062f16b2de5d7b6a5c42a9a5c96326b8454] Linux 6.10-rc5
+git bisect bad f2661062f16b2de5d7b6a5c42a9a5c96326b8454
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [3002b7a31894cfa0e57080f7e0961b5fee788aa3] Merge tag 'staging-6.1-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging
+git bisect good 3002b7a31894cfa0e57080f7e0961b5fee788aa3
+# good: [b96a3e9142fdf346b05b20e867b4f0dfca119e96] Merge tag 'mm-stable-2023-08-28-18-26' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect good b96a3e9142fdf346b05b20e867b4f0dfca119e96
+# good: [cf65598d5909acf5e7b7dc9e21786e386356bc81] Merge tag 'drm-next-2024-01-10' of git://anongit.freedesktop.org/drm/drm
+git bisect good cf65598d5909acf5e7b7dc9e21786e386356bc81
+# bad: [946593d1555921720fa674432e998a1b5931ddac] Revert "firewire: Kill unnecessary buf check in device_attribute.show"
+git bisect bad 946593d1555921720fa674432e998a1b5931ddac
+# bad: [75c2946db360e625f1447a37f47dbbb38b1dd478] Merge tag 'wireless-next-2024-03-08' of git://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+git bisect bad 75c2946db360e625f1447a37f47dbbb38b1dd478
+# bad: [ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7] Merge tag 'net-6.8-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad ecb1b8288dc7ccbdcb3b9df005fa1c0e0c0388a7
+# bad: [296455ade1fdcf5f8f8c033201633b60946c589a] Merge tag 'char-misc-6.8-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+git bisect bad 296455ade1fdcf5f8f8c033201633b60946c589a
+# good: [42bff4d0f9b9c8b669c5cef25c5116f41eb45c6b] Merge tag 'pwm/for-6.8-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/thierry.reding/linux-pwm
+git bisect good 42bff4d0f9b9c8b669c5cef25c5116f41eb45c6b
+# bad: [5d197e97fb106c09d3d013be341e5961fd70ec8a] Merge tag 'hsi-for-6.8' of git://git.kernel.org/pub/scm/linux/kernel/git/sre/linux-hsi
+git bisect bad 5d197e97fb106c09d3d013be341e5961fd70ec8a
+# bad: [1b1934dbbdcf9aa2d507932ff488cec47999cf3f] Merge tag 'docs-6.8-2' of git://git.lwn.net/linux
+git bisect bad 1b1934dbbdcf9aa2d507932ff488cec47999cf3f
+# bad: [0c6bc37255927cf2e2cfdd9dc9bd1eced9c166de] Merge tag 'ubifs-for-linus-6.8-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rw/ubifs
+git bisect bad 0c6bc37255927cf2e2cfdd9dc9bd1eced9c166de
+# good: [23a80d462c67406303df852d58b745b8618acc4a] Merge tag 'rcu.release.v6.8' of https://github.com/neeraju/linux
+git bisect good 23a80d462c67406303df852d58b745b8618acc4a
+# bad: [7f5e47f785140c2d7948bee6fc387f939f68dbb8] Merge tag 'mm-hotfixes-stable-2024-01-12-16-52' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect bad 7f5e47f785140c2d7948bee6fc387f939f68dbb8
+# bad: [11684134140bb708b6e6de969a060535630b1b53] mm/memory_hotplug: fix memmap_on_memory sysfs value retrieval
+git bisect bad 11684134140bb708b6e6de969a060535630b1b53
+# bad: [4cccb6221cae6d020270606b9e52b1678fc8b71a] fs/proc/task_mmu: move mmu notification mechanism inside mm lock
+git bisect bad 4cccb6221cae6d020270606b9e52b1678fc8b71a
+# good: [aaa2c9a97c22af5bf011f6dd8e0538219b45af88] lib/Kconfig.debug: disable CONFIG_DEBUG_INFO_BTF for Hexagon
+git bisect good aaa2c9a97c22af5bf011f6dd8e0538219b45af88
+# bad: [efbd6398353315b7018e6943e41fee9ec35e875f] scripts/decode_stacktrace.sh: optionally use LLVM utilities
+git bisect bad efbd6398353315b7018e6943e41fee9ec35e875f
+# bad: [cc478e0b6bdffd20561e1a07941a65f6c8962cab] kasan: avoid resetting aux_lock
+git bisect bad cc478e0b6bdffd20561e1a07941a65f6c8962cab
+# first bad commit: [cc478e0b6bdffd20561e1a07941a65f6c8962cab] kasan: avoid resetting aux_lock
+|0624_231152|nohup /root/bzimage_bisect/make_bz.sh -k /root/internal-devel -m f2661062f16b2de5d7b6a5c42a9a5c96326b8454 -b cc478e0b6bdffd20561e1a07941a65f6c8962cab -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_f2661062f16b2de5d7b6a5c42a9a5c96326b8454_cc478e0b6bdffd20561e1a07941a65f6c8962cab_revert|
+|0624_231240|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0624_231240|FAIL|bzImage:/var/www/html/bzimage/bzImage_f2661062f16b2de5d7b6a5c42a9a5c96326b8454_cc478e0b6bdffd20561e1a07941a65f6c8962cab_revert does not exist:|
+|0624_231240|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0624_231240|ISSUE:6e89ce80a10c14d6e832ef9b558bcd045825e05b  EMAIL status after check:Email_not_sent|
