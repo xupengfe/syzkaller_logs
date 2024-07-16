@@ -1,0 +1,752 @@
+|0715_174449|cmd=cd /root/linux-next|
+|0715_174449|git log 91e3b24eb7d297d9d99030800ed96944b8652eaf check_result:commit 91e3b24eb7d297d9d99030800ed96944b8652eaf|
+|0715_174449|git log 0c3836482481200ead7b416ca80c68a29cfdaabd check_result:commit 0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0715_174449|cmd=git checkout -f 91e3b24eb7d297d9d99030800ed96944b8652eaf|
+|0715_174451|cmd=cd /root/linux-next|
+|0715_174451||/var/www/html/bzimage/bzImage_91e3b24eb7d297d9d99030800ed96944b8652eaf| exist, no need make|
+|0715_174451|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_174502|Run /var/www/html/bzimage/bzImage_91e3b24eb7d297d9d99030800ed96944b8652eaf with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_174526|It takes 24 seconds to find login:test login: |
+|0715_174526|Boot 1 time: takes 24 seconds to boot up.|
+|0715_174526|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_174527|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_174529|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_174531|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_174532|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_174542|/var/www/html/bzimage/bzImage_91e3b24eb7d297d9d99030800ed96944b8652eaf contained alloc_workqueue:[   30.329627]  ? alloc_workqueue+0x920/0x1940
+[   30.329813]  alloc_workqueue+0x9b0/0x1940
+[   30.329847]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.383808]  ? alloc_workqueue+0x920/0x1940
+[   30.383925]  alloc_workqueue+0x9b0/0x1940
+[   30.383946]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.440317]  ? alloc_workqueue+0x920/0x1940
+[   30.440503]  alloc_workqueue+0x9b0/0x1940
+[   30.440536]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.502771]  ? alloc_workqueue+0x920/0x1940
+[   30.502898]  alloc_workqueue+0x9b0/0x1940
+[   30.502921]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.550813]  ? alloc_workqueue+0x920/0x1940
+[   30.550945]  alloc_workqueue+0x9b0/0x1940
+[   30.550969]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.624222]  ? alloc_workqueue+0x920/0x1940
+[   30.624410]  alloc_workqueue+0x9b0/0x1940
+[   30.624444]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.720200]  ? alloc_workqueue+0x920/0x1940
+[   30.720387]  alloc_workqueue+0x9b0/0x1940
+[   30.720421]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.806678]  ? alloc_workqueue+0x920/0x1940
+[   30.806872]  alloc_workqueue+0x9b0/0x1940
+[   30.806906]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.898222]  ? alloc_workqueue+0x920/0x1940
+[   30.898479]  alloc_workqueue+0x9b0/0x1940
+[   30.898512]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.992998]  ? alloc_workqueue+0x920/0x1940
+[   30.993124]  alloc_workqueue+0x9b0/0x1940
+[   30.993147]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.051432]  ? alloc_workqueue+0x920/0x1940
+[   31.051636]  alloc_workqueue+0x9b0/0x1940
+[   31.051672]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.133912]  ? alloc_workqueue+0x920/0x1940
+[   31.134109]  alloc_workqueue+0x9b0/0x1940
+[   31.134144]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.225157]  ? alloc_workqueue+0x920/0x1940
+[   31.225363]  alloc_workqueue+0x9b0/0x1940
+[   31.225399]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.338724]  ? alloc_workqueue+0x920/0x1940
+[   31.338923]  alloc_workqueue+0x9b0/0x1940
+[   31.338960]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.429036]  ? alloc_workqueue+0x920/0x1940
+[   31.429244]  alloc_workqueue+0x9b0/0x1940
+[   31.429281]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.525651]  ? alloc_workqueue+0x920/0x1940
+[   31.525871]  alloc_workqueue+0x9b0/0x1940
+[   31.525907]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.636619]  ? alloc_workqueue+0x920/0x1940
+[   31.636820]  alloc_workqueue+0x9b0/0x1940
+[   31.636856]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.721552]  ? alloc_workqueue+0x920/0x1940
+[   31.721766]  alloc_workqueue+0x9b0/0x1940
+[   31.721803]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.814239]  ? alloc_workqueue+0x920/0x1940
+[   31.814523]  alloc_workqueue+0x9b0/0x1940
+[   31.814560]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.910967]  ? alloc_workqueue+0x920/0x1940
+[   31.911179]  alloc_workqueue+0x9b0/0x1940
+[   31.911218]  ? __pfx_alloc_workqueue+0x10/0x10
+[   31.979915]  ? alloc_workqueue+0x920/0x1940
+[   31.980076]  alloc_workqueue+0x9b0/0x1940
+[   31.980102]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.075721]  ? alloc_workqueue+0x920/0x1940
+[   32.075926]  alloc_workqueue+0x9b0/0x1940
+[   32.075963]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.168615]  ? alloc_workqueue+0x920/0x1940
+[   32.168823]  alloc_workqueue+0x9b0/0x1940
+[   32.168860]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.270886]  ? alloc_workqueue+0x920/0x1940
+[   32.271094]  alloc_workqueue+0x9b0/0x1940
+[   32.271131]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.375553]  ? alloc_workqueue+0x920/0x1940
+[   32.375759]  alloc_workqueue+0x9b0/0x1940
+[   32.375797]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.452286]  ? alloc_workqueue+0x920/0x1940
+[   32.452428]  alloc_workqueue+0x9b0/0x1940
+[   32.452454]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.515873]  ? alloc_workqueue+0x920/0x1940
+[   32.516008]  alloc_workqueue+0x9b0/0x1940
+[   32.516033]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.598714]  ? alloc_workqueue+0x920/0x1940
+[   32.598937]  alloc_workqueue+0x9b0/0x1940
+[   32.598975]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.701081]  ? alloc_workqueue+0x920/0x1940
+[   32.701217]  alloc_workqueue+0x9b0/0x1940
+[   32.701242]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.771527]  ? alloc_workqueue+0x920/0x1940
+[   32.771734]  alloc_workqueue+0x9b0/0x1940
+[   32.771771]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.857918]  ? alloc_workqueue+0x920/0x1940
+[   32.858060]  alloc_workqueue+0x9b0/0x1940
+[   32.858086]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.921246]  ? alloc_workqueue+0x920/0x1940
+[   32.921451]  alloc_workqueue+0x9b0/0x1940
+[   32.921487]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.996183]  ? alloc_workqueue+0x920/0x1940
+[   32.996389]  alloc_workqueue+0x9b0/0x1940
+[   32.996428]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.099936]  ? alloc_workqueue+0x920/0x1940
+[   33.100163]  alloc_workqueue+0x9b0/0x1940
+[   33.100202]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.201587]  ? alloc_workqueue+0x920/0x1940
+[   33.201814]  alloc_workqueue+0x9b0/0x1940
+[   33.201851]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.293838]  ? alloc_workqueue+0x920/0x1940
+[   33.294057]  alloc_workqueue+0x9b0/0x1940
+[   33.294096]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.400295]  ? alloc_workqueue+0x920/0x1940
+[   33.400652]  alloc_workqueue+0x9b0/0x1940
+[   33.400691]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.498584]  ? alloc_workqueue+0x920/0x1940
+[   33.498796]  alloc_workqueue+0x9b0/0x1940
+[   33.498834]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.582420]  ? alloc_workqueue+0x920/0x1940
+[   33.582562]  alloc_workqueue+0x9b0/0x1940
+[   33.582588]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.661584]  ? alloc_workqueue+0x920/0x1940
+[   33.661772]  alloc_workqueue+0x9b0/0x1940
+[   33.661802]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.743886]  ? alloc_workqueue+0x920/0x1940
+[   33.744096]  alloc_workqueue+0x9b0/0x1940
+[   33.744134]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.833014]  ? alloc_workqueue+0x920/0x1940
+[   33.833232]  alloc_workqueue+0x9b0/0x1940
+[   33.833270]  ? __pfx_alloc_workqueue+0x10/0x10
+[   33.928870]  ? alloc_workqueue+0x920/0x1940
+[   33.929084]  alloc_workqueue+0x9b0/0x1940
+[   33.929123]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.037998]  ? alloc_workqueue+0x920/0x1940
+[   34.038211]  alloc_workqueue+0x9b0/0x1940
+[   34.038249]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.129842]  ? alloc_workqueue+0x920/0x1940
+[   34.130053]  alloc_workqueue+0x9b0/0x1940
+[   34.130091]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.223839]  ? alloc_workqueue+0x920/0x1940
+[   34.223993]  alloc_workqueue+0x9b0/0x1940
+[   34.224024]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.291956]  ? alloc_workqueue+0x920/0x1940
+[   34.292099]  alloc_workqueue+0x9b0/0x1940
+[   34.292144]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.374679]  ? alloc_workqueue+0x920/0x1940
+[   34.374891]  alloc_workqueue+0x9b0/0x1940
+[   34.374928]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.459816]  ? alloc_workqueue+0x920/0x1940
+[   34.459980]  alloc_workqueue+0x9b0/0x1940
+[   34.460006]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.524197]  ? alloc_workqueue+0x920/0x1940
+[   34.524341]  alloc_workqueue+0x9b0/0x1940
+[   34.524366]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.597423]  ? alloc_workqueue+0x920/0x1940
+[   34.597568]  alloc_workqueue+0x9b0/0x1940
+[   34.597594]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.668005]  ? alloc_workqueue+0x920/0x1940
+[   34.668148]  alloc_workqueue+0x9b0/0x1940
+[   34.668175]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.735232]  ? alloc_workqueue+0x920/0x1940
+[   34.735443]  alloc_workqueue+0x9b0/0x1940
+[   34.735480]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.819715]  ? alloc_workqueue+0x920/0x1940
+[   34.819857]  alloc_workqueue+0x9b0/0x1940
+[   34.819883]  ? __pfx_alloc_workqueue+0x10/0x10
+[   34.919804]  ? alloc_workqueue+0x920/0x1940
+[   34.920013]  alloc_workqueue+0x9b0/0x1940
+[   34.920051]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.011378]  ? alloc_workqueue+0x920/0x1940
+[   35.011590]  alloc_workqueue+0x9b0/0x1940
+[   35.011629]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.098213]  ? alloc_workqueue+0x920/0x1940
+[   35.098666]  alloc_workqueue+0x9b0/0x1940
+[   35.098705]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.191709]  ? alloc_workqueue+0x920/0x1940
+[   35.191919]  alloc_workqueue+0x9b0/0x1940
+[   35.191957]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.280037]  ? alloc_workqueue+0x920/0x1940
+[   35.280247]  alloc_workqueue+0x9b0/0x1940
+[   35.280285]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.376711]  ? alloc_workqueue+0x920/0x1940
+[   35.376921]  alloc_workqueue+0x9b0/0x1940
+[   35.376958]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.472534]  ? alloc_workqueue+0x920/0x1940
+[   35.472700]  alloc_workqueue+0x9b0/0x1940
+[   35.472727]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.553361]  ? alloc_workqueue+0x920/0x1940
+[   35.553569]  alloc_workqueue+0x9b0/0x1940
+[   35.553606]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.641887]  ? alloc_workqueue+0x920/0x1940
+[   35.642094]  alloc_workqueue+0x9b0/0x1940
+[   35.642132]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.730808]  ? alloc_workqueue+0x920/0x1940
+[   35.731015]  alloc_workqueue+0x9b0/0x1940
+[   35.731052]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.831604]  ? alloc_workqueue+0x920/0x1940
+[   35.831768]  alloc_workqueue+0x9b0/0x1940
+[   35.831794]  ? __pfx_alloc_workqueue+0x10/0x10
+[   35.924738]  ? alloc_workqueue+0x920/0x1940
+[   35.924951]  alloc_workqueue+0x9b0/0x1940
+[   35.924989]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.012923]  ? alloc_workqueue+0x920/0x1940
+[   36.013134]  alloc_workqueue+0x9b0/0x1940
+[   36.013171]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.104290]  ? alloc_workqueue+0x920/0x1940
+[   36.104499]  alloc_workqueue+0x9b0/0x1940
+[   36.104536]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.201710]  ? alloc_workqueue+0x920/0x1940
+[   36.201941]  alloc_workqueue+0x9b0/0x1940
+[   36.201979]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.265123]  ? alloc_workqueue+0x920/0x1940
+[   36.265263]  alloc_workqueue+0x9b0/0x1940
+[   36.265289]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.330471]  ? alloc_workqueue+0x920/0x1940
+[   36.330614]  alloc_workqueue+0x9b0/0x1940
+[   36.330642]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.388143]  ? alloc_workqueue+0x920/0x1940
+[   36.388286]  alloc_workqueue+0x9b0/0x1940
+[   36.388330]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.446581]  ? alloc_workqueue+0x920/0x1940
+[   36.446736]  alloc_workqueue+0x9b0/0x1940
+[   36.446761]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.509842]  ? alloc_workqueue+0x920/0x1940
+[   36.510061]  alloc_workqueue+0x9b0/0x1940
+[   36.510100]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.609814]  ? alloc_workqueue+0x920/0x1940
+[   36.610021]  alloc_workqueue+0x9b0/0x1940
+[   36.610058]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.708701]  ? alloc_workqueue+0x920/0x1940
+[   36.708911]  alloc_workqueue+0x9b0/0x1940
+[   36.708946]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.834120]  ? alloc_workqueue+0x920/0x1940
+[   36.834385]  alloc_workqueue+0x9b0/0x1940
+[   36.834424]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.921990]  ? alloc_workqueue+0x920/0x1940
+[   36.922141]  alloc_workqueue+0x9b0/0x1940
+[   36.922169]  ? __pfx_alloc_workqueue+0x10/0x10
+[   36.982880]  ? alloc_workqueue+0x920/0x1940
+[   36.983040]  alloc_workqueue+0x9b0/0x1940
+[   36.983067]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.051631]  ? alloc_workqueue+0x920/0x1940
+[   37.051774]  alloc_workqueue+0x9b0/0x1940
+[   37.051800]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.128677]  ? alloc_workqueue+0x920/0x1940
+[   37.128819]  alloc_workqueue+0x9b0/0x1940
+[   37.128845]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.238144]  ? alloc_workqueue+0x920/0x1940
+[   37.238418]  alloc_workqueue+0x9b0/0x1940
+[   37.238455]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.328177]  ? alloc_workqueue+0x920/0x1940
+[   37.328379]  alloc_workqueue+0x9b0/0x1940
+[   37.328414]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.427855]  ? alloc_workqueue+0x920/0x1940
+[   37.428054]  alloc_workqueue+0x9b0/0x1940
+[   37.428089]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.520906]  ? alloc_workqueue+0x920/0x1940
+[   37.521104]  alloc_workqueue+0x9b0/0x1940
+[   37.521139]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.616588]  ? alloc_workqueue+0x920/0x1940
+[   37.616791]  alloc_workqueue+0x9b0/0x1940
+[   37.616827]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.718693]  ? alloc_workqueue+0x920/0x1940
+[   37.718894]  alloc_workqueue+0x9b0/0x1940
+[   37.718930]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.803905]  ? alloc_workqueue+0x920/0x1940
+[   37.804134]  alloc_workqueue+0x9b0/0x1940
+[   37.804171]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.887947]  ? alloc_workqueue+0x920/0x1940
+[   37.888148]  alloc_workqueue+0x9b0/0x1940
+[   37.888183]  ? __pfx_alloc_workqueue+0x10/0x10
+[   37.970909]  ? alloc_workqueue+0x920/0x1940
+[   37.971106]  alloc_workqueue+0x9b0/0x1940
+[   37.971142]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.064898]  ? alloc_workqueue+0x920/0x1940
+[   38.065093]  alloc_workqueue+0x9b0/0x1940
+[   38.065128]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.160697]  ? alloc_workqueue+0x920/0x1940
+[   38.160910]  alloc_workqueue+0x9b0/0x1940
+[   38.160948]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.272670]  ? alloc_workqueue+0x920/0x1940
+[   38.272872]  alloc_workqueue+0x9b0/0x1940
+[   38.272907]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.363842]  ? alloc_workqueue+0x920/0x1940
+[   38.364040]  alloc_workqueue+0x9b0/0x1940
+[   38.364075]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.450895]  ? alloc_workqueue+0x920/0x1940
+[   38.451369]  alloc_workqueue+0x9b0/0x1940
+[   38.451404]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.535359]  ? alloc_workqueue+0x920/0x1940
+[   38.535563]  alloc_workqueue+0x9b0/0x1940
+[   38.535599]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.623666]  ? alloc_workqueue+0x920/0x1940
+[   38.623875]  alloc_workqueue+0x9b0/0x1940
+[   38.623911]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.708505]  ? alloc_workqueue+0x920/0x1940
+[   38.708710]  alloc_workqueue+0x9b0/0x1940
+[   38.708746]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.807079]  ? alloc_workqueue+0x920/0x1940
+[   38.807281]  alloc_workqueue+0x9b0/0x1940
+[   38.807319]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.891693]  ? alloc_workqueue+0x920/0x1940
+[   38.891893]  alloc_workqueue+0x9b0/0x1940
+[   38.891928]  ? __pfx_alloc_workqueue+0x10/0x10
+[   38.994918]  ? alloc_workqueue+0x920/0x1940
+[   38.995123]  alloc_workqueue+0x9b0/0x1940
+[   38.995159]  ? __pfx_alloc_workqueue+0x10/0x10
+[   39.081673]  ? alloc_workqueue+0x920/0x1940
+[   39.081896]  alloc_workqueue+0x9b0/0x1940
+[   39.081931]  ? __pfx_alloc_workqueue+0x10/0x10, FAIL|
+|0715_174542|Found time:30 in /var/www/html/bzimage/0715_174449_alloc_workqueue/91e3b24eb7d297d9d99030800ed96944b8652eaf_dmesg.log|
+|0715_174542|Logic: |<=25: +25|25-100 +180|>100 +1800| Set TIME:210|
+|0715_174542|-END- commit 91e3b24eb7d297d9d99030800ed96944b8652eaf FAIL bad|
+|0715_174542|cmd=rm -rf /var/www/html//syzkaller/2024_07_15/e6328edb1d91b5af561439aded6a7d4cb671a90c|
+|0715_174542|cmd=mkdir -p /var/www/html//syzkaller/2024_07_15/e6328edb1d91b5af561439aded6a7d4cb671a90c|
+|0715_174542|cmd=cp -rf /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog /var/www/html//syzkaller/2024_07_15/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.c|
+|0715_174542|gcc -pthread /var/www/html//syzkaller/2024_07_15/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.c -o /var/www/html//syzkaller/2024_07_15/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro|
+|0715_174542|cmd=cp -rf /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/description /var/www/html//syzkaller/2024_07_15/e6328edb1d91b5af561439aded6a7d4cb671a90c|
+|0715_174542|cp -rf /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/mount_* /var/www/html/bzimage/0715_174449_alloc_workqueue/|
+|0715_174544|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0715_174449_alloc_workqueue/kconfig_origin:0|
+|0715_174544|cmd=cd /root/linux-next|
+|0715_174544|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 0c3836482481200ead7b416ca80c68a29cfdaabd -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_183256|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_183321|Run /var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_183347|It takes 26 seconds to find login:test login: |
+|0715_183347|Boot 1 time: takes 26 seconds to boot up.|
+|0715_183347|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_183349|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_183351|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_183353|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_183353|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_183724|/var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd didn't contain alloc_workqueue: in dmesg, pass|
+|0715_183724|Start commit 0c3836482481200ead7b416ca80c68a29cfdaabd PASS good|
+|0715_183724|cmd=git checkout -f 91e3b24eb7d297d9d99030800ed96944b8652eaf|
+|0715_183725|cmd=git bisect start|
+|0715_183725|cmd=git bisect bad 91e3b24eb7d297d9d99030800ed96944b8652eaf|
+|0715_183725|Bisect first start commit:0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0715_183725|git bisect good 0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0715_183732|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m ab9898cee18772bcbdf052cd1d5de5977f87234d -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_192434|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_192500|Run /var/www/html/bzimage/bzImage_ab9898cee18772bcbdf052cd1d5de5977f87234d with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_192527|It takes 27 seconds to find login:test login: |
+|0715_192527|Boot 1 time: takes 27 seconds to boot up.|
+|0715_192527|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_192529|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_192531|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_192532|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_192533|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_192903|/var/www/html/bzimage/bzImage_ab9898cee18772bcbdf052cd1d5de5977f87234d didn't contain alloc_workqueue: in dmesg, pass|
+|0715_192903|git bisect good ab9898cee18772bcbdf052cd1d5de5977f87234d|
+|0715_192907|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_201647|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_201712|Run /var/www/html/bzimage/bzImage_4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_201732|It takes 20 seconds to find login:test login: |
+|0715_201732|Boot 1 time: takes 20 seconds to boot up.|
+|0715_201732|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_201733|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_201735|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_201736|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_201737|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_202107|/var/www/html/bzimage/bzImage_4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae didn't contain alloc_workqueue: in dmesg, pass|
+|0715_202107|git bisect good 4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae|
+|0715_202109|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m e940d14bb80a145dc4c5b8548d2ee578bdfd890b -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_210616|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_210643|Run /var/www/html/bzimage/bzImage_e940d14bb80a145dc4c5b8548d2ee578bdfd890b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_210705|It takes 22 seconds to find login:test login: |
+|0715_210705|Boot 1 time: takes 22 seconds to boot up.|
+|0715_210705|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_210707|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_210708|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_210710|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_210711|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_211041|/var/www/html/bzimage/bzImage_e940d14bb80a145dc4c5b8548d2ee578bdfd890b contained alloc_workqueue:[   28.524945]  ? alloc_workqueue+0x900/0x1940
+[   28.525089]  alloc_workqueue+0x9b0/0x1940
+[   28.525116]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.564323]  ? alloc_workqueue+0x900/0x1940
+[   28.564469]  alloc_workqueue+0x9b0/0x1940
+[   28.564507]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.606110]  ? alloc_workqueue+0x900/0x1940
+[   28.606255]  alloc_workqueue+0x9b0/0x1940
+[   28.606282]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.644211]  ? alloc_workqueue+0x900/0x1940
+[   28.644354]  alloc_workqueue+0x9b0/0x1940
+[   28.644381]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.688088]  ? alloc_workqueue+0x900/0x1940
+[   28.688293]  alloc_workqueue+0x9b0/0x1940
+[   28.688330]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.753868]  ? alloc_workqueue+0x900/0x1940
+[   28.754026]  alloc_workqueue+0x9b0/0x1940
+[   28.754054]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.813588]  ? alloc_workqueue+0x900/0x1940
+[   28.813733]  alloc_workqueue+0x9b0/0x1940
+[   28.813760]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.874518]  ? alloc_workqueue+0x900/0x1940
+[   28.874724]  alloc_workqueue+0x9b0/0x1940
+[   28.874762]  ? __pfx_alloc_workqueue+0x10/0x10
+[   28.939037]  ? alloc_workqueue+0x900/0x1940
+[   28.939243]  alloc_workqueue+0x9b0/0x1940
+[   28.939286]  ? __pfx_alloc_workqueue+0x10/0x10, FAIL|
+|0715_211041|git bisect bad e940d14bb80a145dc4c5b8548d2ee578bdfd890b|
+|0715_211042|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 52bebd476960601253d1d728b549ee65107d40a8 -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_215757|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_215821|Run /var/www/html/bzimage/bzImage_52bebd476960601253d1d728b549ee65107d40a8 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_215847|It takes 26 seconds to find login:test login: |
+|0715_215847|Boot 1 time: takes 26 seconds to boot up.|
+|0715_215847|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_215849|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_215851|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_215853|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_215853|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_220223|/var/www/html/bzimage/bzImage_52bebd476960601253d1d728b549ee65107d40a8 didn't contain alloc_workqueue: in dmesg, pass|
+|0715_220223|git bisect good 52bebd476960601253d1d728b549ee65107d40a8|
+|0715_220225|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m c6a6381d62be52338157da75475c62f843c7cc70 -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_224957|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_225022|Run /var/www/html/bzimage/bzImage_c6a6381d62be52338157da75475c62f843c7cc70 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_225049|It takes 27 seconds to find login:test login: |
+|0715_225049|Boot 1 time: takes 27 seconds to boot up.|
+|0715_225049|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_225051|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_225053|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_225054|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_225055|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_225425|/var/www/html/bzimage/bzImage_c6a6381d62be52338157da75475c62f843c7cc70 didn't contain alloc_workqueue: in dmesg, pass|
+|0715_225425|git bisect good c6a6381d62be52338157da75475c62f843c7cc70|
+|0715_225426|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 205aa978de5bcb6d927c750063956a12cd05509f -d /var/www/html/bzimage -o /tmp/kernel|
+|0715_233930|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0715_233954|Run /var/www/html/bzimage/bzImage_205aa978de5bcb6d927c750063956a12cd05509f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0715_234014|It takes 19 seconds to find login:test login: |
+|0715_234014|Boot 1 time: takes 19 seconds to boot up.|
+|0715_234014|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0715_234015|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0715_234016|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0715_234018|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0715_234018|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0715_234348|/var/www/html/bzimage/bzImage_205aa978de5bcb6d927c750063956a12cd05509f contained alloc_workqueue:[   24.164171]  ? alloc_workqueue+0x900/0x1940
+[   24.164277]  alloc_workqueue+0x9b0/0x1940
+[   24.164295]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.189580]  ? alloc_workqueue+0x900/0x1940
+[   24.189676]  alloc_workqueue+0x9b0/0x1940
+[   24.189705]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.215198]  ? alloc_workqueue+0x900/0x1940
+[   24.215295]  alloc_workqueue+0x9b0/0x1940
+[   24.215313]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.241164]  ? alloc_workqueue+0x900/0x1940
+[   24.241265]  alloc_workqueue+0x9b0/0x1940
+[   24.241284]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.267517]  ? alloc_workqueue+0x900/0x1940
+[   24.267617]  alloc_workqueue+0x9b0/0x1940
+[   24.267636]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.294016]  ? alloc_workqueue+0x900/0x1940
+[   24.294118]  alloc_workqueue+0x9b0/0x1940
+[   24.294137]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.320067]  ? alloc_workqueue+0x900/0x1940
+[   24.320172]  alloc_workqueue+0x9b0/0x1940
+[   24.320191]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.348944]  ? alloc_workqueue+0x900/0x1940
+[   24.349045]  alloc_workqueue+0x9b0/0x1940
+[   24.349064]  ? __pfx_alloc_workqueue+0x10/0x10
+[   24.377264]  ? alloc_workqueue+0x900/0x1940
+[   24.377359]  alloc_workqueue+0x9b0/0x1940
+[   24.377378]  ? __pfx_alloc_workqueue+0x10/0x10, FAIL|
+|0715_234349|git bisect bad 205aa978de5bcb6d927c750063956a12cd05509f|
+|0715_234350|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 14e826db5cbf0f3356545fb1fc2f259bd6638706 -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_002514|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_002536|Run /var/www/html/bzimage/bzImage_14e826db5cbf0f3356545fb1fc2f259bd6638706 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_002558|It takes 22 seconds to find login:test login: |
+|0716_002558|Boot 1 time: takes 22 seconds to boot up.|
+|0716_002558|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_002559|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_002601|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_002603|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_002604|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_002934|/var/www/html/bzimage/bzImage_14e826db5cbf0f3356545fb1fc2f259bd6638706 didn't contain alloc_workqueue: in dmesg, pass|
+|0716_002934|git bisect good 14e826db5cbf0f3356545fb1fc2f259bd6638706|
+|0716_002938|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m fd0cf516956a0aaa4d899383ee5c2ff191418b5f -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_011445|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_011515|Run /var/www/html/bzimage/bzImage_fd0cf516956a0aaa4d899383ee5c2ff191418b5f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_011541|It takes 26 seconds to find login:test login: |
+|0716_011541|Boot 1 time: takes 26 seconds to boot up.|
+|0716_011541|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_011543|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_011544|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_011546|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_011547|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_011917|/var/www/html/bzimage/bzImage_fd0cf516956a0aaa4d899383ee5c2ff191418b5f didn't contain alloc_workqueue: in dmesg, pass|
+|0716_011917|git bisect good fd0cf516956a0aaa4d899383ee5c2ff191418b5f|
+|0716_011918|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 445f3d968524a3debb723611dfed89cc526b1d13 -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_020615|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_020640|Run /var/www/html/bzimage/bzImage_445f3d968524a3debb723611dfed89cc526b1d13 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_020707|It takes 26 seconds to find login:test login: |
+|0716_020707|Boot 1 time: takes 26 seconds to boot up.|
+|0716_020707|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_020709|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_020710|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_020712|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_020712|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_021042|/var/www/html/bzimage/bzImage_445f3d968524a3debb723611dfed89cc526b1d13 contained alloc_workqueue:[   32.321250]  ? alloc_workqueue+0x940/0x1940
+[   32.324339]  alloc_workqueue+0x9b0/0x1940
+[   32.324706]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.358983]  ? alloc_workqueue+0x940/0x1940
+[   32.362396]  alloc_workqueue+0x9b0/0x1940
+[   32.363074]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.395967]  ? alloc_workqueue+0x940/0x1940
+[   32.399279]  alloc_workqueue+0x9b0/0x1940
+[   32.399628]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.439071]  ? alloc_workqueue+0x940/0x1940
+[   32.443035]  alloc_workqueue+0x9b0/0x1940
+[   32.443446]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.486149]  ? alloc_workqueue+0x940/0x1940
+[   32.491751]  alloc_workqueue+0x9b0/0x1940
+[   32.492402]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.544796]  ? alloc_workqueue+0x940/0x1940
+[   32.548140]  alloc_workqueue+0x9b0/0x1940
+[   32.548485]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.579532]  ? alloc_workqueue+0x940/0x1940
+[   32.582994]  alloc_workqueue+0x9b0/0x1940
+[   32.583362]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.618443]  ? alloc_workqueue+0x940/0x1940
+[   32.622091]  alloc_workqueue+0x9b0/0x1940
+[   32.622447]  ? __pfx_alloc_workqueue+0x10/0x10
+[   32.675289]  ? alloc_workqueue+0x940/0x1940
+[   32.680703]  alloc_workqueue+0x9b0/0x1940
+[   32.681330]  ? __pfx_alloc_workqueue+0x10/0x10, FAIL|
+|0716_021043|git bisect bad 445f3d968524a3debb723611dfed89cc526b1d13|
+|0716_021044|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m c5178e6ca6c8063edc103b75f410add7e4565e63 -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_025753|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_025822|Run /var/www/html/bzimage/bzImage_c5178e6ca6c8063edc103b75f410add7e4565e63 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_025847|It takes 25 seconds to find login:test login: |
+|0716_025847|Boot 1 time: takes 25 seconds to boot up.|
+|0716_025847|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_025849|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_025850|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_025852|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_025852|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_030222|/var/www/html/bzimage/bzImage_c5178e6ca6c8063edc103b75f410add7e4565e63 didn't contain alloc_workqueue: in dmesg, pass|
+|0716_030222|git bisect good c5178e6ca6c8063edc103b75f410add7e4565e63|
+|0716_030223|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_034901|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_034925|Run /var/www/html/bzimage/bzImage_2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_034949|It takes 24 seconds to find login:test login: |
+|0716_034949|Boot 1 time: takes 24 seconds to boot up.|
+|0716_034949|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_034951|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_034953|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_034954|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_034955|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_035325|/var/www/html/bzimage/bzImage_2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b contained alloc_workqueue:[   30.008416]  ? alloc_workqueue+0x910/0x1940
+[   30.011325]  alloc_workqueue+0x9b0/0x1940
+[   30.011667]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.044080]  ? alloc_workqueue+0x910/0x1940
+[   30.047549]  alloc_workqueue+0x9b0/0x1940
+[   30.048210]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.077801]  ? alloc_workqueue+0x910/0x1940
+[   30.080820]  alloc_workqueue+0x9b0/0x1940
+[   30.081127]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.132371]  ? alloc_workqueue+0x910/0x1940
+[   30.138115]  alloc_workqueue+0x9b0/0x1940
+[   30.138710]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.182118]  ? alloc_workqueue+0x910/0x1940
+[   30.185756]  alloc_workqueue+0x9b0/0x1940
+[   30.186161]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.217001]  ? alloc_workqueue+0x910/0x1940
+[   30.220642]  alloc_workqueue+0x9b0/0x1940
+[   30.220991]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.252748]  ? alloc_workqueue+0x910/0x1940
+[   30.256176]  alloc_workqueue+0x9b0/0x1940
+[   30.256690]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.295289]  ? alloc_workqueue+0x910/0x1940
+[   30.298669]  alloc_workqueue+0x9b0/0x1940
+[   30.299022]  ? __pfx_alloc_workqueue+0x10/0x10
+[   30.331585]  ? alloc_workqueue+0x910/0x1940
+[   30.334523]  alloc_workqueue+0x9b0/0x1940
+[   30.334865]  ? __pfx_alloc_workqueue+0x10/0x10, FAIL|
+|0716_035325|git bisect bad 2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b|
+|0716_035326|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 449b31ad2937406981685348ad75abefb1f63cba -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_044037|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_044103|Run /var/www/html/bzimage/bzImage_449b31ad2937406981685348ad75abefb1f63cba with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_044129|It takes 26 seconds to find login:test login: |
+|0716_044129|Boot 1 time: takes 26 seconds to boot up.|
+|0716_044129|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_044131|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_044133|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_044135|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_044136|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_044506|/var/www/html/bzimage/bzImage_449b31ad2937406981685348ad75abefb1f63cba didn't contain alloc_workqueue: in dmesg, pass|
+|0716_044506|git bisect good 449b31ad2937406981685348ad75abefb1f63cba|
+|0716_044506|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m fbb3d4c15dc0fe8a439de267db927a9ab2f44e98 -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_052702|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_052730|Run /var/www/html/bzimage/bzImage_fbb3d4c15dc0fe8a439de267db927a9ab2f44e98 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_052752|It takes 22 seconds to find login:test login: |
+|0716_052752|Boot 1 time: takes 22 seconds to boot up.|
+|0716_052752|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_052754|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_052755|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_052757|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_052757|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_053127|/var/www/html/bzimage/bzImage_fbb3d4c15dc0fe8a439de267db927a9ab2f44e98 didn't contain alloc_workqueue: in dmesg, pass|
+|0716_053127|git bisect good fbb3d4c15dc0fe8a439de267db927a9ab2f44e98|
+|0716_053128|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 19af457573838785290d27dd09a59140f541d1d8 -d /var/www/html/bzimage -o /tmp/kernel|
+|0716_061459|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_061524|Run /var/www/html/bzimage/bzImage_19af457573838785290d27dd09a59140f541d1d8 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_061548|It takes 23 seconds to find login:test login: |
+|0716_061548|Boot 1 time: takes 23 seconds to boot up.|
+|0716_061548|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_061550|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_061551|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_061553|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_061553|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_061923|/var/www/html/bzimage/bzImage_19af457573838785290d27dd09a59140f541d1d8 contained alloc_workqueue:[   29.445908]  ? alloc_workqueue+0x950/0x1940
+[   29.448865]  alloc_workqueue+0x9b0/0x1940
+[   29.449214]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.493475]  ? alloc_workqueue+0x950/0x1940
+[   29.496713]  alloc_workqueue+0x9b0/0x1940
+[   29.497338]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.538405]  ? alloc_workqueue+0x950/0x1940
+[   29.544216]  alloc_workqueue+0x9b0/0x1940
+[   29.544836]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.598648]  ? alloc_workqueue+0x950/0x1940
+[   29.604705]  alloc_workqueue+0x9b0/0x1940
+[   29.605327]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.652114]  ? alloc_workqueue+0x950/0x1940
+[   29.655349]  alloc_workqueue+0x9b0/0x1940
+[   29.655710]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.685413]  ? alloc_workqueue+0x950/0x1940
+[   29.688736]  alloc_workqueue+0x9b0/0x1940
+[   29.689098]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.720477]  ? alloc_workqueue+0x950/0x1940
+[   29.724219]  alloc_workqueue+0x9b0/0x1940
+[   29.724593]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.770282]  ? alloc_workqueue+0x950/0x1940
+[   29.774818]  alloc_workqueue+0x9b0/0x1940
+[   29.775272]  ? __pfx_alloc_workqueue+0x10/0x10
+[   29.822680]  ? alloc_workqueue+0x950/0x1940
+[   29.825703]  alloc_workqueue+0x9b0/0x1940
+[   29.826060]  ? __pfx_alloc_workqueue+0x10/0x10, FAIL|
+|0716_061923|git bisect bad 19af457573838785290d27dd09a59140f541d1d8|
+|0716_061924|Bisect PASS: find bad commit: 19af457573838785290d27dd09a59140f541d1d8 is the first bad commit
+commit 19af457573838785290d27dd09a59140f541d1d8
+Author: Lai Jiangshan <jiangshan.ljs@antgroup.com>
+Date:   Thu Jul 11 16:35:43 2024 +0800
+
+    workqueue: Remove cpus_read_lock() from apply_wqattrs_lock()
+    
+    1726a1713590 ("workqueue: Put PWQ allocation and WQ enlistment in the same
+    lock C.S.") led to the following possible deadlock:
+    
+      WARNING: possible recursive locking detected
+      6.10.0-rc5-00004-g1d4c6111406c #1 Not tainted
+       --------------------------------------------
+       swapper/0/1 is trying to acquire lock:
+       c27760f4 (cpu_hotplug_lock){++++}-{0:0}, at: alloc_workqueue (kernel/workqueue.c:5152 kernel/workqueue.c:5730)
+    
+       but task is already holding lock:
+       c27760f4 (cpu_hotplug_lock){++++}-{0:0}, at: padata_alloc (kernel/padata.c:1007)
+       ...
+       stack backtrace:
+       ...
+       cpus_read_lock (include/linux/percpu-rwsem.h:53 kernel/cpu.c:488)
+       alloc_workqueue (kernel/workqueue.c:5152 kernel/workqueue.c:5730)
+       padata_alloc (kernel/padata.c:1007 (discriminator 1))
+       pcrypt_init_padata (crypto/pcrypt.c:327 (discriminator 1))
+       pcrypt_init (crypto/pcrypt.c:353)
+       do_one_initcall (init/main.c:1267)
+       do_initcalls (init/main.c:1328 (discriminator 1) init/main.c:1345 (discriminator 1))
+       kernel_init_freeable (init/main.c:1364)
+       kernel_init (init/main.c:1469)
+       ret_from_fork (arch/x86/kernel/process.c:153)
+       ret_from_fork_asm (arch/x86/entry/entry_32.S:737)
+       entry_INT80_32 (arch/x86/entry/entry_32.S:944)
+    
+    This is caused by pcrypt allocating a workqueue while holding
+    cpus_read_lock(), so workqueue code can't do it again as that can lead to
+    deadlocks if down_write starts after the first down_read.
+    
+    The pwq creations and installations have been reworked based on
+    wq_online_cpumask rather than cpu_online_mask making cpus_read_lock() is
+    unneeded during wqattrs changes. Fix the deadlock by removing
+    cpus_read_lock() from apply_wqattrs_lock().
+    
+    tj: Updated changelog.
+    
+    Signed-off-by: Lai Jiangshan <jiangshan.ljs@antgroup.com>
+    Fixes: 1726a1713590 ("workqueue: Put PWQ allocation and WQ enlistment in the same lock C.S.")
+    Link: http://lkml.kernel.org/r/202407081521.83b627c1-lkp@intel.com
+    Signed-off-by: Tejun Heo <tj@kernel.org>
+
+ kernel/workqueue.c | 3 ---
+ 1 file changed, 3 deletions(-)|
+|0716_061924|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|0716_061924|cmd=git bisect log >> /var/www/html/bzimage/0715_174449_alloc_workqueue/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [91e3b24eb7d297d9d99030800ed96944b8652eaf] Add linux-next specific files for 20240715
+git bisect bad 91e3b24eb7d297d9d99030800ed96944b8652eaf
+# status: waiting for good commit(s), bad commit known
+# good: [0c3836482481200ead7b416ca80c68a29cfdaabd] Linux 6.10
+git bisect good 0c3836482481200ead7b416ca80c68a29cfdaabd
+# good: [ab9898cee18772bcbdf052cd1d5de5977f87234d] Merge branch 'master' of git://git.kernel.org/pub/scm/linux/kernel/git/herbert/cryptodev-2.6.git
+git bisect good ab9898cee18772bcbdf052cd1d5de5977f87234d
+# good: [4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae] Merge branch 'for-next' of git://git.kernel.dk/linux-block.git
+git bisect good 4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae
+# bad: [e940d14bb80a145dc4c5b8548d2ee578bdfd890b] Merge branch 'for-leds-next' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/leds.git
+git bisect bad e940d14bb80a145dc4c5b8548d2ee578bdfd890b
+# good: [52bebd476960601253d1d728b549ee65107d40a8] Merge branch 'master' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+git bisect good 52bebd476960601253d1d728b549ee65107d40a8
+# good: [c6a6381d62be52338157da75475c62f843c7cc70] Merge branch 'riscv_kvm_next' of https://github.com/kvm-riscv/linux.git
+git bisect good c6a6381d62be52338157da75475c62f843c7cc70
+# bad: [205aa978de5bcb6d927c750063956a12cd05509f] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/sched_ext.git
+git bisect bad 205aa978de5bcb6d927c750063956a12cd05509f
+# good: [14e826db5cbf0f3356545fb1fc2f259bd6638706] Merge branch 'next' of https://github.com/kvm-x86/linux.git
+git bisect good 14e826db5cbf0f3356545fb1fc2f259bd6638706
+# good: [fd0cf516956a0aaa4d899383ee5c2ff191418b5f] sched_ext: Reimplement scx_bpf_reenqueue_local()
+git bisect good fd0cf516956a0aaa4d899383ee5c2ff191418b5f
+# bad: [445f3d968524a3debb723611dfed89cc526b1d13] Merge branch 'for-6.11' into for-next
+git bisect bad 445f3d968524a3debb723611dfed89cc526b1d13
+# good: [c5178e6ca6c8063edc103b75f410add7e4565e63] workqueue: Make rescuer initialization as the last step of the creation of a new wq
+git bisect good c5178e6ca6c8063edc103b75f410add7e4565e63
+# bad: [2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b] workqueue: Remove the unneeded cpumask empty check in wq_calc_pod_cpumask()
+git bisect bad 2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b
+# good: [449b31ad2937406981685348ad75abefb1f63cba] workqueue: Init rescuer's affinities as the wq's effective cpumask
+git bisect good 449b31ad2937406981685348ad75abefb1f63cba
+# good: [fbb3d4c15dc0fe8a439de267db927a9ab2f44e98] workqueue: Simplify wq_calc_pod_cpumask() with wq_online_cpumask
+git bisect good fbb3d4c15dc0fe8a439de267db927a9ab2f44e98
+# bad: [19af457573838785290d27dd09a59140f541d1d8] workqueue: Remove cpus_read_lock() from apply_wqattrs_lock()
+git bisect bad 19af457573838785290d27dd09a59140f541d1d8
+# first bad commit: [19af457573838785290d27dd09a59140f541d1d8] workqueue: Remove cpus_read_lock() from apply_wqattrs_lock()
+|0716_061924|nohup /root/bzimage_bisect/make_bz.sh -k /root/linux-next -m 91e3b24eb7d297d9d99030800ed96944b8652eaf -b 19af457573838785290d27dd09a59140f541d1d8 -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_91e3b24eb7d297d9d99030800ed96944b8652eaf_19af457573838785290d27dd09a59140f541d1d8_revert|
+|0716_070658|1st base commit:0c3836482481200ead7b416ca80c68a29cfdaabd!|
+|0716_070658|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0716_070724|Run /var/www/html/bzimage/bzImage_91e3b24eb7d297d9d99030800ed96944b8652eaf_19af457573838785290d27dd09a59140f541d1d8_revert with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0716_070749|It takes 25 seconds to find login:test login: |
+|0716_070749|Boot 1 time: takes 25 seconds to boot up.|
+|0716_070749|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0716_070751|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0716_070753|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/e6328edb1d91b5af561439aded6a7d4cb671a90c/repro.cprog root@localhost:/root/repro.c|
+|0716_070755|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0716_070755|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0716_071126|/var/www/html/bzimage/bzImage_91e3b24eb7d297d9d99030800ed96944b8652eaf_19af457573838785290d27dd09a59140f541d1d8_revert didn't contain alloc_workqueue: in dmesg, pass|
+|0716_071126|Bisect successfully! 91e3b24eb7d297d9d99030800ed96944b8652eaf_19af457573838785290d27dd09a59140f541d1d8_revert bzimage passed!|
+|0716_071126|cmd=cd /root/linux-next|
+|0716_071126|ISSUE:e6328edb1d91b5af561439aded6a7d4cb671a90c  EMAIL status after check:Email_not_sent|

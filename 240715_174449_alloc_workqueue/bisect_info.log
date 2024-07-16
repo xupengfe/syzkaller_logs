@@ -1,0 +1,37 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [91e3b24eb7d297d9d99030800ed96944b8652eaf] Add linux-next specific files for 20240715
+git bisect bad 91e3b24eb7d297d9d99030800ed96944b8652eaf
+# status: waiting for good commit(s), bad commit known
+# good: [0c3836482481200ead7b416ca80c68a29cfdaabd] Linux 6.10
+git bisect good 0c3836482481200ead7b416ca80c68a29cfdaabd
+# good: [ab9898cee18772bcbdf052cd1d5de5977f87234d] Merge branch 'master' of git://git.kernel.org/pub/scm/linux/kernel/git/herbert/cryptodev-2.6.git
+git bisect good ab9898cee18772bcbdf052cd1d5de5977f87234d
+# good: [4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae] Merge branch 'for-next' of git://git.kernel.dk/linux-block.git
+git bisect good 4829be875d70a4aa9ff5b9716bf2a63d1e8a20ae
+# bad: [e940d14bb80a145dc4c5b8548d2ee578bdfd890b] Merge branch 'for-leds-next' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/leds.git
+git bisect bad e940d14bb80a145dc4c5b8548d2ee578bdfd890b
+# good: [52bebd476960601253d1d728b549ee65107d40a8] Merge branch 'master' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git
+git bisect good 52bebd476960601253d1d728b549ee65107d40a8
+# good: [c6a6381d62be52338157da75475c62f843c7cc70] Merge branch 'riscv_kvm_next' of https://github.com/kvm-riscv/linux.git
+git bisect good c6a6381d62be52338157da75475c62f843c7cc70
+# bad: [205aa978de5bcb6d927c750063956a12cd05509f] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/sched_ext.git
+git bisect bad 205aa978de5bcb6d927c750063956a12cd05509f
+# good: [14e826db5cbf0f3356545fb1fc2f259bd6638706] Merge branch 'next' of https://github.com/kvm-x86/linux.git
+git bisect good 14e826db5cbf0f3356545fb1fc2f259bd6638706
+# good: [fd0cf516956a0aaa4d899383ee5c2ff191418b5f] sched_ext: Reimplement scx_bpf_reenqueue_local()
+git bisect good fd0cf516956a0aaa4d899383ee5c2ff191418b5f
+# bad: [445f3d968524a3debb723611dfed89cc526b1d13] Merge branch 'for-6.11' into for-next
+git bisect bad 445f3d968524a3debb723611dfed89cc526b1d13
+# good: [c5178e6ca6c8063edc103b75f410add7e4565e63] workqueue: Make rescuer initialization as the last step of the creation of a new wq
+git bisect good c5178e6ca6c8063edc103b75f410add7e4565e63
+# bad: [2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b] workqueue: Remove the unneeded cpumask empty check in wq_calc_pod_cpumask()
+git bisect bad 2cb61f76be3b17d5ad42ba3b7b23c7bf98253a0b
+# good: [449b31ad2937406981685348ad75abefb1f63cba] workqueue: Init rescuer's affinities as the wq's effective cpumask
+git bisect good 449b31ad2937406981685348ad75abefb1f63cba
+# good: [fbb3d4c15dc0fe8a439de267db927a9ab2f44e98] workqueue: Simplify wq_calc_pod_cpumask() with wq_online_cpumask
+git bisect good fbb3d4c15dc0fe8a439de267db927a9ab2f44e98
+# bad: [19af457573838785290d27dd09a59140f541d1d8] workqueue: Remove cpus_read_lock() from apply_wqattrs_lock()
+git bisect bad 19af457573838785290d27dd09a59140f541d1d8
+# first bad commit: [19af457573838785290d27dd09a59140f541d1d8] workqueue: Remove cpus_read_lock() from apply_wqattrs_lock()
+|0716_071126|Bisect successfully! 91e3b24eb7d297d9d99030800ed96944b8652eaf_19af457573838785290d27dd09a59140f541d1d8_revert bzimage passed!|
