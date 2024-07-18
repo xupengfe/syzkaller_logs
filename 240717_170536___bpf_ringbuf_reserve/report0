@@ -1,0 +1,584 @@
+============================================
+WARNING: possible recursive locking detected
+6.10.0-next-20240715-91e3b24eb7d2-dirty #1 Not tainted
+--------------------------------------------
+syz-executor.0/4526 is trying to acquire lock:
+ffffc9000ded50d8 (&rb->spinlock){-.-.}-{2:2}, at: __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+
+but task is already holding lock:
+ffffc9000df6b0d8 (&rb->spinlock){-.-.}-{2:2}, at: __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+
+other info that might help us debug this:
+ Possible unsafe locking scenario:
+
+       CPU0
+       ----
+  lock(&rb->spinlock);
+  lock(&rb->spinlock);
+
+ *** DEADLOCK ***
+
+ May be due to missing lock nesting notation
+
+5 locks held by syz-executor.0/4526:
+ #0: ffffffff87144710 (cgroup_threadgroup_rwsem){++++}-{0:0}, at: copy_process+0x3fc4/0x6a90 kernel/fork.c:2472
+ #1: ffffffff8714d848 (freezer_mutex){+.+.}-{3:3}, at: freezer_fork kernel/cgroup/legacy_freezer.c:228 [inline]
+ #1: ffffffff8714d848 (freezer_mutex){+.+.}-{3:3}, at: freezer_fork+0xd8/0x510 kernel/cgroup/legacy_freezer.c:214
+ #2: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:326 [inline]
+ #2: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:838 [inline]
+ #2: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: __bpf_trace_run kernel/trace/bpf_trace.c:2405 [inline]
+ #2: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: bpf_trace_run2+0x1b7/0x5a0 kernel/trace/bpf_trace.c:2447
+ #3: ffffc9000df6b0d8 (&rb->spinlock){-.-.}-{2:2}, at: __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+ #4: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:326 [inline]
+ #4: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:838 [inline]
+ #4: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: __bpf_trace_run kernel/trace/bpf_trace.c:2405 [inline]
+ #4: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: bpf_trace_run2+0x1b7/0x5a0 kernel/trace/bpf_trace.c:2447
+
+stack backtrace:
+CPU: 1 UID: 0 PID: 4526 Comm: syz-executor.0 Not tainted 6.10.0-next-20240715-91e3b24eb7d2-dirty #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:120
+ dump_stack+0x19/0x20 lib/dump_stack.c:129
+ print_deadlock_bug+0x3c5/0x680 kernel/locking/lockdep.c:3034
+ check_deadlock kernel/locking/lockdep.c:3086 [inline]
+ validate_chain kernel/locking/lockdep.c:3888 [inline]
+ __lock_acquire+0x2a85/0x5c90 kernel/locking/lockdep.c:5199
+ lock_acquire kernel/locking/lockdep.c:5822 [inline]
+ lock_acquire+0x1ce/0x580 kernel/locking/lockdep.c:5787
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+ _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+ __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+ ____bpf_ringbuf_reserve kernel/bpf/ringbuf.c:478 [inline]
+ bpf_ringbuf_reserve+0x63/0xa0 kernel/bpf/ringbuf.c:470
+ bpf_prog_9efe54833449f08e+0x2d/0x47
+ bpf_dispatcher_nop_func include/linux/bpf.h:1243 [inline]
+ __bpf_prog_run include/linux/filter.h:691 [inline]
+ bpf_prog_run include/linux/filter.h:698 [inline]
+ __bpf_trace_run kernel/trace/bpf_trace.c:2406 [inline]
+ bpf_trace_run2+0x238/0x5a0 kernel/trace/bpf_trace.c:2447
+ __bpf_trace_contention_end+0xf/0x20 include/trace/events/lock.h:122
+ __traceiter_contention_end+0x66/0xb0 include/trace/events/lock.h:122
+ trace_contention_end.constprop.0+0xdc/0x140 include/trace/events/lock.h:122
+ __pv_queued_spin_lock_slowpath+0x2a1/0xc80 kernel/locking/qspinlock.c:557
+ pv_queued_spin_lock_slowpath arch/x86/include/asm/paravirt.h:584 [inline]
+ queued_spin_lock_slowpath arch/x86/include/asm/qspinlock.h:51 [inline]
+ queued_spin_lock include/asm-generic/qspinlock.h:114 [inline]
+ do_raw_spin_lock+0x1fb/0x280 kernel/locking/spinlock_debug.c:116
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:111 [inline]
+ _raw_spin_lock_irqsave+0x5a/0x80 kernel/locking/spinlock.c:162
+ __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+ ____bpf_ringbuf_reserve kernel/bpf/ringbuf.c:478 [inline]
+ bpf_ringbuf_reserve+0x63/0xa0 kernel/bpf/ringbuf.c:470
+ bpf_prog_9efe54833449f08e+0x2d/0x47
+ bpf_dispatcher_nop_func include/linux/bpf.h:1243 [inline]
+ __bpf_prog_run include/linux/filter.h:691 [inline]
+ bpf_prog_run include/linux/filter.h:698 [inline]
+ __bpf_trace_run kernel/trace/bpf_trace.c:2406 [inline]
+ bpf_trace_run2+0x238/0x5a0 kernel/trace/bpf_trace.c:2447
+ __bpf_trace_contention_end+0xf/0x20 include/trace/events/lock.h:122
+ __traceiter_contention_end+0x66/0xb0 include/trace/events/lock.h:122
+ trace_contention_end+0xc5/0x120 include/trace/events/lock.h:122
+ __mutex_lock_common kernel/locking/mutex.c:617 [inline]
+ __mutex_lock+0x24e/0x1490 kernel/locking/mutex.c:752
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:804
+ freezer_fork kernel/cgroup/legacy_freezer.c:228 [inline]
+ freezer_fork+0xd8/0x510 kernel/cgroup/legacy_freezer.c:214
+ cgroup_post_fork+0x303/0x940 kernel/cgroup/cgroup.c:6667
+ copy_process+0x4fd3/0x6a90 kernel/fork.c:2602
+ kernel_clone+0xfd/0x8d0 kernel/fork.c:2788
+ __do_sys_clone3+0x1fe/0x280 kernel/fork.c:3092
+ __se_sys_clone3 kernel/fork.c:3071 [inline]
+ __x64_sys_clone3+0x5d/0x80 kernel/fork.c:3071
+ x64_sys_call+0x1fca/0x2140 arch/x86/include/generated/asm/syscalls_64.h:436
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fe0b383f43d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 ea ff ff ff 48 85 ff 74 2c 48 85 d2 74 27 49 89 c8 b8 b3 01 00 00 0f 05 <48> 85 c0 7c 18 74 01 c3 31 ed 48 83 e4 f0 4c 89 c7 ff d2 48 89 c7
+RSP: 002b:00007ffdca771038 EFLAGS: 00000206 ORIG_RAX: 00000000000001b3
+RAX: ffffffffffffffda RBX: 00007ffdca771080 RCX: 00007fe0b383f43d
+RDX: 00007fe0b389f560 RSI: 0000000000000058 RDI: 00007ffdca771080
+RBP: fffffffffffffea8 R08: 00007fe0b3adb640 R09: 00007ffdca77117f
+R10: 0000000000000008 R11: 0000000000000206 R12: 00007fe0b3adb640
+R13: 000000000000000b R14: 00007fe0b389f560 R15: 0000000000000000
+ </TASK>
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.7:4533 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.0:4528 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+loop4: detected capacity change from 0 to 4096
+loop7: detected capacity change from 0 to 512
+ext4: Bad value for 'init_itable'
+EXT4-fs: Warning: mounting with data=journal disables delayed allocation, dioread_nolock, O_DIRECT and fast_commit support!
+Injecting memory failure for pfn 0x36dfb at process virtual address 0x20ffb000
+EXT4-fs error (device loop7): ext4_orphan_get:1417: comm syz-executor.7: bad orphan inode 2048
+EXT4-fs (loop7): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+Memory failure: 0x36dfb: keeping poisoned page in swap cache
+Memory failure: 0x36dfb: recovery action for clean swapcache page: Recovered
+ext4 filesystem being mounted at /syzkaller-testdir1344075567/syzkaller.4vOF75/9/file0 supports timestamps until 2038-01-19 (0x7fffffff)
+Injecting memory failure for pfn 0x36dfc at process virtual address 0x20ffc000
+Memory failure: 0x36dfc: keeping poisoned page in swap cache
+Memory failure: 0x36dfc: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x36dfd at process virtual address 0x20ffd000
+Memory failure: 0x36dfd: Sending SIGBUS to syz-executor.3:4535 due to hardware memory corruption
+Memory failure: 0x36dfd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x36dfe at process virtual address 0x20ffe000
+Memory failure: 0x36dfe: Sending SIGBUS to syz-executor.3:4535 due to hardware memory corruption
+Memory failure: 0x36dfe: recovery action for dirty LRU page: Recovered
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+input: syz0 as /devices/virtual/input/input5
+Injecting memory failure for pfn 0x315fb at process virtual address 0x20ffb000
+Memory failure: 0x315fb: keeping poisoned page in swap cache
+Memory failure: 0x315fb: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x315fc at process virtual address 0x20ffc000
+Memory failure: 0x315fc: keeping poisoned page in swap cache
+Memory failure: 0x315fc: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x315fd at process virtual address 0x20ffd000
+Memory failure: 0x315fd: Sending SIGBUS to syz-executor.6:4537 due to hardware memory corruption
+Memory failure: 0x315fd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x315fe at process virtual address 0x20ffe000
+Memory failure: 0x315fe: Sending SIGBUS to syz-executor.6:4537 due to hardware memory corruption
+Memory failure: 0x315fe: recovery action for dirty LRU page: Recovered
+EXT4-fs (loop7): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.5:4569 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.7:4579 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+netlink: 'syz-executor.0': attribute type 21 has an invalid length.
+=======================================================
+WARNING: The mand mount option has been deprecated and
+         and is ignored by this kernel. Remove the mand
+         option from the mount to silence this warning.
+=======================================================
+loop7: detected capacity change from 0 to 2048
+vfat: Unknown parameter 'd'
+Injecting memory failure for pfn 0x3c7fb at process virtual address 0x20ffb000
+Memory failure: 0x3c7fb: keeping poisoned page in swap cache
+Memory failure: 0x3c7fb: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x3c7fc at process virtual address 0x20ffc000
+Memory failure: 0x3c7fc: keeping poisoned page in swap cache
+Memory failure: 0x3c7fc: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x3c7fd at process virtual address 0x20ffd000
+Memory failure: 0x3c7fd: Sending SIGBUS to syz-executor.0:4594 due to hardware memory corruption
+Memory failure: 0x3c7fd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3c7fe at process virtual address 0x20ffe000
+Memory failure: 0x3c7fe: Sending SIGBUS to syz-executor.0:4594 due to hardware memory corruption
+Memory failure: 0x3c7fe: recovery action for dirty LRU page: Recovered
+UDPLite6: UDP-Lite is deprecated and scheduled to be removed in 2025, please contact the netdev mailing list
+loop4: detected capacity change from 0 to 4096
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Journaled quota options ignored when QUOTA feature is enabled
+loop2: detected capacity change from 0 to 32768
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+XFS (loop2): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+Injecting memory failure for pfn 0x391fb at process virtual address 0x20ffb000
+Memory failure: 0x391fb: keeping poisoned page in swap cache
+Memory failure: 0x391fb: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x391fc at process virtual address 0x20ffc000
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x391fc: keeping poisoned page in swap cache
+Memory failure: 0x391fc: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x391fd at process virtual address 0x20ffd000
+Memory failure: 0x391fd: Sending SIGBUS to syz-executor.6:4612 due to hardware memory corruption
+Memory failure: 0x391fd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x391fe at process virtual address 0x20ffe000
+netlink: 'syz-executor.1': attribute type 21 has an invalid length.
+Memory failure: 0x391fe: Sending SIGBUS to syz-executor.6:4612 due to hardware memory corruption
+Memory failure: 0x391fe: recovery action for dirty LRU page: Recovered
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.0:4626 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+XFS (loop2): Ending clean mount
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+XFS (loop2): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop6: detected capacity change from 0 to 8
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x13e: -5
+SQUASHFS error: Unable to read metadata cache entry [13c]
+SQUASHFS error: Unable to read directory block [13c:26]
+netlink: 'syz-executor.3': attribute type 21 has an invalid length.
+Injecting memory failure for pfn 0x37bfb at process virtual address 0x20ffb000
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x37bfb: keeping poisoned page in swap cache
+Memory failure: 0x37bfb: recovery action for clean swapcache page: Recovered
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.7:4672 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+netlink: 32 bytes leftover after parsing attributes in process `syz-executor.6'.
+Injecting memory failure for pfn 0x37bfc at process virtual address 0x20ffc000
+Memory failure: 0x37bfc: keeping poisoned page in swap cache
+Memory failure: 0x37bfc: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x37bfd at process virtual address 0x20ffd000
+Memory failure: 0x37bfd: Sending SIGBUS to syz-executor.0:4664 due to hardware memory corruption
+Memory failure: 0x37bfd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x37bfe at process virtual address 0x20ffe000
+Memory failure: 0x37bfe: Sending SIGBUS to syz-executor.0:4664 due to hardware memory corruption
+capability: warning: `syz-executor.2' uses 32-bit capabilities (legacy support in use)
+Memory failure: 0x37bfe: recovery action for dirty LRU page: Recovered
+loop1: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 32768
+loop2: detected capacity change from 0 to 8
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x31ea4 at process virtual address 0x20ffb000
+Memory failure: 0x31ea4: corrupted page was clean: dropped without side effects
+Memory failure: 0x31ea4: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x31ea3 at process virtual address 0x20ffc000
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x13e: -5
+SQUASHFS error: Unable to read metadata cache entry [13c]
+SQUASHFS error: Unable to read directory block [13c:26]
+loop6: detected capacity change from 0 to 4096
+Memory failure: 0x31ea3: corrupted page was clean: dropped without side effects
+EXT4-fs (loop6): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+Memory failure: 0x31ea3: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x31ea2 at process virtual address 0x20ffd000
+Memory failure: 0x31ea2: corrupted page was clean: dropped without side effects
+Memory failure: 0x31ea2: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x31ea1 at process virtual address 0x20ffe000
+Memory failure: 0x31ea1: corrupted page was clean: dropped without side effects
+Memory failure: 0x31ea1: recovery action for clean LRU page: Recovered
+EXT4-fs error (device loop6): ext4_add_entry:2435: inode #2: comm syz-executor.6: Directory hole found for htree leaf block 0
+EXT4-fs error (device loop6): ext4_add_entry:2435: inode #2: comm syz-executor.6: Directory hole found for htree leaf block 0
+EXT4-fs error (device loop6): ext4_add_entry:2435: inode #2: comm syz-executor.6: Directory hole found for htree leaf block 0
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.0:4706 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+hrtimer: interrupt took 15403 ns
+clocksource: Long readout interval, skipping watchdog check: cs_nsec: 1664822270 wd_nsec: 1664822095
+loop1: detected capacity change from 0 to 256
+Injecting memory failure for pfn 0x3cdfb at process virtual address 0x20ffb000
+Memory failure: 0x3cdfb: keeping poisoned page in swap cache
+Memory failure: 0x3cdfb: Sending SIGBUS to syz-executor.5:4721 due to hardware memory corruption
+Memory failure: 0x3cdfb: recovery action for dirty swapcache page: Delayed
+Injecting memory failure for pfn 0x3cdfc at process virtual address 0x20ffc000
+Memory failure: 0x3cdfc: Sending SIGBUS to syz-executor.5:4721 due to hardware memory corruption
+Memory failure: 0x3cdfc: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3cdfd at process virtual address 0x20ffd000
+Memory failure: 0x3cdfd: Sending SIGBUS to syz-executor.5:4721 due to hardware memory corruption
+Memory failure: 0x3cdfd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3cdfe at process virtual address 0x20ffe000
+Memory failure: 0x3cdfe: Sending SIGBUS to syz-executor.5:4721 due to hardware memory corruption
+Memory failure: 0x3cdfe: recovery action for dirty LRU page: Recovered
+loop2: detected capacity change from 0 to 8
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x13e: -5
+SQUASHFS error: Unable to read metadata cache entry [13c]
+SQUASHFS error: Unable to read directory block [13c:26]
+loop0: detected capacity change from 0 to 4096
+EXT4-fs (loop6): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+program syz-executor.0 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x39bd3 at process virtual address 0x20ffb000
+loop1: detected capacity change from 0 to 4096
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x3c7d6 at process virtual address 0x20ffb000
+Memory failure: 0x39bd3: corrupted page was clean: dropped without side effects
+Memory failure: 0x39bd3: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x2e941 at process virtual address 0x20ffc000
+Memory failure: 0x2e941: corrupted page was clean: dropped without side effects
+Memory failure: 0x2e941: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x39bd6 at process virtual address 0x20ffd000
+Memory failure: 0x39bd6: corrupted page was clean: dropped without side effects
+Memory failure: 0x39bd6: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3f5f7 at process virtual address 0x20ffe000
+Memory failure: 0x3f5f7: corrupted page was clean: dropped without side effects
+Memory failure: 0x3f5f7: recovery action for clean LRU page: Recovered
+Memory failure: 0x3c7d6: corrupted page was clean: dropped without side effects
+Memory failure: 0x3c7d6: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3c7d5 at process virtual address 0x20ffc000
+Memory failure: 0x3c7d5: corrupted page was clean: dropped without side effects
+Memory failure: 0x3c7d5: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3c7d4 at process virtual address 0x20ffd000
+Memory failure: 0x3c7d4: corrupted page was clean: dropped without side effects
+Memory failure: 0x3c7d4: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3963b at process virtual address 0x20ffe000
+Memory failure: 0x3963b: corrupted page was clean: dropped without side effects
+Memory failure: 0x3963b: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.7:4769 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+program syz-executor.2 is using a deprecated SCSI ioctl, please convert it to SG_IO
+9pnet_fd: p9_fd_create_unix (4794): address too long: ./file0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+loop2: detected capacity change from 0 to 8
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x13e: -5
+SQUASHFS error: Unable to read metadata cache entry [13c]
+SQUASHFS error: Unable to read directory block [13c:26]
+Injecting memory failure for pfn 0x3d3fb at process virtual address 0x20ffb000
+Memory failure: 0x3d3fb: keeping poisoned page in swap cache
+Memory failure: 0x3d3fb: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x3d3fc at process virtual address 0x20ffc000
+Memory failure: 0x3d3fc: keeping poisoned page in swap cache
+Memory failure: 0x3d3fc: recovery action for clean swapcache page: Recovered
+Injecting memory failure for pfn 0x3d3fd at process virtual address 0x20ffd000
+Memory failure: 0x3d3fd: Sending SIGBUS to syz-executor.1:4802 due to hardware memory corruption
+Memory failure: 0x3d3fd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3d3fe at process virtual address 0x20ffe000
+Memory failure: 0x3d3fe: Sending SIGBUS to syz-executor.1:4802 due to hardware memory corruption
+Memory failure: 0x3d3fe: recovery action for dirty LRU page: Recovered
+loop1: detected capacity change from 0 to 4096
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.2:4819 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+program syz-executor.1 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x31bb2 at process virtual address 0x20ffb000
+Memory failure: 0x31bb2: corrupted page was clean: dropped without side effects
+Memory failure: 0x31bb2: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3388b at process virtual address 0x20ffc000
+Memory failure: 0x3388b: corrupted page was clean: dropped without side effects
+Memory failure: 0x3388b: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x39bc0 at process virtual address 0x20ffd000
+Memory failure: 0x39bc0: corrupted page was clean: dropped without side effects
+Memory failure: 0x39bc0: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x304bc at process virtual address 0x20ffe000
+Memory failure: 0x304bc: corrupted page was clean: dropped without side effects
+Memory failure: 0x304bc: recovery action for clean LRU page: Recovered
+loop0: detected capacity change from 0 to 4096
+loop6: detected capacity change from 0 to 4096
+loop2: detected capacity change from 0 to 4096
+EXT4-fs (loop6): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs (loop2): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+program syz-executor.0 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x2bf7c at process virtual address 0x20ffb000
+Memory failure: 0x2bf7c: corrupted page was clean: dropped without side effects
+Memory failure: 0x2bf7c: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x2bf7d at process virtual address 0x20ffc000
+Memory failure: 0x2bf7d: corrupted page was clean: dropped without side effects
+Memory failure: 0x2bf7d: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x2bf7e at process virtual address 0x20ffd000
+Memory failure: 0x2bf7e: corrupted page was clean: dropped without side effects
+Memory failure: 0x2bf7e: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x2bf7f at process virtual address 0x20ffe000
+Memory failure: 0x2bf7f: corrupted page was clean: dropped without side effects
+Memory failure: 0x2bf7f: recovery action for clean LRU page: Recovered
+Process accounting resumed
+EXT4-fs (loop6): re-mounted 00000000-0000-0000-0000-000000000000 ro. Quota mode: writeback.
+Process accounting resumed
+loop3: detected capacity change from 0 to 128
+EXT4-fs (loop3): mounted filesystem 76b65be2-f6da-4727-8c75-0525a5b65a09 r/w without journal. Quota mode: none.
+ext4 filesystem being mounted at /syzkaller-testdir1204523165/syzkaller.NMak72/19/mnt supports timestamps until 2038-01-19 (0x7fffffff)
+EXT4-fs (loop2): re-mounted 00000000-0000-0000-0000-000000000000 ro. Quota mode: writeback.
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.1:4843 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+fscrypt (loop3, inode 12): Can't use IV_INO_LBLK_64 policy with contents mode other than AES-256-XTS
+EXT4-fs (loop3): unmounting filesystem 76b65be2-f6da-4727-8c75-0525a5b65a09.
+EXT4-fs (loop6): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+EXT4-fs (loop2): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop2: detected capacity change from 0 to 4096
+loop0: detected capacity change from 0 to 4096
+program syz-executor.2 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x3fcbc at process virtual address 0x20ffb000
+Memory failure: 0x3fcbc: corrupted page was clean: dropped without side effects
+Memory failure: 0x3fcbc: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x2bff8 at process virtual address 0x20ffc000
+Memory failure: 0x2bff8: corrupted page was clean: dropped without side effects
+Memory failure: 0x2bff8: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3f3c3 at process virtual address 0x20ffd000
+process 'syz-executor.6' launched './file1' with NULL argv: empty string added
+Memory failure: 0x3f3c3: corrupted page was clean: dropped without side effects
+Memory failure: 0x3f3c3: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x1d99f at process virtual address 0x20ffe000
+Memory failure: 0x1d99f: corrupted page was clean: dropped without side effects
+Memory failure: 0x1d99f: recovery action for clean LRU page: Recovered
+program syz-executor.0 is using a deprecated SCSI ioctl, please convert it to SG_IO
+Injecting memory failure for pfn 0x22e48 at process virtual address 0x20ffb000
+Memory failure: 0x22e48: corrupted page was clean: dropped without side effects
+Memory failure: 0x22e48: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x22e49 at process virtual address 0x20ffc000
+Memory failure: 0x22e49: corrupted page was clean: dropped without side effects
+Memory failure: 0x22e49: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3162c at process virtual address 0x20ffd000
+Memory failure: 0x3162c: corrupted page was clean: dropped without side effects
+Memory failure: 0x3162c: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x3162d at process virtual address 0x20ffe000
+Memory failure: 0x3162d: corrupted page was clean: dropped without side effects
+Memory failure: 0x3162d: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.1:4882 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+loop7: detected capacity change from 0 to 512
+EXT4-fs: EXT4-fs: inode_readahead_blks must be 0 or a power of 2 smaller than 2^31
+sock: sock_set_timeout: `syz-executor.2' (pid 4900) tries to set negative timeout
+netlink: 12 bytes leftover after parsing attributes in process `syz-executor.2'.
+loop6: detected capacity change from 0 to 32768
+loop3: detected capacity change from 0 to 32768
+XFS (loop6): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop5: detected capacity change from 0 to 4096
+FAT-fs (loop3): IO charset cp866 not found
+netlink: 'syz-executor.3': attribute type 3 has an invalid length.
+EXT4-fs (loop5): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+XFS (loop6): Ending clean mount
+XFS (loop6): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop4: detected capacity change from 0 to 4096
+Process accounting resumed
+autofs4:pid:4940:validate_dev_ioctl: invalid path supplied for cmd(0xc018937e)
+@": renamed from syz_tun (while UP)
+EXT4-fs (loop5): re-mounted 00000000-0000-0000-0000-000000000000 ro. Quota mode: writeback.
+EXT4-fs (loop4): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+Injecting memory failure for pfn 0x39bd2 at process virtual address 0x20ffd000
+loop2: detected capacity change from 0 to 512
+Memory failure: 0x39bd2: recovery action for clean LRU page: Recovered
+EXT4-fs: EXT4-fs: inode_readahead_blks must be 0 or a power of 2 smaller than 2^31
+Injecting memory failure for pfn 0x2e4bc at process virtual address 0x20ffe000
+Memory failure: 0x2e4bc: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20fff000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.6:4958 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+EXT4-fs (loop5): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Process accounting resumed
+EXT4-fs (loop4): re-mounted 00000000-0000-0000-0000-000000000000 ro. Quota mode: writeback.
+EXT4-fs (loop4): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.6:4978 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+loop5: detected capacity change from 0 to 32768
+XFS (loop5): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop5): Ending clean mount
+loop3: detected capacity change from 0 to 32768
+ loop3: p1 p2
+ p1: <minix: p5 >
+loop3: p1 size 268369920 extends beyond EOD, truncated
+loop2: detected capacity change from 0 to 8
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x9b: -5
+SQUASHFS error: Unable to read metadata cache entry [99]
+SQUASHFS error: Unable to read inode 0x127
+loop4: detected capacity change from 0 to 512
+EXT4-fs: EXT4-fs: inode_readahead_blks must be 0 or a power of 2 smaller than 2^31
+loop6: detected capacity change from 0 to 4096
+EXT4-fs (loop6): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop3: p2 size 1648361472 extends beyond EOD, truncated
+loop3: p5 size 268369920 extends beyond EOD, truncated
+loop2: detected capacity change from 0 to 512
+ext4: Bad value for 'data'
+loop7: detected capacity change from 0 to 32768
+Process accounting resumed
+FAT-fs (loop7): error, fat_get_cluster: invalid start cluster (i_pos 899, start 0000ffff)
+FAT-fs (loop7): Filesystem has been set read-only
+loop0: detected capacity change from 0 to 128
+FAT-fs (loop0): Invalid FSINFO signature: 0x41615daf, 0x61417272 (sector = 1)
+FAT-fs (loop7): error, fat_get_cluster: invalid start cluster (i_pos 899, start 0000ffff)
+cgroup: Unknown subsys name 'no'
+Process accounting resumed
+EXT4-fs (loop6): re-mounted 00000000-0000-0000-0000-000000000000 ro. Quota mode: writeback.
+XFS (loop5): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+EXT4-fs (loop6): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop3: detected capacity change from 0 to 128
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.5:5018 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+loop6: detected capacity change from 0 to 512
+EXT4-fs: EXT4-fs: inode_readahead_blks must be 0 or a power of 2 smaller than 2^31
+loop2: detected capacity change from 0 to 8
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x9b: -5
+SQUASHFS error: Unable to read metadata cache entry [99]
+SQUASHFS error: Unable to read inode 0x127
+loop4: detected capacity change from 0 to 32768
+XFS (loop4): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop4): Ending clean mount
+XFS (loop4): Quotacheck needed: Please wait.
+XFS (loop4): Quotacheck: Done.
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop1: detected capacity change from 0 to 32768
+XFS (loop1): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop1): Ending clean mount
+XFS (loop3): Starting recovery (logdev: internal)
+XFS (loop3): Ending recovery (logdev: internal)
+pim6reg: entered allmulticast mode
+XFS (loop1): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+pim6reg: left allmulticast mode
+XFS (loop4): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20ffb000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.1:5075 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+loop5: detected capacity change from 0 to 512
+EXT4-fs: EXT4-fs: inode_readahead_blks must be 0 or a power of 2 smaller than 2^31
+XFS (loop3): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.0'.
+A link change request failed with some changes committed already. Interface lo may have been left with an inconsistent configuration, please check.
+loop2: detected capacity change from 0 to 32768
+loop4: detected capacity change from 0 to 8
+SQUASHFS error: zlib decompression failed, data probably corrupt
+SQUASHFS error: Failed to read block 0x9b: -5
+SQUASHFS error: Unable to read metadata cache entry [99]
+SQUASHFS error: Unable to read inode 0x127
+XFS (loop2): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop7: detected capacity change from 0 to 512
+program syz-executor.4 is using a deprecated SCSI ioctl, please convert it to SG_IO
+EXT4-fs error (device loop7): ext4_orphan_get:1417: comm syz-executor.7: bad orphan inode 6
+EXT4-fs (loop7): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+XFS (loop2): Ending clean mount
+A link change request failed with some changes committed already. Interface lo may have been left with an inconsistent configuration, please check.
+EXT4-fs (loop7): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Injecting memory failure for pfn 0x34899 at process virtual address 0x20ffd000
+Memory failure: 0x34899: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x34898 at process virtual address 0x20ffe000
+Memory failure: 0x34898: recovery action for clean LRU page: Recovered
+Injecting memory failure for pfn 0x8b6f at process virtual address 0x20fff000
+Memory failure: 0x8b6f: already hardware poisoned
+Memory failure: 0x8b6f: Sending SIGBUS to syz-executor.4:5124 due to hardware memory corruption
+Memory failure: 0x8b6f: recovery action for already poisoned: Failed
+Injecting memory failure for pfn 0x3d7fb at process virtual address 0x20ffb000
+Memory failure: 0x3d7fb: Sending SIGBUS to syz-executor.7:5129 due to hardware memory corruption
+Memory failure: 0x3d7fb: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3d7fc at process virtual address 0x20ffc000
+Memory failure: 0x3d7fc: Sending SIGBUS to syz-executor.7:5129 due to hardware memory corruption
+Memory failure: 0x3d7fc: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3d7fd at process virtual address 0x20ffd000
+Memory failure: 0x3d7fd: Sending SIGBUS to syz-executor.7:5129 due to hardware memory corruption
+Memory failure: 0x3d7fd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x3d7fe at process virtual address 0x20ffe000
+Memory failure: 0x3d7fe: Sending SIGBUS to syz-executor.7:5129 due to hardware memory corruption
+Memory failure: 0x3d7fe: recovery action for dirty LRU page: Recovered
+loop0: detected capacity change from 0 to 32768
+Process accounting resumed
+FAT-fs (loop0): error, fat_get_cluster: invalid start cluster (i_pos 899, start 0000ffff)
+FAT-fs (loop0): Filesystem has been set read-only
+FAT-fs (loop0): error, fat_get_cluster: invalid start cluster (i_pos 899, start 0000ffff)
+netlink: 'syz-executor.7': attribute type 46 has an invalid length.
+netlink: 8 bytes leftover after parsing attributes in process `syz-executor.7'.
+loop4: detected capacity change from 0 to 512
+XFS (loop2): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop6: detected capacity change from 0 to 512
+EXT4-fs error (device loop6): ext4_orphan_get:1417: comm syz-executor.6: bad orphan inode 6
+EXT4-fs (loop6): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: none.
+A link change request failed with some changes committed already. Interface lo may have been left with an inconsistent configuration, please check.
+Injecting memory failure for pfn 0x385fb at process virtual address 0x20ffb000
+Memory failure: 0x385fb: Sending SIGBUS to syz-executor.2:5169 due to hardware memory corruption
+Memory failure: 0x385fb: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x385fc at process virtual address 0x20ffc000
+Memory failure: 0x385fc: Sending SIGBUS to syz-executor.2:5169 due to hardware memory corruption
+Memory failure: 0x385fc: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x385fd at process virtual address 0x20ffd000
+EXT4-fs (loop6): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Memory failure: 0x385fd: Sending SIGBUS to syz-executor.2:5169 due to hardware memory corruption
+Memory failure: 0x385fd: recovery action for dirty LRU page: Recovered
+Injecting memory failure for pfn 0x385fe at process virtual address 0x20ffe000
+Memory failure: 0x385fe: Sending SIGBUS to syz-executor.2:5169 due to hardware memory corruption
+Memory failure: 0x385fe: recovery action for dirty LRU page: Recovered
+iommufd_mock iommufd_mock0: Adding to iommu group 0

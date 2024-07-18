@@ -1,0 +1,102 @@
+============================================
+WARNING: possible recursive locking detected
+6.10.0-next-20240715-91e3b24eb7d2-dirty #1 Not tainted
+--------------------------------------------
+updatedb/286 is trying to acquire lock:
+ffffc90003e340d8 (&rb->spinlock){-.-.}-{2:2}, at: __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+
+but task is already holding lock:
+ffffc90003f480d8 (&rb->spinlock){-.-.}-{2:2}, at: __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+
+other info that might help us debug this:
+ Possible unsafe locking scenario:
+
+       CPU0
+       ----
+  lock(&rb->spinlock);
+  lock(&rb->spinlock);
+
+ *** DEADLOCK ***
+
+ May be due to missing lock nesting notation
+
+4 locks held by updatedb/286:
+ #0: ffff8880102100c8 (&f->f_pos_lock){+.+.}-{3:3}, at: __fdget_pos+0xf3/0x180 fs/file.c:1191
+ #1: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:326 [inline]
+ #1: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:838 [inline]
+ #1: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: __bpf_trace_run kernel/trace/bpf_trace.c:2405 [inline]
+ #1: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: bpf_trace_run2+0x1b7/0x5a0 kernel/trace/bpf_trace.c:2447
+ #2: ffffc90003f480d8 (&rb->spinlock){-.-.}-{2:2}, at: __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+ #3: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:326 [inline]
+ #3: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:838 [inline]
+ #3: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: __bpf_trace_run kernel/trace/bpf_trace.c:2405 [inline]
+ #3: ffffffff87059ce0 (rcu_read_lock){....}-{1:2}, at: bpf_trace_run2+0x1b7/0x5a0 kernel/trace/bpf_trace.c:2447
+
+stack backtrace:
+CPU: 1 UID: 0 PID: 286 Comm: updatedb Not tainted 6.10.0-next-20240715-91e3b24eb7d2-dirty #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:120
+ dump_stack+0x19/0x20 lib/dump_stack.c:129
+ print_deadlock_bug+0x3c5/0x680 kernel/locking/lockdep.c:3034
+ check_deadlock kernel/locking/lockdep.c:3086 [inline]
+ validate_chain kernel/locking/lockdep.c:3888 [inline]
+ __lock_acquire+0x2a85/0x5c90 kernel/locking/lockdep.c:5199
+ lock_acquire kernel/locking/lockdep.c:5822 [inline]
+ lock_acquire+0x1ce/0x580 kernel/locking/lockdep.c:5787
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+ _raw_spin_lock_irqsave+0x52/0x80 kernel/locking/spinlock.c:162
+ __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+ ____bpf_ringbuf_reserve kernel/bpf/ringbuf.c:478 [inline]
+ bpf_ringbuf_reserve+0x63/0xa0 kernel/bpf/ringbuf.c:470
+ bpf_prog_9efe54833449f08e+0x2d/0x47
+ bpf_dispatcher_nop_func include/linux/bpf.h:1243 [inline]
+ __bpf_prog_run include/linux/filter.h:691 [inline]
+ bpf_prog_run include/linux/filter.h:698 [inline]
+ __bpf_trace_run kernel/trace/bpf_trace.c:2406 [inline]
+ bpf_trace_run2+0x238/0x5a0 kernel/trace/bpf_trace.c:2447
+ __bpf_trace_contention_end+0xf/0x20 include/trace/events/lock.h:122
+ __traceiter_contention_end+0x66/0xb0 include/trace/events/lock.h:122
+ trace_contention_end.constprop.0+0xdc/0x140 include/trace/events/lock.h:122
+ __pv_queued_spin_lock_slowpath+0x2a1/0xc80 kernel/locking/qspinlock.c:557
+ pv_queued_spin_lock_slowpath arch/x86/include/asm/paravirt.h:584 [inline]
+ queued_spin_lock_slowpath arch/x86/include/asm/qspinlock.h:51 [inline]
+ queued_spin_lock include/asm-generic/qspinlock.h:114 [inline]
+ do_raw_spin_lock+0x1fb/0x280 kernel/locking/spinlock_debug.c:116
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:111 [inline]
+ _raw_spin_lock_irqsave+0x5a/0x80 kernel/locking/spinlock.c:162
+ __bpf_ringbuf_reserve+0x386/0x460 kernel/bpf/ringbuf.c:427
+ ____bpf_ringbuf_reserve kernel/bpf/ringbuf.c:478 [inline]
+ bpf_ringbuf_reserve+0x63/0xa0 kernel/bpf/ringbuf.c:470
+ bpf_prog_9efe54833449f08e+0x2d/0x47
+ bpf_dispatcher_nop_func include/linux/bpf.h:1243 [inline]
+ __bpf_prog_run include/linux/filter.h:691 [inline]
+ bpf_prog_run include/linux/filter.h:698 [inline]
+ __bpf_trace_run kernel/trace/bpf_trace.c:2406 [inline]
+ bpf_trace_run2+0x238/0x5a0 kernel/trace/bpf_trace.c:2447
+ __bpf_trace_contention_end+0xf/0x20 include/trace/events/lock.h:122
+ __traceiter_contention_end+0x66/0xb0 include/trace/events/lock.h:122
+ trace_contention_end+0xc5/0x120 include/trace/events/lock.h:122
+ __mutex_lock_common kernel/locking/mutex.c:617 [inline]
+ __mutex_lock+0x24e/0x1490 kernel/locking/mutex.c:752
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:804
+ __fdget_pos+0xf3/0x180 fs/file.c:1191
+ fdget_pos include/linux/file.h:76 [inline]
+ __do_sys_getdents64 fs/readdir.c:403 [inline]
+ __se_sys_getdents64 fs/readdir.c:392 [inline]
+ __x64_sys_getdents64+0x124/0x2f0 fs/readdir.c:392
+ x64_sys_call+0x10b6/0x2140 arch/x86/include/generated/asm/syscalls_64.h:218
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f9103d14577
+Code: 80 f8 ff 4c 89 e0 5b 5d 41 5c c3 0f 1f 84 00 00 00 00 00 f3 0f 1e fa b8 ff ff ff 7f 48 39 c2 48 0f 47 d0 b8 d9 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 01 c3 48 8b 15 79 58 0e 00 f7 d8 64 89 02 48
+RSP: 002b:00007fff87a871b8 EFLAGS: 00000293 ORIG_RAX: 00000000000000d9
+RAX: ffffffffffffffda RBX: 000055a891b8cea0 RCX: 00007f9103d14577
+RDX: 0000000000008000 RSI: 000055a891b8cea0 RDI: 000000000000000d
+RBP: 000055a891b8ce74 R08: 0000000000000007 R09: 0000000000000000
+R10: 0000000002000000 R11: 0000000000000293 R12: ffffffffffffff80
+R13: 0000000000000000 R14: 000055a891b8ce70 R15: 00000000648985fa
+ </TASK>
