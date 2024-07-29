@@ -1,0 +1,741 @@
+|0728_080131|cmd=cd /root/os.linux.intelnext.kernel|
+|0728_080131|git log 0c3836482481200ead7b416ca80c68a29cfdaabd check_result:commit 0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0728_080131|git log f40ddce88593482919761f74910f42f4b84c004b check_result:commit f40ddce88593482919761f74910f42f4b84c004b|
+|0728_080131|cmd=git checkout -f 0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0728_080132|cmd=cd /root/os.linux.intelnext.kernel|
+|0728_080132||/var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd| exist, no need make|
+|0728_080132|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_080142|Run /var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_080202|It takes 19 seconds to find login:test login: |
+|0728_080202|Boot 1 time: takes 19 seconds to boot up.|
+|0728_080202|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_080203|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_080204|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_080206|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_080206|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_080646|/var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd contained acct_process:[  300.362751]  ? acct_process+0x1ef/0x670
+[  300.364368]  acct_process+0x1ef/0x670
+[  300.364607]  ? acct_process+0xa1/0x670
+[  300.375271]  ? acct_process+0x1ef/0x670
+[  300.376893]  acct_process+0x1ef/0x670
+[  300.377131]  ? acct_process+0xa1/0x670
+[  300.389513]  ? acct_process+0x1ef/0x670
+[  300.391156]  acct_process+0x1ef/0x670
+[  300.391400]  ? acct_process+0xa1/0x670
+[  300.403920]  ? acct_process+0x1ef/0x670
+[  300.405567]  acct_process+0x1ef/0x670
+[  300.405823]  ? acct_process+0xa1/0x670
+[  300.418747]  ? acct_process+0x1ef/0x670
+[  300.420380]  acct_process+0x1ef/0x670
+[  300.420623]  ? acct_process+0xa1/0x670
+[  300.431685]  #0: ff1100000fb81500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670
+[  300.432461]  #0: ff1100000fb81500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670
+[  300.433242]  #0: ff1100000fb81500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670
+[  300.434033]  #0: ff1100000fb81500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670
+[  300.434832]  #0: ff1100000fb81500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670
+[  300.435376]  #1: ff1100001252a408 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x422/0x670
+[  300.437867]  #0: ff1100000fb81500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670, FAIL|
+|0728_080646|Found time:300 in /var/www/html/bzimage/0728_080131_acct_process/0c3836482481200ead7b416ca80c68a29cfdaabd_dmesg.log|
+|0728_080646|Logic: |<=25: +25|25-100 +180|>100 +1800| Set TIME:2100|
+|0728_080646|-END- commit 0c3836482481200ead7b416ca80c68a29cfdaabd FAIL bad|
+|0728_080646|issue_folder alreayd exist:/var/www/html//syzkaller/2024_07_28/2aa63df308f6396d9fb0cada559fdd03471aaf0a|
+|0728_080646|cmd=cp -rf /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog /var/www/html//syzkaller/2024_07_28/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.c|
+|0728_080647|gcc -pthread /var/www/html//syzkaller/2024_07_28/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.c -o /var/www/html//syzkaller/2024_07_28/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro|
+|0728_080647|cmd=cp -rf /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/description /var/www/html//syzkaller/2024_07_28/2aa63df308f6396d9fb0cada559fdd03471aaf0a|
+|0728_080647|FAIL|cp /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/machineInfo0 /var/www/html/bzimage/0728_080131_acct_process/machineInfo0 failed!|
+|0728_080647|FAIL|cp /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/report0 /var/www/html/bzimage/0728_080131_acct_process/report0 failed!|
+|0728_080647|FAIL|cp /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/log0 /var/www/html/bzimage/0728_080131_acct_process/log0 failed!|
+|0728_080647|cp -rf /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/mount_* /var/www/html/bzimage/0728_080131_acct_process/|
+|0728_080649|wget https://raw.githubusercontent.com/xupengfe/kconfig_diff/main/config-5.18rc4i_kvm -O /var/www/html/bzimage/0728_080131_acct_process/kconfig_origin:0|
+|0728_080649|cmd=cd /root/os.linux.intelnext.kernel|
+|0728_080649||/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b| exist, no need make|
+|0728_080649|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_080659|Run /var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_080716|It takes 16 seconds to find login:test login: |
+|0728_080716|Boot 1 time: takes 16 seconds to boot up.|
+|0728_080716|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_080717|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_080718|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_080719|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_080720|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_084220|/var/www/html/bzimage/bzImage_f40ddce88593482919761f74910f42f4b84c004b didn't contain acct_process: in dmesg, pass|
+|0728_084220|Start commit f40ddce88593482919761f74910f42f4b84c004b PASS good|
+|0728_084220|cmd=git checkout -f 0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0728_084220|cmd=git bisect start|
+|0728_084220|cmd=git bisect bad 0c3836482481200ead7b416ca80c68a29cfdaabd|
+|0728_084220|Bisect first start commit:f40ddce88593482919761f74910f42f4b84c004b|
+|0728_084220|git bisect good f40ddce88593482919761f74910f42f4b84c004b|
+|0728_084340||/var/www/html/bzimage/bzImage_0e470763d84dcad27284067647dfb4b1a94dfce0| exist, no need make|
+|0728_084340|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_084351|Run /var/www/html/bzimage/bzImage_0e470763d84dcad27284067647dfb4b1a94dfce0 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_084408|It takes 17 seconds to find login:test login: |
+|0728_084408|Boot 1 time: takes 17 seconds to boot up.|
+|0728_084408|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_084409|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_084410|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_084412|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_084412|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_091912|/var/www/html/bzimage/bzImage_0e470763d84dcad27284067647dfb4b1a94dfce0 didn't contain acct_process: in dmesg, pass|
+|0728_091912|git bisect good 0e470763d84dcad27284067647dfb4b1a94dfce0|
+|0728_092102||/var/www/html/bzimage/bzImage_53ea7f624fb91074c2f9458832ed74975ee5d64c| exist, no need make|
+|0728_092102|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_092112|Run /var/www/html/bzimage/bzImage_53ea7f624fb91074c2f9458832ed74975ee5d64c with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_092133|It takes 20 seconds to find login:test login: |
+|0728_092133|Boot 1 time: takes 20 seconds to boot up.|
+|0728_092133|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_092134|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_092135|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_092137|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_092137|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_095637|/var/www/html/bzimage/bzImage_53ea7f624fb91074c2f9458832ed74975ee5d64c contained acct_process:[  300.357828]  ? acct_process+0x1f6/0x680
+[  300.359682]  acct_process+0x1f6/0x680
+[  300.371174]  ? acct_process+0x1f6/0x680
+[  300.372794]  acct_process+0x1f6/0x680
+[  300.387116]  ? acct_process+0x1f6/0x680
+[  300.389060]  acct_process+0x1f6/0x680
+[  300.400613]  ? acct_process+0x1f6/0x680
+[  300.402292]  acct_process+0x1f6/0x680
+[  300.417679]  ? acct_process+0x1f6/0x680
+[  300.419628]  acct_process+0x1f6/0x680
+[  300.431549]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.432404]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.433231]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.434030]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.434853]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.435405]  #1: ff110000132743f8 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.438029]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.813659]  ? acct_process+0x1f6/0x680
+[  447.815515]  acct_process+0x1f6/0x680
+[  447.827481]  ? acct_process+0x1f6/0x680
+[  447.829172]  acct_process+0x1f6/0x680
+[  447.843546]  ? acct_process+0x1f6/0x680
+[  447.845512]  acct_process+0x1f6/0x680
+[  447.857105]  ? acct_process+0x1f6/0x680
+[  447.858774]  acct_process+0x1f6/0x680
+[  447.874098]  ? acct_process+0x1f6/0x680
+[  447.876028]  acct_process+0x1f6/0x680
+[  447.884218]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.885078]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.885927]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.889263]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.891726]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.892567]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.893562]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.894414]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.895195]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.895998]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.896520]  #1: ff110000132743f8 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.899167]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.900033]  #0: ff11000018c31100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_095637|git bisect bad 53ea7f624fb91074c2f9458832ed74975ee5d64c|
+|0728_095654||/var/www/html/bzimage/bzImage_478a351ce0d69cef2d2bf2a686a09b356b63a66c| exist, no need make|
+|0728_095654|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_095705|Run /var/www/html/bzimage/bzImage_478a351ce0d69cef2d2bf2a686a09b356b63a66c with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_095721|It takes 16 seconds to find login:test login: |
+|0728_095721|Boot 1 time: takes 16 seconds to boot up.|
+|0728_095721|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_095722|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_095723|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_095725|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_095725|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_103225|/var/www/html/bzimage/bzImage_478a351ce0d69cef2d2bf2a686a09b356b63a66c didn't contain acct_process: in dmesg, pass|
+|0728_103225|git bisect good 478a351ce0d69cef2d2bf2a686a09b356b63a66c|
+|0728_103232||/var/www/html/bzimage/bzImage_bb6950556d4b1dd1226c1f09e84b53cb37e5340f| exist, no need make|
+|0728_103232|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_103243|Run /var/www/html/bzimage/bzImage_bb6950556d4b1dd1226c1f09e84b53cb37e5340f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_103300|It takes 17 seconds to find login:test login: |
+|0728_103300|Boot 1 time: takes 17 seconds to boot up.|
+|0728_103300|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_103301|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_103303|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_103304|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_103305|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_110805|/var/www/html/bzimage/bzImage_bb6950556d4b1dd1226c1f09e84b53cb37e5340f didn't contain acct_process: in dmesg, pass|
+|0728_110805|git bisect good bb6950556d4b1dd1226c1f09e84b53cb37e5340f|
+|0728_110809||/var/www/html/bzimage/bzImage_0a8d6c9c7128a93689fba384cdd7f72b0ce19abd| exist, no need make|
+|0728_110809|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_110820|Run /var/www/html/bzimage/bzImage_0a8d6c9c7128a93689fba384cdd7f72b0ce19abd with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_110837|It takes 17 seconds to find login:test login: |
+|0728_110837|Boot 1 time: takes 17 seconds to boot up.|
+|0728_110837|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_110838|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_110839|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_110841|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_110841|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_114341|/var/www/html/bzimage/bzImage_0a8d6c9c7128a93689fba384cdd7f72b0ce19abd didn't contain acct_process: in dmesg, pass|
+|0728_114341|git bisect good 0a8d6c9c7128a93689fba384cdd7f72b0ce19abd|
+|0728_114344||/var/www/html/bzimage/bzImage_f678c890c684373a387b0d73cd4d51edbf329c27| exist, no need make|
+|0728_114344|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_114355|Run /var/www/html/bzimage/bzImage_f678c890c684373a387b0d73cd4d51edbf329c27 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_114413|It takes 18 seconds to find login:test login: |
+|0728_114413|Boot 1 time: takes 18 seconds to boot up.|
+|0728_114413|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_114414|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_114416|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_114417|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_114418|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_121918|/var/www/html/bzimage/bzImage_f678c890c684373a387b0d73cd4d51edbf329c27 contained acct_process:[  300.322815]  ? acct_process+0x1f6/0x680
+[  300.324711]  acct_process+0x1f6/0x680
+[  300.336706]  ? acct_process+0x1f6/0x680
+[  300.338370]  acct_process+0x1f6/0x680
+[  300.353031]  ? acct_process+0x1f6/0x680
+[  300.354709]  acct_process+0x1f6/0x680
+[  300.370157]  ? acct_process+0x1f6/0x680
+[  300.371838]  acct_process+0x1f6/0x680
+[  300.387810]  ? acct_process+0x1f6/0x680
+[  300.389742]  acct_process+0x1f6/0x680
+[  300.404453]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.405300]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.406111]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.406922]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.407744]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.408297]  #1: ff11000013b803f8 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.410936]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.779196]  ? acct_process+0x1f6/0x680
+[  447.781064]  acct_process+0x1f6/0x680
+[  447.793059]  ? acct_process+0x1f6/0x680
+[  447.794737]  acct_process+0x1f6/0x680
+[  447.809403]  ? acct_process+0x1f6/0x680
+[  447.811070]  acct_process+0x1f6/0x680
+[  447.826502]  ? acct_process+0x1f6/0x680
+[  447.828170]  acct_process+0x1f6/0x680
+[  447.844164]  ? acct_process+0x1f6/0x680
+[  447.846116]  acct_process+0x1f6/0x680
+[  447.854387]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.860553]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.863041]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.863889]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.864753]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.865604]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.866404]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.867211]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.868033]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.868578]  #1: ff11000013b803f8 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.871203]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.872052]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.872912]  #0: ff1100000ea3d100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_121918|git bisect bad f678c890c684373a387b0d73cd4d51edbf329c27|
+|0728_121920|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 24a3298ac9e6bd8de838ab79f7868207170d556d -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_122415|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_122427|Run /var/www/html/bzimage/bzImage_24a3298ac9e6bd8de838ab79f7868207170d556d with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_122444|It takes 17 seconds to find login:test login: |
+|0728_122444|Boot 1 time: takes 17 seconds to boot up.|
+|0728_122444|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_122445|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_122447|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_122448|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_122449|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_125949|/var/www/html/bzimage/bzImage_24a3298ac9e6bd8de838ab79f7868207170d556d didn't contain acct_process: in dmesg, pass|
+|0728_125949|git bisect good 24a3298ac9e6bd8de838ab79f7868207170d556d|
+|0728_125950|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m f6a691685962637e53371788fe2a72b171aedc68 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_130501|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_130512|Run /var/www/html/bzimage/bzImage_f6a691685962637e53371788fe2a72b171aedc68 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_130529|It takes 17 seconds to find login:test login: |
+|0728_130529|Boot 1 time: takes 17 seconds to boot up.|
+|0728_130529|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_130530|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_130532|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_130533|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_130533|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_134033|/var/www/html/bzimage/bzImage_f6a691685962637e53371788fe2a72b171aedc68 contained acct_process:[  300.280106]  ? acct_process+0x1f6/0x680
+[  300.282038]  acct_process+0x1f6/0x680
+[  300.293896]  ? acct_process+0x1f6/0x680
+[  300.295567]  acct_process+0x1f6/0x680
+[  300.311120]  ? acct_process+0x1f6/0x680
+[  300.312665]  acct_process+0x1f6/0x680
+[  300.327057]  ? acct_process+0x1f6/0x680
+[  300.328614]  acct_process+0x1f6/0x680
+[  300.343931]  ? acct_process+0x1f6/0x680
+[  300.345856]  acct_process+0x1f6/0x680
+[  300.358718]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.359512]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.360294]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.362663]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.363474]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.364021]  #1: ff110000142623f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.366583]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.735506]  ? acct_process+0x1f6/0x680
+[  447.737429]  acct_process+0x1f6/0x680
+[  447.749157]  ? acct_process+0x1f6/0x680
+[  447.750819]  acct_process+0x1f6/0x680
+[  447.766126]  ? acct_process+0x1f6/0x680
+[  447.767773]  acct_process+0x1f6/0x680
+[  447.783006]  ? acct_process+0x1f6/0x680
+[  447.784628]  acct_process+0x1f6/0x680
+[  447.800255]  ? acct_process+0x1f6/0x680
+[  447.802174]  acct_process+0x1f6/0x680
+[  447.810262]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.816296]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.817127]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.817951]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.818811]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.819590]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.820371]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.822742]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.823548]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824087]  #1: ff110000142623f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.826623]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.827461]  #0: ff1100001243c900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_134034|git bisect bad f6a691685962637e53371788fe2a72b171aedc68|
+|0728_134034|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 64de76ce8e26fb0a5ca32ac2210ef99238c28525 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_134552|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_134604|Run /var/www/html/bzimage/bzImage_64de76ce8e26fb0a5ca32ac2210ef99238c28525 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_134621|It takes 17 seconds to find login:test login: |
+|0728_134621|Boot 1 time: takes 17 seconds to boot up.|
+|0728_134621|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_134622|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_134624|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_134625|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_134626|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_142126|/var/www/html/bzimage/bzImage_64de76ce8e26fb0a5ca32ac2210ef99238c28525 contained acct_process:[  300.279092]  ? acct_process+0x1f6/0x680
+[  300.281017]  acct_process+0x1f6/0x680
+[  300.292842]  ? acct_process+0x1f6/0x680
+[  300.294523]  acct_process+0x1f6/0x680
+[  300.311696]  ? acct_process+0x1f6/0x680
+[  300.313754]  acct_process+0x1f6/0x680
+[  300.330922]  ? acct_process+0x1f6/0x680
+[  300.332751]  acct_process+0x1f6/0x680
+[  300.349267]  ? acct_process+0x1f6/0x680
+[  300.351203]  acct_process+0x1f6/0x680
+[  300.365635]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.366427]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.367218]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.368009]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.368819]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.369363]  #1: ff1100001428a3f8 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.371933]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.735581]  ? acct_process+0x1f6/0x680
+[  447.737502]  acct_process+0x1f6/0x680
+[  447.749304]  ? acct_process+0x1f6/0x680
+[  447.750961]  acct_process+0x1f6/0x680
+[  447.766579]  ? acct_process+0x1f6/0x680
+[  447.768230]  acct_process+0x1f6/0x680
+[  447.783436]  ? acct_process+0x1f6/0x680
+[  447.785093]  acct_process+0x1f6/0x680
+[  447.800836]  ? acct_process+0x1f6/0x680
+[  447.802766]  acct_process+0x1f6/0x680
+[  447.816047]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.818470]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.820125]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.820962]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.821739]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.822536]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.823320]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824109]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824652]  #1: ff1100001428a3f8 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.827209]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.828044]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.828876]  #0: ff11000018b44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_142126|git bisect bad 64de76ce8e26fb0a5ca32ac2210ef99238c28525|
+|0728_142126|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 57f1f9dd3abea322173ea75a15887ccf14bbbe51 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_142629|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_142641|Run /var/www/html/bzimage/bzImage_57f1f9dd3abea322173ea75a15887ccf14bbbe51 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_142658|It takes 17 seconds to find login:test login: |
+|0728_142658|Boot 1 time: takes 17 seconds to boot up.|
+|0728_142658|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_142659|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_142700|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_142702|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_142702|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_150202|/var/www/html/bzimage/bzImage_57f1f9dd3abea322173ea75a15887ccf14bbbe51 contained acct_process:[  300.283028]  ? acct_process+0x1f6/0x680
+[  300.284937]  acct_process+0x1f6/0x680
+[  300.296604]  ? acct_process+0x1f6/0x680
+[  300.298261]  acct_process+0x1f6/0x680
+[  300.313464]  ? acct_process+0x1f6/0x680
+[  300.315106]  acct_process+0x1f6/0x680
+[  300.330241]  ? acct_process+0x1f6/0x680
+[  300.331877]  acct_process+0x1f6/0x680
+[  300.347514]  ? acct_process+0x1f6/0x680
+[  300.349419]  acct_process+0x1f6/0x680
+[  300.363740]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.364518]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.365296]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.366081]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.366882]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.367426]  #1: ff11000013dc43f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.369962]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.738909]  ? acct_process+0x1f6/0x680
+[  447.740845]  acct_process+0x1f6/0x680
+[  447.752618]  ? acct_process+0x1f6/0x680
+[  447.754294]  acct_process+0x1f6/0x680
+[  447.769504]  ? acct_process+0x1f6/0x680
+[  447.771154]  acct_process+0x1f6/0x680
+[  447.786402]  ? acct_process+0x1f6/0x680
+[  447.788053]  acct_process+0x1f6/0x680
+[  447.803496]  ? acct_process+0x1f6/0x680
+[  447.805423]  acct_process+0x1f6/0x680
+[  447.813486]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.817075]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.821940]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.822774]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.823604]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824382]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.825152]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.825986]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.826781]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.827578]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.828119]  #1: ff11000013dc43f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.830698]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.831542]  #0: ff1100001a742d00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_150202|git bisect bad 57f1f9dd3abea322173ea75a15887ccf14bbbe51|
+|0728_150203|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 2a4152742025c5f21482e8cebc581702a0fa5b01 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_150704|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_150716|Run /var/www/html/bzimage/bzImage_2a4152742025c5f21482e8cebc581702a0fa5b01 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_150734|It takes 17 seconds to find login:test login: |
+|0728_150734|Boot 1 time: takes 17 seconds to boot up.|
+|0728_150734|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_150735|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_150736|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_150738|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_150738|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_154238|/var/www/html/bzimage/bzImage_2a4152742025c5f21482e8cebc581702a0fa5b01 contained acct_process:[  300.322654]  ? acct_process+0x1f6/0x680
+[  300.324409]  acct_process+0x1f6/0x680
+[  300.335949]  ? acct_process+0x1f6/0x680
+[  300.337577]  acct_process+0x1f6/0x680
+[  300.353094]  ? acct_process+0x1f6/0x680
+[  300.354753]  acct_process+0x1f6/0x680
+[  300.369901]  ? acct_process+0x1f6/0x680
+[  300.371550]  acct_process+0x1f6/0x680
+[  300.387173]  ? acct_process+0x1f6/0x680
+[  300.389082]  acct_process+0x1f6/0x680
+[  300.401883]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.402674]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.403463]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.405824]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.406645]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.407186]  #1: ff1100001422a3f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.409722]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.778848]  ? acct_process+0x1f6/0x680
+[  447.780708]  acct_process+0x1f6/0x680
+[  447.792460]  ? acct_process+0x1f6/0x680
+[  447.794129]  acct_process+0x1f6/0x680
+[  447.809650]  ? acct_process+0x1f6/0x680
+[  447.811305]  acct_process+0x1f6/0x680
+[  447.826548]  ? acct_process+0x1f6/0x680
+[  447.828196]  acct_process+0x1f6/0x680
+[  447.843879]  ? acct_process+0x1f6/0x680
+[  447.845779]  acct_process+0x1f6/0x680
+[  447.853882]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.857477]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.860776]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.861612]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.862461]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.863292]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.864067]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.864847]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.867242]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.868051]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.868589]  #1: ff1100001422a3f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.871152]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.871992]  #0: ff110000175e2500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_154238|git bisect bad 2a4152742025c5f21482e8cebc581702a0fa5b01|
+|0728_154238|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m b3bd86a0496565272ee1fc003b4b75ddb2f6427f -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_154737|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_154750|Run /var/www/html/bzimage/bzImage_b3bd86a0496565272ee1fc003b4b75ddb2f6427f with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_154808|It takes 18 seconds to find login:test login: |
+|0728_154808|Boot 1 time: takes 18 seconds to boot up.|
+|0728_154808|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_154809|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_154810|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_154812|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_154812|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_162312|/var/www/html/bzimage/bzImage_b3bd86a0496565272ee1fc003b4b75ddb2f6427f contained acct_process:[  300.287392]  ? acct_process+0x1f6/0x680
+[  300.289334]  acct_process+0x1f6/0x680
+[  300.301155]  ? acct_process+0x1f6/0x680
+[  300.302813]  acct_process+0x1f6/0x680
+[  300.318463]  ? acct_process+0x1f6/0x680
+[  300.320122]  acct_process+0x1f6/0x680
+[  300.335383]  ? acct_process+0x1f6/0x680
+[  300.337008]  acct_process+0x1f6/0x680
+[  300.352738]  ? acct_process+0x1f6/0x680
+[  300.354664]  acct_process+0x1f6/0x680
+[  300.369139]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.369933]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.370729]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.371516]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.372325]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.372881]  #1: ff11000013b963f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.375470]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.743201]  ? acct_process+0x1f6/0x680
+[  447.745126]  acct_process+0x1f6/0x680
+[  447.756971]  ? acct_process+0x1f6/0x680
+[  447.758638]  acct_process+0x1f6/0x680
+[  447.774229]  ? acct_process+0x1f6/0x680
+[  447.775883]  acct_process+0x1f6/0x680
+[  447.791116]  ? acct_process+0x1f6/0x680
+[  447.793306]  acct_process+0x1f6/0x680
+[  447.809094]  ? acct_process+0x1f6/0x680
+[  447.811037]  acct_process+0x1f6/0x680
+[  447.819150]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824331]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.827626]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.828445]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.829289]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.830087]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.830872]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.831659]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.832458]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.832993]  #1: ff11000013b963f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.835560]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.836406]  #0: ff11000019dbdd00 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_162312|git bisect bad b3bd86a0496565272ee1fc003b4b75ddb2f6427f|
+|0728_162313|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 38d88d5e97c9032ebeca092b9372209f2ca92cdf -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_162814|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_162827|Run /var/www/html/bzimage/bzImage_38d88d5e97c9032ebeca092b9372209f2ca92cdf with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_162844|It takes 17 seconds to find login:test login: |
+|0728_162844|Boot 1 time: takes 17 seconds to boot up.|
+|0728_162844|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_162845|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_162847|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_162848|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_162849|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_170349|/var/www/html/bzimage/bzImage_38d88d5e97c9032ebeca092b9372209f2ca92cdf didn't contain acct_process: in dmesg, pass|
+|0728_170349|git bisect good 38d88d5e97c9032ebeca092b9372209f2ca92cdf|
+|0728_170349|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 2772d7df3c93f15e5b2119bd9e14724db6a21a04 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_170851|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_170902|Run /var/www/html/bzimage/bzImage_2772d7df3c93f15e5b2119bd9e14724db6a21a04 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_170919|It takes 17 seconds to find login:test login: |
+|0728_170919|Boot 1 time: takes 17 seconds to boot up.|
+|0728_170919|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_170920|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_170921|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_170923|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_170923|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_174423|/var/www/html/bzimage/bzImage_2772d7df3c93f15e5b2119bd9e14724db6a21a04 contained acct_process:[  300.283494]  ? acct_process+0x1f6/0x680
+[  300.285428]  acct_process+0x1f6/0x680
+[  300.297211]  ? acct_process+0x1f6/0x680
+[  300.298881]  acct_process+0x1f6/0x680
+[  300.314355]  ? acct_process+0x1f6/0x680
+[  300.316005]  acct_process+0x1f6/0x680
+[  300.331246]  ? acct_process+0x1f6/0x680
+[  300.332902]  acct_process+0x1f6/0x680
+[  300.348452]  ? acct_process+0x1f6/0x680
+[  300.350376]  acct_process+0x1f6/0x680
+[  300.363181]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.363962]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.364743]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.367155]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.367959]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.368497]  #1: ff11000013b743f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.371058]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.739362]  ? acct_process+0x1f6/0x680
+[  447.741275]  acct_process+0x1f6/0x680
+[  447.753024]  ? acct_process+0x1f6/0x680
+[  447.754671]  acct_process+0x1f6/0x680
+[  447.770305]  ? acct_process+0x1f6/0x680
+[  447.771956]  acct_process+0x1f6/0x680
+[  447.787095]  ? acct_process+0x1f6/0x680
+[  447.788734]  acct_process+0x1f6/0x680
+[  447.804323]  ? acct_process+0x1f6/0x680
+[  447.806234]  acct_process+0x1f6/0x680
+[  447.814298]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.820298]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.821132]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.821968]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.822810]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.823583]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824352]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.826773]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.827556]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.828356]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.828901]  #1: ff11000013b743f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.831443]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.832272]  #0: ff1100001a313500 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_174423|git bisect bad 2772d7df3c93f15e5b2119bd9e14724db6a21a04|
+|0728_174423|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 3a97a2993e7e7392292323fefc46d79bf9633e44 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_174926|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_174938|Run /var/www/html/bzimage/bzImage_3a97a2993e7e7392292323fefc46d79bf9633e44 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_174955|It takes 17 seconds to find login:test login: |
+|0728_174955|Boot 1 time: takes 17 seconds to boot up.|
+|0728_174955|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_174956|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_174958|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_174959|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_175000|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_182500|/var/www/html/bzimage/bzImage_3a97a2993e7e7392292323fefc46d79bf9633e44 didn't contain acct_process: in dmesg, pass|
+|0728_182500|git bisect good 3a97a2993e7e7392292323fefc46d79bf9633e44|
+|0728_182500|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m bde7f150276bf2a04f92d39beaf34eb40c42c9cc -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_183001|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_183013|Run /var/www/html/bzimage/bzImage_bde7f150276bf2a04f92d39beaf34eb40c42c9cc with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_183030|It takes 17 seconds to find login:test login: |
+|0728_183030|Boot 1 time: takes 17 seconds to boot up.|
+|0728_183030|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_183032|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_183033|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_183035|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_183035|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_190535|/var/www/html/bzimage/bzImage_bde7f150276bf2a04f92d39beaf34eb40c42c9cc contained acct_process:[  300.319041]  ? acct_process+0x1f6/0x680
+[  300.320886]  acct_process+0x1f6/0x680
+[  300.332412]  ? acct_process+0x1f6/0x680
+[  300.333991]  acct_process+0x1f6/0x680
+[  300.348211]  ? acct_process+0x1f6/0x680
+[  300.349875]  acct_process+0x1f6/0x680
+[  300.365213]  ? acct_process+0x1f6/0x680
+[  300.366882]  acct_process+0x1f6/0x680
+[  300.382511]  ? acct_process+0x1f6/0x680
+[  300.384390]  acct_process+0x1f6/0x680
+[  300.397252]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.398113]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.398893]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.401303]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.402129]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.402669]  #1: ff110000142023f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.405227]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.774925]  ? acct_process+0x1f6/0x680
+[  447.776847]  acct_process+0x1f6/0x680
+[  447.788744]  ? acct_process+0x1f6/0x680
+[  447.790401]  acct_process+0x1f6/0x680
+[  447.804846]  ? acct_process+0x1f6/0x680
+[  447.806500]  acct_process+0x1f6/0x680
+[  447.822047]  ? acct_process+0x1f6/0x680
+[  447.823714]  acct_process+0x1f6/0x680
+[  447.839500]  ? acct_process+0x1f6/0x680
+[  447.841436]  acct_process+0x1f6/0x680
+[  447.849574]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.850411]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.856474]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.857305]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.858170]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.859017]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.859796]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.862220]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.863020]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.863566]  #1: ff110000142023f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.866159]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.866987]  #0: ff11000015004900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_190535|git bisect bad bde7f150276bf2a04f92d39beaf34eb40c42c9cc|
+|0728_190535|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m c9e4bf607d8c431452ef362c00e62ce999bbae93 -d /var/www/html/bzimage -o /tmp/kernel|
+|0728_191037|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_191050|Run /var/www/html/bzimage/bzImage_c9e4bf607d8c431452ef362c00e62ce999bbae93 with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_191107|It takes 17 seconds to find login:test login: |
+|0728_191107|Boot 1 time: takes 17 seconds to boot up.|
+|0728_191107|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_191108|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_191110|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_191111|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_191112|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_194612|/var/www/html/bzimage/bzImage_c9e4bf607d8c431452ef362c00e62ce999bbae93 contained acct_process:[  300.283224]  ? acct_process+0x1f6/0x680
+[  300.285039]  acct_process+0x1f6/0x680
+[  300.296446]  ? acct_process+0x1f6/0x680
+[  300.298056]  acct_process+0x1f6/0x680
+[  300.313284]  ? acct_process+0x1f6/0x680
+[  300.314903]  acct_process+0x1f6/0x680
+[  300.329732]  ? acct_process+0x1f6/0x680
+[  300.331359]  acct_process+0x1f6/0x680
+[  300.346707]  ? acct_process+0x1f6/0x680
+[  300.348594]  acct_process+0x1f6/0x680
+[  300.362789]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.363556]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.364332]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.365094]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.365877]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  300.366426]  #1: ff11000013e623f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  300.368940]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.738960]  ? acct_process+0x1f6/0x680
+[  447.740826]  acct_process+0x1f6/0x680
+[  447.752329]  ? acct_process+0x1f6/0x680
+[  447.753938]  acct_process+0x1f6/0x680
+[  447.769127]  ? acct_process+0x1f6/0x680
+[  447.770741]  acct_process+0x1f6/0x680
+[  447.785602]  ? acct_process+0x1f6/0x680
+[  447.787205]  acct_process+0x1f6/0x680
+[  447.802524]  ? acct_process+0x1f6/0x680
+[  447.804398]  acct_process+0x1f6/0x680
+[  447.812284]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.813077]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.817399]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.819798]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.820597]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.822987]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.823801]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.824529]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.825243]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.826025]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.826805]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.827290]  #1: ff11000013e623f8 (sb_writers#4){.+.+}-{0:0}, at: acct_process+0x436/0x680
+[  447.829690]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680
+[  447.830446]  #0: ff11000018841900 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1f6/0x680, FAIL|
+|0728_194612|git bisect bad c9e4bf607d8c431452ef362c00e62ce999bbae93|
+|0728_194612|Bisect PASS: find bad commit: c9e4bf607d8c431452ef362c00e62ce999bbae93 is the first bad commit
+commit c9e4bf607d8c431452ef362c00e62ce999bbae93
+Author: Azat Khuzhin <a3at.mail@gmail.com>
+Date:   Tue Jul 11 13:48:12 2023 +0200
+
+    PM: hibernate: Fix writing maj:min to /sys/power/resume
+    
+    resume_store() first calls lookup_bdev() and after tries to handle
+    maj:min, but it does not reset the error before, hence if you will write
+    maj:min you will get ENOENT:
+    
+        # echo 259:2 >| /sys/power/resume
+        bash: echo: write error: No such file or directory
+    
+    This also should fix hiberation via systemd, since it uses this way.
+    
+    Fixes: 1e8c813b083c4 ("PM: hibernate: don't use early_lookup_bdev in resume_store")
+    Signed-off-by: Azat Khuzhin <a3at.mail@gmail.com>
+    Reviewed-by: Christoph Hellwig <hch@lst.de>
+    [ rjw: Subject edits ]
+    Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+
+ kernel/power/hibernate.c | 1 +
+ 1 file changed, 1 insertion(+)|
+|0728_194612|cmd=git bisect log >> /var/www/html/bzimage/bi.log|
+|0728_194612|cmd=git bisect log >> /var/www/html/bzimage/0728_080131_acct_process/bisect.log|
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [0c3836482481200ead7b416ca80c68a29cfdaabd] Linux 6.10
+git bisect bad 0c3836482481200ead7b416ca80c68a29cfdaabd
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [0e470763d84dcad27284067647dfb4b1a94dfce0] Merge tag 'efi-next-for-v6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/efi/efi
+git bisect good 0e470763d84dcad27284067647dfb4b1a94dfce0
+# bad: [53ea7f624fb91074c2f9458832ed74975ee5d64c] Merge tag 'xfs-6.6-merge-1' of git://git.kernel.org/pub/scm/fs/xfs/xfs-linux
+git bisect bad 53ea7f624fb91074c2f9458832ed74975ee5d64c
+# good: [478a351ce0d69cef2d2bf2a686a09b356b63a66c] Merge tag 'net-6.3-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 478a351ce0d69cef2d2bf2a686a09b356b63a66c
+# good: [bb6950556d4b1dd1226c1f09e84b53cb37e5340f] Merge tag 'acpi-6.5-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good bb6950556d4b1dd1226c1f09e84b53cb37e5340f
+# good: [0a8d6c9c7128a93689fba384cdd7f72b0ce19abd] Merge tag 'backlight-next-6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/backlight
+git bisect good 0a8d6c9c7128a93689fba384cdd7f72b0ce19abd
+# bad: [f678c890c684373a387b0d73cd4d51edbf329c27] Merge tag 'affs-for-6.6-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux
+git bisect bad f678c890c684373a387b0d73cd4d51edbf329c27
+# good: [24a3298ac9e6bd8de838ab79f7868207170d556d] ice: Unregister netdev and devlink_port only once
+git bisect good 24a3298ac9e6bd8de838ab79f7868207170d556d
+# bad: [f6a691685962637e53371788fe2a72b171aedc68] Merge tag '6.5-rc4-smb3-client-fix' of git://git.samba.org/sfrench/cifs-2.6
+git bisect bad f6a691685962637e53371788fe2a72b171aedc68
+# bad: [64de76ce8e26fb0a5ca32ac2210ef99238c28525] Merge tag 'for-6.5-rc3-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux
+git bisect bad 64de76ce8e26fb0a5ca32ac2210ef99238c28525
+# bad: [57f1f9dd3abea322173ea75a15887ccf14bbbe51] Merge tag 'net-6.5-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad 57f1f9dd3abea322173ea75a15887ccf14bbbe51
+# bad: [2a4152742025c5f21482e8cebc581702a0fa5b01] security: keys: Modify mismatched function name
+git bisect bad 2a4152742025c5f21482e8cebc581702a0fa5b01
+# bad: [b3bd86a0496565272ee1fc003b4b75ddb2f6427f] Merge tag 'block-6.5-2023-07-14' of git://git.kernel.dk/linux
+git bisect bad b3bd86a0496565272ee1fc003b4b75ddb2f6427f
+# good: [38d88d5e97c9032ebeca092b9372209f2ca92cdf] Merge tag 'amd-drm-fixes-6.5-2023-07-12' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+git bisect good 38d88d5e97c9032ebeca092b9372209f2ca92cdf
+# bad: [2772d7df3c93f15e5b2119bd9e14724db6a21a04] Merge tag 'riscv-for-linus-6.5-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+git bisect bad 2772d7df3c93f15e5b2119bd9e14724db6a21a04
+# good: [3a97a2993e7e7392292323fefc46d79bf9633e44] Merge tag 'drm-fixes-2023-07-14-1' of git://anongit.freedesktop.org/drm/drm
+git bisect good 3a97a2993e7e7392292323fefc46d79bf9633e44
+# bad: [bde7f150276bf2a04f92d39beaf34eb40c42c9cc] Merge tag 'pm-6.5-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad bde7f150276bf2a04f92d39beaf34eb40c42c9cc
+# bad: [c9e4bf607d8c431452ef362c00e62ce999bbae93] PM: hibernate: Fix writing maj:min to /sys/power/resume
+git bisect bad c9e4bf607d8c431452ef362c00e62ce999bbae93
+# first bad commit: [c9e4bf607d8c431452ef362c00e62ce999bbae93] PM: hibernate: Fix writing maj:min to /sys/power/resume
+|0728_194612|nohup /root/bzimage_bisect/make_bz.sh -k /root/os.linux.intelnext.kernel -m 0c3836482481200ead7b416ca80c68a29cfdaabd -b c9e4bf607d8c431452ef362c00e62ce999bbae93 -d /var/www/html/bzimage -o /tmp/kernel -f /var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd_c9e4bf607d8c431452ef362c00e62ce999bbae93_revert|
+|0728_195136|2nd base commit:f40ddce88593482919761f74910f42f4b84c004b!|
+|0728_195136|/root/image/centos9_3.img -> /root/image/centos9_2.img|
+|0728_195149|Run /var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd_c9e4bf607d8c431452ef362c00e62ce999bbae93_revert with image:/root/image/centos9_2.img in local port:10022, 1 time|
+|0728_195208|It takes 19 seconds to find login:test login: |
+|0728_195208|Boot 1 time: takes 19 seconds to boot up.|
+|0728_195208|cmd=ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'rm -rf file*'|
+|0728_195209|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/bzimage_bisect/repro.sh root@localhost:/root/repro.sh|
+|0728_195210|cmd=scp -o 'StrictHostKeyChecking no' -P 10022 /root/syzkaller/workdir/crashes/2aa63df308f6396d9fb0cada559fdd03471aaf0a/repro.cprog root@localhost:/root/repro.c|
+|0728_195212|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost 'chmod 755 /root/repro.sh'|
+|0728_195212|ssh -o ConnectTimeout=1 -o 'StrictHostKeyChecking no' -p 10022 localhost '/root/repro.sh'|
+|0728_202713|/var/www/html/bzimage/bzImage_0c3836482481200ead7b416ca80c68a29cfdaabd_c9e4bf607d8c431452ef362c00e62ce999bbae93_revert didn't contain acct_process: in dmesg, pass|
+|0728_202713|Bisect successfully! 0c3836482481200ead7b416ca80c68a29cfdaabd_c9e4bf607d8c431452ef362c00e62ce999bbae93_revert bzimage passed!|
+|0728_202713|cmd=cd /root/os.linux.intelnext.kernel|
+|0728_202713|ISSUE:2aa63df308f6396d9fb0cada559fdd03471aaf0a  EMAIL status after check:Email_not_sent|

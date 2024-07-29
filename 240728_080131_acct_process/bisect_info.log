@@ -1,0 +1,43 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [0c3836482481200ead7b416ca80c68a29cfdaabd] Linux 6.10
+git bisect bad 0c3836482481200ead7b416ca80c68a29cfdaabd
+# status: waiting for good commit(s), bad commit known
+# good: [f40ddce88593482919761f74910f42f4b84c004b] Linux 5.11
+git bisect good f40ddce88593482919761f74910f42f4b84c004b
+# good: [0e470763d84dcad27284067647dfb4b1a94dfce0] Merge tag 'efi-next-for-v6.1' of git://git.kernel.org/pub/scm/linux/kernel/git/efi/efi
+git bisect good 0e470763d84dcad27284067647dfb4b1a94dfce0
+# bad: [53ea7f624fb91074c2f9458832ed74975ee5d64c] Merge tag 'xfs-6.6-merge-1' of git://git.kernel.org/pub/scm/fs/xfs/xfs-linux
+git bisect bad 53ea7f624fb91074c2f9458832ed74975ee5d64c
+# good: [478a351ce0d69cef2d2bf2a686a09b356b63a66c] Merge tag 'net-6.3-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect good 478a351ce0d69cef2d2bf2a686a09b356b63a66c
+# good: [bb6950556d4b1dd1226c1f09e84b53cb37e5340f] Merge tag 'acpi-6.5-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect good bb6950556d4b1dd1226c1f09e84b53cb37e5340f
+# good: [0a8d6c9c7128a93689fba384cdd7f72b0ce19abd] Merge tag 'backlight-next-6.5' of git://git.kernel.org/pub/scm/linux/kernel/git/lee/backlight
+git bisect good 0a8d6c9c7128a93689fba384cdd7f72b0ce19abd
+# bad: [f678c890c684373a387b0d73cd4d51edbf329c27] Merge tag 'affs-for-6.6-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux
+git bisect bad f678c890c684373a387b0d73cd4d51edbf329c27
+# good: [24a3298ac9e6bd8de838ab79f7868207170d556d] ice: Unregister netdev and devlink_port only once
+git bisect good 24a3298ac9e6bd8de838ab79f7868207170d556d
+# bad: [f6a691685962637e53371788fe2a72b171aedc68] Merge tag '6.5-rc4-smb3-client-fix' of git://git.samba.org/sfrench/cifs-2.6
+git bisect bad f6a691685962637e53371788fe2a72b171aedc68
+# bad: [64de76ce8e26fb0a5ca32ac2210ef99238c28525] Merge tag 'for-6.5-rc3-tag' of git://git.kernel.org/pub/scm/linux/kernel/git/kdave/linux
+git bisect bad 64de76ce8e26fb0a5ca32ac2210ef99238c28525
+# bad: [57f1f9dd3abea322173ea75a15887ccf14bbbe51] Merge tag 'net-6.5-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+git bisect bad 57f1f9dd3abea322173ea75a15887ccf14bbbe51
+# bad: [2a4152742025c5f21482e8cebc581702a0fa5b01] security: keys: Modify mismatched function name
+git bisect bad 2a4152742025c5f21482e8cebc581702a0fa5b01
+# bad: [b3bd86a0496565272ee1fc003b4b75ddb2f6427f] Merge tag 'block-6.5-2023-07-14' of git://git.kernel.dk/linux
+git bisect bad b3bd86a0496565272ee1fc003b4b75ddb2f6427f
+# good: [38d88d5e97c9032ebeca092b9372209f2ca92cdf] Merge tag 'amd-drm-fixes-6.5-2023-07-12' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+git bisect good 38d88d5e97c9032ebeca092b9372209f2ca92cdf
+# bad: [2772d7df3c93f15e5b2119bd9e14724db6a21a04] Merge tag 'riscv-for-linus-6.5-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+git bisect bad 2772d7df3c93f15e5b2119bd9e14724db6a21a04
+# good: [3a97a2993e7e7392292323fefc46d79bf9633e44] Merge tag 'drm-fixes-2023-07-14-1' of git://anongit.freedesktop.org/drm/drm
+git bisect good 3a97a2993e7e7392292323fefc46d79bf9633e44
+# bad: [bde7f150276bf2a04f92d39beaf34eb40c42c9cc] Merge tag 'pm-6.5-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+git bisect bad bde7f150276bf2a04f92d39beaf34eb40c42c9cc
+# bad: [c9e4bf607d8c431452ef362c00e62ce999bbae93] PM: hibernate: Fix writing maj:min to /sys/power/resume
+git bisect bad c9e4bf607d8c431452ef362c00e62ce999bbae93
+# first bad commit: [c9e4bf607d8c431452ef362c00e62ce999bbae93] PM: hibernate: Fix writing maj:min to /sys/power/resume
+|0728_202713|Bisect successfully! 0c3836482481200ead7b416ca80c68a29cfdaabd_c9e4bf607d8c431452ef362c00e62ce999bbae93_revert bzimage passed!|

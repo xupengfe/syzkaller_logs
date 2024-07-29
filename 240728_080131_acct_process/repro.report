@@ -1,0 +1,103 @@
+Process accounting resumed
+Process accounting resumed
+INFO: task syz-executor116:784 blocked for more than 147 seconds.
+      Not tainted 6.10.0-2024-07-15-intel-next-b1a271635eda+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor116 state:D stack:0     pid:784   tgid:784   ppid:763    flags:0x00004006
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5413 [inline]
+ __schedule+0xba3/0x3120 kernel/sched/core.c:6762
+ __schedule_loop kernel/sched/core.c:6839 [inline]
+ schedule+0xf6/0x3f0 kernel/sched/core.c:6854
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6911
+ __mutex_lock_common kernel/locking/mutex.c:684 [inline]
+ __mutex_lock+0xc32/0x1660 kernel/locking/mutex.c:752
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:804
+ acct_get kernel/acct.c:179 [inline]
+ slow_acct_process kernel/acct.c:595 [inline]
+ acct_process+0x1ef/0x670 kernel/acct.c:621
+ do_exit+0x198d/0x29f0 kernel/exit.c:866
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1025
+ get_signal+0x2387/0x2460 kernel/signal.c:2909
+ arch_do_signal_or_restart+0x8e/0x7d0 arch/x86/kernel/signal.c:311
+ exit_to_user_mode_loop kernel/entry/common.c:111 [inline]
+ exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
+ syscall_exit_to_user_mode+0x128/0x190 kernel/entry/common.c:218
+ do_syscall_64+0x79/0x140 arch/x86/entry/common.c:89
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x41f5bd
+RSP: 002b:00007ffd783d7708 EFLAGS: 00000246 ORIG_RAX: 00000000000000a3
+RAX: 0000000000000000 RBX: 00000000000af453 RCX: 000000000041f5bd
+RDX: 0000000000000000 RSI: 0000000000401966 RDI: 0000000020000140
+RBP: 0000000000000000 R08: 0000000000000000 R09: 00007ffd783d79a8
+R10: 00007ffd783d7710 R11: 0000000000000246 R12: 431bde82d7b634db
+R13: 00007ffd783d79a8 R14: 00000000004b0e50 R15: 0000000000000001
+ </TASK>
+INFO: task modprobe:787 blocked for more than 147 seconds.
+      Not tainted 6.10.0-2024-07-15-intel-next-b1a271635eda+ #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:modprobe        state:D stack:0     pid:787   tgid:787   ppid:55     flags:0x00000002
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5413 [inline]
+ __schedule+0xba3/0x3120 kernel/sched/core.c:6762
+ __schedule_loop kernel/sched/core.c:6839 [inline]
+ schedule+0xf6/0x3f0 kernel/sched/core.c:6854
+ schedule_preempt_disabled+0x1c/0x30 kernel/sched/core.c:6911
+ __mutex_lock_common kernel/locking/mutex.c:684 [inline]
+ __mutex_lock+0xc32/0x1660 kernel/locking/mutex.c:752
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:804
+ acct_get kernel/acct.c:179 [inline]
+ slow_acct_process kernel/acct.c:595 [inline]
+ acct_process+0x1ef/0x670 kernel/acct.c:621
+ do_exit+0x198d/0x29f0 kernel/exit.c:866
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1025
+ __do_sys_exit_group kernel/exit.c:1036 [inline]
+ __se_sys_exit_group kernel/exit.c:1034 [inline]
+ __x64_sys_exit_group+0x4d/0x60 kernel/exit.c:1034
+ x64_sys_call+0x1af3/0x21c0 arch/x86/include/generated/asm/syscalls_64.h:232
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7ff543318a4d
+RSP: 002b:00007fffa8479e18 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007ff5433f69e0 RCX: 00007ff543318a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000001
+RBP: 0000000000000001 R08: 0000000000000000 R09: 0000000000000048
+R10: 00007fffa8479c60 R11: 0000000000000246 R12: 00007ff5433f69e0
+R13: 00007ff5433fbf00 R14: 0000000000000001 R15: 00007ff5433fbee8
+ </TASK>
+
+Showing all locks held in the system:
+2 locks held by kworker/u8:1/31:
+ #0: ff1100000d086948 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0x11e1/0x1af0 kernel/workqueue.c:3223
+ #1: ff1100000dba7d78 ((work_completion)(&sub_info->work)){+.+.}-{0:0}, at: process_one_work+0x8a0/0x1af0 kernel/workqueue.c:3224
+1 lock held by khungtaskd/33:
+ #0: ffffffff86e6dda0 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire include/linux/rcupdate.h:329 [inline]
+ #0: ffffffff86e6dda0 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock include/linux/rcupdate.h:781 [inline]
+ #0: ffffffff86e6dda0 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x71/0x370 kernel/locking/lockdep.c:6614
+2 locks held by kworker/u8:3/55:
+ #0: ff1100000d086948 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0x11e1/0x1af0 kernel/workqueue.c:3223
+ #1: ff1100000f28fd78 ((work_completion)(&sub_info->work)){+.+.}-{0:0}, at: process_one_work+0x8a0/0x1af0 kernel/workqueue.c:3224
+1 lock held by syz-executor116/784:
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_get kernel/acct.c:179 [inline]
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: slow_acct_process kernel/acct.c:595 [inline]
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670 kernel/acct.c:621
+5 locks held by modprobe/785:
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_get kernel/acct.c:179 [inline]
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: slow_acct_process kernel/acct.c:595 [inline]
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670 kernel/acct.c:621
+ #1: ff1100000db80408 (sb_writers#5){.+.+}-{0:0}, at: slow_acct_process kernel/acct.c:597 [inline]
+ #1: ff1100000db80408 (sb_writers#5){.+.+}-{0:0}, at: acct_process+0x422/0x670 kernel/acct.c:621
+ #2: ff11000014a47088 (&of->mutex#2){+.+.}-{3:3}, at: kernfs_fop_write_iter+0x29a/0x640 fs/kernfs/file.c:325
+ #3: ff1100000da42788 (kn->active#88){.+.+}-{0:0}, at: kernfs_fop_write_iter+0x2be/0x640 fs/kernfs/file.c:326
+ #4: ffffffff86d48d08 (system_transition_mutex){+.+.}-{3:3}, at: software_resume+0x6d/0x430 kernel/power/hibernate.c:989
+1 lock held by modprobe/787:
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_get kernel/acct.c:179 [inline]
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: slow_acct_process kernel/acct.c:595 [inline]
+ #0: ff11000014a44100 (&acct->lock#2){+.+.}-{3:3}, at: acct_process+0x1ef/0x670 kernel/acct.c:621
+
+=============================================
+
