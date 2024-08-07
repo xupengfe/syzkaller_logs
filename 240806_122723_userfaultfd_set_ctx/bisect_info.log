@@ -1,0 +1,30 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [d6dbc9f56c3a70e915625b6f1887882c23dc5c91] Add linux-next specific files for 20240805
+git bisect bad d6dbc9f56c3a70e915625b6f1887882c23dc5c91
+# status: waiting for good commit(s), bad commit known
+# good: [de9c2c66ad8e787abec7c9d7eff4f8c3cdd28aed] Linux 6.11-rc2
+git bisect good de9c2c66ad8e787abec7c9d7eff4f8c3cdd28aed
+# bad: [490a57863078af8bf4a24d94f8e46094aeb1f973] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git
+git bisect bad 490a57863078af8bf4a24d94f8e46094aeb1f973
+# bad: [92e60a85318cba952214dea7bd4517d85cf398b8] Merge branch 'next' of https://git.linaro.org/people/jens.wiklander/linux-tee.git
+git bisect bad 92e60a85318cba952214dea7bd4517d85cf398b8
+# bad: [d14e45e4c4ef004df0b4b1298ead1b4556a0bc9d] Merge branch 'mm-everything' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+git bisect bad d14e45e4c4ef004df0b4b1298ead1b4556a0bc9d
+# bad: [2b820b576dfc4aa9b65f18b68f468cb5b38ece84] mm: optimization on page allocation when CMA enabled
+git bisect bad 2b820b576dfc4aa9b65f18b68f468cb5b38ece84
+# bad: [4651ba8201cf87548437f2ee1f4738f2222cd0f2] userfaultfd: move core VMA manipulation logic to mm/userfaultfd.c
+git bisect bad 4651ba8201cf87548437f2ee1f4738f2222cd0f2
+# good: [588797b959626e992884aabaf082972b1c97f998] zram: add zstd compression backend support
+git bisect good 588797b959626e992884aabaf082972b1c97f998
+# good: [883f9402d9bbb652379de7f1f934f539ececc35c] mm: shrink skip folio mapped by an exiting process
+git bisect good 883f9402d9bbb652379de7f1f934f539ececc35c
+# good: [2114ba5564a4a701f1e167792f5130829b67a8f9] mm: page_counters: initialize usage using ATOMIC_LONG_INIT() macro
+git bisect good 2114ba5564a4a701f1e167792f5130829b67a8f9
+# good: [e068b760439a2c9ed30b6461c684309c77dfa3b9] mm: simplify arch_make_folio_accessible()
+git bisect good e068b760439a2c9ed30b6461c684309c77dfa3b9
+# good: [8ab8e75e06d4d326891169b7781d4134bc16bc85] mm, memcg: cg2 memory{.swap,}.peak write handlers
+git bisect good 8ab8e75e06d4d326891169b7781d4134bc16bc85
+# good: [75c94d428857d149cad94a6e606f527082fed55e] mm, memcg: cg2 memory{.swap,}.peak write tests
+git bisect good 75c94d428857d149cad94a6e606f527082fed55e
+# first bad commit: [4651ba8201cf87548437f2ee1f4738f2222cd0f2] userfaultfd: move core VMA manipulation logic to mm/userfaultfd.c
