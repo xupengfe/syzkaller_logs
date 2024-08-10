@@ -1,0 +1,203 @@
+XFS (loop1): Please unmount the filesystem and rectify the problem(s)
+ata2: found unknown device (class 0)
+ata2.00: configured for MWDMA2
+ata2: EH complete
+Process accounting resumed
+Oops: general protection fault, probably for non-canonical address 0xdffffc000000000a: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000050-0x0000000000000057]
+CPU: 1 UID: 0 PID: 792 Comm: syz-executor.0 Not tainted 6.11.0-rc2-2024-08-05-intel-next-83217fc3b5e5+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__lock_acquire+0xd3/0x5c60 kernel/locking/lockdep.c:5007
+Code: 03 38 d0 7c 08 84 d2 0f 85 1b 18 00 00 44 8b 1d 1b 3d 7f 06 45 85 db 74 7b 48 b8 00 00 00 00 00 fc ff df 4c 89 f2 48 c1 ea 03 <80> 3c 02 00 0f 85 0e 36 00 00 49 8b 06 48 3d a0 80 c0 88 74 55 44
+RSP: 0018:ff11000014b8edf8 EFLAGS: 00010006
+RAX: dffffc0000000000 RBX: 1fe2200002971dd2 RCX: 0000000000000002
+RDX: 000000000000000a RSI: 0000000000000000 RDI: 0000000000000050
+RBP: ff11000014b8ef18 R08: 0000000000000001 R09: 0000000000000001
+R10: ffffffff87c1f1a7 R11: 0000000000000001 R12: ff11000012b78000
+R13: 0000000000000000 R14: 0000000000000050 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ff1100006c300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000013749708 CR3: 000000001dbf8006 CR4: 0000000000771ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ lock_acquire kernel/locking/lockdep.c:5759 [inline]
+ lock_acquire+0x1ce/0x580 kernel/locking/lockdep.c:5724
+ seqcount_lockdep_reader_access+0x9f/0xd0 include/linux/seqlock.h:72
+ path_init+0x8d1/0x1870 fs/namei.c:2481
+ path_lookupat+0x35/0x770 fs/namei.c:2556
+ filename_lookup+0x1d9/0x5a0 fs/namei.c:2595
+ kern_path+0x42/0x60 fs/namei.c:2703
+ lookup_bdev+0xda/0x2a0 block/bdev.c:1157
+ resume_store+0x239/0x520 kernel/power/hibernate.c:1235
+ kobj_attr_store+0x5b/0x90 lib/kobject.c:840
+ sysfs_kf_write+0x11f/0x180 fs/sysfs/file.c:136
+ kernfs_fop_write_iter+0x414/0x640 fs/kernfs/file.c:334
+ __kernel_write_iter+0x360/0xb90 fs/read_write.c:523
+ __kernel_write+0xe4/0x130 fs/read_write.c:543
+ do_acct_process+0xd79/0x1570 kernel/acct.c:539
+ acct_pin_kill+0x38/0x110 kernel/acct.c:192
+ pin_kill+0x17f/0x800 fs/fs_pin.c:44
+ mnt_pin_kill+0x6c/0x200 fs/fs_pin.c:81
+ cleanup_mnt+0x378/0x460 fs/namespace.c:1366
+ __cleanup_mnt+0x1f/0x30 fs/namespace.c:1380
+ task_work_run+0x19c/0x2b0 kernel/task_work.c:228
+ exit_task_work include/linux/task_work.h:40 [inline]
+ do_exit+0xafa/0x29f0 kernel/exit.c:882
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1031
+ get_signal+0x2279/0x24c0 kernel/signal.c:2917
+ arch_do_signal_or_restart+0x8e/0x7d0 arch/x86/kernel/signal.c:310
+ exit_to_user_mode_loop kernel/entry/common.c:111 [inline]
+ exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
+ syscall_exit_to_user_mode+0x144/0x200 kernel/entry/common.c:218
+ do_syscall_64+0x79/0x140 arch/x86/entry/common.c:89
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x49121a
+Code: Unable to access opcode bytes at 0x4911f0.
+RSP: 002b:00007ffc862e1d08 EFLAGS: 00000246 ORIG_RAX: 00000000000000e6
+RAX: fffffffffffffdfc RBX: 0000000000000143 RCX: 000000000049121a
+RDX: 00007ffc862e1d20 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000032 R08: 0000000000000006 R09: 000000218e9067a3
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffc862e1df0
+R13: 000000000001bee3 R14: 000000000001bdf6 R15: 0000000000000018
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:__lock_acquire+0xd3/0x5c60 kernel/locking/lockdep.c:5007
+Code: 03 38 d0 7c 08 84 d2 0f 85 1b 18 00 00 44 8b 1d 1b 3d 7f 06 45 85 db 74 7b 48 b8 00 00 00 00 00 fc ff df 4c 89 f2 48 c1 ea 03 <80> 3c 02 00 0f 85 0e 36 00 00 49 8b 06 48 3d a0 80 c0 88 74 55 44
+RSP: 0018:ff11000014b8edf8 EFLAGS: 00010006
+RAX: dffffc0000000000 RBX: 1fe2200002971dd2 RCX: 0000000000000002
+RDX: 000000000000000a RSI: 0000000000000000 RDI: 0000000000000050
+RBP: ff11000014b8ef18 R08: 0000000000000001 R09: 0000000000000001
+R10: ffffffff87c1f1a7 R11: 0000000000000001 R12: ff11000012b78000
+R13: 0000000000000000 R14: 0000000000000050 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ff1100006c300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000013749708 CR3: 000000001dbf8006 CR4: 0000000000771ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor.0[792] exited with irqs disabled
+Fixing recursive fault but reboot is needed!
+BUG: using smp_processor_id() in preemptible [00000000] code: syz-executor.0/792
+caller is debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+CPU: 1 UID: 0 PID: 792 Comm: syz-executor.0 Tainted: G      D            6.11.0-rc2-2024-08-05-intel-next-83217fc3b5e5+ #1
+Tainted: [D]=DIE
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:93 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:119
+ dump_stack+0x19/0x20 lib/dump_stack.c:128
+ check_preemption_disabled+0x168/0x180 lib/smp_processor_id.c:49
+ debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+ __schedule+0x9a/0x2eb0 kernel/sched/core.c:6421
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6559
+ make_task_dead+0x384/0x3c0 kernel/exit.c:990
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1502
+RIP: 0033:0x49121a
+Code: Unable to access opcode bytes at 0x4911f0.
+RSP: 002b:00007ffc862e1d08 EFLAGS: 00000246 ORIG_RAX: 00000000000000e6
+RAX: fffffffffffffdfc RBX: 0000000000000143 RCX: 000000000049121a
+RDX: 00007ffc862e1d20 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000032 R08: 0000000000000006 R09: 000000218e9067a3
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffc862e1df0
+R13: 000000000001bee3 R14: 000000000001bdf6 R15: 0000000000000018
+ </TASK>
+BUG: scheduling while atomic: syz-executor.0/792/0x00000000
+INFO: lockdep is turned off.
+Modules linked in:
+Preemption disabled at:
+[<ffffffff81360d08>] do_task_dead+0x28/0x110 kernel/sched/core.c:6554
+CPU: 1 UID: 0 PID: 792 Comm: syz-executor.0 Tainted: G      D            6.11.0-rc2-2024-08-05-intel-next-83217fc3b5e5+ #1
+Tainted: [D]=DIE
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:93 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:119
+ dump_stack+0x19/0x20 lib/dump_stack.c:128
+ __schedule_bug+0x12d/0x180 kernel/sched/core.c:5748
+ schedule_debug kernel/sched/core.c:5775 [inline]
+ __schedule+0x210c/0x2eb0 kernel/sched/core.c:6425
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6559
+ make_task_dead+0x384/0x3c0 kernel/exit.c:990
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1502
+RIP: 0033:0x49121a
+Code: Unable to access opcode bytes at 0x4911f0.
+RSP: 002b:00007ffc862e1d08 EFLAGS: 00000246 ORIG_RAX: 00000000000000e6
+RAX: fffffffffffffdfc RBX: 0000000000000143 RCX: 000000000049121a
+RDX: 00007ffc862e1d20 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000032 R08: 0000000000000006 R09: 000000218e9067a3
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffc862e1df0
+R13: 000000000001bee3 R14: 000000000001bdf6 R15: 0000000000000018
+ </TASK>
+------------[ cut here ]------------
+Voluntary context switch within RCU read-side critical section!
+WARNING: CPU: 1 PID: 792 at kernel/rcu/tree_plugin.h:330 rcu_note_context_switch+0xc05/0x1870 kernel/rcu/tree_plugin.h:330
+Modules linked in:
+CPU: 1 UID: 0 PID: 792 Comm: syz-executor.0 Tainted: G      D W          6.11.0-rc2-2024-08-05-intel-next-83217fc3b5e5+ #1
+Tainted: [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+RIP: 0010:rcu_note_context_switch+0xc05/0x1870 kernel/rcu/tree_plugin.h:330
+Code: 8b 45 a0 4c 8b 55 a8 48 c7 c2 58 3c c2 87 44 8b 4d b0 e9 0f 03 00 00 48 c7 c7 00 9e cd 85 c6 05 37 15 6c 06 01 e8 cb ae d9 ff <0f> 0b e9 00 f5 ff ff 65 48 8b 3d ec b1 b6 7e e8 17 96 fd ff e9 6a
+RSP: 0018:ff11000014b8fd30 EFLAGS: 00010082
+RAX: 0000000000000000 RBX: ff1100006c3496c0 RCX: ffffffff81277383
+RDX: ff11000012b78000 RSI: ffffffff81277390 RDI: 0000000000000001
+RBP: ff11000014b8fda0 R08: 0000000000000001 R09: ffe21c000d866301
+R10: 0000000000000000 R11: 000000002d2d2d2d R12: ff11000012b78000
+R13: 0000000000000000 R14: ff11000012b78000 R15: ff11000014b8ecac
+FS:  0000000000000000(0000) GS:ff1100006c300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000013749708 CR3: 000000001dbf8006 CR4: 0000000000771ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __schedule+0x208/0x2eb0 kernel/sched/core.c:6431
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6559
+ make_task_dead+0x384/0x3c0 kernel/exit.c:990
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1502
+RIP: 0033:0x49121a
+Code: Unable to access opcode bytes at 0x4911f0.
+RSP: 002b:00007ffc862e1d08 EFLAGS: 00000246 ORIG_RAX: 00000000000000e6
+RAX: fffffffffffffdfc RBX: 0000000000000143 RCX: 000000000049121a
+RDX: 00007ffc862e1d20 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000032 R08: 0000000000000006 R09: 000000218e9067a3
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffc862e1df0
+R13: 000000000001bee3 R14: 000000000001bdf6 R15: 0000000000000018
+ </TASK>
+irq event stamp: 733384
+hardirqs last  enabled at (733383): [<ffffffff85800c25>] __raw_spin_unlock_irqrestore include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (733383): [<ffffffff85800c25>] _raw_spin_unlock_irqrestore+0x35/0x70 kernel/locking/spinlock.c:194
+hardirqs last disabled at (733384): [<ffffffff81dcc3e2>] seqcount_lockdep_reader_access+0x82/0xd0 include/linux/seqlock.h:71
+softirqs last  enabled at (733130): [<ffffffff81296629>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (733130): [<ffffffff81296629>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (733130): [<ffffffff81296629>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (733119): [<ffffffff81296629>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (733119): [<ffffffff81296629>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (733119): [<ffffffff81296629>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+---[ end trace 0000000000000000 ]---
+----------------
+Code disassembly (best guess), 1 bytes skipped:
+   0:	38 d0                	cmp    %dl,%al
+   2:	7c 08                	jl     0xc
+   4:	84 d2                	test   %dl,%dl
+   6:	0f 85 1b 18 00 00    	jne    0x1827
+   c:	44 8b 1d 1b 3d 7f 06 	mov    0x67f3d1b(%rip),%r11d        # 0x67f3d2e
+  13:	45 85 db             	test   %r11d,%r11d
+  16:	74 7b                	je     0x93
+  18:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  1f:	fc ff df
+  22:	4c 89 f2             	mov    %r14,%rdx
+  25:	48 c1 ea 03          	shr    $0x3,%rdx
+* 29:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2d:	0f 85 0e 36 00 00    	jne    0x3641
+  33:	49 8b 06             	mov    (%r14),%rax
+  36:	48 3d a0 80 c0 88    	cmp    $0xffffffff88c080a0,%rax
+  3c:	74 55                	je     0x93
+  3e:	44                   	rex.R
