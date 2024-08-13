@@ -1,0 +1,33 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [dcdef334e8852ca433e908db67744965101f3fc1] 0day head guard for 'devel-hourly-20240812-150828'
+git bisect bad dcdef334e8852ca433e908db67744965101f3fc1
+# status: waiting for good commit(s), bad commit known
+# good: [7c626ce4bae1ac14f60076d00eafe71af30450ba] Linux 6.11-rc3
+git bisect good 7c626ce4bae1ac14f60076d00eafe71af30450ba
+# good: [2eaddb18cea32efa0f7ac44a40a40006ba859e05] Merge branch 'drm-next' of https://gitlab.freedesktop.org/drm/kernel.git
+git bisect good 2eaddb18cea32efa0f7ac44a40a40006ba859e05
+# bad: [c846addbab6a92e14ce73c9df1236c3e8716114f] Merge branch 'next' of git://git.kernel.org/pub/scm/linux/kernel/git/rcu/linux.git
+git bisect bad c846addbab6a92e14ce73c9df1236c3e8716114f
+# good: [d6f6bcdefb5d142a8fc179ca1631a2da3e2bf5ef] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git
+git bisect good d6f6bcdefb5d142a8fc179ca1631a2da3e2bf5ef
+# bad: [885c9c1c668b0a82ca79c680e68321f8b4f3bf80] Merge branch into tip/master: 'x86/timers'
+git bisect bad 885c9c1c668b0a82ca79c680e68321f8b4f3bf80
+# bad: [ee631a448159059f71e616729f0301de12724cc4] Merge branch into tip/master: 'sched/core'
+git bisect bad ee631a448159059f71e616729f0301de12724cc4
+# good: [ac5becc43a5a8ef2dadd2a4f773894731e7f7516] Merge branch into tip/master: 'irq/core'
+git bisect good ac5becc43a5a8ef2dadd2a4f773894731e7f7516
+# bad: [3e15a3fe3a2a170c5be52783667706875c088f96] perf: Optimize __pmu_ctx_sched_out()
+git bisect bad 3e15a3fe3a2a170c5be52783667706875c088f96
+# good: [bb18c5de1c288050ef8bd4af4ca16896ad4cd3fc] uprobes: change uprobe_register() to use uprobe_unregister() instead of __uprobe_unregister()
+git bisect good bb18c5de1c288050ef8bd4af4ca16896ad4cd3fc
+# good: [9ac57c456fcb17f07f8792219479b0c841d75ba7] perf/x86/intel/uncore: Add LNL uncore iMC freerunning support
+git bisect good 9ac57c456fcb17f07f8792219479b0c841d75ba7
+# good: [2d17cf1abcbe8a45b7dc41a768ed22aac158ddd8] perf: Optimize context reschedule for single PMU cases
+git bisect good 2d17cf1abcbe8a45b7dc41a768ed22aac158ddd8
+# bad: [558abc7e3f895049faa46b08656be4c60dc6e9fd] perf: Fix event_function_call() locking
+git bisect bad 558abc7e3f895049faa46b08656be4c60dc6e9fd
+# good: [9a32bd9901fe5b1dcf544389dbf04f3b0a2fbab4] perf: Extract a few helpers
+git bisect good 9a32bd9901fe5b1dcf544389dbf04f3b0a2fbab4
+# first bad commit: [558abc7e3f895049faa46b08656be4c60dc6e9fd] perf: Fix event_function_call() locking
+|0813_000222|Bisect successfully! dcdef334e8852ca433e908db67744965101f3fc1_558abc7e3f895049faa46b08656be4c60dc6e9fd_revert bzimage passed!|
