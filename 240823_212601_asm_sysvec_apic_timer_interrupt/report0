@@ -1,0 +1,134 @@
+EXT4-fs (loop4): Remounting filesystem read-only
+e1000 0000:00:03.0 eth0: NETDEV WATCHDOG: CPU: 0: transmit queue 0 timed out 5592 ms
+e1000 0000:00:03.0 eth0: Reset adapter
+e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+watchdog: BUG: soft lockup - CPU#1 stuck for 30s! [syz-executor.5:4493]
+Modules linked in:
+irq event stamp: 20029189
+hardirqs last  enabled at (20029188): [<ffffffff8579a9de>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:357
+hardirqs last disabled at (20029189): [<ffffffff85798e14>] sysvec_apic_timer_interrupt+0x14/0xc0 arch/x86/kernel/apic/apic.c:1043
+softirqs last  enabled at (9562): [<ffffffff81289ff9>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (9562): [<ffffffff81289ff9>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (9562): [<ffffffff81289ff9>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (10779): [<ffffffff81289ff9>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (10779): [<ffffffff81289ff9>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (10779): [<ffffffff81289ff9>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+CPU: 1 UID: 0 PID: 4493 Comm: syz-executor.5 Not tainted 6.11.0-rc4-c4c117bce544+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:check_preemption_disabled+0x43/0x180 lib/smp_processor_id.c:56
+Code: 44 8b 2d 6c c2 8a 7a 65 8b 1d 61 c2 8a 7a 81 e3 ff ff ff 7f 31 ff 89 de 0f 1f 44 00 00 85 db 74 17 0f 1f 44 00 00 44 89 e8 5b <41> 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc 0f 1f 44 00 00 9c 58 0f
+RSP: 0018:ffff88806c709f18 EFLAGS: 00000206
+RAX: 0000000000000001 RBX: ffffffff86c0a108 RCX: 0000000000000002
+RDX: 0000000000000000 RSI: 0000000000000100 RDI: 0000000000000000
+RBP: ffff88806c709f38 R08: 0000000000000000 R09: 0000000000000100
+R10: ffffffff87a11ba7 R11: 0000000000000001 R12: ffffffff85d7b4e0
+R13: 0000000000000001 R14: ffffffff85a987e0 R15: 0000000000000080
+FS:  00007fbd471a6640(0000) GS:ffff88806c700000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000560e9b7c7700 CR3: 000000003e4f2006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ __this_cpu_preempt_check+0x21/0x30 lib/smp_processor_id.c:66
+ kstat_incr_softirqs_this_cpu include/linux/kernel_stat.h:62 [inline]
+ handle_softirqs+0x270/0x870 kernel/softirq.c:551
+ __do_softirq kernel/softirq.c:588 [inline]
+ invoke_softirq kernel/softirq.c:428 [inline]
+ __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+ irq_exit_rcu+0x12/0x30 kernel/softirq.c:649
+ instr_sysvec_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1043 [inline]
+ sysvec_apic_timer_interrupt+0xa5/0xc0 arch/x86/kernel/apic/apic.c:1043
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:702
+RIP: 0010:__sanitizer_cov_trace_pc+0x6a/0x70 kernel/kcov.c:234
+Code: 82 e0 1d 00 00 83 f8 02 75 20 48 8b 8a e8 1d 00 00 8b 92 e4 1d 00 00 48 8b 01 48 83 c0 01 48 39 c2 76 07 48 89 01 48 89 34 c1 <5d> c3 cc cc cc cc 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffff888032127b30 EFLAGS: 00000212
+RAX: 0000000000002bed RBX: ffff888032127c58 RCX: ffffc9000662f000
+RDX: 0000000000040000 RSI: ffffffff81b86791 RDI: 0000000000000001
+RBP: ffff888032127b30 R08: 0000000000000001 R09: ffffed1005b0801b
+R10: ffff88802d8400df R11: 0000000000000001 R12: ffff88800fd2b780
+R13: ffff888014fda000 R14: 0000000000000004 R15: ffff888014fda030
+ vma_iter_store mm/internal.h:1447 [inline]
+ mmap_region+0xb51/0x2740 mm/mmap.c:3028
+ do_mmap+0xda1/0x11f0 mm/mmap.c:1468
+ vm_mmap_pgoff+0x1ea/0x390 mm/util.c:588
+ ksys_mmap_pgoff+0x87/0x530 mm/mmap.c:1514
+ __do_sys_mmap arch/x86/kernel/sys_x86_64.c:86 [inline]
+ __se_sys_mmap arch/x86/kernel/sys_x86_64.c:79 [inline]
+ __x64_sys_mmap+0x139/0x1d0 arch/x86/kernel/sys_x86_64.c:79
+ x64_sys_call+0x18c6/0x20d0 arch/x86/include/generated/asm/syscalls_64.h:10
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fbd46f47fe7
+Code: 00 00 00 89 ef e8 e9 b5 ff ff eb e4 e8 22 56 01 00 66 90 f3 0f 1e fa 41 89 ca 41 f7 c1 ff 0f 00 00 75 10 b8 09 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 21 c3 48 8b 05 09 1e 0b 00 64 c7 00 16 00 00
+RSP: 002b:00007fbd471a5aa8 EFLAGS: 00000246 ORIG_RAX: 0000000000000009
+RAX: ffffffffffffffda RBX: 00007fbd471a5b80 RCX: 00007fbd46f47fe7
+RDX: 0000000000000003 RSI: 0000000008400000 RDI: 0000000000000000
+RBP: 0000000000000b96 R08: 00000000ffffffff R09: 0000000000000000
+R10: 0000000000000022 R11: 0000000000000246 R12: 0000000000000b94
+R13: 0000000000000009 R14: 00007fbd471a5b40 R15: 0000000020001382
+ </TASK>
+Sending NMI from CPU 1 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 266 Comm: NetworkManager Not tainted 6.11.0-rc4-c4c117bce544+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__sanitizer_cov_trace_pc+0x45/0x70 kernel/kcov.c:216
+Code: a9 00 01 ff 00 74 1d f6 c4 01 74 43 a9 00 00 0f 00 75 3c a9 00 00 f0 00 75 35 8b 82 04 1e 00 00 85 c0 74 2b 8b 82 e0 1d 00 00 <83> f8 02 75 20 48 8b 8a e8 1d 00 00 8b 92 e4 1d 00 00 48 8b 01 48
+RSP: 0018:ffff888010b775e8 EFLAGS: 00000246
+RAX: 0000000000000000 RBX: ffff888010b77750 RCX: ffffffff811f49a3
+RDX: ffff888012eca500 RSI: ffffffff811f49e9 RDI: 0000000000000005
+RBP: ffff888010b775e8 R08: ffff888010b77778 R09: 0000000000000000
+R10: 0000000000000001 R11: 0000000000000001 R12: dffffc0000000000
+R13: 0000000000000001 R14: ffff888010b70000 R15: ffff888010b78000
+FS:  00007f9988983500(0000) GS:ffff88806c600000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fc16f616878 CR3: 000000000f712006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <NMI>
+ </NMI>
+ <TASK>
+ on_stack arch/x86/include/asm/stacktrace.h:60 [inline]
+ update_stack_state+0x1b9/0x6a0 arch/x86/kernel/unwind_frame.c:228
+ unwind_next_frame.part.0+0x1aa/0x8b0 arch/x86/kernel/unwind_frame.c:315
+ unwind_next_frame arch/x86/kernel/unwind_frame.c:269 [inline]
+ __unwind_start+0x2fd/0x480 arch/x86/kernel/unwind_frame.c:417
+ unwind_start arch/x86/include/asm/unwind.h:64 [inline]
+ arch_stack_walk+0x94/0x170 arch/x86/kernel/stacktrace.c:24
+ stack_trace_save+0x97/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x3c/0x50 mm/kasan/generic.c:565
+ poison_kmalloc_redzone mm/kasan/common.c:370 [inline]
+ __kasan_kmalloc+0x88/0xa0 mm/kasan/common.c:387
+ kasan_kmalloc include/linux/kasan.h:211 [inline]
+ __do_kmalloc_node mm/slub.c:4158 [inline]
+ __kmalloc_node_noprof+0x1e1/0x4e0 mm/slub.c:4164
+ __kvmalloc_node_noprof+0x1ac/0x250 mm/util.c:650
+ proc_sys_call_handler+0x3d8/0x770 fs/proc/proc_sysctl.c:573
+ proc_sys_write+0x2c/0x40 fs/proc/proc_sysctl.c:616
+ new_sync_write fs/read_write.c:497 [inline]
+ vfs_write+0xc4d/0x1130 fs/read_write.c:590
+ ksys_write+0x14f/0x290 fs/read_write.c:643
+ __do_sys_write fs/read_write.c:655 [inline]
+ __se_sys_write fs/read_write.c:652 [inline]
+ __x64_sys_write+0x7b/0xc0 fs/read_write.c:652
+ x64_sys_call+0x1685/0x20d0 arch/x86/include/generated/asm/syscalls_64.h:2
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f9989b3ebcf
+Code: 89 54 24 18 48 89 74 24 10 89 7c 24 08 e8 69 d0 f5 ff 48 8b 54 24 18 48 8b 74 24 10 41 89 c0 8b 7c 24 08 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 31 44 89 c7 48 89 44 24 08 e8 bc d0 f5 ff 48
+RSP: 002b:00007ffc96488f50 EFLAGS: 00000293 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f9989b3ebcf
+RDX: 0000000000000002 RSI: 00007ffc96488f80 RDI: 0000000000000020
+RBP: 00007ffc96489130 R08: 0000000000000000 R09: 00007ffc96488ff0
+R10: 0000000000000000 R11: 0000000000000293 R12: 0000000000000001
+R13: 0000000000000020 R14: 00007ffc96488f80 R15: 0000559746f524f0
+ </TASK>

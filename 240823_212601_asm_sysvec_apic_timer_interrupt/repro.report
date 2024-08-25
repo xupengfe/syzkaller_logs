@@ -1,0 +1,83 @@
+clocksource: Long readout interval, skipping watchdog check: cs_nsec: 5696012445 wd_nsec: 5696012382
+watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [syz-executor192:97318]
+Modules linked in:
+irq event stamp: 20117105
+hardirqs last  enabled at (20117104): [<ffffffff8579a9de>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:357
+hardirqs last disabled at (20117105): [<ffffffff85798e14>] sysvec_apic_timer_interrupt+0x14/0xc0 arch/x86/kernel/apic/apic.c:1043
+softirqs last  enabled at (9199422): [<ffffffff81289ff9>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (9199422): [<ffffffff81289ff9>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (9199422): [<ffffffff81289ff9>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (9199425): [<ffffffff81289ff9>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (9199425): [<ffffffff81289ff9>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (9199425): [<ffffffff81289ff9>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+CPU: 0 UID: 0 PID: 97318 Comm: syz-executor192 Not tainted 6.11.0-rc4-c4c117bce544+ #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__sanitizer_cov_trace_const_cmp4+0x0/0x20 kernel/kcov.c:312
+Code: 08 e8 04 fe ff ff 5d c3 cc cc cc cc 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 <f3> 0f 1e fa 55 89 f2 89 fe bf 05 00 00 00 48 89 e5 48 8b 4d 08 e8
+RSP: 0018:ffff88806c6099d8 EFLAGS: 00000246
+RAX: 0000000000000001 RBX: ffff88806c609a08 RCX: ffffffff811f4f28
+RDX: 1ffff1100d8c134c RSI: 0000000000000001 RDI: 0000000000000000
+RBP: ffff88806c6099f8 R08: ffff88806c609a30 R09: 0000000000000000
+R10: 0000000000000001 R11: 0000000000000001 R12: 0000000000000001
+R13: ffff88806c609a60 R14: ffff888012d5ca00 R15: ffff88806c609aa8
+FS:  00007f20c551f740(0000) GS:ffff88806c600000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000003b5492d8 CR3: 0000000018832006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <IRQ>
+ arch_stack_walk+0xa7/0x170 arch/x86/kernel/stacktrace.c:26
+ stack_trace_save+0x97/0xd0 kernel/stacktrace.c:122
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_free_info+0x3f/0x60 mm/kasan/generic.c:579
+ poison_slab_object mm/kasan/common.c:240 [inline]
+ poison_slab_object mm/kasan/common.c:211 [inline]
+ __kasan_slab_free+0x115/0x1a0 mm/kasan/common.c:256
+ kasan_slab_free include/linux/kasan.h:184 [inline]
+ slab_free_hook mm/slub.c:2252 [inline]
+ slab_free mm/slub.c:4473 [inline]
+ kmem_cache_free+0x174/0x430 mm/slub.c:4548
+ radix_tree_node_rcu_free+0x82/0xa0 lib/radix-tree.c:304
+ rcu_do_batch kernel/rcu/tree.c:2569 [inline]
+ rcu_core+0x877/0x18f0 kernel/rcu/tree.c:2843
+ rcu_core_si+0x12/0x20 kernel/rcu/tree.c:2860
+ handle_softirqs+0x1c7/0x870 kernel/softirq.c:554
+ __do_softirq kernel/softirq.c:588 [inline]
+ invoke_softirq kernel/softirq.c:428 [inline]
+ __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+ irq_exit_rcu+0x12/0x30 kernel/softirq.c:649
+ instr_sysvec_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1043 [inline]
+ sysvec_apic_timer_interrupt+0xa5/0xc0 arch/x86/kernel/apic/apic.c:1043
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:702
+RIP: 0010:__raw_spin_unlock_irq include/linux/spinlock_api_smp.h:160 [inline]
+RIP: 0010:_raw_spin_unlock_irq+0x32/0x60 kernel/locking/spinlock.c:202
+Code: 00 55 48 89 e5 41 54 49 89 fc 48 83 c7 18 48 8b 75 08 e8 f1 c2 c5 fb 4c 89 e7 e8 59 3b c6 fb e8 d4 8e f6 fb fb 0f 1f 44 00 00 <bf> 01 00 00 00 e8 b4 83 b7 fb 65 8b 05 95 e6 87 7a 85 c0 74 0a 4c
+RSP: 0018:ffff88801a9f7c00 EFLAGS: 00000206
+RAX: 00000000004a87bd RBX: ffff88801a9f7cb0 RCX: 1ffffffff0f41571
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000000
+RBP: ffff88801a9f7c08 R08: 0000000000000001 R09: 0000000000000001
+R10: ffffffff87a11ba7 R11: 0000000000000001 R12: ffff888012d5d760
+R13: ffff888012d5d760 R14: ffff888012d5d6c8 R15: ffff888012d5e350
+ task_work_run+0x174/0x2b0 kernel/task_work.c:224
+ get_signal+0x1da/0x24c0 kernel/signal.c:2689
+ arch_do_signal_or_restart+0x8e/0x7d0 arch/x86/kernel/signal.c:310
+ exit_to_user_mode_loop kernel/entry/common.c:111 [inline]
+ exit_to_user_mode_prepare include/linux/entry-common.h:328 [inline]
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:207 [inline]
+ syscall_exit_to_user_mode+0x144/0x200 kernel/entry/common.c:218
+ do_syscall_64+0x79/0x140 arch/x86/entry/common.c:89
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f20c523ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffd1fa62c88 EFLAGS: 00000246 ORIG_RAX: 0000000000000048
+RAX: 0000000000000000 RBX: 0000000000000003 RCX: 00007f20c523ee5d
+RDX: 0000000000002400 RSI: 0000000000000004 RDI: 0000000000000003
+RBP: 0000000000000000 R08: 0000000000000040 R09: 0000000000000040
+R10: 0000000000000040 R11: 0000000000000246 R12: 000000000006e950
+R13: 0000000000401250 R14: 0000000000406df8 R15: 00007f20c556a000
+ </TASK>
