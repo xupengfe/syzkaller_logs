@@ -1,0 +1,35 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [1ca4237ad9ce29b0c66fe87862f1da54ac56a1e8] Add linux-next specific files for 20240826
+git bisect bad 1ca4237ad9ce29b0c66fe87862f1da54ac56a1e8
+# status: waiting for good commit(s), bad commit known
+# good: [5be63fc19fcaa4c236b307420483578a56986a37] Linux 6.11-rc5
+git bisect good 5be63fc19fcaa4c236b307420483578a56986a37
+# bad: [5515b1f14c7456df45f5752fad0c3282c5bf2416] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next.git
+git bisect bad 5515b1f14c7456df45f5752fad0c3282c5bf2416
+# good: [93ccf0f3c14fba21c8b4395d6099061d948738c2] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/deller/parisc-linux.git
+git bisect good 93ccf0f3c14fba21c8b4395d6099061d948738c2
+# good: [b48d8f2a62e706c63009dce29c7cb2acf2d6b02d] Merge branch 'linux-next' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git
+git bisect good b48d8f2a62e706c63009dce29c7cb2acf2d6b02d
+# good: [0a2f7de0f3b96c4a30e56d2c79f8d812f89599a1] net: sfp: Add helper to return the SFP bus name
+git bisect good 0a2f7de0f3b96c4a30e56d2c79f8d812f89599a1
+# good: [c4b767fc2b39e4e6e218c51b7e2f3ec36042b782] Merge branch 'bpf-next/master' into bpf-next/for-next
+git bisect good c4b767fc2b39e4e6e218c51b7e2f3ec36042b782
+# bad: [25a9773f2cc89fbb6c70c3812af49b3fc6ffff6b] Merge branch 'master' of git://git.kernel.org/pub/scm/linux/kernel/git/klassert/ipsec-next.git
+git bisect bad 25a9773f2cc89fbb6c70c3812af49b3fc6ffff6b
+# good: [2ce595565fd8b1220c92458179ee29ca7ddde82a] Merge branch 'next' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/linux-pm.git
+git bisect good 2ce595565fd8b1220c92458179ee29ca7ddde82a
+# good: [ad933454b13f10320355fb6756247a3442de8c1f] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/rdma/rdma.git
+git bisect good ad933454b13f10320355fb6756247a3442de8c1f
+# bad: [2d522384fb5b8187cb7f8fe7d05c119ac38fd8f3] rtnetlink: delete redundant judgment statements
+git bisect bad 2d522384fb5b8187cb7f8fe7d05c119ac38fd8f3
+# bad: [3688ff3077d3f334cee1d4b61d8bfb6a9508c2d2] net: ethtool: cable-test: Target the command to the requested PHY
+git bisect bad 3688ff3077d3f334cee1d4b61d8bfb6a9508c2d2
+# good: [17194be4c8e1e82d8b484e58cdcb495c0714d1fd] net: ethtool: Introduce a command to list PHYs on an interface
+git bisect good 17194be4c8e1e82d8b484e58cdcb495c0714d1fd
+# good: [02180fb525bac8c259c3b7271ddfa498d47c5dcc] net: ethtool: plca: Target the command to the requested PHY
+git bisect good 02180fb525bac8c259c3b7271ddfa498d47c5dcc
+# good: [31748765bed3fb7cebf4a32b43a6fdf91b9c23de] net: ethtool: pse-pd: Target the command to the requested PHY
+git bisect good 31748765bed3fb7cebf4a32b43a6fdf91b9c23de
+# first bad commit: [3688ff3077d3f334cee1d4b61d8bfb6a9508c2d2] net: ethtool: cable-test: Target the command to the requested PHY
+|0827_072713|Bisect successfully! 1ca4237ad9ce29b0c66fe87862f1da54ac56a1e8_3688ff3077d3f334cee1d4b61d8bfb6a9508c2d2_revert bzimage passed!|

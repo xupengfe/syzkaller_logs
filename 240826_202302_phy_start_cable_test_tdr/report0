@@ -1,0 +1,286 @@
+Oops: general protection fault, probably for non-canonical address 0xdffffc00000000fe: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x00000000000007f0-0x00000000000007f7]
+CPU: 0 UID: 0 PID: 5903 Comm: syz-executor.1 Tainted: G S                 6.11.0-rc5-next-20240826-1ca4237ad9ce-dirty #1
+Tainted: [S]=CPU_OUT_OF_SPEC
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:phy_start_cable_test_tdr+0x43/0x690 drivers/net/phy/phy.c:885
+Code: 48 83 ec 20 48 89 55 c0 48 89 75 c8 e8 b6 a6 1e fd 49 8d bc 24 f0 07 00 00 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 0f 85 9c 05 00 00 4d 8d bc 24 e8 04 00 00 49 8b 9c 24
+RSP: 0018:ffff88804a33f370 EFLAGS: 00010202
+RAX: dffffc0000000000 RBX: ffff88804a33f560 RCX: ffffc90000c04000
+RDX: 00000000000000fe RSI: ffffffff84482e0a RDI: 00000000000007f0
+RBP: ffff88804a33f3b8 R08: 0000000000000000 R09: ffffed1002b5d815
+R10: 0000000000000000 R11: 0000000000000005 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff84482de0
+FS:  00007f44f9b43640(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000478560 CR3: 000000004a1fe006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ethnl_act_cable_test_tdr+0x718/0xe70 net/ethtool/cabletest.c:350
+ genl_family_rcv_msg_doit+0x22f/0x330 net/netlink/genetlink.c:1115
+ genl_family_rcv_msg net/netlink/genetlink.c:1195 [inline]
+ genl_rcv_msg+0x582/0x850 net/netlink/genetlink.c:1210
+ netlink_rcv_skb+0x187/0x470 net/netlink/af_netlink.c:2550
+ genl_rcv+0x32/0x50 net/netlink/genetlink.c:1219
+ netlink_unicast_kernel net/netlink/af_netlink.c:1331 [inline]
+ netlink_unicast+0x5a3/0x870 net/netlink/af_netlink.c:1357
+ netlink_sendmsg+0x956/0xe80 net/netlink/af_netlink.c:1901
+ sock_sendmsg_nosec net/socket.c:730 [inline]
+ __sock_sendmsg net/socket.c:745 [inline]
+ ____sys_sendmsg+0xaba/0xc90 net/socket.c:2597
+ ___sys_sendmsg+0x122/0x1c0 net/socket.c:2651
+ __sys_sendmsg+0x11f/0x200 net/socket.c:2680
+ __do_sys_sendmsg net/socket.c:2689 [inline]
+ __se_sys_sendmsg net/socket.c:2687 [inline]
+ __x64_sys_sendmsg+0x80/0xc0 net/socket.c:2687
+ x64_sys_call+0x932/0x2140 arch/x86/include/generated/asm/syscalls_64.h:47
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f44f983ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007f44f9b42cc8 EFLAGS: 00000246 ORIG_RAX: 000000000000002e
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007f44f983ee5d
+RDX: 0000000000000000 RSI: 00000000200003c0 RDI: 0000000000000003
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007f44f989f560 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:phy_start_cable_test_tdr+0x43/0x690 drivers/net/phy/phy.c:885
+Code: 48 83 ec 20 48 89 55 c0 48 89 75 c8 e8 b6 a6 1e fd 49 8d bc 24 f0 07 00 00 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 0f 85 9c 05 00 00 4d 8d bc 24 e8 04 00 00 49 8b 9c 24
+RSP: 0018:ffff88804a33f370 EFLAGS: 00010202
+RAX: dffffc0000000000 RBX: ffff88804a33f560 RCX: ffffc90000c04000
+RDX: 00000000000000fe RSI: ffffffff84482e0a RDI: 00000000000007f0
+RBP: ffff88804a33f3b8 R08: 0000000000000000 R09: ffffed1002b5d815
+R10: 0000000000000000 R11: 0000000000000005 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff84482de0
+FS:  00007f44f9b43640(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000478560 CR3: 000000004a1fe006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+EXT4-fs (loop5): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+loop4: detected capacity change from 0 to 128
+netlink: 'syz-executor.5': attribute type 1 has an invalid length.
+loop3: detected capacity change from 0 to 256
+==================================================================
+BUG: KASAN: slab-use-after-free in owner_on_cpu include/linux/sched.h:2172 [inline]
+BUG: KASAN: slab-use-after-free in mutex_can_spin_on_owner+0x19b/0x1c0 kernel/locking/mutex.c:409
+Read of size 4 at addr ffff8880414dcab4 by task syz-executor.1/5928
+
+CPU: 0 UID: 0 PID: 5928 Comm: syz-executor.1 Tainted: G S    D            6.11.0-rc5-next-20240826-1ca4237ad9ce-dirty #1
+loop0: detected capacity change from 0 to 65536
+Tainted: [S]=CPU_OUT_OF_SPEC, [D]=DIE
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:120
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xce/0x610 mm/kasan/report.c:488
+XFS: ikeep mount option is deprecated.
+ kasan_report+0xcc/0x110 mm/kasan/report.c:601
+ __asan_report_load4_noabort+0x18/0x20 mm/kasan/report_generic.c:380
+ owner_on_cpu include/linux/sched.h:2172 [inline]
+ mutex_can_spin_on_owner+0x19b/0x1c0 kernel/locking/mutex.c:409
+ mutex_optimistic_spin kernel/locking/mutex.c:452 [inline]
+ __mutex_lock_common kernel/locking/mutex.c:612 [inline]
+ __mutex_lock+0x383/0x1490 kernel/locking/mutex.c:752
+ mutex_lock_nested+0x1f/0x30 kernel/locking/mutex.c:804
+ rtnl_lock+0x20/0x30 net/core/rtnetlink.c:79
+ packet_mc_add net/packet/af_packet.c:3751 [inline]
+ packet_setsockopt+0x27d2/0x3f90 net/packet/af_packet.c:3873
+ do_sock_setsockopt+0x229/0x480 net/socket.c:2324
+ __sys_setsockopt+0x131/0x200 net/socket.c:2347
+ __do_sys_setsockopt net/socket.c:2356 [inline]
+ __se_sys_setsockopt net/socket.c:2353 [inline]
+ __x64_sys_setsockopt+0xc6/0x160 net/socket.c:2353
+ x64_sys_call+0x6e7/0x2140 arch/x86/include/generated/asm/syscalls_64.h:55
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f44f983ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007f44f9b00cc8 EFLAGS: 00000246 ORIG_RAX: 0000000000000036
+RAX: ffffffffffffffda RBX: 00000000004bc120 RCX: 00007f44f983ee5d
+RDX: 0000000000000001 RSI: 0000000000000107 RDI: 0000000000000007
+RBP: 00000000004bc120 R08: 0000000000000010 R09: 0000000000000000
+R10: 0000000020000080 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000006e R14: 00007f44f989f560 R15: 0000000000000000
+ </TASK>
+
+Allocated by task 5901:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x3c/0x50 mm/kasan/generic.c:565
+ unpoison_slab_object mm/kasan/common.c:319 [inline]
+ __kasan_slab_alloc+0x62/0x80 mm/kasan/common.c:345
+ kasan_slab_alloc include/linux/kasan.h:250 [inline]
+ slab_post_alloc_hook mm/slub.c:4036 [inline]
+ slab_alloc_node mm/slub.c:4085 [inline]
+ kmem_cache_alloc_node_noprof+0x12e/0x380 mm/slub.c:4128
+ alloc_task_struct_node kernel/fork.c:180 [inline]
+ dup_task_struct kernel/fork.c:1107 [inline]
+ copy_process+0x476/0x6a00 kernel/fork.c:2203
+ kernel_clone+0xfd/0x8b0 kernel/fork.c:2784
+ __do_sys_clone3+0x1fe/0x280 kernel/fork.c:3088
+ __se_sys_clone3 kernel/fork.c:3067 [inline]
+ __x64_sys_clone3+0x5d/0x80 kernel/fork.c:3067
+ x64_sys_call+0x1f04/0x2140 arch/x86/include/generated/asm/syscalls_64.h:436
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+Freed by task 774:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_free_info+0x3f/0x60 mm/kasan/generic.c:579
+ poison_slab_object mm/kasan/common.c:247 [inline]
+ __kasan_slab_free+0x3d/0x60 mm/kasan/common.c:264
+ kasan_slab_free include/linux/kasan.h:233 [inline]
+ slab_free_hook mm/slub.c:2299 [inline]
+ slab_free mm/slub.c:4521 [inline]
+ kmem_cache_free+0x1aa/0x4f0 mm/slub.c:4623
+ free_task_struct kernel/fork.c:185 [inline]
+ free_task+0x12d/0x180 kernel/fork.c:614
+ __put_task_struct+0x23b/0x3d0 kernel/fork.c:982
+ put_task_struct include/linux/sched/task.h:139 [inline]
+ put_task_struct include/linux/sched/task.h:126 [inline]
+ delayed_put_task_struct+0x125/0x2c0 kernel/exit.c:228
+ rcu_do_batch kernel/rcu/tree.c:2567 [inline]
+ rcu_core+0x86c/0x1920 kernel/rcu/tree.c:2823
+ rcu_core_si+0x12/0x20 kernel/rcu/tree.c:2840
+ handle_softirqs+0x1c5/0x870 kernel/softirq.c:554
+ __do_softirq kernel/softirq.c:588 [inline]
+ invoke_softirq kernel/softirq.c:428 [inline]
+ __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+ irq_exit_rcu+0x12/0x30 kernel/softirq.c:649
+ instr_sysvec_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1037 [inline]
+ sysvec_apic_timer_interrupt+0xb4/0xd0 arch/x86/kernel/apic/apic.c:1037
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:702
+
+Last potentially related work creation:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ __kasan_record_aux_stack+0x93/0xb0 mm/kasan/generic.c:541
+ kasan_record_aux_stack_noalloc+0xf/0x20 mm/kasan/generic.c:551
+ __call_rcu_common.constprop.0+0x72/0x650 kernel/rcu/tree.c:3086
+ call_rcu+0x12/0x20 kernel/rcu/tree.c:3190
+ put_task_struct_rcu_user+0x8c/0xf0 kernel/exit.c:234
+ finish_task_switch.isra.0+0x67f/0x990 kernel/sched/core.c:5220
+ context_switch kernel/sched/core.c:5314 [inline]
+ __schedule+0xbdf/0x31f0 kernel/sched/core.c:6677
+ __schedule_loop kernel/sched/core.c:6754 [inline]
+ schedule+0xf6/0x3f0 kernel/sched/core.c:6769
+ do_nanosleep+0x15a/0x4f0 kernel/time/hrtimer.c:2032
+ hrtimer_nanosleep+0x1d1/0x450 kernel/time/hrtimer.c:2085
+ common_nsleep+0xb7/0xe0 kernel/time/posix-timers.c:1365
+ __do_sys_clock_nanosleep kernel/time/posix-timers.c:1411 [inline]
+ __se_sys_clock_nanosleep kernel/time/posix-timers.c:1388 [inline]
+ __x64_sys_clock_nanosleep+0x388/0x500 kernel/time/posix-timers.c:1388
+ x64_sys_call+0x1727/0x2140 arch/x86/include/generated/asm/syscalls_64.h:231
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+Second to last potentially related work creation:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ __kasan_record_aux_stack+0x93/0xb0 mm/kasan/generic.c:541
+ kasan_record_aux_stack+0x12/0x20 mm/kasan/generic.c:546
+ task_work_add+0x2b4/0x3b0 kernel/task_work.c:66
+ task_tick_mm_cid+0x11c/0x180 kernel/sched/core.c:10422
+ sched_tick+0x233/0x720 kernel/sched/core.c:5594
+ update_process_times+0x158/0x1c0 kernel/time/timer.c:2492
+ tick_sched_handle kernel/time/tick-sched.c:276 [inline]
+ tick_nohz_handler+0x3ae/0x580 kernel/time/tick-sched.c:297
+ __run_hrtimer kernel/time/hrtimer.c:1691 [inline]
+ __hrtimer_run_queues+0x5d6/0xc30 kernel/time/hrtimer.c:1755
+ hrtimer_interrupt+0x324/0x7a0 kernel/time/hrtimer.c:1817
+ local_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1026 [inline]
+ __sysvec_apic_timer_interrupt+0x10b/0x410 arch/x86/kernel/apic/apic.c:1043
+ instr_sysvec_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1037 [inline]
+ sysvec_apic_timer_interrupt+0xaf/0xd0 arch/x86/kernel/apic/apic.c:1037
+ asm_sysvec_apic_timer_interrupt+0x1f/0x30 arch/x86/include/asm/idtentry.h:702
+
+loop7: detected capacity change from 0 to 32768
+The buggy address belongs to the object at ffff8880414dca80
+ which belongs to the cache task_struct of size 9224
+The buggy address is located 52 bytes inside of
+ freed 9224-byte region [ffff8880414dca80, ffff8880414dee88)
+xfs: Unknown parameter 'mogbufs'
+
+The buggy address belongs to the physical page:
+page: refcount:1 mapcount:0 mapping:0000000000000000 index:0xffff8880414d8000 pfn:0x414d8
+head: order:3 mapcount:0 entire_mapcount:0 nr_pages_mapped:0 pincount:0
+memcg:ffff888040a6e541
+flags: 0xfffffc0000240(workingset|head|node=0|zone=1|lastcpupid=0x1fffff)
+page_type: f5(slab)
+raw: 000fffffc0000240 ffff88800d71a640 ffffea0000ae7210 ffffea0000be4e10
+raw: ffff8880414d8000 0000000000030001 00000001f5000000 ffff888040a6e541
+head: 000fffffc0000240 ffff88800d71a640 ffffea0000ae7210 ffffea0000be4e10
+head: ffff8880414d8000 0000000000030001 00000001f5000000 ffff888040a6e541
+head: 000fffffc0000003 ffffea0001053601 ffffffffffffffff 0000000000000000
+head: 0000000000000008 0000000000000000 00000000ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff8880414dc980: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff8880414dca00: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+>ffff8880414dca80: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                                     ^
+ ffff8880414dcb00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff8880414dcb80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+==================================================================
+XFS (loop0): DAX unsupported by block device. Turning off DAX.
+XFS (loop0): Mounting V5 Filesystem 3e7e19ec-4fa8-4c61-9f42-f376546f3591
+XFS (loop0): Ending clean mount
+XFS (loop0): Quotacheck needed: Please wait.
+XFS (loop0): Quotacheck: Done.
+loop4: detected capacity change from 0 to 256
+XFS (loop0): Unmounting Filesystem 3e7e19ec-4fa8-4c61-9f42-f376546f3591
+loop3: detected capacity change from 0 to 32768
+xfs: Unknown parameter 'mogbufs'
+loop5: detected capacity change from 0 to 1024
+EXT4-fs (loop5): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+loop2: detected capacity change from 0 to 32768
+XFS (loop2): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+EXT4-fs (loop5): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+XFS (loop2): Ending clean mount
+XFS (loop2): Quotacheck needed: Please wait.
+XFS (loop2): Quotacheck: Done.
+XFS (loop2): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+coredump: 68(syz-executor.5): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 81(syz-executor.4): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 60(syz-executor.1): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 55(syz-executor.4): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 78(syz-executor.5): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 51(syz-executor.0): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 42(syz-executor.1): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 74(syz-executor.5): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 59(syz-executor.3): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+coredump: 65(syz-executor.4): written to |/usr/lib/systemd/systemd-coredump: VMAs: 44, size 22900736; core: 22908928 bytes, pos 22908928
+----------------
+Code disassembly (best guess):
+   0:	48 83 ec 20          	sub    $0x20,%rsp
+   4:	48 89 55 c0          	mov    %rdx,-0x40(%rbp)
+   8:	48 89 75 c8          	mov    %rsi,-0x38(%rbp)
+   c:	e8 b6 a6 1e fd       	callq  0xfd1ea6c7
+  11:	49 8d bc 24 f0 07 00 	lea    0x7f0(%r12),%rdi
+  18:	00
+  19:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  20:	fc ff df
+  23:	48 89 fa             	mov    %rdi,%rdx
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+* 2a:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2e:	0f 85 9c 05 00 00    	jne    0x5d0
+  34:	4d 8d bc 24 e8 04 00 	lea    0x4e8(%r12),%r15
+  3b:	00
+  3c:	49                   	rex.WB
+  3d:	8b                   	.byte 0x8b
+  3e:	9c                   	pushfq
+  3f:	24                   	.byte 0x24
