@@ -1,0 +1,226 @@
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 29409 at include/linux/maple_tree.h:733 __mas_set_range include/linux/maple_tree.h:733 [inline]
+WARNING: CPU: 0 PID: 29409 at include/linux/maple_tree.h:733 vma_iter_config mm/vma.h:394 [inline]
+WARNING: CPU: 0 PID: 29409 at include/linux/maple_tree.h:733 __split_vma+0x4d7/0x1020 mm/vma.c:396
+Modules linked in:
+CPU: 0 UID: 0 PID: 29409 Comm: syz-executor.2 Tainted: G S                 6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [S]=CPU_OUT_OF_SPEC
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__mas_set_range include/linux/maple_tree.h:733 [inline]
+RIP: 0010:vma_iter_config mm/vma.h:394 [inline]
+RIP: 0010:__split_vma+0x4d7/0x1020 mm/vma.c:396
+Code: 89 ee 48 8b 40 10 48 89 c7 48 89 85 00 ff ff ff e8 8e 61 a7 ff 48 8b 85 00 ff ff ff 4c 39 e8 0f 83 ea fd ff ff e8 b9 5e a7 ff <0f> 0b e9 de fd ff ff 48 8b 85 30 ff ff ff 48 83 c0 10 48 89 85 18
+RSP: 0018:ffff888047a7f9a0 EFLAGS: 00010212
+RAX: 000000000000099c RBX: ffff88804680fa50 RCX: ffffc9001112e000
+RDX: 0000000000040000 RSI: ffffffff81bf6187 RDI: 0000000000000006
+RBP: ffff888047a7faa0 R08: 0000000000000001 R09: ffffed10025e4fcd
+R10: 0000000020ff9000 R11: 0000000000000001 R12: ffff888047a7fe40
+R13: 0000000020ff9000 R14: 0000000020ffc000 R15: ffff88804680ff00
+FS:  00007f9dd66a5640(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d524000 CR3: 0000000024b22003 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ vms_gather_munmap_vmas+0x178/0xf70 mm/vma.c:1203
+ do_vmi_align_munmap+0x26e/0x640 mm/vma.c:1334
+ do_vmi_munmap+0x202/0x400 mm/vma.c:1391
+ __vm_munmap+0x182/0x380 mm/mmap.c:1601
+ __do_sys_munmap mm/mmap.c:1618 [inline]
+ __se_sys_munmap mm/mmap.c:1615 [inline]
+ __x64_sys_munmap+0x62/0x90 mm/mmap.c:1615
+ x64_sys_call+0x198f/0x2140 arch/x86/include/generated/asm/syscalls_64.h:12
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f9dd643ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007f9dd66a4cc8 EFLAGS: 00000246 ORIG_RAX: 000000000000000b
+RAX: ffffffffffffffda RBX: 00000000004bbf80 RCX: 00007f9dd643ee5d
+RDX: 0000000000000000 RSI: 0000000000001000 RDI: 0000000020ffc000
+RBP: 00000000004bbf80 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 000000000000000b R14: 00007f9dd649f560 R15: 0000000000000000
+ </TASK>
+irq event stamp: 1493
+hardirqs last  enabled at (1501): [<ffffffff814629e4>] __up_console_sem kernel/printk/printk.c:343 [inline]
+hardirqs last  enabled at (1501): [<ffffffff814629e4>] __console_unlock kernel/printk/printk.c:2828 [inline]
+hardirqs last  enabled at (1501): [<ffffffff814629e4>] console_unlock+0x224/0x240 kernel/printk/printk.c:3155
+hardirqs last disabled at (1508): [<ffffffff814629c9>] __up_console_sem kernel/printk/printk.c:341 [inline]
+hardirqs last disabled at (1508): [<ffffffff814629c9>] __console_unlock kernel/printk/printk.c:2828 [inline]
+hardirqs last disabled at (1508): [<ffffffff814629c9>] console_unlock+0x209/0x240 kernel/printk/printk.c:3155
+softirqs last  enabled at (1128): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (1128): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (1128): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (1123): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (1123): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (1123): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+sock: sock_timestamping_bind_phc: sock not bind to device
+---[ end trace 0000000000000000 ]---
+XFS (loop7): Deprecated V4 format (crc=0) not supported by kernel.
+Oops: general protection fault, probably for non-canonical address 0xdffffc0000000002: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000010-0x0000000000000017]
+CPU: 0 UID: 0 PID: 29404 Comm: syz-executor.2 Tainted: G S      W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [S]=CPU_OUT_OF_SPEC, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:acct_collect+0x1ce/0x8f0 kernel/acct.c:565
+Code: 1f 44 00 00 4d 8d be 70 ff ff ff 45 31 e4 49 be 00 00 00 00 00 fc ff df eb 38 e8 2d aa 0b 00 49 8d 7d 08 48 89 fa 48 c1 ea 03 <42> 80 3c 32 00 0f 85 87 06 00 00 4c 89 e9 49 8b 55 08 48 c1 e9 03
+RSP: 0018:ffff888052bf7cb8 EFLAGS: 00010202
+RAX: 0000000000000000 RBX: ffff888048921b00 RCX: ffffffff857a0850
+RDX: 0000000000000002 RSI: ffffffff815b1613 RDI: 0000000000000012
+RBP: ffff888052bf7dc8 R08: 0000000000000001 R09: ffffed10043e2a8e
+R10: 0000000000000001 R11: 0000000000000001 R12: 0000000002005000
+R13: 000000000000000a R14: dffffc0000000000 R15: ffff888052bf7d10
+FS:  00007f9dd66a6800(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d525000 CR3: 0000000024b22005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ do_exit+0x7f7/0x2a30 kernel/exit.c:918
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1088
+ __do_sys_exit_group kernel/exit.c:1099 [inline]
+ __se_sys_exit_group kernel/exit.c:1097 [inline]
+ __x64_sys_exit_group+0x4d/0x60 kernel/exit.c:1097
+ x64_sys_call+0xf81/0x2140 arch/x86/include/generated/asm/syscalls_64.h:232
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f9dd643ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffdce8c40b8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f9dd5c01008 RCX: 00007f9dd643ee5d
+RDX: 0000001b2d520000 RSI: 0000000000000000 RDI: 000000000000000b
+RBP: 000000000000000b R08: 0000000000000ba7 R09: 00007f9dd5c01008
+R10: 0000001b2d920000 R11: 0000000000000246 R12: 0000000000003660
+R13: 000000008146eba7 R14: 00000000004bc018 R15: ffffffff8146e0c3
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:acct_collect+0x1ce/0x8f0 kernel/acct.c:565
+Code: 1f 44 00 00 4d 8d be 70 ff ff ff 45 31 e4 49 be 00 00 00 00 00 fc ff df eb 38 e8 2d aa 0b 00 49 8d 7d 08 48 89 fa 48 c1 ea 03 <42> 80 3c 32 00 0f 85 87 06 00 00 4c 89 e9 49 8b 55 08 48 c1 e9 03
+RSP: 0018:ffff888052bf7cb8 EFLAGS: 00010202
+RAX: 0000000000000000 RBX: ffff888048921b00 RCX: ffffffff857a0850
+RDX: 0000000000000002 RSI: ffffffff815b1613 RDI: 0000000000000012
+RBP: ffff888052bf7dc8 R08: 0000000000000001 R09: ffffed10043e2a8e
+R10: 0000000000000001 R11: 0000000000000001 R12: 0000000002005000
+R13: 000000000000000a R14: dffffc0000000000 R15: ffff888052bf7d10
+FS:  00007f9dd66a6800(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000001b2d525000 CR3: 0000000024b22005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Fixing recursive fault but reboot is needed!
+BUG: using smp_processor_id() in preemptible [00000000] code: syz-executor.2/29404
+caller is debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+CPU: 0 UID: 0 PID: 29404 Comm: syz-executor.2 Tainted: G S    D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [S]=CPU_OUT_OF_SPEC, [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:120
+ dump_stack+0x19/0x20 lib/dump_stack.c:129
+ check_preemption_disabled+0x168/0x180 lib/smp_processor_id.c:49
+ debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+ __schedule+0x9a/0x31f0 kernel/sched/core.c:6558
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6693
+ make_task_dead+0x384/0x3c0 kernel/exit.c:1047
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1492
+RIP: 0033:0x7f9dd643ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffdce8c40b8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f9dd5c01008 RCX: 00007f9dd643ee5d
+RDX: 0000001b2d520000 RSI: 0000000000000000 RDI: 000000000000000b
+RBP: 000000000000000b R08: 0000000000000ba7 R09: 00007f9dd5c01008
+R10: 0000001b2d920000 R11: 0000000000000246 R12: 0000000000003660
+R13: 000000008146eba7 R14: 00000000004bc018 R15: ffffffff8146e0c3
+ </TASK>
+BUG: scheduling while atomic: syz-executor.2/29404/0x00000000
+INFO: lockdep is turned off.
+Modules linked in:
+Preemption disabled at:
+[<ffffffff81355628>] do_task_dead+0x28/0x110 kernel/sched/core.c:6688
+CPU: 0 UID: 0 PID: 29404 Comm: syz-executor.2 Tainted: G S    D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [S]=CPU_OUT_OF_SPEC, [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:120
+ dump_stack+0x19/0x20 lib/dump_stack.c:129
+ __schedule_bug+0x12d/0x180 kernel/sched/core.c:5860
+ schedule_debug kernel/sched/core.c:5887 [inline]
+ __schedule+0x2189/0x31f0 kernel/sched/core.c:6562
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6693
+ make_task_dead+0x384/0x3c0 kernel/exit.c:1047
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1492
+RIP: 0033:0x7f9dd643ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffdce8c40b8 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007f9dd5c01008 RCX: 00007f9dd643ee5d
+RDX: 0000001b2d520000 RSI: 0000000000000000 RDI: 000000000000000b
+RBP: 000000000000000b R08: 0000000000000ba7 R09: 00007f9dd5c01008
+R10: 0000001b2d920000 R11: 0000000000000246 R12: 0000000000003660
+R13: 000000008146eba7 R14: 00000000004bc018 R15: ffffffff8146e0c3
+ </TASK>
+loop7: detected capacity change from 0 to 256
+FAT-fs (loop7): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+vfat filesystem being mounted at /syzkaller-testdir3384396151/syzkaller.DQPgCU/561/file0 supports timestamps until 2107-12-31 (0x10391447e)
+loop4: detected capacity change from 0 to 32768
+XFS (loop4): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop4): Ending clean mount
+XFS (loop4): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+iommufd_mock iommufd_mock0: Adding to iommu group 0
+Soft offlining pfn 0x8bf9 at process virtual address 0x20ff9000
+Soft offline: 0x8bf9: page already poisoned
+Soft offlining pfn 0x8bf9 at process virtual address 0x20ffa000
+Soft offline: 0x8bf9: page already poisoned
+Soft offlining pfn 0x2f60f at process virtual address 0x20ffb000
+Soft offlining pfn 0x3621d at process virtual address 0x20ffc000
+loop3: detected capacity change from 0 to 32768
+XFS (loop3): Mounting V5 Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+XFS (loop3): Ending clean mount
+XFS (loop3): Unmounting Filesystem bfdc47fc-10d8-4eed-a562-11a831b3f791
+loop3: detected capacity change from 0 to 4096
+loop5: detected capacity change from 0 to 8
+loop5: detected capacity change from 0 to 256
+FAT-fs (loop5): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+vfat filesystem being mounted at /syzkaller-testdir413979791/syzkaller.1wsAkW/595/file0 supports timestamps until 2107-12-31 (0x10391447e)
+sock: sock_timestamping_bind_phc: sock not bind to device
+loop0: detected capacity change from 0 to 4096
+EXT4-fs: Ignoring removed nobh option
+EXT4-fs: Ignoring removed mblk_io_submit option
+EXT4-fs: Journaled quota options ignored when QUOTA feature is enabled
+EXT4-fs (loop0): mounted filesystem 00000000-0000-0000-0000-000000000000 r/w without journal. Quota mode: writeback.
+EXT4-fs error (device loop0): ext4_expand_extra_isize_ea:2792: inode #2: comm syz-executor.0: corrupted in-inode xattr: bad e_name length
+EXT4-fs error (device loop0): ext4_xattr_ibody_get:653: inode #2: comm syz-executor.0: corrupted in-inode xattr: bad e_name length
+EXT4-fs (loop0): unmounting filesystem 00000000-0000-0000-0000-000000000000.
+Soft offlining pfn 0x8bf9 at process virtual address 0x20ff9000
+Soft offline: 0x8bf9: page already poisoned
+Soft offlining pfn 0x8bf9 at process virtual address 0x20ffa000
+Soft offline: 0x8bf9: page already poisoned
+Soft offlining pfn 0x5c783 at process virtual address 0x20ffb000
+Soft offlining pfn 0x2d90e at process virtual address 0x20ffc000
+----------------
+Code disassembly (best guess), 1 bytes skipped:
+   0:	44 00 00             	add    %r8b,(%rax)
+   3:	4d 8d be 70 ff ff ff 	lea    -0x90(%r14),%r15
+   a:	45 31 e4             	xor    %r12d,%r12d
+   d:	49 be 00 00 00 00 00 	movabs $0xdffffc0000000000,%r14
+  14:	fc ff df
+  17:	eb 38                	jmp    0x51
+  19:	e8 2d aa 0b 00       	callq  0xbaa4b
+  1e:	49 8d 7d 08          	lea    0x8(%r13),%rdi
+  22:	48 89 fa             	mov    %rdi,%rdx
+  25:	48 c1 ea 03          	shr    $0x3,%rdx
+* 29:	42 80 3c 32 00       	cmpb   $0x0,(%rdx,%r14,1) <-- trapping instruction
+  2e:	0f 85 87 06 00 00    	jne    0x6bb
+  34:	4c 89 e9             	mov    %r13,%rcx
+  37:	49 8b 55 08          	mov    0x8(%r13),%rdx
+  3b:	48 c1 e9 03          	shr    $0x3,%rcx

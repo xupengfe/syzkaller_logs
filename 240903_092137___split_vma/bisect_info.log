@@ -1,0 +1,35 @@
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [ecc768a84f0b8e631986f9ade3118fa37852fef0] Add linux-next specific files for 20240902
+git bisect bad ecc768a84f0b8e631986f9ade3118fa37852fef0
+# status: waiting for good commit(s), bad commit known
+# good: [431c1646e1f86b949fa3685efc50b660a364c2b6] Linux 6.11-rc6
+git bisect good 431c1646e1f86b949fa3685efc50b660a364c2b6
+# bad: [ef4c04432ff7e0b828a0fb78a49719740d5d35b3] Merge branch 'master' of git://git.kernel.org/pub/scm/linux/kernel/git/bluetooth/bluetooth-next.git
+git bisect bad ef4c04432ff7e0b828a0fb78a49719740d5d35b3
+# bad: [39a1f4f4601c391e666e1aa837987e8658ce779c] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/deller/parisc-linux.git
+git bisect bad 39a1f4f4601c391e666e1aa837987e8658ce779c
+# bad: [50339c513aa60323d6a155157184b09e0baa19a6] Merge branch 'for-next' of git://git.kernel.org/pub/scm/linux/kernel/git/amlogic/linux.git
+git bisect bad 50339c513aa60323d6a155157184b09e0baa19a6
+# bad: [d09c2981aaf6a430075f662fe23845401bb21b02] foo
+git bisect bad d09c2981aaf6a430075f662fe23845401bb21b02
+# good: [6b2c2ed58e34d88637017cf9e178489550607096] err.h: add ERR_PTR_PCPU(), PTR_ERR_PCPU() and IS_ERR_PCPU() macros
+git bisect good 6b2c2ed58e34d88637017cf9e178489550607096
+# bad: [3c8e392e62b916d57d3db484f8b905f56f79d1aa] mm/damon/core: replace per-quota regions priority histogram buffer usage with per-context one
+git bisect bad 3c8e392e62b916d57d3db484f8b905f56f79d1aa
+# bad: [3dc80ef932e2cbb5e4139a74e655d11f0807adad] mm: move may_expand_vm() check in mmap_region()
+git bisect bad 3dc80ef932e2cbb5e4139a74e655d11f0807adad
+# good: [f88d0d4cb57c1bdde3b9e0db9ed2e57baf9cfee8] mm: remove page_has_private()
+git bisect good f88d0d4cb57c1bdde3b9e0db9ed2e57baf9cfee8
+# good: [a1528ae29ef62b7fff89cb01c4f828dbfcf1c219] mm/vma: introduce abort_munmap_vmas()
+git bisect good a1528ae29ef62b7fff89cb01c4f828dbfcf1c219
+# good: [dbdb3b92034082379722de3296366bea4263988d] mm/vma: support vma == NULL in init_vma_munmap()
+git bisect good dbdb3b92034082379722de3296366bea4263988d
+# good: [da12f28f0b43c344a61027494fd02b2af73d5373] mm/mmap: avoid zeroing vma tree in mmap_region()
+git bisect good da12f28f0b43c344a61027494fd02b2af73d5373
+# bad: [f4704d4e07bb8d51d2d8888ecd1ad5d903f19445] mm/mmap: use PHYS_PFN in mmap_region()
+git bisect bad f4704d4e07bb8d51d2d8888ecd1ad5d903f19445
+# bad: [3483c95414f92248129371a1790921486b507e26] mm: change failure of MAP_FIXED to restoring the gap on failure
+git bisect bad 3483c95414f92248129371a1790921486b507e26
+# first bad commit: [3483c95414f92248129371a1790921486b507e26] mm: change failure of MAP_FIXED to restoring the gap on failure
+|0903_094304|Bisect successfully! ecc768a84f0b8e631986f9ade3118fa37852fef0_3483c95414f92248129371a1790921486b507e26_revert bzimage passed!|

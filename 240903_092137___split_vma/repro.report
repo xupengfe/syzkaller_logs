@@ -1,0 +1,328 @@
+cgroup: Unknown subsys name 'net'
+cgroup: Unknown subsys name 'rlimit'
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 731 at include/linux/maple_tree.h:733 __mas_set_range include/linux/maple_tree.h:733 [inline]
+WARNING: CPU: 1 PID: 731 at include/linux/maple_tree.h:733 vma_iter_config mm/vma.h:394 [inline]
+WARNING: CPU: 1 PID: 731 at include/linux/maple_tree.h:733 __split_vma+0x4d7/0x1020 mm/vma.c:396
+Modules linked in:
+CPU: 1 UID: 0 PID: 731 Comm: syz-executor787 Not tainted 6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__mas_set_range include/linux/maple_tree.h:733 [inline]
+RIP: 0010:vma_iter_config mm/vma.h:394 [inline]
+RIP: 0010:__split_vma+0x4d7/0x1020 mm/vma.c:396
+Code: 89 ee 48 8b 40 10 48 89 c7 48 89 85 00 ff ff ff e8 8e 61 a7 ff 48 8b 85 00 ff ff ff 4c 39 e8 0f 83 ea fd ff ff e8 b9 5e a7 ff <0f> 0b e9 de fd ff ff 48 8b 85 30 ff ff ff 48 83 c0 10 48 89 85 18
+RSP: 0018:ffff8880230ef9a0 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff8880141fc1e0 RCX: ffffffff81bf6117
+RDX: ffff88801684a540 RSI: ffffffff81bf6187 RDI: 0000000000000006
+RBP: ffff8880230efaa0 R08: 0000000000000001 R09: ffffed10024f8146
+R10: 0000000020ff9000 R11: 0000000000000001 R12: ffff8880230efe40
+R13: 0000000020ff9000 R14: 0000000020ffc000 R15: ffff88801a3e4a50
+FS:  00007fede856f740(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055ae639e1040 CR3: 0000000024bd0006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ vms_gather_munmap_vmas+0x178/0xf70 mm/vma.c:1203
+ do_vmi_align_munmap+0x26e/0x640 mm/vma.c:1334
+ do_vmi_munmap+0x202/0x400 mm/vma.c:1391
+ __vm_munmap+0x182/0x380 mm/mmap.c:1601
+ __do_sys_munmap mm/mmap.c:1618 [inline]
+ __se_sys_munmap mm/mmap.c:1615 [inline]
+ __x64_sys_munmap+0x62/0x90 mm/mmap.c:1615
+ x64_sys_call+0x198f/0x2140 arch/x86/include/generated/asm/syscalls_64.h:12
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fede823ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007fff9ef4d3b8 EFLAGS: 00000246 ORIG_RAX: 000000000000000b
+RAX: ffffffffffffffda RBX: 0000000000000003 RCX: 00007fede823ee5d
+RDX: ffffffffffffff80 RSI: 0000000000001000 RDI: 0000000020ffc000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000003 R11: 0000000000000246 R12: 0000000000000000
+R13: 431bde82d7b634db R14: 0000000000404e08 R15: 00007fede85ba000
+ </TASK>
+irq event stamp: 2015
+hardirqs last  enabled at (2023): [<ffffffff814629e4>] __up_console_sem kernel/printk/printk.c:343 [inline]
+hardirqs last  enabled at (2023): [<ffffffff814629e4>] __console_unlock kernel/printk/printk.c:2828 [inline]
+hardirqs last  enabled at (2023): [<ffffffff814629e4>] console_unlock+0x224/0x240 kernel/printk/printk.c:3155
+hardirqs last disabled at (2030): [<ffffffff814629c9>] __up_console_sem kernel/printk/printk.c:341 [inline]
+hardirqs last disabled at (2030): [<ffffffff814629c9>] __console_unlock kernel/printk/printk.c:2828 [inline]
+hardirqs last disabled at (2030): [<ffffffff814629c9>] console_unlock+0x209/0x240 kernel/printk/printk.c:3155
+softirqs last  enabled at (1718): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (1718): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (1718): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (1713): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (1713): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (1713): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 731 at include/linux/maple_tree.h:733 __mas_set_range include/linux/maple_tree.h:733 [inline]
+WARNING: CPU: 1 PID: 731 at include/linux/maple_tree.h:733 vma_iter_config mm/vma.h:394 [inline]
+WARNING: CPU: 1 PID: 731 at include/linux/maple_tree.h:733 __split_vma+0x4d7/0x1020 mm/vma.c:396
+Modules linked in:
+CPU: 1 UID: 0 PID: 731 Comm: syz-executor787 Tainted: G        W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__mas_set_range include/linux/maple_tree.h:733 [inline]
+RIP: 0010:vma_iter_config mm/vma.h:394 [inline]
+RIP: 0010:__split_vma+0x4d7/0x1020 mm/vma.c:396
+Code: 89 ee 48 8b 40 10 48 89 c7 48 89 85 00 ff ff ff e8 8e 61 a7 ff 48 8b 85 00 ff ff ff 4c 39 e8 0f 83 ea fd ff ff e8 b9 5e a7 ff <0f> 0b e9 de fd ff ff 48 8b 85 30 ff ff ff 48 83 c0 10 48 89 85 18
+RSP: 0018:ffff8880230ef9a0 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff8880141fc1e0 RCX: ffffffff81bf6172
+RDX: ffff88801684a540 RSI: ffffffff81bf6187 RDI: 0000000000000006
+RBP: ffff8880230efaa0 R08: 0000000000000001 R09: ffffed10024f806e
+R10: 0000000020ffd000 R11: 0000000000000001 R12: ffff8880230efe40
+R13: 0000000020ffd000 R14: 0000000020ffd000 R15: ffff88801a3e4d20
+FS:  00007fede856f740(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fce06ab7000 CR3: 0000000024bd0006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ vms_gather_munmap_vmas+0x323/0xf70 mm/vma.c:1223
+ do_vmi_align_munmap+0x26e/0x640 mm/vma.c:1334
+ do_vmi_munmap+0x202/0x400 mm/vma.c:1391
+ __vm_munmap+0x182/0x380 mm/mmap.c:1601
+ __do_sys_munmap mm/mmap.c:1618 [inline]
+ __se_sys_munmap mm/mmap.c:1615 [inline]
+ __x64_sys_munmap+0x62/0x90 mm/mmap.c:1615
+ x64_sys_call+0x198f/0x2140 arch/x86/include/generated/asm/syscalls_64.h:12
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fede823ee5d
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007fff9ef4d3b8 EFLAGS: 00000246 ORIG_RAX: 000000000000000b
+RAX: ffffffffffffffda RBX: 0000000000000003 RCX: 00007fede823ee5d
+RDX: ffffffffffffff80 RSI: 0000000000001000 RDI: 0000000020ffc000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000003 R11: 0000000000000246 R12: 0000000000000000
+R13: 431bde82d7b634db R14: 0000000000404e08 R15: 00007fede85ba000
+ </TASK>
+irq event stamp: 2749
+hardirqs last  enabled at (2757): [<ffffffff814629e4>] __up_console_sem kernel/printk/printk.c:343 [inline]
+hardirqs last  enabled at (2757): [<ffffffff814629e4>] __console_unlock kernel/printk/printk.c:2828 [inline]
+hardirqs last  enabled at (2757): [<ffffffff814629e4>] console_unlock+0x224/0x240 kernel/printk/printk.c:3155
+hardirqs last disabled at (2774): [<ffffffff814629c9>] __up_console_sem kernel/printk/printk.c:341 [inline]
+hardirqs last disabled at (2774): [<ffffffff814629c9>] __console_unlock kernel/printk/printk.c:2828 [inline]
+hardirqs last disabled at (2774): [<ffffffff814629c9>] console_unlock+0x209/0x240 kernel/printk/printk.c:3155
+softirqs last  enabled at (2772): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (2772): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (2772): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (2765): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (2765): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (2765): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+---[ end trace 0000000000000000 ]---
+Oops: general protection fault, probably for non-canonical address 0xdffffc0000000003: 0000 [#1] PREEMPT SMP KASAN NOPTI
+KASAN: null-ptr-deref in range [0x0000000000000018-0x000000000000001f]
+CPU: 1 UID: 0 PID: 731 Comm: syz-executor787 Tainted: G        W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:__lock_acquire+0xd3/0x5c90 kernel/locking/lockdep.c:5065
+Code: 03 38 d0 7c 08 84 d2 0f 85 39 18 00 00 44 8b 1d 1b e8 86 06 45 85 db 74 7b 48 b8 00 00 00 00 00 fc ff df 4c 89 f2 48 c1 ea 03 <80> 3c 02 00 0f 85 2c 36 00 00 49 8b 06 48 3d 20 8e c6 88 74 55 44
+RSP: 0018:ffff8880230ef480 EFLAGS: 00010006
+RAX: dffffc0000000000 RBX: 1ffff1100461dea3 RCX: 0000000000000000
+RDX: 0000000000000003 RSI: 0000000000000000 RDI: 0000000000000018
+RBP: ffff8880230ef5a0 R08: 0000000000000001 R09: 0000000000000000
+R10: ffffffff87c916c7 R11: 0000000000000001 R12: ffff88801684a540
+R13: 0000000000000000 R14: 0000000000000018 R15: 0000000000000018
+FS:  0000000000000000(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fede83fca50 CR3: 0000000024bd0006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ lock_acquire.part.0+0x142/0x390 kernel/locking/lockdep.c:5825
+ lock_acquire+0x80/0xb0 kernel/locking/lockdep.c:5798
+ __raw_spin_lock include/linux/spinlock_api_smp.h:133 [inline]
+ _raw_spin_lock+0x38/0x50 kernel/locking/spinlock.c:154
+ spin_lock include/linux/spinlock.h:351 [inline]
+ pmd_lock include/linux/mm.h:3081 [inline]
+ __split_huge_pmd+0x24c/0x400 mm/huge_memory.c:2907
+ zap_pmd_range mm/memory.c:1714 [inline]
+ zap_pud_range mm/memory.c:1764 [inline]
+ zap_p4d_range mm/memory.c:1785 [inline]
+ unmap_page_range+0x156e/0x4320 mm/memory.c:1806
+ unmap_single_vma+0x1ac/0x2d0 mm/memory.c:1852
+ unmap_vmas+0x210/0x470 mm/memory.c:1896
+ exit_mmap+0x19e/0xb10 mm/mmap.c:1861
+ __mmput+0xde/0x3a0 kernel/fork.c:1347
+ mmput+0x74/0x90 kernel/fork.c:1369
+ exit_mm kernel/exit.c:571 [inline]
+ do_exit+0xa03/0x2a30 kernel/exit.c:926
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1088
+ __do_sys_exit_group kernel/exit.c:1099 [inline]
+ __se_sys_exit_group kernel/exit.c:1097 [inline]
+ __x64_sys_exit_group+0x4d/0x60 kernel/exit.c:1097
+ x64_sys_call+0xf81/0x2140 arch/x86/include/generated/asm/syscalls_64.h:232
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fede8318a4d
+Code: Unable to access opcode bytes at 0x7fede8318a23.
+RSP: 002b:00007fff9ef4d358 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007fede83f69e0 RCX: 00007fede8318a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fff9ef4d200 R11: 0000000000000246 R12: 00007fede83f69e0
+R13: 00007fede83fbf00 R14: 0000000000000001 R15: 00007fede83fbee8
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:__lock_acquire+0xd3/0x5c90 kernel/locking/lockdep.c:5065
+Code: 03 38 d0 7c 08 84 d2 0f 85 39 18 00 00 44 8b 1d 1b e8 86 06 45 85 db 74 7b 48 b8 00 00 00 00 00 fc ff df 4c 89 f2 48 c1 ea 03 <80> 3c 02 00 0f 85 2c 36 00 00 49 8b 06 48 3d 20 8e c6 88 74 55 44
+RSP: 0018:ffff8880230ef480 EFLAGS: 00010006
+RAX: dffffc0000000000 RBX: 1ffff1100461dea3 RCX: 0000000000000000
+RDX: 0000000000000003 RSI: 0000000000000000 RDI: 0000000000000018
+RBP: ffff8880230ef5a0 R08: 0000000000000001 R09: 0000000000000000
+R10: ffffffff87c916c7 R11: 0000000000000001 R12: ffff88801684a540
+R13: 0000000000000000 R14: 0000000000000018 R15: 0000000000000018
+FS:  0000000000000000(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fede83fca50 CR3: 0000000024bd0006 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+note: syz-executor787[731] exited with irqs disabled
+note: syz-executor787[731] exited with preempt_count 1
+Fixing recursive fault but reboot is needed!
+BUG: using smp_processor_id() in preemptible [00000000] code: syz-executor787/731
+caller is debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+CPU: 1 UID: 0 PID: 731 Comm: syz-executor787 Tainted: G      D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:120
+ dump_stack+0x19/0x20 lib/dump_stack.c:129
+ check_preemption_disabled+0x168/0x180 lib/smp_processor_id.c:49
+ debug_smp_processor_id+0x20/0x30 lib/smp_processor_id.c:60
+ __schedule+0x9a/0x31f0 kernel/sched/core.c:6558
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6693
+ make_task_dead+0x384/0x3c0 kernel/exit.c:1047
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1492
+RIP: 0033:0x7fede8318a4d
+Code: Unable to access opcode bytes at 0x7fede8318a23.
+RSP: 002b:00007fff9ef4d358 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007fede83f69e0 RCX: 00007fede8318a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fff9ef4d200 R11: 0000000000000246 R12: 00007fede83f69e0
+R13: 00007fede83fbf00 R14: 0000000000000001 R15: 00007fede83fbee8
+ </TASK>
+BUG: scheduling while atomic: syz-executor787/731/0x00000000
+INFO: lockdep is turned off.
+Modules linked in:
+Preemption disabled at:
+[<ffffffff81355628>] do_task_dead+0x28/0x110 kernel/sched/core.c:6688
+CPU: 1 UID: 0 PID: 731 Comm: syz-executor787 Tainted: G      D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x121/0x150 lib/dump_stack.c:120
+ dump_stack+0x19/0x20 lib/dump_stack.c:129
+ __schedule_bug+0x12d/0x180 kernel/sched/core.c:5860
+ schedule_debug kernel/sched/core.c:5887 [inline]
+ __schedule+0x2189/0x31f0 kernel/sched/core.c:6562
+ do_task_dead+0xe0/0x110 kernel/sched/core.c:6693
+ make_task_dead+0x384/0x3c0 kernel/exit.c:1047
+ rewind_stack_and_make_dead+0x16/0x20 arch/x86/entry/entry_64.S:1492
+RIP: 0033:0x7fede8318a4d
+Code: Unable to access opcode bytes at 0x7fede8318a23.
+RSP: 002b:00007fff9ef4d358 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
+RAX: ffffffffffffffda RBX: 00007fede83f69e0 RCX: 00007fede8318a4d
+RDX: 00000000000000e7 RSI: ffffffffffffff80 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000020
+R10: 00007fff9ef4d200 R11: 0000000000000246 R12: 00007fede83f69e0
+R13: 00007fede83fbf00 R14: 0000000000000001 R15: 00007fede83fbee8
+ </TASK>
+------------[ cut here ]------------
+WARNING: CPU: 1 PID: 1 at kernel/locking/lockdep.c:467 lockdep_set_lock_cmp_fn+0x162/0x1d0 kernel/locking/lockdep.c:4990
+Modules linked in:
+CPU: 1 UID: 0 PID: 1 Comm: systemd Tainted: G      D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:lockdep_recursion_finish kernel/locking/lockdep.c:467 [inline]
+RIP: 0010:lockdep_set_lock_cmp_fn+0x162/0x1d0 kernel/locking/lockdep.c:4998
+Code: c4 08 5b 41 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc 31 d2 31 f6 4c 89 e7 e8 ab ed ff ff 48 89 c3 48 85 c0 74 ac e9 0b ff ff ff <0f> 0b 48 c7 c7 20 a0 cb 85 e8 10 5c 3f 04 65 c7 05 8d 0e c0 7e 00
+RSP: 0018:ffff88800dc5fd30 EFLAGS: 00010002
+RAX: 0000000000000002 RBX: ffffffff8a7f9c08 RCX: ffffffff8649fa60
+RDX: 1ffffffff14ff38b RSI: 0000000000000000 RDI: 0000000000000000
+RBP: ffff88800dc5fd60 R08: ffffffff8a7f9c50 R09: ffffed1002136201
+R10: ffff8880109b100b R11: 0000000000000000 R12: ffffffff8a7f9c58
+R13: ffffffff8537e100 R14: 0000000000000246 R15: 0000000000000000
+FS:  00007fe982838b40(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055976c26d7e0 CR3: 00000000133c2005 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ unix_create1+0x25b/0x8e0 net/unix/af_unix.c:1038
+ unix_create+0x121/0x1e0 net/unix/af_unix.c:1094
+ __sock_create+0x36f/0x800 net/socket.c:1571
+ sock_create net/socket.c:1622 [inline]
+ __sys_socket_create net/socket.c:1659 [inline]
+ __sys_socket_create net/socket.c:1644 [inline]
+ __sys_socket+0x16b/0x290 net/socket.c:1706
+ __do_sys_socket net/socket.c:1720 [inline]
+ __se_sys_socket net/socket.c:1718 [inline]
+ __x64_sys_socket+0x7b/0xc0 net/socket.c:1718
+ x64_sys_call+0x7e1/0x2140 arch/x86/include/generated/asm/syscalls_64.h:42
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fe982a3fc1b
+Code: 73 01 c3 48 8b 0d 05 a2 1b 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 29 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d d5 a1 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffca99609a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000029
+RAX: ffffffffffffffda RBX: 000055976c34e220 RCX: 00007fe982a3fc1b
+RDX: 0000000000000000 RSI: 0000000000080801 RDI: 0000000000000001
+RBP: 00007ffca9960ad0 R08: 0000000000000000 R09: 0000000000000001
+R10: 00007ffca9960a50 R11: 0000000000000246 R12: 000055976c34e220
+R13: 000055976c116730 R14: 00007fe982174e18 R15: 0000000000000002
+ </TASK>
+irq event stamp: 2053188
+hardirqs last  enabled at (2053187): [<ffffffff8585099c>] __raw_write_unlock_irq include/linux/rwlock_api_smp.h:273 [inline]
+hardirqs last  enabled at (2053187): [<ffffffff8585099c>] _raw_write_unlock_irq+0x2c/0x60 kernel/locking/spinlock.c:358
+hardirqs last disabled at (2053188): [<ffffffff858355f8>] __schedule+0x14e8/0x31f0 kernel/sched/core.c:6567
+softirqs last  enabled at (2053124): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (2053124): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (2053124): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (2053073): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (2053073): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (2053073): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+---[ end trace 0000000000000000 ]---
+----------------
+Code disassembly (best guess):
+   0:	03 38                	add    (%rax),%edi
+   2:	d0 7c 08 84          	sarb   -0x7c(%rax,%rcx,1)
+   6:	d2 0f                	rorb   %cl,(%rdi)
+   8:	85 39                	test   %edi,(%rcx)
+   a:	18 00                	sbb    %al,(%rax)
+   c:	00 44 8b 1d          	add    %al,0x1d(%rbx,%rcx,4)
+  10:	1b e8                	sbb    %eax,%ebp
+  12:	86 06                	xchg   %al,(%rsi)
+  14:	45 85 db             	test   %r11d,%r11d
+  17:	74 7b                	je     0x94
+  19:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  20:	fc ff df
+  23:	4c 89 f2             	mov    %r14,%rdx
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+* 2a:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1) <-- trapping instruction
+  2e:	0f 85 2c 36 00 00    	jne    0x3660
+  34:	49 8b 06             	mov    (%r14),%rax
+  37:	48 3d 20 8e c6 88    	cmp    $0xffffffff88c68e20,%rax
+  3d:	74 55                	je     0x94
+  3f:	44                   	rex.R
