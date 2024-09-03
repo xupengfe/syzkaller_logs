@@ -1,0 +1,413 @@
+==================================================================
+BUG: KASAN: slab-use-after-free in acct_collect+0x865/0x8f0 kernel/acct.c:565
+Read of size 8 at addr ffff8880126f2968 by task syz-executor125/730
+
+CPU: 1 UID: 0 PID: 730 Comm: syz-executor125 Not tainted 6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0xea/0x150 lib/dump_stack.c:120
+ print_address_description mm/kasan/report.c:377 [inline]
+ print_report+0xce/0x610 mm/kasan/report.c:488
+ kasan_report+0xcc/0x110 mm/kasan/report.c:601
+ __asan_report_load8_noabort+0x18/0x20 mm/kasan/report_generic.c:381
+ acct_collect+0x865/0x8f0 kernel/acct.c:565
+ do_exit+0x7f7/0x2a30 kernel/exit.c:918
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 734 at include/linux/rwsem.h:203 rwsem_assert_held_write include/linux/rwsem.h:203 [inline]
+WARNING: CPU: 0 PID: 734 at include/linux/rwsem.h:203 mmap_assert_write_locked include/linux/mmap_lock.h:70 [inline]
+WARNING: CPU: 0 PID: 734 at include/linux/rwsem.h:203 __is_vma_write_locked include/linux/mm.h:725 [inline]
+WARNING: CPU: 0 PID: 734 at include/linux/rwsem.h:203 vma_start_write include/linux/mm.h:744 [inline]
+WARNING: CPU: 0 PID: 734 at include/linux/rwsem.h:203 free_pgtables+0x7d5/0x980 mm/memory.c:387
+Modules linked in:
+ __do_sys_exit kernel/exit.c:1055 [inline]
+ __se_sys_exit kernel/exit.c:1053 [inline]
+ __x64_sys_exit+0x50/0x60 kernel/exit.c:1053
+CPU: 0 UID: 0 PID: 734 Comm: syz-executor125 Not tainted 6.11.0-rc6-next-20240902-ecc768a84f0b #1
+ x64_sys_call+0x2135/0x2140 arch/x86/include/generated/asm/syscalls_64.h:61
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fbe4d63ee5d
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:rwsem_assert_held_write include/linux/rwsem.h:203 [inline]
+RIP: 0010:mmap_assert_write_locked include/linux/mmap_lock.h:70 [inline]
+RIP: 0010:__is_vma_write_locked include/linux/mm.h:725 [inline]
+RIP: 0010:vma_start_write include/linux/mm.h:744 [inline]
+RIP: 0010:free_pgtables+0x7d5/0x980 mm/memory.c:387
+Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 93 af 1b 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffcbde27be8 EFLAGS: 00000246 ORIG_RAX: 000000000000003c
+Code: 45 85 ed 74 20 e8 5b dc b0 ff 4c 89 f8 48 c1 e8 03 42 80 3c 20 00 0f 85 a8 01 00 00 4d 8b 6e 10 e9 94 fa ff ff e8 3b dc b0 ff <0f> 0b 4c 89 f8 48 c1 e8 03 42 80 3c 20 00 74 e2 4c 89 ff e8 d3 4d
+RSP: 0018:ffff8880136cfaa8 EFLAGS: 00010293
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fbe4d63ee5d
+
+RDX: 00007fbe4d71390a RSI: 0000000000000000 RDI: 0000000000000000
+RAX: 0000000000000000 RBX: ffff8880128320f0 RCX: ffffffff81b5e3db
+RDX: ffff8880134d8000 RSI: ffffffff81b5e405 RDI: 0000000000000005
+RBP: ffff8880136cfbe8 R08: 0000000000000000 R09: ffffed1003bf9bab
+R10: 0000000000000000 R11: 0000000000000001 R12: dffffc0000000000
+RBP: 0000000000000000 R08: 0000000010000000 R09: 0000000000008000
+R10: 0000000000000000 R11: 0000000000000246 R12: 431bde82d7b634db
+R13: 0000000000401160 R14: 0000000000403e08 R15: 00007fbe4d998000
+ </TASK>
+
+Allocated by task 729:
+R13: 0000000000000000 R14: ffff88800ecdd780 R15: ffff88800ecdd790
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_alloc_info+0x3c/0x50 mm/kasan/generic.c:565
+FS:  0000000000000000(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+ unpoison_slab_object mm/kasan/common.c:319 [inline]
+ __kasan_slab_alloc+0x62/0x80 mm/kasan/common.c:345
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+ kasan_slab_alloc include/linux/kasan.h:250 [inline]
+ slab_post_alloc_hook mm/slub.c:4083 [inline]
+ slab_alloc_node mm/slub.c:4132 [inline]
+ kmem_cache_alloc_noprof+0x114/0x370 mm/slub.c:4139
+CR2: 00007fbe4d951fa8 CR3: 0000000012dea001 CR4: 0000000000770ef0
+ vm_area_dup+0x2a/0x1b0 kernel/fork.c:487
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+ __split_vma+0x188/0x1020 mm/vma.c:384
+ vms_gather_munmap_vmas+0x323/0xf70 mm/vma.c:1223
+ mmap_region+0x34f/0x29d0 mm/mmap.c:1388
+ do_mmap+0xd9b/0x11f0 mm/mmap.c:496
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+ vm_mmap_pgoff+0x1ea/0x390 mm/util.c:588
+PKRU: 55555554
+ ksys_mmap_pgoff+0x3dc/0x520 mm/mmap.c:542
+ __do_sys_mmap arch/x86/kernel/sys_x86_64.c:86 [inline]
+ __se_sys_mmap arch/x86/kernel/sys_x86_64.c:79 [inline]
+ __x64_sys_mmap+0x139/0x1d0 arch/x86/kernel/sys_x86_64.c:79
+Call Trace:
+ x64_sys_call+0x2001/0x2140 arch/x86/include/generated/asm/syscalls_64.h:10
+ <TASK>
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+Freed by task 729:
+ kasan_save_stack+0x2c/0x60 mm/kasan/common.c:47
+ kasan_save_track+0x18/0x40 mm/kasan/common.c:68
+ kasan_save_free_info+0x3f/0x60 mm/kasan/generic.c:579
+ poison_slab_object mm/kasan/common.c:247 [inline]
+ __kasan_slab_free+0x3d/0x60 mm/kasan/common.c:264
+ kasan_slab_free include/linux/kasan.h:233 [inline]
+ slab_free_hook mm/slub.c:2339 [inline]
+ slab_free mm/slub.c:4577 [inline]
+ kmem_cache_free+0x1aa/0x550 mm/slub.c:4679
+ __vm_area_free+0x7f/0xa0 kernel/fork.c:515
+ remove_vma+0x155/0x1b0 mm/vma.c:335
+ exit_mmap+0x4cc/0xb10 mm/mmap.c:1885
+ __mmput+0xde/0x3a0 kernel/fork.c:1347
+ mmput+0x74/0x90 kernel/fork.c:1369
+ exit_mm kernel/exit.c:571 [inline]
+ do_exit+0xa03/0x2a30 kernel/exit.c:926
+ do_group_exit+0xe4/0x2c0 kernel/exit.c:1088
+ __do_sys_exit_group kernel/exit.c:1099 [inline]
+ __se_sys_exit_group kernel/exit.c:1097 [inline]
+ __x64_sys_exit_group+0x4d/0x60 kernel/exit.c:1097
+ x64_sys_call+0xf81/0x2140 arch/x86/include/generated/asm/syscalls_64.h:232
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+The buggy address belongs to the object at ffff8880126f2960
+ which belongs to the cache vm_area_struct of size 176
+The buggy address is located 8 bytes inside of
+ freed 176-byte region [ffff8880126f2960, ffff8880126f2a10)
+
+The buggy address belongs to the physical page:
+page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x126f2
+memcg:ffff888010f71701
+ksm flags: 0xfffffc0000000(node=0|zone=1|lastcpupid=0x1fffff)
+page_type: f5(slab)
+raw: 000fffffc0000000 ffff88800d71ab40 ffffea000072fe80 dead000000000007
+raw: 0000000000000000 0000000000110011 00000001f5000000 ffff888010f71701
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff8880126f2800: fb fb fb fb fb fb fc fc fc fc fc fc fc fc fa fb
+ ffff8880126f2880: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>ffff8880126f2900: fb fb fb fb fc fc fc fc fc fc fc fc fa fb fb fb
+                                                          ^
+ ffff8880126f2980: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff8880126f2a00: fb fb fc fc fc fc fc fc fc fc 00 00 00 00 00 00
+==================================================================
+ exit_mmap+0x3cd/0xb10 mm/mmap.c:1872
+ __mmput+0xde/0x3a0 kernel/fork.c:1347
+ mmput+0x74/0x90 kernel/fork.c:1369
+ exit_mm kernel/exit.c:571 [inline]
+ do_exit+0xa03/0x2a30 kernel/exit.c:926
+ __do_sys_exit kernel/exit.c:1055 [inline]
+ __se_sys_exit kernel/exit.c:1053 [inline]
+ __x64_sys_exit+0x50/0x60 kernel/exit.c:1053
+ x64_sys_call+0x2135/0x2140 arch/x86/include/generated/asm/syscalls_64.h:61
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fbe4d63ee5d
+Code: Unable to access opcode bytes at 0x7fbe4d63ee33.
+RSP: 002b:00007ffcbde27be8 EFLAGS: 00000246 ORIG_RAX: 000000000000003c
+RAX: ffffffffffffffda RBX: 000000000000e36b RCX: 00007fbe4d63ee5d
+RDX: 00007fbe4d71390a RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000010000000 R09: 0000000000008000
+R10: 0000000000000000 R11: 0000000000000246 R12: 431bde82d7b634db
+R13: 0000000000401160 R14: 0000000000403e08 R15: 00007fbe4d998000
+ </TASK>
+irq event stamp: 572
+hardirqs last  enabled at (571): [<ffffffff85825aee>] irqentry_exit+0x3e/0xa0 kernel/entry/common.c:357
+hardirqs last disabled at (572): [<ffffffff81462433>] console_emit_next_record kernel/printk/printk.c:3003 [inline]
+hardirqs last disabled at (572): [<ffffffff81462433>] console_flush_all+0x823/0xba0 kernel/printk/printk.c:3082
+softirqs last  enabled at (368): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last  enabled at (368): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last  enabled at (368): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+softirqs last disabled at (363): [<ffffffff81289969>] __do_softirq kernel/softirq.c:588 [inline]
+softirqs last disabled at (363): [<ffffffff81289969>] invoke_softirq kernel/softirq.c:428 [inline]
+softirqs last disabled at (363): [<ffffffff81289969>] __irq_exit_rcu+0xa9/0x120 kernel/softirq.c:637
+---[ end trace 0000000000000000 ]---
+Oops: general protection fault, probably for non-canonical address 0xb63ddfe220048: 0000 [#1] PREEMPT SMP KASAN NOPTI
+CPU: 0 UID: 0 PID: 287 Comm: updatedb Tainted: G    B   W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [B]=BAD_PAGE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:_compound_head include/linux/page-flags.h:242 [inline]
+RIP: 0010:virt_to_folio include/linux/mm.h:1274 [inline]
+RIP: 0010:virt_to_slab mm/kasan/../slab.h:206 [inline]
+RIP: 0010:qlink_to_cache mm/kasan/quarantine.c:131 [inline]
+RIP: 0010:qlist_free_all+0x9a/0x170 mm/kasan/quarantine.c:176
+Code: 80 48 01 c2 0f 82 e5 00 00 00 48 c7 c1 00 00 00 80 48 2b 0d 40 03 f6 04 48 01 ca 48 c1 ea 0c 48 c1 e2 06 48 03 15 1e 03 f6 04 <48> 8b 72 08 48 89 d1 40 f6 c6 01 0f 85 ab 00 00 00 66 90 31 d2 80
+RSP: 0018:ffff88800eeffad8 EFLAGS: 00010203
+RAX: 02ddffff88801044 RBX: 02ddffff88801044 RCX: 0000777f80000000
+RDX: 000b63ddfe220040 RSI: ffffea00003b3740 RDI: 0000000000040000
+RBP: ffff88800eeffb08 R08: ffff88800ecdd782 R09: 000000000011000f
+R10: ffffea00003b3740 R11: ffff88806c450300 R12: 0000000000000000
+R13: ffff88800ecdd782 R14: 0000000000000000 R15: ffff88800ecdd782
+FS:  00007f33744ce740(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000404090 CR3: 000000001218e001 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ kasan_quarantine_reduce+0x193/0x1e0 mm/kasan/quarantine.c:286
+ __kasan_slab_alloc+0x52/0x80 mm/kasan/common.c:329
+ kasan_slab_alloc include/linux/kasan.h:250 [inline]
+ slab_post_alloc_hook mm/slub.c:4083 [inline]
+ slab_alloc_node mm/slub.c:4132 [inline]
+ __kmalloc_cache_noprof+0x11e/0x3a0 mm/slub.c:4288
+ kmalloc_noprof include/linux/slab.h:691 [inline]
+ kzalloc_noprof include/linux/slab.h:827 [inline]
+ ext4_htree_create_dir_info fs/ext4/dir.c:446 [inline]
+ ext4_dx_readdir fs/ext4/dir.c:564 [inline]
+ ext4_readdir+0x2298/0x3170 fs/ext4/dir.c:142
+ iterate_dir+0x52f/0xb40 fs/readdir.c:108
+ __do_sys_getdents64 fs/readdir.c:407 [inline]
+ __se_sys_getdents64 fs/readdir.c:392 [inline]
+ __x64_sys_getdents64+0x153/0x2f0 fs/readdir.c:392
+ x64_sys_call+0x10b6/0x2140 arch/x86/include/generated/asm/syscalls_64.h:218
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7f3374314577
+Code: 80 f8 ff 4c 89 e0 5b 5d 41 5c c3 0f 1f 84 00 00 00 00 00 f3 0f 1e fa b8 ff ff ff 7f 48 39 c2 48 0f 47 d0 b8 d9 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 01 c3 48 8b 15 79 58 0e 00 f7 d8 64 89 02 48
+RSP: 002b:00007ffc06fe8388 EFLAGS: 00000293 ORIG_RAX: 00000000000000d9
+RAX: ffffffffffffffda RBX: 00005599ab95ffa0 RCX: 00007f3374314577
+RDX: 0000000000008000 RSI: 00005599ab95ffa0 RDI: 000000000000000d
+RBP: 00005599ab95ff74 R08: 0000000000000003 R09: 0000000000000000
+R10: 0000000002000000 R11: 0000000000000293 R12: ffffffffffffff80
+R13: 0000000000000000 R14: 00005599ab95ff70 R15: 00000000648985fc
+ </TASK>
+Modules linked in:
+Oops: general protection fault, probably for non-canonical address 0xb53ddfe220048: 0000 [#2] PREEMPT SMP KASAN NOPTI
+---[ end trace 0000000000000000 ]---
+CPU: 1 UID: 0 PID: 709 Comm: syz-executor125 Tainted: G    B D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [B]=BAD_PAGE, [D]=DIE, [W]=WARN
+RIP: 0010:_compound_head include/linux/page-flags.h:242 [inline]
+RIP: 0010:virt_to_folio include/linux/mm.h:1274 [inline]
+RIP: 0010:virt_to_slab mm/kasan/../slab.h:206 [inline]
+RIP: 0010:qlink_to_cache mm/kasan/quarantine.c:131 [inline]
+RIP: 0010:qlist_free_all+0x9a/0x170 mm/kasan/quarantine.c:176
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:_compound_head include/linux/page-flags.h:242 [inline]
+RIP: 0010:virt_to_folio include/linux/mm.h:1274 [inline]
+RIP: 0010:virt_to_slab mm/kasan/../slab.h:206 [inline]
+RIP: 0010:qlink_to_cache mm/kasan/quarantine.c:131 [inline]
+RIP: 0010:qlist_free_all+0x9a/0x170 mm/kasan/quarantine.c:176
+Code: 80 48 01 c2 0f 82 e5 00 00 00 48 c7 c1 00 00 00 80 48 2b 0d 40 03 f6 04 48 01 ca 48 c1 ea 0c 48 c1 e2 06 48 03 15 1e 03 f6 04 <48> 8b 72 08 48 89 d1 40 f6 c6 01 0f 85 ab 00 00 00 66 90 31 d2 80
+Code: 80 48 01 c2 0f 82 e5 00 00 00 48 c7 c1 00 00 00 80 48 2b 0d 40 03 f6 04 48 01 ca 48 c1 ea 0c 48 c1 e2 06 48 03 15 1e 03 f6 04 <48> 8b 72 08 48 89 d1 40 f6 c6 01 0f 85 ab 00 00 00 66 90 31 d2 80
+RSP: 0018:ffff8880148bfa48 EFLAGS: 00010203
+RSP: 0018:ffff88800eeffad8 EFLAGS: 00010203
+
+
+RAX: 02d9ffff888014ee RBX: 02d9ffff888014ee RCX: 0000777f80000000
+RDX: 000b53ddfe220040 RSI: 0000000000000001 RDI: ffffffff81c4072e
+RAX: 02ddffff88801044 RBX: 02ddffff88801044 RCX: 0000777f80000000
+RBP: ffff8880148bfa78 R08: 0000000000000000 R09: 0000000000000000
+RDX: 000b63ddfe220040 RSI: ffffea00003b3740 RDI: 0000000000040000
+R10: ffffffff87c916c7 R11: ffff88806c550301 R12: 0000000000000000
+RBP: ffff88800eeffb08 R08: ffff88800ecdd782 R09: 000000000011000f
+R13: ffff8880126f2962 R14: 0000000000000000 R15: ffff8880126f2962
+R10: ffffea00003b3740 R11: ffff88806c450300 R12: 0000000000000000
+FS:  00007fbe4d951600(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+R13: ffff88800ecdd782 R14: 0000000000000000 R15: ffff88800ecdd782
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+FS:  00007f33744ce740(0000) GS:ffff88806c400000(0000) knlGS:0000000000000000
+CR2: 00007fbe4d7184e0 CR3: 0000000008182002 CR4: 0000000000770ef0
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+CR2: 0000000000404090 CR3: 000000001218e001 CR4: 0000000000770ef0
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+PKRU: 55555554
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+Call Trace:
+PKRU: 55555554
+ <TASK>
+ kasan_quarantine_reduce+0x193/0x1e0 mm/kasan/quarantine.c:286
+ __kasan_slab_alloc+0x52/0x80 mm/kasan/common.c:329
+ kasan_slab_alloc include/linux/kasan.h:250 [inline]
+ slab_post_alloc_hook mm/slub.c:4083 [inline]
+ slab_alloc_node mm/slub.c:4132 [inline]
+ kmem_cache_alloc_node_noprof+0x12e/0x380 mm/slub.c:4184
+ alloc_task_struct_node kernel/fork.c:180 [inline]
+ dup_task_struct kernel/fork.c:1107 [inline]
+ copy_process+0x476/0x6a00 kernel/fork.c:2203
+ kernel_clone+0xfd/0x8b0 kernel/fork.c:2784
+ __do_sys_clone+0xe1/0x120 kernel/fork.c:2927
+ __se_sys_clone kernel/fork.c:2911 [inline]
+ __x64_sys_clone+0xc7/0x150 kernel/fork.c:2911
+ x64_sys_call+0x1ac3/0x2140 arch/x86/include/generated/asm/syscalls_64.h:57
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fbe4d7189d7
+Code: 00 00 00 f3 0f 1e fa 64 48 8b 04 25 10 00 00 00 45 31 c0 31 d2 31 f6 bf 11 00 20 01 4c 8d 90 d0 02 00 00 b8 38 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 39 41 89 c0 85 c0 75 2a 64 48 8b 04 25 10 00
+RSP: 002b:00007ffcbde27ae8 EFLAGS: 00000246 ORIG_RAX: 0000000000000038
+RAX: ffffffffffffffda RBX: 0000000000000001 RCX: 00007fbe4d7189d7
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000001200011
+RBP: 0000000000000000 R08: 0000000000000000 R09: 00000016cbb1b73d
+R10: 00007fbe4d9518d0 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000000000401160 R14: 0000000000403e08 R15: 00007fbe4d998000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:_compound_head include/linux/page-flags.h:242 [inline]
+RIP: 0010:virt_to_folio include/linux/mm.h:1274 [inline]
+RIP: 0010:virt_to_slab mm/kasan/../slab.h:206 [inline]
+RIP: 0010:qlink_to_cache mm/kasan/quarantine.c:131 [inline]
+RIP: 0010:qlist_free_all+0x9a/0x170 mm/kasan/quarantine.c:176
+Code: 80 48 01 c2 0f 82 e5 00 00 00 48 c7 c1 00 00 00 80 48 2b 0d 40 03 f6 04 48 01 ca 48 c1 ea 0c 48 c1 e2 06 48 03 15 1e 03 f6 04 <48> 8b 72 08 48 89 d1 40 f6 c6 01 0f 85 ab 00 00 00 66 90 31 d2 80
+RSP: 0018:ffff88800eeffad8 EFLAGS: 00010203
+RAX: 02ddffff88801044 RBX: 02ddffff88801044 RCX: 0000777f80000000
+RDX: 000b63ddfe220040 RSI: ffffea00003b3740 RDI: 0000000000040000
+RBP: ffff88800eeffb08 R08: ffff88800ecdd782 R09: 000000000011000f
+R10: ffffea00003b3740 R11: ffff88806c450300 R12: 0000000000000000
+R13: ffff88800ecdd782 R14: 0000000000000000 R15: ffff88800ecdd782
+FS:  00007fbe4d951600(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fbe4d7184e0 CR3: 0000000008182002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Oops: general protection fault, probably for non-canonical address 0xbbbddfe220048: 0000 [#3] PREEMPT SMP KASAN NOPTI
+CPU: 1 UID: 0 PID: 1 Comm: systemd Tainted: G    B D W          6.11.0-rc6-next-20240902-ecc768a84f0b #1
+Tainted: [B]=BAD_PAGE, [D]=DIE, [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
+RIP: 0010:_compound_head include/linux/page-flags.h:242 [inline]
+RIP: 0010:virt_to_folio include/linux/mm.h:1274 [inline]
+RIP: 0010:virt_to_slab mm/kasan/../slab.h:206 [inline]
+RIP: 0010:qlink_to_cache mm/kasan/quarantine.c:131 [inline]
+RIP: 0010:qlist_free_all+0x9a/0x170 mm/kasan/quarantine.c:176
+Code: 80 48 01 c2 0f 82 e5 00 00 00 48 c7 c1 00 00 00 80 48 2b 0d 40 03 f6 04 48 01 ca 48 c1 ea 0c 48 c1 e2 06 48 03 15 1e 03 f6 04 <48> 8b 72 08 48 89 d1 40 f6 c6 01 0f 85 ab 00 00 00 66 90 31 d2 80
+RSP: 0018:ffff88800dc5f638 EFLAGS: 00010203
+RAX: 02f3ffff8880105c RBX: 02f3ffff8880105c RCX: 0000777f80000000
+RDX: 000bbbddfe220040 RSI: ffffea00004ae700 RDI: 0000000000040000
+RBP: ffff88800dc5f668 R08: ffff888012b9c782 R09: 000000000011000f
+R10: ffffea00004ae700 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff888012b9c782 R14: 0000000000000000 R15: ffff888012b9c782
+FS:  00007fe376020b40(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000555ea9d46630 CR3: 000000000d474002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ kasan_quarantine_reduce+0x193/0x1e0 mm/kasan/quarantine.c:286
+ __kasan_slab_alloc+0x52/0x80 mm/kasan/common.c:329
+ kasan_slab_alloc include/linux/kasan.h:250 [inline]
+ slab_post_alloc_hook mm/slub.c:4083 [inline]
+ slab_alloc_node mm/slub.c:4132 [inline]
+ kmem_cache_alloc_noprof+0x114/0x370 mm/slub.c:4139
+ audit_buffer_alloc kernel/audit.c:1790 [inline]
+ audit_log_start.part.0+0x27d/0x7f0 kernel/audit.c:1912
+ audit_log_start kernel/audit.c:1868 [inline]
+ audit_log_common_recv_msg+0x1a5/0x330 kernel/audit.c:1097
+ audit_log_user_recv_msg kernel/audit.c:1108 [inline]
+ audit_receive_msg+0x197d/0x2a20 kernel/audit.c:1394
+ audit_receive+0x282/0x450 kernel/audit.c:1571
+ netlink_unicast_kernel net/netlink/af_netlink.c:1331 [inline]
+ netlink_unicast+0x5a3/0x870 net/netlink/af_netlink.c:1357
+ netlink_sendmsg+0x956/0xe80 net/netlink/af_netlink.c:1901
+ sock_sendmsg_nosec net/socket.c:730 [inline]
+ __sock_sendmsg net/socket.c:745 [inline]
+ __sys_sendto+0x53f/0x5b0 net/socket.c:2204
+ __do_sys_sendto net/socket.c:2216 [inline]
+ __se_sys_sendto net/socket.c:2212 [inline]
+ __x64_sys_sendto+0xe9/0x1b0 net/socket.c:2212
+ x64_sys_call+0x1df1/0x2140 arch/x86/include/generated/asm/syscalls_64.h:45
+ do_syscall_x64 arch/x86/entry/common.c:52 [inline]
+ do_syscall_64+0x6d/0x140 arch/x86/entry/common.c:83
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7fe375f4faf6
+Code: c1 f4 ff 44 8b 4c 24 2c 4c 8b 44 24 20 41 89 c4 44 8b 54 24 28 48 8b 54 24 18 b8 2c 00 00 00 48 8b 74 24 10 8b 7c 24 08 0f 05 <48> 3d 00 f0 ff ff 77 3a 44 89 e7 48 89 44 24 08 e8 95 c1 f4 ff 48
+RSP: 002b:00007fff020e8a40 EFLAGS: 00000293 ORIG_RAX: 000000000000002c
+RAX: ffffffffffffffda RBX: 000000000000006c RCX: 00007fe375f4faf6
+RDX: 000000000000007c RSI: 00007fff020e8ab0 RDI: 0000000000000030
+RBP: 000000000000007c R08: 00007fff020e8a9c R09: 000000000000000c
+R10: 0000000000000000 R11: 0000000000000293 R12: 0000000000000000
+R13: 00007fff020e8ab0 R14: 00007fff020e8a9c R15: 000000000000046b
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:_compound_head include/linux/page-flags.h:242 [inline]
+RIP: 0010:virt_to_folio include/linux/mm.h:1274 [inline]
+RIP: 0010:virt_to_slab mm/kasan/../slab.h:206 [inline]
+RIP: 0010:qlink_to_cache mm/kasan/quarantine.c:131 [inline]
+RIP: 0010:qlist_free_all+0x9a/0x170 mm/kasan/quarantine.c:176
+Code: 80 48 01 c2 0f 82 e5 00 00 00 48 c7 c1 00 00 00 80 48 2b 0d 40 03 f6 04 48 01 ca 48 c1 ea 0c 48 c1 e2 06 48 03 15 1e 03 f6 04 <48> 8b 72 08 48 89 d1 40 f6 c6 01 0f 85 ab 00 00 00 66 90 31 d2 80
+RSP: 0018:ffff88800eeffad8 EFLAGS: 00010203
+RAX: 02ddffff88801044 RBX: 02ddffff88801044 RCX: 0000777f80000000
+RDX: 000b63ddfe220040 RSI: ffffea00003b3740 RDI: 0000000000040000
+RBP: ffff88800eeffb08 R08: ffff88800ecdd782 R09: 000000000011000f
+R10: ffffea00003b3740 R11: ffff88806c450300 R12: 0000000000000000
+R13: ffff88800ecdd782 R14: 0000000000000000 R15: ffff88800ecdd782
+FS:  00007fe376020b40(0000) GS:ffff88806c500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000555ea9d46630 CR3: 000000000d474002 CR4: 0000000000770ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff07f0 DR7: 0000000000000400
+PKRU: 55555554
+----------------
+Code disassembly (best guess):
+   0:	ff c3                	inc    %ebx
+   2:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+   9:	00 00 00
+   c:	90                   	nop
+   d:	f3 0f 1e fa          	endbr64
+  11:	48 89 f8             	mov    %rdi,%rax
+  14:	48 89 f7             	mov    %rsi,%rdi
+  17:	48 89 d6             	mov    %rdx,%rsi
+  1a:	48 89 ca             	mov    %rcx,%rdx
+  1d:	4d 89 c2             	mov    %r8,%r10
+  20:	4d 89 c8             	mov    %r9,%r8
+  23:	4c 8b 4c 24 08       	mov    0x8(%rsp),%r9
+  28:	0f 05                	syscall
+* 2a:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax <-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	retq
+  33:	48 8b 0d 93 af 1b 00 	mov    0x1baf93(%rip),%rcx        # 0x1bafcd
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
